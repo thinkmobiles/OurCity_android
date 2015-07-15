@@ -12,14 +12,13 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.model.ItemClickStatus;
 
 import java.util.List;
 
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class CatalogListAdapter  extends BaseAdapter implements OnItemClickListener {
+public class CatalogListAdapter extends BaseAdapter implements OnItemClickListener {
 
     private LayoutInflater mInflater;
     private List<CatalogItemModel> catalogItemModels;
@@ -61,14 +60,15 @@ public class CatalogListAdapter  extends BaseAdapter implements OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CatalogItemModel item = getItem(position);
-        if (item.itemStatus == ItemClickStatus.FALSE){
-
-        }
-        if (item.itemStatus == ItemClickStatus.ITEM){
-
-        }
-        if (item.itemStatus == ItemClickStatus.LINK){
-
+        switch (item.itemStatus) {
+            case ITEM:
+                break;
+            case MAIL:
+                break;
+            case LINK:
+                break;
+            case FALSE:
+                break;
         }
     }
 

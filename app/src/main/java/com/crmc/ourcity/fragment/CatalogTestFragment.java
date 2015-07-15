@@ -7,7 +7,7 @@ import android.widget.ListView;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CatalogListAdapter;
 import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.model.ItemClickStatus;
+import com.crmc.ourcity.model.ItemClickAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,15 +35,15 @@ public class CatalogTestFragment  extends BaseFragment{
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        for (int i = 0; i < 10; i++) {
-//            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClick.FALSE);
-//            mTestList.add(data);
-//        }
         for (int i = 0; i < 10; i++) {
-            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address", ItemClickStatus
-                    .FALSE);
+            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClickAction.FALSE);
             mTestList.add(data);
         }
+//        for (int i = 0; i < 10; i++) {
+//            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address", ItemClickAction
+//                    .FALSE);
+//            mTestList.add(data);
+//        }
 
         mListView = findView(R.id.lvTasks);
         mAdapter = new CatalogListAdapter(getActivity(), mTestList);
