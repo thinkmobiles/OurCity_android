@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.MainMenuFragment;
+import com.crmc.ourcity.fragment.CatalogTestFragment;
 
 public class MainActivity extends BaseFragmentActivity{
 
@@ -22,9 +22,15 @@ public class MainActivity extends BaseFragmentActivity{
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("OutCity");
 
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(MayorSpeechFragment.newInstance());
+//            getSupportActionBar().setTitle("MayorSpeech");
+//        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(MainMenuFragment.newInstance());
+            setTopFragment(CatalogTestFragment.newInstance());
+            getSupportActionBar().setTitle("CatalogTest");
         }
     }
 
