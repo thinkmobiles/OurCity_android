@@ -1,10 +1,10 @@
-package com.crmc.ourcity;
+package com.crmc.ourcity.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 
-import com.crmc.ourcity.activity.BaseFragmentActivity;
+import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.MainMenuFragment;
 
 public class MainActivity extends BaseFragmentActivity{
