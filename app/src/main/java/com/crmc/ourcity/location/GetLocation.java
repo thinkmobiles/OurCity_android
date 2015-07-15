@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
-import com.crmc.ourcity.model.ModelLocation;
+import com.crmc.ourcity.model.LocationModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,9 +28,6 @@ import java.util.Locale;
  */
 public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListener {
 
-    private String lat;
-    private String lon;
-    private String nameCity;
     private Location mLocation;
     private LocationCallBack mCallBack;
     private Context mContext;
@@ -80,7 +77,7 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
             final double lng;
             final String nameCity;
             Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
-            List<Address> addresses = null;
+            List<Address> addresses;
             try {
                 lat = mLocation.getLatitude();
                 lng = mLocation.getLongitude();
@@ -90,7 +87,7 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
                 } else {
                     nameCity = "";
                 }
-                mCallBack.onSuccess(new ModelLocation(lat, lng, nameCity));
+                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity));
             } catch (IOException e) {
                 mCallBack.onFailure(false);
                 e.printStackTrace();
