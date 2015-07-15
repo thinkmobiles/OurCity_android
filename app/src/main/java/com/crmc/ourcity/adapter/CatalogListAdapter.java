@@ -2,6 +2,7 @@ package com.crmc.ourcity.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,9 +88,21 @@ public class CatalogListAdapter extends BaseAdapter implements OnItemClickListen
         }
 
         public void setData(CatalogItemModel item, int position) {
-            title.setText(item.title);
-            date.setText(item.date);
-            address.setText(item.address);
+            if (!TextUtils.isEmpty(item.title)){
+                title.setText(item.title);
+            } else {
+                title.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(item.date)){
+                date.setText(item.date);
+            } else {
+                date.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(item.address)){
+                address.setText(item.address);
+            } else {
+                address.setVisibility(View.GONE);
+            }
 //            if (position % 2 == 0) {
 //                view.setBackgroundResource(R.drawable.f_pf_list_row_backgroundcolor);
 //            } else {

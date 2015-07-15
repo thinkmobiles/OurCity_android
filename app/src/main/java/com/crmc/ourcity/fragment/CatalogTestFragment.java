@@ -35,15 +35,15 @@ public class CatalogTestFragment  extends BaseFragment{
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        for (int i = 0; i < 10; i++) {
-            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClickAction.FALSE);
-            mTestList.add(data);
-        }
 //        for (int i = 0; i < 10; i++) {
-//            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address", ItemClickAction
-//                    .FALSE);
+//            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClickAction.FALSE);
 //            mTestList.add(data);
 //        }
+        for (int i = 0; i < 10; i++) {
+            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address", ItemClickAction
+                    .FALSE);
+            mTestList.add(data);
+        }
 
         mListView = findView(R.id.lvTasks);
         mAdapter = new CatalogListAdapter(getActivity(), mTestList);
