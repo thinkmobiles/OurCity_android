@@ -7,20 +7,20 @@ public class CatalogItemModel {
     public String title;
     public String date;
     public String address;
-    public ItemClickStatus itemStatus;
+    public ItemClickAction itemStatus;
 
-    public CatalogItemModel(String title, ItemClickStatus itemStatus){
+    public CatalogItemModel(String title, ItemClickAction itemStatus){
         this.title = title;
         this.itemStatus = itemStatus;
     }
 
-    public CatalogItemModel(String title, String date, ItemClickStatus itemStatus){
+    public CatalogItemModel(String title, String date, ItemClickAction itemStatus){
         this.title = title;
         this.date = date;
         this.itemStatus = itemStatus;
     }
 
-    public CatalogItemModel(String title, String date, String address, ItemClickStatus itemStatus){
+    public CatalogItemModel(String title, String date, String address, ItemClickAction itemStatus){
         this.title = title;
         this.date = date;
         this.address = address;

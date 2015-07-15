@@ -2,6 +2,7 @@ package com.crmc.ourcity.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,13 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.model.ItemClickStatus;
 
 import java.util.List;
 
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class CatalogListAdapter  extends BaseAdapter implements OnItemClickListener {
+public class CatalogListAdapter extends BaseAdapter implements OnItemClickListener {
 
     private LayoutInflater mInflater;
     private List<CatalogItemModel> catalogItemModels;
@@ -61,14 +61,15 @@ public class CatalogListAdapter  extends BaseAdapter implements OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CatalogItemModel item = getItem(position);
-        if (item.itemStatus == ItemClickStatus.FALSE){
-
-        }
-        if (item.itemStatus == ItemClickStatus.ITEM){
-
-        }
-        if (item.itemStatus == ItemClickStatus.LINK){
-
+        switch (item.itemStatus) {
+            case ITEM:
+                break;
+            case MAIL:
+                break;
+            case LINK:
+                break;
+            case FALSE:
+                break;
         }
     }
 
@@ -87,9 +88,21 @@ public class CatalogListAdapter  extends BaseAdapter implements OnItemClickListe
         }
 
         public void setData(CatalogItemModel item, int position) {
-            title.setText(item.title);
-            date.setText(item.date);
-            address.setText(item.address);
+            if (!TextUtils.isEmpty(item.title)){
+                title.setText(item.title);
+            } else {
+                title.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(item.date)){
+                date.setText(item.date);
+            } else {
+                date.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(item.address)){
+                address.setText(item.address);
+            } else {
+                address.setVisibility(View.GONE);
+            }
 //            if (position % 2 == 0) {
 //                view.setBackgroundResource(R.drawable.f_pf_list_row_backgroundcolor);
 //            } else {
