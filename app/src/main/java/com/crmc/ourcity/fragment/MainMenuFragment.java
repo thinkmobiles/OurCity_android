@@ -18,6 +18,7 @@ public class MainMenuFragment extends BaseFragment {
 
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
+
     }
 
     @Override
