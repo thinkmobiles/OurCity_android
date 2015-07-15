@@ -30,7 +30,7 @@ public class MayorSpeechFragment extends BaseFragment {
         settings.setDefaultTextEncodingName("utf-8");
         String imageUrl = "http://artkiev.com/blog/wp-content/uploads/2012/12/Android1.png";
         String textWebView = getResources().getString(R.string.long_text);
-        String htmlWebView = htmlForWebView(textWebView, imageUrl, "justify", "right", 10);
+        String htmlWebView = htmlForWebView(textWebView, imageUrl, "justify", "right");
         mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
         getLocation();
     }
@@ -62,7 +62,8 @@ public class MayorSpeechFragment extends BaseFragment {
      * @param imageMargin - number margin
      * @return - html text
      */
-    public String htmlForWebView(String text, String urlImage, String textAlign, String imageAlign, int imageMargin) {
+    public String htmlForWebView(String text, String urlImage, String textAlign, String imageAlign) {
+        final int imageMargin = this.getResources().getDimensionPixelSize(R.dimen.msf_image_magrin);
         String htmlText = "<html><head></head><style>#right { text-align: right; } #" +
                 "left { text-align: left; } #justify {text-align: justify} .left {float:left;margin: " + imageMargin
                 + "px " + imageMargin + "px " + imageMargin + "px 0;} .right  {float: right; margin:" + imageMargin +
