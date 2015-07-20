@@ -62,8 +62,8 @@ public class  CatalogTestFragment  extends BaseFourStatesFragment{
 
 
     @Override
-    protected View getContentView(final LayoutInflater _inflater) {
-        return _inflater.inflate(R.layout.catalog_fragment, null);
+    protected int getContentView() {
+        return R.layout.catalog_fragment;
     }
 
     @Override
