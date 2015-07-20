@@ -34,6 +34,7 @@
         android:id="@+id/underline_BFSL"
         android:background="#00ACDC" />
 
+
     <com.crmc.ourcity.fourstatelayout.FourStateLayout
         android:id="@+id/four_state"
         android:layout_width="match_parent"

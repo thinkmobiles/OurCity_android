@@ -1,11 +1,14 @@
 package com.crmc.ourcity.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CatalogListAdapter;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.model.ItemClickAction;
 
@@ -17,7 +20,7 @@ import java.util.Locale;
  *
  * Created by SetKrul on 15.07.2015.
  */
-public class  CatalogTestFragment  extends BaseFragment{
+public class  CatalogTestFragment  extends BaseFourStatesFragment{
 
     private ListView mListView;
     private CatalogListAdapter mAdapter;
@@ -49,6 +52,7 @@ public class  CatalogTestFragment  extends BaseFragment{
         mListView = findView(R.id.lvTasks);
         mAdapter = new CatalogListAdapter(getActivity(), mTestList);
         mListView.setAdapter(mAdapter);
+        showContent();
     }
 
     public String getDateTime() {
@@ -58,12 +62,17 @@ public class  CatalogTestFragment  extends BaseFragment{
 
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.catalog_fragment;
+    protected View getContentView(final LayoutInflater _inflater) {
+        return _inflater.inflate(R.layout.catalog_fragment, null);
     }
 
     @Override
     public boolean onBackPressed() {
         return super.onBackPressed();
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

@@ -23,11 +23,12 @@ public class MainActivity extends BaseFragmentActivity{
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
-        if (getSupportActionBar() != null)
-        getSupportActionBar().setTitle(null);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(MapsFragment.newInstance());
+            setTopFragment(CatalogTestFragment.newInstance());
         }
     }
 

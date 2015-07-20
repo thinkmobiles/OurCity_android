@@ -38,12 +38,12 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);
         mErrorTitle = (TextView) mErrorLayout.findViewById(R.id.error_title);
 
-        mainView.initFourStates(getContentView(_inflater), mLoadingLayout, mEmptyLayout, mErrorLayout);
+        mainView.initFourStates((ViewGroup)getContentView(_inflater), mLoadingLayout, mEmptyLayout, mErrorLayout);
         return view;
 
     }
 
-    protected abstract ViewGroup getContentView(final LayoutInflater _inflater);
+    protected abstract View getContentView(final LayoutInflater _inflater);
 
 
     @Override

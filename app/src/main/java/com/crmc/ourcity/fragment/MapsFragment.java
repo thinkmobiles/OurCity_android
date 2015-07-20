@@ -18,7 +18,7 @@ import com.google.android.gms.maps.MapFragment;
 public final class MapsFragment extends BaseFourStatesFragment implements View.OnClickListener {
     private GoogleMap mMap;
     private View mView;
-    private ViewGroup mFragmentContainer;
+    private View mFragmentContainer;
 
     public static MapsFragment newInstance() {
         //noinspection deprecation
@@ -26,8 +26,8 @@ public final class MapsFragment extends BaseFourStatesFragment implements View.O
     }
 
     @Override
-    protected final ViewGroup getContentView(final LayoutInflater _inflater) {
-        mFragmentContainer = (ViewGroup)_inflater.inflate(R.layout.fragment_map, null);
+    protected final View getContentView(final LayoutInflater _inflater) {
+        mFragmentContainer = _inflater.inflate(R.layout.fragment_map, null);
         return mFragmentContainer;
     }
 
