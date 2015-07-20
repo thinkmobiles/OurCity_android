@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ *
  * Created by SetKrul on 15.07.2015.
  */
-public class CatalogTestFragment  extends BaseFragment{
+public class  CatalogTestFragment  extends BaseFragment{
 
     private ListView mListView;
     private CatalogListAdapter mAdapter;

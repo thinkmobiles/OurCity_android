@@ -3,4 +3,44 @@
     <color name="colorPrimary">#BDBDBD</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#fffffdbd</color>
+
+    <color name="orange_light">#FFA726</color>
+    <color name="orange_light_pressed">#FB8C00</color>
+    <color name="orange_dark">#F57C00</color>
+    <color name="orange_dark_pressed">#E65100</color>
+
+    <color name="green_light">#66BB6A</color>
+    <color name="green_light_pressed">#43A047</color>
+    <color name="green_dark">#388E3C</color>
+    <color name="green_dark_pressed">#1B5E20</color>
+
+
+    <color name="blue_light">#42A5F5</color>
+    <color name="blue_light_pressed">#1E88E5</color>
+    <color name="blue_dark">#1976D2</color>
+    <color name="blue_dark_pressed">#0D47A1</color>
+
+    <color name="red_light">#EF5350</color>
+    <color name="red_light_pressed">#E53935</color>
+    <color name="red_dark">#D32F2F</color>
+    <color name="red_dark_pressed">#B71C1C</color>
+
+    <color name="pink_light">#EC407A</color>
+    <color name="pink_light_pressed">#D81B60</color>
+    <color name="pink_dark">#C2185B</color>
+    <color name="pink_dark_pressed">#880E4F</color>
+
+    <color name="purple_light">#AB47BC</color>
+    <color name="purple_light_pressed">#8E24AA</color>
+    <color name="purple_dark">#7B1FA2</color>
+    <color name="purple_dark_pressed">#4A148C</color>
+
+    <color name="teal">#26A69A</color>
+    <color name="gray_dark">#424242</color>
+    <color name="gray_light">#9E9E9E</color>
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+
+
 </resources>

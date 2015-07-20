@@ -1,11 +1,14 @@
 package com.crmc.ourcity.activity;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.CatalogTestFragment;
+import com.crmc.ourcity.fragment.MapsFragment;
 
 public class MainActivity extends BaseFragmentActivity{
 
@@ -20,17 +23,11 @@ public class MainActivity extends BaseFragmentActivity{
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("OutCity");
+        if (getSupportActionBar() != null)
+        getSupportActionBar().setTitle(null);
 
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(MayorSpeechFragment.newInstance());
-//            getSupportActionBar().setTitle("MayorSpeech");
-//        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(CatalogTestFragment.newInstance());
-            getSupportActionBar().setTitle("CatalogTest");
+            setTopFragment(MapsFragment.newInstance());
         }
     }
 
@@ -40,25 +37,24 @@ public class MainActivity extends BaseFragmentActivity{
         replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, fragment);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public final void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+    }
+
 }
