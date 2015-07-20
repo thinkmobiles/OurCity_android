@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
+public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private Location mLocation;
     private LocationCallBack mCallBack;
@@ -45,7 +45,7 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
 
     private static final String TAG = "TAG";
 
-    public GetLocation(Context context, LocationCallBack mCallBack) {
+    public MyLocation(Context context, LocationCallBack mCallBack) {
         this.mCallBack = mCallBack;
         this.mContext = context;
         if (checkPlayServices()) {

@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
-import com.crmc.ourcity.location.GetLocation;
+import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
 import com.crmc.ourcity.utils.HtmlFormater;
 
@@ -17,6 +17,8 @@ import com.crmc.ourcity.utils.HtmlFormater;
  * Created by SetKrul on 17.07.2015.
  */
 public class WebViewWithDataFragment extends BaseFragment {
+
+    private MyLocation getLocation;
 
     public static WebViewWithDataFragment newInstance() {
         return new WebViewWithDataFragment();
@@ -52,7 +54,7 @@ public class WebViewWithDataFragment extends BaseFragment {
                 Log.d("TAG", result + " result");
             }
         };
-        new GetLocation(getActivity(), locationCallBack);
+        new MyLocation(getActivity(), locationCallBack);
     }
 
     @Override
