@@ -16,6 +16,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
@@ -26,13 +28,22 @@ import java.util.Locale;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListener {
+public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private Location mLocation;
     private LocationCallBack mCallBack;
     private Context mContext;
+
+    private boolean mRequestingLocationUpdates = false;
+    private LocationRequest mLocationRequest;
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
+
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private GoogleApiClient mGoogleApiClient;
+
+    private static final String TAG = "TAG";
 
     public GetLocation(Context context, LocationCallBack mCallBack) {
         this.mCallBack = mCallBack;
@@ -92,8 +103,73 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
                 mCallBack.onFailure(false);
                 e.printStackTrace();
             }
+        } else {
+          createLocationRequest();
         }
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        mLocation = location;
+        if (mLocation != null) {
+            final double lat;
+            final double lng;
+            final String nameCity;
+            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                lat = mLocation.getLatitude();
+                lng = mLocation.getLongitude();
+                addresses = gcd.getFromLocation(lat, lng, 1);
+                if (addresses.size() > 0) {
+                    nameCity = addresses.get(0).getLocality();
+                } else {
+                    nameCity = "";
+                }
+                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity));
+            } catch (IOException e) {
+                mCallBack.onFailure(false);
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void togglePeriodicLocationUpdates() {
+        if (!mRequestingLocationUpdates) {
+            mRequestingLocationUpdates = true;
+            if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
+                startLocationUpdates();
+            }
+        } else {
+            mRequestingLocationUpdates = false;
+            stopLocationUpdates();
+        }
+    }
+
+    protected void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT); // 10 meters
+        togglePeriodicLocationUpdates();
+    }
+
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -101,7 +177,5 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(ConnectionResult connectionResult) {}
 }
