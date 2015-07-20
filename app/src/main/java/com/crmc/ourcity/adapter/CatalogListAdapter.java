@@ -2,12 +2,9 @@ package com.crmc.ourcity.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -19,7 +16,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class CatalogListAdapter extends BaseAdapter implements OnItemClickListener {
+public class CatalogListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<CatalogItemModel> catalogItemModels;
@@ -48,7 +45,7 @@ public class CatalogListAdapter extends BaseAdapter implements OnItemClickListen
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.cf_listview_row, parent, false);
+            convertView = mInflater.inflate(R.layout.listview_row_fc, parent, false);
             holder = new ViewHolder(convertView);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -56,21 +53,6 @@ public class CatalogListAdapter extends BaseAdapter implements OnItemClickListen
         holder.setData(getItem(position), position);
 
         return convertView;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        CatalogItemModel item = getItem(position);
-        switch (item.itemStatus) {
-            case ITEM:
-                break;
-            case MAIL:
-                break;
-            case LINK:
-                break;
-            case FALSE:
-                break;
-        }
     }
 
     private static class ViewHolder {
@@ -88,7 +70,24 @@ public class CatalogListAdapter extends BaseAdapter implements OnItemClickListen
         }
 
         public void setData(CatalogItemModel item, int position) {
-            if (!TextUtils.isEmpty(item.title)){
+            switch (item.catalogSizeView){
+                case SMALL:
+                    title.setText(item.title);
+                    date.setVisibility(View.GONE);
+                    address.setVisibility(View.GONE);
+                    break;
+                case MEDIUM:
+                    title.setText(item.title);
+                    date.setText(item.date);
+                    address.setVisibility(View.GONE);
+                    break;
+                case FULL:
+                    title.setText(item.title);
+                    date.setText(item.date);
+                    address.setText(item.address);
+                    break;
+            }
+            /*if (!TextUtils.isEmpty(item.title)){
                 title.setText(item.title);
             } else {
                 title.setVisibility(View.GONE);
@@ -102,7 +101,7 @@ public class CatalogListAdapter extends BaseAdapter implements OnItemClickListen
                 address.setText(item.address);
             } else {
                 address.setVisibility(View.GONE);
-            }
+            }*/
 //            if (position % 2 == 0) {
 //                view.setBackgroundResource(R.drawable.f_pf_list_row_backgroundcolor);
 //            } else {

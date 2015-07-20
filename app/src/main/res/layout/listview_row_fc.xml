@@ -4,39 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_alignParentEnd="true"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTitle_CF"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:gravity="end"
+        android:layout_gravity="center_vertical|start"
         android:paddingLeft="15dp"
         android:textStyle="bold"
+        android:text="Title"
         tools:background="@android:color/holo_orange_dark"
         android:textSize="@dimen/cf_item_text_size"/>
 
     <TextView
         android:id="@+id/tvDate_CF"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:gravity="right"
+        android:layout_gravity="center_vertical|start"
         android:paddingLeft="15dp"
+        android:text="Date"
         tools:background="@android:color/holo_green_dark"
         android:textSize="@dimen/cf_item_text_size"/>
 
     <TextView
         android:id="@+id/tvAddress_CF"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:gravity="end"
+        android:layout_gravity="center_vertical|start"
+        android:text="Address"
         android:paddingLeft="15dp"
         tools:background="@android:color/holo_blue_dark"
         android:textSize="@dimen/cf_item_text_size"/>

@@ -60,8 +60,4 @@ public abstract class BaseFragment extends Fragment {
     protected final <T extends View> T findView(@IdRes int _id) {
         return (T) rootView.findViewById(_id);
     }
-
-    public boolean onBackPressed(){
-        return false;
-    }
 }
