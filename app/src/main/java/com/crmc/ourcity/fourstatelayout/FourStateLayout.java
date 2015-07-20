@@ -1,11 +1,15 @@
-package com.crmc.ourcity.fragment;
+package com.crmc.ourcity.fourstatelayout;
 
+import android.animation.AnimatorInflater;
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.crmc.ourcity.R;
 
 /**
  *
@@ -26,12 +30,12 @@ public final class FourStateLayout extends LinearLayout {
     }
 
     public final void init() {
-        //setBackgroundColor(getResources().getColor(R.color.white));
+        setBackgroundColor(getResources().getColor(R.color.white));
         LayoutTransition transition = new LayoutTransition();
-        //ObjectAnimator fadeIn = (ObjectAnimator) AnimatorInflater.loadAnimator(getContext(), R.anim.layout_fade_in);
-        //ObjectAnimator fadeOut = (ObjectAnimator) AnimatorInflater.loadAnimator(getContext(), R.anim.layout_fade_out);
-        //transition.setAnimator(LayoutTransition.APPEARING, fadeIn);
-        //transition.setAnimator(LayoutTransition.DISAPPEARING, fadeOut);
+        ObjectAnimator fadeIn = (ObjectAnimator) AnimatorInflater.loadAnimator(getContext(), R.animator.layout_fade_in);
+        ObjectAnimator fadeOut = (ObjectAnimator) AnimatorInflater.loadAnimator(getContext(), R.animator.layout_fade_out);
+        transition.setAnimator(LayoutTransition.APPEARING, fadeIn);
+        transition.setAnimator(LayoutTransition.DISAPPEARING, fadeOut);
         setLayoutTransition(transition);
     }
 
@@ -56,7 +60,7 @@ public final class FourStateLayout extends LinearLayout {
     }
 
 
-    private final void updateVisibilityForState() {
+    private void updateVisibilityForState() {
         if (mContentLayout != null && mEmptyLayout != null && mErrorLayout != null && mLoadingLayout != null) {
             switch (mState) {
                 case States.STATE_CONTENT:
@@ -122,3 +126,7 @@ public final class FourStateLayout extends LinearLayout {
         void onRetryClick();
     }
 }
+
+
+
+
