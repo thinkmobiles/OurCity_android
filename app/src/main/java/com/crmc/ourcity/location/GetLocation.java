@@ -135,6 +135,14 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
         }
     }
 
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT); // 10 meters
+        togglePeriodicLocationUpdates();
+    }
 
     private void togglePeriodicLocationUpdates() {
         if (!mRequestingLocationUpdates) {
@@ -153,22 +161,12 @@ public class GetLocation implements ConnectionCallbacks, OnConnectionFailedListe
 
     }
 
-    protected void stopLocationUpdates() {
+    public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
-
-    protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setSmallestDisplacement(DISPLACEMENT); // 10 meters
-        togglePeriodicLocationUpdates();
-    }
-
 
 
     @Override
