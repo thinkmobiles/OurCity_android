@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -14,7 +12,6 @@ import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.utils.IntentUtils;
-
 
 public class MainActivity extends BaseFragmentActivity implements ListItemAction {
 
@@ -31,19 +28,16 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("OutCity");
+        //getSupportActionBar().setTitle("OutCity");
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(null);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(WebViewWithDataFragment.newInstance());
+//            getSupportActionBar().setTitle("MayorSpeech");
+//        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(CatalogFragment.newInstance());
+            //getSupportActionBar().setTitle("CatalogTest");
         }
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(CatalogFragment.newInstance());
-//            getSupportActionBar().setTitle("CatalogTest");
-//        }
     }
 
     private void setTopFragment(final Fragment fragment) {
@@ -73,22 +67,19 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public final void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        } else {
-            getFragmentManager().popBackStack();
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

@@ -10,7 +10,7 @@ import com.crmc.ourcity.model.CatalogItemModel;
 /**
  * Created by SetKrul on 16.07.2015.
  */
-public class CatalogItemFragment extends BaseFragment{
+public class CatalogItemFragment extends BaseFragment {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private CatalogItemModel catalogItemModel;
@@ -44,4 +44,5 @@ public class CatalogItemFragment extends BaseFragment{
     public void onStop() {
         super.onStop();
     }
+
 }

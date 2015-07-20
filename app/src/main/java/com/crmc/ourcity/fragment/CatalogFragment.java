@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CatalogListAdapter;
-import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.model.ItemClickAction;
 
@@ -21,7 +20,7 @@ import java.util.Locale;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class CatalogFragment extends BaseFourStatesFragment implements OnItemClickListener {
+public class CatalogFragment extends BaseFragment implements OnItemClickListener {
 
     private ListView mListView;
     private CatalogListAdapter mAdapter;
@@ -65,6 +64,11 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
         mListItemAction.onItemAction(mAdapter.getItem(position));
     }
 
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.fragment_catalog;
+    }
+
     public interface ListItemAction {
         void onItemAction(final CatalogItemModel catalogItemModel);
     }
@@ -73,16 +77,16 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
         return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance()
                 .getTime());
     }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_catalog;
-    }
-
-    @Override
-    public void onRetryClick() {
-
-    }
+//
+//    @Override
+//    protected int getContentView() {
+//        return R.layout.fragment_catalog;
+//    }
+//
+//    @Override
+//    public void onRetryClick() {
+//
+//    }
 
     @Override
     public void onDetach() {
