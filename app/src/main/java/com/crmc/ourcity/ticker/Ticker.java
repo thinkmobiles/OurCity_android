@@ -56,7 +56,7 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
         tempTicker.add("test string4 for ticker");
 
         mData = tempTicker;
-        setText(_data.get(0).toString());
+        setText(mData.get(0).toString());
     }
 
     public void startAnimation() {
