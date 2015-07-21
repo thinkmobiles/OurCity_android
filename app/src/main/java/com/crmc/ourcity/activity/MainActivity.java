@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -39,7 +41,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setTitle("OutCity");
+        getSupportActionBar().setTitle("OutCity");
 
 //        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
 //            setTopFragment(WebViewWithDataFragment.newInstance());
@@ -78,23 +80,19 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-
-
+        if (id == R.id.menu_home) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

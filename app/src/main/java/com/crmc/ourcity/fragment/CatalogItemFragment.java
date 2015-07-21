@@ -5,12 +5,13 @@ import android.util.Log;
 import android.view.View;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 
 /**
  * Created by SetKrul on 16.07.2015.
  */
-public class CatalogItemFragment extends BaseFragment {
+public class CatalogItemFragment extends BaseFourStatesFragment {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private CatalogItemModel catalogItemModel;
@@ -33,11 +34,23 @@ public class CatalogItemFragment extends BaseFragment {
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showContent();
+    }
+
+//    @Override
+//    protected int getLayoutResource() {
+//        return R.layout.fragment_catalog_item;
+//    }
+
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_catalog_item;
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_catalog_item;
+    public void onRetryClick() {
+
     }
 
     @Override

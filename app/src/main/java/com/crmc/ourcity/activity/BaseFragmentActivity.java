@@ -35,7 +35,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
                 .commit();
     }
 
-    public final void dectroyFragment(final Fragment fragment){
+    public final void destroyFragment(final Fragment fragment){
         getSupportFragmentManager().beginTransaction()
                 .remove(fragment)
                 .commit();
