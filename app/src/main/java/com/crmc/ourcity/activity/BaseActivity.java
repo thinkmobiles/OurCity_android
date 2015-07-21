@@ -9,8 +9,8 @@ import android.view.View;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @SuppressWarnings("unchecked")
     public final <T extends View> T findView(@IdRes int id) {
         return (T) findViewById(id);
     }
-
 }

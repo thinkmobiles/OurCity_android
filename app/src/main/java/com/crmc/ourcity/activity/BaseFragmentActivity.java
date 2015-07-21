@@ -15,6 +15,13 @@ public abstract class BaseFragmentActivity extends BaseActivity {
                 .commit();
     }
 
+    protected final void addFragmentWithBackStack(final @IdRes int containerId, final Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .add(containerId, fragment)
+                .commit();
+    }
+
     public final void replaceFragmentWithBackStack(final @IdRes int containerId, final Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)

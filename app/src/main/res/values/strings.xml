@@ -2,6 +2,35 @@
     <string name="app_name">OurCity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="send_mail_hint">Send mail...</string>
+    <string name="app_no_mail_client">There are no email clients installed.</string>
     <string name="play_service_do_not_supported">This device is not supported google play service.</string>
     <string name="long_text">ברוכים הבאים לאפליקציה החדשנית של המועצה המקומית יסוד המעלה. המועצה המקומית יסוד המעלה נבחריה ועובדיה רואים חשיבות רבה בקשר עם התושבים ומחויבים לשרות מתקדם ויעיל, לפיכך אנו משקיעים תשומות במימוש ובחיזוק הקשר באמצעות מערכת מתקדמת ויעילה. באמצעות האפליקציה "פוקוס ניהול עירוני" ניתן יהיה לקבל ולשלוח מידע אודות המתרחש במושבה. אנו מאמינים כי השימוש באפליקציה יביא עימו, שרות איכותי ומהיר יותר לרווחת התושב. כראש הרשות אני מאמין בשקיפות מלאה ורואה באפליקציה כמו מערכת "הפוקוס ניהול עירוני" (מוקד) , ערוץ קשר חשוב. אתם מוזמנים לקבל מידע ולהזרים מידע על הקורה במושבה דרך האפליקציה . נשמח לקבל פניותיכם , הצעותיכם והיענותכם למוקד העירוני דרך האפליקציה , אתר האינטרנט והפייסבוק. אנחנו כאן למענכם ולשירותכם. בברכה, אילן אור ראש המועצה מ.מ יסוד המעלה</string>
+
+    <string name="menu_settings">settings</string>
+    <string name="menu_home">home</string>
+    <string name="menu_refresh">refresh</string>
+
+    <!-- emergency buttons-->
+    <string name="emergency_btn_city_site_title">אתר העירייה</string>
+    <string name="emergency_btn_facebook_title">פייסבוק</string>
+    <string name="emergency_btn_phone_title">טלפונים</string>
+    <string name="emergency_btn_focus">חיוג למוקד</string>
+    <string name="emergency_btn_quick_phone">לחצן מצוקה</string>
+    <!-- four state layout-->
+    <string name="empty_message">No data</string>
+    <string name="error_message">Some error</string>
+    <string name="refresh_button_text">Try again</string>
+
+    <!--map fragment -->
+    <string name="btn_interest_point_title">נקודות עניין</string>
+
+    <!-- nodes titles -->
+    <string name="node_payments_title">תשלומים</string>
+    <string name="node_appeals_title">פניות למוקד</string>
+    <string name="node_common_info_title">העיריה שלי</string>
+    <string name="node_voting_title">סקרים</string>
+    <string name="node_map_title">מפות</string>
+    <string name="node_getting_notification">הודעות עבורך</string>
+
 </resources>

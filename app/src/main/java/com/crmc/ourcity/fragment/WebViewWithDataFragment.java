@@ -9,16 +9,19 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
-import com.crmc.ourcity.location.GetLocation;
+import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
+import com.crmc.ourcity.utils.HtmlFormater;
 
 /**
- * Created by SetKrul on 14.07.2015.
+ * Created by SetKrul on 17.07.2015.
  */
-public class MayorSpeechFragment extends BaseFragment {
+public class WebViewWithDataFragment extends BaseFragment {
 
-    public static MayorSpeechFragment newInstance() {
-        return new MayorSpeechFragment();
+    private MyLocation getLocation;
+
+    public static WebViewWithDataFragment newInstance() {
+        return new WebViewWithDataFragment();
 
     }
 
@@ -30,13 +33,13 @@ public class MayorSpeechFragment extends BaseFragment {
         settings.setDefaultTextEncodingName("utf-8");
         String imageUrl = "http://artkiev.com/blog/wp-content/uploads/2012/12/Android1.png";
         String textWebView = getResources().getString(R.string.long_text);
-        String htmlWebView = htmlForWebView(textWebView, imageUrl, "justify", "right");
+        String htmlWebView = new HtmlFormater(getActivity()).htmlForWebView(textWebView, imageUrl, "justify", "right");
         mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
         getLocation();
     }
 
-    public void getLocation(){
-        LocationCallBack location = new LocationCallBack() {
+    public void getLocation() {
+        LocationCallBack locationCallBack = new LocationCallBack() {
             @Override
             public void onSuccess(LocationModel modelLocation) {
                 Toast.makeText(getActivity(), modelLocation.nameCity, Toast.LENGTH_SHORT).show();
@@ -45,31 +48,13 @@ public class MayorSpeechFragment extends BaseFragment {
 
             @Override
             public void onFailure(boolean result) {
-                if (!result){
+                if (!result) {
                     Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
                 }
                 Log.d("TAG", result + " result");
             }
         };
-        new GetLocation(getActivity(), location);
-    }
-
-    /*
-     * @param text  - text for view
-     * @param urlImage - address image
-     * @param textAlign - right, left, justify
-     * @param imageAlign - right, left
-     * @param imageMargin - number margin
-     * @return - html text
-     */
-    public String htmlForWebView(String text, String urlImage, String textAlign, String imageAlign) {
-        final int imageMargin = this.getResources().getDimensionPixelSize(R.dimen.msf_image_magrin);
-        String htmlText = "<html><head></head><style>#right { text-align: right; } #" +
-                "left { text-align: left; } #justify {text-align: justify} .left {float:left;margin: " + imageMargin
-                + "px " + imageMargin + "px " + imageMargin + "px 0;} .right  {float: right; margin:" + imageMargin +
-                "px 0 " + imageMargin + "px " + imageMargin + "px;}</style><body><div id=\"" + textAlign +
-                "\"><p><img src=\"" + urlImage + "\" class=\"" + imageAlign + "\">" + text + "</p></div></body></html>";
-        return htmlText;
+        new MyLocation(getActivity(), locationCallBack);
     }
 
     @Override
@@ -84,7 +69,6 @@ public class MayorSpeechFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.mayor_speech_fragment;
+        return R.layout.fragment_webview;
     }
-
 }

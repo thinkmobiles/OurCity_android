@@ -33,7 +33,7 @@ public class MainMenuFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.main_menu_fragment;
+        return R.layout.fragment_main_menu_;
     }
 
 }
