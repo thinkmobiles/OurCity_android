@@ -11,11 +11,16 @@ import com.crmc.ourcity.fragment.CatalogFragment;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.IntentUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements ListItemAction {
 
     private Toolbar mToolbar;
+    private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
 
     @Override
@@ -24,6 +29,12 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTicker = (Ticker) findViewById(R.id.ticker_MA);
+
+
+        //insert List<string> with breaking news when it will be ready
+        mTicker.setData(null);
+        mTicker.startAnimation();
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -82,4 +93,8 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
 //        }
 //        return super.onOptionsItemSelected(item);
 //    }
+
+
+
+
 }
