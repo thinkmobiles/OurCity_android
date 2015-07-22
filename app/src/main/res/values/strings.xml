@@ -32,5 +32,22 @@
     <string name="node_voting_title">סקרים</string>
     <string name="node_map_title">מפות</string>
     <string name="node_getting_notification">הודעות עבורך</string>
+    <string name="title_activity_dialog">DialogActivity</string>
+
+
+    <!-- for test, remove after -->
+    <string name="focus_address">רחוב</string>
+    <string name="focus_number">מספר</string>
+    <string name="focus_f_name">שם פרטי</string>
+    <string name="focus_l_name">שם משפחה</string>
+    <string name="focus_descripstion">תאור המפגע</string>
+    <string name="focus_phon">טלפון</string>
+    <string name="focus_mobile">נייד</string>
+    <string name="focus_email">אימייל</string>
+    <string name="focus_titel">דיווח למוקד </string>
+    <string name="focus_titel2">עדכון פרטים </string>
+    <string name="focus_name_city">חדרה</string>
+    <string name="txt_gcn">האם את מעוניין/ת לקבל הודעות?</string>
+    <string name="txt_login">כדי להנות מהאפלקציה מומלץ לשתף את פרטיך האישיים, מעוניין/ת עכשיו?</string>
 
 </resources>

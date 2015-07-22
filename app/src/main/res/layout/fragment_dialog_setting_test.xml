@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<!-- header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="#C3C3C3"
+        android:drawablePadding="@dimen/settings3"
+        android:drawableRight="@drawable/settingbtn"
+        android:paddingBottom="@dimen/settings15"
+        android:paddingRight="@dimen/settings15"
+        android:paddingTop="@dimen/settings15"
+        android:text="הגדרות"
+        android:gravity="center|right"
+        android:textColor="@color/turquoise"
+        android:textSize="@dimen/settings22"
+        android:textStyle="bold" />
+
+    <!-- main -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/settings10"
+        android:paddingRight="@dimen/settings10"
+        android:paddingBottom="@dimen/settings10"
+
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/setting_mezuka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings10"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="לחצן מצוקה"
+                android:textColor="#148989"
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mezoka"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings10"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="פרטים אישיים"
+                android:textColor="#148989"
+
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_details" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_interest_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings10"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="תחומי עניין"
+                android:textColor="#148989"
+
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_interesting" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10">
+
+            <TextView
+
+                android:id="@+id/text_message_for_you"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="מוסדות לימוד"
+                android:textColor="#148989"
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_massenger" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
