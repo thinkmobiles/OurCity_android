@@ -9,9 +9,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.CatalogFragment;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
+import com.crmc.ourcity.fragment.testView;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.utils.IntentUtils;
 
@@ -26,6 +26,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -36,7 +37,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
 //            getSupportActionBar().setTitle("MayorSpeech");
 //        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(CatalogFragment.newInstance());
+            setTopFragment(testView.newInstance());
             //getSupportActionBar().setTitle("CatalogTest");
         }
     }

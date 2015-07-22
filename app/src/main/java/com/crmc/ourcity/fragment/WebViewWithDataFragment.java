@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
 import com.crmc.ourcity.utils.HtmlFormater;
@@ -16,7 +17,7 @@ import com.crmc.ourcity.utils.HtmlFormater;
 /**
  * Created by SetKrul on 17.07.2015.
  */
-public class WebViewWithDataFragment extends BaseFragment {
+public class WebViewWithDataFragment extends BaseFourStatesFragment {
 
     private MyLocation getLocation;
 
@@ -68,7 +69,12 @@ public class WebViewWithDataFragment extends BaseFragment {
     }
 
     @Override
-    protected int getLayoutResource() {
+    protected int getContentView() {
         return R.layout.fragment_webview;
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

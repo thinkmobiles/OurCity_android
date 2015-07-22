@@ -48,11 +48,11 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
 //            mTestList.add(data);
 //        }
         //if (mTestList.size()  0) {
-            for (int i = 0; i < 10; i++) {
-                CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address",
-                        ItemClickAction.MAIL);
-                mTestList.add(data);
-            }
+        for (int i = 0; i < 10; i++) {
+            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address",
+                    ItemClickAction.MAIL);
+            mTestList.add(data);
+        }
         //}
         mListView = findView(R.id.lvTasks);
         mAdapter = new CatalogListAdapter(getActivity(), mTestList);
@@ -66,18 +66,12 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
         mListItemAction.onItemAction(mAdapter.getItem(position));
     }
 
-//    @Override
-//    protected int getLayoutResource() {
-//        return R.layout.fragment_catalog;
-//    }
-
     public interface ListItemAction {
         void onItemAction(final CatalogItemModel catalogItemModel);
     }
 
     public String getDateTime() {
-        return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance()
-                .getTime());
+        return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance().getTime());
     }
 
     @Override

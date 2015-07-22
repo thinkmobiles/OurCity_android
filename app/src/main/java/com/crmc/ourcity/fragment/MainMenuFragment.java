@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 /**
  * Created by SetKrul on 14.07.2015.
  */
-public class MainMenuFragment extends BaseFragment {
+public class MainMenuFragment extends BaseFourStatesFragment {
 
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
@@ -32,8 +33,12 @@ public class MainMenuFragment extends BaseFragment {
     }
 
     @Override
-    protected int getLayoutResource() {
+    protected int getContentView() {
         return R.layout.fragment_main_menu_;
     }
 
+    @Override
+    public void onRetryClick() {
+
+    }
 }

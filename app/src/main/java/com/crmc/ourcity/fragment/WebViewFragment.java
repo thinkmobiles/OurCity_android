@@ -6,11 +6,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 /**
  * Created by SetKrul on 20.07.2015.
  */
-public class WebViewFragment extends BaseFragment {
+public class WebViewFragment extends BaseFourStatesFragment {
 
     private WebView mWebView;
 
@@ -39,8 +40,13 @@ public class WebViewFragment extends BaseFragment {
     }
 
     @Override
-    protected int getLayoutResource() {
+    protected int getContentView() {
         return R.layout.fragment_webview;
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 
     private class MyWebViewClient extends WebViewClient {
