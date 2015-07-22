@@ -9,15 +9,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.dialog.DialogActivity;
+import com.crmc.ourcity.dialog.DialogType;
+import com.crmc.ourcity.fragment.CatalogFragment;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
-import com.crmc.ourcity.fragment.testView;
 import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.utils.EnumUtil;
+import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.IntentUtils;
 
 public class MainActivity extends BaseFragmentActivity implements ListItemAction {
 
     private Toolbar mToolbar;
+    private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
 
     @Override
@@ -26,6 +31,12 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTicker = (Ticker) findViewById(R.id.ticker_MA);
+
+
+        //insert List<string> with breaking news when it will be ready
+        mTicker.setData(null);
+        mTicker.startAnimation();
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -37,7 +48,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
 //            getSupportActionBar().setTitle("MayorSpeech");
 //        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(testView.newInstance());
+            setTopFragment(CatalogFragment.newInstance());
             //getSupportActionBar().setTitle("CatalogTest");
         }
     }
@@ -79,7 +90,10 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.menu_home) {
+        if (id == R.id.menu_settings) {
+            Intent intent = new Intent(this, DialogActivity.class);
+            EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

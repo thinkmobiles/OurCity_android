@@ -45,5 +45,118 @@
     <dimen name="btn_interest_point_margin_top">10dp</dimen>
     <dimen name="btn_interest_point_size">16sp</dimen>
 
+    <!-- for test , remove after -->
+
+    <!--profile-->
+    <dimen name="profile15">13.74dp</dimen>
+    <dimen name="profile300">274.90dp</dimen>
+    <dimen name="profile22">20.15dp</dimen>
+    <dimen name="profile18">16.49dp</dimen>
+    <dimen name="profile10">9.16dp</dimen>
+    <dimen name="profile5">4.58dp</dimen>
+    <dimen name="profile3">2.74dp</dimen>
+    <dimen name="profilesp18">16.49sp</dimen>
+    <dimen name="profile10margin">4dp</dimen>
+    <!--settings-->
+    <dimen name="settings15">13.74dp</dimen>
+    <dimen name="settings300">274.90dp</dimen>
+    <dimen name="settings22">20.15dp</dimen>
+    <dimen name="settings16">16dp</dimen>
+    <dimen name="settings10">9.16dp</dimen>
+    <dimen name="settings3">2.74dp</dimen>
+    <dimen name="settings20">18.32dp</dimen>
+    <dimen name="settings25">25dp</dimen>
+    <dimen name="settings30">27.49dp</dimen>
+    <dimen name="settingssp20">18.32sp</dimen>
+
+    <!--survey-->
+    <dimen name="survey5">4.58dp</dimen>
+    <dimen name="survey15">13.74dp</dimen>
+    <dimen name="survey50">45.81dp</dimen>
+    <dimen name="survey40">36.65dp</dimen>
+    <dimen name="survey10">9.16dp</dimen>
+    <dimen name="survey100">91.63dp</dimen>
+
+    <dimen name="survey90">82.47dp</dimen>
+    <dimen name="survey95">96.21dp</dimen>
+
+
+    <dimen name="survey155">142.03dp</dimen>
+    <dimen name="survey3">2.74dp</dimen>
+    <dimen name="survey2">1.83dp</dimen>
+    <dimen name="survey30">27.49dp</dimen>
+    <dimen name="survey150">150dp</dimen>
+    <dimen name="surveysp15">13.74sp</dimen>
+    <dimen name="survey100height">84dp</dimen>
+    <dimen name="survey50height">40dp</dimen>
+
+    <dimen name="surveyheight">120dp</dimen>
+    <dimen name="surveyheight_m_two">166.5dp</dimen>
+    <dimen name="surveyheight_lm_two">130dp</dimen>
+    <dimen name="survey10hi">5dp</dimen>
+    <dimen name="survey10margin">5dp</dimen>
+    <dimen name="survey5margin">2dp</dimen>
+    <!--time emergancy-->
+    <dimen name="timeemergancy5">4.58dp</dimen>
+    <dimen name="timeemergancy10">9.16dp</dimen>
+    <dimen name="timeemergancy250">229.08dp</dimen>
+    <dimen name="timeemergancy30">27.49dp</dimen>
+    <dimen name="timeemergancy16">14.66dp</dimen>
+    <dimen name="timeemergancysp16">14.66sp</dimen>
+    <!--person-->
+    <dimen name="person10">9.16dp</dimen>
+    <dimen name="person4">3.66dp</dimen>
+    <dimen name="person5">4.58dp</dimen>
+    <dimen name="person6">5.49dp</dimen>
+    <dimen name="person8">3.33dp</dimen>
+    <dimen name="person150">150dp</dimen>
+    <dimen name="person80">73.30dp</dimen>
+    <dimen name="person40">36.65dp</dimen>
+    <dimen name="person30">27.49dp</dimen>
+    <dimen name="person20">11.32dp</dimen>
+    <dimen name="person16">14.66sp</dimen>
+    <dimen name="person3">2.74dp</dimen>
+    <dimen name="person20sp">18.32sp</dimen>
+    <dimen name="person18sp">16.49sp</dimen>
+    <dimen name="person16sp">14.66sp</dimen>
+    <dimen name="person12sp">10.99sp</dimen>
+
+    <dimen name="person18sp_from_ardmn">13sp</dimen>
+    <!--phone-->
+    <dimen name="phone2">1.83dp</dimen>
+
+    <!--tourist-->
+    <dimen name="tourist70">64.14dp</dimen>
+    <dimen name="tourist65">59.56dp</dimen>
+    <dimen name="tourist10">9.16dp</dimen>
+
+    <!--message-->
+    <dimen name="message80">73.30dp</dimen>
+    <dimen name="message18">18sp</dimen>
+    <dimen name="message5">4.58dp</dimen>
+    <dimen name="message75">68.72dp</dimen>
+    <dimen name="message4">3.66dp</dimen>
+    <dimen name="message17">15.57dp</dimen>
+    <dimen name="message15">13.74sp</dimen>
+
+    <dimen name="event25">22.90sp</dimen>
+    <dimen name="event25margin">3dp</dimen>
+    <!--focus-->
+    <dimen name="focus20">18.32dp</dimen>
+    <dimen name="focus15">13.74dp</dimen>
+    <dimen name="focus30">27.49dp</dimen>
+    <dimen name="focus110">100.79dp</dimen>
+    <dimen name="focus220">201.59dp</dimen>
+    <dimen name="focus300">274.90dp</dimen>
+    <dimen name="focus120">109.96dp</dimen>
+    <dimen name="focus80">73.30dp</dimen>
+    <dimen name="focus75">68.72dp</dimen>
+    <dimen name="focus9">8.24dp</dimen>
+    <dimen name="focus7">6.41dp</dimen>
+    <dimen name="focus60">54.98dp</dimen>
+    <dimen name="focussp30">27.49sp</dimen>
+    <dimen name="focussp22">20.15sp</dimen>
+    <dimen name="radius_btn">5dp</dimen>
+
 
 </resources>

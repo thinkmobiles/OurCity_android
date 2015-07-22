@@ -27,17 +27,16 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/ticker_container_BA"
+        android:id="@+id/ticker_container_MA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#e0e0df"
         android:visibility="visible">
 
-        <TextView
+        <com.crmc.ourcity.ticker.Ticker
             android:id="@+id/ticker_MA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/actionbar_ticker_padding_top_bottom"
