@@ -111,26 +111,6 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
         }
     }
 
-    /*
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("Адрес: ");
-                for (int i = 0; i < returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append(" ");
-                }
-                adress = strReturnedAddress.toString() + "\n";
-            } else {
-                adress = "Адрес: Нет адреса!";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            adress = "Адрес: Не удалось получить адрес!" + " Lat: " + lat + " Lon: " + lon;
-        }
-     */
 
     @Override
     public void onLocationChanged(Location location) {

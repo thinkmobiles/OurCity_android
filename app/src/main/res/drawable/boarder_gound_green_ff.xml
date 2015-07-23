@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item>
-        <shape android:shape="rectangle"
-            >
+        <shape android:shape="rectangle">
             <corners
-                android:radius="@dimen/radius_btn" />
-            <stroke android:width="3px"
-                    android:color="@color/green_light" >
+                android:radius="5dp"/>
+            <stroke
+                android:width="2dp"
+                android:color="#66BB6A">
             </stroke>
-
-            <solid android:color="#fff" />
+            <solid android:color="#fff"/>
         </shape>
     </item>
 

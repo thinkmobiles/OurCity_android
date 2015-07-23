@@ -15,14 +15,13 @@ public class HtmlFormater {
         this.mContext = context;
     }
 
-    /*
- * @param text  - text for view
- * @param urlImage - address image
- * @param textAlign - right, left, justify
- * @param imageAlign - right, left
- * @param imageMargin - number margin
- * @return - html text
- */
+    /**
+     * @param text        - text for view
+     * @param urlImage    - address image
+     * @param textAlign   - right, left, justify
+     * @param imageAlign  - right, left
+     * @return - html text
+     */
     public String htmlForWebView(String text, String urlImage, String textAlign, String imageAlign) {
         final int imageMargin = mContext.getResources().getDimensionPixelSize(R.dimen.msf_image_magrin);
         String htmlText = "<html><head></head><style>#right { text-align: right; } #" +

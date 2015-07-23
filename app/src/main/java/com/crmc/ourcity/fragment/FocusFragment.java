@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -7,9 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,13 +34,15 @@ import java.util.Date;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class FocusFragment extends BaseFragment implements View.OnClickListener {
+public class FocusFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener {
 
+    private MyLocation location = null;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
     private String mPhotoFilePath;
     private ImageView ivPhoto;
     private EditText etNameStreet;
     private EditText etNameCity;
+    private SwitchCompat swGpsOnOff;
 
     public static FocusFragment newInstance() {
         return new FocusFragment();
@@ -45,14 +51,42 @@ public class FocusFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ivPhoto = findView(R.id.ivPhoto_FF);
-        etNameCity = findView(R.id.etCityName_FF);
-        etNameStreet = findView(R.id.etNameStreet_FF);
         initCamera();
-        getLocation();
         //initGallery();
     }
 
+    @Override
+    protected void initViews() {
+        super.initViews();
+        ivPhoto = findView(R.id.ivPhoto_FF);
+        etNameCity = findView(R.id.etCityName_FF);
+        etNameStreet = findView(R.id.etNameStreet_FF);
+        swGpsOnOff = findView(R.id.swGpsOnOff);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        swGpsOnOff.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (location != null){
+            location.stopLocationUpdates();
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked){
+            getLocation();
+        } else {
+            location.stopLocationUpdates();
+            location = null;
+        }
+    }
 
 
     /*private void initGallery() {
@@ -89,8 +123,8 @@ public class FocusFragment extends BaseFragment implements View.OnClickListener 
         final File imageFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         boolean isFolderExist = imageFolder.exists() || imageFolder.mkdir();
         if (isFolderExist) {
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = timeStamp;
+            @SuppressLint("SimpleDateFormat")
+            String imageFileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             File imageFile;
             try {
                 imageFile = File.createTempFile(imageFileName, PHOTO_FILE_EXTENSION, imageFolder);
@@ -128,14 +162,15 @@ public class FocusFragment extends BaseFragment implements View.OnClickListener 
                     } else {
                         Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
                     }
-                } else if (resultCode == Activity.RESULT_CANCELED) {
+                }
+                if (resultCode == Activity.RESULT_CANCELED) {
                     imageFile.delete();
                 }
             }
         } else if (requestCode == Constants.REQUEST_GALLERY_IMAGE && resultCode == Activity.RESULT_OK) {
-            String mPhoto = ImageFilePath.getPath(getActivity(), data.getData());
-            if (!TextUtils.isEmpty(mPhoto)) {
-                File imageFile = new File(mPhoto);
+            mPhotoFilePath = ImageFilePath.getPath(getActivity(), data.getData());
+            if (!TextUtils.isEmpty(mPhotoFilePath)) {
+                File imageFile = new File(mPhotoFilePath);
                 if (imageFile.exists()) {
                     ivPhoto.setImageURI(Uri.fromFile(imageFile));
                 } else {
@@ -171,26 +206,15 @@ public class FocusFragment extends BaseFragment implements View.OnClickListener 
                 if (!result) {
                     Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
                 }
-                Log.d("TAG", result + " result");
             }
         };
-        new MyLocation(getActivity(), locationCallBack);
+        location = new MyLocation(getActivity(), locationCallBack);
     }
 
 
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_focus;
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
-    }
-
-    @Override
-    protected void setListeners() {
-        super.setListeners();
     }
 
     @Override
