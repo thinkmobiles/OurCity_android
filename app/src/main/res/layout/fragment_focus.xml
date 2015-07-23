@@ -1,0 +1,149 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#81C89B"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:paddingTop="12dp">
+
+            <EditText
+                android:id="@+id/etCityName_FF"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/boarder_gound_green_ff"
+                android:gravity="center_vertical|start"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:singleLine="true"
+                android:hint="City name"
+                android:editable="false"
+                android:textColor="#242424"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:text="GPS"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/swGpsOnOff"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:layout_marginRight="2dp"
+                        android:textStyle="bold"
+                        android:text="Manual"/>
+
+                <EditText
+                        android:id="@+id/etNumberHouse_FF"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/boarder_gound_green_ff"
+                        android:hint="house"
+                        android:gravity="center_vertical|start"
+                        android:inputType="number"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="#242424"
+                        android:textSize="16sp"/>
+
+                <!--com.crmc.ourcity.view.EditTextStreetAutoComplete_FF-->
+                    <EditText
+                        android:id="@+id/etNameStreet_FF"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|start"
+                        android:background="@drawable/boarder_gound_green_ff"
+                        android:hint="street"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:singleLine="true"
+                        android:textColor="#242424"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etDescription_FF"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="top"
+                    android:background="@drawable/boarder_gound_green_ff"
+                    android:gravity="top|start"
+                    android:hint="Descripstion"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="#242424"
+                    android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/boarder_gound_green_ff">
+
+                        <ImageView
+                            android:id="@+id/ivPhoto_FF"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/focus_camera"/>
+                <!--android:background="@drawable/boarder_gound_green_ff"-->
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnSend_FF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="14sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="14sp"
+            android:background="@drawable/selector_button_green_ff"
+            android:gravity="center"
+            android:onClick="sendFocus"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="send"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>

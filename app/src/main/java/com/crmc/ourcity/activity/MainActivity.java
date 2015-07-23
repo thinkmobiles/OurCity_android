@@ -11,12 +11,12 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
-import com.crmc.ourcity.fragment.CatalogFragment;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
+import com.crmc.ourcity.fragment.FocusFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.ticker.Ticker;
+import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.IntentUtils;
 
 public class MainActivity extends BaseFragmentActivity implements ListItemAction {
@@ -43,14 +43,14 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("OutCity");
 
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(WebViewWithDataFragment.newInstance());
-//            getSupportActionBar().setTitle("MayorSpeech");
-//        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(CatalogFragment.newInstance());
-            //getSupportActionBar().setTitle("CatalogTest");
+            setTopFragment(FocusFragment.newInstance());
+            //getSupportActionBar().setTitle("MayorSpeech");
         }
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(CatalogFragment.newInstance());
+//            //getSupportActionBar().setTitle("CatalogTest");
+//        }
     }
 
     private void setTopFragment(final Fragment fragment) {

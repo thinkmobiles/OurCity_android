@@ -1,25 +1,18 @@
 package com.crmc.ourcity.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.callback.LocationCallBack;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.location.MyLocation;
-import com.crmc.ourcity.model.LocationModel;
 import com.crmc.ourcity.utils.HtmlFormater;
 
 /**
  * Created by SetKrul on 17.07.2015.
  */
 public class WebViewWithDataFragment extends BaseFourStatesFragment {
-
-    private MyLocation getLocation;
 
     public static WebViewWithDataFragment newInstance() {
         return new WebViewWithDataFragment();
@@ -36,26 +29,6 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
         String textWebView = getResources().getString(R.string.long_text);
         String htmlWebView = new HtmlFormater(getActivity()).htmlForWebView(textWebView, imageUrl, "justify", "right");
         mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
-        getLocation();
-    }
-
-    public void getLocation() {
-        LocationCallBack locationCallBack = new LocationCallBack() {
-            @Override
-            public void onSuccess(LocationModel modelLocation) {
-                Toast.makeText(getActivity(), modelLocation.nameCity, Toast.LENGTH_SHORT).show();
-                Log.d("TAG", modelLocation.nameCity);
-            }
-
-            @Override
-            public void onFailure(boolean result) {
-                if (!result) {
-                    Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
-                }
-                Log.d("TAG", result + " result");
-            }
-        };
-        new MyLocation(getActivity(), locationCallBack);
     }
 
     @Override

@@ -86,19 +86,22 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
         if (mLocation != null){
             final double lat;
             final double lng;
-            final String nameCity;
+            String nameCity = "";
+            String nameStreet = "";
             Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
             List<Address> addresses;
             try {
                 lat = mLocation.getLatitude();
                 lng = mLocation.getLongitude();
                 addresses = gcd.getFromLocation(lat, lng, 1);
-                if (addresses.size() > 0) {
-                    nameCity = addresses.get(0).getLocality();
-                } else {
-                    nameCity = "";
+                if (addresses != null) {
+                    if (addresses.size() > 0){
+                    Address mAddress = addresses.get(0);
+                        nameCity = mAddress.getLocality();
+                        nameStreet = mAddress.getAddressLine(0);
+                    }
                 }
-                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity));
+                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
             } catch (IOException e) {
                 mCallBack.onFailure(false);
                 e.printStackTrace();
@@ -108,6 +111,27 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
         }
     }
 
+    /*
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("Адрес: ");
+                for (int i = 0; i < returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append(" ");
+                }
+                adress = strReturnedAddress.toString() + "\n";
+            } else {
+                adress = "Адрес: Нет адреса!";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            adress = "Адрес: Не удалось получить адрес!" + " Lat: " + lat + " Lon: " + lon;
+        }
+     */
+
     @Override
     public void onLocationChanged(Location location) {
 
@@ -115,19 +139,22 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
         if (mLocation != null) {
             final double lat;
             final double lng;
-            final String nameCity;
+            String nameCity = "";
+            String nameStreet = "";
             Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
             List<Address> addresses;
             try {
                 lat = mLocation.getLatitude();
                 lng = mLocation.getLongitude();
                 addresses = gcd.getFromLocation(lat, lng, 1);
-                if (addresses.size() > 0) {
-                    nameCity = addresses.get(0).getLocality();
-                } else {
-                    nameCity = "";
+                if (addresses != null) {
+                    if (addresses.size() > 0){
+                        Address mAddress = addresses.get(0);
+                        nameCity = mAddress.getLocality();
+                        nameStreet = mAddress.getAddressLine(0);
+                    }
                 }
-                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity));
+                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
             } catch (IOException e) {
                 mCallBack.onFailure(false);
                 e.printStackTrace();
