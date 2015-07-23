@@ -20,9 +20,12 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
+import com.crmc.ourcity.dialog.DialogActivity;
+import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
+import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.ImageFilePath;
 import com.crmc.ourcity.utils.IntentUtils;
 
@@ -51,8 +54,6 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initCamera();
-        //initGallery();
     }
 
     @Override
@@ -67,49 +68,25 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
     @Override
     protected void setListeners() {
         super.setListeners();
+        ivPhoto.setOnClickListener(this);
         swGpsOnOff.setOnCheckedChangeListener(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (location != null){
+        if (location != null) {
             location.stopLocationUpdates();
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked){
+        if (isChecked) {
             getLocation();
         } else {
             location.stopLocationUpdates();
             location = null;
-        }
-    }
-
-
-    /*private void initGallery() {
-        btnGallery = (Button) findViewById(R.id.btnGallery);
-        Intent galleryIntent = IntentUtils.getGalleryStartIntent();
-        if (galleryIntent.resolveActivity(getActivity().getPackageManager()) == null) {
-            btnGallery.setEnabled(false);
-        } else {
-            btnGallery.setOnClickListener(this);
-        }
-    }*/
-
-    private void initCamera() {
-//        btnCamera = (Button) findViewById(R.id.btnCamera);
-//        if (!isCanGetCameraPicture()) {
-//            btnCamera.setEnabled(false);
-//        } else {
-//            btnCamera.setOnClickListener(this);
-//        }
-        if (!isCanGetCameraPicture()) {
-            ivPhoto.setEnabled(false);
-        } else {
-            ivPhoto.setOnClickListener(this);
         }
     }
 
@@ -123,8 +100,8 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
         final File imageFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         boolean isFolderExist = imageFolder.exists() || imageFolder.mkdir();
         if (isFolderExist) {
-            @SuppressLint("SimpleDateFormat")
-            String imageFileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            @SuppressLint("SimpleDateFormat") String imageFileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format
+                    (new Date());
             File imageFile;
             try {
                 imageFile = File.createTempFile(imageFileName, PHOTO_FILE_EXTENSION, imageFolder);
@@ -152,33 +129,52 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constants.REQUEST_PHOTO) {
-            if (!TextUtils.isEmpty(mPhotoFilePath)) {
-                File imageFile = new File(mPhotoFilePath);
-                if (resultCode == Activity.RESULT_OK) {
-                    if (imageFile.exists()) {
-                        addPhotoToGallery(mPhotoFilePath);
-                        ivPhoto.setImageURI(Uri.fromFile(imageFile));
+        switch (requestCode) {
+            case Constants.REQUEST_TYPE_PHOTO:
+                if (data != null) {
+                    if (data.getStringExtra(Constants.REQUEST_INTENT_TYPE_PHOTO).equals(Constants.REQUEST_PHOTO)) {
+                        if (isCanGetCameraPicture()) {
+                            openCamera();
+                        }
                     } else {
-                        Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                        Intent galleryIntent = IntentUtils.getGalleryStartIntent();
+                        if (galleryIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            openGallery();
+                        }
                     }
                 }
-                if (resultCode == Activity.RESULT_CANCELED) {
-                    imageFile.delete();
+                break;
+            case Constants.REQUEST_PHOTO:
+                if (!TextUtils.isEmpty(mPhotoFilePath)) {
+                    File imageFile = new File(mPhotoFilePath);
+                    if (resultCode == Activity.RESULT_OK) {
+                        if (imageFile.exists()) {
+                            addPhotoToGallery(mPhotoFilePath);
+                            ivPhoto.setImageURI(Uri.fromFile(imageFile));
+                        } else {
+                            Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    if (resultCode == Activity.RESULT_CANCELED) {
+                        imageFile.delete();
+                    }
                 }
-            }
-        } else if (requestCode == Constants.REQUEST_GALLERY_IMAGE && resultCode == Activity.RESULT_OK) {
-            mPhotoFilePath = ImageFilePath.getPath(getActivity(), data.getData());
-            if (!TextUtils.isEmpty(mPhotoFilePath)) {
-                File imageFile = new File(mPhotoFilePath);
-                if (imageFile.exists()) {
-                    ivPhoto.setImageURI(Uri.fromFile(imageFile));
-                } else {
-                    Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                break;
+            case Constants.REQUEST_GALLERY_IMAGE:
+                if (resultCode == Activity.RESULT_OK) {
+                    mPhotoFilePath = ImageFilePath.getPath(getActivity(), data.getData());
+                    if (!TextUtils.isEmpty(mPhotoFilePath)) {
+                        File imageFile = new File(mPhotoFilePath);
+                        if (imageFile.exists()) {
+                            ivPhoto.setImageURI(Uri.fromFile(imageFile));
+                        } else {
+                            Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Uncompilable type!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            } else {
-                Toast.makeText(getActivity(), "Uncompilable type!", Toast.LENGTH_SHORT).show();
-            }
+                break;
         }
     }
 
@@ -195,8 +191,6 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
         LocationCallBack locationCallBack = new LocationCallBack() {
             @Override
             public void onSuccess(LocationModel modelLocation) {
-                //Toast.makeText(getActivity(), modelLocation.nameCity + modelLocation.nameStreet, Toast
-                // .LENGTH_SHORT).show();
                 etNameCity.setText(modelLocation.nameCity);
                 etNameStreet.setText(modelLocation.nameStreet);
             }
@@ -221,18 +215,10 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ivPhoto_FF:
-                openCamera();
-                break;
+                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
+                startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
+            break;
         }
     }
-
-//    @Override
-//    protected int getContentView() {
-//        return R.layout.fragment_focus;
-//    }
-//
-//    @Override
-//    public void onRetryClick() {
-//
-//    }
 }

@@ -12,4 +12,8 @@ public enum DialogType {
     REGISTER,
     SETTING,
     CONFIRMATION,
+    PHOTO,
+    PHOTOCAM,
+    PHOTOGALLERY
+
 }
