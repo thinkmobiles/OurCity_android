@@ -4,16 +4,22 @@ import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class ImageFilePath {
+public class Image {
 
 
     /**
@@ -46,7 +52,8 @@ public class ImageFilePath {
             else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                        Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
             }
@@ -147,5 +154,28 @@ public class ImageFilePath {
      */
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param file         image file
+     * @param requiredSize out file size in kb
+     * @return bitmap with resize image
+     */
+    public Bitmap compressImage(File file, int requiredSize) {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(file), null, options);
+
+            int scale = 1;
+            while (options.outWidth / scale / 2 >= requiredSize && options.outHeight / scale / 2 >= requiredSize)
+                scale *= 2;
+
+            BitmapFactory.Options optionsResize = new BitmapFactory.Options();
+            optionsResize.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(file), null, optionsResize);
+        } catch (FileNotFoundException e) {
+        }
+        return null;
     }
 }

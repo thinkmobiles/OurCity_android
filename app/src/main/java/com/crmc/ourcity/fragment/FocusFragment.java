@@ -26,7 +26,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
 import com.crmc.ourcity.utils.EnumUtil;
-import com.crmc.ourcity.utils.ImageFilePath;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
 import java.io.File;
@@ -39,12 +39,13 @@ import java.util.Date;
  */
 public class FocusFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener {
 
-    private MyLocation location = null;
+    private MyLocation location;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
     private String mPhotoFilePath;
     private ImageView ivPhoto;
     private EditText etNameStreet;
     private EditText etNameCity;
+
     private SwitchCompat swGpsOnOff;
 
     public static FocusFragment newInstance() {
@@ -115,7 +116,8 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
             }
 
         } else {
-            Toast.makeText(getActivity(), "Can't create photo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), this.getResources().getString(R.string.cant_create_photo), Toast
+                    .LENGTH_SHORT).show();
         }
     }
 
@@ -152,7 +154,8 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
                             addPhotoToGallery(mPhotoFilePath);
                             ivPhoto.setImageURI(Uri.fromFile(imageFile));
                         } else {
-                            Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                     if (resultCode == Activity.RESULT_CANCELED) {
@@ -162,16 +165,18 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
                 break;
             case Constants.REQUEST_GALLERY_IMAGE:
                 if (resultCode == Activity.RESULT_OK) {
-                    mPhotoFilePath = ImageFilePath.getPath(getActivity(), data.getData());
+                    mPhotoFilePath = Image.getPath(getActivity(), data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile = new File(mPhotoFilePath);
                         if (imageFile.exists()) {
                             ivPhoto.setImageURI(Uri.fromFile(imageFile));
                         } else {
-                            Toast.makeText(getActivity(), "File i'nt found!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getActivity(), "Uncompilable type!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), this.getResources().getString(R.string.uncompilable_type),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -198,7 +203,7 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
             @Override
             public void onFailure(boolean result) {
                 if (!result) {
-                    Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.uncompilable_type), Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -218,7 +223,7 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                 startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
-            break;
+                break;
         }
     }
 }

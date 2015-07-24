@@ -5,12 +5,17 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
 import com.crmc.ourcity.model.LocationModel;
+import com.crmc.ourcity.rest.RestClientOpenStreetMap;
+import com.crmc.ourcity.rest.api.AddressApi;
+import com.crmc.ourcity.rest.responce.AddressFull;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -23,6 +28,8 @@ import com.google.android.gms.location.LocationServices;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit.RetrofitError;
 
 
 /**
@@ -83,63 +90,48 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
 
     private void getLocation() {
         mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLocation != null){
-            final double lat;
-            final double lng;
-            String nameCity = "";
-            String nameStreet = "";
-            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
-            List<Address> addresses;
-            try {
-                lat = mLocation.getLatitude();
-                lng = mLocation.getLongitude();
-                addresses = gcd.getFromLocation(lat, lng, 1);
-                if (addresses != null) {
-                    if (addresses.size() > 0){
-                    Address mAddress = addresses.get(0);
-                        nameCity = mAddress.getLocality();
-                        nameStreet = mAddress.getAddressLine(0);
-                    }
-                }
-                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
-            } catch (IOException e) {
-                mCallBack.onFailure(false);
-                e.printStackTrace();
-            }
+        if (mLocation != null) {
+            getAddressSync(mLocation.getLatitude(), mLocation.getLongitude());
         } else {
-          createLocationRequest();
+            createLocationRequest();
         }
     }
 
-
     @Override
     public void onLocationChanged(Location location) {
-
         mLocation = location;
         if (mLocation != null) {
-            final double lat;
-            final double lng;
-            String nameCity = "";
-            String nameStreet = "";
-            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
-            List<Address> addresses;
-            try {
-                lat = mLocation.getLatitude();
-                lng = mLocation.getLongitude();
-                addresses = gcd.getFromLocation(lat, lng, 1);
-                if (addresses != null) {
-                    if (addresses.size() > 0){
-                        Address mAddress = addresses.get(0);
-                        nameCity = mAddress.getLocality();
-                        nameStreet = mAddress.getAddressLine(0);
-                    }
-                }
-                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
-            } catch (IOException e) {
-                mCallBack.onFailure(false);
-                e.printStackTrace();
-            }
+            getAddressSync(mLocation.getLatitude(), mLocation.getLongitude());
         }
+    }
+
+    public void getAddressSync(final Double lat, final Double lon) {
+        new AsyncTask<Double, Void, AddressFull>() {
+
+            @Override
+            protected AddressFull doInBackground(Double... params) {
+                AddressApi api = RestClientOpenStreetMap.getWeatherApi();
+
+                try {
+                    return api.getAddress(params[0], params[1]);
+                } catch (RetrofitError e) {
+                    mCallBack.onFailure(false);
+                    Log.d("TAG", e.getKind().name());
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(AddressFull addressFull) {
+                super.onPostExecute(addressFull);
+                if (addressFull != null) {
+                    mCallBack.onSuccess(new LocationModel(lat, lon, addressFull.getCity(), addressFull.getStreet(),
+                            addressFull.getHouse()));
+                } else {
+                    mCallBack.onFailure(false);
+                }
+            }
+        }.execute(lat, lon);
     }
 
     protected void createLocationRequest() {
@@ -175,12 +167,43 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
         }
     }
 
-
     @Override
     public void onConnectionSuspended(int i) {
         mGoogleApiClient.connect();
     }
 
+
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {}
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
+
+    public void getLocationGoogle(){
+        mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLocation != null) {
+            final double lat;
+            final double lng;
+            String nameCity = "";
+            String nameStreet = "";
+            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                lat = mLocation.getLatitude();
+                lng = mLocation.getLongitude();
+                addresses = gcd.getFromLocation(lat, lng, 1);
+                if (addresses != null) {
+                    if (addresses.size() > 0) {
+                        Address mAddress = addresses.get(0);
+                        nameCity = mAddress.getLocality();
+                        nameStreet = mAddress.getAddressLine(0);
+                    }
+                }
+                //mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
+            } catch (IOException e) {
+                mCallBack.onFailure(false);
+                e.printStackTrace();
+            }
+        } else {
+            createLocationRequest();
+        }
+    }
 }
