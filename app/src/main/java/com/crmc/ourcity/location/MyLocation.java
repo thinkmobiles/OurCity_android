@@ -197,7 +197,7 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
                         nameStreet = mAddress.getAddressLine(0);
                     }
                 }
-                //mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet));
+                mCallBack.onSuccess(new LocationModel(lat, lng, nameCity, nameStreet, ""));
             } catch (IOException e) {
                 mCallBack.onFailure(false);
                 e.printStackTrace();
