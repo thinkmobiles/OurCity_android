@@ -22,6 +22,7 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.model.LocationModel;
@@ -37,7 +38,7 @@ import java.util.Date;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class FocusFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener {
+public class FocusFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener {
 
     private MyLocation location;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
@@ -55,6 +56,7 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showContent();
     }
 
     @Override
@@ -210,9 +212,8 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
         location = new MyLocation(getActivity(), locationCallBack);
     }
 
-
     @Override
-    protected int getLayoutResource() {
+    protected int getContentView() {
         return R.layout.fragment_focus;
     }
 
@@ -225,5 +226,10 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
                 startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
                 break;
         }
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

@@ -10,25 +10,15 @@ public class AddressFull {
     @SerializedName("address")
     public AddressModel addressList;
 
-    public String getCity(){
-//        if (addressList != null && addressList.size() > 0) {
-        return addressList/*.get(0)*/.city;
-//        }
-//        return null;
+    public String getCity() {
+        return addressList.city;
     }
 
-    public String getStreet(){
-//        if (addressList != null && addressList.size() > 0) {
-        return addressList/*.get(0)*/.street;
-//        }
-//        return null;
+    public String getStreet() {
+        return addressList.street;
     }
 
-    public String getHouse(){
-//        if (addressList != null && addressList.size() > 0) {
-        return addressList/*.get(0)*/.house;
-//        }
-//        return null;
+    public String getHouse() {
+        return addressList.house;
     }
-
 }

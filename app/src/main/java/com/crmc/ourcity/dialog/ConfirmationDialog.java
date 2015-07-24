@@ -6,13 +6,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 
 /**
  * Created by podo on 21.07.15.
  */
-public class ConfirmationDialog extends BaseFragment implements View.OnClickListener {
+public class ConfirmationDialog extends BaseFourStatesFragment implements View.OnClickListener {
 
     private TextView tvOk;
     private TextView tvCancel;
@@ -31,14 +31,15 @@ public class ConfirmationDialog extends BaseFragment implements View.OnClickList
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_dialog_confirmation;
-    }
-
-    @Override
     protected void initViews() {
         tvOk = findView(R.id.tvOk);
         tvCancel = findView(R.id.tvCancel);
+        showContent();
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_dialog_confirmation;
     }
 
     @Override
@@ -58,5 +59,10 @@ public class ConfirmationDialog extends BaseFragment implements View.OnClickList
                 Toast.makeText(getActivity().getApplicationContext(), "btnCancel is clicked", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

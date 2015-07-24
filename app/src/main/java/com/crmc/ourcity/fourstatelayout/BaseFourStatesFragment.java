@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fourstatelayout;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +20,23 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     private Button mRetryButton;
     private TextView mErrorTitle, mEmptyTitle;
     private FourStateLayout mainView;
+    private View rootView;
 
 
-    @Override
     protected int getLayoutResource() {
         return R.layout.base_four_state_layout;
     }
 
+    protected void setListeners() {
+    }
+
+    protected void initViews() {
+    }
+
     @Override
     public View onCreateView(final LayoutInflater _inflater, final ViewGroup _root, final Bundle _savedInstanceState) {
-        View view = super.onCreateView(_inflater, _root, _savedInstanceState);
+        super.onCreateView(_inflater, _root, _savedInstanceState);
+        rootView = _inflater.inflate(getLayoutResource(), _root, false);
         mainView = findView(R.id.four_state);
         ViewGroup mEmptyLayout = (ViewGroup) _inflater.inflate(R.layout.empty_layout, null);
         ViewGroup mErrorLayout = (ViewGroup) _inflater.inflate(R.layout.error_layout, null);
@@ -38,8 +46,11 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);
         mErrorTitle = (TextView) mErrorLayout.findViewById(R.id.error_title);
 
-        mainView.initFourStates((ViewGroup)_inflater.inflate(getContentView(), null), mLoadingLayout, mEmptyLayout, mErrorLayout);
-        return view;
+        mainView.initFourStates((ViewGroup) _inflater.inflate(getContentView(), null), mLoadingLayout, mEmptyLayout,
+                mErrorLayout);
+        initViews();
+        setListeners();
+        return rootView;
 
     }
 
@@ -88,5 +99,8 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         mainView.showContent();
     }
 
-
+    @SuppressWarnings("unchecked")
+    protected final <T extends View> T findView(@IdRes int _id) {
+        return (T) rootView.findViewById(_id);
+    }
 }

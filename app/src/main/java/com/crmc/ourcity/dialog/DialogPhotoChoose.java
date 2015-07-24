@@ -5,12 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class DialogPhotoChoose extends BaseFragment implements View.OnClickListener {
+public class DialogPhotoChoose extends BaseFourStatesFragment implements View.OnClickListener {
 
     private TextView tvCamera;
     private TextView tvGallery;
@@ -28,14 +28,15 @@ public class DialogPhotoChoose extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_dialog_photo_choose;
-    }
-
-    @Override
     protected void initViews() {
         tvCamera = findView(R.id.tvCamera_CFD);
         tvGallery = findView(R.id.tvGallery_CFD);
+        showContent();
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_dialog_photo_choose;
     }
 
     @Override
@@ -55,5 +56,10 @@ public class DialogPhotoChoose extends BaseFragment implements View.OnClickListe
                 mCallback.onActionDialogSelected(DialogType.PHOTOGALLERY);
                 break;
         }
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

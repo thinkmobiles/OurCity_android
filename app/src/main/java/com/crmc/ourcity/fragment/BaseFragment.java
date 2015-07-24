@@ -1,13 +1,8 @@
 package com.crmc.ourcity.fragment;
 
 
-import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 
 /**
@@ -16,26 +11,26 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private View rootView;
+//    private View rootView;
+//
+//    protected abstract
+//    @LayoutRes
+//    int getLayoutResource();
+//
+//    @Override
+//    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle
+//            savedInstanceState) {
+//        rootView = inflater.inflate(getLayoutResource(), container, false);
+////        initViews();
+////        setListeners();
+//        return rootView;
+//    }
 
-    protected abstract
-    @LayoutRes
-    int getLayoutResource();
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle
-            savedInstanceState) {
-        rootView = inflater.inflate(getLayoutResource(), container, false);
-        initViews();
-        setListeners();
-        return rootView;
-    }
-
-    protected void initViews() {
-    }
-
-    protected void setListeners() {
-    }
+//    protected void initViews() {
+//    }
+//
+//    protected void setListeners() {
+//    }
 
     protected final void addFragment(final @IdRes int containerId, final Fragment fragment) {
         getChildFragmentManager().beginTransaction()
@@ -61,8 +56,8 @@ public abstract class BaseFragment extends Fragment {
         return (T) getChildFragmentManager().findFragmentById(containerId);
     }
 
-    @SuppressWarnings("unchecked")
-    protected final <T extends View> T findView(@IdRes int _id) {
-        return (T) rootView.findViewById(_id);
-    }
+//    @SuppressWarnings("unchecked")
+//    protected final <T extends View> T findView(@IdRes int _id) {
+//        return (T) rootView.findViewById(_id);
+//    }
 }
