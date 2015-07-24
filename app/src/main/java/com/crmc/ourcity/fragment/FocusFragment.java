@@ -132,7 +132,7 @@ public class FocusFragment extends BaseFragment implements OnClickListener, OnCh
         switch (requestCode) {
             case Constants.REQUEST_TYPE_PHOTO:
                 if (data != null) {
-                    if (data.getStringExtra(Constants.REQUEST_INTENT_TYPE_PHOTO).equals(Constants.REQUEST_PHOTO)) {
+                    if (data.getIntExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, 0) == Constants.REQUEST_PHOTO) {
                         if (isCanGetCameraPicture()) {
                             openCamera();
                         }
