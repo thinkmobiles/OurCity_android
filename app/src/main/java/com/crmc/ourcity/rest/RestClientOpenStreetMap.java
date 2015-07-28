@@ -35,7 +35,7 @@ public class RestClientOpenStreetMap {
         return mInstance;
     }
 
-    public static AddressApi getWeatherApi() {
+    public static AddressApi getAddressApi() {
         return getInstance().mAddressApi;
     }
 }
