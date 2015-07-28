@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.crmc.ourcity"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.crmc.ourcity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="com.crmc.ourcity.permission.C2D_MESSAGE"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-feature
@@ -53,6 +55,13 @@
             android:label="@string/title_activity_dialog"
             android:theme="@style/MyDialogTheme">
         </activity>
+        <receiver
+            android:name=".receiver.DownloadReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,10 +26,11 @@ import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.AddressLoader;
 import com.crmc.ourcity.location.MyLocation;
-import com.crmc.ourcity.model.LocationModel;
+import com.crmc.ourcity.rest.responce.AddressFull;
 import com.crmc.ourcity.utils.EnumUtil;
-import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.FilePath;
 import com.crmc.ourcity.utils.IntentUtils;
 
 import java.io.File;
@@ -38,7 +41,8 @@ import java.util.Date;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class FocusFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener {
+public class FocusFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener,
+        LoaderManager.LoaderCallbacks<AddressFull> {
 
     private MyLocation location;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
@@ -167,7 +171,7 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
                 break;
             case Constants.REQUEST_GALLERY_IMAGE:
                 if (resultCode == Activity.RESULT_OK) {
-                    mPhotoFilePath = Image.getPath(getActivity(), data.getData());
+                    mPhotoFilePath = FilePath.getPath(getActivity(), data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile = new File(mPhotoFilePath);
                         if (imageFile.exists()) {
@@ -193,23 +197,36 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
         getActivity().sendBroadcast(mediaScanIntent);
     }
 
-
     public void getLocation() {
         LocationCallBack locationCallBack = new LocationCallBack() {
             @Override
-            public void onSuccess(LocationModel modelLocation) {
-                etNameCity.setText(modelLocation.nameCity);
-                etNameStreet.setText(modelLocation.nameStreet);
+            public void onSuccess(double lat, double lon) {
+                getAddress(lat, lon);
             }
-
             @Override
             public void onFailure(boolean result) {
                 if (!result) {
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.uncompilable_type), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.uncompilable_type),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         };
         location = new MyLocation(getActivity(), locationCallBack);
+    }
+
+    public void getAddress(double lat, double lon) {
+        Bundle bundle = new Bundle();
+        bundle.putDouble(Constants.CONSTANTS_LAT, lat);
+        bundle.putDouble(Constants.CONSTANTS_LON, lon);
+        getLoaderManager().restartLoader(Constants.LOADER_ADDRESS_ID, bundle, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getLoaderManager().getLoader(Constants.LOADER_ADDRESS_ID) != null) {
+            getLoaderManager().initLoader(Constants.LOADER_ADDRESS_ID, null, this);
+        }
     }
 
     @Override
@@ -230,6 +247,20 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
 
     @Override
     public void onRetryClick() {
+    }
 
+    @Override
+    public Loader<AddressFull> onCreateLoader(int id, Bundle args) {
+        return new AddressLoader(getActivity(), args);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AddressFull> loader, AddressFull data) {
+        etNameCity.setText(data.getCity());
+        etNameStreet.setText(data.getStreet());
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AddressFull> loader) {
     }
 }

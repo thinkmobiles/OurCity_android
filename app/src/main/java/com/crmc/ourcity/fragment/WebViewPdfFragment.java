@@ -9,9 +9,9 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 /**
- * Created by SetKrul on 20.07.2015.
+ * Created by SetKrul on 27.07.2015.
  */
-public class WebViewFragment extends BaseFourStatesFragment {
+public class WebViewPdfFragment extends BaseFourStatesFragment {
 
     private WebView mWebView;
 
@@ -30,7 +30,9 @@ public class WebViewFragment extends BaseFourStatesFragment {
         mWebView = findView(R.id.webView);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://google.com.ua");
+        String pdfLink = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
+        if (pdfLink.substring(pdfLink.lastIndexOf(".") + 1).equals(""));
+        mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + pdfLink);
     }
 
     @Override
@@ -48,6 +50,7 @@ public class WebViewFragment extends BaseFourStatesFragment {
     }
 
     private class MyWebViewClient extends WebViewClient {
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
