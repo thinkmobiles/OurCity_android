@@ -30,7 +30,7 @@ import com.crmc.ourcity.loader.AddressLoader;
 import com.crmc.ourcity.location.MyLocation;
 import com.crmc.ourcity.rest.responce.AddressFull;
 import com.crmc.ourcity.utils.EnumUtil;
-import com.crmc.ourcity.utils.FilePath;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
 import java.io.File;
@@ -171,7 +171,7 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
                 break;
             case Constants.REQUEST_GALLERY_IMAGE:
                 if (resultCode == Activity.RESULT_OK) {
-                    mPhotoFilePath = FilePath.getPath(getActivity(), data.getData());
+                    mPhotoFilePath = Image.getPath(getActivity(), data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile = new File(mPhotoFilePath);
                         if (imageFile.exists()) {

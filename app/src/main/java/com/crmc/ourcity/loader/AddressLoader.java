@@ -27,7 +27,7 @@ public class AddressLoader extends BaseLoader<AddressFull> {
     @Override
     public AddressFull loadInBackground() {
         AddressApi api = RestClientOpenStreetMap.getWeatherApi();
-        AddressFull addressFull;//catch RetrofitException
+        AddressFull addressFull;
         try {
             addressFull = api.getAddress(lat, lon);
         } catch (RetrofitError e) {
