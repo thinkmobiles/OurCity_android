@@ -71,15 +71,31 @@ public interface CityApi {
     @POST("/AddSurveyVote")
     String replyVote(@Body VoteModel voteModel);
 
+    /**
+     * @param baseModel city number
+     * @return string base64 image Logo
+     */
     @POST("/GetLogoImage")
     String getLogoImage(@Body BaseModel baseModel);
 
+    /**
+     * @param baseModel city namber
+     * @return string base64 image City
+     */
     @POST("/GetCityImage")
     String getCityImage(@Body BaseModel baseModel);
 
+    /**
+     * @param baseModel city number
+     * @return string base64 image Mayor
+     */
     @POST("/GetMayorImage")
     String getMayorImage(@Body BaseModel baseModel);
 
+    /**
+     * @param residentModel resident id
+     * @return messages from mailing
+     */
     @POST("/GetMessagesToResident")
     List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 }
