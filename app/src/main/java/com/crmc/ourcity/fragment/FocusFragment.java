@@ -28,7 +28,7 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AddressLoader;
 import com.crmc.ourcity.location.MyLocation;
-import com.crmc.ourcity.rest.responce.AddressFull;
+import com.crmc.ourcity.rest.responce.address.AddressFull;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
@@ -216,8 +216,8 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
 
     public void getAddress(double lat, double lon) {
         Bundle bundle = new Bundle();
-        bundle.putDouble(Constants.CONSTANTS_LAT, lat);
-        bundle.putDouble(Constants.CONSTANTS_LON, lon);
+        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, lat);
+        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LON, lon);
         getLoaderManager().restartLoader(Constants.LOADER_ADDRESS_ID, bundle, this);
     }
 

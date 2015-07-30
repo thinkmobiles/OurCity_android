@@ -4,33 +4,11 @@ package com.crmc.ourcity.fragment;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 
-
 /**
  *
  * Created by SetKrul on 14.07.2015.
  */
 public abstract class BaseFragment extends Fragment {
-
-//    private View rootView;
-//
-//    protected abstract
-//    @LayoutRes
-//    int getLayoutResource();
-//
-//    @Override
-//    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle
-//            savedInstanceState) {
-//        rootView = inflater.inflate(getLayoutResource(), container, false);
-////        initViews();
-////        setListeners();
-//        return rootView;
-//    }
-
-//    protected void initViews() {
-//    }
-//
-//    protected void setListeners() {
-//    }
 
     protected final void addFragment(final @IdRes int containerId, final Fragment fragment) {
         getChildFragmentManager().beginTransaction()
@@ -55,9 +33,4 @@ public abstract class BaseFragment extends Fragment {
     public final <T extends Fragment> T getFragmentById(final @IdRes int containerId) {
         return (T) getChildFragmentManager().findFragmentById(containerId);
     }
-
-//    @SuppressWarnings("unchecked")
-//    protected final <T extends View> T findView(@IdRes int _id) {
-//        return (T) rootView.findViewById(_id);
-//    }
 }

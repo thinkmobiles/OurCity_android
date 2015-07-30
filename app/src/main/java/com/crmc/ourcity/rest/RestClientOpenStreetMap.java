@@ -17,8 +17,6 @@ public class RestClientOpenStreetMap {
 
     private RestClientOpenStreetMap() {
 
-//        Gson gson = new GsonBuilder().registerTypeAdapter(AddressFull.class, new AddressDeserializer()).create();
-
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(new OkHttpClient()))
                 .setEndpoint(BASE_URL)

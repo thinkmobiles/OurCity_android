@@ -6,8 +6,8 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientOpenStreetMap;
 import com.crmc.ourcity.rest.api.AddressApi;
-import com.crmc.ourcity.rest.responce.AddressFull;
-import com.crmc.ourcity.rest.responce.AddressModel;
+import com.crmc.ourcity.rest.responce.address.AddressFull;
+import com.crmc.ourcity.rest.responce.address.AddressModel;
 
 import retrofit.RetrofitError;
 
@@ -20,8 +20,8 @@ public class AddressLoader extends BaseLoader<AddressFull> {
 
     public AddressLoader(Context context, Bundle args) {
         super(context);
-        lat = args.getDouble(Constants.CONSTANTS_LAT);
-        lon = args.getDouble(Constants.CONSTANTS_LON);
+        lat = args.getDouble(Constants.BUNDLE_CONSTANTS_LAT);
+        lon = args.getDouble(Constants.BUNDLE_CONSTANTS_LON);
     }
 
     @Override

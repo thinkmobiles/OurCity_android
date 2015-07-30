@@ -13,7 +13,7 @@ import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
-import com.crmc.ourcity.fragment.FocusFragment;
+import com.crmc.ourcity.fragment.TestApiFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -44,7 +44,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         getSupportActionBar().setTitle("OutCity");
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(FocusFragment.newInstance());
+            setTopFragment(TestApiFragment.newInstance());
             //getSupportActionBar().setTitle("MayorSpeech");
         }
 //        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
