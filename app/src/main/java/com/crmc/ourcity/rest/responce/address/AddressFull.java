@@ -8,17 +8,5 @@ import com.google.gson.annotations.SerializedName;
 public class AddressFull {
 
     @SerializedName("address")
-    public AddressModel addressList;
-
-    public String getCity() {
-        return addressList.city;
-    }
-
-    public String getStreet() {
-        return addressList.street;
-    }
-
-    public String getHouse() {
-        return addressList.house;
-    }
+    public AddressModel address;
 }

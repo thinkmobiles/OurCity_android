@@ -16,6 +16,9 @@ public final class Constants {
     public static final String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";
     public static final String BUNDLE_CONSTANT_LANG = "LANG";
     public static final String BUNDLE_CONSTANT_TYPE = "TYPE";
+    public static final String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
+    public static final String BUNDLE_CONSTANT_AGE = "AGE";
+    public static final String BUNDLE_CONSTANT_GENDER = "GENDER";
 
     public static final String IMAGE_MIME_TYPE_PREFIX = "image";
     public static final String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";

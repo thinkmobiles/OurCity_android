@@ -15,6 +15,9 @@ import java.util.ArrayList;
 
 import retrofit.RetrofitError;
 
+/**
+ * Created by SetKrul on 29.07.2015.
+ */
 public class MenuLoader extends BaseLoader<MenuNodes> {
 
     private int cityNumber;

@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by SetKrul on 29.07.2015.
  */
 public class MenuModel {
+
     @SerializedName("ActionType")
     public Integer actionType;
     @SerializedName("Color")

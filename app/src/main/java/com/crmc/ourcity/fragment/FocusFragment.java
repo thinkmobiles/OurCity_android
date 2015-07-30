@@ -256,8 +256,8 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
 
     @Override
     public void onLoadFinished(Loader<AddressFull> loader, AddressFull data) {
-        etNameCity.setText(data.getCity());
-        etNameStreet.setText(data.getStreet());
+        etNameCity.setText(data.address.city);
+        etNameStreet.setText(data.address.street);
     }
 
     @Override

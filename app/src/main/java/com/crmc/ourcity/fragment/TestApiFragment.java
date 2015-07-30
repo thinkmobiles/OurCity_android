@@ -9,16 +9,15 @@ import android.view.View;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.loader.PhonesLoader;
-import com.crmc.ourcity.rest.responce.events.Phones;
-
-import java.util.List;
+import com.crmc.ourcity.loader.VoteReplyLoader;
 
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class TestApiFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>> {
-    private int cityNumber;
+public class TestApiFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<String> {
+    private int selectedOptionId;
+    private int age;
+    private int gender;
 
     public static TestApiFragment newInstance() {
         return new TestApiFragment();
@@ -27,14 +26,18 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cityNumber = 1;
+        selectedOptionId = 1;
+        age = 27;
+        gender = 1;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID, selectedOptionId);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_AGE, age);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_GENDER, gender);
         getLoaderManager().initLoader(1, bundle, this);
     }
 
@@ -48,16 +51,20 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public Loader<List<Phones>> onCreateLoader(int id, Bundle args) {
-        return new PhonesLoader(getActivity(), args);
+    public Loader<String> onCreateLoader(int id, Bundle args) {
+        return new VoteReplyLoader(getActivity(), args);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Phones>> loader, List<Phones> data) {
-        Log.d("TAG", "TAG" + data.get(0).phoneNumber);
+    public void onLoadFinished(Loader<String> loader, String data) {
+//        for (int i = 0; i < data.size(); i++) {
+//            Log.d("TAG", "TAG: " + data.get(i).surveyTitle + " and " + data.get(0).optionsList.get(0)
+//                    .optionDescription);
+//        }
+        Log.d("TAG", "TAG: " + data);
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Phones>> loader) {
+    public void onLoaderReset(Loader<String> loader) {
     }
 }

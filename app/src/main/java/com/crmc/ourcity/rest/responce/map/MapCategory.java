@@ -9,28 +9,13 @@ import java.util.List;
  */
 public class MapCategory {
 
+    @SerializedName("interestPoint")
+    public List<MapInterestedPoint> interestedPointList;
+
     @SerializedName("CategoryId")
     public Integer categoryId;
     @SerializedName("categoryName")
     public String categoryName;
     @SerializedName("icon")
     public String icon;
-    @SerializedName("interestPoint")
-    public List<MapInterestedPoint> interestedPointList;
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public String getCategoryName(){
-        return categoryName;
-    }
-
-    public String getIcon(){
-        return icon;
-    }
-
-    public List<MapInterestedPoint> getInterestedPointList(){
-        return interestedPointList;
-    }
 }

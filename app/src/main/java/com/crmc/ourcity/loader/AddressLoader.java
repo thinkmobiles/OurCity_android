@@ -32,7 +32,7 @@ public class AddressLoader extends BaseLoader<AddressFull> {
             addressFull = api.getAddress(lat, lon);
         } catch (RetrofitError e) {
             addressFull = new AddressFull();
-            addressFull.addressList = new AddressModel();
+            addressFull.address = new AddressModel();
         }
         return addressFull;
     }

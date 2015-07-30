@@ -3,10 +3,13 @@ package com.crmc.ourcity.rest.api;
 import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.request.events.EventsModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
+import com.crmc.ourcity.rest.request.vote.VoteModel;
+import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.events.Site;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.menu.MenuNodes;
+import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public interface CityApi {
 
     /**
      * @param eventsModel type get data
-     * @return data for listView city sites
+     * @return city sites
      */
     @POST("/GetEventsByCityAndTypeId")
     List<Site> getSites(@Body EventsModel eventsModel);
@@ -44,4 +47,25 @@ public interface CityApi {
      */
     @POST("/GetCityEntities")
     List<Phones> getPhones(@Body BaseModel baseModel);
+
+    /**
+     * @param baseModel city number
+     * @return news??????
+     */
+    @POST("/GetInterestAreaToCity")
+    List<News> getNews(@Body BaseModel baseModel);
+
+    /**
+     * @param baseModel city number
+     * @return Survey vote
+     */
+    @POST("/GetSurveyToCity")
+    List<VoteFull> getVote(@Body BaseModel baseModel);
+
+    /**
+     * @param voteModel selected point int, age int, gender int
+     * @return true : false
+     */
+    @POST("/AddSurveyVote")
+    String replyVote(@Body VoteModel voteModel);
 }
