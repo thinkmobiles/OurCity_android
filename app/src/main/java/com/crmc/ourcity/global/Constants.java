@@ -19,6 +19,11 @@ public final class Constants {
     public static final String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
     public static final String BUNDLE_CONSTANT_AGE = "AGE";
     public static final String BUNDLE_CONSTANT_GENDER = "GENDER";
+    public static final String BUNDLE_CONSTANT_LOAD_IMAGE_TYPE = "LOAD_IMAGE_TYPE";
+    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
+    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
+    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
+    public static final String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
 
     public static final String IMAGE_MIME_TYPE_PREFIX = "image";
     public static final String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";

@@ -3,7 +3,9 @@ package com.crmc.ourcity.rest.api;
 import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.request.events.EventsModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
+import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
+import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.events.Site;
@@ -38,7 +40,7 @@ public interface CityApi {
      * @param eventsModel type get data
      * @return city sites
      */
-    @POST("/GetEventsByCityAndTypeId")
+    @POST("/GetEventsByCityIdAndTypeName")
     List<Site> getSites(@Body EventsModel eventsModel);
 
     /**
@@ -68,4 +70,16 @@ public interface CityApi {
      */
     @POST("/AddSurveyVote")
     String replyVote(@Body VoteModel voteModel);
+
+    @POST("/GetLogoImage")
+    String getLogoImage(@Body BaseModel baseModel);
+
+    @POST("/GetCityImage")
+    String getCityImage(@Body BaseModel baseModel);
+
+    @POST("/GetMayorImage")
+    String getMayorImage(@Body BaseModel baseModel);
+
+    @POST("/GetMessagesToResident")
+    List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 }
