@@ -7,7 +7,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientOpenStreetMap;
 import com.crmc.ourcity.rest.api.AddressApi;
 import com.crmc.ourcity.rest.responce.address.AddressFull;
-import com.crmc.ourcity.rest.responce.address.AddressModel;
+import com.crmc.ourcity.rest.responce.address.AddressDetails;
 
 import retrofit.RetrofitError;
 
@@ -32,7 +32,7 @@ public class AddressLoader extends BaseLoader<AddressFull> {
             addressFull = api.getAddress(lat, lon);
         } catch (RetrofitError e) {
             addressFull = new AddressFull();
-            addressFull.address = new AddressModel();
+            addressFull.address = new AddressDetails();
         }
         return addressFull;
     }

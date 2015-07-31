@@ -24,6 +24,9 @@ public final class Constants {
     public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
     public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
     public static final String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
+    public static final String BUNDLE_CONSTANT_CLIENT_ID = "CLIENT_ID";
+    public static final String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
+    public static final String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
 
     public static final String IMAGE_MIME_TYPE_PREFIX = "image";
     public static final String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";

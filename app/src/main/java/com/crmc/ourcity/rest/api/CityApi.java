@@ -4,13 +4,16 @@ import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.request.events.EventsModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
+import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
+import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.events.Site;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
-import com.crmc.ourcity.rest.responce.menu.MenuNodes;
+import com.crmc.ourcity.rest.responce.map.MapTrips;
+import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
 import java.util.List;
@@ -27,7 +30,7 @@ public interface CityApi {
      * @return tree-like structure for client app menu
      */
     @POST("/GetMobileMenu")
-    MenuNodes getMenu(@Body CityModel cityModel);
+    MenuFull getMenu(@Body CityModel cityModel);
 
     /**
      * @param baseModel number city
@@ -98,4 +101,14 @@ public interface CityApi {
      */
     @POST("/GetMessagesToResident")
     List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
+
+    /**
+     * @param baseModel city number
+     * @return point for the construction of the route on the map
+     */
+    @POST("/GetTripsByCityId")
+    List<MapTrips> getMapTrips(@Body BaseModel baseModel);
+
+    @POST("/GetCRMCStreetList")
+    StreetsFull getStreets(@Body StreetsModel streetsModel);
 }

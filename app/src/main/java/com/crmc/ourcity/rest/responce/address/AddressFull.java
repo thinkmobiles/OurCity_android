@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName;
 public class AddressFull {
 
     @SerializedName("address")
-    public AddressModel address;
+    public AddressDetails address;
 }

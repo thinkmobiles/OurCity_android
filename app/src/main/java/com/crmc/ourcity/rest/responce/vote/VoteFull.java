@@ -10,7 +10,7 @@ import java.util.List;
 public class VoteFull {
 
     @SerializedName("optionsList")
-    public List<VoteItem> optionsList;
+    public List<VoteDetails> optionsList;
 
     @SerializedName("imagePath")
     public String imagePath;
