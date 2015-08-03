@@ -19,7 +19,6 @@ public class MainMenuFragment extends BaseFourStatesFragment {
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override

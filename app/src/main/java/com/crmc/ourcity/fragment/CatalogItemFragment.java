@@ -37,21 +37,13 @@ public class CatalogItemFragment extends BaseFourStatesFragment {
         showContent();
     }
 
-//    @Override
-//    protected int getLayoutResource() {
-//        return R.layout.fragment_catalog_item;
-//    }
-
-
     @Override
     protected int getContentView() {
         return R.layout.fragment_catalog_item;
     }
 
     @Override
-    public void onRetryClick() {
-
-    }
+    public void onRetryClick() {}
 
     @Override
     public void onStop() {
