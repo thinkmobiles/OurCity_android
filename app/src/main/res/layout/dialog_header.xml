@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/tvHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="#C3C3C3"
+    android:drawablePadding="@dimen/settings3"
+    android:paddingBottom="@dimen/settings15"
+    android:paddingRight="@dimen/settings15"
+    android:paddingTop="@dimen/settings15"
+    android:paddingLeft="10dp"
+    android:gravity="center|start"
+    android:textColor="@color/turquoise"
+    android:textSize="@dimen/settings22"
+    android:textStyle="bold"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
