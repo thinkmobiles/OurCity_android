@@ -5,20 +5,21 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="#C3C3C3"
-        android:drawablePadding="@dimen/settings3"
-        android:paddingBottom="@dimen/settings15"
-        android:paddingRight="@dimen/settings15"
-        android:paddingTop="@dimen/settings15"
-        android:text="@string/txt_login"
-        android:gravity="center|right"
-        android:textColor="@color/turquoise"
-        android:textSize="@dimen/settings22"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:background="#C3C3C3"-->
+        <!--android:drawablePadding="@dimen/settings3"-->
+        <!--android:paddingBottom="@dimen/settings15"-->
+        <!--android:paddingRight="@dimen/settings15"-->
+        <!--android:paddingTop="@dimen/settings15"-->
+        <!--android:text="@string/txt_login"-->
+        <!--android:gravity="center|right"-->
+        <!--android:textColor="@color/turquoise"-->
+        <!--android:textSize="@dimen/settings22"-->
+        <!--android:textStyle="bold" />-->
+    <include layout="@layout/dialog_header"/>
 
     <LinearLayout
         android:orientation="horizontal"

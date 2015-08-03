@@ -14,6 +14,7 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
  */
 public class ConfirmationDialog extends BaseFourStatesFragment implements View.OnClickListener {
 
+    private TextView tvHeader;
     private TextView tvOk;
     private TextView tvCancel;
     private OnActionDialogListener mCallback;
@@ -32,6 +33,8 @@ public class ConfirmationDialog extends BaseFourStatesFragment implements View.O
 
     @Override
     protected void initViews() {
+        tvHeader = findView(R.id.tvHeader);
+        tvHeader.setText(getResources().getText(R.string.txt_login));
         tvOk = findView(R.id.tvOk);
         tvCancel = findView(R.id.tvCancel);
         showContent();
