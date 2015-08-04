@@ -16,7 +16,15 @@
     <string name="no_application_to_open_pdf">No Application Available to View PDF</string>
     <string name="long_text">ברוכים הבאים לאפליקציה החדשנית של המועצה המקומית יסוד המעלה. המועצה המקומית יסוד המעלה נבחריה ועובדיה רואים חשיבות רבה בקשר עם התושבים ומחויבים לשרות מתקדם ויעיל, לפיכך אנו משקיעים תשומות במימוש ובחיזוק הקשר באמצעות מערכת מתקדמת ויעילה. באמצעות האפליקציה "פוקוס ניהול עירוני" ניתן יהיה לקבל ולשלוח מידע אודות המתרחש במושבה. אנו מאמינים כי השימוש באפליקציה יביא עימו, שרות איכותי ומהיר יותר לרווחת התושב. כראש הרשות אני מאמין בשקיפות מלאה ורואה באפליקציה כמו מערכת "הפוקוס ניהול עירוני" (מוקד) , ערוץ קשר חשוב. אתם מוזמנים לקבל מידע ולהזרים מידע על הקורה במושבה דרך האפליקציה . נשמח לקבל פניותיכם , הצעותיכם והיענותכם למוקד העירוני דרך האפליקציה , אתר האינטרנט והפייסבוק. אנחנו כאן למענכם ולשירותכם. בברכה, אילן אור ראש המועצה מ.מ יסוד המעלה</string>
 
+    <!--dialogs-->
+    <string name="dialog_camera_choose_get_photo">Choose get photo</string>
+    <string name="dialog_camera_btn_camera">Camera</string>
+    <string name="dialog_camera_btn_gallery">Gallery</string>
+    <string name="dialog_map_filter_header_text">Interested points filter</string>
+    <string name="dialog_map_filter_btn_cancel">Cancel</string>
+    <string name="dialog_map_filter_btn_select">Select</string>
 
+    <!--menu-->
     <string name="menu_settings">settings</string>
     <string name="menu_home">home</string>
     <string name="menu_refresh">refresh</string>
@@ -33,7 +41,8 @@
     <string name="refresh_button_text">Try again</string>
 
     <!--map fragment -->
-    <string name="btn_interest_point_title">נקודות עניין</string>
+    <!--<string name="btn_interest_point_title">נקודות עניין</string>-->
+    <string name="map_btn_filter">filter</string>
 
     <!-- nodes titles -->
     <string name="node_payments_title">תשלומים</string>

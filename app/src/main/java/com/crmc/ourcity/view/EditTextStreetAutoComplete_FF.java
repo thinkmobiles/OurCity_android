@@ -35,5 +35,4 @@ public class EditTextStreetAutoComplete_FF extends AutoCompleteTextView {
             performFiltering(getText(), 0);
         }
     }
-
 }

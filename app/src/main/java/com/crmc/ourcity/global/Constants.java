@@ -6,9 +6,16 @@ package com.crmc.ourcity.global;
 public final class Constants {
 
     public static final String REQUEST_INTENT_TYPE_PHOTO = "type";
+//    focus fragment
     public static final int REQUEST_TYPE_PHOTO = 0;
     public static final int REQUEST_PHOTO = 1;
     public static final int REQUEST_GALLERY_IMAGE = 2;
+
+//    map fragment
+    public static final int REQUEST_MAP_FILTER = 3;
+    public static final String REQUEST_MAP_FILTER_TYPE = "filter_type";
+    public static final int REQUEST_MAP_SELECTED = 1;
+    public static final int REQUEST_MAP_CANCEL_SELECTED = 0;
 
     public static final int LOADER_ADDRESS_ID = 1;
     public static final String BUNDLE_CONSTANTS_LAT = "LAT";

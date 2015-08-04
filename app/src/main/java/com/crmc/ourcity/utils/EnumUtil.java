@@ -9,7 +9,6 @@ public class EnumUtil {
 
         public Serializer(Class<T> targetType, T target) {
             super(targetType);
-
             this.target = target;
         }
         public void to(Intent intent) {

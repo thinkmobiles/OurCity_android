@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_map"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_2">
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/map"
@@ -18,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/btn_interest_point_margin_top"
         android:background="@drawable/btn_selector_default"
-        android:text="@string/btn_interest_point_title"
+        android:text="@string/map_btn_filter"
         android:textColor="#FFF"
         android:textSize="@dimen/btn_interest_point_size"
         android:textStyle="bold" />

@@ -1,13 +1,23 @@
 package com.crmc.ourcity.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.dialog.DialogActivity;
+import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
+import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.MapDataLoader;
+import com.crmc.ourcity.model.MapFilterSelected;
+import com.crmc.ourcity.rest.responce.map.MapCategory;
+import com.crmc.ourcity.utils.EnumUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,16 +25,30 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
  * Created by SetKrul on 31.07.2015.
  */
-public final class MapsFragment extends BaseFourStatesFragment implements OnMapReadyCallback {
+public final class MapsFragment extends BaseFourStatesFragment implements OnMapReadyCallback, LoaderManager
+        .LoaderCallbacks<List<MapCategory>>, OnClickListener {
+
+    private GoogleMap mGoogleMap;
+    private int cityNumber;
+    private String lng;
+
     private SupportMapFragment mMap;
-    CharSequence[] items;
-    boolean[] itemsChecked;
-    private Button btnPoint;
+    private Button btnFilter;
+    private List<MapFilterSelected> mDialogMapFilterSelecteds = new ArrayList<>();
+    private Map<Integer, ArrayList<Marker>> mMarkersCategory = new HashMap<>();
 
     public static MapsFragment newInstance() {
         return new MapsFragment();
@@ -49,150 +73,114 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         }
         if (mMap != null) {
             getChildFragmentManager().findFragmentById(R.id.map);
-            setUpMap();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        cityNumber = 1;
+        lng = "en";
         setUpMapIfNeeded();
-
     }
 
-    private void setUpMap() {}
 
     @Override
-    public final void onRetryClick() {}
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), DialogActivity.class);
+        EnumUtil.serialize(DialogType.class, DialogType.FILTER_MAP).to(intent);
+        intent.putParcelableArrayListExtra(MapFilterSelected.class.getCanonicalName(), (ArrayList<? extends
+                Parcelable>) mDialogMapFilterSelecteds);
+        startActivityForResult(intent, Constants.REQUEST_MAP_FILTER);
+    }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        googleMap.setMyLocationEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constants.REQUEST_MAP_FILTER:
+                if (data != null) {
+                    if (data.getIntExtra(Constants.REQUEST_MAP_FILTER_TYPE, 0) == Constants.REQUEST_MAP_SELECTED) {
+                        mDialogMapFilterSelecteds = data.getParcelableArrayListExtra(MapFilterSelected.class
+                                .getCanonicalName());
+                        setFilterableMarkers();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void setFilterableMarkers() {
+        for (int i = 0; i < mDialogMapFilterSelecteds.size(); i++) {
+            Set<Map.Entry<Integer, ArrayList<Marker>>> set = mMarkersCategory.entrySet();
+            for (Map.Entry<Integer, ArrayList<Marker>> me : set) {
+                if (me.getKey() == mDialogMapFilterSelecteds.get(i).categoryId) {
+                    for (int j = 0; j < me.getValue().size(); j++) {
+                        me.getValue().get(j).setVisible(mDialogMapFilterSelecteds.get(i).visible);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        btnFilter = findView(R.id.map_btn_point);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        btnFilter.setOnClickListener(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<MapCategory>> loader, List<MapCategory> data) {
+        ArrayList<Marker> temp = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < data.get(i).getInterestedPointList().size(); j++) {
+                temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + data.get(i)
+                        .getInterestedPointDescription(j)).position(new LatLng(data.get(i).getInterestedPointLat(j),
+                        data.get(i).getInterestedPointLon(j)))));
+            }
+            mMarkersCategory.put(data.get(i).categoryId, new ArrayList<>(temp));
+            mDialogMapFilterSelecteds.add(new MapFilterSelected(data.get(i).categoryId, data.get(i).categoryName,
+                    false));
+            temp.clear();
+        }
         showContent();
-        setCamera(googleMap);
-        //setMarkers();
-        //getInsertPoint(googleMap);
-        //setTitel(googleMap);
-        setbtn(googleMap);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<MapCategory>> loader) {
+    }
+
+    @Override
+    public Loader<List<MapCategory>> onCreateLoader(int id, Bundle args) {
+        return new MapDataLoader(getActivity(), args);
+    }
+
+    @Override
+    public final void onRetryClick() {
+    }
+
+    @Override
+    public void onMapReady(GoogleMap _googleMap) {
+        _googleMap.setMyLocationEnabled(true);
+        _googleMap.getUiSettings().setZoomControlsEnabled(true);
+        setCamera(_googleMap);
+        this.mGoogleMap = _googleMap;
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
+        getLoaderManager().initLoader(1, bundle, this);
     }
 
     private void setCamera(GoogleMap googleMap) {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(50.0, 50.0)).zoom(12).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(32.441364, 34.922662)).zoom
+                (12).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         googleMap.moveCamera(cameraUpdate);
     }
-
-    private void setbtn(final GoogleMap googleMap) {
-        btnPoint = findView(R.id.map_btn_point);
-        btnPoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog_option(view, googleMap);
-            }
-        });
-    }
-
-//    private void setInterestPoint() {
-//        if (!Common.getCategories().isEmpty()) {
-//            items = new String[Common.getCategories().size()];
-//            itemsChecked = new boolean[Common.getCategories().size()];
-//            double lat = Double.parseDouble(Common.getCategories().get(0).getInterestPoint().get(0).getLat());
-//            double lon = Double.parseDouble(Common.getCategories().get(0).getInterestPoint().get(0).getLon());
-//            LatLng Chadera = new LatLng(lat, lon);
-//            mMap.setMyLocationEnabled(true);
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chadera, 12));
-//
-//            for (int i = 0; i < Common.getCategories().size(); i++) {
-//                items[i] = Common.getCategories().get(i).getCategoryName();
-//                itemsChecked[i] = true;
-//            }
-//        }
-//    }
-
-//    private void getInsertPoint() {
-//        if (Common.getCategories().isEmpty()) {
-//            new GetInterestPointToCityTask(this, Common.getOurCity(), this).execute();
-//        } else {
-//            setInterestPoint();
-//        }
-//    }
-
-//    private void setTitel() {
-//        if (Common.getTypeClient() == Common.TypeClient.machon) {
-//            setTitleText(getResources().getString(R.string.titel_map_machon));
-//
-//        }
-//    }
-
-//    private void setMarkers() {
-//        boolean isContainsBounds = false;
-//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//        LatLng latLng;
-//        List<InterestPoint> points = new ArrayList<InterestPoint>();
-//
-//        for (int i = 0; i < Common.getCategories().size(); i++) {
-//            if (itemsChecked != null) {
-//                if (itemsChecked[i]) {
-//                    points.addAll(Common.getCategories().get(i).getInterestPoint());
-//
-//                    byte[] decodedString = Base64.decode(Common.getCategories().get(i).getIcon(), Base64.DEFAULT);
-//                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//                    mMap.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
-//                    for (InterestPoint point : Common.getCategories().get(i).getInterestPoint()) {
-//                        latLng = new LatLng(Double.parseDouble(point.getLat()), Double.parseDouble(point.getLon()));
-//                        builder.include(latLng);
-//                        isContainsBounds = true;
-//                        mMap.addMarker(new MarkerOptions().title(point.getDescription()).position(latLng)).setIcon
-//                                (BitmapDescriptorFactory.fromBitmap(decodedByte));
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (isContainsBounds) mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 12));
-//
-//    }
-
-    public void showDialog_option(View v, final GoogleMap googleMap) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setPositiveButton("אישור", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                googleMap.clear();
-//                for (CharSequence c : items) {
-//                    //setMarkers();
-//                }
-            }
-
-        });
-        builder.setNegativeButton("ביטול", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-
-        });
-        builder.setMultiChoiceItems(items, itemsChecked, new DialogInterface.OnMultiChoiceClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                itemsChecked[which] = isChecked;
-            }
-        });
-        builder.show();
-    }
-
-//    @Override
-//    public void onSuccess(Object o) {
-//        setInterestPoint();
-//    }
-//
-//    @Override
-//    public void onFailure(ConnectionResultType errorType) {
-//        DialogManager.showErrorDialog(this, errorType, null);
-//    }
 }

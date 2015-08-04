@@ -3,6 +3,7 @@ package com.crmc.ourcity.dialog;
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
+import android.view.View.OnClickListener;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -10,7 +11,7 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class DialogPhotoChoose extends BaseFourStatesFragment implements View.OnClickListener {
+public class DialogPhotoChoose extends BaseFourStatesFragment implements OnClickListener {
 
     private TextView tvCamera;
     private TextView tvGallery;
@@ -50,10 +51,10 @@ public class DialogPhotoChoose extends BaseFourStatesFragment implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvCamera_CFD:
-                mCallback.onActionDialogSelected(DialogType.PHOTOCAM);
+                mCallback.onActionDialogSelected(DialogType.PHOTO_CAM);
                 break;
             case R.id.tvGallery_CFD:
-                mCallback.onActionDialogSelected(DialogType.PHOTOGALLERY);
+                mCallback.onActionDialogSelected(DialogType.PHOTO_GALLERY);
                 break;
         }
     }

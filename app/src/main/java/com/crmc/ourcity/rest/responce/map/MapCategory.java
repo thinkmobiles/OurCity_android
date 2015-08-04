@@ -18,4 +18,21 @@ public class MapCategory {
     public String categoryName;
     @SerializedName("icon")
     public String icon;
+
+    public List<MapInterestedPoint> getInterestedPointList(){
+        return interestedPointList;
+    }
+
+    public Double getInterestedPointLat(int element){
+        return Double.parseDouble((interestedPointList.get(element).lat).replace(',', '.'));
+    }
+
+    public Double getInterestedPointLon(int element){
+        return Double.parseDouble((interestedPointList.get(element).lon).replace(',', '.'));
+    }
+
+    public String getInterestedPointDescription(int element){
+        return interestedPointList.get(element).description;
+    }
+
 }

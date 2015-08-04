@@ -13,7 +13,8 @@ public enum DialogType {
     SETTING,
     CONFIRMATION,
     PHOTO,
-    PHOTOCAM,
-    PHOTOGALLERY
+    FILTER_MAP,
+    PHOTO_CAM,
+    PHOTO_GALLERY
 
 }
