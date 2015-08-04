@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.adapter.MapFilterListAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.MapFilterSelected;
 
@@ -20,8 +22,10 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private TextView btnCancelFilter;
     private TextView btnSelectFilter;
+    private ListView lvMapFilter;
     private OnActionDialogListenerWithData mCallback;
     private ArrayList<MapFilterSelected> mMapFilterSelected;
+    private MapFilterListAdapter mAdapter;
 
     public DialogMapFilter() {
         super();
@@ -55,6 +59,9 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
     protected void initViews() {
         btnCancelFilter = findView(R.id.btnCancel_Filter_MF);
         btnSelectFilter = findView(R.id.btnSelect_Filter_MF);
+        lvMapFilter = findView(R.id.lvMapFilter);
+        mAdapter = new MapFilterListAdapter(getActivity(), mMapFilterSelected);
+        lvMapFilter.setAdapter(mAdapter);
         showContent();
     }
 
@@ -77,7 +84,7 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
                 mCallback.onActionDialogDataCancel(false);
                 break;
             case R.id.btnSelect_Filter_MF:
-                mCallback.onActionDialogDataSelected(mMapFilterSelected);
+                mCallback.onActionDialogDataSelected(mAdapter.getResult());
                 break;
         }
     }

@@ -146,7 +146,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
             }
             mMarkersCategory.put(data.get(i).categoryId, new ArrayList<>(temp));
             mDialogMapFilterSelecteds.add(new MapFilterSelected(data.get(i).categoryId, data.get(i).categoryName,
-                    false));
+                    true));
             temp.clear();
         }
         showContent();
