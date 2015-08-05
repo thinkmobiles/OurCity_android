@@ -16,5 +16,4 @@ public enum DialogType {
     FILTER_MAP,
     PHOTO_CAM,
     PHOTO_GALLERY
-
 }

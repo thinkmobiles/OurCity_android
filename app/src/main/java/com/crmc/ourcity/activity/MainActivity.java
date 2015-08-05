@@ -11,9 +11,9 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
-import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
-import com.crmc.ourcity.fragment.CatalogItemFragment;
-import com.crmc.ourcity.fragment.MapsFragment;
+import com.crmc.ourcity.fragment.EventsFragment.ListItemAction;
+import com.crmc.ourcity.fragment.EventsItemFragment;
+import com.crmc.ourcity.fragment.TestApiFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -44,9 +44,14 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         getSupportActionBar().setTitle("OutCity");
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(MapsFragment.newInstance());
+            setTopFragment(TestApiFragment.newInstance());
             //getSupportActionBar().setTitle("MayorSpeech");
         }
+
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(MapsFragment.newInstance());
+//            //getSupportActionBar().setTitle("MayorSpeech");
+//        }
 //        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
 //            setTopFragment(CatalogFragment.newInstance());
 //            //getSupportActionBar().setTitle("CatalogTest");
@@ -62,7 +67,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
     public void onItemAction(CatalogItemModel catalogItemModel) {
         switch (catalogItemModel.itemStatus) {
             case ITEM:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CatalogItemFragment.newInstance(catalogItemModel));
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(catalogItemModel));
                 break;
             case MAIL:
                 try {
