@@ -11,7 +11,14 @@ public class MenuFull {
 
     @SerializedName("Nodes")
     public List<MenuModel> nodes;
-
     @SerializedName("SplashScreen")
     public String splashScreen;
+
+    public int getSize() {
+        return nodes.size();
+    }
+
+    public List<MenuModel> getNodes() {
+        return nodes;
+    }
 }

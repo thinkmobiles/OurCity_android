@@ -10,27 +10,28 @@ public class CatalogItemModel implements Parcelable {
     public String title;
     public String date;
     public String address;
-    public ItemClickAction itemStatus;
+    public ActionType actionType;
+    public ListType listType;
     public CatalogSizeView catalogSizeView;
 
-    public CatalogItemModel(String title, ItemClickAction itemStatus){
+    public CatalogItemModel(String title, ActionType actionType){
         this.title = title;
-        this.itemStatus = itemStatus;
+        this.actionType = actionType;
         this.catalogSizeView = CatalogSizeView.SMALL;
     }
 
-    public CatalogItemModel(String title, String date, ItemClickAction itemStatus){
+    public CatalogItemModel(String title, String date, ActionType actionType){
         this.title = title;
         this.date = date;
-        this.itemStatus = itemStatus;
+        this.actionType = actionType;
         this.catalogSizeView = CatalogSizeView.MEDIUM;
     }
 
-    public CatalogItemModel(String title, String date, String address, ItemClickAction itemStatus){
+    public CatalogItemModel(String title, String date, String address, ActionType actionType){
         this.title = title;
         this.date = date;
         this.address = address;
-        this.itemStatus = itemStatus;
+        this.actionType = actionType;
         this.catalogSizeView = CatalogSizeView.FULL;
     }
 
@@ -38,7 +39,7 @@ public class CatalogItemModel implements Parcelable {
         title = in.readString();
         date = in.readString();
         address = in.readString();
-        itemStatus = ItemClickAction.values()[in.readInt()];
+        actionType = ActionType.values()[in.readInt()];
         catalogSizeView = CatalogSizeView.values()[in.readInt()];
     }
 
@@ -47,7 +48,7 @@ public class CatalogItemModel implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(date);
         parcel.writeString(address);
-        parcel.writeInt(itemStatus.ordinal());
+        parcel.writeInt(actionType.ordinal());
         parcel.writeInt(catalogSizeView.ordinal());
     }
 

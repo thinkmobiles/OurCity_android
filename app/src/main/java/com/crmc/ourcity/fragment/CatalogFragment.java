@@ -11,7 +11,7 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CatalogListAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.model.ItemClickAction;
+import com.crmc.ourcity.model.ActionType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,13 +44,13 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
         super.onViewCreated(view, savedInstanceState);
 
 //        for (int i = 0; i < 10; i++) {
-//            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClickAction.FALSE);
+//            CatalogItemModel data = new CatalogItemModel("Some title " + i, ActionType.FALSE);
 //            mTestList.add(data);
 //        }
         //if (mTestList.size()  0) {
         for (int i = 0; i < 10; i++) {
             CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address",
-                    ItemClickAction.MAIL);
+                    ActionType.MAIL);
             mTestList.add(data);
         }
         //}
