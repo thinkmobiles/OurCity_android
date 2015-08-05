@@ -5,6 +5,8 @@ package com.crmc.ourcity.global;
  */
 public final class Constants {
 
+    public static final String TAG = "TAG";
+
     public static final String REQUEST_INTENT_TYPE_PHOTO = "type";
 //    focus fragment
     public static final int REQUEST_TYPE_PHOTO = 0;

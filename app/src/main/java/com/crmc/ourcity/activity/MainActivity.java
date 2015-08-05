@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
+import com.crmc.ourcity.fragment.EventsFragment.ListItemAction;
+import com.crmc.ourcity.fragment.EventsItemFragment;
+import com.crmc.ourcity.fragment.TestApiFragment;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
@@ -50,6 +53,11 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
             setTopFragment(TestApiFragment.newInstance());
             //getSupportActionBar().setTitle("MayorSpeech");
         }
+
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(MapsFragment.newInstance());
+//            //getSupportActionBar().setTitle("MayorSpeech");
+//        }
 //        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
 //            setTopFragment(CatalogFragment.newInstance());
 //            //getSupportActionBar().setTitle("CatalogTest");

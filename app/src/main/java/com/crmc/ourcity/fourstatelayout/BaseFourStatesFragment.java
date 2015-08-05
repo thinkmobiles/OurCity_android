@@ -38,9 +38,9 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         super.onCreateView(_inflater, _root, _savedInstanceState);
         rootView = _inflater.inflate(getLayoutResource(), _root, false);
         mainView = findView(R.id.four_state);
-        ViewGroup mEmptyLayout = (ViewGroup) _inflater.inflate(R.layout.empty_layout, null);
-        ViewGroup mErrorLayout = (ViewGroup) _inflater.inflate(R.layout.error_layout, null);
-        ViewGroup mLoadingLayout = (ViewGroup) _inflater.inflate(R.layout.loading_layout, null);
+        ViewGroup mEmptyLayout = (ViewGroup) _inflater.inflate(R.layout.empty_layout, _root, false);
+        ViewGroup mErrorLayout = (ViewGroup) _inflater.inflate(R.layout.error_layout, _root, false);
+        ViewGroup mLoadingLayout = (ViewGroup) _inflater.inflate(R.layout.loading_layout, _root, false);
 
         mRetryButton = (Button) mErrorLayout.findViewById(R.id.btn_try_again);
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);
@@ -51,7 +51,6 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         initViews();
         setListeners();
         return rootView;
-
     }
 
     protected abstract int getContentView();
