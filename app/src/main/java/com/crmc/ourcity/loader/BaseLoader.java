@@ -1,7 +1,7 @@
 package com.crmc.ourcity.loader;
 
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+        import android.content.Context;
+        import android.support.v4.content.AsyncTaskLoader;
 
 /**
  * Created by SetKrul on 28.07.2015.

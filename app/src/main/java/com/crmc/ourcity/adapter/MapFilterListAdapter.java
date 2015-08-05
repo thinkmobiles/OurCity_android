@@ -38,27 +38,27 @@ public class MapFilterListAdapter extends BaseAdapter{
     }
 
     @Override
-    public MapFilterSelected getItem(int position) {
-        return mapFilterSelected.get(position);
+    public MapFilterSelected getItem(int _position) {
+        return mapFilterSelected.get(_position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int _position) {
+        return _position;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int _position, View _convertView, ViewGroup _parent) {
         final ViewHolder holder;
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.listview_row_dialog_mf, parent, false);
-            holder = new ViewHolder(convertView);
+        if (_convertView == null) {
+            _convertView = mInflater.inflate(R.layout.listview_row_dialog_mf, _parent, false);
+            holder = new ViewHolder(_convertView);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) _convertView.getTag();
         }
-        holder.setData(getItem(position),position);
+        holder.setData(getItem(_position),_position);
 
-        return convertView;
+        return _convertView;
     }
 
     private class ViewHolder implements CompoundButton.OnCheckedChangeListener {
@@ -75,15 +75,15 @@ public class MapFilterListAdapter extends BaseAdapter{
             _view.setTag(this);
         }
 
-        public void setData(MapFilterSelected item, int _position) {
+        public void setData(MapFilterSelected _item, int _position) {
             this.position = _position;
-            tvCategoryMarkers_DMF.setText(item.title);
-            cbCategoryMarkersVisible_DMF.setChecked(item.visible);
+            tvCategoryMarkers_DMF.setText(_item.title);
+            cbCategoryMarkersVisible_DMF.setChecked(_item.visible);
         }
 
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            getItem(position).visible = isChecked;
+        public void onCheckedChanged(CompoundButton _buttonView, boolean _isChecked) {
+            getItem(position).visible = _isChecked;
         }
     }
 }

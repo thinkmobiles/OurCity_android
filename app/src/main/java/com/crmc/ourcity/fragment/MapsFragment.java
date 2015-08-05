@@ -47,7 +47,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     private SupportMapFragment mMap;
     private Button btnFilter;
-    private List<MapFilterSelected> mDialogMapFilterSelecteds = new ArrayList<>();
+    private List<MapFilterSelected> mDialogMapFilterSelected = new ArrayList<>();
     private Map<Integer, ArrayList<Marker>> mMarkersCategory = new HashMap<>();
 
     public static MapsFragment newInstance() {
@@ -86,22 +86,22 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View _v) {
         Intent intent = new Intent(getActivity(), DialogActivity.class);
         EnumUtil.serialize(DialogType.class, DialogType.FILTER_MAP).to(intent);
         intent.putParcelableArrayListExtra(MapFilterSelected.class.getCanonicalName(), (ArrayList<? extends
-                Parcelable>) mDialogMapFilterSelecteds);
+                Parcelable>) mDialogMapFilterSelected);
         startActivityForResult(intent, Constants.REQUEST_MAP_FILTER);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+    public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
+        super.onActivityResult(_requestCode, _resultCode, _data);
+        switch (_requestCode) {
             case Constants.REQUEST_MAP_FILTER:
-                if (data != null) {
-                    if (data.getIntExtra(Constants.REQUEST_MAP_FILTER_TYPE, 0) == Constants.REQUEST_MAP_SELECTED) {
-                        mDialogMapFilterSelecteds = data.getParcelableArrayListExtra(MapFilterSelected.class
+                if (_data != null) {
+                    if (_data.getIntExtra(Constants.REQUEST_MAP_FILTER_TYPE, 0) == Constants.REQUEST_MAP_SELECTED) {
+                        mDialogMapFilterSelected = _data.getParcelableArrayListExtra(MapFilterSelected.class
                                 .getCanonicalName());
                         setFilterableMarkers();
                     }
@@ -111,12 +111,12 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     private void setFilterableMarkers() {
-        for (int i = 0; i < mDialogMapFilterSelecteds.size(); i++) {
+        for (int i = 0; i < mDialogMapFilterSelected.size(); i++) {
             Set<Map.Entry<Integer, ArrayList<Marker>>> set = mMarkersCategory.entrySet();
             for (Map.Entry<Integer, ArrayList<Marker>> me : set) {
-                if (me.getKey() == mDialogMapFilterSelecteds.get(i).categoryId) {
+                if (me.getKey() == mDialogMapFilterSelected.get(i).categoryId) {
                     for (int j = 0; j < me.getValue().size(); j++) {
-                        me.getValue().get(j).setVisible(mDialogMapFilterSelecteds.get(i).visible);
+                        me.getValue().get(j).setVisible(mDialogMapFilterSelected.get(i).visible);
                     }
                 }
             }
@@ -136,16 +136,16 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     @Override
-    public void onLoadFinished(Loader<List<MapCategory>> loader, List<MapCategory> data) {
+    public void onLoadFinished(Loader<List<MapCategory>> _loader, List<MapCategory> _data) {
         ArrayList<Marker> temp = new ArrayList<>();
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data.get(i).getInterestedPointList().size(); j++) {
-                temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + data.get(i)
-                        .getInterestedPointDescription(j)).position(new LatLng(data.get(i).getInterestedPointLat(j),
-                        data.get(i).getInterestedPointLon(j)))));
+        for (int i = 0; i < _data.size(); i++) {
+            for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
+                temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
+                        .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat(j),
+                        _data.get(i).getInterestedPointLon(j)))));
             }
-            mMarkersCategory.put(data.get(i).categoryId, new ArrayList<>(temp));
-            mDialogMapFilterSelecteds.add(new MapFilterSelected(data.get(i).categoryId, data.get(i).categoryName,
+            mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
+            mDialogMapFilterSelected.add(new MapFilterSelected(_data.get(i).categoryId, _data.get(i).categoryName,
                     true));
             temp.clear();
         }
@@ -153,12 +153,12 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     @Override
-    public void onLoaderReset(Loader<List<MapCategory>> loader) {
+    public void onLoaderReset(Loader<List<MapCategory>> _loader) {
     }
 
     @Override
-    public Loader<List<MapCategory>> onCreateLoader(int id, Bundle args) {
-        return new MapDataLoader(getActivity(), args);
+    public Loader<List<MapCategory>> onCreateLoader(int _id, Bundle _args) {
+        return new MapDataLoader(getActivity(), _args);
     }
 
     @Override
@@ -177,10 +177,10 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         getLoaderManager().initLoader(1, bundle, this);
     }
 
-    private void setCamera(GoogleMap googleMap) {
+    private void setCamera(GoogleMap _googleMap) {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(32.441364, 34.922662)).zoom
                 (12).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        googleMap.moveCamera(cameraUpdate);
+        _googleMap.moveCamera(cameraUpdate);
     }
 }

@@ -40,18 +40,18 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
         mMapFilterSelected = getArguments().getParcelableArrayList(CONFIGURATION_KEY);
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
         try {
-            mCallback = (OnActionDialogListenerWithData) activity;
+            mCallback = (OnActionDialogListenerWithData) _activity;
         } catch (ClassCastException _e) {
-            throw new ClassCastException(activity.toString() + " must implement OnActionDialogListenerWithData");
+            throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListenerWithData");
         }
     }
 
