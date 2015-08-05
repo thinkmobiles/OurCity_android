@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.BaseFragmentActivity;
+import com.crmc.ourcity.callback.MapFilterCallBack;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.model.MapFilterSelected;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -13,8 +14,7 @@ import com.crmc.ourcity.utils.EnumUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogActivity extends BaseFragmentActivity implements OnActionDialogListener,
-        OnActionDialogListenerWithData {
+public class DialogActivity extends BaseFragmentActivity implements OnActionDialogListener, MapFilterCallBack {
 
     private Intent intent = new Intent();
 

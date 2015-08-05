@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MapFilterListAdapter;
+import com.crmc.ourcity.callback.MapFilterCallBack;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.MapFilterSelected;
 
@@ -23,7 +24,7 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
     private TextView btnCancelFilter;
     private TextView btnSelectFilter;
     private ListView lvMapFilter;
-    private OnActionDialogListenerWithData mCallback;
+    private MapFilterCallBack mCallback;
     private ArrayList<MapFilterSelected> mMapFilterSelected;
     private MapFilterListAdapter mAdapter;
 
@@ -49,7 +50,7 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
-            mCallback = (OnActionDialogListenerWithData) _activity;
+            mCallback = (MapFilterCallBack) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListenerWithData");
         }
@@ -76,7 +77,6 @@ public class DialogMapFilter extends BaseFourStatesFragment implements OnClickLi
         btnSelectFilter.setOnClickListener(this);
     }
 
-    //for test
     @Override
     public void onClick(View _v) {
         switch (_v.getId()) {

@@ -46,7 +46,6 @@ public class DialogPhotoChoose extends BaseFourStatesFragment implements OnClick
         tvGallery.setOnClickListener(this);
     }
 
-    //for test
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
