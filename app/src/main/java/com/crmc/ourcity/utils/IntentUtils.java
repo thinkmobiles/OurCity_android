@@ -10,6 +10,13 @@ import com.crmc.ourcity.global.Constants;
  * Created by SetKrul on 17.07.2015.
  */
 public final class IntentUtils {
+
+    public static Intent getIntentSkype(String phoneNumber){
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("skype:" + phoneNumber));
+        return i;
+    }
+
     public static Intent getIntentMail(String mail){
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");

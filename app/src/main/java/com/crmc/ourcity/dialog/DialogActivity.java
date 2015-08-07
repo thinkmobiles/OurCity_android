@@ -29,8 +29,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case FILTER_MAP:
                 ArrayList<MapFilterSelected> mMapFilterSelected = getIntent().getParcelableArrayListExtra
                         (MapFilterSelected.class.getCanonicalName());
-                DialogMapFilter dialogMapFilter = new DialogMapFilter();
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, dialogMapFilter.newInstance
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, DialogMarkerFilter.newInstance
                         (mMapFilterSelected));
                 break;
 

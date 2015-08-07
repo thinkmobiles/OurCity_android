@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.responce.menu;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -11,7 +8,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 29.07.2015.
  */
-public class MenuModel implements Parcelable {
+public class MenuModel {
 
     @SerializedName("Nodes")
     public List<MenuModel> menu;
@@ -39,37 +36,12 @@ public class MenuModel implements Parcelable {
     @SerializedName("Title")
     public String title;
 
-    protected MenuModel(Parcel in) {
-        menu = in.createTypedArrayList(MenuModel.CREATOR);
-        colorItem = in.readString();
-        link = in.readString();
-        lat = in.readString();
-        lon = in.readString();
-        iconItem = in.readString();
-        requestJson = in.readString();
-        requestRoute = in.readString();
-        splashScreen = in.readString();
-        title = in.readString();
-    }
-
-    public static final Creator<MenuModel> CREATOR = new Creator<MenuModel>() {
-        @Override
-        public MenuModel createFromParcel(Parcel in) {
-            return new MenuModel(in);
-        }
-
-        @Override
-        public MenuModel[] newArray(int size) {
-            return new MenuModel[size];
-        }
-    };
-
     public List<MenuModel> getMenu(){
         if (menu != null){
             return menu;
         } else {
             menu = new ArrayList<>();
-            //menu.add(new MenuModel());
+            menu.add(new MenuModel());
             return menu;
         }
     }
@@ -88,22 +60,4 @@ public class MenuModel implements Parcelable {
         return null;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(menu);
-        dest.writeString(colorItem);
-        dest.writeString(link);
-        dest.writeString(lat);
-        dest.writeString(lon);
-        dest.writeString(iconItem);
-        dest.writeString(requestJson);
-        dest.writeString(requestRoute);
-        dest.writeString(splashScreen);
-        dest.writeString(title);
-    }
 }

@@ -11,8 +11,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
  */
 public class MainMenuFragment extends BaseFourStatesFragment {
 
-
-
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
 
@@ -35,7 +33,7 @@ public class MainMenuFragment extends BaseFourStatesFragment {
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_main_menu;
+        return R.layout.fragment_main_menu_;
     }
 
     @Override
