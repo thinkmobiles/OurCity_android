@@ -39,8 +39,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         MenuModel item = menuModels.get(position);
         holder.title.setText(item.title);
-        
-        holder.imgThumbnail.setImageResource(R.drawable.new_menu_general_report);
+
+
+       // holder.imgThumbnail.setImageResource(R.drawable.new_menu_general_report);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
+//            imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
             title = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
