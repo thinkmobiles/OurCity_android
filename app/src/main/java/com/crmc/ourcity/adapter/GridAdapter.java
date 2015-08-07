@@ -1,13 +1,14 @@
 package com.crmc.ourcity.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 
 import java.util.List;
@@ -17,11 +18,10 @@ import java.util.List;
  */
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
-    private List<MenuModel> menuModels;
+    private List<MenuModel> mMenuModels;
 
-
-    public GridAdapter(List<MenuModel> _menuModels) {
-        menuModels = _menuModels;
+    public GridAdapter(List<MenuModel> _mMenuModels) {
+        mMenuModels = _mMenuModels;
     }
 
     @Override
@@ -37,33 +37,27 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MenuModel item = menuModels.get(position);
-        holder.title.setText(item.title);
-
-
-       // holder.imgThumbnail.setImageResource(R.drawable.new_menu_general_report);
+        MenuModel item = mMenuModels.get(position);
+        holder.tvTitle.setText(item.title);
+        holder.tvTitle.setBackgroundColor(Color.parseColor(item.colorItem));
+        //TODO: configure DownloadImageLib
     }
 
     @Override
     public int getItemCount() {
-        return menuModels.size();
+        return mMenuModels.size();
     }
 
     public MenuModel getItem(int _position) {
-        return menuModels.get(_position);
+        return mMenuModels.get(_position);
     }
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public ImageView imgThumbnail;
-        public TextView title;
+        public TextView tvTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
-            title = (TextView) itemView.findViewById(R.id.tv_title);
+            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle_FGI);
         }
     }
 }

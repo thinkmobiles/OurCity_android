@@ -11,15 +11,19 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
-import com.crmc.ourcity.fragment.EventsFragment.ListItemAction;
 import com.crmc.ourcity.fragment.EventsItemFragment;
-import com.crmc.ourcity.fragment.PhonesFragment;
+import com.crmc.ourcity.fragment.OnItemActionListener;
+import com.crmc.ourcity.fragment.SubMenuFragment;
+import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.IntentUtils;
 
-public class MainActivity extends BaseFragmentActivity implements ListItemAction {
+import java.util.List;
+
+public class MainActivity extends BaseFragmentActivity implements OnItemActionListener {
 
     private Toolbar mToolbar;
     private Ticker mTicker;
@@ -32,7 +36,6 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
-
 
         //insert List<string> with breaking news when it will be ready
         mTicker.setData(null);
@@ -53,7 +56,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
 //            //getSupportActionBar().setTitle("MayorSpeech");
 //        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(PhonesFragment.newInstance());
+            setTopFragment(MainMenuFragment.newInstance());
             //getSupportActionBar().setTitle("CatalogTest");
         }
     }
@@ -86,6 +89,11 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
     }
 
     @Override
+    public void onMenuModelPrepared(List<MenuModel> _menuModel) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel));
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -103,4 +111,5 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -26,7 +26,7 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
     private ListView mListView;
     private EventsListAdapter mAdapter;
     private List<CatalogItemModel> mTestList = new ArrayList<>();
-    private ListItemAction mListItemAction;
+    private OnItemActionListener mOnItemActionListener;
 
     public static EventsFragment newInstance() {
         //noinspection deprecation
@@ -36,7 +36,7 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mListItemAction = (ListItemAction) activity;
+        mOnItemActionListener = (OnItemActionListener) activity;
     }
 
     @Override
@@ -44,12 +44,12 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
         super.onViewCreated(view, savedInstanceState);
 
 //        for (int i = 0; i < 10; i++) {
-//            CatalogItemModel data = new CatalogItemModel("Some title " + i, ItemClickAction.FALSE);
+//            CatalogItemModel data = new CatalogItemModel("Some tvTitle " + i, ItemClickAction.FALSE);
 //            mTestList.add(data);
 //        }
         //if (mTestList.size()  0) {
         for (int i = 0; i < 10; i++) {
-            CatalogItemModel data = new CatalogItemModel("Some title " + i, getDateTime(), "Some address",
+            CatalogItemModel data = new CatalogItemModel("Some tvTitle " + i, getDateTime(), "Some address",
                     ItemClickAction.MAIL);
             mTestList.add(data);
         }
@@ -63,12 +63,12 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mListItemAction.onItemAction(mAdapter.getItem(position));
+        mOnItemActionListener.onItemAction(mAdapter.getItem(position));
     }
 
-    public interface ListItemAction {
-        void onItemAction(final CatalogItemModel catalogItemModel);
-    }
+//    public interface OnItemActionListener {
+//        void onItemAction(final CatalogItemModel catalogItemModel);
+//    }
 
     public String getDateTime() {
         return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance().getTime());
@@ -86,7 +86,7 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 
     @Override
     public void onDetach() {
-        mListItemAction = null;
+        mOnItemActionListener = null;
         super.onDetach();
     }
 }

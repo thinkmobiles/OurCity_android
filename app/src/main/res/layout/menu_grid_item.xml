@@ -10,23 +10,23 @@
         android:layout_height="90dp"
         card_view:cardCornerRadius="3dp"
         android:layout_marginTop="9dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+
         card_view:cardElevation="0.01dp"
         android:layout_gravity="center"
         android:layout_marginBottom="0dp">
 
-
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tvTitle_FGI"
                 android:background="#274799"
-                android:drawableTop="@drawable/ic_media_play"
+                android:drawableTop="@drawable/new_menu_arnona"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="25dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="2dp"
-                android:layout_gravity="bottom"
-                android:gravity="center|center_vertical"
+
+                android:gravity="center"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:text="Test"

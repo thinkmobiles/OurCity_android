@@ -87,10 +87,10 @@ public class CatalogListAdapter extends BaseAdapter {
                     address.setText(item.address);
                     break;
             }
-            /*if (!TextUtils.isEmpty(item.title)){
-                title.setText(item.title);
+            /*if (!TextUtils.isEmpty(item.tvTitle)){
+                tvTitle.setText(item.tvTitle);
             } else {
-                title.setVisibility(View.GONE);
+                tvTitle.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(item.date)){
                 date.setText(item.date);

@@ -25,6 +25,6 @@ public class Site {
     public String picture;
     @SerializedName("price")
     public String price;
-    @SerializedName("title")
+    @SerializedName("tvTitle")
     public String title;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by podo on 05.08.15.
  */
-public interface ListItemAction {
+public interface OnItemActionListener {
     void onItemAction(final CatalogItemModel catalogItemModel);
     void onMenuModelPrepared(List<MenuModel> _menuModel);
 }
