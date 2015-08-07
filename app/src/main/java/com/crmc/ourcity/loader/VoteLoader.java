@@ -22,9 +22,9 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
 
     private int cityNumber;
 
-    public VoteLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+    public VoteLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
         List<VoteFull> mVote;
         try {
             mVote =  api.getVote(new BaseModel(new BaseCity(cityNumber)));
-        } catch (RetrofitError e) {
+        } catch (RetrofitError _e) {
             mVote = new ArrayList<>();
             mVote.add(new VoteFull());
         }

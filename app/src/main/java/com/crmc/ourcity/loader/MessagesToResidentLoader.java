@@ -22,9 +22,9 @@ public class MessagesToResidentLoader extends BaseLoader<List<MassageToResident>
 
     private int residentId;
 
-    public MessagesToResidentLoader(Context context, Bundle args) {
-        super(context);
-        residentId = args.getInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID);
+    public MessagesToResidentLoader(Context _context, Bundle _args) {
+        super(_context);
+        residentId = _args.getInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID);
     }
 
     @Override

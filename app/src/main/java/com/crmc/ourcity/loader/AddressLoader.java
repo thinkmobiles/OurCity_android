@@ -18,10 +18,10 @@ public class AddressLoader extends BaseLoader<AddressFull> {
 
     private double lat, lon;
 
-    public AddressLoader(Context context, Bundle args) {
-        super(context);
-        lat = args.getDouble(Constants.BUNDLE_CONSTANTS_LAT);
-        lon = args.getDouble(Constants.BUNDLE_CONSTANTS_LON);
+    public AddressLoader(Context _context, Bundle _args) {
+        super(_context);
+        lat = _args.getDouble(Constants.BUNDLE_CONSTANTS_LAT);
+        lon = _args.getDouble(Constants.BUNDLE_CONSTANTS_LON);
     }
 
     @Override

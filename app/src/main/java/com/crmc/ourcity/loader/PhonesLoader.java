@@ -22,9 +22,9 @@ public class PhonesLoader extends BaseLoader<List<Phones>> {
 
     private int cityNumber;
 
-    public PhonesLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+    public PhonesLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
     }
 
     @Override

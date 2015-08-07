@@ -19,10 +19,10 @@ public class ImageLoader extends BaseLoader<String> {
     private int cityNumber;
     private int loadImageType;
 
-    public ImageLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
-        loadImageType = args.getInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE);
+    public ImageLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+        loadImageType = _args.getInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ImageLoader extends BaseLoader<String> {
                     result = null;
                     break;
             }
-        } catch (RetrofitError e) {
+        } catch (RetrofitError _e) {
             result = null;
         }
         return result;

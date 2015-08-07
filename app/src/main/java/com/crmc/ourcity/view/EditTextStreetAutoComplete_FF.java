@@ -10,16 +10,16 @@ import android.widget.AutoCompleteTextView;
  */
 public class EditTextStreetAutoComplete_FF extends AutoCompleteTextView {
 
-    public EditTextStreetAutoComplete_FF(Context context) {
-        super(context);
+    public EditTextStreetAutoComplete_FF(Context _context) {
+        super(_context);
     }
 
-    public EditTextStreetAutoComplete_FF(Context arg0, AttributeSet arg1) {
-        super(arg0, arg1);
+    public EditTextStreetAutoComplete_FF(Context _arg0, AttributeSet _arg1) {
+        super(_arg0, _arg1);
     }
 
-    public EditTextStreetAutoComplete_FF(Context arg0, AttributeSet arg1, int arg2) {
-        super(arg0, arg1, arg2);
+    public EditTextStreetAutoComplete_FF(Context _arg0, AttributeSet _arg1, int _arg2) {
+        super(_arg0, _arg1, _arg2);
     }
 
     @Override
@@ -28,10 +28,10 @@ public class EditTextStreetAutoComplete_FF extends AutoCompleteTextView {
     }
 
     @Override
-    protected void onFocusChanged(boolean focused, int direction,
-                                  Rect previouslyFocusedRect) {
-        super.onFocusChanged(focused, direction, previouslyFocusedRect);
-        if (focused) {
+    protected void onFocusChanged(boolean _focused, int _direction,
+                                  Rect _previouslyFocusedRect) {
+        super.onFocusChanged(_focused, _direction, _previouslyFocusedRect);
+        if (_focused) {
             performFiltering(getText(), 0);
         }
     }

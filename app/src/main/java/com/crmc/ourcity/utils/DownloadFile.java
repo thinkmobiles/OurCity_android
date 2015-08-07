@@ -20,24 +20,24 @@ import java.io.File;
  */
 public class DownloadFile {
 
-    public void downloadPdf(Context context, String url) {
-//        url = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
+    public void downloadPdf(Context _context, String _url) {
+//        _url = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
         DownloadManager myDownloadManager;
         DownloadReceiver myDownLoadReceiver = new DownloadReceiver();
         IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        context.registerReceiver(myDownLoadReceiver, intentFilter);
-        if (!TextUtils.isEmpty(url)) {
-            String fileName = url.substring(url.lastIndexOf("/") + 1);
+        _context.registerReceiver(myDownLoadReceiver, intentFilter);
+        if (!TextUtils.isEmpty(_url)) {
+            String fileName = _url.substring(_url.lastIndexOf("/") + 1);
             Uri linkFile = Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/" + fileName);
-            File file = new File(new FilePath().getPath(context, linkFile));
+            File file = new File(new FilePath().getPath(_context, linkFile));
             if (!file.exists()) {
                 try {
-                    myDownloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse((url)));
+                    myDownloadManager = (DownloadManager) _context.getSystemService(Context.DOWNLOAD_SERVICE);
+                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse((_url)));
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                     request.setMimeType("application/pdf");
-                    request.setDescription(context.getResources().getString(R.string.download_from) + " " + url);
-                    request.setTitle(context.getResources().getString(R.string.download) + " " + fileName);
+                    request.setDescription(_context.getResources().getString(R.string.download_from) + " " + _url);
+                    request.setTitle(_context.getResources().getString(R.string.download) + " " + fileName);
                     request.setDestinationUri(linkFile);
                     myDownloadManager.enqueue(request);
                 } catch (Exception e) {
@@ -48,13 +48,13 @@ public class DownloadFile {
                 intent.setDataAndType(path, "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 try {
-                    context.startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(context, context.getResources().getString(R.string.no_application_to_open_pdf), Toast.LENGTH_SHORT).show();
+                    _context.startActivity(intent);
+                } catch (ActivityNotFoundException _e) {
+                    Toast.makeText(_context, _context.getResources().getString(R.string.no_application_to_open_pdf), Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
-            Toast.makeText(context, "Empty url", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_context, "Empty _url", Toast.LENGTH_SHORT).show();
         }
     }
 
