@@ -5,18 +5,18 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/mapMain"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/map_btn_point"
+        android:id="@+id/btnMarkerFilter_MF"
         android:layout_width="@dimen/btn_interest_point_width"
         android:layout_height="@dimen/btn_interest_point_height"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/btn_interest_point_margin_top"
-        android:background="@drawable/btn_selector_default"
+        android:background="@drawable/btn_selector_mf"
         android:text="@string/map_btn_filter"
         android:textColor="#FFF"
         android:textSize="@dimen/btn_interest_point_size"

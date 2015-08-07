@@ -62,25 +62,25 @@ public class PhonesListAdapter extends BaseAdapter {
     }
 
     private class ViewHolder implements View.OnClickListener {
-        final TextView nameInstitution;
-        final ImageView callSkype;
-        final ImageView sendMail;
+        final TextView tvNameInstitution;
+        final ImageView ivCallSkype;
+        final ImageView ivSendMail;
         View view;
         private int position;
 
         public ViewHolder(@NonNull final View _view) {
-            nameInstitution = (TextView) _view.findViewById(R.id.tvNameInstitution_FP);
-            callSkype = (ImageView) _view.findViewById(R.id.btnCallSkype_FP);
-            sendMail = (ImageView) _view.findViewById(R.id.btnSendMail_FP);
-            callSkype.setOnClickListener(this);
-            sendMail.setOnClickListener(this);
+            tvNameInstitution = (TextView) _view.findViewById(R.id.tvNameInstitution_FP);
+            ivCallSkype = (ImageView) _view.findViewById(R.id.btnCallSkype_FP);
+            ivSendMail = (ImageView) _view.findViewById(R.id.btnSendMail_FP);
+            ivCallSkype.setOnClickListener(this);
+            ivSendMail.setOnClickListener(this);
             this.view = _view;
             view.setTag(this);
         }
 
         public void setData(Phones _item, int _position) {
             this.position = _position;
-            nameInstitution.setText(_item.entityName);
+            tvNameInstitution.setText(_item.entityName);
         }
 
         @Override

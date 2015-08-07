@@ -21,7 +21,7 @@ import com.google.android.gms.location.LocationServices;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
+public class CurrentLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private Location mLocation;
     private LocationCallBack mCallBack;
@@ -38,9 +38,9 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
 
     private static final String TAG = "TAG";
 
-    public MyLocation(Context context, LocationCallBack mCallBack) {
-        this.mCallBack = mCallBack;
-        this.mContext = context;
+    public CurrentLocation(Context _context, LocationCallBack _locationCallBack) {
+        this.mCallBack = _locationCallBack;
+        this.mContext = _context;
         if (checkPlayServices()) {
             buildGoogleApiClient();
         }
@@ -70,7 +70,7 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
     }
 
     @Override
-    public void onConnected(Bundle bundle) {
+    public void onConnected(Bundle _bundle) {
         getLocation();
     }
 
@@ -85,8 +85,8 @@ public class MyLocation implements ConnectionCallbacks, OnConnectionFailedListen
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        mLocation = location;
+    public void onLocationChanged(Location _location) {
+        mLocation = _location;
         if (mLocation != null) {
             mCallBack.onSuccess(mLocation.getLatitude(), mLocation.getLongitude());
         } else {

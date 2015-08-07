@@ -10,8 +10,8 @@ import android.widget.ListView;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.EventsListAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.model.ItemClickAction;
+import com.crmc.ourcity.model.ActionType;
+import com.crmc.ourcity.model.EventsItemModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ import java.util.Locale;
  */
 public class EventsFragment extends BaseFourStatesFragment implements OnItemClickListener {
 
-    private ListView mListView;
+    private ListView lvEvents;
     private EventsListAdapter mAdapter;
-    private List<CatalogItemModel> mTestList = new ArrayList<>();
+    private List<EventsItemModel> mEventsList = new ArrayList<>();
     private OnItemActionListener mOnItemActionListener;
 
     public static EventsFragment newInstance() {
@@ -34,14 +34,14 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mOnItemActionListener = (OnItemActionListener) activity;
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        mOnItemActionListener = (OnItemActionListener) _activity;
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
 
 //        for (int i = 0; i < 10; i++) {
 //            CatalogItemModel data = new CatalogItemModel("Some tvTitle " + i, ItemClickAction.FALSE);
@@ -49,21 +49,21 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 //        }
         //if (mTestList.size()  0) {
         for (int i = 0; i < 10; i++) {
-            CatalogItemModel data = new CatalogItemModel("Some tvTitle " + i, getDateTime(), "Some address",
-                    ItemClickAction.MAIL);
-            mTestList.add(data);
+            EventsItemModel data = new EventsItemModel("Some tvTitle " + i, getDateTime(), "Some address", ActionType
+                    .MAIL);
+            mEventsList.add(data);
         }
         //}
-        mListView = findView(R.id.lvTasks);
-        mAdapter = new EventsListAdapter(getActivity(), mTestList);
-        mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(this);
+        lvEvents = findView(R.id.lvEvents_EF);
+        mAdapter = new EventsListAdapter(getActivity(), mEventsList);
+        lvEvents.setAdapter(mAdapter);
+        lvEvents.setOnItemClickListener(this);
         showContent();
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mOnItemActionListener.onItemAction(mAdapter.getItem(position));
+    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
+        mOnItemActionListener.onItemAction(mAdapter.getItem(_position));
     }
 
 //    public interface OnItemActionListener {
@@ -71,7 +71,8 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 //    }
 
     public String getDateTime() {
-        return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance().getTime());
+        return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance()
+                .getTime());
     }
 
     @Override

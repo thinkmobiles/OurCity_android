@@ -5,13 +5,13 @@ package com.crmc.ourcity.callback;
  */
 public interface LocationCallBack {
     /**
-     * @param lat Latitude
-     * @param lon Longitude
+     * @param _lat Latitude
+     * @param _lon Longitude
      */
-    void onSuccess(double lat, double lon);
+    void onSuccess(double _lat, double _lon);
 
     /**
-     * @param result error - false
+     * @param _result error - false
      */
-    void onFailure(boolean result);
+    void onFailure(boolean _result);
 }

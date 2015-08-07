@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 
 import java.util.List;
@@ -16,11 +15,11 @@ import java.util.List;
 /**
  * Created by podo on 05.08.15.
  */
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
+public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHolder> {
 
     private List<MenuModel> mMenuModels;
 
-    public GridAdapter(List<MenuModel> _mMenuModels) {
+    public MenuGridAdapter(List<MenuModel> _mMenuModels) {
         mMenuModels = _mMenuModels;
     }
 

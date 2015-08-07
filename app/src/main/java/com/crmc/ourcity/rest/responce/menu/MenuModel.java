@@ -39,28 +39,28 @@ public class MenuModel implements Parcelable{
     @SerializedName("Title")
     public String title;
 
-    protected MenuModel(Parcel in) {
-        menu = in.createTypedArrayList(MenuModel.CREATOR);
-        colorItem = in.readString();
-        link = in.readString();
-        lat = in.readString();
-        lon = in.readString();
-        iconItem = in.readString();
-        requestJson = in.readString();
-        requestRoute = in.readString();
-        splashScreen = in.readString();
-        title = in.readString();
+    protected MenuModel(Parcel _in) {
+        menu = _in.createTypedArrayList(MenuModel.CREATOR);
+        colorItem = _in.readString();
+        link = _in.readString();
+        lat = _in.readString();
+        lon = _in.readString();
+        iconItem = _in.readString();
+        requestJson = _in.readString();
+        requestRoute = _in.readString();
+        splashScreen = _in.readString();
+        title = _in.readString();
     }
 
     public static final Creator<MenuModel> CREATOR = new Creator<MenuModel>() {
         @Override
-        public MenuModel createFromParcel(Parcel in) {
-            return new MenuModel(in);
+        public MenuModel createFromParcel(Parcel _in) {
+            return new MenuModel(_in);
         }
 
         @Override
-        public MenuModel[] newArray(int size) {
-            return new MenuModel[size];
+        public MenuModel[] newArray(int _size) {
+            return new MenuModel[_size];
         }
     };
 

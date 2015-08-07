@@ -26,8 +26,8 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         cityNumber = 1;
         lng = "en";
     }
@@ -50,19 +50,19 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
     public void onRetryClick() {}
 
     @Override
-    public Loader<List<Phones>> onCreateLoader(int id, Bundle args) {
-        return new PhonesLoader(getActivity(), args);
+    public Loader<List<Phones>> onCreateLoader(int _id, Bundle _args) {
+        return new PhonesLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Phones>> loader, List<Phones> data) {
-        for (int i = 0; i < data.size(); i++) {
-            Log.d("TAG", "TAG: " + data.get(i).phoneNumber);
+    public void onLoadFinished(Loader<List<Phones>> _loader, List<Phones> _data) {
+        for (int i = 0; i < _data.size(); i++) {
+            Log.d("TAG", "TAG: " + _data.get(i).phoneNumber);
         }
 //        Log.d("TAG", "TAG: " + data);
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Phones>> loader) {
+    public void onLoaderReset(Loader<List<Phones>> _loader) {
     }
 }

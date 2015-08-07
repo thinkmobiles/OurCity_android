@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.model.EventsItemModel;
 
 /**
  * Created by SetKrul on 16.07.2015.
@@ -14,26 +14,26 @@ import com.crmc.ourcity.model.CatalogItemModel;
 public class EventsItemFragment extends BaseFourStatesFragment {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
-    private CatalogItemModel catalogItemModel;
+    private EventsItemModel mEventsItemModel;
 
-    public static EventsItemFragment newInstance(CatalogItemModel catalogItemModel) {
+    public static EventsItemFragment newInstance(EventsItemModel _eventsItemModel) {
         EventsItemFragment eventsItemFragment = new EventsItemFragment();
         Bundle args = new Bundle();
-        args.putParcelable(CONFIGURATION_KEY, catalogItemModel);
+        args.putParcelable(CONFIGURATION_KEY, _eventsItemModel);
         eventsItemFragment.setArguments(args);
         return eventsItemFragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        catalogItemModel = getArguments().getParcelable(CONFIGURATION_KEY);
-        Log.d("TAG", catalogItemModel.title);
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        mEventsItemModel = getArguments().getParcelable(CONFIGURATION_KEY);
+        Log.d("TAG", mEventsItemModel.title);
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         showContent();
     }
 

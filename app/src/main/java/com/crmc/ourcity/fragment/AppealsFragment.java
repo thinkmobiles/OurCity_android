@@ -27,7 +27,7 @@ import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AddressLoader;
-import com.crmc.ourcity.location.MyLocation;
+import com.crmc.ourcity.location.CurrentLocation;
 import com.crmc.ourcity.rest.responce.address.AddressFull;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
@@ -41,10 +41,10 @@ import java.util.Date;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class FocusFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener,
+public class AppealsFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener,
         LoaderManager.LoaderCallbacks<AddressFull> {
 
-    private MyLocation location;
+    private CurrentLocation mLocation;
     private static final String PHOTO_FILE_EXTENSION = ".jpg";
     private String mPhotoFilePath;
     private ImageView ivPhoto;
@@ -53,23 +53,23 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
 
     private SwitchCompat swGpsOnOff;
 
-    public static FocusFragment newInstance() {
-        return new FocusFragment();
+    public static AppealsFragment newInstance() {
+        return new AppealsFragment();
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         showContent();
     }
 
     @Override
     protected void initViews() {
         super.initViews();
-        ivPhoto = findView(R.id.ivPhoto_FF);
-        etNameCity = findView(R.id.etCityName_FF);
-        etNameStreet = findView(R.id.etNameStreet_FF);
-        swGpsOnOff = findView(R.id.swGpsOnOff);
+        ivPhoto = findView(R.id.ivPhoto_AF);
+        etNameCity = findView(R.id.etCityName_AF);
+        etNameStreet = findView(R.id.etNameStreet_AF);
+        swGpsOnOff = findView(R.id.swGpsOnOff_AF);
     }
 
     @Override
@@ -82,18 +82,18 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (location != null) {
-            location.stopLocationUpdates();
+        if (mLocation != null) {
+            mLocation.stopLocationUpdates();
         }
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
+    public void onCheckedChanged(CompoundButton _buttonView, boolean _isChecked) {
+        if (_isChecked) {
             getLocation();
         } else {
-            location.stopLocationUpdates();
-            location = null;
+            mLocation.stopLocationUpdates();
+            mLocation = null;
         }
     }
 
@@ -135,12 +135,12 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+    public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
+        super.onActivityResult(_requestCode, _resultCode, _data);
+        switch (_requestCode) {
             case Constants.REQUEST_TYPE_PHOTO:
-                if (data != null) {
-                    if (data.getIntExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, 0) == Constants.REQUEST_PHOTO) {
+                if (_data != null) {
+                    if (_data.getIntExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, 0) == Constants.REQUEST_PHOTO) {
                         if (isCanGetCameraPicture()) {
                             openCamera();
                         }
@@ -155,7 +155,7 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
             case Constants.REQUEST_PHOTO:
                 if (!TextUtils.isEmpty(mPhotoFilePath)) {
                     File imageFile = new File(mPhotoFilePath);
-                    if (resultCode == Activity.RESULT_OK) {
+                    if (_resultCode == Activity.RESULT_OK) {
                         if (imageFile.exists()) {
                             addPhotoToGallery(mPhotoFilePath);
                             ivPhoto.setImageURI(Uri.fromFile(imageFile));
@@ -164,14 +164,14 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-                    if (resultCode == Activity.RESULT_CANCELED) {
+                    if (_resultCode == Activity.RESULT_CANCELED) {
                         imageFile.delete();
                     }
                 }
                 break;
             case Constants.REQUEST_GALLERY_IMAGE:
-                if (resultCode == Activity.RESULT_OK) {
-                    mPhotoFilePath = Image.getPath(getActivity(), data.getData());
+                if (_resultCode == Activity.RESULT_OK) {
+                    mPhotoFilePath = Image.getPath(getActivity(), _data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile = new File(mPhotoFilePath);
                         if (imageFile.exists()) {
@@ -189,9 +189,9 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
         }
     }
 
-    private void addPhotoToGallery(String mPhotoFilePath) {
+    private void addPhotoToGallery(String _mPhotoFilePath) {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mPhotoFilePath);
+        File f = new File(_mPhotoFilePath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         getActivity().sendBroadcast(mediaScanIntent);
@@ -211,13 +211,13 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
                 }
             }
         };
-        location = new MyLocation(getActivity(), locationCallBack);
+        mLocation = new CurrentLocation(getActivity(), locationCallBack);
     }
 
-    public void getAddress(double lat, double lon) {
+    public void getAddress(double _lat, double _lon) {
         Bundle bundle = new Bundle();
-        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, lat);
-        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LON, lon);
+        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, _lat);
+        bundle.putDouble(Constants.BUNDLE_CONSTANTS_LON, _lon);
         getLoaderManager().restartLoader(Constants.LOADER_ADDRESS_ID, bundle, this);
     }
 
@@ -235,9 +235,9 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivPhoto_FF:
+    public void onClick(View _view) {
+        switch (_view.getId()) {
+            case R.id.ivPhoto_AF:
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                 startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
@@ -250,17 +250,17 @@ public class FocusFragment extends BaseFourStatesFragment implements OnClickList
     }
 
     @Override
-    public Loader<AddressFull> onCreateLoader(int id, Bundle args) {
-        return new AddressLoader(getActivity(), args);
+    public Loader<AddressFull> onCreateLoader(int _id, Bundle _args) {
+        return new AddressLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoadFinished(Loader<AddressFull> loader, AddressFull data) {
-        etNameCity.setText(data.address.city);
-        etNameStreet.setText(data.address.street);
+    public void onLoadFinished(Loader<AddressFull> _loader, AddressFull _data) {
+        etNameCity.setText(_data.address.city);
+        etNameStreet.setText(_data.address.street);
     }
 
     @Override
-    public void onLoaderReset(Loader<AddressFull> loader) {
+    public void onLoaderReset(Loader<AddressFull> _loader) {
     }
 }

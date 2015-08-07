@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.model.EventsItemModel;
 
 import java.util.List;
 
@@ -19,21 +19,21 @@ import java.util.List;
 public class EventsListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private List<CatalogItemModel> catalogItemModels;
+    private List<EventsItemModel> mEventsItemModels;
 
-    public EventsListAdapter(Context context, List<CatalogItemModel> catalogItemModels) {
-        this.catalogItemModels = catalogItemModels;
+    public EventsListAdapter(Context context, List<EventsItemModel> _eventsItemModels) {
+        this.mEventsItemModels = _eventsItemModels;
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return catalogItemModels.size();
+        return mEventsItemModels.size();
     }
 
     @Override
-    public CatalogItemModel getItem(int position) {
-        return catalogItemModels.get(position);
+    public EventsItemModel getItem(int position) {
+        return mEventsItemModels.get(position);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class EventsListAdapter extends BaseAdapter {
             view.setTag(this);
         }
 
-        public void setData(CatalogItemModel item, int position) {
+        public void setData(EventsItemModel item, int position) {
             switch (item.catalogSizeView){
                 case SMALL:
                     title.setText(item.title);
@@ -87,26 +87,6 @@ public class EventsListAdapter extends BaseAdapter {
                     address.setText(item.address);
                     break;
             }
-            /*if (!TextUtils.isEmpty(item.tvTitle)){
-                tvTitle.setText(item.tvTitle);
-            } else {
-                tvTitle.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(item.date)){
-                date.setText(item.date);
-            } else {
-                date.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(item.address)){
-                address.setText(item.address);
-            } else {
-                address.setVisibility(View.GONE);
-            }*/
-//            if (position % 2 == 0) {
-//                view.setBackgroundResource(R.drawable.f_pf_list_row_backgroundcolor);
-//            } else {
-//                view.setBackgroundResource(R.drawable.f_pf_list_row_background_alternate);
-//            }
         }
     }
 }

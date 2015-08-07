@@ -8,7 +8,7 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.BaseFragmentActivity;
 import com.crmc.ourcity.callback.MapFilterCallBack;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.MapFilterSelected;
+import com.crmc.ourcity.model.Marker;
 import com.crmc.ourcity.utils.EnumUtil;
 
 import java.util.ArrayList;
@@ -27,20 +27,17 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         DialogType type = EnumUtil.deserialize(DialogType.class).from(getIntent());
         switch (type) {
             case FILTER_MAP:
-                ArrayList<MapFilterSelected> mMapFilterSelected = getIntent().getParcelableArrayListExtra
-                        (MapFilterSelected.class.getCanonicalName());
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, DialogMarkerFilter.newInstance
-                        (mMapFilterSelected));
+                ArrayList<Marker> mMarkers = getIntent().getParcelableArrayListExtra(Marker.class.getCanonicalName());
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, MarkerFilterDialog.newInstance
+                        (mMarkers));
                 break;
 
             case PHOTO:
-                DialogPhotoChoose dialogPhotoChoose = new DialogPhotoChoose();
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, dialogPhotoChoose);
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new PhotoChooseDialog());
                 break;
 
             case SETTING:
-                SettingDialog settingDialog = new SettingDialog();
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, settingDialog);
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SettingDialog());
                 break;
         }
     }
@@ -59,19 +56,17 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 finish();
                 break;
             case REGISTER:
-                TestDialog testDialog = new TestDialog();
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, testDialog);
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new TestDialog());
                 break;
             case CONFIRMATION:
-                ConfirmationDialog confirmationDialog = new ConfirmationDialog();
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, confirmationDialog);
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
                 break;
         }
     }
 
     @Override
-    public void onActionDialogDataSelected(List<MapFilterSelected> _list) {
-        intent.putParcelableArrayListExtra(MapFilterSelected.class.getCanonicalName(), (ArrayList<? extends
+    public void onActionDialogDataSelected(List<Marker> _list) {
+        intent.putParcelableArrayListExtra(Marker.class.getCanonicalName(), (ArrayList<? extends
                 Parcelable>) _list);
         intent.putExtra(Constants.REQUEST_MAP_FILTER_TYPE, Constants.REQUEST_MAP_SELECTED);
         setResult(RESULT_OK, intent);

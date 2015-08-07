@@ -1,10 +1,5 @@
 package com.crmc.ourcity.fragment;
 
-import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.ActionType;
-import com.crmc.ourcity.model.CatalogItemModel;
-import com.crmc.ourcity.rest.responce.menu.MenuFull;
-
 /**
  * Created by podo on 03.08.15.
  */

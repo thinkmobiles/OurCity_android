@@ -8,34 +8,34 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.adapter.MapFilterListAdapter;
+import com.crmc.ourcity.adapter.MarkersListAdapter;
 import com.crmc.ourcity.callback.MapFilterCallBack;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.MapFilterSelected;
+import com.crmc.ourcity.model.Marker;
 
 import java.util.ArrayList;
 
 /**
  * Created by SetKrul on 04.08.2015.
  */
-public class DialogMarkerFilter extends BaseFourStatesFragment implements OnClickListener {
+public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClickListener {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private TextView btnCancelFilter;
     private TextView btnSelectFilter;
-    private ListView lvMapFilter;
+    private ListView lvMarkerFilter;
     private MapFilterCallBack mCallback;
-    private ArrayList<MapFilterSelected> mMapFilterSelected;
-    private MapFilterListAdapter mAdapter;
+    private ArrayList<Marker> mMarkers;
+    private MarkersListAdapter mAdapter;
 
-    public DialogMarkerFilter() {
+    public MarkerFilterDialog() {
         super();
     }
 
-    public static DialogMarkerFilter newInstance(ArrayList<MapFilterSelected> _mMapFilterSelected) {
-        DialogMarkerFilter mDialogMapFilter = new DialogMarkerFilter();
+    public static MarkerFilterDialog newInstance(ArrayList<Marker> _mMarkers) {
+        MarkerFilterDialog mDialogMapFilter = new MarkerFilterDialog();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(CONFIGURATION_KEY, _mMapFilterSelected);
+        args.putParcelableArrayList(CONFIGURATION_KEY, _mMarkers);
         mDialogMapFilter.setArguments(args);
         return mDialogMapFilter;
     }
@@ -43,7 +43,7 @@ public class DialogMarkerFilter extends BaseFourStatesFragment implements OnClic
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        mMapFilterSelected = getArguments().getParcelableArrayList(CONFIGURATION_KEY);
+        mMarkers = getArguments().getParcelableArrayList(CONFIGURATION_KEY);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class DialogMarkerFilter extends BaseFourStatesFragment implements OnClic
 
     @Override
     protected void initViews() {
-        btnCancelFilter = findView(R.id.btnCancel_Filter_MF);
-        btnSelectFilter = findView(R.id.btnSelect_Filter_MF);
-        lvMapFilter = findView(R.id.lvMapFilter);
-        mAdapter = new MapFilterListAdapter(getActivity(), mMapFilterSelected);
-        lvMapFilter.setAdapter(mAdapter);
+        btnCancelFilter = findView(R.id.btnCancel_Filter_DMF);
+        btnSelectFilter = findView(R.id.btnSelect_Filter_DMF);
+        lvMarkerFilter = findView(R.id.lvMarkerFilter_DMF);
+        mAdapter = new MarkersListAdapter(getActivity(), mMarkers);
+        lvMarkerFilter.setAdapter(mAdapter);
         showContent();
     }
 
@@ -80,10 +80,10 @@ public class DialogMarkerFilter extends BaseFourStatesFragment implements OnClic
     @Override
     public void onClick(View _v) {
         switch (_v.getId()) {
-            case R.id.btnCancel_Filter_MF:
+            case R.id.btnCancel_Filter_DMF:
                 mCallback.onActionDialogDataCancel(false);
                 break;
-            case R.id.btnSelect_Filter_MF:
+            case R.id.btnSelect_Filter_DMF:
                 mCallback.onActionDialogDataSelected(mAdapter.getResult());
                 break;
         }

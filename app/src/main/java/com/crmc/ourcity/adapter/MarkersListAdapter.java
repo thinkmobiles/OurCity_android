@@ -11,35 +11,35 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.model.MapFilterSelected;
+import com.crmc.ourcity.model.Marker;
 
 import java.util.List;
 
 /**
  * Created by SetKrul on 04.08.2015.
  */
-public class MapFilterListAdapter extends BaseAdapter{
+public class MarkersListAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;
-    private List<MapFilterSelected> mapFilterSelected;
+    private List<Marker> mMarkers;
 
-    public MapFilterListAdapter(Context _context, List<MapFilterSelected> _mapFilterSelected) {
-        this.mapFilterSelected = _mapFilterSelected;
+    public MarkersListAdapter(Context _context, List<Marker> _markers) {
+        this.mMarkers = _markers;
         mInflater = LayoutInflater.from(_context);
     }
 
     @Override
     public int getCount() {
-        return mapFilterSelected.size();
+        return mMarkers.size();
     }
 
-    final public List<MapFilterSelected> getResult() {
-        return mapFilterSelected;
+    final public List<Marker> getResult() {
+        return mMarkers;
     }
 
     @Override
-    public MapFilterSelected getItem(int _position) {
-        return mapFilterSelected.get(_position);
+    public Marker getItem(int _position) {
+        return mMarkers.get(_position);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MapFilterListAdapter extends BaseAdapter{
             _view.setTag(this);
         }
 
-        public void setData(MapFilterSelected _item, int _position) {
+        public void setData(Marker _item, int _position) {
             this.position = _position;
             tvCategoryMarkers_DMF.setText(_item.title);
             cbCategoryMarkersVisible_DMF.setChecked(_item.visible);

@@ -34,7 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="אני מסכים"
             android:gravity="center"
-            android:id="@+id/tvOk"
+            android:id="@+id/tvOk_CD"
             android:layout_weight="1"
             />
 
@@ -44,7 +44,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="לא מסכים"
             android:gravity="center"
-            android:id="@+id/tvCancel"
+            android:id="@+id/tvCancel_CD"
             android:layout_weight="1"/>
     </LinearLayout>
 
