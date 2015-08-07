@@ -12,6 +12,7 @@ import com.crmc.ourcity.adapter.CatalogListAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
 import com.crmc.ourcity.model.ActionType;
+import com.crmc.ourcity.rest.responce.menu.MenuModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,9 +67,11 @@ public class CatalogFragment extends BaseFourStatesFragment implements OnItemCli
         mListItemAction.onItemAction(mAdapter.getItem(position));
     }
 
-    public interface ListItemAction {
-        void onItemAction(final CatalogItemModel catalogItemModel);
-    }
+//    public interface ListItemAction {
+//        void onItemAction(final CatalogItemModel catalogItemModel);
+//
+//        void onMenuModelPrepared(List<MenuModel> _menuModel);
+//    }
 
     public String getDateTime() {
         return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance().getTime());

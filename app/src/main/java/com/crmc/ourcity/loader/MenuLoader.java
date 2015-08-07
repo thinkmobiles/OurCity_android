@@ -38,7 +38,7 @@ public class MenuLoader extends BaseLoader<MenuFull> {
         } catch (RetrofitError e) {
             menuNodes = new MenuFull();
             menuNodes.nodes = new ArrayList<>();
-            menuNodes.nodes.add(new MenuModel());
+            //menuNodes.nodes.add(new MenuModel());
         }
         return menuNodes;
     }

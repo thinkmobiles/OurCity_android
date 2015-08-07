@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.GridAdapter;
+import com.crmc.ourcity.dialog.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.MenuLoader;
@@ -21,20 +23,33 @@ import com.crmc.ourcity.view.RecyclerItemClickListener;
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class TestApiFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<MenuFull> {
+public class TESTMainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<MenuFull> {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private GridAdapter mAdapter;
     private MenuFull data;
+    private ListItemAction mCallbackMenuModel;
 
     private int cityNumber;
     private String lng;
 
-    public static TestApiFragment newInstance() {
-        return new TestApiFragment();
+    public static TESTMainMenuFragment newInstance() {
+        return new TESTMainMenuFragment();
     }
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try{
+            mCallbackMenuModel = (ListItemAction) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement ListItemAction");
+        }
+    }
 
 
     @Override
@@ -47,7 +62,7 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 if(menuModel.menu != null) {
-                    Toast.makeText(_context, "woohoo", Toast.LENGTH_SHORT).show();
+                    mCallbackMenuModel.onMenuModelPrepared(menuModel.menu);
                 }
             }
         }));

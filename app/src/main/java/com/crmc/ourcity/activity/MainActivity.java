@@ -11,19 +11,18 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
-import com.crmc.ourcity.fragment.EventsFragment.ListItemAction;
-import com.crmc.ourcity.fragment.EventsItemFragment;
-import com.crmc.ourcity.fragment.TestApiFragment;
-import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.fragment.CatalogFragment.ListItemAction;
+
+import com.crmc.ourcity.fragment.SubMenuFragment;
+import com.crmc.ourcity.fragment.TESTMainMenuFragment;
+import com.crmc.ourcity.fragment.ListItemAction;
 import com.crmc.ourcity.fragment.CatalogItemFragment;
-import com.crmc.ourcity.fragment.MapsFragment;
-import com.crmc.ourcity.fragment.FragmentFactoryMethod;
-import com.crmc.ourcity.fragment.TestApiFragment;
 import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.IntentUtils;
+
+import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements ListItemAction {
 
@@ -50,7 +49,7 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
         getSupportActionBar().setTitle("OutCity");
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(TestApiFragment.newInstance());
+            setTopFragment(TESTMainMenuFragment.newInstance());
             //getSupportActionBar().setTitle("MayorSpeech");
         }
 
@@ -89,6 +88,11 @@ public class MainActivity extends BaseFragmentActivity implements ListItemAction
             case FALSE:
                 break;
         }
+    }
+
+    @Override
+    public void onMenuModelPrepared(List<MenuModel> _menuModel) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel));
     }
 
     @Override

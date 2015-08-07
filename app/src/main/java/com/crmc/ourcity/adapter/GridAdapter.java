@@ -39,6 +39,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         MenuModel item = menuModels.get(position);
         holder.title.setText(item.title);
+        
         holder.imgThumbnail.setImageResource(R.drawable.new_menu_general_report);
     }
 
