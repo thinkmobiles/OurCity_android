@@ -22,9 +22,9 @@ public class MapTripsLoader extends BaseLoader<List<MapTrips>> {
 
     private int cityNumber;
 
-    public MapTripsLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+    public MapTripsLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
     }
 
     @Override

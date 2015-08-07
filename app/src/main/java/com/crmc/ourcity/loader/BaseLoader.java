@@ -9,8 +9,8 @@ package com.crmc.ourcity.loader;
 public abstract class BaseLoader<T> extends AsyncTaskLoader<T> {
 
     private T mData;
-    public BaseLoader(final Context context) {
-        super(context);
+    public BaseLoader(final Context _context) {
+        super(_context);
     }
 
     @Override
@@ -28,10 +28,10 @@ public abstract class BaseLoader<T> extends AsyncTaskLoader<T> {
     }
 
     @Override
-    public void deliverResult(T data) {
-        mData = data;
+    public void deliverResult(T _data) {
+        mData = _data;
         if (isStarted()) {
-            super.deliverResult(data);
+            super.deliverResult(_data);
         }
     }
 }

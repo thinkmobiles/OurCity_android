@@ -28,7 +28,7 @@ public class FragmentFactoryMethod {
 //
 //        return fragment;
 //    }
-
+//
 //    public static BaseFourStatesFragment getNeededFragment(MenuFull _menuFull) {
 //        BaseFourStatesFragment fragment = null;
 //        if()

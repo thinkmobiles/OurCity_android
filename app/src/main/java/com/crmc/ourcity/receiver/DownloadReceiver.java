@@ -21,25 +21,25 @@ public class DownloadReceiver extends BroadcastReceiver {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
+    public void onReceive(Context _context, Intent _intent) {
+        String action = _intent.getAction();
         if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
             DownloadManager.Query query = new DownloadManager.Query();
-            long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+            long downloadId = _intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
             query.setFilterById(downloadId);
-            DownloadManager mDownloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager mDownloadManager = (DownloadManager) _context.getSystemService(Context.DOWNLOAD_SERVICE);
             Cursor c = mDownloadManager.query(query);
             if (c.moveToFirst()) {
                 int status = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
                 if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(status)) {
                     String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
-                    File file = new File(new FilePath().getPath(context, Uri.parse(uriString)));
+                    File file = new File(new FilePath().getPath(_context, Uri.parse(uriString)));
                     if (file.exists()) {
-                        Toast.makeText(context, context.getResources().getString(R.string.download_susses), Toast
+                        Toast.makeText(_context, _context.getResources().getString(R.string.download_susses), Toast
                                 .LENGTH_SHORT).show();
                     }
                 } else if (status == DownloadManager.STATUS_FAILED) {
-                    Toast.makeText(context, context.getResources().getString(R.string.download_fail), Toast
+                    Toast.makeText(_context, _context.getResources().getString(R.string.download_fail), Toast
                             .LENGTH_SHORT).show();
                 }
             }

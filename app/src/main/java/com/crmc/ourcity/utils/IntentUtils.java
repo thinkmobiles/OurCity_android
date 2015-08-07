@@ -11,16 +11,16 @@ import com.crmc.ourcity.global.Constants;
  */
 public final class IntentUtils {
 
-    public static Intent getIntentSkype(String phoneNumber){
+    public static Intent getIntentSkype(String _phoneNumber){
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("skype:" + phoneNumber));
+        i.setData(Uri.parse("skype:" + _phoneNumber));
         return i;
     }
 
-    public static Intent getIntentMail(String mail){
+    public static Intent getIntentMail(String _mail){
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{mail});
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{_mail});
         return i;
     }
 
@@ -33,9 +33,9 @@ public final class IntentUtils {
         return galleryIntent;
     }
 
-    public static Intent getCameraStartIntent(final Uri fileUri) {
+    public static Intent getCameraStartIntent(final Uri _fileUri) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, _fileUri);
         return takePictureIntent;
     }
 }

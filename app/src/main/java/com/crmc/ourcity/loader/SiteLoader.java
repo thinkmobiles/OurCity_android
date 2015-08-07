@@ -23,10 +23,10 @@ public class SiteLoader extends BaseLoader<List<Site>> {
     private int cityNumber;
     private String type;
 
-    public SiteLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
-        type = args.getString(Constants.BUNDLE_CONSTANT_TYPE);
+    public SiteLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+        type = _args.getString(Constants.BUNDLE_CONSTANT_TYPE);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class SiteLoader extends BaseLoader<List<Site>> {
         List<Site> mSite;
         try {
             mSite =  api.getSites(new EventsModel(new EventsType(cityNumber, type)));
-        } catch (RetrofitError e) {
+        } catch (RetrofitError _e) {
             mSite = new ArrayList<>();
             mSite.add(new Site());
         }

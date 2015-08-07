@@ -24,22 +24,22 @@ public class Image {
     /**
      * Method for return file path of Gallery image
      *
-     * @param context
-     * @param uri
+     * @param _context
+     * @param _uri
      * @return path of the selected image file from gallery
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath(final Context context, final Uri uri) {
+    public static String getPath(final Context _context, final Uri _uri) {
 
         //check here to KITKAT or new version
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (isKitKat && DocumentsContract.isDocumentUri(_context, _uri)) {
 
             // ExternalStorageProvider
-            if (isExternalStorageDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
+            if (isExternalStorageDocument(_uri)) {
+                final String docId = DocumentsContract.getDocumentId(_uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
@@ -48,17 +48,17 @@ public class Image {
                 }
             }
             // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            else if (isDownloadsDocument(_uri)) {
 
-                final String id = DocumentsContract.getDocumentId(uri);
+                final String id = DocumentsContract.getDocumentId(_uri);
                 final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
                         Long.valueOf(id));
 
-                return getDataColumn(context, contentUri, null, null);
+                return getDataColumn(_context, contentUri, null, null);
             }
             // MediaProvider
-            else if (isMediaDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
+            else if (isMediaDocument(_uri)) {
+                final String docId = DocumentsContract.getDocumentId(_uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
@@ -76,20 +76,20 @@ public class Image {
                 final String selection = "_id=?";
                 final String[] selectionArgs = new String[]{split[1]};
 
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+                return getDataColumn(_context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+        else if ("content".equalsIgnoreCase(_uri.getScheme())) {
 
             // Return the remote address
-            if (isGooglePhotosUri(uri)) return uri.getLastPathSegment();
+            if (isGooglePhotosUri(_uri)) return _uri.getLastPathSegment();
 
-            return getDataColumn(context, uri, null, null);
+            return getDataColumn(_context, _uri, null, null);
         }
         // File
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
+        else if ("file".equalsIgnoreCase(_uri.getScheme())) {
+            return _uri.getPath();
         }
 
         return null;
@@ -99,20 +99,20 @@ public class Image {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context       The context.
-     * @param uri           The Uri to query.
-     * @param selection     (Optional) Filter used in the query.
-     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @param _context       The _context.
+     * @param _uri           The Uri to query.
+     * @param _selection     (Optional) Filter used in the query.
+     * @param _selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+    public static String getDataColumn(Context _context, Uri _uri, String _selection, String[] _selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {column};
 
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            cursor = _context.getContentResolver().query(_uri, projection, _selection, _selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(index);
@@ -124,55 +124,55 @@ public class Image {
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    public static boolean isExternalStorageDocument(Uri _uri) {
+        return "com.android.externalstorage.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    public static boolean isDownloadsDocument(Uri _uri) {
+        return "com.android.providers.downloads.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    public static boolean isMediaDocument(Uri _uri) {
+        return "com.android.providers.media.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is Google Photos.
      */
-    public static boolean isGooglePhotosUri(Uri uri) {
-        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    public static boolean isGooglePhotosUri(Uri _uri) {
+        return "com.google.android.apps.photos.content".equals(_uri.getAuthority());
     }
 
     /**
-     * @param file         image file
-     * @param requiredSize out file size in kb
+     * @param _file         image _file
+     * @param _requiredSize out _file size in kb
      * @return bitmap with resize image
      */
-    public Bitmap compressImage(File file, int requiredSize) {
+    public Bitmap compressImage(File _file, int _requiredSize) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(new FileInputStream(file), null, options);
+            BitmapFactory.decodeStream(new FileInputStream(_file), null, options);
 
             int scale = 1;
-            while (options.outWidth / scale / 2 >= requiredSize && options.outHeight / scale / 2 >= requiredSize)
+            while (options.outWidth / scale / 2 >= _requiredSize && options.outHeight / scale / 2 >= _requiredSize)
                 scale *= 2;
 
             BitmapFactory.Options optionsResize = new BitmapFactory.Options();
             optionsResize.inSampleSize = scale;
-            return BitmapFactory.decodeStream(new FileInputStream(file), null, optionsResize);
+            return BitmapFactory.decodeStream(new FileInputStream(_file), null, optionsResize);
         } catch (FileNotFoundException e) {
         }
         return null;

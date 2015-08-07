@@ -22,9 +22,9 @@ public class NewsLoader extends BaseLoader<List<News>> {
 
     private int cityNumber;
 
-    public NewsLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+    public NewsLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class NewsLoader extends BaseLoader<List<News>> {
         List<News> mNews;
         try {
             mNews =  api.getNews(new BaseModel(new BaseCity(cityNumber)));
-        } catch (RetrofitError e) {
+        } catch (RetrofitError _e) {
             mNews = new ArrayList<>();
             mNews.add(new News());
         }

@@ -21,20 +21,20 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
     private List<String> mData;
     private int count;
 
-    public Ticker(Context context) {
-        this(context, null, 0);
+    public Ticker(Context _context) {
+        this(_context, null, 0);
     }
 
-    public Ticker(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    public Ticker(Context _context, AttributeSet _attrs) {
+        this(_context, _attrs, 0);
     }
 
-    public Ticker(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public Ticker(Context _context, AttributeSet _attrs, int _defStyleAttr) {
+        super(_context, _attrs, _defStyleAttr);
 
         count = 0;
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = _context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
 
         mAimator = ObjectAnimator.ofFloat(this, "translationX", -1 * width, width);
@@ -72,22 +72,22 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
     }
 
     @Override
-    public void onAnimationStart(Animator animation) {
+    public void onAnimationStart(Animator _animation) {
         count = 0;
     }
 
     @Override
-    public void onAnimationEnd(Animator animation) {
+    public void onAnimationEnd(Animator _animation) {
 
     }
 
     @Override
-    public void onAnimationCancel(Animator animation) {
+    public void onAnimationCancel(Animator _animation) {
 
     }
 
     @Override
-    public void onAnimationRepeat(Animator animation) {
+    public void onAnimationRepeat(Animator _animation) {
         if (count < mData.size() - 1) {
             count++;
         } else {

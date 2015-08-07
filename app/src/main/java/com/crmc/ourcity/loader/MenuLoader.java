@@ -22,10 +22,10 @@ public class MenuLoader extends BaseLoader<MenuFull> {
     private int cityNumber;
     private String lng;
 
-    public MenuLoader(Context context, Bundle args) {
-        super(context);
-        cityNumber = args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
-        lng = args.getString(Constants.BUNDLE_CONSTANT_LANG);
+    public MenuLoader(Context _context, Bundle _args) {
+        super(_context);
+        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+        lng = _args.getString(Constants.BUNDLE_CONSTANT_LANG);
     }
 
     @Override

@@ -24,11 +24,11 @@ public class StreetsLoader extends BaseLoader<StreetsFull> {
     public String userName;
     public String password;
 
-    public StreetsLoader(Context context, Bundle args) {
-        super(context);
-        clientId = args.getInt(Constants.BUNDLE_CONSTANT_CLIENT_ID);
-        userName = args.getString(Constants.BUNDLE_CONSTANT_USER_NAME);
-        password = args.getString(Constants.BUNDLE_CONSTANT_PASSWORD);
+    public StreetsLoader(Context _context, Bundle _args) {
+        super(_context);
+        clientId = _args.getInt(Constants.BUNDLE_CONSTANT_CLIENT_ID);
+        userName = _args.getString(Constants.BUNDLE_CONSTANT_USER_NAME);
+        password = _args.getString(Constants.BUNDLE_CONSTANT_PASSWORD);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class StreetsLoader extends BaseLoader<StreetsFull> {
         StreetsFull mStreetsFull;
         try {
             mStreetsFull =  api.getStreets(new StreetsModel(new StreetsDetails(clientId, userName, password)));
-        } catch (RetrofitError e) {
+        } catch (RetrofitError _e) {
             mStreetsFull = new StreetsFull();
             mStreetsFull.streetsList = new ArrayList<>();
             mStreetsFull.streetsList.add(new StreetsItem());

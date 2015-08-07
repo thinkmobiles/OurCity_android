@@ -19,22 +19,22 @@ public class FilePath {
     /**
      * Method for return file path of Gallery image
      *
-     * @param context
-     * @param uri
+     * @param _context
+     * @param _uri
      * @return path of the selected image file from gallery
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public String getPath(final Context context, final Uri uri) {
+    public String getPath(final Context _context, final Uri _uri) {
 
         //check here to KITKAT or new version
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (isKitKat && DocumentsContract.isDocumentUri(_context, _uri)) {
 
             // ExternalStorageProvider
-            if (isExternalStorageDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
+            if (isExternalStorageDocument(_uri)) {
+                final String docId = DocumentsContract.getDocumentId(_uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
@@ -43,17 +43,17 @@ public class FilePath {
                 }
             }
             // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            else if (isDownloadsDocument(_uri)) {
 
-                final String id = DocumentsContract.getDocumentId(uri);
+                final String id = DocumentsContract.getDocumentId(_uri);
                 final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
                         Long.valueOf(id));
 
-                return getDataColumn(context, contentUri, null, null);
+                return getDataColumn(_context, contentUri, null, null);
             }
             // MediaProvider
-            else if (isMediaDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
+            else if (isMediaDocument(_uri)) {
+                final String docId = DocumentsContract.getDocumentId(_uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
@@ -71,20 +71,20 @@ public class FilePath {
                 final String selection = "_id=?";
                 final String[] selectionArgs = new String[]{split[1]};
 
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+                return getDataColumn(_context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+        else if ("content".equalsIgnoreCase(_uri.getScheme())) {
 
             // Return the remote address
-            if (isGooglePhotosUri(uri)) return uri.getLastPathSegment();
+            if (isGooglePhotosUri(_uri)) return _uri.getLastPathSegment();
 
-            return getDataColumn(context, uri, null, null);
+            return getDataColumn(_context, _uri, null, null);
         }
         // File
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
+        else if ("file".equalsIgnoreCase(_uri.getScheme())) {
+            return _uri.getPath();
         }
 
         return null;
