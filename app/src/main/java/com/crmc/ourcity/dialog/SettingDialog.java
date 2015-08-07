@@ -20,13 +20,13 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
     private OnActionDialogListener mCallback;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
 
         try{
-            mCallback = (OnActionDialogListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            mCallback = (OnActionDialogListener) _activity;
+        } catch (ClassCastException _e) {
+            throw new ClassCastException(_activity.toString()
                             + " must implement OnActionDialogListener");
         }
     }
@@ -50,8 +50,8 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    public void onClick(View _view) {
+        switch (_view.getId()){
             case R.id.register:
                 mCallback.onActionDialogSelected(DialogType.REGISTER);
                 break;

@@ -20,23 +20,23 @@ public class ConfirmationDialog extends BaseFourStatesFragment implements View.O
     private OnActionDialogListener mCallback;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
 
         try{
-            mCallback = (OnActionDialogListener) activity;
+            mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(_activity.toString()
                     + " must implement OnActionDialogListener");
         }
     }
 
     @Override
     protected void initViews() {
-        tvHeader = findView(R.id.tvHeader);
+        tvHeader = findView(R.id.tvHeader_CD);
         tvHeader.setText(getResources().getText(R.string.txt_login));
-        tvOk = findView(R.id.tvOk);
-        tvCancel = findView(R.id.tvCancel);
+        tvOk = findView(R.id.tvOk_CD);
+        tvCancel = findView(R.id.tvCancel_CD);
         showContent();
     }
 
@@ -55,10 +55,10 @@ public class ConfirmationDialog extends BaseFourStatesFragment implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tvOk:
+            case R.id.tvOk_CD:
                 mCallback.onActionDialogSelected(DialogType.REGISTER);
                 break;
-            case R.id.tvCancel:
+            case R.id.tvCancel_CD:
                 Toast.makeText(getActivity().getApplicationContext(), "btnCancel is clicked", Toast.LENGTH_SHORT).show();
                 break;
         }

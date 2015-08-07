@@ -15,7 +15,7 @@ import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.MapDataLoader;
-import com.crmc.ourcity.model.MapFilterSelected;
+import com.crmc.ourcity.model.Marker;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.google.android.gms.maps.CameraUpdate;
@@ -25,7 +25,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -47,8 +46,8 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     private SupportMapFragment mMap;
     private Button btnFilter;
-    private List<MapFilterSelected> mDialogMapFilterSelected = new ArrayList<>();
-    private Map<Integer, ArrayList<Marker>> mMarkersCategory = new HashMap<>();
+    private List<Marker> mDialogMarkers = new ArrayList<>();
+    private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
 
     public static MapsFragment newInstance() {
         return new MapsFragment();
@@ -68,11 +67,11 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     private void setUpMapIfNeeded() {
         if (mMap == null) {
-            mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+            mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapMain));
             mMap.getMapAsync(this);
         }
         if (mMap != null) {
-            getChildFragmentManager().findFragmentById(R.id.map);
+            getChildFragmentManager().findFragmentById(R.id.mapMain);
         }
     }
 
@@ -86,12 +85,16 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
 
     @Override
-    public void onClick(View _v) {
-        Intent intent = new Intent(getActivity(), DialogActivity.class);
-        EnumUtil.serialize(DialogType.class, DialogType.FILTER_MAP).to(intent);
-        intent.putParcelableArrayListExtra(MapFilterSelected.class.getCanonicalName(), (ArrayList<? extends
-                Parcelable>) mDialogMapFilterSelected);
-        startActivityForResult(intent, Constants.REQUEST_MAP_FILTER);
+    public void onClick(View _view) {
+        switch (_view.getId()) {
+            case R.id.btnMarkerFilter_MF:
+                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.FILTER_MAP).to(intent);
+                intent.putParcelableArrayListExtra(Marker.class.getCanonicalName(), (ArrayList<? extends
+                        Parcelable>) mDialogMarkers);
+                startActivityForResult(intent, Constants.REQUEST_MAP_FILTER);
+                break;
+        }
     }
 
     @Override
@@ -101,8 +104,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
             case Constants.REQUEST_MAP_FILTER:
                 if (_data != null) {
                     if (_data.getIntExtra(Constants.REQUEST_MAP_FILTER_TYPE, 0) == Constants.REQUEST_MAP_SELECTED) {
-                        mDialogMapFilterSelected = _data.getParcelableArrayListExtra(MapFilterSelected.class
-                                .getCanonicalName());
+                        mDialogMarkers = _data.getParcelableArrayListExtra(Marker.class.getCanonicalName());
                         setFilterableMarkers();
                     }
                 }
@@ -111,12 +113,13 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     private void setFilterableMarkers() {
-        for (int i = 0; i < mDialogMapFilterSelected.size(); i++) {
-            Set<Map.Entry<Integer, ArrayList<Marker>>> set = mMarkersCategory.entrySet();
-            for (Map.Entry<Integer, ArrayList<Marker>> me : set) {
-                if (me.getKey() == mDialogMapFilterSelected.get(i).categoryId) {
+        for (int i = 0; i < mDialogMarkers.size(); i++) {
+            Set<Map.Entry<Integer, ArrayList<com.google.android.gms.maps.model.Marker>>> set = mMarkersCategory
+                    .entrySet();
+            for (Map.Entry<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> me : set) {
+                if (me.getKey() == mDialogMarkers.get(i).categoryId) {
                     for (int j = 0; j < me.getValue().size(); j++) {
-                        me.getValue().get(j).setVisible(mDialogMapFilterSelected.get(i).visible);
+                        me.getValue().get(j).setVisible(mDialogMarkers.get(i).visible);
                     }
                 }
             }
@@ -126,7 +129,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     protected void initViews() {
         super.initViews();
-        btnFilter = findView(R.id.map_btn_point);
+        btnFilter = findView(R.id.btnMarkerFilter_MF);
     }
 
     @Override
@@ -137,7 +140,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     @Override
     public void onLoadFinished(Loader<List<MapCategory>> _loader, List<MapCategory> _data) {
-        ArrayList<Marker> temp = new ArrayList<>();
+        ArrayList<com.google.android.gms.maps.model.Marker> temp = new ArrayList<>();
         for (int i = 0; i < _data.size(); i++) {
             for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
                 temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
@@ -145,8 +148,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
                         _data.get(i).getInterestedPointLon(j)))));
             }
             mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
-            mDialogMapFilterSelected.add(new MapFilterSelected(_data.get(i).categoryId, _data.get(i).categoryName,
-                    true));
+            mDialogMarkers.add(new Marker(_data.get(i).categoryId, _data.get(i).categoryName, true));
             temp.clear();
         }
         showContent();

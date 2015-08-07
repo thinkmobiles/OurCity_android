@@ -11,20 +11,20 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class DialogPhotoChoose extends BaseFourStatesFragment implements OnClickListener {
+public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClickListener {
 
     private TextView tvCamera;
     private TextView tvGallery;
     private OnActionDialogListener mCallback;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
 
         try {
-            mCallback = (OnActionDialogListener) activity;
+            mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnActionDialogListener");
+            throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListener");
         }
     }
 
@@ -47,8 +47,8 @@ public class DialogPhotoChoose extends BaseFourStatesFragment implements OnClick
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View _view) {
+        switch (_view.getId()) {
             case R.id.tvCamera_CFD:
                 mCallback.onActionDialogSelected(DialogType.PHOTO_CAM);
                 break;

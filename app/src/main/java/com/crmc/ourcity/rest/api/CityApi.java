@@ -40,6 +40,13 @@ public interface CityApi {
     List<MapCategory> getMapDetails(@Body BaseModel baseModel);
 
     /**
+     * @param baseModel city number
+     * @return phones number with others data
+     */
+    @POST("/GetCityEntities")
+    List<Phones> getPhones(@Body BaseModel baseModel);
+
+    /**
      * @param eventsModel type get data
      * @return city sites
      */
@@ -48,17 +55,17 @@ public interface CityApi {
 
     /**
      * @param baseModel city number
-     * @return phones number with others data
-     */
-    @POST("/GetCityEntities")
-    List<Phones> getPhones(@Body BaseModel baseModel);
-
-    /**
-     * @param baseModel city number
      * @return news??????
      */
     @POST("/GetInterestAreaToCity")
     List<News> getNews(@Body BaseModel baseModel);
+
+    /**
+     * @param residentModel resident id
+     * @return messages from mailing
+     */
+    @POST("/GetMessagesToResident")
+    List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 
     /**
      * @param baseModel city number
@@ -94,13 +101,6 @@ public interface CityApi {
      */
     @POST("/GetMayorImage")
     String getMayorImage(@Body BaseModel baseModel);
-
-    /**
-     * @param residentModel resident id
-     * @return messages from mailing
-     */
-    @POST("/GetMessagesToResident")
-    List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 
     /**
      * @param baseModel city number

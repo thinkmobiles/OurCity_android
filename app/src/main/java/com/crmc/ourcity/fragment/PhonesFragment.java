@@ -40,18 +40,18 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         cityNumber = 1;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Phones>> loader, List<Phones> data) {
-        for (int i = 0; i < data.size(); i++){
-            Log.d(Constants.TAG, "TAG: " + data.get(i).phoneNumber);
+    public void onLoadFinished(Loader<List<Phones>> _loader, List<Phones> _data) {
+        for (int i = 0; i < _data.size(); i++){
+            Log.d(Constants.TAG, "TAG: " + _data.get(i).phoneNumber);
         }
         lvPhones = findView(R.id.lvPhones_FP);
-        mAdapter = new PhonesListAdapter(getActivity(), data);
+        mAdapter = new PhonesListAdapter(getActivity(), _data);
         lvPhones.setAdapter(mAdapter);
         showContent();
     }
@@ -67,11 +67,11 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public Loader<List<Phones>> onCreateLoader(int id, Bundle args) {
-        return new PhonesLoader(getActivity(), args);
+    public Loader<List<Phones>> onCreateLoader(int _id, Bundle _args) {
+        return new PhonesLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Phones>> loader) {
+    public void onLoaderReset(Loader<List<Phones>> _loader) {
     }
 }

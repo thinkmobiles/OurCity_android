@@ -15,7 +15,7 @@ import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.OnItemActionListener;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
-import com.crmc.ourcity.model.CatalogItemModel;
+import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -67,10 +67,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onItemAction(CatalogItemModel catalogItemModel) {
-        switch (catalogItemModel.itemStatus) {
-            case ITEM:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(catalogItemModel));
+    public void onItemAction(EventsItemModel _eventsItemModel) {
+        switch (_eventsItemModel.actionType) {
+            case LIST:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_eventsItemModel));
                 break;
             case MAIL:
                 try {

@@ -9,5 +9,5 @@ package com.crmc.ourcity.dialog;
  */
 
 public interface OnActionDialogListener {
-    void onActionDialogSelected(DialogType action);
+    void onActionDialogSelected(DialogType _action);
 }

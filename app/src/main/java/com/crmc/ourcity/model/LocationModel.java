@@ -11,11 +11,11 @@ public class LocationModel {
     public String nameStreet;
     public String numberHouse;
 
-    public LocationModel(double lat, double lng, String nameCity, String nameStreet, String numberHouse){
-        this.lat = lat;
-        this.lng = lng;
-        this.nameCity = nameCity;
-        this.nameStreet = nameStreet;
-        this.numberHouse = numberHouse;
+    public LocationModel(double _lat, double _lng, String _nameCity, String _nameStreet, String _numberHouse){
+        this.lat = _lat;
+        this.lng = _lng;
+        this.nameCity = _nameCity;
+        this.nameStreet = _nameStreet;
+        this.numberHouse = _numberHouse;
     }
 }

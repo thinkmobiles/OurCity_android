@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.adapter.GridAdapter;
+import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
@@ -26,9 +26,9 @@ public class SubMenuFragment extends BaseFourStatesFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private GridAdapter mAdapter;
+    private MenuGridAdapter mAdapter;
     private ArrayList<MenuModel> mData;
-    private OnItemActionListener mCallbackMenuModel;
+    private OnItemActionListener mCallBackMenuModel;
 
 //    private int cityNumber;
 //    private String lng;
@@ -46,13 +46,13 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
 
         try{
-            mCallbackMenuModel = (OnItemActionListener) activity;
+            mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(_activity.toString()
                     + " must implement OnItemActionListener");
         }
     }
@@ -67,25 +67,25 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 if(menuModel.menu != null) {
-                    mCallbackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                 }
             }
         }));
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
         mData = getArguments().getParcelableArrayList("SUBMENU");
         Log.i("TAG", mData.toString());
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new GridAdapter(mData);
+        mAdapter = new MenuGridAdapter(mData);
         mRecyclerView.setAdapter(mAdapter);
         showContent();
     }

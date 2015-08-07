@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.adapter.GridAdapter;
+import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.MenuLoader;
@@ -26,29 +26,29 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private GridAdapter mAdapter;
+    private MenuGridAdapter mAdapter;
     private MenuFull mData;
-    private OnItemActionListener mCallbackMenuModel;
+    private OnItemActionListener mCallBackMenuModel;
 
     private int cityNumber;
     private String lng;
 
     @SuppressLint("ValidFragment")
-    private MainMenuFragment() {}
+    private MainMenuFragment() {
+    }
 
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
 
-        try{
-            mCallbackMenuModel = (OnItemActionListener) activity;
+        try {
+            mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnItemActionListener");
+            throw new ClassCastException(_activity.toString() + " must implement OnItemActionListener");
         }
     }
 
@@ -61,16 +61,16 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
-                if(menuModel.menu != null) {
-                    mCallbackMenuModel.onMenuModelPrepared(menuModel.menu);
+                if (menuModel.menu != null) {
+                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                 }
             }
         }));
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = 1;
@@ -96,19 +96,19 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
-    public Loader<MenuFull> onCreateLoader(int id, Bundle args) {
-        return new MenuLoader(getActivity(), args);
+    public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
+        return new MenuLoader(getActivity(), _args);
     }
 
     @Override
     public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
         mData = _data;
-        mAdapter = new GridAdapter(mData.getNodes());
+        mAdapter = new MenuGridAdapter(mData.getNodes());
         mRecyclerView.setAdapter(mAdapter);
         showContent();
     }
 
     @Override
-    public void onLoaderReset(Loader<MenuFull> loader) {
+    public void onLoaderReset(Loader<MenuFull> _loader) {
     }
 }

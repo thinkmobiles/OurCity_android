@@ -20,8 +20,8 @@ public class WebViewFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
     }
 
     @Override
@@ -49,12 +49,12 @@ public class WebViewFragment extends BaseFourStatesFragment {
 
     private class MyWebViewClient extends WebViewClient {
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
+        public boolean shouldOverrideUrlLoading(WebView _view, String _url) {
+            _view.loadUrl(_url);
             return true;
         }
 
-        public void onPageFinished(WebView view, String url) {
+        public void onPageFinished(WebView _view, String _url) {
             showContent();
         }
     }

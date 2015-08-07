@@ -9,25 +9,25 @@ import android.support.v4.app.Fragment;
  */
 public abstract class BaseFragment extends Fragment {
 
-    protected final void addFragment(final @IdRes int containerId, final Fragment fragment) {
-        getChildFragmentManager().beginTransaction().add(containerId, fragment).commit();
+    protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {
+        getChildFragmentManager().beginTransaction().add(_containerId, _fragment).commit();
     }
 
-    public final void replaceFragmentWithBackStack(final @IdRes int containerId, final Fragment fragment) {
-        getChildFragmentManager().beginTransaction().addToBackStack(null).replace(containerId, fragment).commit();
+    public final void replaceFragmentWithBackStack(final @IdRes int _containerId, final Fragment _fragment) {
+        getChildFragmentManager().beginTransaction().addToBackStack(null).replace(_containerId, _fragment).commit();
     }
 
-    public final void replaceFragmentWithoutBackStack(final @IdRes int containerId, final Fragment fragment) {
-        getChildFragmentManager().beginTransaction().replace(containerId, fragment).commit();
+    public final void replaceFragmentWithoutBackStack(final @IdRes int _containerId, final Fragment _fragment) {
+        getChildFragmentManager().beginTransaction().replace(_containerId, _fragment).commit();
     }
 
 
-    public final void destroyFragment(final Fragment fragment) {
-        getChildFragmentManager().beginTransaction().remove(fragment).commit();
+    public final void destroyFragment(final Fragment _fragment) {
+        getChildFragmentManager().beginTransaction().remove(_fragment).commit();
     }
 
     @SuppressWarnings("unchecked")
-    public final <T extends Fragment> T getFragmentById(final @IdRes int containerId) {
-        return (T) getChildFragmentManager().findFragmentById(containerId);
+    public final <T extends Fragment> T getFragmentById(final @IdRes int _containerId) {
+        return (T) getChildFragmentManager().findFragmentById(_containerId);
     }
 }
