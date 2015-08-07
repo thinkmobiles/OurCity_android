@@ -19,33 +19,33 @@ public class Image {
     /**
      * Method for return file path of Gallery image
      *
-     * @param context
-     * @param uri
+     * @param _context
+     * @param _uri
      * @return path of the selected image file from gallery
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath(final Context context, final Uri uri) {
-        return new FilePath().getPath(context, uri);
+    public static String getPath(final Context _context, final Uri _uri) {
+        return new FilePath().getPath(_context, _uri);
     }
 
     /**
-     * @param file         image file
-     * @param requiredSize out file size in kb
+     * @param _file         image file
+     * @param _requiredSize out file size in kb
      * @return bitmap with resize image
      */
-    public Bitmap compressImage(File file, int requiredSize) {
+    public Bitmap compressImage(File _file, int _requiredSize) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(new FileInputStream(file), null, options);
+            BitmapFactory.decodeStream(new FileInputStream(_file), null, options);
 
             int scale = 1;
-            while (options.outWidth / scale / 2 >= requiredSize && options.outHeight / scale / 2 >= requiredSize)
+            while (options.outWidth / scale / 2 >= _requiredSize && options.outHeight / scale / 2 >= _requiredSize)
                 scale *= 2;
 
             BitmapFactory.Options optionsResize = new BitmapFactory.Options();
             optionsResize.inSampleSize = scale;
-            return BitmapFactory.decodeStream(new FileInputStream(file), null, optionsResize);
+            return BitmapFactory.decodeStream(new FileInputStream(_file), null, optionsResize);
         } catch (FileNotFoundException e) {
         }
         return null;
