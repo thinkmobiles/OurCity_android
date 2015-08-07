@@ -54,7 +54,7 @@ public class TESTMainMenuFragment extends BaseFourStatesFragment implements Load
 
     @Override
     protected void initViews() {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = findView(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
                 mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {

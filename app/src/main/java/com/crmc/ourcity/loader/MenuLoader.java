@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.menu.CityNumber;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
-import com.crmc.ourcity.rest.responce.menu.MenuModel;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class MenuLoader extends BaseLoader<MenuFull> {
         } catch (RetrofitError e) {
             menuNodes = new MenuFull();
             menuNodes.nodes = new ArrayList<>();
-            menuNodes.nodes.add(new MenuModel());
+            //menuNodes.nodes.add(new MenuModel());
         }
         return menuNodes;
     }
