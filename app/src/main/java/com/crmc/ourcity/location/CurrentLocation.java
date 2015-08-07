@@ -128,11 +128,11 @@ public class CurrentLocation implements ConnectionCallbacks, OnConnectionFailedL
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int _i) {
         mGoogleApiClient.connect();
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(ConnectionResult _connectionResult) {
     }
 }
