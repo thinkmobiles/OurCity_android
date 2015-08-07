@@ -20,7 +20,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     private Button mRetryButton;
     private TextView mErrorTitle, mEmptyTitle;
     private FourStateLayout mainView;
-    protected View rootView;
+    private View rootView;
 
 
     protected int getLayoutResource() {
