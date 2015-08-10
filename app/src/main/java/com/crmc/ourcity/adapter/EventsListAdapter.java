@@ -70,7 +70,7 @@ public class EventsListAdapter extends BaseAdapter {
         }
 
         public void setData(EventsItemModel item, int position) {
-            switch (item.catalogSizeView){
+            switch (item.mEventsSizeView){
                 case SMALL:
                     title.setText(item.title);
                     date.setVisibility(View.GONE);

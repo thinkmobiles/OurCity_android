@@ -3,7 +3,9 @@ package com.crmc.ourcity.fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
 
@@ -19,12 +21,14 @@ import java.util.List;
 /**
  * Created by SetKrul on 05.08.2015.
  */
-public class PhonesFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>> {
+public class PhonesFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>>,
+        OnRefreshListener {
 
     private int cityNumber;
 
     private ListView lvPhones;
     private PhonesListAdapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static PhonesFragment newInstance() {
         //noinspection deprecation
@@ -40,6 +44,29 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
+    protected void initViews() {
+        super.initViews();
+        swipeRefreshLayout = findView(R.id.swipe_refresh_layout);
+        lvPhones = findView(R.id.lvPhones_FP);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         cityNumber = 1;
@@ -47,12 +74,10 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onLoadFinished(Loader<List<Phones>> _loader, List<Phones> _data) {
-        for (int i = 0; i < _data.size(); i++){
-            Log.d(Constants.TAG, "TAG: " + _data.get(i).phoneNumber);
-        }
-        lvPhones = findView(R.id.lvPhones_FP);
+        swipeRefreshLayout.setRefreshing(false);
         mAdapter = new PhonesListAdapter(getActivity(), _data);
         lvPhones.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         showContent();
     }
 
@@ -73,5 +98,12 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onLoaderReset(Loader<List<Phones>> _loader) {
+    }
+
+    @Override
+    public void onRefresh() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        getLoaderManager().restartLoader(1, bundle, this);
     }
 }

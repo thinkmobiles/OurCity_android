@@ -11,19 +11,19 @@ public class EventsItemModel implements Parcelable {
     public String date;
     public String address;
     public ActionType actionType;
-    public CatalogSizeView catalogSizeView;
+    public EventsSizeView mEventsSizeView;
 
     public EventsItemModel(String _title, ActionType _actionType){
         this.title = _title;
         this.actionType = _actionType;
-        this.catalogSizeView = CatalogSizeView.SMALL;
+        this.mEventsSizeView = EventsSizeView.SMALL;
     }
 
     public EventsItemModel(String _title, String _date, ActionType _actionType){
         this.title = _title;
         this.date = _date;
         this.actionType = _actionType;
-        this.catalogSizeView = CatalogSizeView.MEDIUM;
+        this.mEventsSizeView = EventsSizeView.MEDIUM;
     }
 
     public EventsItemModel(String _title, String _date, String _address, ActionType _actionType){
@@ -31,7 +31,7 @@ public class EventsItemModel implements Parcelable {
         this.date = _date;
         this.address = _address;
         this.actionType = _actionType;
-        this.catalogSizeView = CatalogSizeView.FULL;
+        this.mEventsSizeView = EventsSizeView.FULL;
     }
 
     protected EventsItemModel(Parcel _in) {
@@ -39,7 +39,7 @@ public class EventsItemModel implements Parcelable {
         date = _in.readString();
         address = _in.readString();
         actionType = ActionType.values()[_in.readInt()];
-        catalogSizeView = CatalogSizeView.values()[_in.readInt()];
+        mEventsSizeView = EventsSizeView.values()[_in.readInt()];
     }
 
     @Override
@@ -48,7 +48,7 @@ public class EventsItemModel implements Parcelable {
         _parcel.writeString(date);
         _parcel.writeString(address);
         _parcel.writeInt(actionType.ordinal());
-        _parcel.writeInt(catalogSizeView.ordinal());
+        _parcel.writeInt(mEventsSizeView.ordinal());
     }
 
     public static final Creator<EventsItemModel> CREATOR = new Creator<EventsItemModel>() {

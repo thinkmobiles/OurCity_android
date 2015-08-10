@@ -20,6 +20,7 @@ public final class Constants {
     public static final int REQUEST_MAP_CANCEL_SELECTED = 0;
 
     public static final int LOADER_ADDRESS_ID = 1;
+    public static final int LOADER_STREETS_ID = 2;
     public static final String BUNDLE_CONSTANTS_LAT = "LAT";
     public static final String BUNDLE_CONSTANTS_LON = "LON";
     public static final String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";

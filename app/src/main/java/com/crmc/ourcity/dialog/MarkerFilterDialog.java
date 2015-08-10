@@ -68,7 +68,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_dialog_map_filter;
+        return R.layout.fragment_dialog_marker_filter;
     }
 
     @Override

@@ -11,10 +11,10 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
+import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.OnItemActionListener;
 import com.crmc.ourcity.fragment.SubMenuFragment;
-import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
@@ -56,7 +56,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 //            //getSupportActionBar().setTitle("MayorSpeech");
 //        }
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(MainMenuFragment.newInstance());
+            setTopFragment(AppealsFragment.newInstance());
             //getSupportActionBar().setTitle("CatalogTest");
         }
     }
