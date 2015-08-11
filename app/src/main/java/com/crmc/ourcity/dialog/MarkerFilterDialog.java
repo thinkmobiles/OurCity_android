@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MarkersListAdapter;
-import com.crmc.ourcity.callback.MapFilterCallBack;
+import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.Marker;
 
@@ -24,7 +24,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     private TextView btnCancelFilter;
     private TextView btnSelectFilter;
     private ListView lvMarkerFilter;
-    private MapFilterCallBack mCallback;
+    private CallBackWithData mCallback;
     private ArrayList<Marker> mMarkers;
     private MarkersListAdapter mAdapter;
 
@@ -50,7 +50,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
-            mCallback = (MapFilterCallBack) _activity;
+            mCallback = (CallBackWithData) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListenerWithData");
         }
@@ -81,10 +81,10 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     public void onClick(View _v) {
         switch (_v.getId()) {
             case R.id.btnCancel_Filter_DMF:
-                mCallback.onActionDialogDataCancel(false);
+                mCallback.onActionDialogCancel(false);
                 break;
             case R.id.btnSelect_Filter_DMF:
-                mCallback.onActionDialogDataSelected(mAdapter.getResult());
+                mCallback.onActionDialogDataMarker(mAdapter.getResult());
                 break;
         }
     }

@@ -89,10 +89,10 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         switch (_view.getId()) {
             case R.id.btnMarkerFilter_MF:
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
-                EnumUtil.serialize(DialogType.class, DialogType.FILTER_MAP).to(intent);
-                intent.putParcelableArrayListExtra(Marker.class.getCanonicalName(), (ArrayList<? extends
+                EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
+                intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
                         Parcelable>) mDialogMarkers);
-                startActivityForResult(intent, Constants.REQUEST_MAP_FILTER);
+                startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
                 break;
         }
     }
@@ -101,10 +101,10 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
         super.onActivityResult(_requestCode, _resultCode, _data);
         switch (_requestCode) {
-            case Constants.REQUEST_MAP_FILTER:
+            case Constants.REQUEST_MARKER_FILTER:
                 if (_data != null) {
-                    if (_data.getIntExtra(Constants.REQUEST_MAP_FILTER_TYPE, 0) == Constants.REQUEST_MAP_SELECTED) {
-                        mDialogMarkers = _data.getParcelableArrayListExtra(Marker.class.getCanonicalName());
+                    if (_data.getIntExtra(Constants.REQUEST_MARKER_FILTER_TYPE, 0) == Constants.REQUEST_MARKER_SELECTED) {
+                        mDialogMarkers = _data.getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
                         setFilterableMarkers();
                     }
                 }

@@ -1,4 +1,4 @@
-package com.crmc.ourcity.fragment;
+package com.crmc.ourcity.callback;
 
 import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;

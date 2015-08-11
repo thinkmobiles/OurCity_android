@@ -43,7 +43,7 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_webview;
+        return R.layout.fragment_dialog_age_picker;
     }
 
     @Override
@@ -60,6 +60,7 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
             Log.d("TAG", "TAG: " + _data.get(i).phoneNumber);
         }
 //        Log.d("TAG", "TAG: " + data);
+        showContent();
     }
 
     @Override

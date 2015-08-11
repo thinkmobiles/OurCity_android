@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ public class Image {
      * @param _requiredSize out file size in kb
      * @return bitmap with resize image
      */
-    public Bitmap compressImage(File _file, int _requiredSize) {
+    public static Bitmap compressImage(File _file, int _requiredSize) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -49,5 +50,16 @@ public class Image {
         } catch (FileNotFoundException e) {
         }
         return null;
+    }
+
+    public static Bitmap convertBase64ToBitmap(String _image) {
+        String imageDataBytes = _image.substring(_image.indexOf(",") + 1);
+        Bitmap decodedByte = null;
+        if (imageDataBytes.length() > 0) {
+            byte[] decodedString = Base64.decode(imageDataBytes, Base64.DEFAULT);
+            decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        }
+        return decodedByte;
     }
 }

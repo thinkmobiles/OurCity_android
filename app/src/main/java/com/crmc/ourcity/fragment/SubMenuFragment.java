@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
+import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.view.RecyclerItemClickListener;

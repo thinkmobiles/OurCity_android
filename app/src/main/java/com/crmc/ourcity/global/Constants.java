@@ -8,19 +8,25 @@ public final class Constants {
     public static final String TAG = "TAG";
 
     public static final String REQUEST_INTENT_TYPE_PHOTO = "type";
-//    focus fragment
+    //focus fragment
     public static final int REQUEST_TYPE_PHOTO = 0;
     public static final int REQUEST_PHOTO = 1;
     public static final int REQUEST_GALLERY_IMAGE = 2;
 
-//    map fragment
-    public static final int REQUEST_MAP_FILTER = 3;
-    public static final String REQUEST_MAP_FILTER_TYPE = "filter_type";
-    public static final int REQUEST_MAP_SELECTED = 1;
-    public static final int REQUEST_MAP_CANCEL_SELECTED = 0;
+    //map fragment
+    public static final int REQUEST_MARKER_FILTER = 3;
+    public static final String REQUEST_MARKER_FILTER_TYPE = "filter_type";
+    public static final int REQUEST_MARKER_SELECTED = 1;
+    public static final int REQUEST_MARKER_SELECTED_CANCEL = 0;
 
+    //vote fragment
+    public static final int REQUEST_VOTE = 4;
+
+    //for loadera
     public static final int LOADER_ADDRESS_ID = 1;
     public static final int LOADER_STREETS_ID = 2;
+
+    //for bundle
     public static final String BUNDLE_CONSTANTS_LAT = "LAT";
     public static final String BUNDLE_CONSTANTS_LON = "LON";
     public static final String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";
@@ -37,7 +43,8 @@ public final class Constants {
     public static final String BUNDLE_CONSTANT_CLIENT_ID = "CLIENT_ID";
     public static final String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
     public static final String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
-
+    public static final String BUNDLE_MARKERS = "MARKER";
+    public static final String BUNDLE_VOTE = "VOTE";
     public static final String IMAGE_MIME_TYPE_PREFIX = "image";
     public static final String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
 }
