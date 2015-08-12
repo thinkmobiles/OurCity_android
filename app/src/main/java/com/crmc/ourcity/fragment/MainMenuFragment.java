@@ -34,10 +34,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     private int cityNumber;
     private String lng;
 
-    @SuppressLint("ValidFragment")
-    private MainMenuFragment() {
-    }
-
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
     }
