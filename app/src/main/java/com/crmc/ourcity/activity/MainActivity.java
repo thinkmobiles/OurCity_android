@@ -12,9 +12,9 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.EventsItemFragment;
-import com.crmc.ourcity.fragment.OnItemActionListener;
+import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fragment.SubMenuFragment;
-import com.crmc.ourcity.fragment.MainMenuFragment;
+import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
@@ -46,19 +46,19 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("OutCity");
 
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(TestApiFragment.newInstance());
-//            //getSupportActionBar().setTitle("MayorSpeech");
-//        }
+        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+            setTopFragment(VoteFragment.newInstance());
+            //getSupportActionBar().setTitle("MayorSpeech");
+        }
 
 //        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
 //            setTopFragment(MapsFragment.newInstance());
 //            //getSupportActionBar().setTitle("MayorSpeech");
 //        }
-        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(MainMenuFragment.newInstance());
-            //getSupportActionBar().setTitle("CatalogTest");
-        }
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(AppealsFragment.newInstance());
+//            //getSupportActionBar().setTitle("CatalogTest");
+//        }
     }
 
     private void setTopFragment(final Fragment fragment) {

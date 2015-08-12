@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.EventsListAdapter;
+import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.ActionType;
 import com.crmc.ourcity.model.EventsItemModel;

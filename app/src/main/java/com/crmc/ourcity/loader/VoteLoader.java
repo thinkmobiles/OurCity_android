@@ -35,7 +35,6 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
             mVote =  api.getVote(new BaseModel(new BaseCity(cityNumber)));
         } catch (RetrofitError _e) {
             mVote = new ArrayList<>();
-            mVote.add(new VoteFull());
         }
         return mVote;
     }

@@ -62,23 +62,23 @@ public class MarkersListAdapter extends BaseAdapter{
     }
 
     private class ViewHolder implements CompoundButton.OnCheckedChangeListener {
-        final TextView tvCategoryMarkers_DMF;
-        final CheckBox cbCategoryMarkersVisible_DMF;
+        final TextView tvCategoryMarkers;
+        final CheckBox cbCategoryMarkersVisible;
         final View view;
         private int position;
 
         public ViewHolder(@NonNull final View _view) {
-            tvCategoryMarkers_DMF = (TextView) _view.findViewById(R.id.tvCategoryMarkers_DMF);
-            cbCategoryMarkersVisible_DMF = (CheckBox) _view.findViewById(R.id.cbCategoryMarkersVisible_DMF);
-            cbCategoryMarkersVisible_DMF.setOnCheckedChangeListener(this);
+            tvCategoryMarkers = (TextView) _view.findViewById(R.id.tvCategoryMarkers_DMF);
+            cbCategoryMarkersVisible = (CheckBox) _view.findViewById(R.id.cbCategoryMarkersVisible_DMF);
+            cbCategoryMarkersVisible.setOnCheckedChangeListener(this);
             this.view = _view;
             _view.setTag(this);
         }
 
         public void setData(Marker _item, int _position) {
             this.position = _position;
-            tvCategoryMarkers_DMF.setText(_item.title);
-            cbCategoryMarkersVisible_DMF.setChecked(_item.visible);
+            tvCategoryMarkers.setText(_item.title);
+            cbCategoryMarkersVisible.setChecked(_item.visible);
         }
 
         @Override

@@ -14,7 +14,6 @@ import android.provider.MediaStore;
  * Created by SetKrul on 23.07.2015.
  */
 public class FilePath {
-    public FilePath(){}
 
     /**
      * Method for return file path of Gallery image
@@ -94,20 +93,20 @@ public class FilePath {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context       The context.
-     * @param uri           The Uri to query.
-     * @param selection     (Optional) Filter used in the query.
-     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @param _context       The context.
+     * @param _uri           The Uri to query.
+     * @param _selection     (Optional) Filter used in the query.
+     * @param _selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+    public static String getDataColumn(Context _context, Uri _uri, String _selection, String[] _selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {column};
 
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            cursor = _context.getContentResolver().query(_uri, projection, _selection, _selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(index);
@@ -119,34 +118,34 @@ public class FilePath {
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    public static boolean isExternalStorageDocument(Uri _uri) {
+        return "com.android.externalstorage.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    public static boolean isDownloadsDocument(Uri _uri) {
+        return "com.android.providers.downloads.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    public static boolean isMediaDocument(Uri _uri) {
+        return "com.android.providers.media.documents".equals(_uri.getAuthority());
     }
 
     /**
-     * @param uri The Uri to check.
+     * @param _uri The Uri to check.
      * @return Whether the Uri authority is Google Photos.
      */
-    public static boolean isGooglePhotosUri(Uri uri) {
-        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    public static boolean isGooglePhotosUri(Uri _uri) {
+        return "com.google.android.apps.photos.content".equals(_uri.getAuthority());
     }
 }

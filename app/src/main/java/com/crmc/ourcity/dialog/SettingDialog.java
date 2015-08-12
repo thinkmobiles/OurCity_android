@@ -6,6 +6,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 /**

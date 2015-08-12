@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
 
@@ -53,8 +54,8 @@ public class ConfirmationDialog extends BaseFourStatesFragment implements View.O
 
     //for test
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View _view) {
+        switch (_view.getId()) {
             case R.id.tvOk_CD:
                 mCallback.onActionDialogSelected(DialogType.REGISTER);
                 break;

@@ -21,9 +21,9 @@ public class EventsListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<EventsItemModel> mEventsItemModels;
 
-    public EventsListAdapter(Context context, List<EventsItemModel> _eventsItemModels) {
+    public EventsListAdapter(Context _context, List<EventsItemModel> _eventsItemModels) {
         this.mEventsItemModels = _eventsItemModels;
-        mInflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(_context);
     }
 
     @Override
@@ -32,27 +32,27 @@ public class EventsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public EventsItemModel getItem(int position) {
-        return mEventsItemModels.get(position);
+    public EventsItemModel getItem(int _position) {
+        return mEventsItemModels.get(_position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int _position) {
+        return _position;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int _position, View _convertView, ViewGroup _parent) {
         final ViewHolder holder;
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.listview_row_fc, parent, false);
-            holder = new ViewHolder(convertView);
+        if (_convertView == null) {
+            _convertView = mInflater.inflate(R.layout.listview_row_fc, _parent, false);
+            holder = new ViewHolder(_convertView);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) _convertView.getTag();
         }
-        holder.setData(getItem(position), position);
+        holder.setData(getItem(_position), _position);
 
-        return convertView;
+        return _convertView;
     }
 
     private static class ViewHolder {
@@ -61,30 +61,30 @@ public class EventsListAdapter extends BaseAdapter {
         final TextView address;
         final View view;
 
-        public ViewHolder(@NonNull final View view) {
-            title = (TextView) view.findViewById(R.id.tvTitle_CF);
-            date = (TextView) view.findViewById(R.id.tvDate_CF);
-            address = (TextView) view.findViewById(R.id.tvAddress_CF);
-            this.view = view;
-            view.setTag(this);
+        public ViewHolder(@NonNull final View _view) {
+            title = (TextView) _view.findViewById(R.id.tvTitle_CF);
+            date = (TextView) _view.findViewById(R.id.tvDate_CF);
+            address = (TextView) _view.findViewById(R.id.tvAddress_CF);
+            this.view = _view;
+            _view.setTag(this);
         }
 
-        public void setData(EventsItemModel item, int position) {
-            switch (item.catalogSizeView){
+        public void setData(EventsItemModel _item, int _position) {
+            switch (_item.mEventsSizeView){
                 case SMALL:
-                    title.setText(item.title);
+                    title.setText(_item.title);
                     date.setVisibility(View.GONE);
                     address.setVisibility(View.GONE);
                     break;
                 case MEDIUM:
-                    title.setText(item.title);
-                    date.setText(item.date);
+                    title.setText(_item.title);
+                    date.setText(_item.date);
                     address.setVisibility(View.GONE);
                     break;
                 case FULL:
-                    title.setText(item.title);
-                    date.setText(item.date);
-                    address.setText(item.address);
+                    title.setText(_item.title);
+                    date.setText(_item.date);
+                    address.setText(_item.address);
                     break;
             }
         }

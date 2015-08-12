@@ -30,4 +30,8 @@ public abstract class BaseFragment extends Fragment {
     public final <T extends Fragment> T getFragmentById(final @IdRes int _containerId) {
         return (T) getChildFragmentManager().findFragmentById(_containerId);
     }
+
+    public final void popBackStack() {
+        getChildFragmentManager().popBackStack();
+    }
 }
