@@ -36,7 +36,7 @@ public class Camera{
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) && takePictureIntent.resolveActivity(pm) != null;
     }
 
-    public String openCamera(Fragment _appealsFragment) {
+    public String openCamera(Fragment _fragment) {
         String mPhotoFilePath = null;
         if (isCanGetCameraPicture()) {
             final File imageFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -53,7 +53,7 @@ public class Camera{
                 if (imageFile != null) {
                     mPhotoFilePath = imageFile.getPath();
                     Intent takePictureIntent = IntentUtils.getCameraStartIntent(Uri.fromFile(imageFile));
-                    _appealsFragment.startActivityForResult(takePictureIntent, Constants.REQUEST_PHOTO);
+                    _fragment.startActivityForResult(takePictureIntent, Constants.REQUEST_PHOTO);
                 }
 
             } else {

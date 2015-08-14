@@ -36,6 +36,8 @@ public class Image {
     }
 
     /**
+     * Metod for return compress image to set size
+     *
      * @param _file         image file
      * @param _requiredSize out file size in kb
      * @return bitmap with resize image
@@ -59,9 +61,10 @@ public class Image {
     }
 
     /**
+     * Convert base64 string image to bitmap
      *
-     * @param _image
-     * @return
+     * @param _image string base64 image
+     * @return bitmap image
      */
     public static Bitmap convertBase64ToBitmap(String _image) {
         Bitmap decodedByte = null;
@@ -79,6 +82,7 @@ public class Image {
     }
 
     /**
+     *
      *
      * @param _context
      * @param _color

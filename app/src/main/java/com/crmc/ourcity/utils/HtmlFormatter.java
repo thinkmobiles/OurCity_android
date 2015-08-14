@@ -7,11 +7,11 @@ import com.crmc.ourcity.R;
 /**
  * Created by SetKrul on 20.07.2015.
  */
-public class HtmlFormater {
+public class HtmlFormatter {
 
     Context mContext;
 
-    public HtmlFormater(Context _context) {
+    public HtmlFormatter(Context _context) {
         this.mContext = _context;
     }
 

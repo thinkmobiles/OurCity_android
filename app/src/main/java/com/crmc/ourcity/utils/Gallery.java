@@ -26,11 +26,11 @@ public class Gallery {
         return galleryIntent.resolveActivity(mActivity.getPackageManager());
     }
 
-    public void openGallery(Fragment _appealsFragment) {
+    public void openGallery(Fragment _fragment) {
         if (isCanGetGalleryPicture() != null) {
             Intent galleryIntent = IntentUtils.getGalleryStartIntent();
             if (galleryIntent.resolveActivity(mActivity.getPackageManager()) != null) {
-                _appealsFragment.startActivityForResult(galleryIntent, Constants.REQUEST_GALLERY_IMAGE);
+                _fragment.startActivityForResult(galleryIntent, Constants.REQUEST_GALLERY_IMAGE);
             }
         }
     }
