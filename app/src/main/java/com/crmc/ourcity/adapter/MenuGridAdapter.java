@@ -40,7 +40,7 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         MenuModel item = mMenuModels.get(position);
-        holder.tvTitle.setBackgroundColor(Color.parseColor(item.colorItem));
+        holder.cvBackground.setCardBackgroundColor(Color.parseColor(item.colorItem));
         holder.tvTitle.setText(item.title);
         //TODO: configure DownloadImageLib
     }
@@ -56,10 +56,12 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTitle;
+        private CardView cvBackground;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle_FGI);
+            cvBackground = (CardView) itemView.findViewById(R.id.cvBackground_FGI);
         }
     }
 }

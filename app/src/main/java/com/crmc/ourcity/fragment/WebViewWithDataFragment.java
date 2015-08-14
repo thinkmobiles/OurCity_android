@@ -16,7 +16,6 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
 
     public static WebViewWithDataFragment newInstance() {
         return new WebViewWithDataFragment();
-
     }
 
     @Override

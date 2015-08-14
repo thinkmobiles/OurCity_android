@@ -31,12 +31,6 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
 
-//    private int cityNumber;
-//    private String lng;
-
-    @SuppressLint("ValidFragment")
-    private SubMenuFragment() {}
-
     public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
         Bundle args = new Bundle();
