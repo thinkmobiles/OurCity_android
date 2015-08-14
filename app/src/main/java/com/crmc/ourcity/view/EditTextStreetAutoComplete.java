@@ -46,7 +46,9 @@ public class EditTextStreetAutoComplete extends AutoCompleteTextView {
     protected void onFocusChanged(boolean _focused, int _direction, Rect _previouslyFocusedRect) {
         super.onFocusChanged(_focused, _direction, _previouslyFocusedRect);
         if (_focused) {
-            performFiltering(getText(), 0);
+            if (!(getText().toString().equals(""))) {
+                performFiltering(getText(), 0);
+            }
             showDropDown();
         }
     }

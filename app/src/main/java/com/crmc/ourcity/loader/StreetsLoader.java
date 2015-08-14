@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.request.streets.StreetsDetails;
 import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
-import com.crmc.ourcity.rest.responce.address.StreetsItem;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class StreetsLoader extends BaseLoader<StreetsFull> {
         } catch (RetrofitError _e) {
             mStreetsFull = new StreetsFull();
             mStreetsFull.streetsList = new ArrayList<>();
-            mStreetsFull.streetsList.add(new StreetsItem());
+            //mStreetsFull.streetsList.add(new StreetsItem());
         }
         return mStreetsFull;
     }

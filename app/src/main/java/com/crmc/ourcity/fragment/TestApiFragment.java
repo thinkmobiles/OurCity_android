@@ -43,7 +43,7 @@ public class TestApiFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_dialog_age_picker;
+        return R.layout.fragment_dialog_age;
     }
 
     @Override

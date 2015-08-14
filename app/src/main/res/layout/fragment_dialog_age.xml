@@ -2,34 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@android:color/darker_gray"
               android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Some title"
+        android:text="Age"
+        android:paddingStart="10dp"
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:textSize="20sp"
         android:layout_gravity="start|center_vertical"/>
 
     <NumberPicker
-        android:id="@+id/numberPicker"
+        android:id="@+id/npAge_DFA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray">
 
         <Button
+            android:id="@+id/btnCancel_DFA"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:layout_weight="1"/>
 
         <Button
+            android:id="@+id/btnOk_DFA"
             android:layout_width="0dp"
             android:text="Ok"
             android:layout_height="wrap_content"

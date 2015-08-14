@@ -10,7 +10,7 @@ import java.util.List;
 public interface CallBackWithData {
     void onActionDialogDataMarker(List<Marker> _list);
 
-    void onActionDialogDataVote(Integer _surveyId);
+    void onActionDialogDataInteger(Integer _integer);
 
     void onActionDialogCancel(boolean _check);
 }

@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -11,10 +12,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -44,8 +47,13 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     private CurrentLocation mLocation;
     private String mPhotoFilePath;
     private ImageView ivPhoto;
+    private LinearLayout llPhoto;
+    private LinearLayout llAppeals;
     private EditTextStreetAutoComplete etNameStreet;
     private EditText etNameCity;
+    private EditText etDescription;
+    private EditText etNumberHouse;
+    private Button btnSend;
     private Camera mCamera;
     private Gallery mGallery;
     private int clientId;
@@ -76,6 +84,19 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         etNameCity = findView(R.id.etCityName_AF);
         etNameStreet = findView(R.id.etNameStreet_AF);
         swGpsOnOff = findView(R.id.swGpsOnOff_AF);
+        etDescription = findView(R.id.etDescription_AF);
+        btnSend = findView(R.id.btnSend_AF);
+        etNumberHouse = findView(R.id.etNumberHouse_AF);
+        llPhoto = findView(R.id.llPhoto_AP);
+        llAppeals = findView(R.id.llAppeals_AF);
+        int color = Color.parseColor("#66BB6A");
+
+        llAppeals.setBackgroundColor(Image.lighterColor(color, 0.2f));
+        ivPhoto.setImageDrawable(Image.setImageColor(getActivity(), Image.darkenColor(color, 0.2f), R.drawable
+                .focus_camera));
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
+                etDescription, llPhoto}, R.drawable.boarder_round_green_ff, color);
+        Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff, color);
     }
 
     private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
@@ -107,15 +128,17 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
-            int numbersStreets = _data.streetsList.size();
-            streets = new String[numbersStreets];
-            for (int i = 0; i <numbersStreets; i++){
-                streets[i] = _data.streetsList.get(i).streetName;
-            }
+            if (_data.streetsList != null) {
+                int numbersStreets = _data.streetsList.size();
+                streets = new String[numbersStreets];
+                for (int i = 0; i < numbersStreets; i++) {
+                    streets[i] = _data.streetsList.get(i).streetName;
+                }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
-                    streets);
-            etNameStreet.setAdapter(adapter);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
+                        streets);
+                etNameStreet.setAdapter(adapter);
+            }
         }
 
         @Override
@@ -128,15 +151,16 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         Bundle bundle = new Bundle();
         bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, _lat);
         bundle.putDouble(Constants.BUNDLE_CONSTANTS_LON, _lon);
-        getLoaderManager().restartLoader(Constants.LOADER_ADDRESS_ID, bundle, mAddressCallBack);
+        if (getLoaderManager().getLoader(Constants.LOADER_ADDRESS_ID) == null) {
+            getLoaderManager().initLoader(Constants.LOADER_ADDRESS_ID, bundle, mAddressCallBack);
+        } else {
+            getLoaderManager().restartLoader(Constants.LOADER_ADDRESS_ID, bundle, mAddressCallBack);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getLoaderManager().getLoader(Constants.LOADER_ADDRESS_ID) != null) {
-            getLoaderManager().initLoader(Constants.LOADER_ADDRESS_ID, null, mAddressCallBack);
-        }
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_CLIENT_ID, clientId);
         bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, userName);
@@ -166,7 +190,6 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         } else {
             mLocation.stopLocationUpdates();
             mLocation = null;
-            //set autocomplitetext
         }
     }
 

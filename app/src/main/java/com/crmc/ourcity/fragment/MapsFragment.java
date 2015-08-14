@@ -103,10 +103,8 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         switch (_requestCode) {
             case Constants.REQUEST_MARKER_FILTER:
                 if (_data != null) {
-                    if (_data.getIntExtra(Constants.REQUEST_MARKER_FILTER_TYPE, 0) == Constants.REQUEST_MARKER_SELECTED) {
-                        mDialogMarkers = _data.getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
-                        setFilterableMarkers();
-                    }
+                    mDialogMarkers = _data.getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
+                    setFilterableMarkers();
                 }
                 break;
         }

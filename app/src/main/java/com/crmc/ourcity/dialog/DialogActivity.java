@@ -29,7 +29,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         DialogType type = EnumUtil.deserialize(DialogType.class).from(getIntent());
         switch (type) {
             case VOTE_CHOICE:
-                ArrayList<VoteFull> mVoteFull = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_VOTE);
+                ArrayList<VoteFull> mVoteFull = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_INTEGER);
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, VoteChoiceDialog.newInstance
                         (mVoteFull));
                 break;
@@ -38,6 +38,17 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 ArrayList<Marker> mMarkers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, MarkerFilterDialog.newInstance
                         (mMarkers));
+                break;
+
+            case AGE:
+                Integer age = getIntent().getIntExtra(Constants.BUNDLE_INTEGER, 25);
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, AgeDialog.newInstance
+                        ((age)));
+                break;
+
+            case GENDER:
+                Integer gender = getIntent().getIntExtra(Constants.BUNDLE_INTEGER, -1);
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, GenderDialog.newInstance(gender));
                 break;
 
             case PHOTO:
@@ -81,15 +92,15 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     }
 
     @Override
-    public void onActionDialogDataVote(Integer _surveyId) {
-        intent.putExtra(Constants.BUNDLE_VOTE, _surveyId);
+    public void onActionDialogDataInteger(Integer _integer) {
+        intent.putExtra(Constants.BUNDLE_INTEGER, _integer);
         setResult(RESULT_OK, intent);
         finish();
     }
 
     @Override
     public void onActionDialogCancel(boolean _check) {
-        intent.putExtra(Constants.REQUEST_MARKER_FILTER_TYPE, Constants.REQUEST_MARKER_SELECTED_CANCEL);
+        intent.putExtra(Constants.REQUEST_TYPE, Constants.REQUEST_CANCEL);
         setResult(RESULT_OK, intent);
         finish();
     }

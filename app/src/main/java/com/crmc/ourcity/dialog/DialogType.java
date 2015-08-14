@@ -14,6 +14,8 @@ public enum DialogType {
     CONFIRMATION,
     PHOTO,
     MARKER_FILTER,
+    AGE,
+    GENDER,
     VOTE_CHOICE,
     PHOTO_CAM,
     PHOTO_GALLERY

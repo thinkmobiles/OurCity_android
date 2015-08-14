@@ -18,7 +18,8 @@ import java.util.List;
  */
 public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHolder> {
 
-    List<VoteDetails> mVoteDetailsList;
+    private List<VoteDetails> mVoteDetailsList;
+    private boolean visibleVotePercent = false;
 
     public VoteGridAdapter(List<VoteDetails> _optionsList) {
         this.mVoteDetailsList = _optionsList;
@@ -31,11 +32,25 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
         return viewHolder;
     }
 
+    public void setVisibleVotePercent(boolean _visible){
+        visibleVotePercent = _visible;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder _viewHolder, int _position) {
         VoteDetails voteDetails = mVoteDetailsList.get(_position);
         _viewHolder.tvVoteTitle.setText(voteDetails.optionDescription);
         _viewHolder.ivVote.setImageBitmap(Image.convertBase64ToBitmap(voteDetails.image));
+        _viewHolder.tvVotePercent.setText(voteDetails.votePercent + "");
+
+        if (visibleVotePercent) {
+            _viewHolder.ivVotePercent.setVisibility(View.VISIBLE);
+            _viewHolder.tvVotePercent.setVisibility(View.VISIBLE);
+        } else {
+            _viewHolder.ivVotePercent.setVisibility(View.INVISIBLE);
+            _viewHolder.tvVotePercent.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -51,11 +66,15 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
 
         public ImageView ivVote;
         public TextView tvVoteTitle;
+        public ImageView ivVotePercent;
+        public TextView tvVotePercent;
 
         public ViewHolder(View _itemView) {
             super(_itemView);
             ivVote = (ImageView) _itemView.findViewById(R.id.ivVote_VF);
             tvVoteTitle = (TextView) _itemView.findViewById(R.id.tvVoteTitle_VF);
+            ivVotePercent = (ImageView) _itemView.findViewById(R.id.ivVotePercent_VF);
+            tvVotePercent = (TextView) _itemView.findViewById(R.id.tvVotePercent_VF);
         }
     }
 }
