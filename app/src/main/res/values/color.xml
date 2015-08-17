@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#fffffdbd</color>
 
+    <color name="gray_for_drawable">#525252</color>
+
     <color name="orange_light">#FFA726</color>
     <color name="orange_light_pressed">#FB8C00</color>
     <color name="orange_dark">#F57C00</color>

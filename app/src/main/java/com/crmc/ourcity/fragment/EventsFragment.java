@@ -64,7 +64,7 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnItemActionListener.onItemAction(mAdapter.getItem(_position));
+        //mOnItemActionListener.onItemAction(mAdapter.getItem(_position));
     }
 
 //    public interface OnItemActionListener {

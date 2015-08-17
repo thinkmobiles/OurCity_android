@@ -1,6 +1,5 @@
 package com.crmc.ourcity.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
+import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
@@ -30,6 +30,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private MenuGridAdapter mAdapter;
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
+    private EventsItemModel mEventsItemModel;
 
     public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
@@ -44,11 +45,10 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
 
-        try{
+        try {
             mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(_activity.toString()
-                    + " must implement OnItemActionListener");
+            throw new ClassCastException(_activity.toString() + " must implement OnItemActionListener");
         }
     }
 
@@ -61,8 +61,10 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
-                if(menuModel.menu != null) {
+                if (menuModel.menu != null) {
                     mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                } else {
+                    mCallBackMenuModel.onItemAction(menuModel);
                 }
             }
         }));

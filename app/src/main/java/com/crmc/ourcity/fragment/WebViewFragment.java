@@ -14,9 +14,21 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 public class WebViewFragment extends BaseFourStatesFragment {
 
     private WebView mWebView;
+    private String link;
+    private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
 
-    public static WebViewFragment newInstance() {
-        return new WebViewFragment();
+    public static WebViewFragment newInstance(String _link) {
+        WebViewFragment mWebViewFragment = new WebViewFragment();
+        Bundle args = new Bundle();
+        args.putString(CONFIGURATION_KEY, _link);
+        mWebViewFragment.setArguments(args);
+        return mWebViewFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        link = getArguments().getString(CONFIGURATION_KEY);
     }
 
     @Override
@@ -30,7 +42,7 @@ public class WebViewFragment extends BaseFourStatesFragment {
         mWebView = findView(R.id.webView);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://google.com.ua");
+        mWebView.loadUrl(link);
     }
 
     @Override

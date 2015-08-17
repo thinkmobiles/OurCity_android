@@ -52,7 +52,6 @@ public class VotesListAdapter extends BaseAdapter {
             holder = (ViewHolder) _convertView.getTag();
         }
         holder.setData(getItem(_position));
-
         return _convertView;
     }
 

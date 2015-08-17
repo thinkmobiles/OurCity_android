@@ -15,11 +15,13 @@ import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
+import com.google.gson.JsonPrimitive;
 
 import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.POST;
+import retrofit.mime.TypedInput;
 
 /**
  * Created by SetKrul on 28.07.2015.
@@ -67,12 +69,15 @@ public interface CityApi {
     @POST("/GetMessagesToResident")
     List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 
-    /**
-     * @param baseModel city number
-     * @return Survey vote
-     */
+//    /**
+//     * @param baseModel city number
+//     * @return Survey vote
+//     */
     @POST("/GetSurveyToCity")
-    List<VoteFull> getVote(@Body BaseModel baseModel);
+    List<VoteFull> getVote(@Body JsonPrimitive a);
+
+    @POST("/GetSurveyToCity")
+    List<VoteFull> getVote(@Body TypedInput body);
 
     /**
      * @param voteModel selected point int, age int, gender int

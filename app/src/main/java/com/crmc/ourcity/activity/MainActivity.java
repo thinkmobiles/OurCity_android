@@ -6,20 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
-import com.crmc.ourcity.fragment.EventsItemFragment;
+import com.crmc.ourcity.fragment.MainMenuFragment;
+import com.crmc.ourcity.fragment.MapsFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
-import com.crmc.ourcity.model.EventsItemModel;
+import com.crmc.ourcity.fragment.VoteFragment;
+import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
-import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
 
@@ -55,8 +55,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 //            setTopFragment(MapsFragment.newInstance());
 //            //getSupportActionBar().setTitle("MayorSpeech");
 //        }
+//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+//            setTopFragment(AppealsFragment.newInstance());
+//            //getSupportActionBar().setTitle("CatalogTest");
+//        }
+
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-            setTopFragment(AppealsFragment.newInstance());
+            setTopFragment(MainMenuFragment.newInstance());
             //getSupportActionBar().setTitle("CatalogTest");
         }
     }
@@ -67,24 +72,34 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onItemAction(EventsItemModel _eventsItemModel) {
-        switch (_eventsItemModel.actionType) {
-            case LIST:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_eventsItemModel));
+    public void onItemAction(MenuModel _menuModel) {
+        switch (_menuModel.actionType) {
+//            case LIST:
+//                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_eventsItemModel));
+//                break;
+//            case MAIL:
+//                try {
+//                    startActivity(Intent.createChooser(IntentUtils.getIntentMail("recipient@example.com"), getString
+//                            (R.string.send_mail_hint)));
+//                } catch (android.content.ActivityNotFoundException ex) {
+//                    Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
+//                }
+//                break;
+            case 3://link
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link));
                 break;
-            case MAIL:
-                try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentMail("recipient@example.com"), getString
-                            (R.string.send_mail_hint)));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
-                }
+            case 5://map
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapsFragment.newInstance(_menuModel.getLat(),
+                        _menuModel.getLon(), _menuModel.colorItem));
                 break;
-            case LINK:
-                //addFragmentWithBackStack(FRAGMENT_CONTAINER, WebView.newInstance(catalogItemModel.link));
+            case 6:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance());
                 break;
-            case FALSE:
+            case 7:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance());
                 break;
+//            case FALSE:
+//                break;
         }
     }
 

@@ -89,14 +89,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         etNumberHouse = findView(R.id.etNumberHouse_AF);
         llPhoto = findView(R.id.llPhoto_AP);
         llAppeals = findView(R.id.llAppeals_AF);
-        int color = Color.parseColor("#66BB6A");
 
-        llAppeals.setBackgroundColor(Image.lighterColor(color, 0.2f));
-        ivPhoto.setImageDrawable(Image.setImageColor(getActivity(), Image.darkenColor(color, 0.2f), R.drawable
-                .focus_camera));
+        Image.init(Color.parseColor("#66BB6A"));
+        llAppeals.setBackgroundColor(Image.lighterColor(0.2));
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable
+                .focus_camera, Image.darkenColor(0.2)));
         Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
-                etDescription, llPhoto}, R.drawable.boarder_round_green_ff, color);
-        Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff, color);
+                etDescription, llPhoto}, R.drawable.boarder_round_green_ff);
+        Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
     }
 
     private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager

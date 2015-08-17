@@ -1,16 +1,11 @@
 package com.crmc.ourcity.global;
 
-import android.graphics.Color;
-
 /**
  * Created by SetKrul on 23.07.2015.
  */
 public final class Constants {
 
     public static final String TAG = "TAG";
-
-    //for colors
-    public static int COLOR_NOW = Color.BLACK;
 
     //for request
     public static final String REQUEST_INTENT_TYPE_PHOTO = "type";

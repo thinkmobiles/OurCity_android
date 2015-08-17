@@ -58,7 +58,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        cityNumber = 2;
+        cityNumber = 1;
     }
 
     @Override
@@ -123,11 +123,11 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
-            if (Boolean.getBoolean(_data)) {
+            //if (Boolean.getBoolean(_data)) {
                 mAdapter.setVisibleVotePercent(true);
-            } else {
-                Toast.makeText(getActivity(), "You have already reply vote!", Toast.LENGTH_SHORT).show();
-            }
+            //} else {
+            //    Toast.makeText(getActivity(), "You have already reply vote!", Toast.LENGTH_SHORT).show();
+            //}
         }
 
         @Override

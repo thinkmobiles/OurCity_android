@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
@@ -18,6 +19,7 @@ import com.crmc.ourcity.loader.MapDataLoader;
 import com.crmc.ourcity.model.Marker;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.utils.EnumUtil;
+import com.crmc.ourcity.utils.Image;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,17 +42,37 @@ import java.util.Set;
 public final class MapsFragment extends BaseFourStatesFragment implements OnMapReadyCallback, LoaderManager
         .LoaderCallbacks<List<MapCategory>>, OnClickListener {
 
+    private Double lat;
+    private Double lon;
+    private String color;
+    private static final String CONFIGURATION_KEY3 = "CONFIGURATION_KEY3";
+    private static final String CONFIGURATION_KEY2 = "CONFIGURATION_KEY2";
+    private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private GoogleMap mGoogleMap;
     private int cityNumber;
     private String lng;
 
     private SupportMapFragment mMap;
     private Button btnFilter;
-    private List<Marker> mDialogMarkers = new ArrayList<>();
+    private List<Marker> mDialogMarkers;
     private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
 
-    public static MapsFragment newInstance() {
-        return new MapsFragment();
+    public static MapsFragment newInstance(Double _lat, Double _lon, String _color) {
+        MapsFragment mMapsFragment = new MapsFragment();
+        Bundle args = new Bundle();
+        args.putDouble(CONFIGURATION_KEY, _lat);
+        args.putDouble(CONFIGURATION_KEY2, _lon);
+        args.putString(CONFIGURATION_KEY3, _color);
+        mMapsFragment.setArguments(args);
+        return mMapsFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        lat = getArguments().getDouble(CONFIGURATION_KEY);
+        lon = getArguments().getDouble(CONFIGURATION_KEY2);
+        color = getArguments().getString(CONFIGURATION_KEY3);
     }
 
 
@@ -88,11 +110,15 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     public void onClick(View _view) {
         switch (_view.getId()) {
             case R.id.btnMarkerFilter_MF:
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
-                intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
-                        Parcelable>) mDialogMarkers);
-                startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
+                //if (mDialogMarkers != null) {
+                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
+                    intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
+                            Parcelable>) mDialogMarkers);
+                    startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
+                //} else {
+                //    Toast.makeText(getActivity(), "Do not have intepested points!", Toast.LENGTH_SHORT).show();
+                //}
                 break;
         }
     }
@@ -103,8 +129,10 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         switch (_requestCode) {
             case Constants.REQUEST_MARKER_FILTER:
                 if (_data != null) {
-                    mDialogMarkers = _data.getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
-                    setFilterableMarkers();
+                    if (!(_data.getIntExtra(Constants.REQUEST_TYPE, 0) == Constants.REQUEST_CANCEL)) {
+                        mDialogMarkers = _data.getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
+                        setFilterableMarkers();
+                    }
                 }
                 break;
         }
@@ -128,6 +156,8 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     protected void initViews() {
         super.initViews();
         btnFilter = findView(R.id.btnMarkerFilter_MF);
+        Image.init(Color.parseColor(color));
+        Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
     }
 
     @Override
@@ -138,16 +168,20 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     @Override
     public void onLoadFinished(Loader<List<MapCategory>> _loader, List<MapCategory> _data) {
-        ArrayList<com.google.android.gms.maps.model.Marker> temp = new ArrayList<>();
-        for (int i = 0; i < _data.size(); i++) {
-            for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
-                temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
-                        .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat(j),
-                        _data.get(i).getInterestedPointLon(j)))));
+        if (mDialogMarkers == null) {
+            ArrayList<com.google.android.gms.maps.model.Marker> temp = new ArrayList<>();
+            mDialogMarkers = new ArrayList<>();
+            for (int i = 0; i < _data.size(); i++) {
+                for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
+                    temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
+                            .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat
+                            (j), _data.get(i).getInterestedPointLon(j)))));
+
+                }
+                mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
+                mDialogMarkers.add(new Marker(_data.get(i).categoryId, _data.get(i).categoryName, true));
+                temp.clear();
             }
-            mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
-            mDialogMarkers.add(new Marker(_data.get(i).categoryId, _data.get(i).categoryName, true));
-            temp.clear();
         }
         showContent();
     }
@@ -178,7 +212,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     private void setCamera(GoogleMap _googleMap) {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(32.441364, 34.922662)).zoom
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(lat, lon)).zoom
                 (12).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         _googleMap.moveCamera(cameraUpdate);
