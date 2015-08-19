@@ -14,13 +14,9 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
 //    private EventsItemModel mEventsItemModel;
 
-//    public static EventsItemFragment newInstance(EventsItemModel _eventsItemModel) {
-//        EventsItemFragment eventsItemFragment = new EventsItemFragment();
-//        Bundle args = new Bundle();
-//        args.putParcelable(CONFIGURATION_KEY, _eventsItemModel);
-//        eventsItemFragment.setArguments(args);
-//        return eventsItemFragment;
-//    }
+    public static EventsItemFragment newInstance() {
+        return new EventsItemFragment();
+    }
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
@@ -37,7 +33,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_catalog_item;
+        return R.layout.fragment_events_item;
     }
 
     @Override

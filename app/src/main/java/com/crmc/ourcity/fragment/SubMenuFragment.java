@@ -35,19 +35,23 @@ public class SubMenuFragment extends BaseFourStatesFragment {
         Bundle args = new Bundle();
         args.putParcelableArrayList("SUBMENU", (ArrayList<? extends Parcelable>) _submenu);
         subMenuFragment.setArguments(args);
-
         return subMenuFragment;
     }
 
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
-
         try {
             mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnItemActionListener");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        mCallBackMenuModel = null;
+        super.onDetach();
     }
 
     @Override

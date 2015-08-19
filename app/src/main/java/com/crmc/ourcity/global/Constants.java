@@ -24,6 +24,7 @@ public final class Constants {
     public static final int LOADER_STREETS_ID = 2;
     public static final int LOADER_VOTE_ID = 3;
     public static final int LOADER_VOTE_REPLY_ID = 4;
+    public static final int LOADER_EVENTS_ID = 5;
 
     //for bundle
     public static final String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";

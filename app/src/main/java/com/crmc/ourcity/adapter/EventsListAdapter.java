@@ -2,6 +2,7 @@ package com.crmc.ourcity.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +20,21 @@ import java.util.List;
 public class EventsListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private List<Events> mEventsItemModels;
+    private List<Events> mEventsList;
 
-    public EventsListAdapter(Context _context, List<Events> _eventsItemModels) {
-        this.mEventsItemModels = _eventsItemModels;
+    public EventsListAdapter(Context _context, List<Events> _eventsList) {
+        this.mEventsList = _eventsList;
         mInflater = LayoutInflater.from(_context);
     }
 
     @Override
     public int getCount() {
-        return mEventsItemModels.size();
+        return mEventsList.size();
     }
 
     @Override
     public Events getItem(int _position) {
-        return mEventsItemModels.get(_position);
+        return mEventsList.get(_position);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class EventsListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) _convertView.getTag();
         }
-        holder.setData(getItem(_position), _position);
+        holder.setData(getItem(_position));
 
         return _convertView;
     }
@@ -69,24 +70,25 @@ public class EventsListAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
-        public void setData(Events _item, int _position) {
-//            switch (_item.mEventsSizeView){
-//                case SMALL:
-//                    title.setText(_item.title);
-//                    date.setVisibility(View.GONE);
-//                    address.setVisibility(View.GONE);
-//                    break;
-//                case MEDIUM:
-//                    title.setText(_item.title);
-//                    date.setText(_item.date);
-//                    address.setVisibility(View.GONE);
-//                    break;
-//                case FULL:
-//                    title.setText(_item.title);
-//                    date.setText(_item.date);
-//                    address.setText(_item.address);
-//                    break;
-//            }
+        public void setData(Events _item) {
+
+            if (TextUtils.isEmpty(_item.title)){
+                title.setVisibility(View.GONE);
+            } else {
+                title.setText(_item.title);
+            }
+
+            if (TextUtils.isEmpty(_item.eventDateToMobileClient)){
+                date.setVisibility(View.GONE);
+            } else {
+                date.setText(_item.eventDateToMobileClient);
+            }
+
+            if (TextUtils.isEmpty(_item.address)){
+                address.setVisibility(View.GONE);
+            } else {
+                address.setText(_item.address);
+            }
         }
     }
 }

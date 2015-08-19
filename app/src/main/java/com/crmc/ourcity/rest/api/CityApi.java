@@ -3,7 +3,6 @@ package com.crmc.ourcity.rest.api;
 import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
-import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -110,6 +109,6 @@ public interface CityApi {
     @POST("/GetTripsByCityId")
     List<MapTrips> getMapTrips(@Body BaseModel baseModel);
 
-    @POST("/GetCRMCStreetList")
-    StreetsFull getStreets(@Body StreetsModel streetsModel);
+    @POST("/{path}")
+    StreetsFull getStreets(@Path ("path") String q, @Body TypedInput body);
 }

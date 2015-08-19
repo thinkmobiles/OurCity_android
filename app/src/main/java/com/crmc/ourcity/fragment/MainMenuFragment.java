@@ -49,6 +49,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
+    public void onDetach() {
+        mCallBackMenuModel = null;
+        super.onDetach();
+    }
+
+    @Override
     protected void initViews() {
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);

@@ -11,13 +11,12 @@ import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.EventsListAdapter;
-import com.crmc.ourcity.adapter.PhonesListAdapter;
-import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
+import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.EventsLoader;
 import com.crmc.ourcity.rest.responce.events.Events;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +34,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     private String route;
 
     private EventsListAdapter mAdapter;
-    private List<Events> mEventsList = new ArrayList<>();
-    private OnItemActionListener mOnItemActionListener;
+    private OnListItemActionListener mOnListItemActionListener;
 
     public static EventsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
         EventsFragment mEventsFragment = new EventsFragment();
@@ -49,6 +47,16 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(CONFIGURATION_KEY_COLOR);
@@ -57,9 +65,12 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onAttach(Activity _activity) {
-        super.onAttach(_activity);
-        mOnItemActionListener = (OnItemActionListener) _activity;
+    public void onResume() {
+        super.onResume();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().initLoader(Constants.LOADER_EVENTS_ID, bundle, this);
     }
 
     @Override
@@ -67,7 +78,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         mAdapter = new EventsListAdapter(getActivity(), _data);
         lvEvents.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        showContent();
         showContent();
     }
 
@@ -99,16 +109,12 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        //mOnItemActionListener.onItemAction(mAdapter.getItem(_position));
+        mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
     }
-
-//    public interface OnItemActionListener {
-//        void onItemAction(final CatalogItemModel catalogItemModel);
-//    }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_catalog;
+        return R.layout.fragment_events;
     }
 
     @Override
@@ -117,7 +123,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onDetach() {
-        mOnItemActionListener = null;
+        mOnListItemActionListener = null;
         super.onDetach();
     }
 }

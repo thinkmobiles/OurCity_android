@@ -44,6 +44,12 @@ import java.io.File;
  */
 public class AppealsFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener {
 
+    private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
+    private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
+    private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
+    private String color;
+    private String json;
+    private String route;
     private CurrentLocation mLocation;
     private String mPhotoFilePath;
     private ImageView ivPhoto;
@@ -56,14 +62,25 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     private Button btnSend;
     private Camera mCamera;
     private Gallery mGallery;
-    private int clientId;
-    private String userName;
-    private String password;
     private SwitchCompat swGpsOnOff;
     private String[] streets;
 
-    public static AppealsFragment newInstance() {
-        return new AppealsFragment();
+    public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+        AppealsFragment mAppealsFragment = new AppealsFragment();
+        Bundle args = new Bundle();
+        args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(CONFIGURATION_KEY_jSON, _requestJson);
+        args.putString(CONFIGURATION_KEY_ROUTE, _requestRoute);
+        mAppealsFragment.setArguments(args);
+        return mAppealsFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(CONFIGURATION_KEY_jSON);
+        route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
     }
 
     @Override
@@ -71,9 +88,6 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         super.onViewCreated(_view, _savedInstanceState);
         mCamera = new Camera(getActivity());
         mGallery = new Gallery(getActivity());
-        clientId = 1;
-        userName = "Webit";
-        password = "HdrMoked";
         showContent();
     }
 
@@ -90,7 +104,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         llPhoto = findView(R.id.llPhoto_AP);
         llAppeals = findView(R.id.llAppeals_AF);
 
-        Image.init(Color.parseColor("#66BB6A"));
+        Image.init(Color.parseColor(color));
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable
                 .focus_camera, Image.darkenColor(0.2)));
@@ -128,7 +142,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
-            if (_data.streetsList != null) {
+            if (_data != null) {
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
                 for (int i = 0; i < numbersStreets; i++) {
@@ -162,9 +176,8 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CLIENT_ID, clientId);
-        bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, userName);
-        bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, password);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
         getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, mStreetsCallBack);
     }
 

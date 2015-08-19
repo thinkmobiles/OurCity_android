@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
+import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.MapsFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
@@ -29,7 +32,7 @@ import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
 
-public class MainActivity extends BaseFragmentActivity implements OnItemActionListener {
+public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener {
 
     private Toolbar mToolbar;
     private Ticker mTicker;
@@ -101,7 +104,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         _menuModel.getLon(), _menuModel.colorItem));
                 break;
             case 6://add appeals
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case 7://vote
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_menuModel.colorItem,
@@ -112,8 +116,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                     startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_menuModel.phoneNumber),
                             getResources().getString(R.string.call_skype_hint)));
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case 9://mail
@@ -129,7 +132,25 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onEventsItemAction(Events _events) {
-
+        if (!TextUtils.isEmpty(_events.link)){
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_events.link));
+        } else if (!TextUtils.isEmpty(_events.email)) {
+            try {
+                startActivity(Intent.createChooser(IntentUtils.getIntentMail(_events.email), getString(R
+                        .string.send_mail_hint)));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
+            }
+        } else if (!TextUtils.isEmpty(_events.phone)){
+            try {
+                startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_events.phone),
+                        getResources().getString(R.string.call_skype_hint)));
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance());
+        }
     }
 
     @Override
@@ -155,5 +176,4 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

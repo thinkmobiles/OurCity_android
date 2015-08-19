@@ -27,7 +27,7 @@ public class WebViewPdfFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        mWebView = findView(R.id.webView);
+        mWebView = findView(R.id.webView_WVF);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
         String pdfLink = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";

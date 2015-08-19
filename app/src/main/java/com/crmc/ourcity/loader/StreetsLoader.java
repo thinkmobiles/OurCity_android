@@ -6,40 +6,39 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
-import com.crmc.ourcity.rest.request.streets.StreetsDetails;
-import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import retrofit.RetrofitError;
+import retrofit.mime.TypedByteArray;
 
 /**
  * Created by SetKrul on 31.07.2015.
  */
 public class StreetsLoader extends BaseLoader<StreetsFull> {
 
-    private int clientId;
-    public String userName;
-    public String password;
+    private String json;
+    private String route;
 
     public StreetsLoader(Context _context, Bundle _args) {
         super(_context);
-        clientId = _args.getInt(Constants.BUNDLE_CONSTANT_CLIENT_ID);
-        userName = _args.getString(Constants.BUNDLE_CONSTANT_USER_NAME);
-        password = _args.getString(Constants.BUNDLE_CONSTANT_PASSWORD);
+        json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
+        route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);
     }
 
     @Override
     public StreetsFull loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        StreetsFull mStreetsFull;
+        StreetsFull mStreetsFull = null;
         try {
-            mStreetsFull =  api.getStreets(new StreetsModel(new StreetsDetails(clientId, userName, password)));
+            mStreetsFull =  api.getStreets(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError _e) {
             mStreetsFull = new StreetsFull();
             mStreetsFull.streetsList = new ArrayList<>();
-            //mStreetsFull.streetsList.add(new StreetsItem());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return mStreetsFull;
     }

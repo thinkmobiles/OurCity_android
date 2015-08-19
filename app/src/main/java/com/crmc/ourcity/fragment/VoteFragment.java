@@ -153,11 +153,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
-            //if (Boolean.getBoolean(_data)) {
+            //TODO:add checked vote
                 mAdapter.setVisibleVotePercent(true);
-            //} else {
-            //    Toast.makeText(getActivity(), "You have already reply vote!", Toast.LENGTH_SHORT).show();
-            //}
         }
 
         @Override
@@ -169,9 +166,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-//        if (getLoaderManager().getLoader(Constants.LOADER_VOTE_REPLY_ID) != null) {
-//            getLoaderManager().initLoader(Constants.LOADER_VOTE_REPLY_ID, null, mVoteReplyCallBack);
-//        }
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

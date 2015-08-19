@@ -32,6 +32,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public final void popBackStack() {
-        getChildFragmentManager().popBackStack();
+        getFragmentManager().popBackStack();
     }
 }

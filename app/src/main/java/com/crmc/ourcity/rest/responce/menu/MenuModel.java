@@ -40,8 +40,8 @@ public class MenuModel implements Parcelable{
     public String requestRoute;
     @SerializedName("RequestLogin")
     public String requestLogin;
-    @SerializedName("ReturnType")
-    public Integer returnType;
+//    @SerializedName("ReturnType")
+//    public Integer returnType;
     @SerializedName("Title")
     public String title;
 
@@ -58,7 +58,7 @@ public class MenuModel implements Parcelable{
         requestJson = in.readString();
         requestRoute = in.readString();
         requestLogin = in.readString();
-        returnType = in.readInt();
+//        returnType = in.readInt();
         title = in.readString();
     }
 
@@ -116,7 +116,7 @@ public class MenuModel implements Parcelable{
         dest.writeString(requestJson);
         dest.writeString(requestRoute);
         dest.writeString(requestLogin);
-        dest.writeInt(returnType);
+//        dest.writeInt(returnType);
         dest.writeString(title);
     }
 }
