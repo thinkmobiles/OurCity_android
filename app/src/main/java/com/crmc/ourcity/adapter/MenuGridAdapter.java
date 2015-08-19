@@ -1,18 +1,18 @@
 package com.crmc.ourcity.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -22,27 +22,27 @@ import java.util.List;
 public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHolder> {
 
     private List<MenuModel> mMenuModels;
+    private Context mContext;
 
-    public MenuGridAdapter(List<MenuModel> _mMenuModels) {
-        mMenuModels = _mMenuModels;
+    public MenuGridAdapter(List<MenuModel> _mMenuModels, Context _context) {
+        this.mMenuModels = _mMenuModels;
+        this.mContext = _context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup _parent, int _viewType) {
 
-        View v = LayoutInflater.from(parent.getContext())
-                               .inflate(R.layout.menu_grid_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-
+        View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.menu_grid_item, _parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        MenuModel item = mMenuModels.get(position);
-        holder.cvBackground.setCardBackgroundColor(Color.parseColor(item.colorItem));
-        holder.tvTitle.setText(item.title);
-        //TODO: configure DownloadImageLib
+    public void onBindViewHolder(ViewHolder _holder, int _position) {
+        MenuModel item = mMenuModels.get(_position);
+        Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor(item.colorItem));
+        _holder.ivMenuIcon.setImageBitmap(Image.convertBase64ToBitmap(item.iconItem));
+        _holder.tvTitle.setText(item.title);
     }
 
     @Override
@@ -54,14 +54,16 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
         return mMenuModels.get(_position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTitle;
-        private CardView cvBackground;
+        private ImageView ivMenuIcon;
+        private LinearLayout llMenuItem;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle_FGI);
-            cvBackground = (CardView) itemView.findViewById(R.id.cvBackground_FGI);
+        public ViewHolder(View _itemView) {
+            super(_itemView);
+            tvTitle = (TextView) _itemView.findViewById(R.id.tvTitle_MF);
+            ivMenuIcon = (ImageView) _itemView.findViewById(R.id.ivMenuIcon_MF);
+            llMenuItem = (LinearLayout) _itemView.findViewById(R.id.llMenuItem_MF);
         }
     }
 }

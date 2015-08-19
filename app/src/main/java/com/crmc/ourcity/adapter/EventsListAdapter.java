@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.model.EventsItemModel;
+import com.crmc.ourcity.rest.responce.events.Events;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ import java.util.List;
 public class EventsListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private List<EventsItemModel> mEventsItemModels;
+    private List<Events> mEventsItemModels;
 
-    public EventsListAdapter(Context _context, List<EventsItemModel> _eventsItemModels) {
+    public EventsListAdapter(Context _context, List<Events> _eventsItemModels) {
         this.mEventsItemModels = _eventsItemModels;
         mInflater = LayoutInflater.from(_context);
     }
@@ -32,7 +32,7 @@ public class EventsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public EventsItemModel getItem(int _position) {
+    public Events getItem(int _position) {
         return mEventsItemModels.get(_position);
     }
 
@@ -69,24 +69,24 @@ public class EventsListAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
-        public void setData(EventsItemModel _item, int _position) {
-            switch (_item.mEventsSizeView){
-                case SMALL:
-                    title.setText(_item.title);
-                    date.setVisibility(View.GONE);
-                    address.setVisibility(View.GONE);
-                    break;
-                case MEDIUM:
-                    title.setText(_item.title);
-                    date.setText(_item.date);
-                    address.setVisibility(View.GONE);
-                    break;
-                case FULL:
-                    title.setText(_item.title);
-                    date.setText(_item.date);
-                    address.setText(_item.address);
-                    break;
-            }
+        public void setData(Events _item, int _position) {
+//            switch (_item.mEventsSizeView){
+//                case SMALL:
+//                    title.setText(_item.title);
+//                    date.setVisibility(View.GONE);
+//                    address.setVisibility(View.GONE);
+//                    break;
+//                case MEDIUM:
+//                    title.setText(_item.title);
+//                    date.setText(_item.date);
+//                    address.setVisibility(View.GONE);
+//                    break;
+//                case FULL:
+//                    title.setText(_item.title);
+//                    date.setText(_item.date);
+//                    address.setText(_item.address);
+//                    break;
+//            }
         }
     }
 }

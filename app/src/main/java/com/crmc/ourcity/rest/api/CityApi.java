@@ -1,32 +1,32 @@
 package com.crmc.ourcity.rest.api;
 
 import com.crmc.ourcity.rest.request.base.BaseModel;
-import com.crmc.ourcity.rest.request.events.EventsModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
-import com.crmc.ourcity.rest.responce.events.Site;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
-import com.google.gson.JsonPrimitive;
 
 import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.mime.TypedInput;
 
 /**
  * Created by SetKrul on 28.07.2015.
  */
 public interface CityApi {
+
     /**
      * @param cityModel number city and language
      * @return tree-like structure for client app menu
@@ -49,11 +49,10 @@ public interface CityApi {
     List<Phones> getPhones(@Body BaseModel baseModel);
 
     /**
-     * @param eventsModel type get data
-     * @return city sites
+     * @return city events
      */
-    @POST("/GetEventsByCityIdAndTypeName")
-    List<Site> getSites(@Body EventsModel eventsModel);
+    @POST("/{path}")
+    List<Events> getEvents(@Path ("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number
@@ -69,15 +68,12 @@ public interface CityApi {
     @POST("/GetMessagesToResident")
     List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
 
-//    /**
-//     * @param baseModel city number
-//     * @return Survey vote
-//     */
-    @POST("/GetSurveyToCity")
-    List<VoteFull> getVote(@Body JsonPrimitive a);
-
-    @POST("/GetSurveyToCity")
-    List<VoteFull> getVote(@Body TypedInput body);
+    /**
+     * @param body json request
+     * @return Survey vote
+     */
+    @POST("/{path}")
+    List<VoteFull> getVote(@Path ("path") String q, @Body TypedInput body);
 
     /**
      * @param voteModel selected point int, age int, gender int

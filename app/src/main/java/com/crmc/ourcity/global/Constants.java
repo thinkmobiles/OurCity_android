@@ -26,6 +26,8 @@ public final class Constants {
     public static final int LOADER_VOTE_REPLY_ID = 4;
 
     //for bundle
+    public static final String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
+    public static final String BUNDLE_CONSTANT_REQUEST_ROUTE = "ROUTE";
     public static final String BUNDLE_CONSTANTS_LAT = "LAT";
     public static final String BUNDLE_CONSTANTS_LON = "LON";
     public static final String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";

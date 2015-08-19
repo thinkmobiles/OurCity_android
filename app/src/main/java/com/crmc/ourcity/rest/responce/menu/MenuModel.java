@@ -20,6 +20,8 @@ public class MenuModel implements Parcelable{
     public Integer actionType;
     @SerializedName("Color")
     public String colorItem;
+    @SerializedName("Email")
+    public String email;
     @SerializedName("Link")
     public String link;
     @SerializedName("ListType")
@@ -28,39 +30,47 @@ public class MenuModel implements Parcelable{
     public String lat;
     @SerializedName("MapLongitude")
     public String lon;
+    @SerializedName("PhoneNumber")
+    public String phoneNumber;
     @SerializedName("Picture")
     public String iconItem;
     @SerializedName("RequestJson")
     public String requestJson;
     @SerializedName("RequestRoute")
     public String requestRoute;
-    @SerializedName("SplashScreen")
-    public String splashScreen;
+    @SerializedName("RequestLogin")
+    public String requestLogin;
+    @SerializedName("ReturnType")
+    public Integer returnType;
     @SerializedName("Title")
     public String title;
 
-    protected MenuModel(Parcel _in) {
-        menu = _in.createTypedArrayList(MenuModel.CREATOR);
-        colorItem = _in.readString();
-        link = _in.readString();
-        lat = _in.readString();
-        lon = _in.readString();
-        iconItem = _in.readString();
-        requestJson = _in.readString();
-        requestRoute = _in.readString();
-        splashScreen = _in.readString();
-        title = _in.readString();
+    protected MenuModel(Parcel in) {
+        menu = in.createTypedArrayList(MenuModel.CREATOR);
+        colorItem = in.readString();
+        email = in.readString();
+        link = in.readString();
+        listType = in.readInt();
+        lat = in.readString();
+        lon = in.readString();
+        phoneNumber = in.readString();
+        iconItem = in.readString();
+        requestJson = in.readString();
+        requestRoute = in.readString();
+        requestLogin = in.readString();
+        returnType = in.readInt();
+        title = in.readString();
     }
 
     public static final Creator<MenuModel> CREATOR = new Creator<MenuModel>() {
         @Override
-        public MenuModel createFromParcel(Parcel _in) {
-            return new MenuModel(_in);
+        public MenuModel createFromParcel(Parcel in) {
+            return new MenuModel(in);
         }
 
         @Override
-        public MenuModel[] newArray(int _size) {
-            return new MenuModel[_size];
+        public MenuModel[] newArray(int size) {
+            return new MenuModel[size];
         }
     };
 
@@ -96,13 +106,17 @@ public class MenuModel implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(menu);
         dest.writeString(colorItem);
+        dest.writeString(email);
         dest.writeString(link);
+        dest.writeInt(listType);
         dest.writeString(lat);
         dest.writeString(lon);
+        dest.writeString(phoneNumber);
         dest.writeString(iconItem);
         dest.writeString(requestJson);
         dest.writeString(requestRoute);
-        dest.writeString(splashScreen);
+        dest.writeString(requestLogin);
+        dest.writeInt(returnType);
         dest.writeString(title);
     }
 }

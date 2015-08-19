@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/cvBackground_FGI"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardMaxElevation="3dp"
-    android:layout_gravity="center"
-    android:layout_margin="8dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:id="@+id/llMenuItem_MF"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="105dp"
+              android:layout_height="110dp"
+              android:layout_margin="8dp"
+              android:background="@drawable/item_boarder_menu"
+              android:clickable="true"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:weightSum="10">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6">
 
-            <TextView
-                android:id="@+id/tvTitle_FGI"
-                android:drawableTop="@drawable/new_menu_arnona"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:paddingTop="25dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="10sp"/>
+        <ImageView
+            android:id="@+id/ivMenuIcon_MF"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|bottom"/>
+    </FrameLayout>
 
-    </android.support.v7.widget.CardView>
-
+    <TextView
+        android:id="@+id/tvTitle_MF"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:ellipsize="end"
+        android:gravity="center_horizontal|top"
+        android:maxLines="2"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:textColor="#fff"
+        android:textSize="14sp"/>
+</LinearLayout>

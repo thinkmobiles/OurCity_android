@@ -7,7 +7,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.request.menu.CityModel;
-import com.crmc.ourcity.rest.request.menu.CityNumber;
+import com.crmc.ourcity.rest.request.menu.Resident;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class MenuLoader extends BaseLoader<MenuFull> {
         CityApi api = RestClientApi.getCityApi();
         MenuFull menuNodes;
         try {
-            menuNodes =  api.getMenu(new CityModel(new CityNumber(cityNumber), lng));
+            menuNodes =  api.getMenu(new CityModel(new Resident(0, cityNumber), lng));
         } catch (RetrofitError e) {
             menuNodes = new MenuFull();
             menuNodes.nodes = new ArrayList<>();

@@ -2,6 +2,8 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -9,29 +11,49 @@ import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.EventsListAdapter;
+import com.crmc.ourcity.adapter.PhonesListAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.ActionType;
-import com.crmc.ourcity.model.EventsItemModel;
+import com.crmc.ourcity.loader.EventsLoader;
+import com.crmc.ourcity.rest.responce.events.Events;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class EventsFragment extends BaseFourStatesFragment implements OnItemClickListener {
+public class EventsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
+        OnItemClickListener {
 
+    private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
+    private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
+    private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
     private ListView lvEvents;
+    private String color;
+    private String json;
+    private String route;
+
     private EventsListAdapter mAdapter;
-    private List<EventsItemModel> mEventsList = new ArrayList<>();
+    private List<Events> mEventsList = new ArrayList<>();
     private OnItemActionListener mOnItemActionListener;
 
-    public static EventsFragment newInstance() {
-        //noinspection deprecation
-        return new EventsFragment();
+    public static EventsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+        EventsFragment mEventsFragment = new EventsFragment();
+        Bundle args = new Bundle();
+        args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(CONFIGURATION_KEY_jSON, _requestJson);
+        args.putString(CONFIGURATION_KEY_ROUTE, _requestRoute);
+        mEventsFragment.setArguments(args);
+        return mEventsFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(CONFIGURATION_KEY_jSON);
+        route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
     }
 
     @Override
@@ -41,25 +63,38 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
     }
 
     @Override
+    public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
+        mAdapter = new EventsListAdapter(getActivity(), _data);
+        lvEvents.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        showContent();
+        showContent();
+    }
+
+    @Override
+    public Loader<List<Events>> onCreateLoader(int _id, Bundle _args) {
+        return new EventsLoader(getActivity(), _args);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Events>> _loader) {
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        lvEvents = findView(R.id.lvEvents_EF);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        lvEvents.setOnItemClickListener(this);
+    }
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-
-//        for (int i = 0; i < 10; i++) {
-//            CatalogItemModel data = new CatalogItemModel("Some tvTitle " + i, ItemClickAction.FALSE);
-//            mTestList.add(data);
-//        }
-        //if (mTestList.size()  0) {
-        for (int i = 0; i < 10; i++) {
-            EventsItemModel data = new EventsItemModel("Some tvTitle " + i, getDateTime(), "Some address", ActionType
-                    .MAIL);
-            mEventsList.add(data);
-        }
-        //}
-        lvEvents = findView(R.id.lvEvents_EF);
-        mAdapter = new EventsListAdapter(getActivity(), mEventsList);
-        lvEvents.setAdapter(mAdapter);
-        lvEvents.setOnItemClickListener(this);
-        showContent();
     }
 
     @Override
@@ -71,11 +106,6 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 //        void onItemAction(final CatalogItemModel catalogItemModel);
 //    }
 
-    public String getDateTime() {
-        return new SimpleDateFormat("yyyy.MM.dd. HH:mm", Locale.ENGLISH).format(java.util.Calendar.getInstance()
-                .getTime());
-    }
-
     @Override
     protected int getContentView() {
         return R.layout.fragment_catalog;
@@ -83,7 +113,6 @@ public class EventsFragment extends BaseFourStatesFragment implements OnItemClic
 
     @Override
     public void onRetryClick() {
-
     }
 
     @Override

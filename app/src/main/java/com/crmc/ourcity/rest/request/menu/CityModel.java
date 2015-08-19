@@ -4,11 +4,11 @@ package com.crmc.ourcity.rest.request.menu;
  * Created by SetKrul on 28.07.2015.
  */
 public class CityModel {
-    public CityNumber city;
-    public String lng;
+    public Resident resident;
+    public String lang;
 
-    public CityModel(CityNumber city, String lng){
-        this.city = city;
-        this.lng = lng;
+    public CityModel(Resident resident, String lang){
+        this.resident = resident;
+        this.lang = lang;
     }
 }

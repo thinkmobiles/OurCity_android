@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
@@ -27,6 +28,7 @@ import com.crmc.ourcity.loader.VoteReplyLoader;
 import com.crmc.ourcity.rest.responce.vote.VoteDetails;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 import com.crmc.ourcity.utils.EnumUtil;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -36,7 +38,13 @@ import java.util.List;
  * Created by SetKrul on 10.08.2015.
  */
 public class VoteFragment extends BaseFourStatesFragment implements OnClickListener {
-    private int cityNumber;
+
+    private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
+    private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
+    private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
+    private String color;
+    private String json;
+    private String route;
     private Button btnChooseAnotherVote;
     private TextView tvAge;
     private TextView tvGender;
@@ -51,14 +59,28 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private Integer gender;
     private List<VoteFull> mVoteFull;
 
-    public static VoteFragment newInstance() {
-        return new VoteFragment();
+    public static VoteFragment newInstance(String _colorItem, String _json, String _route) {
+        VoteFragment mVoteFragment = new VoteFragment();
+        Bundle args = new Bundle();
+        args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(CONFIGURATION_KEY_jSON, _json);
+        args.putString(CONFIGURATION_KEY_ROUTE, _route);
+        mVoteFragment.setArguments(args);
+        return mVoteFragment;
     }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(CONFIGURATION_KEY_jSON);
+        route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
+    }
+
 
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        cityNumber = 1;
     }
 
     @Override
@@ -74,6 +96,14 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        Image.init(Color.parseColor(color));
+        tvAge.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
+                .arrow_red, Image.darkenColor(0.2)), null, null, null);
+        tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
+                .arrow_red, Image.darkenColor(0.2)), null, null, null);
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{llAge, llGender}, R.drawable.boarder_round_red_vf);
+        Image.setBackgroundColorView(getActivity(), btnChooseAnotherVote, R.drawable.selector_button_red_vf);
     }
 
     @Override
@@ -143,7 +173,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 //            getLoaderManager().initLoader(Constants.LOADER_VOTE_REPLY_ID, null, mVoteReplyCallBack);
 //        }
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
         getLoaderManager().initLoader(Constants.LOADER_VOTE_ID, bundle, mVoteCallBack);
     }
 
@@ -221,7 +252,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private void showVote(Integer _surveyId) {
         List<VoteDetails> voteDetails = getVote(_surveyId);
         if (voteDetails.size() > 0) {
-            mAdapter = new VoteGridAdapter(getVote(_surveyId));
+            mAdapter = new VoteGridAdapter(getVote(_surveyId), color, getActivity());
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
                     mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {

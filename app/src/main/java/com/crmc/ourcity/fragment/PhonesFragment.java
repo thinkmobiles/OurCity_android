@@ -82,6 +82,15 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
+    public Loader<List<Phones>> onCreateLoader(int _id, Bundle _args) {
+        return new PhonesLoader(getActivity(), _args);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Phones>> _loader) {
+    }
+
+    @Override
     protected int getContentView() {
         return R.layout.fragment_phones;
     }
@@ -89,15 +98,6 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     public void onRetryClick() {
 
-    }
-
-    @Override
-    public Loader<List<Phones>> onCreateLoader(int _id, Bundle _args) {
-        return new PhonesLoader(getActivity(), _args);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Phones>> _loader) {
     }
 
     @Override

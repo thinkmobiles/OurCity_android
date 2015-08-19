@@ -13,7 +13,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.EventsItemModel;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
@@ -30,7 +29,6 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private MenuGridAdapter mAdapter;
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
-    private EventsItemModel mEventsItemModel;
 
     public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
@@ -82,7 +80,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
         super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MenuGridAdapter(mData);
+        mAdapter = new MenuGridAdapter(mData, getActivity());
         mRecyclerView.setAdapter(mAdapter);
         showContent();
     }

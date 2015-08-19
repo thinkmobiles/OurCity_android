@@ -1,6 +1,5 @@
 package com.crmc.ourcity.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -100,7 +99,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
         mData = _data;
-        mAdapter = new MenuGridAdapter(mData.getNodes());
+        mAdapter = new MenuGridAdapter(mData.getNodes(), getActivity());
         mRecyclerView.setAdapter(mAdapter);
         showContent();
     }

@@ -1,9 +1,11 @@
 package com.crmc.ourcity.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,20 +21,25 @@ import java.util.List;
 public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHolder> {
 
     private List<VoteDetails> mVoteDetailsList;
+    private String color;
+    private Context mContext;
     private boolean visibleVotePercent = false;
 
-    public VoteGridAdapter(List<VoteDetails> _optionsList) {
+    public VoteGridAdapter(List<VoteDetails> _optionsList, String _color, Context _context) {
         this.mVoteDetailsList = _optionsList;
+        this.color = _color;
+        this.mContext = _context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup _parent, int _position) {
         View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.grid_item_vf, _parent, false);
+        //Image.init(Color.parseColor(color));
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
-    public void setVisibleVotePercent(boolean _visible){
+    public void setVisibleVotePercent(boolean _visible) {
         visibleVotePercent = _visible;
         notifyDataSetChanged();
     }
@@ -43,9 +50,12 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
         _viewHolder.tvVoteTitle.setText(voteDetails.optionDescription);
         _viewHolder.ivVote.setImageBitmap(Image.convertBase64ToBitmap(voteDetails.image));
         _viewHolder.tvVotePercent.setText(voteDetails.votePercent + "");
+        Image.setBackgroundColorView(mContext, _viewHolder.flVoteItemBoarder, R.drawable.boarder_round_red_vf);
 
         if (visibleVotePercent) {
             _viewHolder.ivVotePercent.setVisibility(View.VISIBLE);
+            _viewHolder.ivVotePercent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
+                    .information_corner, Image.darkenColor(0.2)));
             _viewHolder.tvVotePercent.setVisibility(View.VISIBLE);
         } else {
             _viewHolder.ivVotePercent.setVisibility(View.INVISIBLE);
@@ -68,6 +78,7 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
         public TextView tvVoteTitle;
         public ImageView ivVotePercent;
         public TextView tvVotePercent;
+        public FrameLayout flVoteItemBoarder;
 
         public ViewHolder(View _itemView) {
             super(_itemView);
@@ -75,6 +86,7 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
             tvVoteTitle = (TextView) _itemView.findViewById(R.id.tvVoteTitle_VF);
             ivVotePercent = (ImageView) _itemView.findViewById(R.id.ivVotePercent_VF);
             tvVotePercent = (TextView) _itemView.findViewById(R.id.tvVotePercent_VF);
+            flVoteItemBoarder = (FrameLayout) _itemView.findViewById(R.id.flVoteItemBoarder_VF);
         }
     }
 }
