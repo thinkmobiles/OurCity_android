@@ -45,24 +45,22 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     private Double lat;
     private Double lon;
     private String color;
-    private static final String CONFIGURATION_KEY3 = "CONFIGURATION_KEY3";
-    private static final String CONFIGURATION_KEY2 = "CONFIGURATION_KEY2";
-    private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
+    private String json;
+    private String route;
     private GoogleMap mGoogleMap;
-    private int cityNumber;
-    private String lng;
-
     private SupportMapFragment mMap;
     private Button btnFilter;
     private List<Marker> mDialogMarkers;
     private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
 
-    public static MapsFragment newInstance(Double _lat, Double _lon, String _color) {
+    public static MapsFragment newInstance(Double _lat, Double _lon, String _colorItem, String _requestJson, String _requestRoute) {
         MapsFragment mMapsFragment = new MapsFragment();
         Bundle args = new Bundle();
-        args.putDouble(CONFIGURATION_KEY, _lat);
-        args.putDouble(CONFIGURATION_KEY2, _lon);
-        args.putString(CONFIGURATION_KEY3, _color);
+        args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
+        args.putDouble(Constants.CONFIGURATION_KEY_LON, _lon);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
         mMapsFragment.setArguments(args);
         return mMapsFragment;
     }
@@ -70,9 +68,11 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        lat = getArguments().getDouble(CONFIGURATION_KEY);
-        lon = getArguments().getDouble(CONFIGURATION_KEY2);
-        color = getArguments().getString(CONFIGURATION_KEY3);
+        lat = getArguments().getDouble(Constants.CONFIGURATION_KEY_LAT);
+        lon = getArguments().getDouble(Constants.CONFIGURATION_KEY_LON);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
 
@@ -100,8 +100,6 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     public void onResume() {
         super.onResume();
-        cityNumber = 1;
-        lng = "en";
         setUpMapIfNeeded();
     }
 
@@ -117,7 +115,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
                             Parcelable>) mDialogMarkers);
                     startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
                 //} else {
-                //    Toast.makeText(getActivity(), "Do not have intepested points!", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getActivity(), "Do not have interested points!", Toast.LENGTH_SHORT).show();
                 //}
                 break;
         }
@@ -206,9 +204,9 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
         setCamera(_googleMap);
         this.mGoogleMap = _googleMap;
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        getLoaderManager().initLoader(1, bundle, this);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().initLoader(Constants.LOADER_INTERESTED_POINTS_ID, bundle, this);
     }
 
     private void setCamera(GoogleMap _googleMap) {

@@ -34,11 +34,10 @@ public interface CityApi {
     MenuFull getMenu(@Body CityModel cityModel);
 
     /**
-     * @param baseModel number city
      * @return map marker category and markers with data
      */
-    @POST("/GetInterestPointToCity")
-    List<MapCategory> getMapDetails(@Body BaseModel baseModel);
+    @POST("/{path}")
+    List<MapCategory> getMapDetails(@Path ("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number

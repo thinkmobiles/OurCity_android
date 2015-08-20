@@ -12,7 +12,7 @@ public class MapCategory {
     @SerializedName("interestPoint")
     public List<MapInterestedPoint> interestedPointList;
 
-    @SerializedName("CategoryId")
+    @SerializedName("categoryId")
     public Integer categoryId;
     @SerializedName("categoryName")
     public String categoryName;

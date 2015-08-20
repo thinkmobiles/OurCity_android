@@ -3,50 +3,71 @@ package com.crmc.ourcity.global;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public final class Constants {
+public class Constants {
 
-    public static final String TAG = "TAG";
+    final public static String TAG = "TAG";
 
     //for request
-    public static final String REQUEST_INTENT_TYPE_PHOTO = "type";
-    public static final int REQUEST_TYPE_PHOTO = 0;
-    public static final int REQUEST_PHOTO = 1;
-    public static final int REQUEST_GALLERY_IMAGE = 2;
-    public static final int REQUEST_MARKER_FILTER = 3;
-    public static final int REQUEST_VOTE = 4;
-    public static final int REQUEST_AGE = 5;
-    public static final int REQUEST_GENDER = 6;
-    public static final String REQUEST_TYPE = "REQUEST_TYPE";
-    public static final int REQUEST_CANCEL = 8;
+    final public static String REQUEST_INTENT_TYPE_PHOTO = "type";
+    final public static int REQUEST_TYPE_PHOTO = 0;
+    final public static int REQUEST_PHOTO = 1;
+    final public static int REQUEST_GALLERY_IMAGE = 2;
+    final public static int REQUEST_MARKER_FILTER = 3;
+    final public static int REQUEST_VOTE = 4;
+    final public static int REQUEST_AGE = 5;
+    final public static int REQUEST_GENDER = 6;
+    final public static String REQUEST_TYPE = "REQUEST_TYPE";
+    final public static int REQUEST_CANCEL = 8;
 
     //for loaders
-    public static final int LOADER_ADDRESS_ID = 1;
-    public static final int LOADER_STREETS_ID = 2;
-    public static final int LOADER_VOTE_ID = 3;
-    public static final int LOADER_VOTE_REPLY_ID = 4;
-    public static final int LOADER_EVENTS_ID = 5;
+    final public static int LOADER_ADDRESS_ID = 1;
+    final public static int LOADER_STREETS_ID = 2;
+    final public static int LOADER_VOTE_ID = 3;
+    final public static int LOADER_VOTE_REPLY_ID = 4;
+    final public static int LOADER_EVENTS_ID = 5;
+    final public static int LOADER_INTERESTED_POINTS_ID = 6;
 
     //for bundle
-    public static final String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
-    public static final String BUNDLE_CONSTANT_REQUEST_ROUTE = "ROUTE";
-    public static final String BUNDLE_CONSTANTS_LAT = "LAT";
-    public static final String BUNDLE_CONSTANTS_LON = "LON";
-    public static final String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";
-    public static final String BUNDLE_CONSTANT_LANG = "LANG";
-    public static final String BUNDLE_CONSTANT_TYPE = "TYPE";
-    public static final String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
-    public static final String BUNDLE_CONSTANT_AGE = "AGE";
-    public static final String BUNDLE_CONSTANT_GENDER = "GENDER";
-    public static final String BUNDLE_CONSTANT_LOAD_IMAGE_TYPE = "LOAD_IMAGE_TYPE";
-    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
-    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
-    public static final int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
-    public static final String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
-    public static final String BUNDLE_CONSTANT_CLIENT_ID = "CLIENT_ID";
-    public static final String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
-    public static final String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
-    public static final String BUNDLE_MARKERS = "MARKER";
-    public static final String BUNDLE_INTEGER = "INTEGER";
-    public static final String IMAGE_MIME_TYPE_PREFIX = "image";
-    public static final String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
+    final public static String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
+    final public static String BUNDLE_CONSTANT_REQUEST_ROUTE = "ROUTE";
+    final public static String BUNDLE_CONSTANTS_LAT = "LAT";
+    final public static String BUNDLE_CONSTANTS_LON = "LON";
+    final public static String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";
+    final public static String BUNDLE_CONSTANT_LANG = "LANG";
+    final public static String BUNDLE_CONSTANT_TYPE = "TYPE";
+    final public static String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
+    final public static String BUNDLE_CONSTANT_AGE = "AGE";
+    final public static String BUNDLE_CONSTANT_GENDER = "GENDER";
+    final public static String BUNDLE_CONSTANT_LOAD_IMAGE_TYPE = "LOAD_IMAGE_TYPE";
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
+    final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
+    final public static String BUNDLE_CONSTANT_CLIENT_ID = "CLIENT_ID";
+    final public static String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
+    final public static String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
+    final public static String BUNDLE_MARKERS = "MARKER";
+    final public static String BUNDLE_INTEGER = "INTEGER";
+    final public static String IMAGE_MIME_TYPE_PREFIX = "image";
+    final public static String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
+
+    //for Instance
+    final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";
+    final public static String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
+    final public static String CONFIGURATION_KEY_LAT = "KEY_LAT";
+    final public static String CONFIGURATION_KEY_LON = "KEY_LON";
+    final public static String CONFIGURATION_KEY_JSON = "KEY_JSON";
+    final public static String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
+    
+    //action type
+    final public static int ACTION_TYPE_LIST = 1;
+    final public static int ACTION_TYPE_LIST_EVENTS = 1;
+    final public static int ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT = 2;
+    final public static int ACTION_TYPE_LIST_PHONE_LiST = 3;
+    final public static int ACTION_TYPE_LINK = 3;
+    final public static int ACTION_TYPE_MAP = 5;
+    final public static int ACTION_TYPE_ADD_APPEALS = 6;
+    final public static int ACTION_TYPE_VOTE = 7;
+    final public static int ACTION_TYPE_CALL_SKYPE = 8;
+    final public static int ACTION_TYPE_MAIL = 9;
 }

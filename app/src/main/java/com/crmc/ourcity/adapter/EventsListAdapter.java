@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -21,10 +23,12 @@ public class EventsListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<Events> mEventsList;
+    private Context mContext;
 
     public EventsListAdapter(Context _context, List<Events> _eventsList) {
         this.mEventsList = _eventsList;
-        mInflater = LayoutInflater.from(_context);
+        this.mInflater = LayoutInflater.from(_context);
+        this.mContext = _context;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class EventsListAdapter extends BaseAdapter {
         final ViewHolder holder;
         if (_convertView == null) {
             _convertView = mInflater.inflate(R.layout.listview_row_fc, _parent, false);
-            holder = new ViewHolder(_convertView);
+            holder = new ViewHolder(_convertView, mContext);
         } else {
             holder = (ViewHolder) _convertView.getTag();
         }
@@ -60,17 +64,24 @@ public class EventsListAdapter extends BaseAdapter {
         final TextView title;
         final TextView date;
         final TextView address;
+        final ImageView ivArrowEvent;
         final View view;
+        final Context mContext;
 
-        public ViewHolder(@NonNull final View _view) {
+        public ViewHolder(@NonNull final View _view, Context _context) {
             title = (TextView) _view.findViewById(R.id.tvTitle_CF);
             date = (TextView) _view.findViewById(R.id.tvDate_CF);
             address = (TextView) _view.findViewById(R.id.tvAddress_CF);
+            ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_EF);
             this.view = _view;
+            this.mContext = _context;
             _view.setTag(this);
         }
 
         public void setData(Events _item) {
+
+            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right, Image
+                    .darkenColor(0.2)));
 
             if (TextUtils.isEmpty(_item.title)){
                 title.setVisibility(View.GONE);

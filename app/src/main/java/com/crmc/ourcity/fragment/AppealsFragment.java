@@ -44,9 +44,6 @@ import java.io.File;
  */
 public class AppealsFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener {
 
-    private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
-    private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
-    private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
     private String color;
     private String json;
     private String route;
@@ -68,9 +65,9 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
         AppealsFragment mAppealsFragment = new AppealsFragment();
         Bundle args = new Bundle();
-        args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
-        args.putString(CONFIGURATION_KEY_jSON, _requestJson);
-        args.putString(CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
         mAppealsFragment.setArguments(args);
         return mAppealsFragment;
     }
@@ -78,9 +75,9 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        color = getArguments().getString(CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(CONFIGURATION_KEY_jSON);
-        route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
     @Override

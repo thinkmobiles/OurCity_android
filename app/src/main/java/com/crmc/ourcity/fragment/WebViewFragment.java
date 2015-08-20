@@ -2,7 +2,6 @@ package com.crmc.ourcity.fragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -16,6 +15,8 @@ import android.widget.ProgressBar;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
+import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.utils.Image;
 
 /**
  * Created by SetKrul on 20.07.2015.
@@ -25,12 +26,13 @@ public class WebViewFragment extends BaseFourStatesFragment {
     private WebView mWebView;
     private String link;
     private ProgressBar pbLoading;
-    private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
+    private int color;
 
-    public static WebViewFragment newInstance(String _link) {
+    public static WebViewFragment newInstance(String _link, int _color) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
         Bundle args = new Bundle();
-        args.putString(CONFIGURATION_KEY, _link);
+        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
+        args.putInt(Constants.CONFIGURATION_KEY_COLOR, _color);
         mWebViewFragment.setArguments(args);
         return mWebViewFragment;
     }
@@ -38,7 +40,8 @@ public class WebViewFragment extends BaseFourStatesFragment {
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        link = getArguments().getString(CONFIGURATION_KEY);
+        link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
+        color = getArguments().getInt(Constants.CONFIGURATION_KEY_COLOR);
     }
 
     @Override
@@ -60,9 +63,9 @@ public class WebViewFragment extends BaseFourStatesFragment {
 
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
-
-        pbLoading.getIndeterminateDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
-        pbLoading.getProgressDrawable().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+        Image.init(color);
+        pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
+        pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
 
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -113,7 +116,9 @@ public class WebViewFragment extends BaseFourStatesFragment {
 //            _link = new HtmlFormatter(getActivity()).htmlForWebView(_link, "", "justify", "right");
 //            mWebView.loadDataWithBaseURL(null, _link, "text/html", "UTF-8", null);
 //        }
-        mWebView.loadUrl(_link);
+        else {
+            mWebView.loadUrl(_link);
+        }
     }
 
     private class MyWebViewClient extends WebViewClient {

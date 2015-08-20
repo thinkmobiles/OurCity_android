@@ -1,6 +1,8 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -16,6 +18,7 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.EventsLoader;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -25,9 +28,6 @@ import java.util.List;
 public class EventsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
         OnItemClickListener {
 
-    private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
-    private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
-    private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
     private ListView lvEvents;
     private String color;
     private String json;
@@ -39,9 +39,9 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     public static EventsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
         EventsFragment mEventsFragment = new EventsFragment();
         Bundle args = new Bundle();
-        args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
-        args.putString(CONFIGURATION_KEY_jSON, _requestJson);
-        args.putString(CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
         mEventsFragment.setArguments(args);
         return mEventsFragment;
     }
@@ -59,9 +59,9 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        color = getArguments().getString(CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(CONFIGURATION_KEY_jSON);
-        route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
     @Override
@@ -94,6 +94,10 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     protected void initViews() {
         super.initViews();
         lvEvents = findView(R.id.lvEvents_EF);
+
+        Image.init(Color.parseColor(color));
+        lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvEvents.setDividerHeight(4);
     }
 
     @Override

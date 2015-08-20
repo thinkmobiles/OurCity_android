@@ -2,6 +2,7 @@ package com.crmc.ourcity.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -24,10 +25,12 @@ import com.crmc.ourcity.fragment.PhonesFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
+import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
@@ -83,43 +86,45 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onItemAction(MenuModel _menuModel) {
         switch (_menuModel.actionType) {
-            case 1:
+            case Constants.ACTION_TYPE_LIST:
                 switch (_menuModel.listType) {
-                    case 1://events list
+                    case Constants.ACTION_TYPE_LIST_EVENTS:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsFragment.newInstance(_menuModel
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
-                    case 2://message to resident
+                    case Constants.ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT:
                         break;
-                    case 3://phone list
+                    case Constants.ACTION_TYPE_LIST_PHONE_LiST:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance());
                         break;
                 }
                 break;
-            case 3://link
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link));
+            case Constants.ACTION_TYPE_LINK:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link, Color
+                        .parseColor(_menuModel.colorItem)));
                 break;
-            case 5://map
+            case Constants.ACTION_TYPE_MAP:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapsFragment.newInstance(_menuModel.getLat(),
-                        _menuModel.getLon(), _menuModel.colorItem));
+                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
-            case 6://add appeals
+            case Constants.ACTION_TYPE_ADD_APPEALS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
-            case 7://vote
+            case Constants.ACTION_TYPE_VOTE:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
-            case 8://call skype
+            case Constants.ACTION_TYPE_CALL_SKYPE:
                 try {
                     startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_menuModel.phoneNumber),
                             getResources().getString(R.string.call_skype_hint)));
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT)
+                            .show();
                 }
                 break;
-            case 9://mail
+            case Constants.ACTION_TYPE_MAIL:
                 try {
                     startActivity(Intent.createChooser(IntentUtils.getIntentMail(_menuModel.email), getString(R
                             .string.send_mail_hint)));
@@ -132,19 +137,21 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onEventsItemAction(Events _events) {
-        if (!TextUtils.isEmpty(_events.link)){
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_events.link));
+        if (!TextUtils.isEmpty(_events.link)) {
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_events.link, Image
+                    .darkenColor(0.0)));
+
         } else if (!TextUtils.isEmpty(_events.email)) {
             try {
-                startActivity(Intent.createChooser(IntentUtils.getIntentMail(_events.email), getString(R
-                        .string.send_mail_hint)));
+                startActivity(Intent.createChooser(IntentUtils.getIntentMail(_events.email), getString(R.string
+                        .send_mail_hint)));
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
             }
-        } else if (!TextUtils.isEmpty(_events.phone)){
+        } else if (!TextUtils.isEmpty(_events.phone)) {
             try {
-                startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_events.phone),
-                        getResources().getString(R.string.call_skype_hint)));
+                startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_events.phone), getResources()
+                        .getString(R.string.call_skype_hint)));
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
             }
