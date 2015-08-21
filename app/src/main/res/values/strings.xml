@@ -61,16 +61,28 @@
     <!-- for test, remove after -->
     <string name="focus_address">רחוב</string>
     <string name="focus_number">מספר</string>
-    <string name="focus_f_name">שם פרטי</string>
-    <string name="focus_l_name">שם משפחה</string>
+    <string name="focus_f_name">first name</string>
+    <string name="focus_l_name">last name</string>
     <string name="focus_descripstion">תאור המפגע</string>
-    <string name="focus_phon">טלפון</string>
-    <string name="focus_mobile">נייד</string>
-    <string name="focus_email">אימייל</string>
+    <string name="focus_phon">phone number</string>
+    <string name="focus_mobile">mobile number</string>
+    <string name="focus_email">email</string>
     <string name="focus_titel">דיווח למוקד </string>
     <string name="focus_titel2">עדכון פרטים </string>
-    <string name="focus_name_city">חדרה</string>
+    <string name="focus_name_city">city name</string>
     <string name="txt_gcn">האם את מעוניין/ת לקבל הודעות?</string>
     <string name="txt_login">כדי להנות מהאפלקציה מומלץ לשתף את פרטיך האישיים, מעוניין/ת עכשיו?</string>
+    <string name="resident_userName">username</string>
+    <string name="resident_password">password</string>
+    <string name="sign_in_dialog_login">Sign in</string>
+    <string name="sign_up_dialog_lName">last name</string>
+    <string name="sign_up_dialog_fName">first name</string>
+    <string name="focus_street">street</string>
+    <string name="focus_house">house</string>
+    <string name="sign_up_dialog_error_text">fill this field</string>
+    <string name="sign_up_dialog_incorrect_phone_number">incorrect phone number</string>
+    <string name="sign_up_dialog_incorrect_email">incorrect email</string>
+    <string name="gcm_SenderID">226589076343</string>
+    <string name="setting_dialog_logout">Logout</string>
 
 </resources>

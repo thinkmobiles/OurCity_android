@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
+import com.crmc.ourcity.utils.SPManager;
 
 import java.util.List;
 
@@ -40,11 +42,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
-
+    private boolean isLogIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isLogIn = SPManager.getInstance(this).getLogInStatus();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
@@ -171,7 +174,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         int id = item.getItemId();
 
         if (id == R.id.menu_settings) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+            boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
+
             Intent intent = new Intent(this, DialogActivity.class);
+            intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
             EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
             startActivity(intent);
             return true;

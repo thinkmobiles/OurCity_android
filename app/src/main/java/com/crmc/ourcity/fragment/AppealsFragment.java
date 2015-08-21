@@ -93,7 +93,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         super.initViews();
         ivPhoto = findView(R.id.ivPhoto_AF);
         etNameCity = findView(R.id.etCityName_AF);
-        etNameStreet = findView(R.id.etNameStreet_AF);
+        etNameStreet = findView(R.id.etStreetName_SUDF);
         swGpsOnOff = findView(R.id.swGpsOnOff_AF);
         etDescription = findView(R.id.etDescription_AF);
         btnSend = findView(R.id.btnSend_AF);

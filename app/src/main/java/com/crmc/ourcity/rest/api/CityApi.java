@@ -1,6 +1,9 @@
 package com.crmc.ourcity.rest.api;
 
 import com.crmc.ourcity.rest.request.base.BaseModel;
+import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
+import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
+import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
@@ -25,6 +28,23 @@ import retrofit.mime.TypedInput;
  * Created by SetKrul on 28.07.2015.
  */
 public interface CityApi {
+
+    /**
+     *
+     * @param _residentModel - data for register new Resident
+     * @return residentID
+     */
+    @POST("/RegistNewResident")
+    Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel _residentModel);
+
+    @POST("/MobileLogin")
+    String loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
+
+    @POST("/MobileUpdatePushToken")
+    Boolean updatePushTokenOnWS(@Body PushTokenUpdatingModel _pushTokenUpdatingModel);
+
+    @POST("/MobileLogout")
+    Boolean logout(@Body LogoutModel _logoutModel);
 
     /**
      * @param cityModel number city and language

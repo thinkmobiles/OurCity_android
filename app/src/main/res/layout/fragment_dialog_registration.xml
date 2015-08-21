@@ -59,7 +59,7 @@
             android:weightSum="2">
 
             <EditText
-                android:id="@+id/update_details_l_name"
+                android:id="@+id/etLastName_SUDF"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -71,7 +71,7 @@
                 android:padding="@dimen/person5" />
 
             <EditText
-                android:id="@+id/update_details_f_name"
+                android:id="@+id/etFirstName_SUDF"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/profile10"

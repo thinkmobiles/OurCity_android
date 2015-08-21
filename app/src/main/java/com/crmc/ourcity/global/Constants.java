@@ -72,4 +72,21 @@ public class Constants {
     final public static int ACTION_TYPE_VOTE = 7;
     final public static int ACTION_TYPE_CALL_SKYPE = 8;
     final public static int ACTION_TYPE_MAIL = 9;
+
+    public static final String BUNDLE_CONSTANT_FIRST_NAME = "FIRST_NAME";
+    public static final String BUNDLE_CONSTANT_LAST_NAME = "LAST_NAME";
+    public static final String BUNDLE_CONSTANT_EMAIL = "EMAIL";
+    public static final String BUNDLE_CONSTANT_MOBILE_NUMBER = "MOBILE_NUMBER";
+    public static final String BUNDLE_CONSTANT_PHONE_NUMBER = "PHONE_NUMBER";
+    public static final String BUNDLE_CONSTANT_HOUSE_NUMBER = "HOUSE_NUMBER";
+    public static final String BUNDLE_CONSTANT_STREET_ID = "STREET_ID";
+    public static final String BUNDLE_CONSTANT_CITY_ID = "CITY_ID";
+    public static final String BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED = "GLOBAL_NOTIFICATION";
+    public static final String BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED = "PERSONAL_NOTIFICATION";
+    public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
+    public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
+
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+    public static String IS_FROM_MAIN_ACTIVITY = "true";
 }

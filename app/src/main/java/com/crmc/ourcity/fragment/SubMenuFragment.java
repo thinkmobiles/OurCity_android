@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,8 +13,12 @@ import android.view.View;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.dialog.DialogActivity;
+import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.utils.EnumUtil;
+import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -63,10 +68,26 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
-                if (menuModel.menu != null) {
-                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+
+                Boolean isLogIn = SPManager.getInstance(getActivity()).getLogInStatus();
+                if (Boolean.parseBoolean(menuModel.requestLogin) == true) {
+                    if (isLogIn) {
+                        if (menuModel.menu != null) {
+                            mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                        } else {
+                            mCallBackMenuModel.onItemAction(menuModel);
+                        }
+                    } else {
+                        Intent intent = new Intent(getActivity(), DialogActivity.class);
+                        EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                        startActivity(intent);
+                    }
                 } else {
-                    mCallBackMenuModel.onItemAction(menuModel);
+                    if (menuModel.menu != null) {
+                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    } else {
+                        mCallBackMenuModel.onItemAction(menuModel);
+                    }
                 }
             }
         }));
