@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
@@ -38,7 +38,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvDate_EIF"
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":date"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
@@ -102,7 +102,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":email"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
@@ -120,7 +120,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvMobile_EIF"
@@ -129,7 +129,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":mobile"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
@@ -146,7 +146,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvPhone_EIF"
@@ -155,7 +155,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":phone"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
@@ -172,7 +172,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvPrice_EIF"
@@ -181,7 +181,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":price"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
@@ -199,7 +199,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvDescription_EIF"
@@ -208,8 +208,15 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text=":description"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
+
         </LinearLayout>
+        <WebView
+            android:id="@+id/webView_WVF"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </ScrollView>

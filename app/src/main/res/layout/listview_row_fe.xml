@@ -17,7 +17,7 @@
 
 
     <ImageView
-        android:id="@+id/btnCallSkype_EF"
+        android:id="@+id/ivCallSkype_EF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -27,21 +27,21 @@
         tools:background="@android:color/darker_gray"/>
 
     <ImageView
-        android:id="@+id/btnSendMail_EF"
+        android:id="@+id/ivSendMail_EF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
         android:scaleType="centerInside"
         android:src="@drawable/mail"
         tools:background="@android:color/darker_gray"/>
 
     <ImageView
-        android:id="@+id/btnLink_EF"
+        android:id="@+id/ivLink_EF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
         android:scaleType="centerInside"
         android:src="@drawable/link"
         tools:background="@android:color/darker_gray"/>
@@ -51,39 +51,79 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTitle_CF"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_vertical|start"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark"/>
+        <LinearLayout
+            android:id="@+id/llTitle_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
 
-        <TextView
-            android:id="@+id/tvDate_CF"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_vertical|start"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:text="Date"
-            android:textSize="@dimen/cf_item_text_size"
-            tools:background="@android:color/holo_green_dark"/>
+            <TextView
+                android:id="@+id/tvTitle_Text_EIF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
-        <TextView
-            android:id="@+id/tvAddress_CF"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_vertical|start"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:text="Address"
-            android:textSize="@dimen/cf_item_text_size"
-            tools:background="@android:color/holo_blue_dark"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDate_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDate_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvDate_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text=":date"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAddress_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvAddress_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvAddress_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text=":address"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

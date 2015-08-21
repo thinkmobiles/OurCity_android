@@ -47,6 +47,7 @@ public class MenuModel implements Parcelable{
 
     protected MenuModel(Parcel in) {
         menu = in.createTypedArrayList(MenuModel.CREATOR);
+        actionType = in.readInt();
         colorItem = in.readString();
         email = in.readString();
         link = in.readString();
@@ -105,6 +106,7 @@ public class MenuModel implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(menu);
+        dest.writeInt(actionType);
         dest.writeString(colorItem);
         dest.writeString(email);
         dest.writeString(link);
