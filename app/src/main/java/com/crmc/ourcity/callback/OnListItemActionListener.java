@@ -7,4 +7,5 @@ import com.crmc.ourcity.rest.responce.events.Events;
  */
 public interface OnListItemActionListener {
     void onEventsItemAction(Events _events);
+    void onEventsClickLinkAction(String _link);
 }

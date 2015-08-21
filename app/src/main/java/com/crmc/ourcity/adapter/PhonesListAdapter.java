@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,33 +82,41 @@ public class PhonesListAdapter extends BaseAdapter {
 
         public void setData(Phones _item, int _position) {
             this.position = _position;
-            ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
-                    .phonebook_phone, Image.darkenColor(0.2)));
-            ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
-                    .phonebook_mail, Image.darkenColor(0.2)));
             tvNameInstitution.setText(_item.entityName);
+            if (!TextUtils.isEmpty(getItem(position).phoneNumber)) {
+                ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
+                        Image.darkenColor(0.2)));
+            } else {
+                ivCallSkype.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(getItem(position).emailAddress)) {
+                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail2,
+                        Image.darkenColor(0.2)));
+            } else {
+                ivSendMail.setVisibility(View.GONE);
+            }
         }
 
         @Override
         public void onClick(View _view) {
             switch (_view.getId()) {
                 case R.id.btnCallSkype_FP:
-                    try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentSkype(getItem(position)
-                                .phoneNumber), mContext.getResources().getString(R.string.call_skype_hint)));
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_skype_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
+                        try {
+                            mContext.startActivity(Intent.createChooser(IntentUtils.getIntentSkype(getItem(position)
+                                    .phoneNumber), mContext.getResources().getString(R.string.call_skype_hint)));
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_skype_client),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     break;
                 case R.id.btnSendMail_FP:
-                    try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentMail(getItem(position)
-                                .emailAddress), mContext.getResources().getString(R.string.send_mail_hint)));
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
+                        try {
+                            mContext.startActivity(Intent.createChooser(IntentUtils.getIntentMail(getItem(position)
+                                    .emailAddress), mContext.getResources().getString(R.string.send_mail_hint)));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     break;
             }
         }

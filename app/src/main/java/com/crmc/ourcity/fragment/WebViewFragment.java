@@ -69,10 +69,8 @@ public class WebViewFragment extends BaseFourStatesFragment {
 
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.setInitialScale(100);
+        //mWebView.setInitialScale(100);
         mWebView.getSettings().setSupportZoom(true);
-//        mWebView.getSettings().setBuiltInZoomControls(true);
-//        mWebView.getSettings().setDisplayZoomControls(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setBuiltInZoomControls(true);

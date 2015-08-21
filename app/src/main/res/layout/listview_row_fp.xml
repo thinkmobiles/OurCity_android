@@ -13,7 +13,7 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:scaleType="centerInside"
-        android:src="@drawable/phonebook_phone"/>
+        android:src="@drawable/phone2"/>
 
     <ImageView
         android:id="@+id/btnSendMail_FP"
@@ -22,7 +22,7 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:scaleType="centerInside"
-        android:src="@drawable/phonebook_mail"/>
+        android:src="@drawable/mail2"/>
 
     <TextView
         android:id="@+id/tvNameInstitution_FP"

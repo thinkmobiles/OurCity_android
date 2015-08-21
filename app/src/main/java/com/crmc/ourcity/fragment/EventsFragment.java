@@ -75,7 +75,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
-        mAdapter = new EventsListAdapter(getActivity(), _data);
+        mAdapter = new EventsListAdapter(getActivity(), _data, mOnListItemActionListener);
         lvEvents.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();

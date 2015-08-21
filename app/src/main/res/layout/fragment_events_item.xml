@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingBottom="12dp"
     android:paddingTop="12dp">
@@ -212,8 +213,46 @@
                 android:textStyle="bold"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+
+            <ImageView
+                android:id="@+id/ivCallSkype_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivSendMail_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/mail"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivLink_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/link"
+                tools:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
         <WebView
-            android:id="@+id/webView_WVF"
+            android:id="@+id/webView_EIF"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
