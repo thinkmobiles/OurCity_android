@@ -47,6 +47,14 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+    }
+
+    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
@@ -54,14 +62,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
         }
-    }
-
-    @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
     @Override

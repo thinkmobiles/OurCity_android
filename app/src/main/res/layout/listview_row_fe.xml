@@ -6,21 +6,45 @@
     android:layout_height="@dimen/cf_item_row_size"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/ivArrowEvent_EF"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="15dp"
+        android:src="@drawable/event_arrow_right"
+        tools:background="@android:color/darker_gray"/>
 
-        <ImageView
-            android:id="@+id/ivArrowEvent_EF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            tools:background="@android:color/darker_gray"
-            android:src="@drawable/event_arrow_right"/>
-    </LinearLayout>
 
+    <ImageView
+        android:id="@+id/btnCallSkype_EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/phone"
+        tools:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/btnSendMail_EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerInside"
+        android:src="@drawable/mail"
+        tools:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/btnLink_EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerInside"
+        android:src="@drawable/link"
+        tools:background="@android:color/darker_gray"/>
 
     <LinearLayout
         android:layout_width="match_parent"

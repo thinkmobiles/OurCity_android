@@ -58,23 +58,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("OutCity");
 
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(VoteFragment.newInstance());
-//            //getSupportActionBar().setTitle("MayorSpeech");
-//        }
-//
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(MapsFragment.newInstance());
-//            //getSupportActionBar().setTitle("MayorSpeech");
-//        }
-//        if (getFragmentById(FRAGMENT_CONTAINER) == null) {
-//            setTopFragment(AppealsFragment.newInstance());
-//            //getSupportActionBar().setTitle("CatalogTest");
-//        }
-
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
-            //getSupportActionBar().setTitle("CatalogTest");
         }
     }
 
@@ -94,8 +79,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         break;
                     case Constants.ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT:
                         break;
-                    case Constants.ACTION_TYPE_LIST_PHONE_LiST:
-                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance());
+                    case Constants.ACTION_TYPE_LIST_PHONE_LIST:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_menuModel
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                 }
                 break;
@@ -156,7 +142,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
             }
         } else {
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance());
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
         }
     }
 

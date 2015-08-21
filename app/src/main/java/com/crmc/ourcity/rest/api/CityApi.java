@@ -40,11 +40,10 @@ public interface CityApi {
     List<MapCategory> getMapDetails(@Path ("path") String q, @Body TypedInput body);
 
     /**
-     * @param baseModel city number
      * @return phones number with others data
      */
-    @POST("/GetCityEntities")
-    List<Phones> getPhones(@Body BaseModel baseModel);
+    @POST("/{path}")
+    List<Phones> getPhones(@Path ("path") String q, @Body TypedInput body);
 
     /**
      * @return city events

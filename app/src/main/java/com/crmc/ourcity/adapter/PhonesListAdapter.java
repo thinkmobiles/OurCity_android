@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class PhonesListAdapter extends BaseAdapter {
     public PhonesListAdapter(Context _context, List<Phones> _phonesList) {
         this.mPhonesList = _phonesList;
         this.mContext = _context;
-        mInflater = LayoutInflater.from(_context);
+        this.mInflater = LayoutInflater.from(_context);
     }
 
     @Override
@@ -80,6 +81,10 @@ public class PhonesListAdapter extends BaseAdapter {
 
         public void setData(Phones _item, int _position) {
             this.position = _position;
+            ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
+                    .phonebook_phone, Image.darkenColor(0.2)));
+            ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
+                    .phonebook_mail, Image.darkenColor(0.2)));
             tvNameInstitution.setText(_item.entityName);
         }
 

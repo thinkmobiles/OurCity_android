@@ -26,6 +26,7 @@ public class Constants {
     final public static int LOADER_VOTE_REPLY_ID = 4;
     final public static int LOADER_EVENTS_ID = 5;
     final public static int LOADER_INTERESTED_POINTS_ID = 6;
+    final public static int LOADER_PHONES_ID = 5;
 
     //for bundle
     final public static String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
@@ -58,12 +59,13 @@ public class Constants {
     final public static String CONFIGURATION_KEY_LON = "KEY_LON";
     final public static String CONFIGURATION_KEY_JSON = "KEY_JSON";
     final public static String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
+    final public static String CONFIGURATION_KEY_EVENTS = "KEY_EVENTS";
     
     //action type
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
     final public static int ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT = 2;
-    final public static int ACTION_TYPE_LIST_PHONE_LiST = 3;
+    final public static int ACTION_TYPE_LIST_PHONE_LIST = 3;
     final public static int ACTION_TYPE_LINK = 3;
     final public static int ACTION_TYPE_MAP = 5;
     final public static int ACTION_TYPE_ADD_APPEALS = 6;

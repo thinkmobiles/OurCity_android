@@ -32,13 +32,13 @@ public class EventsLoader extends BaseLoader<List<Events>> {
     @Override
     public List<Events> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        List<Events> mEvents = null;
+        List<Events> mEvents;
         try {
             mEvents =  api.getEvents(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError _e) {
             mEvents = new ArrayList<>();
-            mEvents.add(new Events());
         } catch (UnsupportedEncodingException e) {
+            mEvents = new ArrayList<>();
             e.printStackTrace();
         }
         return mEvents;

@@ -6,36 +6,43 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
-import com.crmc.ourcity.rest.request.base.BaseCity;
-import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.responce.events.Phones;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
+import retrofit.mime.TypedByteArray;
 
 /**
  * Created by SetKrul on 30.07.2015.
  */
 public class PhonesLoader extends BaseLoader<List<Phones>> {
 
-    private int cityNumber;
+    private String json;
+    private String route;
+
 
     public PhonesLoader(Context _context, Bundle _args) {
         super(_context);
-        cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+        json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
+        route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);
     }
 
     @Override
     public List<Phones> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        List<Phones> mPhones;
+        List<Phones> mPhones = null;
         try {
-            mPhones =  api.getPhones(new BaseModel(new BaseCity(cityNumber)));
+            mPhones =  api.getPhones(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError e) {
             mPhones = new ArrayList<>();
             mPhones.add(new Phones());
+        } catch (UnsupportedEncodingException e) {
+            mPhones = new ArrayList<>();
+            mPhones.add(new Phones());
+            e.printStackTrace();
         }
         return mPhones;
     }

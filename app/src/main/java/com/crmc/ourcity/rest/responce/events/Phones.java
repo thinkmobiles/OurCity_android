@@ -7,16 +7,14 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Phones {
 
-    @SerializedName("details")
-    public String details;
-    @SerializedName("emailAddress")
+    @SerializedName("email")
     public String emailAddress;
     @SerializedName("entityId")
     public Integer entityId;
-    @SerializedName("entityName")
+    @SerializedName("name")
     public String entityName;
-    @SerializedName("information")
-    public String information;
+    @SerializedName("address")
+    public String address;
     @SerializedName("phoneNumber")
     public String phoneNumber;
 }

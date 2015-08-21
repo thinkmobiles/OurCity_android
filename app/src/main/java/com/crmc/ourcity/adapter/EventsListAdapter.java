@@ -50,7 +50,7 @@ public class EventsListAdapter extends BaseAdapter {
     public View getView(final int _position, View _convertView, ViewGroup _parent) {
         final ViewHolder holder;
         if (_convertView == null) {
-            _convertView = mInflater.inflate(R.layout.listview_row_fc, _parent, false);
+            _convertView = mInflater.inflate(R.layout.listview_row_fe, _parent, false);
             holder = new ViewHolder(_convertView, mContext);
         } else {
             holder = (ViewHolder) _convertView.getTag();

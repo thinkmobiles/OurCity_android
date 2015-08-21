@@ -38,6 +38,8 @@ public class StreetsLoader extends BaseLoader<StreetsFull> {
             mStreetsFull = new StreetsFull();
             mStreetsFull.streetsList = new ArrayList<>();
         } catch (UnsupportedEncodingException e) {
+            mStreetsFull = new StreetsFull();
+            mStreetsFull.streetsList = new ArrayList<>();
             e.printStackTrace();
         }
         return mStreetsFull;

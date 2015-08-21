@@ -1,5 +1,7 @@
 package com.crmc.ourcity.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -15,6 +17,7 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.PhonesLoader;
 import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -24,23 +27,38 @@ import java.util.List;
 public class PhonesFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>>,
         OnRefreshListener {
 
-    private int cityNumber;
-
     private ListView lvPhones;
     private PhonesListAdapter mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private String color;
+    private String json;
+    private String route;
 
-    public static PhonesFragment newInstance() {
-        //noinspection deprecation
-        return new PhonesFragment();
+    public static PhonesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+        PhonesFragment mPhonesFragment = new PhonesFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        mPhonesFragment.setArguments(args);
+        return mPhonesFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        getLoaderManager().initLoader(1, bundle, this);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().initLoader(Constants.LOADER_PHONES_ID, bundle, this);
     }
 
     @Override
@@ -48,6 +66,9 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
         super.initViews();
         swipeRefreshLayout = findView(R.id.swipe_refresh_layout);
         lvPhones = findView(R.id.lvPhones_FP);
+        Image.init(Color.parseColor(color));
+        lvPhones.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvPhones.setDividerHeight(4);
     }
 
     @Override
@@ -69,7 +90,6 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        cityNumber = 1;
     }
 
     @Override
@@ -97,13 +117,13 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onRetryClick() {
-
     }
 
     @Override
     public void onRefresh() {
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        getLoaderManager().restartLoader(1, bundle, this);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_PHONES_ID, bundle, this);
     }
 }
