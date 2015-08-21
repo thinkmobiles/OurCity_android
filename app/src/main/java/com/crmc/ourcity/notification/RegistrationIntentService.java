@@ -53,6 +53,7 @@ public class RegistrationIntentService extends IntentService {
         CityApi cityApi = RestClientApi.getCityApi();
 
         Boolean isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(_authToken, _pushToken));
+        SPManager.getInstance(this).setPushToken(_pushToken);
     }
 
 

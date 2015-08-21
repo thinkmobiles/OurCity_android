@@ -7,13 +7,14 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
+import com.crmc.ourcity.rest.responce.login.LoginResponse;
 
 import retrofit.RetrofitError;
 
 /**
  * Created by podo on 20.08.15.
  */
-public class LoginLoader extends BaseLoader<String> {
+public class LoginLoader extends BaseLoader<LoginResponse> {
 
     private ResidentSignInDetails residentSignInDetails;
 
@@ -28,17 +29,17 @@ public class LoginLoader extends BaseLoader<String> {
     }
 
     @Override
-    public String loadInBackground() {
+    public LoginResponse loadInBackground() {
 
         CityApi cityApi = RestClientApi.getCityApi();
-        String authToken;
+        LoginResponse response;
 
         try {
-            authToken = cityApi.loginResidentAndGetAuthToken(residentSignInDetails);
+            response = cityApi.loginResidentAndGetAuthToken(residentSignInDetails);
         } catch (RetrofitError e) {
             e.printStackTrace();
-            authToken = "not so good";
+            response = new LoginResponse();
         }
-        return  authToken;
+        return  response;
     }
 }

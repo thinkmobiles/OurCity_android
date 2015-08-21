@@ -24,6 +24,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
 import com.crmc.ourcity.loader.RegisterLoader;
 import com.crmc.ourcity.rest.request.registration.ResidentDetails;
+import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
@@ -178,10 +179,10 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
 
         @Override
-        public void onLoadFinished(Loader<Integer> loader, Integer data) {
-            Integer residentID = data;
-            if (residentID > 0) {
-            SPManager.getInstance(getActivity()).setResidentId(residentID);
+        public void onLoadFinished(Loader<Integer> loader, Integer residentId) {
+
+            if (residentId > 0) {
+            SPManager.getInstance(getActivity()).setResidentId(residentId);
             SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
             SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
 
@@ -189,8 +190,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
 
             getLoaderManager().initLoader(12, bundle, mLoginCallback);
 
-        }
-        Log.d("TAG", residentID.toString());
+            }
 
         }
 
@@ -200,19 +200,21 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
     };
 
-    private LoaderManager.LoaderCallbacks<String> mLoginCallback = new LoaderManager.LoaderCallbacks<String>() {
+    private LoaderManager.LoaderCallbacks<LoginResponse> mLoginCallback = new LoaderManager.LoaderCallbacks<LoginResponse>() {
         @Override
-        public Loader<String> onCreateLoader(int id, Bundle args) {
+        public Loader<LoginResponse> onCreateLoader(int id, Bundle args) {
             return new LoginLoader(getActivity(), args);
         }
 
         @Override
-        public void onLoadFinished(Loader<String> loader, String data) {
-            SPManager.getInstance(getActivity()).setAuthToken(data);
+        public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
+            SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+            SPManager.getInstance(getActivity()).setIsLogInStatus(true);
+            getActivity().finish();
         }
 
         @Override
-        public void onLoaderReset(Loader<String> loader) {
+        public void onLoaderReset(Loader<LoginResponse> loader) {
 
         }
     };

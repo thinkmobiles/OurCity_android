@@ -19,13 +19,15 @@ import android.widget.Toast;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
+import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.utils.SPManager;
 
 /**
  * Created by podo on 19.08.15.
  */
-public class SignInDialog extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<String>, View.OnFocusChangeListener {
+public class SignInDialog extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<LoginResponse>, View.OnFocusChangeListener {
 
     private EditText etUsername;
     private EditText etPassword;
@@ -69,15 +71,20 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
         etUsername.setOnFocusChangeListener(this);
     }
 
+    private Bundle createBundleForResident() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, etUsername.getText().toString());
+        bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
+        return bundle;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignIn_SIDF :
                 if(checkValidation()) {
-                    //TODO: раскомментировать, когда закончишь логику отправки пушей
-//                getLoaderManager().initLoader(1, new Bundle(), this);
-                    SPManager.getInstance(getActivity()).setIsLogInStatus(true);
-                    getActivity().finish();
+                    Bundle bundle = createBundleForResident();
+                getLoaderManager().initLoader(1, bundle, this);
                 }
                 break;
             case R.id.tvSignUp_SIDF :
@@ -102,17 +109,20 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public Loader<String> onCreateLoader(int id, Bundle args) {
+    public Loader<LoginResponse> onCreateLoader(int id, Bundle args) {
         return new LoginLoader(getActivity(), args);
     }
 
     @Override
-    public void onLoadFinished(Loader<String> loader, String data) {
-        Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT);
+    public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
+        SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+        SPManager.getInstance(getActivity()).setResidentId(data.residentId);
+        SPManager.getInstance(getActivity()).setIsLogInStatus(true);
+        getActivity().finish();
     }
 
     @Override
-    public void onLoaderReset(Loader<String> loader) {
+    public void onLoaderReset(Loader<LoginResponse> loader) {
 
     }
 

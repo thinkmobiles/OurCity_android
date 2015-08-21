@@ -12,6 +12,7 @@ import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
@@ -38,7 +39,7 @@ public interface CityApi {
     Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel _residentModel);
 
     @POST("/MobileLogin")
-    String loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
+    LoginResponse loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
 
     @POST("/MobileUpdatePushToken")
     Boolean updatePushTokenOnWS(@Body PushTokenUpdatingModel _pushTokenUpdatingModel);
