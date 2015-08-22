@@ -20,9 +20,9 @@ import android.content.Intent;
 
 import com.google.android.gms.iid.InstanceIDListenerService;
 
-public class MyInstanceIDListenerService extends InstanceIDListenerService {
+public class InstanceIdListenerService extends InstanceIDListenerService {
 
-    private static final String TAG = "MyInstanceIDLS";
+    private static final String TAG = "InstanceIDLS";
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of

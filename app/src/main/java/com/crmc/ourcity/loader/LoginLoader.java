@@ -24,8 +24,7 @@ public class LoginLoader extends BaseLoader<LoginResponse> {
         residentSignInDetails.userName = _bundle.getString(Constants.BUNDLE_CONSTANT_USER_NAME, "default value");
         residentSignInDetails.password = _bundle.getString(Constants.BUNDLE_CONSTANT_PASSWORD, "default value");
         residentSignInDetails.authToken = _bundle.getString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, "");
-        residentSignInDetails.pushToken = "APA124324";
-
+        residentSignInDetails.pushToken = _bundle.getString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, "");
     }
 
     @Override

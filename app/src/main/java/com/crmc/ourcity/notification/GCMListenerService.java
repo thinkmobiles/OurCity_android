@@ -28,9 +28,9 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-public class MyGcmListenerService extends GcmListenerService {
+public class GCMListenerService extends GcmListenerService {
 
-    private static final String TAG = "MyGcmListenerService";
+    private static final String TAG = "GCMListenerService";
 
     /**
      * Called when message is received.

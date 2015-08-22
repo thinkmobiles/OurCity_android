@@ -1,6 +1,7 @@
 package com.crmc.ourcity.dialog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -13,6 +14,7 @@ import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LogoutLoader;
+import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.utils.SPManager;
 
 /**
@@ -101,6 +103,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
             SPManager.getInstance(getActivity()).setIsLogInStatus(false);
             if (data) {
                 SPManager.getInstance(getActivity()).deleteResidentInformation();
+                getActivity().stopService(new Intent(getActivity(), RegistrationIntentService.class));
                 logout.setVisibility(View.GONE);
             }
         }
