@@ -25,12 +25,16 @@ import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
+import com.crmc.ourcity.utils.SPManager;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.List;
 
@@ -39,11 +43,20 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
-
+    private boolean isLogIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(checkPlayServices()) {
+            if (!TextUtils.isEmpty(SPManager.getInstance(this).getAuthToken())) {
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+        }
+
+        isLogIn = SPManager.getInstance(this).getLogInStatus();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
@@ -153,11 +166,37 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         int id = item.getItemId();
 
         if (id == R.id.menu_settings) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+            boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
+
             Intent intent = new Intent(this, DialogActivity.class);
+            intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
             EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        Constants.PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                //Device not supported.
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 }

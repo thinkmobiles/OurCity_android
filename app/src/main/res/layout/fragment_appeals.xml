@@ -80,7 +80,7 @@
                     android:textSize="16sp"/>
 
                 <com.crmc.ourcity.view.EditTextStreetAutoComplete
-                    android:id="@+id/etNameStreet_AF"
+                    android:id="@+id/etStreetName_SUDF"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:background="@drawable/boarder_round_green_ff"

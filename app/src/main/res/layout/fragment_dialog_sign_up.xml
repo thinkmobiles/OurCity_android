@@ -1,0 +1,254 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#212121"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/sign_id_dialog_vertical"
+            android:paddingLeft="@dimen/sign_id_dialog_horizontal"
+            android:paddingRight="@dimen/sign_id_dialog_horizontal"
+            android:paddingBottom="@dimen/sign_id_dialog_vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/linearLayout">
+
+
+        <EditText
+            android:id="@+id/etLastName_SUDF"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:background="#424242"
+            android:textColorHint="#616161"
+            android:gravity="right|center_vertical"
+            android:hint="@string/focus_l_name"
+            android:textSize="@dimen/sign_up_dialog_textSize"
+            android:padding="@dimen/person5"
+            android:paddingStart="@dimen/person5"
+            />
+
+        <EditText
+            android:id="@+id/etFirstName_SUDF"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/profile10"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:background="#424242"
+            android:gravity="right|center_vertical"
+            android:hint="@string/focus_f_name"
+            android:textColorHint="#616161"
+            android:padding="@dimen/person5"
+            android:paddingEnd="@dimen/person5"
+            android:textSize="@dimen/sign_up_dialog_textSize"/>
+    </LinearLayout>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:background="#424242"
+        android:hint="@string/resident_userName"
+        android:textColorHint="#616161"
+        android:id="@+id/etUsername_SUDF"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/person5"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:background="#424242"
+        android:hint="@string/resident_password"
+        android:textColorHint="#616161"
+        android:id="@+id/etPassword_SUDF"
+        android:layout_below="@+id/etUsername_SUDF"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/person5"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:background="#424242"
+        android:hint="@string/focus_phon"
+        android:textColorHint="#616161"
+        android:id="@+id/etPhoneNumber_SUDF"
+        android:layout_below="@+id/etPassword_SUDF"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/person5"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#424242"
+        android:textColorHint="#616161"
+        android:inputType="text"
+        android:hint="@string/focus_mobile"
+        android:gravity="right|center_vertical"
+        android:ems="10"
+        android:id="@+id/etMobileNumber_SUDF"
+        android:layout_below="@+id/etPhoneNumber_SUDF"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/person5"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:hint="@string/focus_email"
+        android:background="#424242"
+        android:textColorHint="#616161"
+        android:gravity="right|center_vertical"
+        android:id="@+id/etEmail_SUDF"
+        android:layout_below="@+id/etMobileNumber_SUDF"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/person5"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/etEmail_SUDF"
+        android:layout_centerHorizontal="true"
+        android:weightSum="3"
+        android:id="@+id/linearLayout2">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/etHouseNumber_SUDF"
+            android:background="#424242"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColorHint="#616161"
+            android:hint="@string/focus_house"
+            android:padding="@dimen/person5"
+            android:textSize="@dimen/sign_up_dialog_textSize"
+            />
+
+        <com.crmc.ourcity.view.EditTextStreetAutoComplete
+            android:id="@+id/etStreetName_SUDF"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:textColorHint="#616161"
+            android:background="#424242"
+            android:textColor="#242424"
+            android:textSize="@dimen/sign_up_dialog_textSize"
+            android:inputType="textAutoComplete"
+            android:gravity="center_vertical|right"
+            android:hint="@string/focus_street"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:layout_weight="2"
+
+            />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/etCityName_SUDF"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        android:layout_alignEnd="@+id/linearLayout2"
+        android:textColorHint="#616161"
+        android:background="#424242"
+        android:gravity="right|center_vertical"
+        android:hint="@string/focus_name_city"
+        android:padding="@dimen/person5"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you want to receive global notifications?"
+        android:textColor="#616161"
+        android:id="@+id/chbGlobalNotifications_SUDF"
+        android:layout_below="@+id/etCityName_SUDF"
+        android:layout_alignParentEnd="true"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you want to receive personal notifications?"
+        android:textColor="#616161"
+        android:id="@+id/chbPersonalNotifications_SUDF"
+        android:layout_below="@+id/chbGlobalNotifications_SUDF"
+        android:layout_alignParentEnd="true"
+        />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Sign up"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        android:background="@color/turquoise"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/btnSignUpOrEdit_SUDF"
+        android:layout_below="@+id/chbPersonalNotifications_SUDF"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pb_SUDF"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

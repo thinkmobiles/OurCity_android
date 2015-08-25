@@ -18,5 +18,7 @@ public enum DialogType {
     GENDER,
     VOTE_CHOICE,
     PHOTO_CAM,
-    PHOTO_GALLERY
+    PHOTO_GALLERY,
+    LOGIN,
+
 }

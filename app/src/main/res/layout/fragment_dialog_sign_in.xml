@@ -1,0 +1,78 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/turquoise"
+    android:paddingLeft="@dimen/sign_id_dialog_horizontal"
+    android:paddingRight="@dimen/sign_id_dialog_horizontal"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/turquoise">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/background_dark"
+        android:hint="@string/resident_userName"
+        android:gravity="right|center_vertical"
+        android:paddingRight="5dp"
+        android:ems="10"
+        android:textColor="@android:color/black"
+        android:id="@+id/etUsername_SIDF"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        android:background="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/etPassword_SIDF"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:textColorHint="@android:color/background_dark"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        android:paddingRight="5dp"
+        android:gravity="right|center_vertical"
+        android:hint="@string/resident_password"
+        android:textColor="@android:color/black"
+        android:background="#FFFFFF"
+        android:id="@+id/etPassword_SIDF"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/etUsername_SIDF"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/sign_in_dialog_login"
+        android:id="@+id/btnSignIn_SIDF"
+        android:textSize="@dimen/sign_up_dialog_textSize"
+        android:background="#EEEEEE"
+        android:textColor="@color/turquoise"
+        android:layout_below="@+id/etPassword_SIDF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not a member? Sign up now."
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/white"
+        android:id="@+id/tvSignUp_SIDF"
+        android:layout_below="@+id/btnSignIn_SIDF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

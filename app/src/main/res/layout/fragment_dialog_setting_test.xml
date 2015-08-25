@@ -140,6 +140,36 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_massenger" />
         </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/rlLogout_FDS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:visibility="gone"
+            android:padding="@dimen/settings10">
+
+            <TextView
+
+                android:id="@+id/tvLogout_FDS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="@string/setting_dialog_logout"
+                android:textColor="#148989"
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/log_off"
+                android:background="@color/turquoise"/>
+        </RelativeLayout>
     </LinearLayout>
 
 

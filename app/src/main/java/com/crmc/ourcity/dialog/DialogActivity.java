@@ -58,6 +58,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case SETTING:
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SettingDialog());
                 break;
+            case LOGIN:
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SignInDialog());
+                break;
         }
     }
 
@@ -75,7 +78,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 finish();
                 break;
             case REGISTER:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new TestDialog());
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignUpDialog());
                 break;
             case CONFIRMATION:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());

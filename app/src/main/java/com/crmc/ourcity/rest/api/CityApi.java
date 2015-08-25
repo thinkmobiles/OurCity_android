@@ -1,6 +1,9 @@
 package com.crmc.ourcity.rest.api;
 
 import com.crmc.ourcity.rest.request.base.BaseModel;
+import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
+import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
+import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
@@ -10,6 +13,7 @@ import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
@@ -26,6 +30,23 @@ import retrofit.mime.TypedInput;
  * Created by SetKrul on 28.07.2015.
  */
 public interface CityApi {
+
+    /**
+     *
+     * @param _residentModel - data for register new Resident
+     * @return residentID
+     */
+    @POST("/RegistNewResident")
+    Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel _residentModel);
+
+    @POST("/MobileLogin")
+    LoginResponse loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
+
+    @POST("/MobileUpdatePushToken")
+    Boolean updatePushTokenOnWS(@Body PushTokenUpdatingModel _pushTokenUpdatingModel);
+
+    @POST("/MobileLogout")
+    Boolean logout(@Body LogoutModel _logoutModel);
 
     /**
      * @param cityModel number city and language

@@ -52,7 +52,7 @@
     <dimen name="profile300">274.90dp</dimen>
     <dimen name="profile22">20.15dp</dimen>
     <dimen name="profile18">16.49dp</dimen>
-    <dimen name="profile10">9.16dp</dimen>
+    <dimen name="profile10">10dp</dimen>
     <dimen name="profile5">4.58dp</dimen>
     <dimen name="profile3">2.74dp</dimen>
     <dimen name="profilesp18">16.49sp</dimen>
@@ -157,6 +157,9 @@
     <dimen name="focussp30">27.49sp</dimen>
     <dimen name="focussp22">20.15sp</dimen>
     <dimen name="radius_btn">5dp</dimen>
+    <dimen name="sign_id_dialog_horizontal">20dp</dimen>
+    <dimen name="sign_id_dialog_vertical">40dp</dimen>
+    <dimen name="sign_up_dialog_textSize">15sp</dimen>
 
 
 </resources>
