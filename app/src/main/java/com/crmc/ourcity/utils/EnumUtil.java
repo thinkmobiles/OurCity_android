@@ -34,10 +34,10 @@ public class EnumUtil {
         }
     }
     public static <T extends Enum<T>> Deserializer<T> deserialize(Class<T> _targetType) {
-        return new Deserializer<T>(_targetType);
+        return new Deserializer<>(_targetType);
     }
 
     public static <T extends Enum<T>> Serializer<T> serialize(Class<T> _targetType, T _target) {
-        return new Serializer<T>(_targetType, _target);
+        return new Serializer<>(_targetType, _target);
     }
 }

@@ -29,6 +29,10 @@ public class Image {
         ColorNow = _color;
     }
 
+    public static String getStringColor() {
+        return "#" + Integer.toHexString(ColorNow).substring(2);
+    }
+
     /**
      * Method for return file path of Gallery image
      *
@@ -62,8 +66,8 @@ public class Image {
             optionsResize.inSampleSize = scale;
             return BitmapFactory.decodeStream(new FileInputStream(_file), null, optionsResize);
         } catch (FileNotFoundException e) {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -73,16 +77,15 @@ public class Image {
      * @return bitmap image
      */
     public static Bitmap convertBase64ToBitmap(String _image) {
-        Bitmap decodedByte = null;
         try {
             String imageDataBytes = _image.substring(_image.indexOf(",") + 1);
-            if (imageDataBytes.length() > 0) {
-                byte[] decodedString = Base64.decode(imageDataBytes, Base64.DEFAULT);
-                decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            }
+//            if (imageDataBytes.length() > 0) {
+            byte[] decodedString = Base64.decode(imageDataBytes, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//            }
         } catch (Exception e) {
+            return null;
         }
-        return decodedByte;
     }
 
     /**
@@ -177,10 +180,10 @@ public class Image {
      */
     public static void setBackgroundColorArrayView(Context _context, View[] _view, int _drawable, int _color) {
         Drawable d;
-        for (int i = 0; i < _view.length; i++) {
+        for (View a_view : _view) {
             d = ContextCompat.getDrawable(_context, _drawable);
             d.setColorFilter(_color, PorterDuff.Mode.SCREEN);
-            _view[i].setBackground(d);
+            a_view.setBackground(d);
         }
     }
 

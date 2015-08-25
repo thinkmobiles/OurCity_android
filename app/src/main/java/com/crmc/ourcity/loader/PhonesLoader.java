@@ -36,13 +36,9 @@ public class PhonesLoader extends BaseLoader<List<Phones>> {
         List<Phones> mPhones = null;
         try {
             mPhones =  api.getPhones(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
-        } catch (RetrofitError e) {
+        } catch (RetrofitError | UnsupportedEncodingException e) {
             mPhones = new ArrayList<>();
             mPhones.add(new Phones());
-        } catch (UnsupportedEncodingException e) {
-            mPhones = new ArrayList<>();
-            mPhones.add(new Phones());
-            e.printStackTrace();
         }
         return mPhones;
     }

@@ -2,7 +2,6 @@ package com.crmc.ourcity.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -54,7 +53,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         mTicker.startAnimation();
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("OutCity");
 
@@ -86,8 +85,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 }
                 break;
             case Constants.ACTION_TYPE_LINK:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link, Color
-                        .parseColor(_menuModel.colorItem)));
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link,
+                        _menuModel.colorItem));
+                break;
+            case Constants.ACTION_TYPE_DOCUMENT:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_TYPE_MAP:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapsFragment.newInstance(_menuModel.getLat(),
@@ -123,35 +126,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onEventsItemAction(Events _events) {
-//        if (!TextUtils.isEmpty(_events.link)) {
-//            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_events.link, Image
-//                    .darkenColor(0.0)));
-//
-//        } else if (!TextUtils.isEmpty(_events.email)) {
-//            try {
-//                startActivity(Intent.createChooser(IntentUtils.getIntentMail(_events.email), getString(R.string
-//                        .send_mail_hint)));
-//            } catch (android.content.ActivityNotFoundException ex) {
-//                Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
-//            }
-//        } else if (!TextUtils.isEmpty(_events.phone)) {
-//            try {
-//                startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_events.phone), getResources()
-//                        .getString(R.string.call_skype_hint)));
-//            } catch (ActivityNotFoundException e) {
-//                Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
-//        }
-    }
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
+   }
 
     @Override
     public void onEventsClickLinkAction(String _link) {
         if (!TextUtils.isEmpty(_link)) {
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image
-                    .darkenColor(0.0)));
-
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
+                    ()));
         }
     }
 

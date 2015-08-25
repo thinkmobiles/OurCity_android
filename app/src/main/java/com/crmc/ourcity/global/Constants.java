@@ -26,7 +26,9 @@ public class Constants {
     final public static int LOADER_VOTE_REPLY_ID = 4;
     final public static int LOADER_EVENTS_ID = 5;
     final public static int LOADER_INTERESTED_POINTS_ID = 6;
-    final public static int LOADER_PHONES_ID = 5;
+    final public static int LOADER_PHONES_ID = 7;
+    final public static int LOADER_DOCUMENTS_ID = 8;
+    final public static int LOADER_MENU_ID = 9;
 
     //for bundle
     final public static String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
@@ -35,7 +37,6 @@ public class Constants {
     final public static String BUNDLE_CONSTANTS_LON = "LON";
     final public static String BUNDLE_CONSTANT_CITY_NUMBER = "CITY";
     final public static String BUNDLE_CONSTANT_LANG = "LANG";
-    final public static String BUNDLE_CONSTANT_TYPE = "TYPE";
     final public static String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
     final public static String BUNDLE_CONSTANT_AGE = "AGE";
     final public static String BUNDLE_CONSTANT_GENDER = "GENDER";
@@ -44,9 +45,6 @@ public class Constants {
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
     final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
-    final public static String BUNDLE_CONSTANT_CLIENT_ID = "CLIENT_ID";
-    final public static String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
-    final public static String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
     final public static String BUNDLE_MARKERS = "MARKER";
     final public static String BUNDLE_INTEGER = "INTEGER";
     final public static String IMAGE_MIME_TYPE_PREFIX = "image";
@@ -60,13 +58,15 @@ public class Constants {
     final public static String CONFIGURATION_KEY_JSON = "KEY_JSON";
     final public static String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
     final public static String CONFIGURATION_KEY_EVENTS = "KEY_EVENTS";
-    
+    final public static String CONFIGURATION_KEY_SUBMENU = "SUBMENU";
+
     //action type
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
     final public static int ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT = 2;
     final public static int ACTION_TYPE_LIST_PHONE_LIST = 3;
     final public static int ACTION_TYPE_LINK = 3;
+    final public static int ACTION_TYPE_DOCUMENT = 4;
     final public static int ACTION_TYPE_MAP = 5;
     final public static int ACTION_TYPE_ADD_APPEALS = 6;
     final public static int ACTION_TYPE_VOTE = 7;

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 29.07.2015.
  */
-public class MenuModel implements Parcelable{
+public class MenuModel implements Parcelable {
 
     @SerializedName("Nodes")
     public List<MenuModel> menu;
@@ -40,8 +40,8 @@ public class MenuModel implements Parcelable{
     public String requestRoute;
     @SerializedName("RequestLogin")
     public String requestLogin;
-//    @SerializedName("ReturnType")
-//    public Integer returnType;
+    @SerializedName("ShowOnMap")
+    public Integer showOnMap;
     @SerializedName("Title")
     public String title;
 
@@ -59,7 +59,7 @@ public class MenuModel implements Parcelable{
         requestJson = in.readString();
         requestRoute = in.readString();
         requestLogin = in.readString();
-//        returnType = in.readInt();
+        showOnMap = in.readInt();
         title = in.readString();
     }
 
@@ -75,8 +75,8 @@ public class MenuModel implements Parcelable{
         }
     };
 
-    public List<MenuModel> getMenu(){
-        if (menu != null){
+    public List<MenuModel> getMenu() {
+        if (menu != null) {
             return menu;
         } else {
             menu = new ArrayList<>();
@@ -84,16 +84,16 @@ public class MenuModel implements Parcelable{
         }
     }
 
-    public Double getLat(){
+    public Double getLat() {
         if (lat != null) {
             return Double.parseDouble(lat.replace(',', '.'));
         }
         return null;
     }
 
-    public Double getLon(){
+    public Double getLon() {
         if (lon != null) {
-            return Double.parseDouble(lon.replace(',','.'));
+            return Double.parseDouble(lon.replace(',', '.'));
         }
         return null;
     }
@@ -118,7 +118,7 @@ public class MenuModel implements Parcelable{
         dest.writeString(requestJson);
         dest.writeString(requestRoute);
         dest.writeString(requestLogin);
-//        dest.writeInt(returnType);
+        dest.writeInt(showOnMap);
         dest.writeString(title);
     }
 }

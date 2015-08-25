@@ -5,6 +5,7 @@ import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
@@ -109,4 +110,7 @@ public interface CityApi {
 
     @POST("/{path}")
     StreetsFull getStreets(@Path ("path") String q, @Body TypedInput body);
+
+    @POST("/{path}")
+    Documents getDocuments(@Path ("path") String q, @Body TypedInput body);
 }

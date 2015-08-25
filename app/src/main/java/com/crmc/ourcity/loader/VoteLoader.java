@@ -35,10 +35,8 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
         List<VoteFull> mVote = null;
         try {
             mVote =  api.getVote(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
-        } catch (RetrofitError _e) {
+        } catch (RetrofitError | UnsupportedEncodingException _e) {
             mVote = new ArrayList<>();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
         return mVote;
     }

@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
+import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
@@ -33,7 +33,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("SUBMENU", (ArrayList<? extends Parcelable>) _submenu);
+        args.putParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU, (ArrayList<? extends Parcelable>) _submenu);
         subMenuFragment.setArguments(args);
         return subMenuFragment;
     }
@@ -58,8 +58,8 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     protected void initViews() {
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
-                mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
+                RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
@@ -75,8 +75,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        mData = getArguments().getParcelableArrayList("SUBMENU");
-        Log.i("TAG", mData.toString());
+        mData = getArguments().getParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU);
     }
 
     @Override

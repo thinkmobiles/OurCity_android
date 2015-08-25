@@ -35,13 +35,9 @@ public class MapDataLoader extends BaseLoader<List<MapCategory>> {
         List<MapCategory> mapCategories = null;
         try {
             mapCategories =  api.getMapDetails(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
-        } catch (RetrofitError _e) {
+        } catch (RetrofitError | UnsupportedEncodingException _e) {
             mapCategories = new ArrayList<>();
             mapCategories.add(new MapCategory());
-        } catch (UnsupportedEncodingException e) {
-            mapCategories = new ArrayList<>();
-            mapCategories.add(new MapCategory());
-            e.printStackTrace();
         }
         return mapCategories;
     }

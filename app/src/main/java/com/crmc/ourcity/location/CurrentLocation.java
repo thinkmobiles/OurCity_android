@@ -36,8 +36,6 @@ public class CurrentLocation implements ConnectionCallbacks, OnConnectionFailedL
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private GoogleApiClient mGoogleApiClient;
 
-    private static final String TAG = "TAG";
-
     public CurrentLocation(Context _context, LocationCallBack _locationCallBack) {
         this.mCallBack = _locationCallBack;
         this.mContext = _context;
@@ -106,7 +104,7 @@ public class CurrentLocation implements ConnectionCallbacks, OnConnectionFailedL
     private void togglePeriodicLocationUpdates() {
         if (!mRequestingLocationUpdates) {
             mRequestingLocationUpdates = true;
-            if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
+            if (mGoogleApiClient.isConnected()) {
                 startLocationUpdates();
             }
         } else {

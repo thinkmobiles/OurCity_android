@@ -41,6 +41,7 @@ public class DownloadFile {
                     request.setDestinationUri(linkFile);
                     myDownloadManager.enqueue(request);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             } else {
                 Uri path = Uri.fromFile(file);

@@ -35,8 +35,7 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup _parent, int _position) {
         View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.grid_item_vf, _parent, false);
         //Image.init(Color.parseColor(color));
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     public void setVisibleVotePercent(boolean _visible) {

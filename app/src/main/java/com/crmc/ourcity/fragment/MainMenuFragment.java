@@ -40,7 +40,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
-
         try {
             mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
@@ -58,13 +57,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     protected void initViews() {
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
-                mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
+                RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 if (menuModel.menu != null) {
                     mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                } else {
+                    mCallBackMenuModel.onItemAction(menuModel);
                 }
             }
         }));
@@ -85,7 +86,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        getLoaderManager().initLoader(1, bundle, this);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
     }
 
     @Override

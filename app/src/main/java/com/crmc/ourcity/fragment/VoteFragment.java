@@ -125,7 +125,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         @Override
         public void onLoadFinished(Loader<List<VoteFull>> _loader, List<VoteFull> _data) {
             if (mVoteFull == null) {
-                if (_data.size() > 0 && _data != null) {
+                if (_data.size() > 0) {
                     Intent intent = new Intent(getActivity(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
                     intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>) _data);
@@ -248,8 +248,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         if (voteDetails.size() > 0) {
             mAdapter = new VoteGridAdapter(getVote(_surveyId), color, getActivity());
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
-                    mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(Context _context, View _view, int _position) {
                     VoteDetails voteDetails = mAdapter.getItem(_position);

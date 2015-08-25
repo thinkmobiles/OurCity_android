@@ -35,11 +35,8 @@ public class EventsLoader extends BaseLoader<List<Events>> {
         List<Events> mEvents;
         try {
             mEvents =  api.getEvents(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
-        } catch (RetrofitError _e) {
+        } catch (RetrofitError | UnsupportedEncodingException _e) {
             mEvents = new ArrayList<>();
-        } catch (UnsupportedEncodingException e) {
-            mEvents = new ArrayList<>();
-            e.printStackTrace();
         }
         return mEvents;
     }

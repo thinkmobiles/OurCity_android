@@ -16,7 +16,6 @@ public class TestDialog extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
-        View root = _inflater.inflate(R.layout.fragment_dialog_registration, _container, false);
-        return root;
+        return _inflater.inflate(R.layout.fragment_dialog_registration, _container, false);
     }
 }

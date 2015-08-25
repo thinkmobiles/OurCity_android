@@ -2,37 +2,58 @@ package com.crmc.ourcity.fragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.DocumentsLoader;
+import com.crmc.ourcity.rest.responce.events.Documents;
+import com.crmc.ourcity.utils.HtmlFormatter;
 import com.crmc.ourcity.utils.Image;
 
 /**
  * Created by SetKrul on 20.07.2015.
  */
-public class WebViewFragment extends BaseFourStatesFragment {
+public class WebViewFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Documents> {
 
     private WebView mWebView;
+    private TextView tvTitle_WVF;
     private String link;
     private ProgressBar pbLoading;
-    private int color;
+    private String color;
+    private String json;
+    private String route;
 
-    public static WebViewFragment newInstance(String _link, int _color) {
+    public static WebViewFragment newInstance(String _link, String _colorItem) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
-        args.putInt(Constants.CONFIGURATION_KEY_COLOR, _color);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        mWebViewFragment.setArguments(args);
+        return mWebViewFragment;
+    }
+
+    public static WebViewFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+        WebViewFragment mWebViewFragment = new WebViewFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
         mWebViewFragment.setArguments(args);
         return mWebViewFragment;
     }
@@ -41,7 +62,9 @@ public class WebViewFragment extends BaseFourStatesFragment {
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
-        color = getArguments().getInt(Constants.CONFIGURATION_KEY_COLOR);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
     }
 
     @Override
@@ -49,6 +72,24 @@ public class WebViewFragment extends BaseFourStatesFragment {
         super.onViewCreated(_view, _savedInstanceState);
         loadUrl(link);
     }
+
+    @Override
+    public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
+        String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
+        mWebView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
+        tvTitle_WVF.setText(_data.documentTitle);
+        showContent();
+    }
+
+    @Override
+    public Loader<Documents> onCreateLoader(int _id, Bundle _args) {
+        return new DocumentsLoader(getActivity(), _args);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Documents> _loader) {
+    }
+
 
     @Override
     public void onRetryClick() {
@@ -60,10 +101,10 @@ public class WebViewFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-
+        tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
-        Image.init(color);
+        Image.init(Color.parseColor(color));
         pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
         pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
 
@@ -103,18 +144,20 @@ public class WebViewFragment extends BaseFourStatesFragment {
     }
 
     private void loadUrl(String _link) {
-        if (_link.contains(".pdf")) {
+        if (!TextUtils.isEmpty(_link) && _link.contains(".pdf")) {
 //            String pdfLink = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
 //            if (pdfLink.substring(pdfLink.lastIndexOf(".") + 1).equals(""));
             mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _link);
+            tvTitle_WVF.setVisibility(View.GONE);
 //            new DownloadFile().downloadPdf(getActivity(), _link);
 //            popBackStack();
-        }
-//         else if (/*html text*/){
-//            _link = new HtmlFormatter(getActivity()).htmlForWebView(_link, "", "justify", "right");
-//            mWebView.loadDataWithBaseURL(null, _link, "text/html", "UTF-8", null);
-//        }
-        else {
+        } else if (!TextUtils.isEmpty(json)) {
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+            bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+            getLoaderManager().initLoader(Constants.LOADER_DOCUMENTS_ID, bundle, this);
+        } else {
+            tvTitle_WVF.setVisibility(View.GONE);
             mWebView.loadUrl(_link);
         }
     }

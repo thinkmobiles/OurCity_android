@@ -33,8 +33,7 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup _parent, int _viewType) {
 
         View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.menu_grid_item, _parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
