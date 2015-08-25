@@ -47,8 +47,22 @@ public class Constants {
     final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
     final public static String BUNDLE_MARKERS = "MARKER";
     final public static String BUNDLE_INTEGER = "INTEGER";
+    final public static String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
+    final public static String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
     final public static String IMAGE_MIME_TYPE_PREFIX = "image";
     final public static String IMAGE_MIME_TYPE = IMAGE_MIME_TYPE_PREFIX + "/*";
+    public static final String BUNDLE_CONSTANT_FIRST_NAME = "FIRST_NAME";
+    public static final String BUNDLE_CONSTANT_LAST_NAME = "LAST_NAME";
+    public static final String BUNDLE_CONSTANT_EMAIL = "EMAIL";
+    public static final String BUNDLE_CONSTANT_MOBILE_NUMBER = "MOBILE_NUMBER";
+    public static final String BUNDLE_CONSTANT_PHONE_NUMBER = "PHONE_NUMBER";
+    public static final String BUNDLE_CONSTANT_HOUSE_NUMBER = "HOUSE_NUMBER";
+    public static final String BUNDLE_CONSTANT_STREET_ID = "STREET_ID";
+    public static final String BUNDLE_CONSTANT_CITY_ID = "CITY_ID";
+    public static final String BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED = "GLOBAL_NOTIFICATION";
+    public static final String BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED = "PERSONAL_NOTIFICATION";
+    public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
+    public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
 
     //for Instance
     final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";
@@ -73,18 +87,7 @@ public class Constants {
     final public static int ACTION_TYPE_CALL_SKYPE = 8;
     final public static int ACTION_TYPE_MAIL = 9;
 
-    public static final String BUNDLE_CONSTANT_FIRST_NAME = "FIRST_NAME";
-    public static final String BUNDLE_CONSTANT_LAST_NAME = "LAST_NAME";
-    public static final String BUNDLE_CONSTANT_EMAIL = "EMAIL";
-    public static final String BUNDLE_CONSTANT_MOBILE_NUMBER = "MOBILE_NUMBER";
-    public static final String BUNDLE_CONSTANT_PHONE_NUMBER = "PHONE_NUMBER";
-    public static final String BUNDLE_CONSTANT_HOUSE_NUMBER = "HOUSE_NUMBER";
-    public static final String BUNDLE_CONSTANT_STREET_ID = "STREET_ID";
-    public static final String BUNDLE_CONSTANT_CITY_ID = "CITY_ID";
-    public static final String BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED = "GLOBAL_NOTIFICATION";
-    public static final String BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED = "PERSONAL_NOTIFICATION";
-    public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
-    public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
+
 
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 

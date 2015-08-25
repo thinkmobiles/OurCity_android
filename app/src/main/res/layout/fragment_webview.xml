@@ -13,7 +13,7 @@
         android:id="@+id/pbLoading_WVF"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:layout_gravity="bottom"
         android:background="@android:color/transparent"
         android:max="100"/>
