@@ -19,14 +19,18 @@ import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
-import com.crmc.ourcity.fragment.MapsFragment;
+import com.crmc.ourcity.fragment.MapClearFragment;
+import com.crmc.ourcity.fragment.MapInterestPointFragment;
+import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
+import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -44,12 +48,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private boolean isLogIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(checkPlayServices()) {
+        if (checkPlayServices()) {
             if (!TextUtils.isEmpty(SPManager.getInstance(this).getAuthToken())) {
                 Intent intent = new Intent(this, RegistrationIntentService.class);
                 startService(intent);
@@ -106,8 +111,22 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_TYPE_MAP:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapsFragment.newInstance(_menuModel.getLat(),
-                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                switch (_menuModel.showOnMap) {
+                    case 0:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapClearFragment.newInstance(_menuModel
+                                .getLat(), _menuModel.getLon()));
+                        break;
+                    case 1:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapInterestPointFragment.newInstance
+                                (_menuModel.getLat(), _menuModel.getLon(), _menuModel.colorItem, _menuModel
+                                        .requestJson, _menuModel.requestRoute));
+                        break;
+                    case 2:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat
+                                (), _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel
+                                .requestRoute));
+                        break;
+                }
                 break;
             case Constants.ACTION_TYPE_ADD_APPEALS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance(_menuModel.colorItem,
@@ -140,7 +159,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
-   }
+    }
+
+    @Override
+    public void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapTripsFragment.newInstance(_trips, _lat, _lon));
+    }
 
     @Override
     public void onEventsClickLinkAction(String _link) {
@@ -189,8 +213,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
             if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-                        Constants.PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, Constants.PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
             } else {
                 //Device not supported.
                 finish();

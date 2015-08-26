@@ -15,7 +15,7 @@ import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.loader.MapDataLoader;
+import com.crmc.ourcity.loader.MapInterestPointLoader;
 import com.crmc.ourcity.model.Marker;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.utils.EnumUtil;
@@ -25,8 +25,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ import java.util.Set;
 /**
  * Created by SetKrul on 31.07.2015.
  */
-public final class MapsFragment extends BaseFourStatesFragment implements OnMapReadyCallback, LoaderManager
-        .LoaderCallbacks<List<MapCategory>>, OnClickListener {
+public final class MapInterestPointFragment extends BaseFourStatesFragment implements OnMapReadyCallback,
+        LoaderManager.LoaderCallbacks<List<MapCategory>>, OnClickListener {
 
     private Double lat;
     private Double lon;
@@ -51,18 +51,20 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     private SupportMapFragment mMap;
     private Button btnFilter;
     private List<Marker> mDialogMarkers;
+    private LatLngBounds.Builder bounds;
     private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
 
-    public static MapsFragment newInstance(Double _lat, Double _lon, String _colorItem, String _requestJson, String _requestRoute) {
-        MapsFragment mMapsFragment = new MapsFragment();
+    public static MapInterestPointFragment newInstance(Double _lat, Double _lon, String _colorItem, String
+            _requestJson, String _requestRoute) {
+        MapInterestPointFragment mMapInterestPointFragment = new MapInterestPointFragment();
         Bundle args = new Bundle();
         args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
         args.putDouble(Constants.CONFIGURATION_KEY_LON, _lon);
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
-        mMapsFragment.setArguments(args);
-        return mMapsFragment;
+        mMapInterestPointFragment.setArguments(args);
+        return mMapInterestPointFragment;
     }
 
     @Override
@@ -78,7 +80,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_map;
+        return R.layout.fragment_map_interest_point;
     }
 
     @Override
@@ -89,11 +91,11 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     private void setUpMapIfNeeded() {
         if (mMap == null) {
-            mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapMain));
+            mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapInterestPoint_MIPF));
             mMap.getMapAsync(this);
         }
         if (mMap != null) {
-            getChildFragmentManager().findFragmentById(R.id.mapMain);
+            getChildFragmentManager().findFragmentById(R.id.mapInterestPoint_MIPF);
         }
     }
 
@@ -107,13 +109,13 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     public void onClick(View _view) {
         switch (_view.getId()) {
-            case R.id.btnMarkerFilter_MF:
+            case R.id.btnMarkerFilter_MIPF:
                 //if (mDialogMarkers != null) {
-                    Intent intent = new Intent(getActivity(), DialogActivity.class);
-                    EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
-                    intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
-                            Parcelable>) mDialogMarkers);
-                    startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
+                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
+                intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
+                        Parcelable>) mDialogMarkers);
+                startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
                 //} else {
                 //    Toast.makeText(getActivity(), "Do not have interested points!", Toast.LENGTH_SHORT).show();
                 //}
@@ -153,7 +155,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     protected void initViews() {
         super.initViews();
-        btnFilter = findView(R.id.btnMarkerFilter_MF);
+        btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         Image.init(Color.parseColor(color));
         Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
     }
@@ -167,6 +169,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     @Override
     public void onLoadFinished(Loader<List<MapCategory>> _loader, List<MapCategory> _data) {
         if (mDialogMarkers == null) {
+            bounds = new LatLngBounds.Builder();
             ArrayList<com.google.android.gms.maps.model.Marker> temp = new ArrayList<>();
             mDialogMarkers = new ArrayList<>();
             for (int i = 0; i < _data.size(); i++) {
@@ -174,14 +177,15 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
                     temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
                             .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat
                             (j), _data.get(i).getInterestedPointLon(j)))));
-
+                    bounds.include(new LatLng(_data.get(i).getInterestedPointLat(j), _data.get(i)
+                            .getInterestedPointLon(j)));
                 }
                 mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
                 mDialogMarkers.add(new Marker(_data.get(i).categoryId, _data.get(i).categoryName, true));
                 temp.clear();
             }
+            setCamera(mGoogleMap);
         }
-        showContent();
     }
 
     @Override
@@ -190,7 +194,7 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
 
     @Override
     public Loader<List<MapCategory>> onCreateLoader(int _id, Bundle _args) {
-        return new MapDataLoader(getActivity(), _args);
+        return new MapInterestPointLoader(getActivity(), _args);
     }
 
     @Override
@@ -201,7 +205,6 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     public void onMapReady(GoogleMap _googleMap) {
         _googleMap.setMyLocationEnabled(true);
         _googleMap.getUiSettings().setZoomControlsEnabled(true);
-        setCamera(_googleMap);
         this.mGoogleMap = _googleMap;
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
@@ -210,9 +213,12 @@ public final class MapsFragment extends BaseFourStatesFragment implements OnMapR
     }
 
     private void setCamera(GoogleMap _googleMap) {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(lat, lon)).zoom
-                (12).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.30);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds.build(), width, height, padding);
         _googleMap.moveCamera(cameraUpdate);
+        showContent();
     }
 }

@@ -47,6 +47,7 @@
     <!--map fragment -->
     <!--<string name="btn_interest_point_title">נקודות עניין</string>-->
     <string name="map_btn_filter">filter</string>
+    <string name="map_btn_trips">trips</string>
 
     <!-- nodes titles -->
     <string name="node_payments_title">תשלומים</string>

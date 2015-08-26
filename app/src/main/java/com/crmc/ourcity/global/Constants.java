@@ -29,6 +29,7 @@ public class Constants {
     final public static int LOADER_PHONES_ID = 7;
     final public static int LOADER_DOCUMENTS_ID = 8;
     final public static int LOADER_MENU_ID = 9;
+    final public static int LOADER_TRIPS_ID = 10;
 
     //for bundle
     final public static String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
@@ -72,6 +73,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_JSON = "KEY_JSON";
     final public static String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
     final public static String CONFIGURATION_KEY_EVENTS = "KEY_EVENTS";
+    final public static String CONFIGURATION_KEY_TRIPS = "KEY_TRIPS";
     final public static String CONFIGURATION_KEY_SUBMENU = "SUBMENU";
 
     //action type

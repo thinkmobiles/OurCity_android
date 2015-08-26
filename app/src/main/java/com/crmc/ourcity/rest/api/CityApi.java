@@ -49,11 +49,18 @@ public interface CityApi {
     Boolean logout(@Body LogoutModel _logoutModel);
 
     /**
-     * @param cityModel number city and language
+     * @param cityModel number city, resident id and language
      * @return tree-like structure for client app menu
      */
     @POST("/GetMobileMenu")
     MenuFull getMenu(@Body CityModel cityModel);
+
+    /**
+     * @param cityModel number city, resident id and language
+     * @return tree-like structure for client app menu
+     */
+    @POST("/GetBottomMobileMenu")
+    MenuFull getMenuBottom(@Body CityModel cityModel);
 
     /**
      * @return map marker category and markers with data
@@ -123,11 +130,10 @@ public interface CityApi {
     String getMayorImage(@Body BaseModel baseModel);
 
     /**
-     * @param baseModel city number
      * @return point for the construction of the route on the map
      */
-    @POST("/GetTripsByCityId")
-    List<MapTrips> getMapTrips(@Body BaseModel baseModel);
+    @POST("/{path}")
+    List<MapTrips> getMapTrips(@Path ("path") String q, @Body TypedInput body);
 
     @POST("/{path}")
     StreetsFull getStreets(@Path ("path") String q, @Body TypedInput body);

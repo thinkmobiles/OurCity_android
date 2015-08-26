@@ -18,12 +18,12 @@ import retrofit.mime.TypedByteArray;
 /**
  * Created by SetKrul on 29.07.2015.
  */
-public class MapDataLoader extends BaseLoader<List<MapCategory>> {
+public class MapInterestPointLoader extends BaseLoader<List<MapCategory>> {
 
     private String json;
     private String route;
 
-    public MapDataLoader(Context _context, Bundle _args) {
+    public MapInterestPointLoader(Context _context, Bundle _args) {
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
         route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);

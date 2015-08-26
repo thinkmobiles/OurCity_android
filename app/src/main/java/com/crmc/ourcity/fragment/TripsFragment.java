@@ -1,52 +1,78 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.adapter.PhonesListAdapter;
+import com.crmc.ourcity.adapter.TripsListAdapter;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.loader.PhonesLoader;
-import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.loader.MapTripsLoader;
+import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
 /**
- * Created by SetKrul on 05.08.2015.
+ * Created by SetKrul on 25.08.2015.
  */
-public class PhonesFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>>,
-        OnRefreshListener {
+public class TripsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<MapTrips>>,
+        SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
 
-    private ListView lvPhones;
-    private PhonesListAdapter mAdapter;
+    private ListView lvTrips;
+    private TripsListAdapter mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String color;
     private String json;
     private String route;
+    private Double lat;
+    private Double lon;
+    private OnListItemActionListener mOnListItemActionListener;
 
-    public static PhonesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
-        PhonesFragment mPhonesFragment = new PhonesFragment();
+    public static TripsFragment newInstance(Double _lat, Double _lon, String _colorItem, String _requestJson, String
+            _requestRoute) {
+        TripsFragment mTripsFragment = new TripsFragment();
         Bundle args = new Bundle();
+        args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
+        args.putDouble(Constants.CONFIGURATION_KEY_LON, _lon);
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
-        mPhonesFragment.setArguments(args);
-        return mPhonesFragment;
+        mTripsFragment.setArguments(args);
+        return mTripsFragment;
+    }
+
+    @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        super.onDetach();
     }
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        lat = getArguments().getDouble(Constants.CONFIGURATION_KEY_LAT);
+        lon = getArguments().getDouble(Constants.CONFIGURATION_KEY_LON);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
@@ -58,22 +84,28 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_PHONES_ID, bundle, this);
+        getLoaderManager().initLoader(Constants.LOADER_TRIPS_ID, bundle, this);
     }
 
     @Override
     protected void initViews() {
         super.initViews();
-        swipeRefreshLayout = findView(R.id.swipe_refresh_phones);
-        lvPhones = findView(R.id.lvPhones_FP);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
+        lvTrips = findView(R.id.lvTrips_FT);
         Image.init(Color.parseColor(color));
-        lvPhones.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
-        lvPhones.setDividerHeight(4);
+        lvTrips.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvTrips.setDividerHeight(4);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
+        mOnListItemActionListener.onTripsItemAction(mAdapter.getItem(_position), lat, lon);
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
+        lvTrips.setOnItemClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeInStart();
     }
@@ -93,26 +125,26 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Phones>> _loader, List<Phones> _data) {
+    public void onLoadFinished(Loader<List<MapTrips>> _loader, List<MapTrips> _data) {
         swipeRefreshLayout.setRefreshing(false);
-        mAdapter = new PhonesListAdapter(getActivity(), _data);
-        lvPhones.setAdapter(mAdapter);
+        mAdapter = new TripsListAdapter(getActivity(), _data);
+        lvTrips.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();
     }
 
     @Override
-    public Loader<List<Phones>> onCreateLoader(int _id, Bundle _args) {
-        return new PhonesLoader(getActivity(), _args);
+    public Loader<List<MapTrips>> onCreateLoader(int _id, Bundle _args) {
+        return new MapTripsLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Phones>> _loader) {
+    public void onLoaderReset(Loader<List<MapTrips>> _loader) {
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_phones;
+        return R.layout.fragment_trips;
     }
 
     @Override
@@ -124,6 +156,6 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_PHONES_ID, bundle, this);
+        getLoaderManager().restartLoader(Constants.LOADER_TRIPS_ID, bundle, this);
     }
 }

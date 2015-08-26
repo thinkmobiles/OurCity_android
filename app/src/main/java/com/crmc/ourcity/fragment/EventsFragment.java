@@ -65,6 +65,12 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        super.onDetach();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
@@ -94,7 +100,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     protected void initViews() {
         super.initViews();
         lvEvents = findView(R.id.lvEvents_EF);
-
         Image.init(Color.parseColor(color));
         lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvEvents.setDividerHeight(4);
@@ -107,13 +112,13 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
-        super.onViewCreated(_view, _savedInstanceState);
+    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
+        mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
     }
 
     @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
     }
 
     @Override
@@ -123,11 +128,5 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onRetryClick() {
-    }
-
-    @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        super.onDetach();
     }
 }
