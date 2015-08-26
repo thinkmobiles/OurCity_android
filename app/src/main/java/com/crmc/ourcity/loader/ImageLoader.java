@@ -40,6 +40,12 @@ public class ImageLoader extends BaseLoader<String> {
                 case Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR:
                     result = api.getMayorImage(new BaseModel(new BaseCity(cityNumber)));
                     break;
+                case Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL:
+                    result = api.getPromotionalImage(new BaseModel(new BaseCity(cityNumber)));
+                    break;
+                case Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_BANNER:
+                    result = api.getBannerImages(new BaseModel(new BaseCity(cityNumber)));
+                    break;
                 default:
                     result = null;
                     break;

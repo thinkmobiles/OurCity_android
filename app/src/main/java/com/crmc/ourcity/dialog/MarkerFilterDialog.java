@@ -11,7 +11,7 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MarkersListAdapter;
 import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.model.Marker;
+import com.crmc.ourcity.model.MapMarker;
 
 import java.util.ArrayList;
 
@@ -25,17 +25,17 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     private TextView btnSelectFilter;
     private ListView lvMarkerFilter;
     private CallBackWithData mCallback;
-    private ArrayList<Marker> mMarkers;
+    private ArrayList<MapMarker> mMapMarkers;
     private MarkersListAdapter mAdapter;
 
     public MarkerFilterDialog() {
         super();
     }
 
-    public static MarkerFilterDialog newInstance(ArrayList<Marker> _mMarkers) {
+    public static MarkerFilterDialog newInstance(ArrayList<MapMarker> _mMapMarkers) {
         MarkerFilterDialog mDialogMapFilter = new MarkerFilterDialog();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(CONFIGURATION_KEY, _mMarkers);
+        args.putParcelableArrayList(CONFIGURATION_KEY, _mMapMarkers);
         mDialogMapFilter.setArguments(args);
         return mDialogMapFilter;
     }
@@ -43,7 +43,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        mMarkers = getArguments().getParcelableArrayList(CONFIGURATION_KEY);
+        mMapMarkers = getArguments().getParcelableArrayList(CONFIGURATION_KEY);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
         btnCancelFilter = findView(R.id.btnCancel_Filter_DMF);
         btnSelectFilter = findView(R.id.btnSelect_Filter_DMF);
         lvMarkerFilter = findView(R.id.lvMarkerFilter_DMF);
-        mAdapter = new MarkersListAdapter(getActivity(), mMarkers);
+        mAdapter = new MarkersListAdapter(getActivity(), mMapMarkers);
         lvMarkerFilter.setAdapter(mAdapter);
         showContent();
     }

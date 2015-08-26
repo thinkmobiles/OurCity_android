@@ -130,6 +130,20 @@ public interface CityApi {
     String getMayorImage(@Body BaseModel baseModel);
 
     /**
+     * @param baseModel city number
+     * @return string base64 image promotional
+     */
+    @POST("/GetPromotionalImage")
+    String getPromotionalImage(@Body BaseModel baseModel);
+
+    /**
+     * @param baseModel city number
+     * @return string base64 image banner
+     */
+    @POST("/GetBannerImages")
+    String getBannerImages(@Body BaseModel baseModel);
+
+    /**
      * @return point for the construction of the route on the map
      */
     @POST("/{path}")

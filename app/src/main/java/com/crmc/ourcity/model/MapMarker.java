@@ -6,32 +6,32 @@ import android.os.Parcelable;
 /**
  * Created by SetKrul on 04.08.2015.
  */
-public class Marker implements Parcelable{
+public class MapMarker implements Parcelable{
     public int categoryId;
     public String title;
     public boolean visible;
 
-    public Marker(int _categoryId, String _title, boolean _visible){
+    public MapMarker(int _categoryId, String _title, boolean _visible){
         this.categoryId = _categoryId;
         this.title = _title;
         this.visible = _visible;
     }
 
-    protected Marker(Parcel _in) {
+    protected MapMarker(Parcel _in) {
         categoryId = _in.readInt();
         title = _in.readString();
         visible = Boolean.valueOf(_in.readString());
     }
 
-    public static final Creator<Marker> CREATOR = new Creator<Marker>() {
+    public static final Creator<MapMarker> CREATOR = new Creator<MapMarker>() {
         @Override
-        public Marker createFromParcel(Parcel _in) {
-            return new Marker(_in);
+        public MapMarker createFromParcel(Parcel _in) {
+            return new MapMarker(_in);
         }
 
         @Override
-        public Marker[] newArray(int _size) {
-            return new Marker[_size];
+        public MapMarker[] newArray(int _size) {
+            return new MapMarker[_size];
         }
     };
 

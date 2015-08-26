@@ -2,36 +2,54 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.MenuBottomLoader;
 import com.crmc.ourcity.loader.MenuLoader;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class MainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<MenuFull> {
+public class MainMenuFragment extends BaseFourStatesFragment {
+
+    LinearLayout llBtn_MMF;
+    LinearLayout llBtnFirst_MMF;
+    LinearLayout llBtnSecond_MMF;
+    LinearLayout llBtnThird_MMF;
+
+    TextView tvBtnFirst_MMF;
+    TextView tvBtnSecond_MMF;
+    TextView tvBtnThird_MMF;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MenuGridAdapter mAdapter;
-    private MenuFull mData;
     private OnItemActionListener mCallBackMenuModel;
 
     private int cityNumber;
     private String lng;
+    private int residentId;
+    private boolean loaderMenuFinish = false;
+    private boolean loaderMenuBottomFinish = false;
+
 
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
@@ -55,6 +73,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     protected void initViews() {
+        llBtn_MMF = findView(R.id.llBtn_MMF);
+        llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
+        llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
+        llBtnThird_MMF = findView(R.id.llBtnThird_MMF);
+
+        tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
+        tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
+        tvBtnThird_MMF = findView(R.id.tvBtnThird_MMF);
+
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
@@ -78,6 +105,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = 1;
         lng = "en";
+        residentId = 0;
     }
 
     @Override
@@ -86,7 +114,97 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_BUTTOM_ID, bundle, mMenuBottomCallBack);
+    }
+
+    private LoaderManager.LoaderCallbacks<MenuFull> mMenuCallBack = new LoaderManager.LoaderCallbacks<MenuFull>() {
+
+        @Override
+        public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
+            return new MenuLoader(getActivity(), _args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
+            mAdapter = new MenuGridAdapter(_data.getNodes(), getActivity());
+            mRecyclerView.setAdapter(mAdapter);
+            loaderMenuFinish = true;
+            showView();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<MenuFull> _loader) {
+        }
+    };
+
+    private LoaderManager.LoaderCallbacks<MenuFull> mMenuBottomCallBack = new LoaderManager.LoaderCallbacks<MenuFull>
+            () {
+
+        @Override
+        public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
+            return new MenuBottomLoader(getActivity(), _args);
+        }
+
+        public Bitmap scaleDown(Bitmap realImage, float maxImageSize, boolean filter) {
+            float ratio = Math.min((float) maxImageSize / realImage.getWidth(), (float) maxImageSize / realImage
+                    .getHeight());
+            int width = Math.round((float) ratio * realImage.getWidth());
+            int height = Math.round((float) ratio * realImage.getHeight());
+
+            Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width, height, filter);
+            return newBitmap;
+        }
+
+        @Override
+        public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
+            if (_data.getSize() > 0) {
+                switch (_data.getSize()) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+//                llBtnFirst_MMF.setVisibility(View.GONE);
+//                llBtnSecond_MMF.setVisibility(View.GONE);
+//                llBtnThird_MMF.setVisibility(View.GONE);
+
+                BitmapDrawable a;
+                Bitmap scaledBitmap = scaleDown(Image.convertBase64ToBitmap(_data.getNodes().get(0).iconItem),
+                        30, true);
+                a = new BitmapDrawable(getResources(), scaledBitmap);
+                tvBtnFirst_MMF.setText(_data.getNodes().get(0).title);
+                tvBtnFirst_MMF.setCompoundDrawablesWithIntrinsicBounds(a, null, null, null);
+
+
+//                tvBtnSecond_MMF.setText(_data.getNodes().get(0).title);
+//                tvBtnSecond_MMF.setCompoundDrawables(new BitmapDrawable(getResources(), Image.convertBase64ToBitmap
+//                        (_data.getNodes().get(0).iconItem)), null, null, null);
+//                tvBtnThird_MMF.setText(_data.getNodes().get(0).title);
+//                tvBtnThird_MMF.setCompoundDrawables(new BitmapDrawable(getResources(), Image.convertBase64ToBitmap
+//                        (_data.getNodes().get(0).iconItem)), null, null, null);
+            } else {
+                llBtn_MMF.setVisibility(View.GONE);
+            }
+
+            loaderMenuBottomFinish = true;
+            showView();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<MenuFull> _loader) {
+        }
+    };
+
+    private void showView() {
+        if (loaderMenuFinish && loaderMenuBottomFinish) {
+            showContent();
+            loaderMenuFinish = false;
+            loaderMenuBottomFinish = false;
+        }
     }
 
     @Override
@@ -96,22 +214,5 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onRetryClick() {
-    }
-
-    @Override
-    public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
-        return new MenuLoader(getActivity(), _args);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
-        mData = _data;
-        mAdapter = new MenuGridAdapter(mData.getNodes(), getActivity());
-        mRecyclerView.setAdapter(mAdapter);
-        showContent();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<MenuFull> _loader) {
     }
 }

@@ -9,7 +9,7 @@ import com.crmc.ourcity.activity.BaseFragmentActivity;
 import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.Marker;
+import com.crmc.ourcity.model.MapMarker;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 import com.crmc.ourcity.utils.EnumUtil;
 
@@ -35,9 +35,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 break;
 
             case MARKER_FILTER:
-                ArrayList<Marker> mMarkers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
+                ArrayList<MapMarker> mMapMarkers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, MarkerFilterDialog.newInstance
-                        (mMarkers));
+                        (mMapMarkers));
                 break;
 
             case AGE:
@@ -88,7 +88,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
 
 
     @Override
-    public void onActionDialogDataMarker(List<Marker> _list) {
+    public void onActionDialogDataMarker(List<MapMarker> _list) {
         intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends Parcelable>) _list);
         setResult(RESULT_OK, intent);
         finish();

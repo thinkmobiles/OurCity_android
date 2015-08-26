@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.model.Marker;
+import com.crmc.ourcity.model.MapMarker;
 
 import java.util.List;
 
@@ -21,25 +21,25 @@ import java.util.List;
 public class MarkersListAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;
-    private List<Marker> mMarkers;
+    private List<MapMarker> mMapMarkers;
 
-    public MarkersListAdapter(Context _context, List<Marker> _markers) {
-        this.mMarkers = _markers;
+    public MarkersListAdapter(Context _context, List<MapMarker> _mapMarkers) {
+        this.mMapMarkers = _mapMarkers;
         mInflater = LayoutInflater.from(_context);
     }
 
     @Override
     public int getCount() {
-        return mMarkers.size();
+        return mMapMarkers.size();
     }
 
-    final public List<Marker> getResult() {
-        return mMarkers;
+    final public List<MapMarker> getResult() {
+        return mMapMarkers;
     }
 
     @Override
-    public Marker getItem(int _position) {
-        return mMarkers.get(_position);
+    public MapMarker getItem(int _position) {
+        return mMapMarkers.get(_position);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MarkersListAdapter extends BaseAdapter{
             _view.setTag(this);
         }
 
-        public void setData(Marker _item, int _position) {
+        public void setData(MapMarker _item, int _position) {
             this.position = _position;
             tvCategoryMarkers.setText(_item.title);
             cbCategoryMarkersVisible.setChecked(_item.visible);

@@ -29,9 +29,15 @@ public class Constants {
     final public static int LOADER_PHONES_ID = 7;
     final public static int LOADER_DOCUMENTS_ID = 8;
     final public static int LOADER_MENU_ID = 9;
-    final public static int LOADER_TRIPS_ID = 10;
+    final public static int LOADER_MENU_BUTTOM_ID = 10;
+    final public static int LOADER_TRIPS_ID = 1;
 
     //for bundle
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL = 3;
+    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_BANNER = 4;
     final public static String BUNDLE_CONSTANT_REQUEST_JSON = "JSON";
     final public static String BUNDLE_CONSTANT_REQUEST_ROUTE = "ROUTE";
     final public static String BUNDLE_CONSTANTS_LAT = "LAT";
@@ -42,9 +48,6 @@ public class Constants {
     final public static String BUNDLE_CONSTANT_AGE = "AGE";
     final public static String BUNDLE_CONSTANT_GENDER = "GENDER";
     final public static String BUNDLE_CONSTANT_LOAD_IMAGE_TYPE = "LOAD_IMAGE_TYPE";
-    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
-    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY = 1;
-    final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_MAYOR = 2;
     final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
     final public static String BUNDLE_MARKERS = "MARKER";
     final public static String BUNDLE_INTEGER = "INTEGER";
@@ -88,6 +91,7 @@ public class Constants {
     final public static int ACTION_TYPE_VOTE = 7;
     final public static int ACTION_TYPE_CALL_SKYPE = 8;
     final public static int ACTION_TYPE_MAIL = 9;
+    final public static int ACTION_TYPE_PHONE_BOOK = 10;
 
 
 

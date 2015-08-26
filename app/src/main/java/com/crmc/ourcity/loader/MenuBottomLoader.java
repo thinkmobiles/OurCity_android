@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import retrofit.RetrofitError;
 
 /**
- * Created by SetKrul on 29.07.2015.
+ * Created by SetKrul on 26.08.2015.
  */
-public class MenuLoader extends BaseLoader<MenuFull> {
+public class MenuBottomLoader extends BaseLoader<MenuFull> {
 
     private int cityNumber;
     private String lng;
     private int residentId;
 
-    public MenuLoader(Context _context, Bundle _args) {
+    public MenuBottomLoader(Context _context, Bundle _args) {
         super(_context);
         cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
         lng = _args.getString(Constants.BUNDLE_CONSTANT_LANG);
@@ -35,7 +35,7 @@ public class MenuLoader extends BaseLoader<MenuFull> {
         CityApi api = RestClientApi.getCityApi();
         MenuFull menuNodes;
         try {
-            menuNodes =  api.getMenu(new CityModel(new Resident(residentId, cityNumber), lng));
+            menuNodes =  api.getMenuBottom(new CityModel(new Resident(residentId, cityNumber), lng));
         } catch (RetrofitError e) {
             menuNodes = new MenuFull();
             menuNodes.nodes = new ArrayList<>();
