@@ -33,12 +33,12 @@ import retrofit.mime.TypedInput;
 public interface CityApi {
 
     /**
-     *
      * @param _residentModel - data for register new Resident
      * @return residentID
      */
     @POST("/RegistNewResident")
-    Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel _residentModel);
+    Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel
+                                                        _residentModel);
 
     @POST("/MobileLogin")
     LoginResponse loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
@@ -67,25 +67,25 @@ public interface CityApi {
      * @return map marker category and markers with data
      */
     @POST("/{path}")
-    List<MapCategory> getMapDetails(@Path ("path") String q, @Body TypedInput body);
+    List<MapCategory> getMapDetails(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @return phones number with others data
      */
     @POST("/{path}")
-    List<Phones> getPhones(@Path ("path") String q, @Body TypedInput body);
+    List<Phones> getPhones(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @return phone book number with others data
      */
     @POST("/{path}")
-    List<PhoneBook> getPhoneBook(@Path ("path") String q, @Body TypedInput body);
+    List<PhoneBook> getPhoneBook(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @return city events
      */
     @POST("/{path}")
-    List<Events> getEvents(@Path ("path") String q, @Body TypedInput body);
+    List<Events> getEvents(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number
@@ -106,7 +106,7 @@ public interface CityApi {
      * @return Survey vote
      */
     @POST("/{path}")
-    List<VoteFull> getVote(@Path ("path") String q, @Body TypedInput body);
+    List<VoteFull> getVote(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param voteModel selected point int, age int, gender int
@@ -154,11 +154,11 @@ public interface CityApi {
      * @return point for the construction of the route on the map
      */
     @POST("/{path}")
-    List<MapTrips> getMapTrips(@Path ("path") String q, @Body TypedInput body);
+    List<MapTrips> getMapTrips(@Path("path") String q, @Body TypedInput body);
 
     @POST("/{path}")
-    StreetsFull getStreets(@Path ("path") String q, @Body TypedInput body);
+    StreetsFull getStreets(@Path("path") String q, @Body TypedInput body);
 
     @POST("/{path}")
-    Documents getDocuments(@Path ("path") String q, @Body TypedInput body);
+    Documents getDocuments(@Path("path") String q, @Body TypedInput body);
 }
