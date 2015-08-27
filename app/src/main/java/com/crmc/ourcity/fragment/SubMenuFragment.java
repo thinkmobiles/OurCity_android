@@ -61,7 +61,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
 
     @Override
     protected void initViews() {
-        mRecyclerView = findView(R.id.rvMenu_FMM);
+        mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
                 RecyclerItemClickListener.OnItemClickListener() {
@@ -112,7 +112,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_main_menu;
+        return R.layout.fragment_sub_menu;
     }
 
 

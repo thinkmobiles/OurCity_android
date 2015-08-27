@@ -31,7 +31,6 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup _parent, int _viewType) {
-
         View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.menu_grid_item, _parent, false);
         return new ViewHolder(view);
     }
@@ -39,7 +38,8 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder _holder, int _position) {
         MenuModel item = mMenuModels.get(_position);
-        Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor(item.colorItem));
+        Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
+                (item.colorItem));
         _holder.ivMenuIcon.setImageBitmap(Image.convertBase64ToBitmap(item.iconItem));
         _holder.tvTitle.setText(item.title);
     }

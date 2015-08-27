@@ -11,9 +11,9 @@ import com.crmc.ourcity.global.Constants;
  */
 public final class IntentUtils {
 
-    public static Intent getIntentSkype(String _phoneNumber){
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("skype:" + _phoneNumber));
+    public static Intent getIntentCall(String _phoneNumber){
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setData(Uri.parse("tel:" + _phoneNumber));
         return i;
     }
 

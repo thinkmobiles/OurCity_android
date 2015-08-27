@@ -23,7 +23,6 @@ public class PhonesLoader extends BaseLoader<List<Phones>> {
     private String json;
     private String route;
 
-
     public PhonesLoader(Context _context, Bundle _args) {
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
@@ -33,12 +32,11 @@ public class PhonesLoader extends BaseLoader<List<Phones>> {
     @Override
     public List<Phones> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        List<Phones> mPhones = null;
+        List<Phones> mPhones;
         try {
             mPhones =  api.getPhones(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException e) {
             mPhones = new ArrayList<>();
-            mPhones.add(new Phones());
         }
         return mPhones;
     }

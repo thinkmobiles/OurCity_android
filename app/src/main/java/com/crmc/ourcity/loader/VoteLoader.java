@@ -32,7 +32,7 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
     @Override
     public List<VoteFull> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        List<VoteFull> mVote = null;
+        List<VoteFull> mVote;
         try {
             mVote =  api.getVote(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {

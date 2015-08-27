@@ -78,6 +78,9 @@ public class Constants {
     final public static String CONFIGURATION_KEY_EVENTS = "KEY_EVENTS";
     final public static String CONFIGURATION_KEY_TRIPS = "KEY_TRIPS";
     final public static String CONFIGURATION_KEY_SUBMENU = "SUBMENU";
+    final public static String CONFIGURATION_KEY_PHONE_LIST = "PHONE_LIST";
+    final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
+
 
     //action type
     final public static int ACTION_TYPE_LIST = 1;
@@ -89,11 +92,13 @@ public class Constants {
     final public static int ACTION_TYPE_MAP = 5;
     final public static int ACTION_TYPE_ADD_APPEALS = 6;
     final public static int ACTION_TYPE_VOTE = 7;
-    final public static int ACTION_TYPE_CALL_SKYPE = 8;
+    final public static int ACTION_TYPE_CALL = 8;
     final public static int ACTION_TYPE_MAIL = 9;
     final public static int ACTION_TYPE_PHONE_BOOK = 10;
 
-
+    //phone fragment type
+    final public static int PHONE_BOOK_LIST = 0;
+    final public static int PHONE_LIST = 1;
 
     public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 

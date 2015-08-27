@@ -194,10 +194,10 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         switch (v.getId()) {
             case R.id.ivCallSkype_EIF:
                 try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentSkype(mEvents.phone), getResources().getString(R
-                            .string.call_skype_hint)));
+                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources().getString(R
+                            .string.call_hint)));
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_skype_client), Toast
+                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                             .LENGTH_SHORT).show();
                 }
                 break;
