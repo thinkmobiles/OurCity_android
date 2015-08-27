@@ -117,11 +117,15 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
-        SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
-        SPManager.getInstance(getActivity()).setResidentId(data.residentId);
-        SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
-        getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
-        getActivity().finish();
+        if (data != null){
+            SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+            SPManager.getInstance(getActivity()).setResidentId(data.residentId);
+            SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
+            getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
+            getActivity().finish();
+        } else {
+
+        }
     }
 
     @Override

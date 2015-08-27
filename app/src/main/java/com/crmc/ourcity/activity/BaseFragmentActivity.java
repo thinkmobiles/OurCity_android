@@ -26,7 +26,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(containerId, fragment)
-                .commit();
+                .commitAllowingStateLoss( );
     }
 
     public final void replaceFragmentWithoutBackStack(final @IdRes int containerId, final Fragment fragment) {

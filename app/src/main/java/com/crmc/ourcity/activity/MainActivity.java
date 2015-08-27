@@ -2,12 +2,16 @@ package com.crmc.ourcity.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -42,6 +46,7 @@ import com.crmc.ourcity.utils.SPManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import java.text.Bidi;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener {
@@ -75,9 +80,17 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         setSupportActionBar(mToolbar);
         //getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //getSupportActionBar().setTitle("OurCity");
 
-        mToolbar.setNavigationIcon(R.drawable.ic_back);
+//            Configuration config = getResources().getConfiguration();
+//            if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+//                mToolbar.setNavigationIcon(R.drawable.ic_back_rtl);
+//            } else {
+//                mToolbar.setNavigationIcon(R.drawable.ic_back_ltr);
+//            }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -224,8 +237,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
                 startActivity(intent);
             break;
-
-
+            case android.R.id.home:
+                popBackStack();
+                break;
+            case R.id.menu_home:
+                clearBackStack();
+                setTopFragment(MainMenuFragment.newInstance());
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

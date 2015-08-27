@@ -6,14 +6,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -80,6 +84,9 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     protected void initViews() {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        //findView(R.id.menu_home).setVisibility(View.GONE);
+        setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
         llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
@@ -101,7 +108,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 if (menuModel.menu != null) {
-                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    try {
+                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
                 } else {
                     mCallBackMenuModel.onItemAction(menuModel);
                 }
@@ -254,5 +265,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     public void onRetryClick() {
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.getItem(0).setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
