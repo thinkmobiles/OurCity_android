@@ -6,38 +6,38 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
-import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.events.PhoneBook;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
 /**
- * Created by SetKrul on 31.07.2015.
+ * Created by SetKrul on 27.08.2015.
  */
-public class StreetsLoader extends BaseLoader<StreetsFull> {
+public class PhoneBookLoader extends BaseLoader<List<PhoneBook>> {
 
     private String json;
     private String route;
 
-    public StreetsLoader(Context _context, Bundle _args) {
+    public PhoneBookLoader(Context _context, Bundle _args) {
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
         route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);
     }
 
     @Override
-    public StreetsFull loadInBackground() {
+    public List<PhoneBook> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        StreetsFull mStreetsFull;
+        List<PhoneBook> mPhoneBooks;
         try {
-            mStreetsFull =  api.getStreets(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
+            mPhoneBooks =  api.getPhoneBook(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            mStreetsFull = new StreetsFull();
-            mStreetsFull.streetsList = new ArrayList<>();
+            mPhoneBooks = new ArrayList<>();
         }
-        return mStreetsFull;
+        return mPhoneBooks;
     }
 }

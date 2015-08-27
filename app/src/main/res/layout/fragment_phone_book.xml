@@ -5,12 +5,12 @@
               android:orientation="vertical">
 
     <ListView
-        android:id="@+id/lvEvents_EF"
+        android:id="@+id/lvPhoneBook_PBF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/holo_blue_light"
         android:dividerHeight="4dp"
-        tools:listitem="@layout/listview_row_fe">
+        tools:listitem="@layout/listview_row_fpb">
     </ListView>
 
 </LinearLayout>

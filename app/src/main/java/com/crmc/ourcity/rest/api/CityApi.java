@@ -12,6 +12,7 @@ import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
+import com.crmc.ourcity.rest.responce.events.PhoneBook;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
@@ -73,6 +74,12 @@ public interface CityApi {
      */
     @POST("/{path}")
     List<Phones> getPhones(@Path ("path") String q, @Body TypedInput body);
+
+    /**
+     * @return phone book number with others data
+     */
+    @POST("/{path}")
+    List<PhoneBook> getPhoneBook(@Path ("path") String q, @Body TypedInput body);
 
     /**
      * @return city events

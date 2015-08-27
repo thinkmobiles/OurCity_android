@@ -32,7 +32,7 @@ public class MapInterestPointLoader extends BaseLoader<List<MapCategory>> {
     @Override
     public List<MapCategory> loadInBackground() {
         CityApi api = RestClientApi.getCityApi();
-        List<MapCategory> mapCategories = null;
+        List<MapCategory> mapCategories;
         try {
             mapCategories =  api.getMapDetails(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {

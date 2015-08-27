@@ -2,14 +2,14 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,15 +25,21 @@ import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
+import java.util.List;
+
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class MainMenuFragment extends BaseFourStatesFragment {
+public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener {
 
     LinearLayout llBtn_MMF;
     LinearLayout llBtnFirst_MMF;
     LinearLayout llBtnSecond_MMF;
     LinearLayout llBtnThird_MMF;
+
+    ImageView ivBtnFirst_MMF;
+    ImageView ivBtnSecond_MMF;
+    ImageView ivBtnThird_MMF;
 
     TextView tvBtnFirst_MMF;
     TextView tvBtnSecond_MMF;
@@ -42,6 +48,7 @@ public class MainMenuFragment extends BaseFourStatesFragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MenuGridAdapter mAdapter;
+    private List<MenuModel> mMenuBottom;
     private OnItemActionListener mCallBackMenuModel;
 
     private int cityNumber;
@@ -78,6 +85,10 @@ public class MainMenuFragment extends BaseFourStatesFragment {
         llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
         llBtnThird_MMF = findView(R.id.llBtnThird_MMF);
 
+        ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
+        ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
+        ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
+
         tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
         tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
         tvBtnThird_MMF = findView(R.id.tvBtnThird_MMF);
@@ -96,6 +107,14 @@ public class MainMenuFragment extends BaseFourStatesFragment {
                 }
             }
         }));
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        llBtnFirst_MMF.setOnClickListener(this);
+        llBtnSecond_MMF.setOnClickListener(this);
+        llBtnThird_MMF.setOnClickListener(this);
     }
 
     @Override
@@ -147,49 +166,53 @@ public class MainMenuFragment extends BaseFourStatesFragment {
             return new MenuBottomLoader(getActivity(), _args);
         }
 
-        public Bitmap scaleDown(Bitmap realImage, float maxImageSize, boolean filter) {
-            float ratio = Math.min((float) maxImageSize / realImage.getWidth(), (float) maxImageSize / realImage
-                    .getHeight());
-            int width = Math.round((float) ratio * realImage.getWidth());
-            int height = Math.round((float) ratio * realImage.getHeight());
-
-            Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width, height, filter);
-            return newBitmap;
-        }
-
         @Override
         public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
             if (_data.getSize() > 0) {
+                mMenuBottom = _data.getNodes();
                 switch (_data.getSize()) {
                     case 1:
+                        llBtnSecond_MMF.setVisibility(View.GONE);
+                        llBtnThird_MMF.setVisibility(View.GONE);
+                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
+                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).colorItem));
                         break;
+
                     case 2:
+                        llBtnThird_MMF.setVisibility(View.GONE);
+                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
+                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).colorItem));
+
+                        tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
+                        ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(1).colorItem));
                         break;
+
                     case 3:
+                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
+                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).colorItem));
+
+                        tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
+                        ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(1).colorItem));
+
+                        tvBtnThird_MMF.setText(mMenuBottom.get(2).title);
+                        ivBtnThird_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(2).iconItem));
+                        Image.setBackgroundColorView(getActivity(), llBtnThird_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(2).colorItem));
                         break;
                 }
-//                llBtnFirst_MMF.setVisibility(View.GONE);
-//                llBtnSecond_MMF.setVisibility(View.GONE);
-//                llBtnThird_MMF.setVisibility(View.GONE);
-
-                BitmapDrawable a;
-                Bitmap scaledBitmap = scaleDown(Image.convertBase64ToBitmap(_data.getNodes().get(0).iconItem),
-                        30, true);
-                a = new BitmapDrawable(getResources(), scaledBitmap);
-                tvBtnFirst_MMF.setText(_data.getNodes().get(0).title);
-                tvBtnFirst_MMF.setCompoundDrawablesWithIntrinsicBounds(a, null, null, null);
-
-
-//                tvBtnSecond_MMF.setText(_data.getNodes().get(0).title);
-//                tvBtnSecond_MMF.setCompoundDrawables(new BitmapDrawable(getResources(), Image.convertBase64ToBitmap
-//                        (_data.getNodes().get(0).iconItem)), null, null, null);
-//                tvBtnThird_MMF.setText(_data.getNodes().get(0).title);
-//                tvBtnThird_MMF.setCompoundDrawables(new BitmapDrawable(getResources(), Image.convertBase64ToBitmap
-//                        (_data.getNodes().get(0).iconItem)), null, null, null);
             } else {
                 llBtn_MMF.setVisibility(View.GONE);
             }
-
             loaderMenuBottomFinish = true;
             showView();
         }
@@ -198,6 +221,23 @@ public class MainMenuFragment extends BaseFourStatesFragment {
         public void onLoaderReset(Loader<MenuFull> _loader) {
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.llBtnFirst_MMF:
+                mCallBackMenuModel.onItemAction(mMenuBottom.get(0));
+                break;
+
+            case R.id.llBtnSecond_MMF:
+                mCallBackMenuModel.onItemAction(mMenuBottom.get(1));
+                break;
+
+            case R.id.llBtnThird_MMF:
+                mCallBackMenuModel.onItemAction(mMenuBottom.get(2));
+                break;
+        }
+    }
 
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish) {

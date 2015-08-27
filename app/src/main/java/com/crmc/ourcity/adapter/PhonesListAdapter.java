@@ -102,10 +102,10 @@ public class PhonesListAdapter extends BaseAdapter {
             switch (_view.getId()) {
                 case R.id.btnCallSkype_FP:
                         try {
-                            mContext.startActivity(Intent.createChooser(IntentUtils.getIntentSkype(getItem(position)
-                                    .phoneNumber), mContext.getResources().getString(R.string.call_skype_hint)));
+                            mContext.startActivity(Intent.createChooser(IntentUtils.getIntentCall(getItem(position)
+                                    .phoneNumber), mContext.getResources().getString(R.string.call_hint)));
                         } catch (ActivityNotFoundException e) {
-                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_skype_client),
+                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
                                     Toast.LENGTH_SHORT).show();
                         }
                     break;

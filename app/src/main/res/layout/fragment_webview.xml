@@ -3,12 +3,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-    <TextView
-        android:id="@+id/tvTitle_WFV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"/>
     <ProgressBar
         android:id="@+id/pbLoading_WVF"
         style="?android:attr/progressBarStyleHorizontal"
@@ -17,6 +11,12 @@
         android:layout_gravity="bottom"
         android:background="@android:color/transparent"
         android:max="100"/>
+    <TextView
+        android:id="@+id/tvTitle_WFV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"/>
     <WebView
         android:id="@+id/webView_WVF"
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.MapClearFragment;
 import com.crmc.ourcity.fragment.MapInterestPointFragment;
 import com.crmc.ourcity.fragment.MapTripsFragment;
+import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.TripsFragment;
@@ -30,6 +31,7 @@ import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.ticker.Ticker;
@@ -103,7 +105,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         break;
                     case Constants.ACTION_TYPE_LIST_PHONE_LIST:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, Constants.PHONE_LIST));
                         break;
                 }
                 break;
@@ -141,12 +143,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
-            case Constants.ACTION_TYPE_CALL_SKYPE:
+            case Constants.ACTION_TYPE_CALL:
                 try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentSkype(_menuModel.phoneNumber),
-                            getResources().getString(R.string.call_skype_hint)));
+                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(_menuModel.phoneNumber),
+                            getResources().getString(R.string.call_hint)));
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(this, getResources().getString(R.string.app_no_skype_client), Toast.LENGTH_SHORT)
+                    Toast.makeText(this, getResources().getString(R.string.app_no_call_client), Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
@@ -157,6 +159,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(this, getString(R.string.app_no_mail_client), Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case Constants.ACTION_TYPE_PHONE_BOOK:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhoneBookFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.requestJson, _menuModel.requestRoute));
                 break;
         }
     }
@@ -177,6 +183,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
                     ()));
         }
+    }
+
+    @Override
+    public void onPhoneBookItemAction(List<Phones> _phones) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones, Constants.PHONE_BOOK_LIST));
     }
 
     @Override

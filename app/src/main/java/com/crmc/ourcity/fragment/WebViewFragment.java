@@ -110,7 +110,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        //mWebView.setInitialScale(100);
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
@@ -123,6 +122,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 pbLoading.setProgress(newProgress);
+//                if (newProgress == 100){
+//                    showContent();
+//                }
             }
         });
     }
@@ -152,12 +154,14 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 //            new DownloadFile().downloadPdf(getActivity(), _link);
 //            popBackStack();
         } else if (!TextUtils.isEmpty(json)) {
+            mWebView.setInitialScale(100);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
             getLoaderManager().initLoader(Constants.LOADER_DOCUMENTS_ID, bundle, this);
         } else {
             tvTitle_WVF.setVisibility(View.GONE);
+            //_link = "http://gooasdfghjgle";
             mWebView.loadUrl(_link);
         }
     }
@@ -166,7 +170,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         @Override
         public boolean shouldOverrideUrlLoading(WebView _view, String _url) {
             _view.loadUrl(_url);
-            return true;
+            return false;
         }
 
         @Override
@@ -186,6 +190,10 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             pbLoading.setVisibility(View.GONE);
         }
 
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+        }
 
         @Override
         public void onReceivedSslError(WebView view, @NonNull SslErrorHandler handler, SslError error) {
