@@ -4,14 +4,9 @@ package com.crmc.ourcity.rest.request.login;
  * Created by podo on 21.08.15.
  */
 public class PushTokenUpdatingModel {
-    public String authToken;
-    public String pushToken;
+   public PushTokenAndAuthToken token;
 
-    public PushTokenUpdatingModel() {
-    }
-
-    public PushTokenUpdatingModel(String _authToken, String _pushToken) {
-        authToken = _authToken;
-        pushToken = _pushToken;
+   public PushTokenUpdatingModel(PushTokenAndAuthToken token) {
+        this.token = token;
     }
 }

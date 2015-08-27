@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.loader.PushTokenLoader;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
+import com.crmc.ourcity.rest.request.login.PushTokenAndAuthToken;
 import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.utils.SPManager;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegIntentService";
+    String authToken = SPManager.getInstance(this).getAuthToken();
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.     *
@@ -37,10 +38,10 @@ public class RegistrationIntentService extends IntentService {
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
 
-                String authToken = SPManager.getInstance(this).getAuthToken();
-                if (!TextUtils.isEmpty(authToken)) {
-                    sendPushTokenToServer(authToken, pushToken);
-                }
+                //String authToken = SPManager.getInstance(this).getAuthToken();
+//                if (!TextUtils.isEmpty(authToken)) {
+//                    sendPushTokenToServer(authToken, pushToken);
+//                }
 
 
             }
@@ -52,11 +53,17 @@ public class RegistrationIntentService extends IntentService {
     private void sendPushTokenToServer(String _authToken, String _pushToken) {
         CityApi cityApi = RestClientApi.getCityApi();
 
-        Boolean isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(_authToken, _pushToken));
-        SPManager.getInstance(this).setPushToken(_pushToken);
+        if (!TextUtils.isEmpty(authToken)) {
+            Integer isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
+            SPManager.getInstance(this).setPushToken(_pushToken);
+        }
+
+//    {
+//        "code": -79,
+//            "lang": null,
+//            "message": null
+//    }
+
+
     }
-
-
-
-
 }

@@ -4,37 +4,37 @@
               android:orientation="vertical"
               android:scrollbars="vertical">
 
-    <LinearLayout
-        android:id="@+id/title_background_BFSL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00ACDC"
-        android:gravity="right"
-        android:paddingBottom="@dimen/four_state_title_padding"
-        android:paddingTop="@dimen/four_state_title_padding">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/title_background_BFSL"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#00ACDC"-->
+        <!--android:gravity="right"-->
+        <!--android:paddingBottom="@dimen/four_state_title_padding"-->
+        <!--android:paddingTop="@dimen/four_state_title_padding">-->
 
-        <TextView
-            android:id="@+id/base_fragment_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/four_state_title_padding"
-            android:singleLine="true"
-            android:textColor="#fff"
-            android:textSize="@dimen/four_state_title_text_size"
-            android:textStyle="bold"/>
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/base_fragment_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_marginRight="@dimen/four_state_title_padding"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="@dimen/four_state_title_text_size"-->
+            <!--android:textStyle="bold"/>-->
+    <!--</LinearLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:background="@drawable/divider_background"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/divider_height"-->
+        <!--android:background="@drawable/divider_background"/>-->
 
-    <View
-        android:id="@+id/underline_BFSL"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/underline_height"
-        android:background="#00ACDC"/>
+    <!--<View-->
+        <!--android:id="@+id/underline_BFSL"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/underline_height"-->
+        <!--android:background="#00ACDC"/>-->
 
 
     <com.crmc.ourcity.fourstatelayout.FourStateLayout

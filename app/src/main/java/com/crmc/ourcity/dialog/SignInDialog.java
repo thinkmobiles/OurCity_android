@@ -2,6 +2,7 @@ package com.crmc.ourcity.dialog;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -14,13 +15,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
+import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.utils.SPManager;
 
@@ -118,7 +119,8 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
         SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
         SPManager.getInstance(getActivity()).setResidentId(data.residentId);
-        SPManager.getInstance(getActivity()).setIsLogInStatus(true);
+        SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
+        getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
         getActivity().finish();
     }
 

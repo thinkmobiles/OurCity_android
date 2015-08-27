@@ -69,7 +69,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
 
-                Boolean isLogIn = SPManager.getInstance(getActivity()).getLogInStatus();
+                Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
                 if (Boolean.parseBoolean(menuModel.requestLogin)) {
                     if (isLogIn) {
                         if (menuModel.menu != null) {

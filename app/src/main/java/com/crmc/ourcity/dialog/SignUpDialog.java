@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +14,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
 import com.crmc.ourcity.loader.RegisterLoader;
-import com.crmc.ourcity.rest.request.registration.ResidentDetails;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
-import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
-
-import java.util.regex.Pattern;
 
 /**
  * Created by podo on 19.08.15.
@@ -209,7 +202,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         @Override
         public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
             SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
-            SPManager.getInstance(getActivity()).setIsLogInStatus(true);
+            SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
             getActivity().finish();
         }
 

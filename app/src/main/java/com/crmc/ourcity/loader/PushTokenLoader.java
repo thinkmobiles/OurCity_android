@@ -15,26 +15,27 @@ import retrofit.RetrofitError;
  */
 public class PushTokenLoader extends BaseLoader<Boolean> {
 
-    private PushTokenUpdatingModel pushTokenUpdatingModel;
+    //private PushTokenUpdatingModel pushTokenUpdatingModel;
 
     public PushTokenLoader(Context _context, Bundle _bundle) {
         super(_context);
-        pushTokenUpdatingModel = new PushTokenUpdatingModel();
-
-        pushTokenUpdatingModel.authToken = _bundle.getString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN);
-        pushTokenUpdatingModel.pushToken = _bundle.getString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN);
+//        pushTokenUpdatingModel = new PushTokenUpdatingModel();
+//
+//        pushTokenUpdatingModel.authToken = _bundle.getString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN);
+//        pushTokenUpdatingModel.pushToken = _bundle.getString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN);
     }
 
     @Override
     public Boolean loadInBackground() {
 
-        CityApi cityApi = RestClientApi.getCityApi();
-        Boolean isTokenUpdated;
-        try {
-            isTokenUpdated = cityApi.updatePushTokenOnWS(pushTokenUpdatingModel);
-        } catch (RetrofitError e) {
-            isTokenUpdated = false;
-        }
-        return isTokenUpdated;
+//        CityApi cityApi = RestClientApi.getCityApi();
+//        Boolean isTokenUpdated;
+//        try {
+//            isTokenUpdated = cityApi.updatePushTokenOnWS(pushTokenUpdatingModel);
+//        } catch (RetrofitError e) {
+//            isTokenUpdated = false;
+//        }
+//        return isTokenUpdated;
+        return null;
     }
 }

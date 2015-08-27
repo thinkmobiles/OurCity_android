@@ -49,7 +49,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
         logout = findView(R.id.rlLogout_FDS);
         boolean isFromMainActivity = getActivity().getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
         if (isFromMainActivity) {
-            if (SPManager.getInstance(getActivity()).getLogInStatus()) {
+            if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
             } else {
                 logout.setVisibility(View.GONE);
@@ -60,7 +60,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_dialog_setting_test;
+        return R.layout.fragment_dialog_settings;
     }
 
     @Override
@@ -100,8 +100,9 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
         @Override
         public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-            SPManager.getInstance(getActivity()).setIsLogInStatus(false);
+            SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
             if (data) {
+
                 SPManager.getInstance(getActivity()).deleteResidentInformation();
                 getActivity().stopService(new Intent(getActivity(), RegistrationIntentService.class));
                 logout.setVisibility(View.GONE);

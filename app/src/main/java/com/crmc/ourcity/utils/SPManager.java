@@ -70,7 +70,7 @@ public class SPManager {
         setResidentId(0);
         setAuthToken("");
         setPushToken("");
-        setIsLogInStatus(false);
+        setIsLoggedStatus(false);
     }
 
 
@@ -103,11 +103,11 @@ public class SPManager {
         return retrieveInt(RESIDENT_ID, 0);
     }
 
-    public void setIsLogInStatus(Boolean _isLogIn) {
+    public void setIsLoggedStatus(Boolean _isLogIn) {
         saveBoolean(LOGGED_IN, _isLogIn);
     }
 
-    public boolean getLogInStatus() {
+    public boolean getIsLoggedStatus() {
         return retrieveBoolean(LOGGED_IN, false);
     }
 

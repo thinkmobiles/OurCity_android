@@ -61,7 +61,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             }
         }
 
-        isLogIn = SPManager.getInstance(this).getLogInStatus();
+        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
@@ -73,7 +73,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         setSupportActionBar(mToolbar);
         //getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("OutCity");
+        //getSupportActionBar().setTitle("OurCity");
+
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
+
+
+
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
@@ -187,17 +192,29 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+//        int id = item.getItemId();
+//
+//        if (id == R.id.menu_settings) {
+//            Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+//            boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
+//
+//            Intent intent = new Intent(this, DialogActivity.class);
+//            intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
+//            EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
+//            startActivity(intent);
+//            return true;
+//        }
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
+                Intent intent = new Intent(this, DialogActivity.class);
+                intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
+                EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
+                startActivity(intent);
+            break;
 
-        if (id == R.id.menu_settings) {
-            Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-            boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
 
-            Intent intent = new Intent(this, DialogActivity.class);
-            intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
-            EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-            startActivity(intent);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
