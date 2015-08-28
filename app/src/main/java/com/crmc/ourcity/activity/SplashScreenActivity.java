@@ -4,18 +4,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.os.Handler;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
+
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.ImageLoader;
 import com.crmc.ourcity.utils.Image;
-
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 
 
 
@@ -52,11 +51,11 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
 
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mEndSplash.run();
-        return super.onTouchEvent(event);
-    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        mEndSplash.run();
+//        return super.onTouchEvent(event);
+//    }
 
     private Runnable mEndSplash = new Runnable() {
         public void run() {
@@ -92,4 +91,6 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     public void onLoaderReset(Loader<String> loader) {
 
     }
+
+
 }

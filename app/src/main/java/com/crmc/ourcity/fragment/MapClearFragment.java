@@ -13,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Created by SetKrul on 25.08.2015.
@@ -74,7 +75,7 @@ public final class MapClearFragment extends BaseFourStatesFragment implements On
         _googleMap.setMyLocationEnabled(true);
         _googleMap.getUiSettings().setZoomControlsEnabled(true);
         setCamera(_googleMap);
-//        _googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)));
+        _googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)));
         showContent();
     }
 
