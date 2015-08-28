@@ -1,6 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'CRMC_KEY'
+            keyPassword 'AppCrmc15'
+            storeFile file('/home/klim/Android/Projects/OurCityProject/keystore/CRMC_KEY.jks')
+            storePassword 'AppCrmc15'
+        }
+        configShoham {
+            keyAlias 'gy7hu8ji9'
+            keyPassword 'Gy7hu8ji9'
+            storeFile file('/home/podo/Projects/ThinkMobiles/OurCityProject/keystore/shoam.jks')
+            storePassword 'Gy7hu8ji9'
+        }
+    }
+
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
 
@@ -17,6 +32,58 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        afula {
+            applicationId = "com.crmc.afula"
+            signingConfig signingConfigs.config
+            versionCode 10
+            versionName '2.0.0'
+        }
+        biniamina {
+            applicationId = "com.crmc.biniamina"
+            signingConfig signingConfigs.config
+            versionCode 10
+            versionName '2.0.0'
+        }
+        chadera {
+            applicationId = "com.crmc.chadera"
+            signingConfig signingConfigs.config
+            versionCode 20
+            versionName '3.0.0'
+        }
+        machonvizman {
+            applicationId = "com.crmc.machonvizman"
+            signingConfig signingConfigs.config
+            versionCode 20
+            versionName '3.0.0'
+        }
+        migdal {
+            applicationId = "com.crmc.migdal"
+            signingConfig signingConfigs.config
+            versionCode 20
+            versionName '3.0.0'
+        }
+        shderot {
+            applicationId = "com.crmc.shderot"
+            signingConfig signingConfigs.config
+            versionCode 10
+            versionName '2.0.0'
+        }
+        shoham {
+            applicationId = "com.ctconnect.shoam"
+            signingConfig signingConfigs.configShoham
+            versionCode 20
+            versionName '2.0.0'
+        }
+        yesod {
+            applicationId = "com.crmc.yesod"
+            signingConfig signingConfigs.config
+            versionCode 20
+            versionName '2.0.0'
+        }
+    }
+
 }
 
 dependencies {
