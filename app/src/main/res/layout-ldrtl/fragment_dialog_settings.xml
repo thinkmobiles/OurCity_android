@@ -11,12 +11,12 @@
         android:layout_gravity="center_vertical"
         android:background="#9E9E9E"
         android:drawablePadding="@dimen/settings3"
-        android:drawableLeft="@drawable/settingbtn"
+        android:drawableRight="@drawable/settingbtn"
         android:paddingBottom="@dimen/settings15"
-        android:paddingLeft="@dimen/settings15"
+        android:paddingRight="@dimen/settings15"
         android:paddingTop="@dimen/settings15"
         android:text="הגדרות"
-        android:gravity="center|left"
+        android:gravity="center|right"
         android:textColor="@color/turquoise"
         android:textSize="@dimen/settings22"
         android:textStyle="bold" />
@@ -41,8 +41,14 @@
             android:clickable="true"
             android:visibility="gone"
             android:padding="@dimen/settings10"
-
             >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_mezoka"
+                android:layout_alignParentEnd="true"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,16 +58,9 @@
                 android:text="לחצן מצוקה"
                 android:textColor="#148989"
                 android:textSize="@dimen/settings16"
-                android:textStyle="bold"
+                android:textStyle="bold" />
 
-                />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_mezoka"
-                android:layout_alignParentEnd="true"
-                />
         </RelativeLayout>
 
 
@@ -88,9 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_details"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"/>
         </RelativeLayout>
-
 
         <!-- uncomment visibility -->
         <RelativeLayout
@@ -120,7 +118,6 @@
                 android:src="@drawable/icon_interesting"
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
-
 
         <!-- uncomment visibility -->
         <RelativeLayout

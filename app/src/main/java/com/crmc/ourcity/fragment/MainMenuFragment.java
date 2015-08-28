@@ -27,6 +27,7 @@ import com.crmc.ourcity.loader.MenuLoader;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 import java.util.List;
@@ -135,7 +136,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = 1;
         lng = "en";
-        residentId = 0;
+        residentId = SPManager.getInstance(getActivity()).getResidentId();
     }
 
     @Override
