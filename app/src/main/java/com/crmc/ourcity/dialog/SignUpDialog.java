@@ -59,6 +59,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         etHouseNumber = (EditText) _root. findViewById(R.id.etHouseNumber_SUDF);
         etStreet = (EditTextStreetAutoComplete) _root. findViewById(R.id.etStreetName_SUDF);
         etCityName = (EditText) _root. findViewById(R.id.etCityName_SUDF);
+        etCityName.setText(getResources().getString(R.string.app_name));
         chbGlobalNotifications = (CheckBox) _root. findViewById(R.id.chbGlobalNotifications_SUDF);
         chbPersonalNotifications = (CheckBox) _root. findViewById(R.id.chbPersonalNotifications_SUDF);
         btnSignUpOrEdit = (Button) _root .findViewById(R.id.btnSignUpOrEdit_SUDF);
@@ -89,7 +90,9 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_PHONE_NUMBER, etPhoneNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_MOBILE_NUMBER, etMobileNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_HOUSE_NUMBER, etHouseNumber.getText().toString());
-        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
+       // bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
+        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
+        //TODO: uncomment when write street loader
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());
         bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
@@ -157,10 +160,10 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
             etHouseNumber.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
-        if (TextUtils.isEmpty(etStreet.getText().toString())) {
-            etStreet.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
-            isValid = false;
-        }
+//        if (TextUtils.isEmpty(etStreet.getText().toString())) {
+//            etStreet.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+//            isValid = false;
+//        } TODO: uncomment when write logic for street loader
 
         return isValid && isOptionalFieldValid;
     }
@@ -179,7 +182,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
             SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
             SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
 
-            Bundle bundle = createBundleForResident();
+                Bundle bundle = createBundleForResident();
 
             getLoaderManager().initLoader(12, bundle, mLoginCallback);
 

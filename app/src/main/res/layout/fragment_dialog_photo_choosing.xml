@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/dialog_camera_add_photo"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <View
+        android:id="@+id/vFirstDivider_CFD"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/turquoise"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/dialog_camera_btn_camera"
+        android:id="@+id/tvCamera_CFD"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/vSecondDivider_CFD"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/turquoise"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/dialog_camera_btn_gallery"
+        android:id="@+id/tvGallery_CFD"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+    <View
+        android:id="@+id/vThirdDivider_CFD"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/turquoise"/>
+
+
+</LinearLayout>

@@ -188,6 +188,19 @@ public class Image {
     }
 
     /**
+     *
+     * @param _context context
+     * @param _view array of view for changing color
+     * @param _color color to paint view background
+     */
+    public static void setBackgroundColorArrayViewWithoutDrawable(Context _context, View[] _view, int _color) {
+        Drawable d;
+        for (View a_view : _view) {
+            a_view.setBackgroundColor(_color);
+        }
+    }
+
+    /**
      * Change color array view with default color
      *
      * @param _context  context

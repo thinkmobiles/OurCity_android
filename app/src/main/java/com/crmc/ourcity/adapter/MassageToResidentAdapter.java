@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
-import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -74,8 +73,8 @@ public class MassageToResidentAdapter extends BaseAdapter {
         }
 
         public void setData(MassageToResident _item) {
-            ivArrowMessageToResident_MTRF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right,
-                    Image.darkenColor(0.2)));
+//            ivArrowMessageToResident_MTRF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right,
+//                    Image.darkenColor(0.2)));
             tvMessage_MTRF.setText(_item.message);
         }
     }
