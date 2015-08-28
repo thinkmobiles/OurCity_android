@@ -85,5 +85,6 @@
     <string name="sign_up_dialog_incorrect_email">incorrect email</string>
     <string name="gcm_SenderID">226589076343</string>
     <string name="setting_dialog_logout">Logout</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 
 </resources>
