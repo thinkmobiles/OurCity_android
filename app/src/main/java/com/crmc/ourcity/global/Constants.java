@@ -1,11 +1,17 @@
 package com.crmc.ourcity.global;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+
 /**
  * Created by SetKrul on 23.07.2015.
  */
 public class Constants {
 
     final public static String TAG = "TAG";
+
+    public static BitmapDrawable cityImage = null;
+    public static Bitmap logoImage = null;
 
     //for request
     final public static String REQUEST_INTENT_TYPE_PHOTO = "type";
@@ -32,6 +38,8 @@ public class Constants {
     final public static int LOADER_MENU_BUTTOM_ID = 10;
     final public static int LOADER_TRIPS_ID = 11;
     final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
+    final public static int LOADER_IMAGE_LOGO_ID = 13;
+    final public static int LOADER_IMAGE_CITY_ID = 14;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

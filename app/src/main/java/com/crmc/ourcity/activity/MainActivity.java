@@ -50,7 +50,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
-    private boolean isLogIn;
+//    private boolean isLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             }
         }
 
-        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
+//        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
@@ -221,18 +221,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.menu_settings) {
-//            Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-//            boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
-//
-//            Intent intent = new Intent(this, DialogActivity.class);
-//            intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
-//            EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-//            startActivity(intent);
-//            return true;
-//        }
         switch (item.getItemId()) {
             case R.id.menu_settings:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
@@ -253,13 +241,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * Check the device to make sure it has the Google Play Services APK. If
-     * it doesn't, display a dialog that allows users to download the APK from
-     * the Google Play Store or enable it in the device's system settings.
-     */
-
 
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);

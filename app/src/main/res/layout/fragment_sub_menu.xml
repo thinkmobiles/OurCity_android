@@ -8,6 +8,7 @@
         android:id="@+id/rvSubMenu_FSM"
         android:layout_width="330dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
