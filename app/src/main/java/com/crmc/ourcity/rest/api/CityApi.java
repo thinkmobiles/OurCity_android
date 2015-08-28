@@ -87,6 +87,12 @@ public interface CityApi {
     List<Events> getEvents(@Path("path") String q, @Body TypedInput body);
 
     /**
+     * @return city entities
+     */
+    @POST("/{path}")
+    List<Events> getCityEntities(@Path("path") String q, @Body TypedInput body);
+
+    /**
      * @param baseModel city number
      * @return news??????
      */

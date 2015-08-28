@@ -101,6 +101,8 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         llPhoto = findView(R.id.llPhoto_AP);
         llAppeals = findView(R.id.llAppeals_AF);
 
+        etNameCity.setText("חדרה");
+
         Image.init(Color.parseColor(color));
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable
