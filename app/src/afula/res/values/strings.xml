@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">עפולה בירת העמק</string>
+    <string name="contact_mail">mazkirut@yaic.org.il</string>
+
+
+    <string name="munu_name_btn_our_city">עיריית עפולה</string>
+    <string name="munu_name_btn_pniot_focus">הלשכה לפניות הציבור</string>
+    <string name="munu_name_btn_map">מפת העיר</string>
+    <string name="menu_btn_title_contact_phone">טלפונים חשובים</string>
+    <string name="menu_btn_title_municipal_buildings">מוסדות עירייה וציבור</string>
+    <string name="menu_btn_title_animals"> פינת אימוץ בע"ח</string>
+    <string name="munu_name_btn_tik_toshav">תיק תושב</string>
+
+    <!--appeals-->
+    <string name="new_focus">חיוג למוקד</string>
+    <string name="submenu_btn_attention">פניה למוקד</string>
+
+    <string name="resident_city">עפולה</string>
+</resources>
