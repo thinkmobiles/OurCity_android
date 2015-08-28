@@ -3,6 +3,7 @@ package com.crmc.ourcity.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
@@ -21,6 +23,7 @@ import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.ImageLoader;
 import com.crmc.ourcity.loader.MenuBottomLoader;
 import com.crmc.ourcity.loader.MenuLoader;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
@@ -41,9 +44,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     LinearLayout llBtnSecond_MMF;
     LinearLayout llBtnThird_MMF;
 
+    RelativeLayout rlMenu_MMF;
+
     ImageView ivBtnFirst_MMF;
     ImageView ivBtnSecond_MMF;
     ImageView ivBtnThird_MMF;
+    ImageView ivTown_MA;
 
     TextView tvBtnFirst_MMF;
     TextView tvBtnSecond_MMF;
@@ -60,6 +66,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     private int residentId;
     private boolean loaderMenuFinish = false;
     private boolean loaderMenuBottomFinish = false;
+    private boolean loaderLogoImageFinish = false;
+    private boolean loaderCityImageFinish = false;
 
 
     public static MainMenuFragment newInstance() {
@@ -92,9 +100,13 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
         llBtnThird_MMF = findView(R.id.llBtnThird_MMF);
 
+        rlMenu_MMF = findView(R.id.rlMenu_MMF);
+
         ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
         ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
         ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
+
+        ivTown_MA = (ImageView) getActivity().findViewById(R.id.ivTown_MA);
 
         tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
         tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
@@ -144,7 +156,63 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
         getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
         getLoaderManager().initLoader(Constants.LOADER_MENU_BUTTOM_ID, bundle, mMenuBottomCallBack);
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader);
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader);
     }
+
+    private LoaderManager.LoaderCallbacks<String> mLogoImageLoader = new LoaderManager.LoaderCallbacks<String>() {
+
+        @Override
+        public Loader<String> onCreateLoader(int _id, Bundle _args) {
+            return new ImageLoader(getActivity(), _args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<String> _loader, String _data) {
+            if (Constants.logoImage == null) {
+                Constants.logoImage = Image.convertBase64ToBitmap(_data);
+                ivTown_MA.setImageBitmap(Constants.logoImage);
+            } else {
+                ivTown_MA.setImageBitmap(Constants.logoImage);
+            }
+            loaderLogoImageFinish = true;
+            showView();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<String> _loader) {
+        }
+    };
+
+    private LoaderManager.LoaderCallbacks<String> mImageCityLoader = new LoaderManager.LoaderCallbacks<String>() {
+
+        @Override
+        public Loader<String> onCreateLoader(int _id, Bundle _args) {
+            return new ImageLoader(getActivity(), _args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<String> _loader, String _data) {
+            if (Constants.cityImage == null) {
+                Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(_data));
+                rlMenu_MMF.setBackground(Constants.cityImage);
+            } else {
+                rlMenu_MMF.setBackground(Constants.cityImage);
+            }
+            loaderCityImageFinish = true;
+            showView();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<String> _loader) {
+        }
+    };
 
     private LoaderManager.LoaderCallbacks<MenuFull> mMenuCallBack = new LoaderManager.LoaderCallbacks<MenuFull>() {
 
@@ -248,10 +316,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     }
 
     private void showView() {
-        if (loaderMenuFinish && loaderMenuBottomFinish) {
+        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderCityImageFinish) {
             showContent();
             loaderMenuFinish = false;
             loaderMenuBottomFinish = false;
+            loaderLogoImageFinish = false;
+            loaderCityImageFinish = false;
         }
     }
 
