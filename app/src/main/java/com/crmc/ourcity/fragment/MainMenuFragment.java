@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -85,7 +84,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     protected void initViews() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //findView(R.id.menu_home).setVisibility(View.GONE);
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
@@ -109,11 +108,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 if (menuModel.menu != null) {
-                    try {
-                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
+                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                 } else {
                     mCallBackMenuModel.onItemAction(menuModel);
                 }

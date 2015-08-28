@@ -64,7 +64,6 @@ public class EventsListAdapter extends BaseAdapter {
             holder = (ViewHolder) _convertView.getTag();
         }
         holder.setData(getItem(_position), _position);
-
         return _convertView;
     }
 

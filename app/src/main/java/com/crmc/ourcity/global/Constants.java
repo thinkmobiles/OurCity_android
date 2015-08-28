@@ -30,7 +30,8 @@ public class Constants {
     final public static int LOADER_DOCUMENTS_ID = 8;
     final public static int LOADER_MENU_ID = 9;
     final public static int LOADER_MENU_BUTTOM_ID = 10;
-    final public static int LOADER_TRIPS_ID = 1;
+    final public static int LOADER_TRIPS_ID = 11;
+    final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -95,6 +96,9 @@ public class Constants {
     final public static int ACTION_TYPE_CALL = 8;
     final public static int ACTION_TYPE_MAIL = 9;
     final public static int ACTION_TYPE_PHONE_BOOK = 10;
+    final public static int ACTION_TYPE_RSS = 11;
+    final public static int ACTION_TYPE_MAP_TRIPS = 12;
+    final public static int ACTION_TYPE_ENTITIES = 13;
 
     //phone fragment type
     final public static int PHONE_BOOK_LIST = 0;

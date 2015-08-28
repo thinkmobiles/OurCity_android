@@ -138,6 +138,7 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         if (!TextUtils.isEmpty(_html)) {
             mWebView.setWebViewClient(new MyWebViewClient());
             mWebView.getSettings().setJavaScriptEnabled(true);
+            mWebView.setInitialScale(100);
             String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(_html, "", "justify", "right");
             mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
         } else {
