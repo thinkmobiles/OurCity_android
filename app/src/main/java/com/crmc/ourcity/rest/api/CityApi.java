@@ -5,7 +5,6 @@ import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
 import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
-import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.events.Documents;
@@ -95,11 +94,10 @@ public interface CityApi {
     List<News> getNews(@Body BaseModel baseModel);
 
     /**
-     * @param residentModel resident id
      * @return messages from mailing
      */
-    @POST("/GetMessagesToResident")
-    List<MassageToResident> getMessagesToResident(@Body ResidentModel residentModel);
+    @POST("/{path}")
+    List<MassageToResident> getMessagesToResident(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param body json request

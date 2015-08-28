@@ -2,16 +2,12 @@ package com.crmc.ourcity.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -26,6 +22,7 @@ import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.MapClearFragment;
 import com.crmc.ourcity.fragment.MapInterestPointFragment;
 import com.crmc.ourcity.fragment.MapTripsFragment;
+import com.crmc.ourcity.fragment.MessageToResidentFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
@@ -46,7 +43,6 @@ import com.crmc.ourcity.utils.SPManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import java.text.Bidi;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener {
@@ -93,8 +89,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
@@ -115,6 +109,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                     case Constants.ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance
+                                (_menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                     case Constants.ACTION_TYPE_LIST_PHONE_LIST:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_menuModel
@@ -177,6 +173,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhoneBookFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
+            case Constants.ACTION_TYPE_RSS:
+                break;
+            case Constants.ACTION_TYPE_MAP_TRIPS:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat(),
+                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                break;
+            case Constants.ACTION_TYPE_ENTITIES:
+                break;
         }
     }
 
@@ -200,7 +204,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onPhoneBookItemAction(List<Phones> _phones) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones, Constants.PHONE_BOOK_LIST));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones, Constants
+                .PHONE_BOOK_LIST));
     }
 
     @Override
@@ -231,12 +236,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         switch (item.getItemId()) {
             case R.id.menu_settings:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof SubMenuFragment;
+                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
+                        SubMenuFragment;
                 Intent intent = new Intent(this, DialogActivity.class);
                 intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
                 EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
                 startActivity(intent);
-            break;
+                break;
             case android.R.id.home:
                 popBackStack();
                 break;

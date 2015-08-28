@@ -23,7 +23,7 @@ public final class MapClearFragment extends BaseFourStatesFragment implements On
     private Double lon;
     private SupportMapFragment mMap;
 
-    public static MapClearFragment newInstance(Double _lon, Double _lat) {
+    public static MapClearFragment newInstance(Double _lat, Double _lon) {
         MapClearFragment mMapClearFragment = new MapClearFragment();
         Bundle args = new Bundle();
         args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
