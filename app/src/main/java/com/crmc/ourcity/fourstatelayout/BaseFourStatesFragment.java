@@ -2,6 +2,7 @@ package com.crmc.ourcity.fourstatelayout;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     protected void setListeners() {
     }
 
-    protected void initViews() {
-    }
+    protected void initViews() {}
 
     @Override
     public View onCreateView(final LayoutInflater _inflater, final ViewGroup _root, final Bundle _savedInstanceState) {

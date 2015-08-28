@@ -35,6 +35,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private MenuGridAdapter mAdapter;
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
+    public static String title;
 
     public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
@@ -62,7 +63,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
 
     @Override
     protected void initViews() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
@@ -70,6 +71,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
+                title = menuModel.title;
                 //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(menuModel.title);
                 Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
                 if (Boolean.parseBoolean(menuModel.requestLogin)) {
