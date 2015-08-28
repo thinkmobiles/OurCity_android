@@ -85,7 +85,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //findView(R.id.menu_home).setVisibility(View.GONE);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
@@ -107,6 +107,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
+               // ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(menuModel.title);
                 if (menuModel.menu != null) {
                     mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                 } else {

@@ -70,7 +70,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
             @Override
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
-
+                //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(menuModel.title);
                 Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
                 if (Boolean.parseBoolean(menuModel.requestLogin)) {
                     if (isLogIn) {
@@ -78,6 +78,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
                             mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                         } else {
                             mCallBackMenuModel.onItemAction(menuModel);
+
                         }
                     } else {
                         Intent intent = new Intent(getActivity(), DialogActivity.class);

@@ -244,6 +244,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 startActivity(intent);
                 break;
             case android.R.id.home:
+                Fragment fragment1 = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+
                 popBackStack();
                 break;
             case R.id.menu_home:

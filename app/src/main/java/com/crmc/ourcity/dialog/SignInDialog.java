@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnActionDialogListener;
@@ -124,7 +125,7 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
             getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
             getActivity().finish();
         } else {
-
+            Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_SHORT).show();
         }
     }
 

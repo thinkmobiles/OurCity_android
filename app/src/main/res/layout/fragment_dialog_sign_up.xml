@@ -203,7 +203,8 @@
             android:paddingRight="5dp"
             android:singleLine="true"
             android:layout_weight="2"
-
+            android:focusableInTouchMode="false"
+            android:clickable="false"
             />
     </LinearLayout>
 
@@ -220,6 +221,8 @@
         android:gravity="left|center_vertical"
         android:hint="@string/focus_name_city"
         android:padding="@dimen/person5"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
         />
 
     <CheckBox
