@@ -114,7 +114,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(false);
+        mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(true);
         mWebView.getSettings().setDomStorageEnabled(true);

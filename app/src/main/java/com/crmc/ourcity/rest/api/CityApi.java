@@ -7,6 +7,7 @@ import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
@@ -90,7 +91,7 @@ public interface CityApi {
      * @return city entities
      */
     @POST("/{path}")
-    List<Events> getCityEntities(@Path("path") String q, @Body TypedInput body);
+    List<CityEntities> getCityEntities(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number
