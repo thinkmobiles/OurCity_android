@@ -16,6 +16,7 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
+import com.crmc.ourcity.fragment.CityEntitiesFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
@@ -31,6 +32,7 @@ import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.notification.RegistrationIntentService;
+import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
@@ -180,6 +182,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_TYPE_ENTITIES:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesFragment.newInstance(_menuModel
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
         }
     }
@@ -187,6 +191,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
+    }
+
+    @Override
+    public void onCityEntitiesItemAction(CityEntities _cityEntities) {
+        //replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
     }
 
     @Override

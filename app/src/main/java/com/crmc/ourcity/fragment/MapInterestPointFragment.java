@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -176,7 +177,8 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
                 for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
                     temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
                             .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat
-                            (j), _data.get(i).getInterestedPointLon(j)))));
+                            (j), _data.get(i).getInterestedPointLon(j))).icon(BitmapDescriptorFactory.fromBitmap
+                            (Image.convertBase64ToBitmap(_data.get(i).icon)))));
                     bounds.include(new LatLng(_data.get(i).getInterestedPointLat(j), _data.get(i)
                             .getInterestedPointLon(j)));
                 }
