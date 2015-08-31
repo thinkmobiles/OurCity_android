@@ -31,11 +31,8 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         cityNumber = getResources().getInteger(R.integer.city_id);
-        Log.d("TAG", cityNumber + " id city");
         drawable = getResources().getDrawable(R.drawable.splash);
-
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
-
         rlBackground.setBackground(getResources().getDrawable(R.drawable.splash));
 
 
@@ -65,8 +62,6 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
                 finish();
             }
         }
-
-        ;
     };
 
 
@@ -90,6 +85,4 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     public void onLoaderReset(Loader<String> loader) {
 
     }
-
-
 }
