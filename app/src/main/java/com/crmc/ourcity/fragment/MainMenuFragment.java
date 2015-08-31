@@ -10,6 +10,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -142,7 +143,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        cityNumber = 1;
+        cityNumber = getResources().getInteger(R.integer.city_id);
+        Log.d("TAG", cityNumber + " id from Menu");
         lng = "en";
         residentId = SPManager.getInstance(getActivity()).getResidentId();
     }

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 import com.crmc.ourcity.R;
@@ -36,7 +37,8 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        cityNumber = 1;
+        cityNumber = getResources().getInteger(R.integer.city_id);
+        Log.d("TAG", cityNumber + " id city");
         drawable = getResources().getDrawable(R.drawable.splash);
 
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
@@ -62,7 +64,7 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         public void run() {
             if (!isFinishing()) {
                 mHandler.removeCallbacks(this);
-
+                getSupportLoaderManager().destroyLoader(Constants.LOADER_SPLASH_CITY_ID);
                 startActivity(new Intent(
                         SplashScreenActivity.this, MainActivity.class
                 ));
