@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -61,6 +62,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
@@ -112,11 +114,10 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setUseWideViewPort(false);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(true);
         mWebView.getSettings().setDomStorageEnabled(true);
-
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -161,7 +162,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             getLoaderManager().initLoader(Constants.LOADER_DOCUMENTS_ID, bundle, this);
         } else {
             tvTitle_WVF.setVisibility(View.GONE);
-            //_link = "http://gooasdfghjgle";
             mWebView.loadUrl(_link);
         }
     }

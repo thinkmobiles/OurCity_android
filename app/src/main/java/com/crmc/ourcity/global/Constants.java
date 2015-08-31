@@ -40,6 +40,7 @@ public class Constants {
     final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
     final public static int LOADER_IMAGE_LOGO_ID = 13;
     final public static int LOADER_IMAGE_CITY_ID = 14;
+    public static final int LOADER_SPLASH_CITY_ID = 15;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
