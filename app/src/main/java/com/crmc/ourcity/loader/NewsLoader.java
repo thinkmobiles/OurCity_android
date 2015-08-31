@@ -25,6 +25,7 @@ public class NewsLoader extends BaseLoader<List<News>> {
     public NewsLoader(Context _context, Bundle _args) {
         super(_context);
         cityNumber = _args.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER);
+        //TODO: если нужно будет использовать. использовать сити_ид из ресурсов
     }
 
     @Override
