@@ -102,34 +102,40 @@ public class EventsListAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(getItem(position).phone)){
                 ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image
                         .darkenColor(0.2)));
+                ivCall.setVisibility(View.VISIBLE);
             } else {
                 ivCall.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(getItem(position).email)){
                 ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image
                         .darkenColor(0.2)));
+                ivSendMail.setVisibility(View.VISIBLE);
             } else {
                 ivSendMail.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(getItem(position).link)){
                 ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
                         .darkenColor(0.2)));
+                ivLink.setVisibility(View.VISIBLE);
             } else {
                 ivLink.setVisibility(View.GONE);
             }
             if (TextUtils.isEmpty(_item.title)){
                 title.setVisibility(View.GONE);
             } else {
+                title.setVisibility(View.VISIBLE);
                 title.setText(_item.title);
             }
             if (TextUtils.isEmpty(_item.eventDateToMobileClient)){
                 date.setVisibility(View.GONE);
             } else {
+                date.setVisibility(View.VISIBLE);
                 date.setText(_item.eventDateToMobileClient);
             }
             if (TextUtils.isEmpty(_item.address)){
                 address.setVisibility(View.GONE);
             } else {
+                address.setVisibility(View.VISIBLE);
                 address.setText(_item.address);
             }
         }

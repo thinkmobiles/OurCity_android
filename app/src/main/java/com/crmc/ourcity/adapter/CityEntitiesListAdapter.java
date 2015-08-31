@@ -88,15 +88,19 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right, Image
                     .darkenColor(0.2)));
-            if (!TextUtils.isEmpty(getItem(position).phoneNumber)) {
+            if (!TextUtils.isEmpty(_item.phoneNumber)) {
                 ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
                         Image.darkenColor(0.2)));
+
+                ivCall.setVisibility(View.VISIBLE);
             } else {
                 ivCall.setVisibility(View.GONE);
             }
-            if (!TextUtils.isEmpty(getItem(position).emailAddress)) {
+            if (!TextUtils.isEmpty(_item.emailAddress)) {
                 ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
                         (0.2)));
+
+                ivSendMail.setVisibility(View.VISIBLE);
             } else {
                 ivSendMail.setVisibility(View.GONE);
             }
