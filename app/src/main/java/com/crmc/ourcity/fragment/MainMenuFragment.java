@@ -225,8 +225,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
         @Override
         public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
-            mAdapter = new MenuGridAdapter(_data.getNodes(), getActivity());
-            mRecyclerView.setAdapter(mAdapter);
+            if (_data.getSize() > 0) {
+                mAdapter = new MenuGridAdapter(_data.getNodes(), getActivity());
+                mRecyclerView.setAdapter(mAdapter);
+            }
             loaderMenuFinish = true;
             showView();
         }

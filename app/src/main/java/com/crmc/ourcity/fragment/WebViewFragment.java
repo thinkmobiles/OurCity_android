@@ -24,7 +24,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.DocumentsLoader;
 import com.crmc.ourcity.rest.responce.events.Documents;
-import com.crmc.ourcity.utils.HtmlFormatter;
 import com.crmc.ourcity.utils.Image;
 
 /**
@@ -62,6 +61,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        //noinspection ConstantConditions
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
@@ -77,8 +77,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
-        String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
-        mWebView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
+        //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
+        mWebView.loadDataWithBaseURL(null, _data.documentData, "text/html", "UTF-8", null);
         tvTitle_WVF.setText(_data.documentTitle);
         showContent();
     }

@@ -15,7 +15,7 @@ public class MenuFull {
     public String splashScreen;
 
     public int getSize() {
-        return nodes.size();
+        return nodes != null ? nodes.size() : 0;
     }
 
     public List<MenuModel> getNodes() {
