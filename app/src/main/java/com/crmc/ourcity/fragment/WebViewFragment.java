@@ -78,7 +78,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
         //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
-        mWebView.loadDataWithBaseURL(null, _data.documentData, "text/html", "UTF-8", null);
+        mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
+                .documentData, "text/html", "UTF-8", null);
         tvTitle_WVF.setText(_data.documentTitle);
         showContent();
     }
@@ -109,7 +110,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         Image.init(Color.parseColor(color));
         pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
         pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
-
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setSupportZoom(true);
@@ -155,7 +155,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 //            new DownloadFile().downloadPdf(getActivity(), _link);
 //            popBackStack();
         } else if (!TextUtils.isEmpty(json)) {
-            mWebView.setInitialScale(100);
+            //mWebView.setInitialScale(100);
+//            mWebView.getSettings().setMinimumFontSize(20);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

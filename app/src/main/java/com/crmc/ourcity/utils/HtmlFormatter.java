@@ -24,7 +24,7 @@ public class HtmlFormatter {
      */
     public String htmlForWebView(String _text, String _urlImage, String _textAlign, String _imageAlign) {
         final int imageMargin = mContext.getResources().getDimensionPixelSize(R.dimen.msf_image_magrin);
-        return "<html><head></head><style>#right { _text-align: right; } #" +
+        return "<html><head><meta name=\"viewport\" content=\"width=device-width\"></head><style>#right { _text-align: right; } #" +
                 "left { _text-align: left; } #justify {_text-align: justify} .left {float:left;margin: " + imageMargin
                 + "px " + imageMargin + "px " + imageMargin + "px 0;} .right  {float: right; margin:" + imageMargin +
                 "px 0 " + imageMargin + "px " + imageMargin + "px;}</style><body><div id=\"" + _textAlign +
