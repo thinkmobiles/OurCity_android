@@ -35,7 +35,7 @@ public class Constants {
     final public static int LOADER_PHONES_ID = 7;
     final public static int LOADER_DOCUMENTS_ID = 8;
     final public static int LOADER_MENU_ID = 9;
-    final public static int LOADER_MENU_BUTTOM_ID = 10;
+    final public static int LOADER_MENU_BOTTOM_ID = 10;
     final public static int LOADER_TRIPS_ID = 11;
     final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
     final public static int LOADER_IMAGE_LOGO_ID = 13;
@@ -91,6 +91,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_SUBMENU = "SUBMENU";
     final public static String CONFIGURATION_KEY_PHONE_LIST = "PHONE_LIST";
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
+    final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
 
 
     //action type

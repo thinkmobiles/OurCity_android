@@ -1,21 +1,21 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingBottom="12dp"
     android:paddingTop="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
 
         <TextView
-            android:id="@+id/tvTitle_EIF"
+            android:id="@+id/tvEntityName_CEIF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -25,7 +25,7 @@
             android:textStyle="bold"/>
 
         <LinearLayout
-            android:id="@+id/llDate_EIF"
+            android:id="@+id/llDetails_CEIF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -33,7 +33,7 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvDate_Text_EIF"
+                android:id="@+id/tvDetails_Text_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -42,26 +42,25 @@
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tvDate_EIF"
+                android:id="@+id/tvDetails_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text=":date"
+                android:text=":details"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
-
         <LinearLayout
-            android:id="@+id/llAddress_EIF"
+            android:id="@+id/llEmail_CEIF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvAddress_Text_EIF"
+                android:id="@+id/tvEmail_Text_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -70,34 +69,7 @@
                 android:textSize="@dimen/person16"/>
 
             <TextView
-                android:id="@+id/tvAddress_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text=":address"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llEmail_EIF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:id="@+id/tvEmail_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="@dimen/person16"/>
-
-            <TextView
-                android:id="@+id/tvEmail_EIF"
+                android:id="@+id/tvEmail_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -108,14 +80,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llMobile_EIF"
+            android:id="@+id/llInformation_CEIF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvMobile_Text_EIF"
+                android:id="@+id/tvInformation_Text_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -124,24 +96,25 @@
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tvMobile_EIF"
+                android:id="@+id/tvInformation_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text=":mobile"
+                android:text=":information"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
+
         <LinearLayout
-            android:id="@+id/llPhone_EIF"
+            android:id="@+id/llPhone_CEIF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvPhone_Text_EIF"
+                android:id="@+id/tvPhone_Text_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -150,7 +123,7 @@
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tvPhone_EIF"
+                android:id="@+id/tvPhone_CEIF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,60 +131,6 @@
                 android:text=":phone"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/llPrice_EIF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:id="@+id/tvPrice_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/tvPrice_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text=":price"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llDescription_EIF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:id="@+id/tvDescription_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/tvDescription_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text=":description"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -221,7 +140,7 @@
 
 
             <ImageView
-                android:id="@+id/ivCallSkype_EIF"
+                android:id="@+id/ivCall_CEIF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -231,7 +150,7 @@
                 tools:background="@android:color/darker_gray"/>
 
             <ImageView
-                android:id="@+id/ivSendMail_EIF"
+                android:id="@+id/ivSendMail_CEIF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -240,22 +159,6 @@
                 android:src="@drawable/mail"
                 tools:background="@android:color/darker_gray"/>
 
-            ImageView
-                android:id="@+id/ivLink_EIF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/link"
-                tools:background="@android:color/darker_gray"/>
-
         </LinearLayout>
-        WebView
-            android:id="@+id/webView_EIF"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </ScrollView>

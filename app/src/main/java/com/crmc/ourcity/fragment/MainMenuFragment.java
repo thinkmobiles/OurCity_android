@@ -157,7 +157,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
         getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_BUTTOM_ID, bundle, mMenuBottomCallBack);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack);
         Bundle bundle1 = new Bundle();
         bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);

@@ -17,6 +17,7 @@ import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.CityEntitiesFragment;
+import com.crmc.ourcity.fragment.CityEntitiesItemFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
@@ -195,7 +196,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onCityEntitiesItemAction(CityEntities _cityEntities) {
-        //replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
     }
 
     @Override

@@ -55,9 +55,7 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
             if (!isFinishing()) {
                 mHandler.removeCallbacks(this);
                 getSupportLoaderManager().destroyLoader(Constants.LOADER_SPLASH_CITY_ID);
-                startActivity(new Intent(
-                        SplashScreenActivity.this, MainActivity.class
-                ));
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
 
                 finish();
             }
