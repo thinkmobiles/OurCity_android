@@ -99,7 +99,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     @Override
     protected void initViews() {
         super.initViews();
@@ -165,6 +165,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             mWebView.loadUrl(_link);
         }
     }
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override
