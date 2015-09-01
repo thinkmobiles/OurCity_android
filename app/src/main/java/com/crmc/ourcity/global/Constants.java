@@ -10,6 +10,7 @@ public class Constants {
 
     final public static String TAG = "TAG";
 
+
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
 
@@ -42,6 +43,7 @@ public class Constants {
     final public static int LOADER_IMAGE_CITY_ID = 14;
     final public static int LOADER_SPLASH_CITY_ID = 15;
     final public static int LOADER_CITY_ENTITIES_ID = 16;
+    public static final int LOADER_RSS_ID = 17;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -78,6 +80,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED = "PERSONAL_NOTIFICATION";
     public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
     public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
+    public static final String BUNDLE_CONSTANT_RSS_LINK = "rss_link";
 
     //for Instance
     final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";

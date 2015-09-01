@@ -97,7 +97,7 @@ public class EventsListAdapter extends BaseAdapter {
 
         public void setData(Events _item, int _position) {
             this.position = _position;
-            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right, Image
+            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
             if (!TextUtils.isEmpty(getItem(position).phone)){
                 ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image

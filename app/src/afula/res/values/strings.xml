@@ -17,4 +17,6 @@
     <string name="submenu_btn_attention">פניה למוקד</string>
 
     <string name="resident_city">עפולה</string>
+
+    <integer name="city_id">15</integer>
 </resources>

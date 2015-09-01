@@ -76,7 +76,7 @@ public class TripsListAdapter extends BaseAdapter {
             tvTripName_TF.setText(_item.tripName);
             tvDescription_TF.setText(_item.description);
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
-                    .event_arrow_right, Image.darkenColor(0.2)));
+                    .event_arrow, Image.darkenColor(0.2)));
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.crmc.ourcity.callback;
 
+import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
