@@ -56,7 +56,6 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
                 mHandler.removeCallbacks(this);
                 getSupportLoaderManager().destroyLoader(Constants.LOADER_SPLASH_CITY_ID);
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-
                 finish();
             }
         }
@@ -76,6 +75,7 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
             mHandler.postDelayed(mEndSplash, SPLASH_DURATION_MS);
         } else {
             startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+            finish();
         }
     }
 
