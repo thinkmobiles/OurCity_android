@@ -247,6 +247,24 @@
 
         />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:visibility="gone"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="Username is already used"
+                android:id="@+id/tvErrorMessage_SUDF"
+                android:layout_below="@+id/chbPersonalNotifications_SUDF"
+                android:layout_centerHorizontal="true"
+                android:padding="@dimen/person5"
+                android:textSize="@dimen/sign_up_dialog_textSize"
+                />
+
+
+
     <Button
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -256,7 +274,7 @@
         android:background="@color/turquoise"
         android:gravity="center_vertical|center_horizontal"
         android:id="@+id/btnSignUpOrEdit_SUDF"
-        android:layout_below="@+id/chbPersonalNotifications_SUDF"
+        android:layout_below="@+id/tvErrorMessage_SUDF"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         />
