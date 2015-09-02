@@ -86,7 +86,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
 
         public void setData(CityEntities _item, int _position) {
             this.position = _position;
-            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
+            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right, Image
                     .darkenColor(0.2)));
             if (!TextUtils.isEmpty(_item.phoneNumber)) {
                 ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,

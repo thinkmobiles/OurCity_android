@@ -78,7 +78,7 @@ public class PhoneBookListAdapter extends BaseAdapter {
         }
 
         public void setData(PhoneBook _item) {
-            ivArrowPhoneBook_PBF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow,
+            ivArrowPhoneBook_PBF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right,
                     Image.darkenColor(0.2)));
             tvCategory_PBF.setText(_item.categoryName.trim());
         }
