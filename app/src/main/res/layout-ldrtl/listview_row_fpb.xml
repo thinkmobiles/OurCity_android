@@ -15,9 +15,9 @@
         android:paddingStart="5dp">
 
         <TextView
-            android:id="@+id/tvMessage_MTRF"
+            android:id="@+id/tvCategory_PBF"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:layout_weight="1"
             android:ellipsize="end"
@@ -28,6 +28,7 @@
             android:textSize="@dimen/cf_item_text_size"
             android:textStyle="bold"
             tools:background="@android:color/holo_orange_dark"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +38,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivArrowMessageToResident_MTRF"
+            android:id="@+id/ivArrowPhoneBook_PBF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -45,4 +46,5 @@
             android:src="@drawable/event_arrow"
             tools:background="@android:color/darker_gray"/>
     </LinearLayout>
+
 </LinearLayout>
