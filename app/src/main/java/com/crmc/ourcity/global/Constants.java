@@ -11,6 +11,7 @@ public class Constants {
     final public static String TAG = "TAG";
 
 
+
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
 
@@ -95,6 +96,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_PHONE_LIST = "PHONE_LIST";
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
     final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
+    public static final String CONFIGURATION_KEY_RSS = "rss";
 
 
     //action type

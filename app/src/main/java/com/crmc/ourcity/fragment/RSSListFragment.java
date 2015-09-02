@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,9 +23,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 15.07.2015.
- */
 public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RSSEntry>>,
         OnItemClickListener {
 
@@ -47,9 +45,10 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
-
     }
 
     @Override
@@ -79,7 +78,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<List<RSSEntry>> _loader, List<RSSEntry> _data) {
-        mAdapter = new RSSAdapter(getActivity(), _data);
+        mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
         lvRssEntries.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();
@@ -111,7 +110,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).getLink());
+        mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(_position));
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
 
@@ -24,11 +25,14 @@ public class RSSAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<RSSEntry> mRSSEnties;
     private Context mContext;
+    private OnListItemActionListener mOnListItemActionListener;
 
-    public RSSAdapter(final Context _context, final List<RSSEntry> _rssEntries) {
+    public RSSAdapter(final Context _context, final List<RSSEntry> _rssEntries, OnListItemActionListener
+            _onListItemActionListener) {
         mContext = _context;
         mInflater = LayoutInflater.from(mContext);
         mRSSEnties = _rssEntries;
+        mOnListItemActionListener = _onListItemActionListener;
     }
 
     @Override
@@ -60,10 +64,10 @@ public class RSSAdapter extends BaseAdapter {
         return _convertView;
     }
 
-    private class ViewHolder {
+    private class ViewHolder implements View.OnClickListener {
         final TextView title;
         final TextView date;
-//        final ImageView ivLink;
+        final ImageView ivLink;
         final ImageView ivArrowEvent;
         final View view;
         final Context mContext;
@@ -72,7 +76,8 @@ public class RSSAdapter extends BaseAdapter {
         ViewHolder(@NonNull final View _view, Context _context) {
             this.title = (TextView) _view.findViewById(R.id.tvTitle_RssFrgmt);
             this.date = (TextView) _view.findViewById(R.id.tvDate_RssFrgmt);
-//            this.ivLink = (ImageView) _view.findViewById(R.id.ivLink_RssFrgmt);
+            this.ivLink = (ImageView) _view.findViewById(R.id.ivLink_RssFrgmt);
+            this.ivLink.setOnClickListener(this);
             this.ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_RssFrgmt);
             this.view = _view;
             this.mContext = _context;
@@ -97,14 +102,19 @@ public class RSSAdapter extends BaseAdapter {
                 date.setVisibility(View.VISIBLE);
                 date.setText(_entry.getPubDate());
             }
-//
-//            if (!TextUtils.isEmpty(_entry.getLink())) {
-//                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
-//                        .darkenColor(0.2)));
-//                ivLink.setVisibility(View.VISIBLE);
-//            } else {
-//                ivLink.setVisibility(View.GONE);
-//            }
+
+            if (!TextUtils.isEmpty(_entry.getLink())) {
+                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
+                        .darkenColor(0.2)));
+                ivLink.setVisibility(View.VISIBLE);
+            } else {
+                ivLink.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnListItemActionListener.onEventsClickLinkAction(getItem(position).getLink());
         }
     }
 }

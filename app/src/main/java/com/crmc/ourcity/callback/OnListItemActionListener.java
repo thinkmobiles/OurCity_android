@@ -1,5 +1,6 @@
 package com.crmc.ourcity.callback;
 
+import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
@@ -16,4 +17,5 @@ public interface OnListItemActionListener {
     void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon);
     void onEventsClickLinkAction(String _link);
     void onPhoneBookItemAction(List<Phones> _phones);
+    void onRSSItemAction(RSSEntry _entry);
 }

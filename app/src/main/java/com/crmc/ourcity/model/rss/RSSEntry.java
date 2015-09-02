@@ -1,11 +1,14 @@
 package com.crmc.ourcity.model.rss;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.net.URL;
 
 /**
  * Created by podo on 01.09.15.
  */
-public class RSSEntry {
+public class RSSEntry implements Parcelable {
 
     private String guid;
     private String title;
@@ -86,4 +89,45 @@ public class RSSEntry {
         data = data.replaceAll("\\]\\]>", "");
         return data;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.guid);
+        dest.writeString(this.title);
+        dest.writeString(this.link);
+        dest.writeString(this.description);
+        dest.writeString(this.pubDate);
+        dest.writeString(this.author);
+        dest.writeSerializable(this.url);
+        dest.writeString(this.encodedContent);
+    }
+
+    public RSSEntry() {
+    }
+
+    protected RSSEntry(Parcel in) {
+        this.guid = in.readString();
+        this.title = in.readString();
+        this.link = in.readString();
+        this.description = in.readString();
+        this.pubDate = in.readString();
+        this.author = in.readString();
+        this.url = (URL) in.readSerializable();
+        this.encodedContent = in.readString();
+    }
+
+    public static final Creator<RSSEntry> CREATOR = new Creator<RSSEntry>() {
+        public RSSEntry createFromParcel(Parcel source) {
+            return new RSSEntry(source);
+        }
+
+        public RSSEntry[] newArray(int size) {
+            return new RSSEntry[size];
+        }
+    };
 }

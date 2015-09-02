@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,12 +28,14 @@ import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.MessageToResidentFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
+import com.crmc.ourcity.fragment.RSSEntryFragment;
 import com.crmc.ourcity.fragment.RSSListFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -198,6 +201,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
     }
+
+    @Override
+    public void onRSSItemAction(RSSEntry _entry) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry));
+    }
+
+
 
     @Override
     public void onCityEntitiesItemAction(CityEntities _cityEntities) {
