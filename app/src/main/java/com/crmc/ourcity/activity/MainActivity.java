@@ -28,12 +28,14 @@ import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.MessageToResidentFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
+import com.crmc.ourcity.fragment.RSSEntryFragment;
 import com.crmc.ourcity.fragment.RSSListFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -200,8 +202,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onRSSItemAction(RSSEntry _entry) {
-        Log.d("TAG", "Hei, i clicked on item");
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry));
     }
+
+
 
     @Override
     public void onCityEntitiesItemAction(CityEntities _cityEntities) {
