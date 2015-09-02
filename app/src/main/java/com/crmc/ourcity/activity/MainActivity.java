@@ -34,7 +34,6 @@ import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
