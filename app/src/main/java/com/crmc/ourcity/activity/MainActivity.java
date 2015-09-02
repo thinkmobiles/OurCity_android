@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -196,6 +197,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
+    }
+
+    @Override
+    public void onRSSItemAction(RSSEntry _entry) {
+        Log.d("TAG", "Hei, i clicked on item");
     }
 
     @Override

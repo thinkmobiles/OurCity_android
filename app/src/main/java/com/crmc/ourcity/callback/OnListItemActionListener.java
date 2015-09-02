@@ -17,4 +17,5 @@ public interface OnListItemActionListener {
     void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon);
     void onEventsClickLinkAction(String _link);
     void onPhoneBookItemAction(List<Phones> _phones);
+    void onRSSItemAction(RSSEntry _entry);
 }

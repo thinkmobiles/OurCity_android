@@ -49,7 +49,6 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
-
     }
 
     @Override
@@ -79,7 +78,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<List<RSSEntry>> _loader, List<RSSEntry> _data) {
-        mAdapter = new RSSAdapter(getActivity(), _data);
+        mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
         lvRssEntries.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();
@@ -111,7 +110,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).getLink());
+        mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(_position));
     }
 
     @Override
