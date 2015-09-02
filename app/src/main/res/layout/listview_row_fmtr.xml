@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:padding="15dp"
-        android:src="@drawable/event_arrow"
+        android:src="@drawable/event_arrow_right"
         tools:background="@android:color/darker_gray"/>
 
     <LinearLayout

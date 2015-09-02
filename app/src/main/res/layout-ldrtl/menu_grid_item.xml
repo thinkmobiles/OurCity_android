@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/llMenuItem_MF"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="105dp"
+              android:layout_height="115dp"
+              android:layout_margin="8dp"
+              android:rotationY="180"
+              android:background="@drawable/item_boarder_menu"
+              android:clickable="true"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:weightSum="10">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6">
+
+        <ImageView
+            android:id="@+id/ivMenuIcon_MF"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|bottom"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvTitle_MF"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:ellipsize="end"
+        android:gravity="center_horizontal|top"
+        android:maxLines="2"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:textColor="#fff"
+        android:textSize="14sp"/>
+</LinearLayout>

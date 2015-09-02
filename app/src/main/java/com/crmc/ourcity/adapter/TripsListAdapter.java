@@ -73,8 +73,8 @@ public class TripsListAdapter extends BaseAdapter {
         }
 
         public void setData(MapTrips _item) {
-            tvTripName_TF.setText(_item.tripName);
-            tvDescription_TF.setText(_item.description);
+            tvTripName_TF.setText(_item.tripName.trim());
+            tvDescription_TF.setText(_item.description.trim());
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable
                     .event_arrow, Image.darkenColor(0.2)));
         }
