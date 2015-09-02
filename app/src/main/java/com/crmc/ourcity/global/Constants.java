@@ -103,8 +103,7 @@ public class Constants {
     //action type
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
-    final public static int ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT = 2;
-    final public static int ACTION_TYPE_LIST_PHONE_LIST = 3;
+    final public static int ACTION_TYPE_LIST_APPEALS = 2;
     final public static int ACTION_TYPE_LINK = 3;
     final public static int ACTION_TYPE_DOCUMENT = 4;
     final public static int ACTION_TYPE_MAP = 5;
@@ -116,6 +115,9 @@ public class Constants {
     final public static int ACTION_TYPE_RSS = 11;
     final public static int ACTION_TYPE_MAP_TRIPS = 12;
     final public static int ACTION_TYPE_ENTITIES = 13;
+    final public static int ACTION_SEND_MAIL_FRAGMENT = 14;
+    final public static int ACTION_HOT_CALL = 15;
+    final public static int ACTION_TYPE_MESSAGE_TO_RESIDENT = 16;
 
     //phone fragment type
     final public static int PHONE_BOOK_LIST = 0;
