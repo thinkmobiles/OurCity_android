@@ -112,13 +112,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsFragment.newInstance(_menuModel
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
-                    case Constants.ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT:
-                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance
-                                (_menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
-                        break;
-                    case Constants.ACTION_TYPE_LIST_PHONE_LIST:
-                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, Constants.PHONE_LIST));
+                    case Constants.ACTION_TYPE_LIST_APPEALS:
                         break;
                 }
                 break;
@@ -187,6 +181,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_ENTITIES:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesFragment.newInstance(_menuModel
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                break;
+            case Constants.ACTION_SEND_MAIL_FRAGMENT:
+                break;
+            case Constants.ACTION_HOT_CALL:
+                break;
+            case Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(_menuModel
                         .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
         }
