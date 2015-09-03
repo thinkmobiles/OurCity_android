@@ -1,18 +1,15 @@
 package com.crmc.ourcity.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.dialog.DialogActivity;
-import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 
 /**
@@ -20,6 +17,14 @@ import com.crmc.ourcity.utils.Image;
  */
 public class SendMailFragment extends BaseFourStatesFragment implements View.OnClickListener {
 
+    private View vTopLine_SMF;
+    private View vUnderLine_SMF;
+    private EditText etFirstName_SMF;
+    private EditText etLastName_SMF;
+    private EditText etMail_SMF;
+    private EditText etDescription_SMF;
+    private Button btnCancel_SMF;
+    private Button btnOk_SMF;
     private String color;
 
     public static SendMailFragment newInstance(String _colorItem) {
@@ -45,59 +50,60 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
-        ivPhoto = findView(R.id.ivPhoto_AF);
-        ivRotate = findView(R.id.ivRotate_AF);
-        etNameCity = findView(R.id.etCityName_AF);
-        etNameStreet = findView(R.id.etStreetName_SUDF);
-        swGpsOnOff = findView(R.id.swGpsOnOff_AF);
-        etDescription = findView(R.id.etDescription_AF);
-        btnSend = findView(R.id.btnSend_AF);
-        etNumberHouse = findView(R.id.etNumberHouse_AF);
-        llPhoto = findView(R.id.llPhoto_AP);
-        llAppeals = findView(R.id.llAppeals_AF);
-
-        etNameCity.setText(getResources().getString(R.string.app_name));
+        vTopLine_SMF = findView(R.id.vTopLine_SMF);
+        vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
+        etFirstName_SMF = findView(R.id.etFirstName_SMF);
+        etLastName_SMF = findView(R.id.etLastName_SMF);
+        etMail_SMF = findView(R.id.etMail_SMF);
+        etDescription_SMF = findView(R.id.etDescription_SMF);
+        btnCancel_SMF = findView(R.id.btnCancel_SMF);
+        btnOk_SMF = findView(R.id.btnOk_SMF);
 
         Image.init(Color.parseColor(color));
-        llAppeals.setBackgroundColor(Image.lighterColor(0.2));
-        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
-                .darkenColor(0.2)));
-        ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
-                Image.darkenColor(0.2)));
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
-                etDescription, llPhoto}, R.drawable.boarder_round_green_ff);
-        Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{etFirstName_SMF, etLastName_SMF, etMail_SMF,
+                etDescription_SMF}, R.drawable.boarder_round_green_ff);
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{btnCancel_SMF, btnOk_SMF}, R.drawable
+                .selector_button_green_ff);
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivPhoto.setOnClickListener(this);
-        ivRotate.setOnClickListener(this);
-        swGpsOnOff.setOnCheckedChangeListener(this);
+        btnCancel_SMF.setOnClickListener(this);
+        btnOk_SMF.setOnClickListener(this);
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_appeals;
+        return R.layout.fragment_send_mail;
     }
 
 
     @Override
     public void onClick(View _view) {
         switch (_view.getId()) {
-            case R.id.ivPhoto_AF:
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
-                startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
-                break;
-            case R.id.ivRotate_AF:
-                if (!mPhotoFilePath.equals("")) {
-                    Bitmap bitmap = Image.rotateImage(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap(), 90);
-                    ivPhoto.setImageBitmap(bitmap);
-                }
-                break;
+            case R.id.btnCancel_SMF:
+                String[] send = {getString(R.string.contact_mail)};
+                String title = "יצירת קשר אפליקציה ";
+                String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
+                        .toString() + "\n" + "כתובת דואר אלקטרוני" + ":  " + etMail_SMF.getText().toString() + "\n" +
+                        "מידע" + ":  " + etDescription_SMF.getText().toString();
+
+                sendMail(send, title, subject);
+                popBackStack();
+            case R.id.btnOk_SMF:
+
         }
+    }
+
+    public final void sendMail(final String[] _mailAdress, final String title, final String text) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, _mailAdress);
+        i.putExtra(Intent.EXTRA_SUBJECT, title);
+        i.putExtra(Intent.EXTRA_TEXT, text);
+        getActivity().startActivity(Intent.createChooser(i, "Send mail..."));
+
     }
 
     @Override

@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <View
-            android:id="@+id/vTopLine"
+            android:id="@+id/vTopLine_SMF"
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:background="@color/black"/>
@@ -145,7 +145,7 @@
                     android:layout_height="27dp"
                     android:layout_marginRight="55dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boarder_round_red_vf"
+                    android:background="@drawable/selector_button_green_ff"
                     android:text="ביטול"
                     android:textColor="#fff"
                     android:textSize="19dp"
@@ -156,7 +156,7 @@
                     android:layout_width="0dp"
                     android:layout_height="27dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boarder_round_red_vf"
+                    android:background="@drawable/selector_button_green_ff"
                     android:text="אישור"
                     android:textColor="#fff"
                     android:textSize="19dp"
@@ -164,7 +164,7 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/vUnderLine"
+                android:id="@+id/vUnderLine_SMF"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
                 android:background="@color/black"/>
