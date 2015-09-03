@@ -1,0 +1,177 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/contact_us_content_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="9dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="5dp"
+                android:text="על מנת ליצור איתנו קשר נא מלא את הפרטים הבאים"
+                android:textColor="#242424"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingRight="5dp"
+                android:text="שם פרטי:"
+                android:textSize="13dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/content_f_name"
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/boarder_round_green_ff"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingRight="5dp"
+                android:text="שם משפחה:"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/content_l_name"
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/boarder_round_green_ff"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingRight="5dp"
+                android:text="כתובת דואר אלקטרוני:"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/content_email"
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/boarder_round_green_ff"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:inputType="textEmailAddress"
+                android:paddingRight="5dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingRight="5dp"
+                android:text="כתב מידע:"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/content_content"
+                android:textColor="#242424"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/boarder_round_green_ff"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:paddingBottom="5dp"
+                android:paddingRight="5dp"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="4dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="5dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/contact_us_btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="27dp"
+                    android:layout_marginRight="55dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boarder_round_red_vf"
+                    android:text="ביטול"
+                    android:textColor="#fff"
+                    android:textSize="19dp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/contact_us_btn_ok"
+                    android:layout_width="0dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boarder_round_red_vf"
+                    android:text="אישור"
+                    android:textColor="#fff"
+                    android:textSize="19dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/black"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
