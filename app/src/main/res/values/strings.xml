@@ -87,5 +87,6 @@
     <string name="setting_dialog_logout">Logout</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="ivalid_number">מספר לא תקין</string>
+    <string name="contact_mail">support@quickwork.co.il</string>
 
 </resources>
