@@ -194,7 +194,7 @@
             android:layout_marginLeft="10dp"
             android:textColorHint="#616161"
             android:background="#424242"
-            android:textColor="#242424"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/sign_up_dialog_textSize"
             android:inputType="textAutoComplete"
             android:gravity="left|center_vertical"
@@ -203,8 +203,6 @@
             android:paddingRight="5dp"
             android:singleLine="true"
             android:layout_weight="2"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
             />
     </LinearLayout>
 
