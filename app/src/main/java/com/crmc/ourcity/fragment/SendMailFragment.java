@@ -87,6 +87,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         switch (_view.getId()) {
             case R.id.btnCancel_SMF:
                 popBackStack();
+                break;
             case R.id.btnOk_SMF:
                 String[] send = {mail};
                 String title = "יצירת קשר אפליקציה ";
@@ -95,6 +96,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
                         "מידע" + ":  " + etDescription_SMF.getText().toString();
 
                 sendMail(send, title, subject);
+                break;
         }
     }
 
