@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -79,12 +78,10 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
 
     @Override
     public void onAnimationEnd(Animator _animation) {
-
     }
 
     @Override
     public void onAnimationCancel(Animator _animation) {
-
     }
 
     @Override
