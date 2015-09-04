@@ -7,6 +7,7 @@ import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
@@ -17,8 +18,10 @@ import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
+import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.http.Body;
@@ -39,6 +42,12 @@ public interface CityApi {
     Integer registerNewResidentAndGetResidentID(@Body com.crmc.ourcity.rest.request.registration.ResidentModel
                                                         _residentModel);
 
+    /**
+     *
+     * @param _residentSignInDetails object which contains username, password, authtoken, pushToken,
+     *                               applianceType
+     * @return loginResponse obj which contains residentId and authToken
+     */
     @POST("/MobileLogin")
     LoginResponse loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
 
@@ -61,6 +70,9 @@ public interface CityApi {
      */
     @POST("/GetBottomMobileMenu")
     MenuFull getMenuBottom(@Body CityModel cityModel);
+
+    @POST("/GetTickerEventsList")
+    ArrayList<TickerModel> getTickers(@Body BaseModel baseModel);
 
     /**
      * @return map marker category and markers with data
@@ -90,7 +102,7 @@ public interface CityApi {
      * @return city entities
      */
     @POST("/{path}")
-    List<Events> getCityEntities(@Path("path") String q, @Body TypedInput body);
+    List<CityEntities> getCityEntities(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number

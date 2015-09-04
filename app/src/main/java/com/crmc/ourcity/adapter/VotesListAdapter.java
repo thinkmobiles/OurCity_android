@@ -68,7 +68,7 @@ public class VotesListAdapter extends BaseAdapter {
         }
 
         public void setData(VoteFull _item) {
-            tvVoteTitle.setText(_item.surveyTitle);
+            tvVoteTitle.setText(_item.surveyTitle.trim());
             if (_item.isActive) {
                 ivVoteStatus.setImageResource(R.drawable.new_menu_dvar_resh_hyer);
             } else {

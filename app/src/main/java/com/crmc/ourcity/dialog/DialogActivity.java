@@ -61,6 +61,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case LOGIN:
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SignInDialog());
                 break;
+            case HOT_CALLS:
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsDialog());
+                break;
         }
     }
 
@@ -76,6 +79,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 intent.putExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, Constants.REQUEST_GALLERY_IMAGE);
                 setResult(RESULT_OK, intent);
                 finish();
+                break;
+            case HOT_CALLS_EDITABLE:
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsEditableDialog());
                 break;
             case REGISTER:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignUpDialog());

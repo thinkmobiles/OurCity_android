@@ -2,7 +2,9 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -38,6 +40,7 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by SetKrul on 23.07.2015.
@@ -50,6 +53,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     private CurrentLocation mLocation;
     private String mPhotoFilePath;
     private ImageView ivPhoto;
+    private ImageView ivRotate;
     private LinearLayout llPhoto;
     private LinearLayout llAppeals;
     private EditTextStreetAutoComplete etNameStreet;
@@ -89,9 +93,24 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("mPhotoFilePath", mPhotoFilePath);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            mPhotoFilePath = savedInstanceState.getString("mPhotoFilePath");
+        }
+    }
+
+    @Override
     protected void initViews() {
         super.initViews();
         ivPhoto = findView(R.id.ivPhoto_AF);
+        ivRotate = findView(R.id.ivRotate_AF);
         etNameCity = findView(R.id.etCityName_AF);
         etNameStreet = findView(R.id.etStreetName_SUDF);
         swGpsOnOff = findView(R.id.swGpsOnOff_AF);
@@ -101,12 +120,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         llPhoto = findView(R.id.llPhoto_AP);
         llAppeals = findView(R.id.llAppeals_AF);
 
-        etNameCity.setText("חדרה");
+        etNameCity.setText(getResources().getString(R.string.app_name));
 
         Image.init(Color.parseColor(color));
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
-        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable
-                .focus_camera, Image.darkenColor(0.2)));
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
+                .darkenColor(0.2)));
+        ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
+                Image.darkenColor(0.2)));
         Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
                 etDescription, llPhoto}, R.drawable.boarder_round_green_ff);
         Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
@@ -184,6 +205,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     protected void setListeners() {
         super.setListeners();
         ivPhoto.setOnClickListener(this);
+        ivRotate.setOnClickListener(this);
         swGpsOnOff.setOnCheckedChangeListener(this);
     }
 
@@ -225,7 +247,12 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                     if (_resultCode == Activity.RESULT_OK) {
                         if (imageFile.exists()) {
                             mGallery.addPhotoToGallery(mPhotoFilePath);
-                            ivPhoto.setImageURI(Uri.fromFile(imageFile));
+                            try {
+                                ivPhoto.setImageBitmap(Image.handleSamplingAndRotationBitmap(getActivity(), Uri
+                                        .fromFile(imageFile), 400, 400));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         } else {
                             Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();
@@ -241,9 +268,9 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 if (_resultCode == Activity.RESULT_OK) {
                     mPhotoFilePath = Image.getPath(getActivity(), _data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
-                        File imageFile = new File(mPhotoFilePath);
-                        if (imageFile.exists()) {
-                            ivPhoto.setImageURI(Uri.fromFile(imageFile));
+                        File imageFile1 = new File(mPhotoFilePath);
+                        if (imageFile1.exists()) {
+                            ivPhoto.setImageURI(Uri.fromFile(imageFile1));
                         } else {
                             Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();
@@ -287,6 +314,12 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                 startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
+                break;
+            case R.id.ivRotate_AF:
+                if (!mPhotoFilePath.equals("")) {
+                    Bitmap bitmap = Image.rotateImage(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap(), 90);
+                    ivPhoto.setImageBitmap(bitmap);
+                }
                 break;
         }
     }

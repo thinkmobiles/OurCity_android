@@ -72,7 +72,7 @@ public class EventsListAdapter extends BaseAdapter {
         final TextView date;
         final TextView address;
         final ImageView ivArrowEvent;
-        final ImageView ivCallSkype;
+        final ImageView ivCall;
         final ImageView ivSendMail;
         final ImageView ivLink;
         final View view;
@@ -84,10 +84,10 @@ public class EventsListAdapter extends BaseAdapter {
             date = (TextView) _view.findViewById(R.id.tvDate_EIF);
             address = (TextView) _view.findViewById(R.id.tvAddress_EIF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_EF);
-            ivCallSkype = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
+            ivCall = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
             ivSendMail = (ImageView) _view.findViewById(R.id.ivSendMail_EF);
             ivLink = (ImageView) _view.findViewById(R.id.ivLink_EF);
-            ivCallSkype.setOnClickListener(this);
+            ivCall.setOnClickListener(this);
             ivSendMail.setOnClickListener(this);
             ivLink.setOnClickListener(this);
             this.view = _view;
@@ -97,39 +97,45 @@ public class EventsListAdapter extends BaseAdapter {
 
         public void setData(Events _item, int _position) {
             this.position = _position;
-            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right, Image
+            ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
             if (!TextUtils.isEmpty(getItem(position).phone)){
-                ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image
+                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image
                         .darkenColor(0.2)));
+                ivCall.setVisibility(View.VISIBLE);
             } else {
-                ivCallSkype.setVisibility(View.GONE);
+                ivCall.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(getItem(position).email)){
                 ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image
                         .darkenColor(0.2)));
+                ivSendMail.setVisibility(View.VISIBLE);
             } else {
                 ivSendMail.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(getItem(position).link)){
                 ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
                         .darkenColor(0.2)));
+                ivLink.setVisibility(View.VISIBLE);
             } else {
                 ivLink.setVisibility(View.GONE);
             }
             if (TextUtils.isEmpty(_item.title)){
                 title.setVisibility(View.GONE);
             } else {
+                title.setVisibility(View.VISIBLE);
                 title.setText(_item.title);
             }
             if (TextUtils.isEmpty(_item.eventDateToMobileClient)){
                 date.setVisibility(View.GONE);
             } else {
+                date.setVisibility(View.VISIBLE);
                 date.setText(_item.eventDateToMobileClient);
             }
             if (TextUtils.isEmpty(_item.address)){
                 address.setVisibility(View.GONE);
             } else {
+                address.setVisibility(View.VISIBLE);
                 address.setText(_item.address);
             }
         }

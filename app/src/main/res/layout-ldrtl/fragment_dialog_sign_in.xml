@@ -2,10 +2,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/turquoise"
-    android:paddingLeft="@dimen/sign_id_dialog_horizontal"
-    android:paddingRight="@dimen/sign_id_dialog_horizontal"
+    android:padding="@dimen/sign_id_dialog_horizontal"
     android:clickable="true"
     android:focusableInTouchMode="true"
     >
@@ -14,7 +13,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/turquoise">
 
     <EditText
@@ -31,8 +30,7 @@
         android:id="@+id/etUsername_SIDF"
         android:textSize="@dimen/sign_up_dialog_textSize"
         android:background="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/etPassword_SIDF"/>
+        android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_marginTop="10dp"
@@ -50,7 +48,7 @@
         android:background="#FFFFFF"
         android:id="@+id/etPassword_SIDF"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/etUsername_SIDF"/>
+        android:layout_below="@+id/etUsername_SIDF"/>
 
     <Button
         android:layout_width="match_parent"
@@ -73,7 +71,7 @@
         android:id="@+id/tvSignUp_SIDF"
         android:layout_below="@+id/btnSignIn_SIDF"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="20dp"/>
 
     </RelativeLayout>
 

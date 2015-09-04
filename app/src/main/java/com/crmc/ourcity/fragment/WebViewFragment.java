@@ -24,7 +24,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.DocumentsLoader;
 import com.crmc.ourcity.rest.responce.events.Documents;
-import com.crmc.ourcity.utils.HtmlFormatter;
 import com.crmc.ourcity.utils.Image;
 
 /**
@@ -62,6 +61,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        //noinspection ConstantConditions
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
@@ -77,8 +77,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
-        String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
-        mWebView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
+        //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
+        mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
+                .documentData, "text/html", "UTF-8", null);
         tvTitle_WVF.setText(_data.documentTitle);
         showContent();
     }
@@ -99,7 +100,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     @Override
     protected void initViews() {
         super.initViews();
@@ -109,12 +110,11 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         Image.init(Color.parseColor(color));
         pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
         pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
-
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(false);
+        mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(true);
         mWebView.getSettings().setDomStorageEnabled(true);
@@ -155,7 +155,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 //            new DownloadFile().downloadPdf(getActivity(), _link);
 //            popBackStack();
         } else if (!TextUtils.isEmpty(json)) {
-            mWebView.setInitialScale(100);
+            //mWebView.setInitialScale(100);
+//            mWebView.getSettings().setMinimumFontSize(20);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
@@ -165,6 +166,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             mWebView.loadUrl(_link);
         }
     }
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override

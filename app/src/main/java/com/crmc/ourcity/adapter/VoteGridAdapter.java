@@ -46,7 +46,7 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder _viewHolder, int _position) {
         VoteDetails voteDetails = mVoteDetailsList.get(_position);
-        _viewHolder.tvVoteTitle.setText(voteDetails.optionDescription);
+        _viewHolder.tvVoteTitle.setText(voteDetails.optionDescription.trim());
         _viewHolder.ivVote.setImageBitmap(Image.convertBase64ToBitmap(voteDetails.image));
         _viewHolder.tvVotePercent.setText(voteDetails.votePercent + "");
         Image.setBackgroundColorView(mContext, _viewHolder.flVoteItemBoarder, R.drawable.boarder_round_red_vf);

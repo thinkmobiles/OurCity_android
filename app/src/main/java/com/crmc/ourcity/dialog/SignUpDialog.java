@@ -28,13 +28,14 @@ import com.crmc.ourcity.view.EditTextStreetAutoComplete;
  * Created by podo on 19.08.15.
  */
 public class SignUpDialog extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
-
+    private View root;
     private EditText etLastName, etFirstName, etUsername,
                      etPassword, etPhoneNumber, etMobileNumber,
                      etEmail, etHouseNumber, etCityName;
     private EditTextStreetAutoComplete etStreet;
     private CheckBox chbGlobalNotifications, chbPersonalNotifications;
     private Button btnSignUpOrEdit;
+    private int residentId;
 
 
 
@@ -42,7 +43,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_dialog_sign_up, container, false);
+        root = inflater.inflate(R.layout.fragment_dialog_sign_up, container, false);
         findUI(root);
         setListeners();
         return root;
@@ -106,7 +107,11 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     public void onClick(View v) {
         if (checkValidation()) {
             Bundle args = createBundleForResident();
-            getLoaderManager().initLoader(1, args, mRegisterCallback);
+            if (residentId == -3) {
+                getLoaderManager().restartLoader(Constants.LOADER_REGISTER_NEW_RESIDENT_ID, args, mRegisterCallback);
+            } else {
+                getLoaderManager().initLoader(Constants.LOADER_REGISTER_NEW_RESIDENT_ID, args, mRegisterCallback);
+            }
         }
     }
 
@@ -175,9 +180,12 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
 
         @Override
-        public void onLoadFinished(Loader<Integer> loader, Integer residentId) {
+        public void onLoadFinished(Loader<Integer> _loader, Integer _residentId) {
+            residentId = _residentId;
+            if (residentId == -3) {
+                root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
 
-            if (residentId > 0) {
+            } else if (residentId > 0) {
             SPManager.getInstance(getActivity()).setResidentId(residentId);
             SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
             SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());

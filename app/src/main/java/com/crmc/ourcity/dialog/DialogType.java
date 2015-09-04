@@ -19,6 +19,6 @@ public enum DialogType {
     VOTE_CHOICE,
     PHOTO_CAM,
     PHOTO_GALLERY,
-    LOGIN,
+    LOGIN, HOT_CALLS, HOT_CALLS_EDITABLE,
 
 }

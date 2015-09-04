@@ -4,11 +4,15 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.callback.OnListItemActionListener;
+import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +20,11 @@ import java.util.List;
 /**
  * Created by klim on 21.07.15.
  */
-public class Ticker extends TextView implements Animator.AnimatorListener {
+public class Ticker extends TextView implements Animator.AnimatorListener, View.OnClickListener {
     private ObjectAnimator mAimator;
-    private List<String> mData;
+    private List<TickerModel> mData;
     private int count;
+    private OnListItemActionListener onTickerActionListener;
 
     public Ticker(Context _context) {
         this(_context, null, 0);
@@ -37,6 +42,7 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
         DisplayMetrics metrics = _context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
 
+        setOnClickListener(this);
         mAimator = ObjectAnimator.ofFloat(this, "translationX", -1 * width, width);
         mAimator.setDuration(7000);
         mAimator.addListener(this);
@@ -48,15 +54,9 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
      * instert real data when it will be ready
      * @param _data
      */
-    public void setData(List<String> _data) {
-        List tempTicker = new ArrayList();
-        tempTicker.add("test string1 for ticker");
-        tempTicker.add("test string2 for ticker");
-        tempTicker.add("test string3 for ticker");
-        tempTicker.add("test string4 for ticker");
-
-        mData = tempTicker;
-        setText(mData.get(0).toString());
+    public void setData(List<TickerModel> _data) {
+        mData = _data;
+        setText(mData.get(0).title);
     }
 
     public void startAnimation() {
@@ -78,12 +78,10 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
 
     @Override
     public void onAnimationEnd(Animator _animation) {
-
     }
 
     @Override
     public void onAnimationCancel(Animator _animation) {
-
     }
 
     @Override
@@ -93,6 +91,17 @@ public class Ticker extends TextView implements Animator.AnimatorListener {
         } else {
             count = 0;
         }
-        setText(mData.get(count));
+        setText(mData.get(count).title);
+    }
+
+    public void setOnTickerActionListener(OnListItemActionListener _listener) {
+        onTickerActionListener = _listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (onTickerActionListener != null && mData != null && !mData.isEmpty()) {
+            onTickerActionListener.onTickerAction(v, mData.get(count).link);
+        }
     }
 }

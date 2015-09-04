@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -16,6 +17,8 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
+import com.crmc.ourcity.fragment.CityEntitiesFragment;
+import com.crmc.ourcity.fragment.CityEntitiesItemFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
@@ -25,16 +28,22 @@ import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.MessageToResidentFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
+import com.crmc.ourcity.fragment.RSSEntryFragment;
+import com.crmc.ourcity.fragment.RSSListFragment;
+import com.crmc.ourcity.fragment.SendMailFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.notification.RegistrationIntentService;
+import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
@@ -43,6 +52,7 @@ import com.crmc.ourcity.utils.SPManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener {
@@ -50,6 +60,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
+    private ArrayList<TickerModel> tickers;
+    private int cityNumber;
 //    private boolean isLogIn;
 
     @Override
@@ -65,13 +77,19 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
 
 //        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
-
+        cityNumber = getResources().getInteger(R.integer.city_id);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
-
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+//        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, bundle, mTickersDataCallback);
         //insert List<string> with breaking news when it will be ready
-        mTicker.setData(null);
-        mTicker.startAnimation();
+        tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
+        if(tickers!= null) {
+            mTicker.setData((List) tickers);
+            mTicker.setOnTickerActionListener(this);
+            mTicker.startAnimation();
+        }
 
         setSupportActionBar(mToolbar);
         //getSupportActionBar().setHomeButtonEnabled(true);
@@ -108,13 +126,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsFragment.newInstance(_menuModel
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
-                    case Constants.ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT:
-                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance
-                                (_menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
-                        break;
-                    case Constants.ACTION_TYPE_LIST_PHONE_LIST:
-                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, Constants.PHONE_LIST));
+                    case Constants.ACTION_TYPE_LIST_APPEALS:
                         break;
                 }
                 break;
@@ -174,12 +186,28 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_TYPE_RSS:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSListFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.link));
                 break;
             case Constants.ACTION_TYPE_MAP_TRIPS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat(),
                         _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_TYPE_ENTITIES:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesFragment.newInstance(_menuModel
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                break;
+            case Constants.ACTION_SEND_MAIL_FRAGMENT:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem));
+                break;
+            case Constants.ACTION_HOT_CALL:
+                Intent intent = new Intent(this, DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.HOT_CALLS).to(intent);
+                startActivity(intent);
+                break;
+            case Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(_menuModel
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
         }
     }
@@ -187,6 +215,25 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
+    }
+
+    @Override
+    public void onRSSItemAction(RSSEntry _entry) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry));
+    }
+
+    @Override
+    public void onTickerAction(View _view, String _link) {
+        if (!TextUtils.isEmpty(_link)) {
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
+                    ()));
+        }
+    }
+
+
+    @Override
+    public void onCityEntitiesItemAction(CityEntities _cityEntities) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
     }
 
     @Override

@@ -82,7 +82,7 @@ public class PhonesListAdapter extends BaseAdapter {
 
         public void setData(Phones _item, int _position) {
             this.position = _position;
-            tvNameInstitution.setText(_item.entityName);
+            tvNameInstitution.setText(_item.entityName.trim());
             if (!TextUtils.isEmpty(getItem(position).phoneNumber)) {
                 ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
                         Image.darkenColor(0.2)));

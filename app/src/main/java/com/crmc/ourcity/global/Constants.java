@@ -35,12 +35,16 @@ public class Constants {
     final public static int LOADER_PHONES_ID = 7;
     final public static int LOADER_DOCUMENTS_ID = 8;
     final public static int LOADER_MENU_ID = 9;
-    final public static int LOADER_MENU_BUTTOM_ID = 10;
+    final public static int LOADER_MENU_BOTTOM_ID = 10;
     final public static int LOADER_TRIPS_ID = 11;
     final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
     final public static int LOADER_IMAGE_LOGO_ID = 13;
     final public static int LOADER_IMAGE_CITY_ID = 14;
-    public static final int LOADER_SPLASH_CITY_ID = 15;
+    final public static int LOADER_SPLASH_CITY_ID = 15;
+    final public static int LOADER_CITY_ENTITIES_ID = 16;
+    public static final int LOADER_RSS_ID = 17;
+    public static final int LOADER_REGISTER_NEW_RESIDENT_ID = 18;
+    public static final int LOADER_TICKERS_ID = 19;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -77,6 +81,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED = "PERSONAL_NOTIFICATION";
     public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
     public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
+    public static final String BUNDLE_CONSTANT_RSS_LINK = "rss_link";
 
     //for Instance
     final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";
@@ -90,13 +95,14 @@ public class Constants {
     final public static String CONFIGURATION_KEY_SUBMENU = "SUBMENU";
     final public static String CONFIGURATION_KEY_PHONE_LIST = "PHONE_LIST";
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
+    final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
+    public static final String CONFIGURATION_KEY_RSS = "rss";
 
 
     //action type
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
-    final public static int ACTION_TYPE_LIST_MESSAGE_TO_RESIDENT = 2;
-    final public static int ACTION_TYPE_LIST_PHONE_LIST = 3;
+    final public static int ACTION_TYPE_LIST_APPEALS = 2;
     final public static int ACTION_TYPE_LINK = 3;
     final public static int ACTION_TYPE_DOCUMENT = 4;
     final public static int ACTION_TYPE_MAP = 5;
@@ -108,6 +114,9 @@ public class Constants {
     final public static int ACTION_TYPE_RSS = 11;
     final public static int ACTION_TYPE_MAP_TRIPS = 12;
     final public static int ACTION_TYPE_ENTITIES = 13;
+    final public static int ACTION_SEND_MAIL_FRAGMENT = 14;
+    final public static int ACTION_HOT_CALL = 15;
+    final public static int ACTION_TYPE_MESSAGE_TO_RESIDENT = 16;
 
     //phone fragment type
     final public static int PHONE_BOOK_LIST = 0;
@@ -118,4 +127,5 @@ public class Constants {
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static String IS_FROM_MAIN_ACTIVITY = "true";
+    public static String BUNDLE_TICKERS_LIST = "tickersList";
 }

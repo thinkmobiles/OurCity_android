@@ -73,7 +73,7 @@ public class MassageToResidentAdapter extends BaseAdapter {
         }
 
         public void setData(MassageToResident _item) {
-//            ivArrowMessageToResident_MTRF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow_right,
+//            ivArrowMessageToResident_MTRF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow,
 //                    Image.darkenColor(0.2)));
             tvMessage_MTRF.setText(_item.message);
         }

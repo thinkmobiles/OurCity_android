@@ -19,7 +19,6 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.Events;
-import com.crmc.ourcity.utils.HtmlFormatter;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
@@ -125,8 +124,8 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         setImage();
     }
 
-    private void checkData(String _text, TextView _tvView, View _view){
-        if (!TextUtils.isEmpty(_text)){
+    private void checkData(String _text, TextView _tvView, View _view) {
+        if (!TextUtils.isEmpty(_text)) {
             _tvView.setText(_text);
         } else {
             _view.setVisibility(View.GONE);
@@ -134,35 +133,36 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void setWebView(String _html){
+    private void setWebView(String _html) {
         if (!TextUtils.isEmpty(_html)) {
             mWebView.setWebViewClient(new MyWebViewClient());
             mWebView.getSettings().setJavaScriptEnabled(true);
-            mWebView.setInitialScale(100);
-            String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(_html, "", "justify", "right");
-            mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
+            mWebView.getSettings().setUseWideViewPort(true);
+            //String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(_html, "", "justify", "right");
+            mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" " +
+                    "content=\"width=device-width\">" + _html, "text/html", "UTF-8", null);
         } else {
             mWebView.setVisibility(View.GONE);
             showContent();
         }
     }
 
-    private void setImage(){
-        if (!TextUtils.isEmpty(mEvents.phone)){
+    private void setImage() {
+        if (!TextUtils.isEmpty(mEvents.phone)) {
             ivCallSkype.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
                     .darkenColor(0.2)));
         } else {
             ivCallSkype.setVisibility(View.GONE);
         }
-        if (!TextUtils.isEmpty(mEvents.email)){
-            ivSendMail.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.mail, Image
-                    .darkenColor(0.2)));
+        if (!TextUtils.isEmpty(mEvents.email)) {
+            ivSendMail.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.mail, Image.darkenColor
+                    (0.2)));
         } else {
             ivSendMail.setVisibility(View.GONE);
         }
-        if (!TextUtils.isEmpty(mEvents.link)){
-            ivLink.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.link, Image
-                    .darkenColor(0.2)));
+        if (!TextUtils.isEmpty(mEvents.link)) {
+            ivLink.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.link,
+                    Image.darkenColor(0.2)));
         } else {
             ivLink.setVisibility(View.GONE);
         }
@@ -195,8 +195,8 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         switch (v.getId()) {
             case R.id.ivCallSkype_EIF:
                 try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources().getString(R
-                            .string.call_hint)));
+                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources()
+                            .getString(R.string.call_hint)));
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                             .LENGTH_SHORT).show();
@@ -204,8 +204,8 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
                 break;
             case R.id.ivSendMail_EIF:
                 try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentMail(mEvents.email), getResources().getString(R
-                            .string.send_mail_hint)));
+                    startActivity(Intent.createChooser(IntentUtils.getIntentMail(mEvents.email), getResources()
+                            .getString(R.string.send_mail_hint)));
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
                             .LENGTH_SHORT).show();
