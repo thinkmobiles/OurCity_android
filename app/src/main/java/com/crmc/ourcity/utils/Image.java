@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.view.View;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,6 +45,7 @@ public class Image {
         img.recycle();
         return rotatedImg;
     }
+
     private static Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
         ExifInterface ei = new ExifInterface(selectedImage.getPath());
         int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -161,6 +163,17 @@ public class Image {
 //            }
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static String convertBitmapToBase64(Bitmap _bitmap) {
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            _bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        } catch (Exception e){
+            return "";
         }
     }
 

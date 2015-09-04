@@ -117,7 +117,6 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         etHouseNumber.setOnFocusChangeListener(this);
 //        etStreet.setOnFocusChangeListener(this);
         etCityName.setOnFocusChangeListener(this);
-
     }
 
     private Bundle createBundleForResident() {
@@ -130,8 +129,13 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_PHONE_NUMBER, etPhoneNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_MOBILE_NUMBER, etMobileNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_HOUSE_NUMBER, etHouseNumber.getText().toString());
-        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
-//        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
+        try{
+            bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
+        }catch (Exception e){
+            bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
+            e.printStackTrace();
+        }
+
         //TODO: uncomment when write street loader
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());

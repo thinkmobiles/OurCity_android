@@ -78,10 +78,14 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<List<RSSEntry>> _loader, List<RSSEntry> _data) {
-        mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
-        lvRssEntries.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        showContent();
+        if (_data != null) {
+            mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
+            lvRssEntries.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showEmpty("Server do not response");
+        }
     }
 
     @Override
