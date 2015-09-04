@@ -122,6 +122,8 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         etNameCity.setText(getResources().getString(R.string.app_name));
 
+        ivRotate.setEnabled(false);
+
         Image.init(Color.parseColor(color));
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
@@ -250,7 +252,9 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                             try {
                                 ivPhoto.setImageBitmap(Image.handleSamplingAndRotationBitmap(getActivity(), Uri
                                         .fromFile(imageFile), 400, 400));
+                                ivRotate.setEnabled(true);
                             } catch (IOException e) {
+                                ivRotate.setEnabled(false);
                                 e.printStackTrace();
                             }
                         } else {
@@ -271,6 +275,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                         File imageFile1 = new File(mPhotoFilePath);
                         if (imageFile1.exists()) {
                             ivPhoto.setImageURI(Uri.fromFile(imageFile1));
+                            ivRotate.setEnabled(true);
                         } else {
                             Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();

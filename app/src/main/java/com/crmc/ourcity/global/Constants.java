@@ -10,6 +10,7 @@ public class Constants {
 
     final public static String TAG = "TAG";
 
+
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
 
@@ -45,6 +46,7 @@ public class Constants {
     public static final int LOADER_RSS_ID = 17;
     public static final int LOADER_REGISTER_NEW_RESIDENT_ID = 18;
     public static final int LOADER_TICKERS_ID = 19;
+    public static final int LOADER_APPEALS_ID = 20;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -97,6 +99,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
     final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
     public static final String CONFIGURATION_KEY_RSS = "rss";
+    public static final String CONFIGURATION_KEY_MAIL = "mail";
 
 
     //action type

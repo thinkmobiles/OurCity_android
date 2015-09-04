@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
 import com.crmc.ourcity.loader.RegisterLoader;
+import com.crmc.ourcity.loader.StreetsLoader;
+import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
@@ -29,16 +32,52 @@ import com.crmc.ourcity.view.EditTextStreetAutoComplete;
  */
 public class SignUpDialog extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener {
     private View root;
-    private EditText etLastName, etFirstName, etUsername,
-                     etPassword, etPhoneNumber, etMobileNumber,
-                     etEmail, etHouseNumber, etCityName;
+    private EditText etLastName, etFirstName, etUsername, etPassword, etPhoneNumber, etMobileNumber, etEmail,
+            etHouseNumber, etCityName;
     private EditTextStreetAutoComplete etStreet;
     private CheckBox chbGlobalNotifications, chbPersonalNotifications;
     private Button btnSignUpOrEdit;
     private int residentId;
+    private String[] streets;
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"1\"," +
+                "\"userName\":\"Webit\",\"password\":\"HdrMoked                                          \"}}");
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
+        getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, mStreetsCallBack);
+    }
 
+    private LoaderManager.LoaderCallbacks<StreetsFull> mStreetsCallBack = new LoaderManager
+            .LoaderCallbacks<StreetsFull>() {
+
+        @Override
+        public Loader<StreetsFull> onCreateLoader(int _id, Bundle _args) {
+            return new StreetsLoader(getActivity(), _args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
+            if (_data != null) {
+                int numbersStreets = _data.streetsList.size();
+                streets = new String[numbersStreets];
+                for (int i = 0; i < numbersStreets; i++) {
+                    streets[i] = _data.streetsList.get(i).streetName;
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
+                        streets);
+                etStreet.setAdapter(adapter);
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<StreetsFull> _loader) {
+        }
+    };
 
     @Nullable
     @Override
@@ -50,20 +89,20 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     private void findUI(View _root) {
-        etLastName = (EditText) _root. findViewById(R.id.etLastName_SUDF);
-        etFirstName = (EditText) _root. findViewById(R.id.etFirstName_SUDF);
-        etUsername = (EditText) _root. findViewById(R.id.etUsername_SUDF);
-        etPassword = (EditText) _root. findViewById(R.id.etPassword_SUDF);
-        etPhoneNumber = (EditText) _root. findViewById(R.id.etPhoneNumber_SUDF);
-        etMobileNumber = (EditText) _root. findViewById(R.id.etMobileNumber_SUDF);
-        etEmail = (EditText) _root. findViewById(R.id.etEmail_SUDF);
-        etHouseNumber = (EditText) _root. findViewById(R.id.etHouseNumber_SUDF);
-        etStreet = (EditTextStreetAutoComplete) _root. findViewById(R.id.etStreetName_SUDF);
-        etCityName = (EditText) _root. findViewById(R.id.etCityName_SUDF);
+        etLastName = (EditText) _root.findViewById(R.id.etLastName_SUDF);
+        etFirstName = (EditText) _root.findViewById(R.id.etFirstName_SUDF);
+        etUsername = (EditText) _root.findViewById(R.id.etUsername_SUDF);
+        etPassword = (EditText) _root.findViewById(R.id.etPassword_SUDF);
+        etPhoneNumber = (EditText) _root.findViewById(R.id.etPhoneNumber_SUDF);
+        etMobileNumber = (EditText) _root.findViewById(R.id.etMobileNumber_SUDF);
+        etEmail = (EditText) _root.findViewById(R.id.etEmail_SUDF);
+        etHouseNumber = (EditText) _root.findViewById(R.id.etHouseNumber_SUDF);
+        etStreet = (EditTextStreetAutoComplete) _root.findViewById(R.id.etStreetName_SUDF);
+        etCityName = (EditText) _root.findViewById(R.id.etCityName_SUDF);
         etCityName.setText(getResources().getString(R.string.app_name));
-        chbGlobalNotifications = (CheckBox) _root. findViewById(R.id.chbGlobalNotifications_SUDF);
-        chbPersonalNotifications = (CheckBox) _root. findViewById(R.id.chbPersonalNotifications_SUDF);
-        btnSignUpOrEdit = (Button) _root .findViewById(R.id.btnSignUpOrEdit_SUDF);
+        chbGlobalNotifications = (CheckBox) _root.findViewById(R.id.chbGlobalNotifications_SUDF);
+        chbPersonalNotifications = (CheckBox) _root.findViewById(R.id.chbPersonalNotifications_SUDF);
+        btnSignUpOrEdit = (Button) _root.findViewById(R.id.btnSignUpOrEdit_SUDF);
     }
 
     private void setListeners() {
@@ -76,7 +115,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         etMobileNumber.setOnFocusChangeListener(this);
         etEmail.setOnFocusChangeListener(this);
         etHouseNumber.setOnFocusChangeListener(this);
-        etStreet.setOnFocusChangeListener(this);
+//        etStreet.setOnFocusChangeListener(this);
         etCityName.setOnFocusChangeListener(this);
 
     }
@@ -91,8 +130,8 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_PHONE_NUMBER, etPhoneNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_MOBILE_NUMBER, etMobileNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_HOUSE_NUMBER, etHouseNumber.getText().toString());
-       // bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
-        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, Integer.parseInt(etStreet.getText().toString()));
+//        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
         //TODO: uncomment when write street loader
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());
@@ -119,28 +158,28 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         boolean isValid = true;
         boolean isOptionalFieldValid = true;
         if (TextUtils.isEmpty(etFirstName.getText().toString())) {
-            etFirstName.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etFirstName.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
         if (TextUtils.isEmpty(etLastName.getText().toString())) {
-            etLastName.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etLastName.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
         if (TextUtils.isEmpty(etUsername.getText().toString())) {
-            etUsername.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etUsername.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
         if (TextUtils.isEmpty(etPassword.getText().toString())) {
-            etPassword.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etPassword.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
         if (!TextUtils.isEmpty(etEmail.getText().toString())) {
-            if(!Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches()) {
                 etEmail.setError(getResources().getString(R.string.sign_up_dialog_incorrect_email));
                 isValid = false;
             }
         } else {
-            etEmail.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etEmail.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 
@@ -150,7 +189,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
                 isValid = false;
             }
         } else {
-            etMobileNumber.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etMobileNumber.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 
@@ -162,7 +201,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
 
         if (TextUtils.isEmpty(etHouseNumber.getText().toString())) {
-            etHouseNumber.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etHouseNumber.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 //        if (TextUtils.isEmpty(etStreet.getText().toString())) {
@@ -186,13 +225,13 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
                 root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
 
             } else if (residentId > 0) {
-            SPManager.getInstance(getActivity()).setResidentId(residentId);
-            SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
-            SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
+                SPManager.getInstance(getActivity()).setResidentId(residentId);
+                SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
+                SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
 
                 Bundle bundle = createBundleForResident();
 
-            getLoaderManager().initLoader(12, bundle, mLoginCallback);
+                getLoaderManager().initLoader(12, bundle, mLoginCallback);
 
             }
 
@@ -204,7 +243,8 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
     };
 
-    private LoaderManager.LoaderCallbacks<LoginResponse> mLoginCallback = new LoaderManager.LoaderCallbacks<LoginResponse>() {
+    private LoaderManager.LoaderCallbacks<LoginResponse> mLoginCallback = new LoaderManager
+            .LoaderCallbacks<LoginResponse>() {
         @Override
         public Loader<LoginResponse> onCreateLoader(int id, Bundle args) {
             return new LoginLoader(getActivity(), args);
@@ -213,6 +253,8 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         @Override
         public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
             SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+            SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
+            SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
             SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
             getActivity().finish();
         }
@@ -224,13 +266,14 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     };
 
     private void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity(). getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity
+                .INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if(!hasFocus) {
+        if (!hasFocus) {
             hideKeyboard(v);
         }
     }

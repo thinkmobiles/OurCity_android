@@ -17,6 +17,7 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealsFragment;
+import com.crmc.ourcity.fragment.AppealsListFragment;
 import com.crmc.ourcity.fragment.CityEntitiesFragment;
 import com.crmc.ourcity.fragment.CityEntitiesItemFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
@@ -127,6 +128,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                     case Constants.ACTION_TYPE_LIST_APPEALS:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsListFragment.newInstance(_menuModel
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                 }
                 break;
@@ -198,7 +201,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_SEND_MAIL_FRAGMENT:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem));
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.email));
                 break;
             case Constants.ACTION_HOT_CALL:
                 Intent intent = new Intent(this, DialogActivity.class);

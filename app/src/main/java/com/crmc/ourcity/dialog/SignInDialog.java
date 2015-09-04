@@ -85,6 +85,7 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignIn_SIDF :
+                hideKeyboard(btnSignIn);
                 if(checkValidation()) {
                     Bundle bundle = createBundleForResident();
                 getLoaderManager().initLoader(1, bundle, this);
@@ -121,6 +122,8 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
         if (data != null){
             SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
             SPManager.getInstance(getActivity()).setResidentId(data.residentId);
+            SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
+            SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
             SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
             getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
             getActivity().finish();

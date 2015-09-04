@@ -26,11 +26,13 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     private Button btnCancel_SMF;
     private Button btnOk_SMF;
     private String color;
+    private String mail;
 
-    public static SendMailFragment newInstance(String _colorItem) {
+    public static SendMailFragment newInstance(String _colorItem, String _mail) {
         SendMailFragment mSendMailFragment = new SendMailFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_MAIL, _mail);
         mSendMailFragment.setArguments(args);
         return mSendMailFragment;
     }
@@ -39,6 +41,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        mail = getArguments().getString(Constants.CONFIGURATION_KEY_MAIL);
     }
 
     @Override
@@ -60,8 +63,8 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         btnOk_SMF = findView(R.id.btnOk_SMF);
 
         Image.init(Color.parseColor(color));
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{etFirstName_SMF, etLastName_SMF, etMail_SMF,
-                etDescription_SMF}, R.drawable.boarder_round_green_ff);
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{vTopLine_SMF, vUnderLine_SMF, etFirstName_SMF,
+                etLastName_SMF, etMail_SMF, etDescription_SMF}, R.drawable.boarder_round_green_ff);
         Image.setBackgroundColorArrayView(getActivity(), new View[]{btnCancel_SMF, btnOk_SMF}, R.drawable
                 .selector_button_green_ff);
     }
@@ -84,14 +87,16 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         switch (_view.getId()) {
             case R.id.btnCancel_SMF:
                 popBackStack();
+                break;
             case R.id.btnOk_SMF:
-                String[] send = {getString(R.string.contact_mail)};
+                String[] send = {mail};
                 String title = "יצירת קשר אפליקציה ";
                 String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
                         .toString() + "\n" + "כתובת דואר אלקטרוני" + ":  " + etMail_SMF.getText().toString() + "\n" +
                         "מידע" + ":  " + etDescription_SMF.getText().toString();
 
                 sendMail(send, title, subject);
+                break;
         }
     }
 
