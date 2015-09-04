@@ -21,102 +21,99 @@ import com.crmc.ourcity.utils.Image;
 import java.util.ArrayList;
 
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks {
+
 
     private RelativeLayout rlBackground;
-    private static final int SPLASH_DURATION_MS = 2000;
     private Handler mHandler = new Handler();
     private int cityNumber;
     private Drawable drawable;
     private ArrayList<TickerModel> tickers;
-    private Bundle bundle;
+    private Bundle loaderBundle;
+
+    private int SPLASH_DELAY ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        SPLASH_DELAY = getResources().getInteger(R.integer.banner_delay); //seconds
         cityNumber = getResources().getInteger(R.integer.city_id);
         drawable = getResources().getDrawable(R.drawable.splash);
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
         rlBackground.setBackground(getResources().getDrawable(R.drawable.splash));
 
+        buildLoaderBundle();
+        loadTicker();
+        loadBackgroundImage();
+    }
 
-        bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL);
-        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, bundle, mTickersDataCallback);
-
+    private void loadTicker() {
+        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, loaderBundle, this);
 
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        mEndSplash.run();
-//        return super.onTouchEvent(event);
-//    }
+    private void loadBackgroundImage() {
+        getSupportLoaderManager().initLoader(Constants.LOADER_BACKGROUND_IMAGE_ID, loaderBundle, this);
+    }
+
+    private void buildLoaderBundle() {
+        loaderBundle = new Bundle();
+        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL);
+    }
 
     private Runnable mEndSplash = new Runnable() {
         public void run() {
             if (!isFinishing()) {
-                mHandler.removeCallbacks(this);
-                getSupportLoaderManager().destroyLoader(Constants.LOADER_SPLASH_CITY_ID);
                 Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 intent.putParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST, tickers);
+                getSupportLoaderManager().destroyLoader(Constants.LOADER_BACKGROUND_IMAGE_ID);
+                getSupportLoaderManager().destroyLoader(Constants.LOADER_TICKERS_ID);
                 startActivity(intent);
                 finish();
             }
         }
     };
 
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        Loader loader = null;
 
-
-    private LoaderManager.LoaderCallbacks<String> mSplashCallback = new LoaderManager.LoaderCallbacks<String>() {
-        @Override
-        public Loader<String> onCreateLoader(int id, Bundle args) {
-            return new ImageLoader(SplashScreenActivity.this, args);
+        switch (id) {
+            case Constants.LOADER_BACKGROUND_IMAGE_ID:
+                loader = new ImageLoader(SplashScreenActivity.this, args);
+                break;
+            case Constants.LOADER_TICKERS_ID:
+                loader = new TickerLoader(SplashScreenActivity.this, args);
+                break;
         }
+        return loader;
+    }
 
-        @Override
-        public void onLoadFinished(Loader<String> loader, String data) {
-            if (!TextUtils.isEmpty(data)) {
-                drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(data));
-                rlBackground.setBackground(drawable);
-                mHandler.postDelayed(mEndSplash, SPLASH_DURATION_MS);
-            } else {
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                intent.putParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST, tickers);
+    @Override
+    public void onLoadFinished(Loader loader, Object data) {
+        switch (loader.getId()) {
+            case Constants.LOADER_BACKGROUND_IMAGE_ID:
 
-                startActivity(intent);
-                finish();
-            }
+                String dataString = (String) data;
+                if (!TextUtils.isEmpty(dataString)) {
+                    drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(dataString));
+                    rlBackground.setBackground(drawable);
+
+                }
+                mHandler.postDelayed(mEndSplash, SPLASH_DELAY * 1000);
+                break;
+            case Constants.LOADER_TICKERS_ID:
+                tickers = (ArrayList<TickerModel>) data;
+                break;
         }
+    }
 
-        @Override
-        public void onLoaderReset(Loader<String> loader) {
+    @Override
+    public void onLoaderReset(Loader loader) {
 
-        }
-    };
+    }
 
-
-
-
-    private LoaderManager.LoaderCallbacks<ArrayList<TickerModel>> mTickersDataCallback = new LoaderManager.LoaderCallbacks<ArrayList<TickerModel>>() {
-        @Override
-        public Loader<ArrayList<TickerModel>> onCreateLoader(int id, Bundle args) {
-            return new TickerLoader(SplashScreenActivity.this, args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<ArrayList<TickerModel>> loader, ArrayList<TickerModel> data) {
-
-            tickers = data;
-            getSupportLoaderManager().initLoader(Constants.LOADER_SPLASH_CITY_ID, bundle, mSplashCallback);
-
-        }
-
-        @Override
-        public void onLoaderReset(Loader<ArrayList<TickerModel>> loader) {
-
-        }
-    };
 }

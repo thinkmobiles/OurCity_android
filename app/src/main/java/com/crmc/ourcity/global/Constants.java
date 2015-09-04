@@ -41,12 +41,13 @@ public class Constants {
     final public static int LOADER_MESSAGE_TO_RESIDENT = 12;
     final public static int LOADER_IMAGE_LOGO_ID = 13;
     final public static int LOADER_IMAGE_CITY_ID = 14;
-    final public static int LOADER_SPLASH_CITY_ID = 15;
+    final public static int LOADER_BACKGROUND_IMAGE_ID = 15;
     final public static int LOADER_CITY_ENTITIES_ID = 16;
     public static final int LOADER_RSS_ID = 17;
     public static final int LOADER_REGISTER_NEW_RESIDENT_ID = 18;
     public static final int LOADER_TICKERS_ID = 19;
     public static final int LOADER_APPEALS_ID = 20;
+    public static final int LOGIN_ID = 21;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

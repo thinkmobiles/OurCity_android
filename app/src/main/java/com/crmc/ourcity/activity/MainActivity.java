@@ -38,6 +38,7 @@ import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.model.rss.RSSEntry;
+import com.crmc.ourcity.notification.GCMListenerService;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private int cityNumber;
+    private boolean isLogIn;
 //    private boolean isLogIn;
 
     @Override
@@ -70,14 +72,20 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (checkPlayServices()) {
-            if (!TextUtils.isEmpty(SPManager.getInstance(this).getAuthToken())) {
-                Intent intent = new Intent(this, RegistrationIntentService.class);
-                startService(intent);
+        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
+        if (isLogIn) {
+            if (checkPlayServices()) {
+                if (TextUtils.isEmpty(SPManager.getInstance(this).getPushToken())) {
+                    Intent intent = new Intent(this, RegistrationIntentService.class);
+                    startService(intent);
+                } else {
+                    Intent intent = new Intent(this, GCMListenerService.class);
+                    startService(intent);
+                }
             }
         }
 
-//        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
+
         cityNumber = getResources().getInteger(R.integer.city_id);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
@@ -301,7 +309,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         .show();
             } else {
                 //Device not supported.
-                finish();
+                //finish();
             }
             return false;
         }

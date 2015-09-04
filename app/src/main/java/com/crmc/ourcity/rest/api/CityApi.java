@@ -53,7 +53,7 @@ public interface CityApi {
     LoginResponse loginResidentAndGetAuthToken(@Body ResidentSignInDetails _residentSignInDetails);
 
     @POST("/MobileUpdatePushToken")
-    Integer updatePushTokenOnWS(@Body PushTokenUpdatingModel _pushTokenUpdatingModel);
+    Boolean updatePushTokenOnWS(@Body PushTokenUpdatingModel _pushTokenUpdatingModel);
 
     @POST("/MobileLogout")
     Boolean logout(@Body LogoutModel _logoutModel);

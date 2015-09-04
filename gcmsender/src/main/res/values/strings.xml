@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GcmSender</string>
+
+    <string name="send_push_notification">Send push notification</string>
+    <string name="send_button_title">SEND</string>
+    <string name="action_settings">Settings</string>
+</resources>

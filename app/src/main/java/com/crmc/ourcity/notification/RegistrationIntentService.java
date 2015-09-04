@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegIntentService";
-    String authToken = SPManager.getInstance(this).getAuthToken();
+    public static final String ACTION = "service action";
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.     *
@@ -37,12 +37,8 @@ public class RegistrationIntentService extends IntentService {
                 String pushToken = instanceID.getToken(getString(R.string.gcm_SenderID),
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
-
-                //String authToken = SPManager.getInstance(this).getAuthToken();
-//                if (!TextUtils.isEmpty(authToken)) {
-//                    sendPushTokenToServer(authToken, pushToken);
-//                }
-
+                String authToken = SPManager.getInstance(this).getAuthToken();
+                sendPushTokenToServer(authToken, pushToken);
 
             }
         } catch (IOException e) {
@@ -53,17 +49,8 @@ public class RegistrationIntentService extends IntentService {
     private void sendPushTokenToServer(String _authToken, String _pushToken) {
         CityApi cityApi = RestClientApi.getCityApi();
 
-        if (!TextUtils.isEmpty(authToken)) {
-            Integer isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
+        boolean isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
+        if (isPushUpdated)
             SPManager.getInstance(this).setPushToken(_pushToken);
-        }
-
-//    {
-//        "code": -79,
-//            "lang": null,
-//            "message": null
-//    }
-
-
     }
 }
