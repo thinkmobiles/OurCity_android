@@ -10,8 +10,6 @@ public class Constants {
 
     final public static String TAG = "TAG";
 
-
-
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
 
@@ -46,6 +44,7 @@ public class Constants {
     final public static int LOADER_CITY_ENTITIES_ID = 16;
     public static final int LOADER_RSS_ID = 17;
     public static final int LOADER_REGISTER_NEW_RESIDENT_ID = 18;
+    public static final int LOADER_TICKERS_ID = 19;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -129,4 +128,5 @@ public class Constants {
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static String IS_FROM_MAIN_ACTIVITY = "true";
+    public static String BUNDLE_TICKERS_LIST = "tickersList";
 }

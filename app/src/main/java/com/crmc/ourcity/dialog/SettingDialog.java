@@ -25,6 +25,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
     private RelativeLayout register;
     private RelativeLayout confirmation;
     private RelativeLayout logout;
+    private RelativeLayout hotCalls;
 
 
 
@@ -44,9 +45,10 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     protected void initViews() {
-        register = findView(R.id.register);
+        register = findView(R.id.rlSignUp_SetDFrgmt);
         confirmation = findView(R.id.confirmation);
         logout = findView(R.id.rlLogout_FDS);
+        hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
         boolean isFromMainActivity = getActivity().getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
         if (isFromMainActivity) {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
@@ -68,12 +70,16 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
         register.setOnClickListener(this);
         confirmation.setOnClickListener(this);
         logout.setOnClickListener(this);
+        hotCalls.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View _view) {
         switch (_view.getId()){
-            case R.id.register:
+            case R.id.rlHotCalls_SetDFrgmt:
+                mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
+                break;
+            case R.id.rlSignUp_SetDFrgmt:
                 mCallback.onActionDialogSelected(DialogType.REGISTER);
                 break;
             case R.id.confirmation:
