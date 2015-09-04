@@ -348,16 +348,16 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack);
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack).forceLoad();
         Bundle bundle1 = new Bundle();
         bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader).forceLoad();
         Bundle bundle2 = new Bundle();
         bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader).forceLoad();
     }
 
     @Override

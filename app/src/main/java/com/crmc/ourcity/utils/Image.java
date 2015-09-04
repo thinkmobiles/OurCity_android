@@ -157,10 +157,8 @@ public class Image {
     public static Bitmap convertBase64ToBitmap(String _image) {
         try {
             String imageDataBytes = _image.substring(_image.indexOf(",") + 1);
-//            if (imageDataBytes.length() > 0) {
             byte[] decodedString = Base64.decode(imageDataBytes, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//            }
         } catch (Exception e) {
             return null;
         }
@@ -172,7 +170,7 @@ public class Image {
             _bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             return Base64.encodeToString(byteArray, Base64.DEFAULT);
-        } catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
