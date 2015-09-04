@@ -12,4 +12,9 @@ public class WSResult {
     List<ResultObject> ResultObjects;
     public String ReturnStatus;
     public String ReturnValue;
+
+    public List<ResultObject> getResultObjects() {
+        return ResultObjects;
+    }
+
 }
