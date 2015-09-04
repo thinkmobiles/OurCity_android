@@ -82,7 +82,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
         checkData(entry.getTitle(), tvTitle, tvTitle);
         checkData(entry.getPubDate(), tvDate_Text, llDate);
         //checkData(entry.getDescription(), tvDescription_Text, llDescription);
-        if(TextUtils.isEmpty(Html.fromHtml(entry.getDescription()).toString())){
+        if(TextUtils.isEmpty(entry.getDescription())){
             llDescription.setVisibility(View.GONE);
         } else {
             tvDescription_Text.setText(Html.fromHtml(entry.getDescription()));

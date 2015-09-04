@@ -19,6 +19,9 @@ public class SPManager {
     public static final String REG_ID = "registrationId";
     public static final String PUSH_RINGTONE = "pushRingtone";
     public static final String FIRST_LAUNCH = "firstLaunch";
+    public static final String FIRST_EMERGENCY_NUM = "firstEmergencyNum";
+    public static final String SECOND_EMERGENCY_NUM = "secondEmergencyNum";
+    public static final String THIRD_EMERGENCY_NUM = "thirdEmergencyNum";
 
     public static SPManager getInstance(Context context) {
         if (spManager == null) {
@@ -73,6 +76,29 @@ public class SPManager {
         setIsLoggedStatus(false);
     }
 
+    public void setFirstEmergencyNumber(String _phone) {
+        saveString(FIRST_EMERGENCY_NUM, _phone);
+    }
+
+    public String getFirstEmergencyNum() {
+        return retrieveString(FIRST_EMERGENCY_NUM, "");
+    }
+
+    public void setSecondEmergencyNum(String _phone) {
+        saveString(SECOND_EMERGENCY_NUM, _phone);
+    }
+
+    public String getSecondEmergencyNum() {
+        return retrieveString(SECOND_EMERGENCY_NUM, "");
+    }
+
+    public void setThirdEmergencyNumber(String _phone) {
+        saveString(THIRD_EMERGENCY_NUM, _phone);
+    }
+
+    public String getThirdEmergencyNum() {
+        return retrieveString(THIRD_EMERGENCY_NUM, "");
+    }
 
     public void setPushToken(String _pushToken) {
         saveString(PUSH_TOKEN, _pushToken);

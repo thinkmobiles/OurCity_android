@@ -65,7 +65,7 @@ public class RSSHandler extends DefaultHandler {
 
         if (localName.equalsIgnoreCase("title")){
             currentRSSEntry.setTitle(chars.toString());
-        } else if (localName.equalsIgnoreCase("description")){
+        } else if (localName.equalsIgnoreCase("title")){
             currentRSSEntry.setDescription(chars.toString());
         } else if (localName.equalsIgnoreCase("published")){
             currentRSSEntry.setPubDate(chars.toString());

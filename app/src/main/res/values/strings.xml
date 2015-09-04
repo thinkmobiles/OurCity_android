@@ -86,5 +86,6 @@
     <string name="gcm_SenderID">226589076343</string>
     <string name="setting_dialog_logout">Logout</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="ivalid_number">מספר לא תקין</string>
 
 </resources>

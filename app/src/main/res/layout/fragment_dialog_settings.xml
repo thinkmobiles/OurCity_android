@@ -33,13 +33,13 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/setting_mezuka"
+            android:id="@+id/rlHotCalls_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings10"
             android:background="@drawable/new_rec_setting"
             android:clickable="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:padding="@dimen/settings10"
 
             >
@@ -59,14 +59,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_mezoka"
+                android:src="@drawable/icon_hotcalls"
                 android:layout_alignParentEnd="true"
                 />
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:id="@+id/register"
+            android:id="@+id/rlSignUp_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings10"

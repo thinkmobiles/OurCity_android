@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -41,6 +42,7 @@ import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
@@ -49,6 +51,7 @@ import com.crmc.ourcity.utils.SPManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener {
@@ -56,6 +59,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
+    private ArrayList<TickerModel> tickers;
+    private int cityNumber;
 //    private boolean isLogIn;
 
     @Override
@@ -71,13 +76,19 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
 
 //        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
-
+        cityNumber = getResources().getInteger(R.integer.city_id);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
-
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+//        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, bundle, mTickersDataCallback);
         //insert List<string> with breaking news when it will be ready
-        mTicker.setData(null);
-        mTicker.startAnimation();
+        tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
+        if(tickers!= null) {
+            mTicker.setData((List) tickers);
+            mTicker.setOnTickerActionListener(this);
+            mTicker.startAnimation();
+        }
 
         setSupportActionBar(mToolbar);
         //getSupportActionBar().setHomeButtonEnabled(true);
@@ -188,6 +199,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             case Constants.ACTION_SEND_MAIL_FRAGMENT:
                 break;
             case Constants.ACTION_HOT_CALL:
+                Intent intent = new Intent(this, DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.HOT_CALLS).to(intent);
+                startActivity(intent);
                 break;
             case Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(_menuModel
@@ -206,6 +220,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry));
     }
 
+    @Override
+    public void onTickerAction(View _view, String _link) {
+        if (!TextUtils.isEmpty(_link)) {
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
+                    ()));
+        }
+    }
 
 
     @Override
