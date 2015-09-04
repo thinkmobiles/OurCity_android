@@ -187,7 +187,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                 break;
             case Constants.ACTION_SEND_MAIL_FRAGMENT:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem));
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem,
+                        _menuModel.email));
                 break;
             case Constants.ACTION_HOT_CALL:
                 break;
