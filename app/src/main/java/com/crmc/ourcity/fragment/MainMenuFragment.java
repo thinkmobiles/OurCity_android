@@ -56,6 +56,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     TextView tvBtnSecond_MMF;
     TextView tvBtnThird_MMF;
 
+    private MenuFull mMenuFull;
+
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MenuGridAdapter mAdapter;
@@ -226,6 +228,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         @Override
         public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
             if (_data.getSize() > 0) {
+                mMenuFull = _data;
                 mAdapter = new MenuGridAdapter(_data.getNodes(), getActivity());
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -321,11 +324,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderCityImageFinish) {
-            showContent();
-            loaderMenuFinish = false;
-            loaderMenuBottomFinish = false;
-            loaderLogoImageFinish = false;
-            loaderCityImageFinish = false;
+            if (mMenuFull != null) {
+                showContent();
+                loaderMenuFinish = false;
+                loaderMenuBottomFinish = false;
+                loaderLogoImageFinish = false;
+                loaderCityImageFinish = false;
+            } else {
+                showError("Server do not responds");
+            }
         }
     }
 
@@ -336,6 +343,21 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     public void onRetryClick() {
+        showLoading();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack);
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader);
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader);
     }
 
     @Override

@@ -77,6 +77,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
+
         //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
         mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
                 .documentData, "text/html", "UTF-8", null);
@@ -100,7 +101,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
 
-    @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void initViews() {
         super.initViews();
@@ -117,7 +118,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(true);
-        mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -171,9 +171,14 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView _view, String _url) {
-            _view.loadUrl(_url);
+            if (_url.contains(".pdf")) {
+                mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _url);
+            } else {
+                _view.loadUrl(_url);
+            }
             return false;
         }
+
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

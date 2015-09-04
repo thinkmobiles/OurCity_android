@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,8 +53,10 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
      * @param _data
      */
     public void setData(List<TickerModel> _data) {
-        mData = _data;
-        setText(mData.get(0).title);
+        if (_data.size() > 0){
+            mData = _data;
+            setText(mData.get(0).title);
+        }
     }
 
     public void startAnimation() {
