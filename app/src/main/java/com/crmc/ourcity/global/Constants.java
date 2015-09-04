@@ -99,6 +99,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
     final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
     public static final String CONFIGURATION_KEY_RSS = "rss";
+    public static final String CONFIGURATION_KEY_MAIL = "mail";
 
 
     //action type
