@@ -7,6 +7,7 @@ import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -103,6 +104,15 @@ public interface CityApi {
      */
     @POST("/{path}")
     List<CityEntities> getCityEntities(@Path("path") String q, @Body TypedInput body);
+
+    /**
+     *
+     * @param q
+     * @param body
+     * @return return Appeals
+     */
+    @POST("/{path}")
+    WSResult getAppeals(@Path("path") String q, @Body TypedInput body);
 
     /**
      * @param baseModel city number

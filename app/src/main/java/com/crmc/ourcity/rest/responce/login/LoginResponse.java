@@ -6,12 +6,9 @@ package com.crmc.ourcity.rest.responce.login;
 public class LoginResponse {
     public Integer residentId;
     public String authToken;
+    public String crmcUsername;
+    public String crmcPassword;
 
     public LoginResponse() {
-    }
-
-    public LoginResponse(Integer _residentId, String _authToken) {
-        residentId = _residentId;
-        authToken = _authToken;
     }
 }

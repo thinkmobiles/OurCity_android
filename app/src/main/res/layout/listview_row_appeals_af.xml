@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/persona_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/person4"
+    android:paddingBottom="@dimen/person10"
+    android:paddingTop="@dimen/person8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/person150"
+        android:orientation="horizontal"
+        android:padding="@dimen/person5"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/last_appeals_image_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_green"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/person10">
+
+            <ImageView
+                android:id="@+id/focus_img_picker"
+                android:layout_width="@dimen/person80"
+                android:layout_height="@dimen/person40"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/person30"
+                android:src="@drawable/icon_camera" />
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_content_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/person10"
+                android:gravity="center"
+                android:text="לא צורפה תמונה לדווח"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/custom_item_personal_area_content_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/last_appeals_data_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/person5"
+            android:layout_weight="2"
+            android:background="@drawable/edittext_green"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/person20">
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/person5"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text="2/2/2014   4:50"
+                android:textSize="@dimen/person16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/person5"
+                android:drawableRight="@drawable/icon_home"
+                android:gravity="right"
+
+                android:singleLine="true"
+                android:text="חפץ חיים 20"
+                android:textSize="@dimen/person16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icon_address"
+                android:gravity="right|top"
+                android:maxLines="3"
+
+                android:singleLine="false"
+                android:text="נזילה בצנרת "
+                android:textSize="@dimen/person16"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- </LinearLayout> -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/person3">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/person10">
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_content_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/person10"
+                android:maxLength="23"
+                android:singleLine="true"
+                android:text="נשלח" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:singleLine="true"
+
+                android:text="@string/personal_status"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/person10">
+
+            <TextView
+                android:id="@+id/custom_item_personal_area_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/person10"
+
+                android:text="12345" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+
+                android:text="@string/personal_area_id"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

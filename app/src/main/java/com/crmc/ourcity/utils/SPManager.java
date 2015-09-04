@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
  * Created by crm on 19/11/2014.
  */
 public class SPManager {
+    private static final String CRMCUSERNAME = "crmcUsername";
+    private static final String CRMCPASSWORD = "crmcPassword";
     public static SPManager spManager;
     public static SharedPreferences sharedPreferences;
     public static final String USER_NAME = "userName";
@@ -139,6 +141,22 @@ public class SPManager {
 
     public void setResidentId(Integer _residentId) {
         saveInt(RESIDENT_ID, _residentId);
+    }
+
+    public void setCRMCUsername(String _crmcUsername) {
+        saveString(CRMCUSERNAME, _crmcUsername);
+    }
+
+    public String getCRMCUsername() {
+        return retrieveString(CRMCUSERNAME, "");
+    }
+
+    public void setCRMCPassword(String _crmcPassword) {
+        saveString(CRMCPASSWORD, _crmcPassword);
+    }
+
+    public String getCRMCPassword() {
+        return retrieveString(CRMCPASSWORD, "");
     }
 
     public String getAuthToken() {

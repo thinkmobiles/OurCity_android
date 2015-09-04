@@ -213,6 +213,8 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         @Override
         public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
             SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+            SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
+            SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
             SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
             getActivity().finish();
         }

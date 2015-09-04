@@ -21,4 +21,5 @@ public interface OnListItemActionListener {
     void onPhoneBookItemAction(List<Phones> _phones);
     void onRSSItemAction(RSSEntry _entry);
     void onTickerAction(View _view, String _link);
+    //void onAppealsItemAction();
 }
