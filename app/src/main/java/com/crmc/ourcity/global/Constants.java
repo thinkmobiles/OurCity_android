@@ -9,6 +9,9 @@ import android.graphics.drawable.BitmapDrawable;
 public class Constants {
 
     final public static String TAG = "TAG";
+    public static final String BUNDLE_CONSTANT_PARCELABLE_TICKET = "ticket_parse";
+    public static final String BUNDLE_CONSTANT_CRMCUSERNAME = "crmcusername";
+    public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
 
 
     public static BitmapDrawable cityImage = null;

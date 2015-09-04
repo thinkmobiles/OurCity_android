@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,15 +30,25 @@ import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AddressLoader;
+import com.crmc.ourcity.loader.SendTicketLoader;
 import com.crmc.ourcity.loader.StreetsLoader;
 import com.crmc.ourcity.location.CurrentLocation;
+import com.crmc.ourcity.rest.request.appeals.CreateNewTicketWrapper;
+import com.crmc.ourcity.rest.request.appeals.NewTicket;
+import com.crmc.ourcity.rest.request.appeals.NewTicketObj;
+import com.crmc.ourcity.rest.request.appeals.WSAddress;
+import com.crmc.ourcity.rest.request.appeals.WSPhoneNumber;
 import com.crmc.ourcity.rest.responce.address.AddressFull;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
+import com.crmc.ourcity.rest.responce.appeals.Location;
+import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.Camera;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Gallery;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +146,27 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
     }
 
+    private LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager
+            .LoaderCallbacks<WSResult>() {
+
+        @Override
+        public Loader<WSResult> onCreateLoader(int id, Bundle args) {
+            return new SendTicketLoader(getActivity(), args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
+            if (data!=null) {
+                Toast.makeText(getActivity(), "Ticket is send", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<WSResult> loader) {
+
+        }
+    };
+
     private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
             .LoaderCallbacks<AddressFull>() {
 
@@ -209,6 +241,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         ivPhoto.setOnClickListener(this);
         ivRotate.setOnClickListener(this);
         swGpsOnOff.setOnCheckedChangeListener(this);
+        btnSend.setOnClickListener(this);
     }
 
     @Override
@@ -325,6 +358,36 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                     Bitmap bitmap = Image.rotateImage(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap(), 90);
                     ivPhoto.setImageBitmap(bitmap);
                 }
+                break;
+            case R.id.btnSend_AF:
+                NewTicket ticket = new NewTicket();
+                ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+                ticket.Description = etDescription.getText().toString();
+                Location location = new Location();
+                location.StreetName = etNameStreet.getText().toString();
+                location.HouseNumber = etNumberHouse.getText().toString();
+                ticket.Location = location;
+                CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
+                WSAddress wsAddress = new WSAddress();
+                WSPhoneNumber phoneNumber = new WSPhoneNumber();
+                ticket.ReporterAddress = wsAddress;
+                ticket.ReporterFaxNumber = phoneNumber;
+                ticket.ReporterHomePhoneNumber = phoneNumber;
+                ticket.ReporterMobilePhoneNumber = phoneNumber;
+                ticketWrapper.newTicket = ticket;
+
+
+                ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
+                ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
+                ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
+                ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
+                NewTicketObj ticketObj = new NewTicketObj(ticketWrapper);
+                Gson gson = new Gson();
+                String json = gson.toJson(ticketObj);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
+                getLoaderManager().initLoader(21,bundle,  mSendTicket);
+                popBackStack();
                 break;
         }
     }

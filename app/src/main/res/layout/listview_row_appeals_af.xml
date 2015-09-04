@@ -38,7 +38,7 @@
                 android:src="@drawable/icon_camera" />
 
             <TextView
-                android:id="@+id/custom_item_personal_area_content_txt"
+                android:id="@+id/tvPhotoText_AF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -51,7 +51,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/custom_item_personal_area_content_img"
+                android:id="@+id/ivImage_AF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
@@ -71,7 +71,7 @@
             android:paddingRight="@dimen/person20">
 
             <TextView
-                android:id="@+id/custom_item_personal_area_date_time"
+                android:id="@+id/tvDate_AF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/person5"
@@ -82,7 +82,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/custom_item_personal_area_address"
+                android:id="@+id/tvAddress_AF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/person5"
@@ -95,7 +95,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/custom_item_personal_area_content"
+                android:id="@+id/tvDescription_AF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/icon_address"
@@ -123,7 +123,7 @@
             android:layout_marginRight="@dimen/person10">
 
             <TextView
-                android:id="@+id/custom_item_personal_area_content_status"
+                android:id="@+id/tvStat_AF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/person10"
@@ -149,7 +149,7 @@
             android:layout_marginLeft="@dimen/person10">
 
             <TextView
-                android:id="@+id/custom_item_personal_area_id"
+                android:id="@+id/tvReferenceID_AF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/person10"

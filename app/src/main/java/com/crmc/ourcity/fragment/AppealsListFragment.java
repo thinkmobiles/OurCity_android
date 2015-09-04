@@ -1,15 +1,20 @@
 package com.crmc.ourcity.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.adapter.AppealsAdapter;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AppealsLoader;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
+import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 
 /**
  * Created by podo on 04.09.15.
@@ -19,6 +24,8 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     private String color;
     private String json;
     private String route;
+
+    private AppealsAdapter mAdapter;
 
     public static AppealsListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
         AppealsListFragment mAppealsListFragment = new AppealsListFragment();
@@ -46,13 +53,12 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        showContent();
         getLoaderManager().initLoader(Constants.LOADER_APPEALS_ID, bundle, this);
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_city_entities;
+        return R.layout.fragment_appealslist;
     }
 
     @Override
@@ -67,7 +73,19 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
+        mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
+        lvAppeals.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        showContent();
+    }
 
+    @Override
+    protected void initViews() {
+        super.initViews();
+        lvAppeals = findView(R.id.lvCityEntities_CEF);
+        Image.init(Color.parseColor(color));
+        lvAppeals.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvAppeals.setDividerHeight(4);
     }
 
     @Override

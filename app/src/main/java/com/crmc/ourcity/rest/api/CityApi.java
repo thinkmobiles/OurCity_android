@@ -1,5 +1,6 @@
 package com.crmc.ourcity.rest.api;
 
+import com.crmc.ourcity.rest.request.appeals.NewTicketObj;
 import com.crmc.ourcity.rest.request.base.BaseModel;
 import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
@@ -120,6 +121,9 @@ public interface CityApi {
      */
     @POST("/GetInterestAreaToCity")
     List<News> getNews(@Body BaseModel baseModel);
+
+    @POST("/CreateNewTicket")
+    WSResult sendTicket(@Body NewTicketObj newTicket);
 
     /**
      * @return messages from mailing
