@@ -250,8 +250,8 @@ public class Image {
     public static void setBorderColorView(Context _context, View _view, int _drawable, int _borderColor, int _borderWidth) {
         GradientDrawable gd = new GradientDrawable();
         //gd.setColor(_borderColor);
-        gd.setCornerRadius(5);
-        gd.setStroke(_borderWidth * 4 ,_borderColor);
+        gd.setCornerRadius(10);
+        gd.setStroke(_borderWidth * 2 ,_borderColor);
         _view.setBackgroundDrawable(gd);
 
     }
