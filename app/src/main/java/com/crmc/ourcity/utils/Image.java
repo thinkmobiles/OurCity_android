@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -242,8 +243,17 @@ public class Image {
      */
     public static void setBackgroundColorView(Context _context, View _view, int _drawable, int _color) {
         Drawable d = ContextCompat.getDrawable(_context, _drawable);
-        d.setColorFilter(_color, PorterDuff.Mode.SCREEN);
+        d.setColorFilter(_color, PorterDuff.Mode.SRC);
         _view.setBackground(d);
+    }
+
+    public static void setBorderColorView(Context _context, View _view, int _drawable, int _borderColor, int _borderWidth) {
+        GradientDrawable gd = new GradientDrawable();
+        //gd.setColor(_borderColor);
+        gd.setCornerRadius(5);
+        gd.setStroke(_borderWidth * 4 ,_borderColor);
+        _view.setBackgroundDrawable(gd);
+
     }
 
     /**

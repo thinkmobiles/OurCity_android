@@ -9,6 +9,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
@@ -144,6 +145,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
+
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = getResources().getInteger(R.integer.city_id);
         Log.d("TAG", cityNumber + " id from Menu");
@@ -261,6 +263,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(0).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
                         break;
 
                     case 2:
@@ -269,11 +273,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(0).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
 
                         tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
                         ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(1).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(1).borderColor), mMenuBottom.get(1).borderWidth);
                         break;
 
                     case 3:
@@ -281,16 +289,22 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(0).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
 
                         tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
                         ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(1).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(1).borderColor), mMenuBottom.get(1).borderWidth);
 
                         tvBtnThird_MMF.setText(mMenuBottom.get(2).title);
                         ivBtnThird_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(2).iconItem));
                         Image.setBackgroundColorView(getActivity(), llBtnThird_MMF, R.drawable.boarder_round_red_vf,
                                 Color.parseColor(mMenuBottom.get(2).colorItem));
+                        Image.setBorderColorView(getActivity(), llBtnThird_MMF, R.drawable.boarder_round_red_vf,
+                                Color.parseColor(mMenuBottom.get(2).borderColor), mMenuBottom.get(2).borderWidth);
                         break;
                 }
             } else {

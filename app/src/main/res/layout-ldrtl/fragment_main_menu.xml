@@ -123,6 +123,7 @@
         android:id="@+id/rvMenu_FMM"
         android:layout_width="330dp"
         android:rotationY="180"
+        android:layoutDirection="ltr"
         android:splitMotionEvents="false"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

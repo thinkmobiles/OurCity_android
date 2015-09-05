@@ -20,6 +20,10 @@ public class MenuModel implements Parcelable {
     public Integer actionType;
     @SerializedName("Color")
     public String colorItem;
+    @SerializedName("BorderColor")
+    public String borderColor;
+    @SerializedName("BorderWidth")
+    public int borderWidth;
     @SerializedName("Email")
     public String email;
     @SerializedName("Link")
@@ -49,6 +53,8 @@ public class MenuModel implements Parcelable {
         menu = in.createTypedArrayList(MenuModel.CREATOR);
         actionType = in.readInt();
         colorItem = in.readString();
+        borderColor = in.readString();
+        borderWidth = in.readInt();
         email = in.readString();
         link = in.readString();
         listType = in.readInt();
@@ -108,6 +114,8 @@ public class MenuModel implements Parcelable {
         dest.writeTypedList(menu);
         dest.writeInt(actionType);
         dest.writeString(colorItem);
+        dest.writeString(borderColor);
+        dest.writeInt(borderWidth);
         dest.writeString(email);
         dest.writeString(link);
         dest.writeInt(listType);
