@@ -31,6 +31,7 @@
     <!--menu-->
     <string name="menu_settings">settings</string>
     <string name="menu_home">home</string>
+    <string name="menu_back">back</string>
     <string name="menu_refresh">refresh</string>
 
     <!-- emergency buttons-->
