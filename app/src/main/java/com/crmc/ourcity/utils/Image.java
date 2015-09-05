@@ -32,7 +32,9 @@ public class Image {
     private static int ColorNow = Color.BLACK;
 
     public static void init(int _color) {
-        ColorNow = _color;
+        String hexColor = String.format("#%06X", (0xFFFFFF & _color));
+        int color = Color.parseColor(hexColor);
+        ColorNow = color;
     }
 
     public static String getStringColor() {
@@ -186,8 +188,12 @@ public class Image {
      */
     public static Drawable setDrawableImageColor(Context _context, int _drawable, int _color) {
         Drawable mDrawable = ContextCompat.getDrawable(_context, _drawable);
-        PorterDuffColorFilter mFilter = new PorterDuffColorFilter(_color, PorterDuff.Mode.MULTIPLY);
+        String hexColor = String.format("#%06X", (0xFFFFFF & _color));
+        int color = Color.parseColor(hexColor);
+        PorterDuffColorFilter mFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         mDrawable.setColorFilter(mFilter);
+
+
         return mDrawable;
     }
 
@@ -250,8 +256,8 @@ public class Image {
     public static void setBorderColorView(Context _context, View _view, int _drawable, int _borderColor, int _borderWidth) {
         GradientDrawable gd = new GradientDrawable();
         //gd.setColor(_borderColor);
-        gd.setCornerRadius(5);
-        gd.setStroke(_borderWidth * 4 ,_borderColor);
+        gd.setCornerRadius(10);
+        gd.setStroke(_borderWidth * 2 ,_borderColor);
         _view.setBackgroundDrawable(gd);
 
     }
