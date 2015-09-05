@@ -32,9 +32,13 @@ public class Image {
     private static int ColorNow = Color.BLACK;
 
     public static void init(int _color) {
-        String hexColor = String.format("#%06X", (0xFFFFFF & _color));
-        int color = Color.parseColor(hexColor);
+        int color = getColorWithoutAlpha(_color);
         ColorNow = color;
+    }
+
+    private static int getColorWithoutAlpha(int _color) {
+        String hexColor = String.format("#%06X", (0xFFFFFF & _color));
+        return Color.parseColor(hexColor);
     }
 
     public static String getStringColor() {
@@ -188,8 +192,7 @@ public class Image {
      */
     public static Drawable setDrawableImageColor(Context _context, int _drawable, int _color) {
         Drawable mDrawable = ContextCompat.getDrawable(_context, _drawable);
-        String hexColor = String.format("#%06X", (0xFFFFFF & _color));
-        int color = Color.parseColor(hexColor);
+        int color = getColorWithoutAlpha(_color);
         PorterDuffColorFilter mFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         mDrawable.setColorFilter(mFilter);
 
