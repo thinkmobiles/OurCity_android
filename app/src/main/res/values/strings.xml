@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">חדרה</string>
     <string name="hello_world">Hello world!</string>
@@ -75,8 +76,8 @@
     <string name="txt_gcn">האם את מעוניין/ת לקבל הודעות?</string>
     <string name="txt_login">כדי להנות מהאפלקציה מומלץ לשתף את פרטיך האישיים, מעוניין/ת עכשיו?</string>
     <string name="resident_userName">username</string>
-    <string name="resident_password">password</string>
-    <string name="sign_in_dialog_login">Sign in</string>
+
+    <string name="sign_in_dialog_login">כניסה</string>
     <string name="sign_up_dialog_lName">last name</string>
     <string name="sign_up_dialog_fName">first name</string>
     <string name="focus_street">street</string>
@@ -91,5 +92,22 @@
     <string name="contact_mail">support@quickwork.co.il</string>
     <string name="personal_area_id">מספר פניה</string>
     <string name="personal_status">סטטוס</string>
+
+    <string name="not_a_member">אינו חבר? הירשם עכשיו.</string>
+    <string name="username">שם משתמש</string>
+    <string name="password">סיסמא</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="last_name">שם משפחה</string>
+
+
+    <string name="phone_number">מספר טלפון</string>
+    <string name="mobile_phone">טלפון נייד</string>
+    <string name="email">דואר אלקטרוני</string>
+    <string name="house">בית</string>
+    <string name="street">רחוב</string>
+    <string name="do_you_want_to_receive_global_notifications">אתה מעוניין לקבל הודעות כלליות?</string>
+    <string name="do_you_want_to_receive_personal_notifications">אתה מעוניין לקבל הודעות אישיות?</string>
+
+
 
 </resources>

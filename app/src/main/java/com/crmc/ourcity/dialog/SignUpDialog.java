@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
@@ -91,6 +92,9 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         chbGlobalNotifications = (CheckBox) _root.findViewById(R.id.chbGlobalNotifications_SUDF);
         chbPersonalNotifications = (CheckBox) _root.findViewById(R.id.chbPersonalNotifications_SUDF);
         btnSignUpOrEdit = (Button) _root.findViewById(R.id.btnSignUpOrEdit_SUDF);
+        ScrollView view = (ScrollView)_root.findViewById(R.id.scrollView);
+        view.setVerticalScrollBarEnabled(false);
+        view.setHorizontalScrollBarEnabled(false);
     }
 
     private void setListeners() {
