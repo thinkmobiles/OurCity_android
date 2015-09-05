@@ -104,7 +104,7 @@
         android:ems="10"
         android:gravity="right|center_vertical"
         android:background="#424242"
-        android:hint="@string/resident_password"
+        android:hint="@string/password"
         android:textColorHint="#616161"
         android:id="@+id/etPassword_SUDF"
         android:layout_below="@+id/etUsername_SUDF"
