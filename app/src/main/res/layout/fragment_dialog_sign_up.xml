@@ -321,8 +321,10 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/turquoise"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Sign up"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:text="הירשם"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                 />
 
             <ProgressBar
                 android:id="@+id/pb_SUDF"
