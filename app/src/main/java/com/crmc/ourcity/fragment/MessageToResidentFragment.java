@@ -45,7 +45,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
