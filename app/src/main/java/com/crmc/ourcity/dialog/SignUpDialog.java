@@ -112,14 +112,12 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_MOBILE_NUMBER, etMobileNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_HOUSE_NUMBER, etHouseNumber.getText().toString());
         bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, selectedStreetID);
-//        bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, 654);
-        //TODO: uncomment when write street loader
+
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());
         bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
         bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
-        //TODO: убрать hardcoded сити_ид
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, 1);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, getResources().getInteger(R.integer.city_id));
 
         return bundle;
     }

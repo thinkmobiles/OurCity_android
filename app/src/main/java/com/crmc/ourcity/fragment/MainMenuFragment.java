@@ -2,14 +2,13 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,8 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.dialog.DialogActivity;
+import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.ImageLoader;
@@ -31,21 +33,26 @@ import com.crmc.ourcity.loader.MenuBottomLoader;
 import com.crmc.ourcity.loader.MenuLoader;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
+import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
-
 import java.util.List;
+import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_MENU_BOTTOM_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_CITY_ID;
 
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener {
+public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Object> {
 
     LinearLayout llBtn_MMF;
     LinearLayout llBtnFirst_MMF;
     LinearLayout llBtnSecond_MMF;
     LinearLayout llBtnThird_MMF;
+
 
     RelativeLayout rlMenu_MMF;
 
@@ -57,6 +64,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     TextView tvBtnFirst_MMF;
     TextView tvBtnSecond_MMF;
     TextView tvBtnThird_MMF;
+
+    LinearLayout[] llBottomButtons;
+    TextView[] tvBottomButtons;
+    ImageView[] ivBottomButtons;
 
     private MenuFull mMenuFull;
 
@@ -104,34 +115,53 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
         llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
         llBtnThird_MMF = findView(R.id.llBtnThird_MMF);
+        llBottomButtons = new LinearLayout[]{llBtnFirst_MMF, llBtnSecond_MMF, llBtnThird_MMF};
 
         rlMenu_MMF = findView(R.id.rlMenu_MMF);
 
         ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
         ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
         ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
+        ivBottomButtons = new ImageView[] {ivBtnFirst_MMF, ivBtnSecond_MMF, ivBtnThird_MMF};
 
         ivTown_MA = (ImageView) getActivity().findViewById(R.id.ivTown_MA);
 
         tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
         tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
         tvBtnThird_MMF = findView(R.id.tvBtnThird_MMF);
+        tvBottomButtons = new TextView[]{tvBtnFirst_MMF, tvBtnSecond_MMF, tvBtnThird_MMF};
 
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
                 RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(Context _context, View _view, int _position) {
-                MenuModel menuModel = mAdapter.getItem(_position);
+                    @Override
+                    public void onItemClick(Context _context, View _view, int _position) {
+                        MenuModel menuModel = mAdapter.getItem(_position);
 
-                if (menuModel.menu != null) {
-                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                } else {
-                    mCallBackMenuModel.onItemAction(menuModel);
-                }
-            }
-        }));
+                        Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+                        if (Boolean.parseBoolean(menuModel.requestLogin)) {
+                            if (isLogIn) {
+                                if (menuModel.menu != null) {
+                                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                                } else {
+                                    mCallBackMenuModel.onItemAction(menuModel);
+
+                                }
+                            } else {
+                                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                                startActivity(intent);
+                            }
+                        } else {
+                            if (menuModel.menu != null) {
+                                mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                            } else {
+                                mCallBackMenuModel.onItemAction(menuModel);
+                            }
+                        }
+                    }
+                }));
     }
 
     @Override
@@ -161,176 +191,20 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, this);
+
         Bundle bundle1 = new Bundle();
         bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
-        getLoaderManager().initLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, this);
+
         Bundle bundle2 = new Bundle();
         bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
-        getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this);
+
     }
-
-    private LoaderManager.LoaderCallbacks<String> mLogoImageLoader = new LoaderManager.LoaderCallbacks<String>() {
-
-        @Override
-        public Loader<String> onCreateLoader(int _id, Bundle _args) {
-            return new ImageLoader(getActivity(), _args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<String> _loader, String _data) {
-            if (Constants.logoImage == null) {
-                Constants.logoImage = Image.convertBase64ToBitmap(_data);
-                ivTown_MA.setImageBitmap(Constants.logoImage);
-            } else {
-                ivTown_MA.setImageBitmap(Constants.logoImage);
-            }
-            loaderLogoImageFinish = true;
-            showView();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<String> _loader) {
-        }
-    };
-
-    private LoaderManager.LoaderCallbacks<String> mImageCityLoader = new LoaderManager.LoaderCallbacks<String>() {
-
-        @Override
-        public Loader<String> onCreateLoader(int _id, Bundle _args) {
-            return new ImageLoader(getActivity(), _args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<String> _loader, String _data) {
-            if (Constants.cityImage == null) {
-                Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(_data));
-                rlMenu_MMF.setBackground(Constants.cityImage);
-            } else {
-                rlMenu_MMF.setBackground(Constants.cityImage);
-            }
-            loaderCityImageFinish = true;
-            showView();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<String> _loader) {
-        }
-    };
-
-    private LoaderManager.LoaderCallbacks<MenuFull> mMenuCallBack = new LoaderManager.LoaderCallbacks<MenuFull>() {
-
-        @Override
-        public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
-            return new MenuLoader(getActivity(), _args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
-            if (_data.getSize() > 0) {
-                mMenuFull = _data;
-                mAdapter = new MenuGridAdapter(_data.getNodes(), getActivity());
-                mRecyclerView.setAdapter(mAdapter);
-            }
-            loaderMenuFinish = true;
-            showView();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<MenuFull> _loader) {
-        }
-    };
-
-    private LoaderManager.LoaderCallbacks<MenuFull> mMenuBottomCallBack = new LoaderManager.LoaderCallbacks<MenuFull>
-            () {
-
-        @Override
-        public Loader<MenuFull> onCreateLoader(int _id, Bundle _args) {
-            return new MenuBottomLoader(getActivity(), _args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<MenuFull> _loader, MenuFull _data) {
-            if (_data.getSize() > 0) {
-                mMenuBottom = _data.getNodes();
-                switch (_data.getSize()) {
-                    case 1:
-                        llBtnSecond_MMF.setVisibility(View.GONE);
-                        llBtnThird_MMF.setVisibility(View.GONE);
-                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
-                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
-                        break;
-
-                    case 2:
-                        llBtnThird_MMF.setVisibility(View.GONE);
-                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
-                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
-
-                        tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
-                        ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(1).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(1).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(1).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(1).borderColor), mMenuBottom.get(1).borderWidth);
-                        break;
-
-                    case 3:
-                        tvBtnFirst_MMF.setText(mMenuBottom.get(0).title);
-                        ivBtnFirst_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(0).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(0).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnFirst_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(0).borderColor), mMenuBottom.get(0).borderWidth);
-
-                        tvBtnSecond_MMF.setText(mMenuBottom.get(1).title);
-                        ivBtnSecond_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(1).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(1).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(1).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(1).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnSecond_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(1).borderColor), mMenuBottom.get(1).borderWidth);
-
-                        tvBtnThird_MMF.setText(mMenuBottom.get(2).title);
-                        ivBtnThird_MMF.setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(2).iconItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(2).colorItem))
-                        Image.setBackgroundColorView(getActivity(), llBtnThird_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(2).colorItem));
-                        if(!TextUtils.isEmpty(mMenuBottom.get(2).borderColor))
-                        Image.setBorderColorView(getActivity(), llBtnThird_MMF, R.drawable.boarder_round_red_vf,
-                                Color.parseColor(mMenuBottom.get(2).borderColor), mMenuBottom.get(2).borderWidth);
-                        break;
-                }
-            } else {
-                llBtn_MMF.setVisibility(View.GONE);
-            }
-            loaderMenuBottomFinish = true;
-            showView();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<MenuFull> _loader) {
-        }
-    };
 
     @Override
     public void onClick(View v) {
@@ -375,21 +249,114 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, mMenuCallBack).forceLoad();
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, mMenuBottomCallBack).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, this).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, this).forceLoad();
         Bundle bundle1 = new Bundle();
         bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, mLogoImageLoader).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, this).forceLoad();
         Bundle bundle2 = new Bundle();
         bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, mImageCityLoader).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this).forceLoad();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.getItem(0).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public Loader<Object> onCreateLoader(int id, Bundle args) {
+        Loader loader = null;
+        MainActivity activity = (MainActivity)getActivity();
+        switch (id) {
+            case LOADER_MENU_ID:
+                loader = new MenuLoader(activity, args);
+                break;
+            case LOADER_MENU_BOTTOM_ID:
+                loader = new MenuBottomLoader(activity, args);
+                break;
+            case LOADER_IMAGE_CITY_ID:
+                loader = new ImageLoader(activity, args);
+                break;
+            case LOADER_IMAGE_LOGO_ID:
+                loader = new ImageLoader(activity, args);
+                break;
+        }
+
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Object> loader, Object _data) {
+        MainActivity activity = (MainActivity) getActivity();
+        switch (loader.getId()) {
+
+            case LOADER_MENU_ID:
+                mMenuFull = (MenuFull)_data;
+                if (mMenuFull.getSize() > 0) {
+                    mAdapter = new MenuGridAdapter(mMenuFull.getNodes(), activity);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+                loaderMenuFinish = true;
+                showView();
+                break;
+
+            case LOADER_MENU_BOTTOM_ID:
+                mMenuFull = (MenuFull) _data;
+                if (mMenuFull.getSize() > 0) {
+                    mMenuBottom = mMenuFull.getNodes();
+                    for (int i = 0; i < mMenuFull.getSize(); i++) {
+                        llBottomButtons[i].setVisibility(View.VISIBLE);
+                        tvBottomButtons[i].setText(mMenuBottom.get(i).title);
+                        ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));
+                        if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
+                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable.boarder_round_red_vf,
+                                    Color.parseColor(mMenuBottom.get(i).colorItem));
+                        }
+                        if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
+                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable.boarder_round_red_vf,
+                                    Color.parseColor(mMenuBottom.get(i).borderColor), mMenuBottom.get(i).borderWidth);
+                        }
+                    }
+                } else {
+                    llBtn_MMF.setVisibility(View.GONE);
+                }
+                loaderMenuBottomFinish = true;
+                showView();
+                break;
+
+            case LOADER_IMAGE_CITY_ID:
+                if (Constants.cityImage == null) {
+                    Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)_data));
+                    rlMenu_MMF.setBackground(Constants.cityImage);
+                } else {
+                    rlMenu_MMF.setBackground(Constants.cityImage);
+                }
+                loaderCityImageFinish = true;
+                showView();
+                break;
+
+            case LOADER_IMAGE_LOGO_ID:
+                if (Constants.logoImage == null) {
+                    Constants.logoImage = Image.convertBase64ToBitmap((String)_data);
+                    ivTown_MA.setImageBitmap(Constants.logoImage);
+                } else {
+                    ivTown_MA.setImageBitmap(Constants.logoImage);
+                }
+                loaderLogoImageFinish = true;
+                showView();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Object> loader) {
+
     }
 }

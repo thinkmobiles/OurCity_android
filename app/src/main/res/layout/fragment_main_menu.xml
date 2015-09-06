@@ -24,6 +24,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
@@ -90,6 +91,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
@@ -125,6 +127,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
