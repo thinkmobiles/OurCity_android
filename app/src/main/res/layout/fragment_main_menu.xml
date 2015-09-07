@@ -188,7 +188,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMenu_FMM"
-        android:layoutDirection="rtl"
+        android:layoutDirection="ltr"
+        android:rotationY="180"
         android:layout_width="330dp"
         android:splitMotionEvents="false"
         android:layout_height="match_parent"
