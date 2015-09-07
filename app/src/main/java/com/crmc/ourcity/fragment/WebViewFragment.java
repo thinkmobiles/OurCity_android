@@ -171,8 +171,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView _view, String _url) {
-            if (_url.contains(".pdf")) {
-                mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _url);
+            if (_url.contains(".pdf") && !(_url.contains("docs.google.com"))) {
+                _view.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _url);
+
             } else {
                 _view.loadUrl(_url);
             }
