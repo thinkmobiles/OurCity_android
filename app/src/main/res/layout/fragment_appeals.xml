@@ -72,7 +72,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/boarder_round_green_ff"
                     android:gravity="center_vertical|start"
-                    android:hint="house"
+                    android:hint="מספר בית"
                     android:inputType="number"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
@@ -86,7 +86,7 @@
                     android:layout_weight="2"
                     android:background="@drawable/boarder_round_green_ff"
                     android:gravity="center_vertical|start"
-                    android:hint="street"
+                    android:hint="רחוב"
                     android:inputType="textAutoComplete"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
@@ -96,19 +96,41 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/etDescription_AF"
+            <FrameLayout
+                android:id="@+id/flDescriptionContainer_AF"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_gravity="top"
-                android:layout_marginTop="5dp"
                 android:background="@drawable/boarder_round_green_ff"
-                android:gravity="top|start"
-                android:hint="Descripstion"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="#242424"
-                android:textSize="16sp"/>
+                >
+                <EditText
+                    android:id="@+id/etDescription_AF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:gravity="top|right"
+                    android:hint="תיאור"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="#242424"
+                    android:textSize="16sp"/>
+
+            </FrameLayout>
+
+            <!--<EditText-->
+                <!--android:id="@+id/etDescription_AF"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="160dp"-->
+                <!--android:layout_gravity="top"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="@drawable/boarder_round_green_ff"-->
+                <!--android:gravity="top|start"-->
+                <!--android:hint="Descripstion"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp"-->
+                <!--android:textColor="#242424"-->
+                <!--android:textSize="16sp"/>-->
 
             <LinearLayout
                 android:id="@+id/llPhoto_AP"

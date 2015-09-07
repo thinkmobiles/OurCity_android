@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.SwitchCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -70,6 +73,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     private EditTextStreetAutoComplete etNameStreet;
     private EditText etNameCity;
     private EditText etDescription;
+    private FrameLayout flDescription;
     private EditText etNumberHouse;
     private Button btnSend;
     private Camera mCamera;
@@ -126,6 +130,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         etNameStreet = findView(R.id.etStreetName_SUDF);
         swGpsOnOff = findView(R.id.swGpsOnOff_AF);
         etDescription = findView(R.id.etDescription_AF);
+        flDescription = findView(R.id.flDescriptionContainer_AF);
         btnSend = findView(R.id.btnSend_AF);
         etNumberHouse = findView(R.id.etNumberHouse_AF);
         llPhoto = findView(R.id.llPhoto_AP);
@@ -142,7 +147,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
                 Image.darkenColor(0.2)));
         Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
-                etDescription, llPhoto}, R.drawable.boarder_round_green_ff);
+                flDescription, llPhoto}, R.drawable.boarder_round_green_ff);
         Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
     }
 
@@ -179,6 +184,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         public void onLoadFinished(Loader<AddressFull> _loader, AddressFull _data) {
             etNameCity.setText(_data.address.city);
             etNameStreet.setText(_data.address.street);
+            etNameStreet.setError(null);
         }
 
         @Override
@@ -242,6 +248,26 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         ivRotate.setOnClickListener(this);
         swGpsOnOff.setOnCheckedChangeListener(this);
         btnSend.setOnClickListener(this);
+        etNameStreet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if( etNameStreet.getText().length()>0)
+                {
+                    etNameStreet.setError(null);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -360,39 +386,57 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 }
                 break;
             case R.id.btnSend_AF:
-                NewTicket ticket = new NewTicket();
-                ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
-                ticket.Description = etDescription.getText().toString();
-                Location location = new Location();
-                location.StreetName = etNameStreet.getText().toString();
-                location.HouseNumber = etNumberHouse.getText().toString();
-                ticket.Location = location;
-                CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
-                WSAddress wsAddress = new WSAddress();
-                WSPhoneNumber phoneNumber = new WSPhoneNumber();
-                ticket.ReporterAddress = wsAddress;
-                ticket.ReporterFaxNumber = phoneNumber;
-                ticket.ReporterHomePhoneNumber = phoneNumber;
-                ticket.ReporterMobilePhoneNumber = phoneNumber;
-                ticketWrapper.newTicket = ticket;
+                if (checkValidation()) {
+                    NewTicket ticket = new NewTicket();
+                    ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+                    ticket.Description = etDescription.getText().toString();
+                    Location location = new Location();
+                    location.StreetName = etNameStreet.getText().toString();
+                    location.HouseNumber = etNumberHouse.getText().toString();
+                    ticket.Location = location;
+                    CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
+                    WSAddress wsAddress = new WSAddress();
+                    WSPhoneNumber phoneNumber = new WSPhoneNumber();
+                    ticket.ReporterAddress = wsAddress;
+                    ticket.ReporterFaxNumber = phoneNumber;
+                    ticket.ReporterHomePhoneNumber = phoneNumber;
+                    ticket.ReporterMobilePhoneNumber = phoneNumber;
+                    ticketWrapper.newTicket = ticket;
+                    ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
+                    ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
+                    ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
+                    ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
+                    NewTicketObj ticketObj = new NewTicketObj(ticketWrapper);
 
-
-                ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
-                ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
-                ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
-                ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
-                NewTicketObj ticketObj = new NewTicketObj(ticketWrapper);
-                Gson gson = new Gson();
-                String json = gson.toJson(ticketObj);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
-                getLoaderManager().initLoader(21,bundle,  mSendTicket);
-                popBackStack();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
+                    getLoaderManager().initLoader(21, bundle, mSendTicket);
+                    popBackStack();
+                }
                 break;
         }
     }
 
     @Override
     public void onRetryClick() {
+    }
+
+    private boolean checkValidation() {
+        boolean isValid = true;
+
+        if (TextUtils.isEmpty(etDescription.getText().toString())) {
+            etDescription.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(etNameStreet.getText().toString())) {
+            etNameStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(etNumberHouse.getText().toString())) {
+            etNumberHouse.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+
+        return isValid;
     }
 }
