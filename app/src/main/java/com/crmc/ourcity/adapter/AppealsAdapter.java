@@ -66,6 +66,7 @@ public class AppealsAdapter extends BaseAdapter {
         final TextView description;
         final TextView status;
         final TextView referenceID;
+        final TextView tvPhotoText_AF;
         final ImageView ivPhoto;
         final View view;
         final Context mContext;
@@ -76,6 +77,7 @@ public class AppealsAdapter extends BaseAdapter {
             address = (TextView) _view.findViewById(R.id.tvAddress_AF);
             description = (TextView) _view.findViewById(R.id.tvDescription_AF);
             status = (TextView) _view.findViewById(R.id.tvStat_AF);
+            tvPhotoText_AF = (TextView) _view.findViewById(R.id.tvPhotoText_AF);
             referenceID = (TextView) _view.findViewById(R.id.tvReferenceID_AF);
             ivPhoto = (ImageView) _view.findViewById(R.id.ivImage_AF);
             this.view = _view;
@@ -87,6 +89,7 @@ public class AppealsAdapter extends BaseAdapter {
             this.position = _position;
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(_item.AttachedFiles));
+                tvPhotoText_AF.setText("");
             }
 
             if (!TextUtils.isEmpty(_item.DateCreatedClient)) {

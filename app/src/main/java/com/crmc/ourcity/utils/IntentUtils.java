@@ -12,7 +12,7 @@ import com.crmc.ourcity.global.Constants;
 public final class IntentUtils {
 
     public static Intent getIntentCall(String _phoneNumber){
-        Intent i = new Intent(Intent.ACTION_CALL);
+        Intent i = new Intent(Intent.ACTION_DIAL);
         i.setData(Uri.parse("tel:" + _phoneNumber));
         return i;
     }

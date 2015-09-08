@@ -14,7 +14,6 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AppealsLoader;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.Image;
-import com.crmc.ourcity.utils.SPManager;
 
 /**
  * Created by podo on 04.09.15.
@@ -43,8 +42,6 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-
-
     }
 
     @Override
@@ -63,7 +60,11 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onRetryClick() {
-
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_APPEALS_ID, bundle, this);
+        showLoading();
     }
 
     @Override
@@ -73,10 +74,14 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
-        mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
-        lvAppeals.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        showContent();
+        if (data != null){
+            mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
+            lvAppeals.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showError("Server do not response!");
+        }
     }
 
     @Override

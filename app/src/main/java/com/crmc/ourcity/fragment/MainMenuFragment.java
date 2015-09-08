@@ -37,16 +37,19 @@ import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
+
 import java.util.List;
-import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
-import static com.crmc.ourcity.global.Constants.LOADER_MENU_BOTTOM_ID;
-import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
+
 import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_CITY_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_MENU_BOTTOM_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
 
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Object> {
+public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener, LoaderManager
+        .LoaderCallbacks<Object> {
 
     LinearLayout llBtn_MMF;
     LinearLayout llBtnFirst_MMF;
@@ -109,7 +112,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string
+        // .app_name));
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
@@ -122,7 +126,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
         ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
         ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
-        ivBottomButtons = new ImageView[] {ivBtnFirst_MMF, ivBtnSecond_MMF, ivBtnThird_MMF};
+        ivBottomButtons = new ImageView[]{ivBtnFirst_MMF, ivBtnSecond_MMF, ivBtnThird_MMF};
 
         ivTown_MA = (ImageView) getActivity().findViewById(R.id.ivTown_MA);
 
@@ -135,33 +139,33 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
                 RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Context _context, View _view, int _position) {
-                        MenuModel menuModel = mAdapter.getItem(_position);
+            @Override
+            public void onItemClick(Context _context, View _view, int _position) {
+                MenuModel menuModel = mAdapter.getItem(_position);
 
-                        Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
-                        if (Boolean.parseBoolean(menuModel.requestLogin)) {
-                            if (isLogIn) {
-                                if (menuModel.menu != null) {
-                                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                                } else {
-                                    mCallBackMenuModel.onItemAction(menuModel);
-
-                                }
-                            } else {
-                                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
-                                startActivity(intent);
-                            }
+                Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+                if (Boolean.parseBoolean(menuModel.requestLogin)) {
+                    if (isLogIn) {
+                        if (menuModel.menu != null) {
+                            mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
                         } else {
-                            if (menuModel.menu != null) {
-                                mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                            } else {
-                                mCallBackMenuModel.onItemAction(menuModel);
-                            }
+                            mCallBackMenuModel.onItemAction(menuModel);
+
                         }
+                    } else {
+                        Intent intent = new Intent(getActivity(), DialogActivity.class);
+                        EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                        startActivity(intent);
                     }
-                }));
+                } else {
+                    if (menuModel.menu != null) {
+                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    } else {
+                        mCallBackMenuModel.onItemAction(menuModel);
+                    }
+                }
+            }
+        }));
     }
 
     @Override
@@ -224,13 +228,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     }
 
     private void showView() {
-        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderCityImageFinish) {
+        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
             if (mMenuFull != null) {
-                showContent();
-                loaderMenuFinish = false;
-                loaderMenuBottomFinish = false;
-                loaderLogoImageFinish = false;
-                loaderCityImageFinish = false;
+                if (mMenuFull.getNodes().size() > 0) {
+                    showContent();
+                    loaderMenuFinish = false;
+                    loaderMenuBottomFinish = false;
+                    loaderLogoImageFinish = false;
+                    loaderCityImageFinish = false;
+                }
             } else {
                 showError("Server do not responds");
             }
@@ -270,7 +276,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     public Loader<Object> onCreateLoader(int id, Bundle args) {
         Loader loader = null;
-        MainActivity activity = (MainActivity)getActivity();
+        MainActivity activity = (MainActivity) getActivity();
         switch (id) {
             case LOADER_MENU_ID:
                 loader = new MenuLoader(activity, args);
@@ -295,7 +301,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         switch (loader.getId()) {
 
             case LOADER_MENU_ID:
-                mMenuFull = (MenuFull)_data;
+                mMenuFull = (MenuFull) _data;
                 if (mMenuFull.getSize() > 0) {
                     mAdapter = new MenuGridAdapter(mMenuFull.getNodes(), activity);
                     mRecyclerView.setAdapter(mAdapter);
@@ -313,12 +319,13 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         tvBottomButtons[i].setText(mMenuBottom.get(i).title);
                         ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
-                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable.boarder_round_red_vf,
-                                    Color.parseColor(mMenuBottom.get(i).colorItem));
+                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
+                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
                         }
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
-                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable.boarder_round_red_vf,
-                                    Color.parseColor(mMenuBottom.get(i).borderColor), mMenuBottom.get(i).borderWidth);
+                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
+                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
+                                    mMenuBottom.get(i).borderWidth);
                         }
                     }
                 } else {
@@ -330,7 +337,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_CITY_ID:
                 if (Constants.cityImage == null) {
-                    Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)_data));
+                    Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
+                            _data));
                     rlMenu_MMF.setBackground(Constants.cityImage);
                 } else {
                     rlMenu_MMF.setBackground(Constants.cityImage);
@@ -341,7 +349,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_LOGO_ID:
                 if (Constants.logoImage == null) {
-                    Constants.logoImage = Image.convertBase64ToBitmap((String)_data);
+                    Constants.logoImage = Image.convertBase64ToBitmap((String) _data);
                     ivTown_MA.setImageBitmap(Constants.logoImage);
                 } else {
                     ivTown_MA.setImageBitmap(Constants.logoImage);

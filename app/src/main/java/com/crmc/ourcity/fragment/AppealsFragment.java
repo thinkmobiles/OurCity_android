@@ -1,10 +1,10 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -51,7 +52,6 @@ import com.crmc.ourcity.utils.Gallery;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,7 +104,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         super.onViewCreated(_view, _savedInstanceState);
         mCamera = new Camera(getActivity());
         mGallery = new Gallery(getActivity());
-        showContent();
+//        showContent();
     }
 
     @Override
@@ -151,8 +151,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
     }
 
-    private LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager
-            .LoaderCallbacks<WSResult>() {
+    private LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager.LoaderCallbacks<WSResult>() {
 
         @Override
         public Loader<WSResult> onCreateLoader(int id, Bundle args) {
@@ -161,7 +160,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
-            if (data!=null) {
+            if (data != null) {
                 Toast.makeText(getActivity(), "Ticket is send", Toast.LENGTH_SHORT).show();
             }
         }
@@ -213,6 +212,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                         streets);
                 etNameStreet.setAdapter(adapter);
             }
+            showContent();
         }
 
         @Override
@@ -248,6 +248,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         ivRotate.setOnClickListener(this);
         swGpsOnOff.setOnCheckedChangeListener(this);
         btnSend.setOnClickListener(this);
+        flDescription.setOnClickListener(this);
         etNameStreet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -261,8 +262,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
             @Override
             public void afterTextChanged(Editable s) {
-                if( etNameStreet.getText().length()>0)
-                {
+                if (etNameStreet.getText().length() > 0) {
                     etNameStreet.setError(null);
                 }
             }
@@ -374,6 +374,12 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     @Override
     public void onClick(View _view) {
         switch (_view.getId()) {
+            case R.id.flDescriptionContainer_AF:
+                etDescription.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context
+                        .INPUT_METHOD_SERVICE);
+                imm.showSoftInput(etDescription, InputMethodManager.SHOW_IMPLICIT);
+                break;
             case R.id.ivPhoto_AF:
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
@@ -388,7 +394,8 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
             case R.id.btnSend_AF:
                 if (checkValidation()) {
                     NewTicket ticket = new NewTicket();
-                    ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+                    ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
+                            .getBitmap());
                     ticket.Description = etDescription.getText().toString();
                     Location location = new Location();
                     location.StreetName = etNameStreet.getText().toString();
