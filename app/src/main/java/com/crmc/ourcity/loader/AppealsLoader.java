@@ -37,7 +37,7 @@ public class AppealsLoader extends BaseLoader<WSResult>{
         try {
             wsResult = api.getAppeals(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            wsResult = new WSResult();
+            wsResult = null;
         }
         return wsResult;
     }

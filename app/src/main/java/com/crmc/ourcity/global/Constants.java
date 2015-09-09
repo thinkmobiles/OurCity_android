@@ -52,6 +52,7 @@ public class Constants {
     public static final int LOADER_APPEALS_ID = 20;
     public static final int LOADER_LOGIN_ID = 21;
     public static final int LOADER_LIST_LINK_ID = 22;
+    public static final int LOADER_SEND_APPEALS_ID = 23;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

@@ -30,7 +30,7 @@ public class SendTicketLoader extends BaseLoader<WSResult> {
         try {
             wsResult = api.sendTicket(ticket);
         } catch (RetrofitError e) {
-            wsResult = new WSResult();
+            wsResult = null;
         }
 
         return wsResult;

@@ -162,6 +162,8 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
             if (data != null) {
                 Toast.makeText(getActivity(), "Ticket is send", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Ticket is not send", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -252,12 +254,10 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         etNameStreet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -417,7 +417,10 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
-                    getLoaderManager().initLoader(21, bundle, mSendTicket);
+                    getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
+                    InputMethodManager imm2 = (InputMethodManager) getActivity().getSystemService(Context
+                            .INPUT_METHOD_SERVICE);
+                    imm2.showSoftInput(btnSend, InputMethodManager.HIDE_IMPLICIT_ONLY);
                     popBackStack();
                 }
                 break;

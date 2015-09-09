@@ -74,7 +74,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
-        if (data != null){
+        if (data != null ){
             mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
             lvAppeals.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -95,6 +95,9 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onLoaderReset(Loader<WSResult> loader) {
-
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_APPEALS_ID, bundle, this);
     }
 }

@@ -275,7 +275,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 loader = new ImageLoader(activity, args);
                 break;
         }
-
         return loader;
     }
 

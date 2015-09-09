@@ -34,7 +34,7 @@ public class DocumentsLoader extends BaseLoader<Documents> {
         try {
             mDocuments =  api.getDocuments(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            mDocuments = new Documents();
+            mDocuments = null;
         }
         return mDocuments;
     }
