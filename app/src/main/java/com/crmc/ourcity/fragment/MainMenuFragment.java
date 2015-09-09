@@ -229,14 +229,14 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
-            if (mMenuFull != null && mMenuFull.getNodes() != null) {
-                if (mMenuFull.getNodes().size() > 0) {
+            if (mMenuFull != null) {
+//                if (mMenuFull.getNodes().size() > 0) {
                     showContent();
                     loaderMenuFinish = false;
                     loaderMenuBottomFinish = false;
                     loaderLogoImageFinish = false;
                     loaderCityImageFinish = false;
-                }
+//                }
             } else {
                 showError("Server do not responds");
             }
@@ -301,7 +301,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_MENU_ID:
                 mMenuFull = (MenuFull) _data;
-                if (mMenuFull.getSize() > 0) {
+                if (mMenuFull != null && mMenuFull.getNodes() !=null && mMenuFull.getSize() > 0) {
                     mAdapter = new MenuGridAdapter(mMenuFull.getNodes(), activity);
                     mRecyclerView.setAdapter(mAdapter);
                 }

@@ -77,7 +77,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
-
         //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
         if (_data != null) {
             mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data.documentData, "text/html", "UTF-8", null);
