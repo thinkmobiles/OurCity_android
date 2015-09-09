@@ -227,22 +227,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         }
     }
 
-    private void showView() {
-        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
-            if (mMenuFull != null) {
-                if (mMenuFull.getNodes().size() > 0) {
-                    showContent();
-                    loaderMenuFinish = false;
-                    loaderMenuBottomFinish = false;
-                    loaderLogoImageFinish = false;
-                    loaderCityImageFinish = false;
-                }
-            } else {
-                showError("Server do not responds");
-            }
-        }
-    }
-
     @Override
     protected int getContentView() {
         return R.layout.fragment_main_menu;
@@ -295,6 +279,20 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         return loader;
     }
 
+    private void showView() {
+        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
+            if (mMenuFull != null && mMenuFull.getNodes().size() > 0) {
+                showContent();
+                loaderMenuFinish = false;
+                loaderMenuBottomFinish = false;
+                loaderLogoImageFinish = false;
+                loaderCityImageFinish = false;
+            } else {
+                showError("Server do not responds");
+            }
+        }
+    }
+
     @Override
     public void onLoadFinished(Loader<Object> loader, Object _data) {
         MainActivity activity = (MainActivity) getActivity();
@@ -328,6 +326,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                                     mMenuBottom.get(i).borderWidth);
                         }
                     }
+                    llBtn_MMF.setVisibility(View.VISIBLE);
                 } else {
                     llBtn_MMF.setVisibility(View.GONE);
                 }
@@ -337,9 +336,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_CITY_ID:
                 if (Constants.cityImage == null) {
-                    Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
-                            _data));
-                    rlMenu_MMF.setBackground(Constants.cityImage);
+                    if (_data != null) {
+                        Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
+                                _data));
+
+                        rlMenu_MMF.setBackground(Constants.cityImage);
+                    }
                 } else {
                     rlMenu_MMF.setBackground(Constants.cityImage);
                 }
@@ -349,8 +351,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_LOGO_ID:
                 if (Constants.logoImage == null) {
-                    Constants.logoImage = Image.convertBase64ToBitmap((String) _data);
-                    ivTown_MA.setImageBitmap(Constants.logoImage);
+                    if (_data != null) {
+                        Constants.logoImage = Image.convertBase64ToBitmap((String) _data);
+                        ivTown_MA.setImageBitmap(Constants.logoImage);
+                    }
                 } else {
                     ivTown_MA.setImageBitmap(Constants.logoImage);
                 }

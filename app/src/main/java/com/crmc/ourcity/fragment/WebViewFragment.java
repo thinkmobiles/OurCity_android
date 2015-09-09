@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -38,6 +37,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private String color;
     private String json;
     private String route;
+    private boolean error = false;
 
     public static WebViewFragment newInstance(String _link, String _colorItem) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
@@ -79,10 +79,13 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
 
         //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
-        mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
-                .documentData, "text/html", "UTF-8", null);
-        tvTitle_WVF.setText(_data.documentTitle);
-        showContent();
+        if (_data != null) {
+            mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data.documentData, "text/html", "UTF-8", null);
+            tvTitle_WVF.setText(_data.documentTitle);
+            showContent();
+        } else {
+            showError("Server do not response");
+        }
     }
 
     @Override
@@ -97,6 +100,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onRetryClick() {
+        error = false;
+//        showContent();
         loadUrl(link);
     }
 
@@ -184,11 +189,16 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            showContent();
+            if (!error) {
+                showContent();
+            }
             pbLoading.setVisibility(View.VISIBLE);
         }
 
         public void onPageFinished(WebView _view, String _url) {
+            if (error) {
+                showError("Server do not response!");
+            }
             pbLoading.setVisibility(View.GONE);
         }
 
@@ -196,6 +206,10 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             pbLoading.setVisibility(View.GONE);
+            if (isAdded()) {
+                mWebView.loadUrl("about:blank");
+            }
+            error = true;
         }
 
         @Override
