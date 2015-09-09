@@ -2,6 +2,7 @@ package com.crmc.ourcity.rest.responce.menu;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -91,14 +92,14 @@ public class MenuModel implements Parcelable {
     }
 
     public Double getLat() {
-        if (lat != null) {
+        if (!TextUtils.isEmpty(lat)) {
             return Double.parseDouble(lat.replace(',', '.'));
         }
         return null;
     }
 
     public Double getLon() {
-        if (lon != null) {
+        if (!TextUtils.isEmpty(lon)) {
             return Double.parseDouble(lon.replace(',', '.'));
         }
         return null;

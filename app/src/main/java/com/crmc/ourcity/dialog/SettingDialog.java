@@ -80,7 +80,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
                 mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
                 break;
             case R.id.rlSignUp_SetDFrgmt:
-                mCallback.onActionDialogSelected(DialogType.REGISTER);
+                mCallback.onActionDialogSelected(DialogType.LOGIN);
                 break;
             case R.id.confirmation:
                 Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();

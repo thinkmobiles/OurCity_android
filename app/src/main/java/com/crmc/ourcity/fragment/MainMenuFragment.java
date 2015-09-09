@@ -227,6 +227,22 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         }
     }
 
+    private void showView() {
+        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
+            if (mMenuFull != null && mMenuFull.getNodes() != null) {
+                if (mMenuFull.getNodes().size() > 0) {
+                    showContent();
+                    loaderMenuFinish = false;
+                    loaderMenuBottomFinish = false;
+                    loaderLogoImageFinish = false;
+                    loaderCityImageFinish = false;
+                }
+            } else {
+                showError("Server do not responds");
+            }
+        }
+    }
+
     @Override
     protected int getContentView() {
         return R.layout.fragment_main_menu;
@@ -276,20 +292,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 break;
         }
         return loader;
-    }
-
-    private void showView() {
-        if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
-            if (mMenuFull != null && mMenuFull.getNodes().size() > 0) {
-                showContent();
-                loaderMenuFinish = false;
-                loaderMenuBottomFinish = false;
-                loaderLogoImageFinish = false;
-                loaderCityImageFinish = false;
-            } else {
-                showError("Server do not responds");
-            }
-        }
     }
 
     @Override

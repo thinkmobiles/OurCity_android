@@ -83,6 +83,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case HOT_CALLS_EDITABLE:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsEditableDialog());
                 break;
+            case LOGIN:
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignInDialog());
+                break;
             case REGISTER:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignUpDialog());
                 break;
