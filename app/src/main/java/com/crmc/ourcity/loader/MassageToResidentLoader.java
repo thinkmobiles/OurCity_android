@@ -7,6 +7,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
+import com.crmc.ourcity.utils.SPManager;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class MassageToResidentLoader extends BaseLoader<List<MassageToResident>>
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
         route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);
+        json = changeResidentIdInJson(json, SPManager.getInstance(_context).getResidentId());
     }
 
     @Override

@@ -229,7 +229,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
-            if (mMenuFull != null) {
+            if (mMenuFull != null && mMenuFull.getNodes() != null) {
                 if (mMenuFull.getNodes().size() > 0) {
                     showContent();
                     loaderMenuFinish = false;
