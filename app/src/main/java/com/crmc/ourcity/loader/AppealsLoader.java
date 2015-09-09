@@ -6,9 +6,7 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
-import com.crmc.ourcity.rest.request.appeals.GetTask;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
-import com.crmc.ourcity.utils.SPManager;
 
 import java.io.UnsupportedEncodingException;
 
@@ -29,7 +27,6 @@ public class AppealsLoader extends BaseLoader<WSResult>{
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);
         route = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE);
-
     }
 
     @Override

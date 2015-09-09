@@ -2,10 +2,7 @@ package com.crmc.ourcity.dialog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -29,7 +26,6 @@ import com.crmc.ourcity.loader.LoginLoader;
 import com.crmc.ourcity.loader.RegisterLoader;
 import com.crmc.ourcity.loader.StreetsLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
-import com.crmc.ourcity.rest.request.streets.StreetsModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.address.StreetsItem;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
@@ -39,7 +35,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
-import static com.crmc.ourcity.global.Constants.LOGIN_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
 
 /**
  * Created by podo on 19.08.15.
@@ -238,7 +234,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
             case LOADER_REGISTER_NEW_RESIDENT_ID:
                 loader = new RegisterLoader(getActivity(), args);
                 break;
-            case LOGIN_ID:
+            case LOADER_LOGIN_ID:
                 loader = new LoginLoader(getActivity(), args);
                 break;
             case Constants.LOADER_STREETS_ID:
@@ -251,7 +247,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
 
     private void login() {
         Bundle bundle = createBundleForResident();
-        getLoaderManager().initLoader(LOGIN_ID, bundle, this);
+        getLoaderManager().initLoader(LOADER_LOGIN_ID, bundle, this);
 
     }
 
@@ -274,7 +270,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
                     login();
                 }
                 break;
-            case LOGIN_ID:
+            case LOADER_LOGIN_ID:
                 LoginResponse dataLogin = (LoginResponse) data;
                 SPManager.getInstance(getActivity()).setAuthToken(dataLogin.authToken);
                 SPManager.getInstance(getActivity()).setCRMCUsername(dataLogin.crmcUsername);

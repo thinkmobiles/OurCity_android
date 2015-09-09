@@ -50,7 +50,8 @@ public class Constants {
     public static final int LOADER_REGISTER_NEW_RESIDENT_ID = 18;
     public static final int LOADER_TICKERS_ID = 19;
     public static final int LOADER_APPEALS_ID = 20;
-    public static final int LOGIN_ID = 21;
+    public static final int LOADER_LOGIN_ID = 21;
+    public static final int LOADER_LIST_LINK_ID = 22;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -110,6 +111,7 @@ public class Constants {
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
     final public static int ACTION_TYPE_LIST_APPEALS = 2;
+    final public static int ACTION_TYPE_LIST_LINK = 3;
     final public static int ACTION_TYPE_LINK = 3;
     final public static int ACTION_TYPE_DOCUMENT = 4;
     final public static int ACTION_TYPE_MAP = 5;
