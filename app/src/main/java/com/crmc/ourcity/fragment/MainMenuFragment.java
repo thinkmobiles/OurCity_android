@@ -328,6 +328,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                                     mMenuBottom.get(i).borderWidth);
                         }
                     }
+                    llBtn_MMF.setVisibility(View.VISIBLE);
                 } else {
                     llBtn_MMF.setVisibility(View.GONE);
                 }
@@ -337,9 +338,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_CITY_ID:
                 if (Constants.cityImage == null) {
-                    Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
-                            _data));
-                    rlMenu_MMF.setBackground(Constants.cityImage);
+                    if (_data != null) {
+                        Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
+                                _data));
+
+                        rlMenu_MMF.setBackground(Constants.cityImage);
+                    }
                 } else {
                     rlMenu_MMF.setBackground(Constants.cityImage);
                 }
@@ -349,8 +353,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_IMAGE_LOGO_ID:
                 if (Constants.logoImage == null) {
-                    Constants.logoImage = Image.convertBase64ToBitmap((String) _data);
-                    ivTown_MA.setImageBitmap(Constants.logoImage);
+                    if (_data != null) {
+                        Constants.logoImage = Image.convertBase64ToBitmap((String) _data);
+                        ivTown_MA.setImageBitmap(Constants.logoImage);
+                    }
                 } else {
                     ivTown_MA.setImageBitmap(Constants.logoImage);
                 }

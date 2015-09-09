@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +23,7 @@ import com.crmc.ourcity.fragment.CityEntitiesFragment;
 import com.crmc.ourcity.fragment.CityEntitiesItemFragment;
 import com.crmc.ourcity.fragment.EventsFragment;
 import com.crmc.ourcity.fragment.EventsItemFragment;
+import com.crmc.ourcity.fragment.LinkListFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.MapClearFragment;
 import com.crmc.ourcity.fragment.MapInterestPointFragment;
@@ -129,6 +129,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         break;
                     case Constants.ACTION_TYPE_LIST_APPEALS:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsListFragment.newInstance(_menuModel
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                        break;
+                    case Constants.ACTION_TYPE_LIST_LINK:
+                        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, LinkListFragment.newInstance(_menuModel
                                 .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
                         break;
                 }
