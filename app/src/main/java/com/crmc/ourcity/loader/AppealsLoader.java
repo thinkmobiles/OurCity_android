@@ -6,7 +6,6 @@ import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
-import com.crmc.ourcity.rest.request.appeals.GetTask;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.SPManager;
 
