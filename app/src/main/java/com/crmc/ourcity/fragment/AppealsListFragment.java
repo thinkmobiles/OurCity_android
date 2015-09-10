@@ -83,7 +83,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
             mAdapter.notifyDataSetChanged();
             showContent();
         } else {
-            showError("Server do not response!");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 

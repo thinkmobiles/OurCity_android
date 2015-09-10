@@ -85,7 +85,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             tvTitle_WVF.setText(_data.documentTitle);
             showContent();
         } else {
-            showError("Server do not response");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 
@@ -201,7 +201,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
         public void onPageFinished(WebView _view, String _url) {
             if (error) {
-                showError("Server do not response!");
+                showError(getResources().getString(R.string.connection_error));
             }
             pbLoading.setVisibility(View.GONE);
         }

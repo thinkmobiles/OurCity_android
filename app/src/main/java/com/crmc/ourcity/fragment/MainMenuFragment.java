@@ -231,7 +231,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 loaderLogoImageFinish = false;
                 loaderCityImageFinish = false;
             } else {
-                showError("Server do not responds");
+                showError(getResources().getString(R.string.connection_error));
             }
         }
     }

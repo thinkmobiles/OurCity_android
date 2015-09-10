@@ -70,10 +70,10 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
                 mAdapter.notifyDataSetChanged();
                 showContent();
             } else {
-                showEmpty("No messages for you!");
+                showError(getResources().getString(R.string.connection_error));
             }
         } else {
-            showError("Server do not response!");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 
