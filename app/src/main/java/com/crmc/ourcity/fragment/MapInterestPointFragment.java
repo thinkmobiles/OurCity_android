@@ -159,7 +159,11 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         super.initViews();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
     }
 

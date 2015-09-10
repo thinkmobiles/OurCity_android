@@ -108,7 +108,11 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_EF.setBackgroundColor(Image.darkenColor(0.2));
         lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvEvents.setDividerHeight(4);

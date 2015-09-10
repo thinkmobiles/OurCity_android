@@ -104,7 +104,11 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_RssFrg.setBackgroundColor(Image.darkenColor(0.2));
         lvRssEntries.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvRssEntries.setDividerHeight(4);

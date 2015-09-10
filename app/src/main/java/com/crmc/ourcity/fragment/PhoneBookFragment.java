@@ -104,7 +104,11 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
         vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_PBF.setBackgroundColor(Image.darkenColor(0.2));
         lvPhoneBook.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvPhoneBook.setDividerHeight(4);

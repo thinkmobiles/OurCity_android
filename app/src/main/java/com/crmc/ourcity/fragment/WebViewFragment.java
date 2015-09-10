@@ -116,7 +116,11 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
         vUnderLine_WVF = findView(R.id.vUnderLine_WVF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_WVF.setBackgroundColor(Image.darkenColor(0.2));
         pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
         pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
