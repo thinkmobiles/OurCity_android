@@ -88,7 +88,7 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
                 hideKeyboard(btnSignIn);
                 if(checkValidation()) {
                     Bundle bundle = createBundleForResident();
-                getLoaderManager().initLoader(1, bundle, this);
+                getLoaderManager().restartLoader(1, bundle, this);
                 }
                 break;
             case R.id.tvSignUp_SIDF :
@@ -120,15 +120,20 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
         if (data != null){
-            SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
-            SPManager.getInstance(getActivity()).setResidentId(data.residentId);
-            SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
-            SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
-            SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
-            getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
-            getActivity().finish();
+            if (data.authToken != null) {
+                SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
+                SPManager.getInstance(getActivity()).setResidentId(data.residentId);
+                SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
+                SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
+                SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
+                getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
+                getActivity().finish();
+            } else  {
+                Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_SHORT).show();
+
+            }
         } else {
-            Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
         }
     }
 

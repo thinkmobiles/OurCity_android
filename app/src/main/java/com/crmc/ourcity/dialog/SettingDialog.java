@@ -22,7 +22,7 @@ import com.crmc.ourcity.utils.SPManager;
  */
 public class SettingDialog extends BaseFourStatesFragment implements View.OnClickListener {
 
-    private RelativeLayout register;
+    private RelativeLayout login;
     private RelativeLayout confirmation;
     private RelativeLayout logout;
     private RelativeLayout hotCalls;
@@ -45,7 +45,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     protected void initViews() {
-        register = findView(R.id.rlSignUp_SetDFrgmt);
+        login = findView(R.id.rlSignIn_SetDFrgmt);
         confirmation = findView(R.id.confirmation);
         logout = findView(R.id.rlLogout_FDS);
         hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
@@ -53,6 +53,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
         if (isFromMainActivity) {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
+                login.setVisibility(View.GONE);
             } else {
                 logout.setVisibility(View.GONE);
             }
@@ -67,7 +68,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     protected void setListeners() {
-        register.setOnClickListener(this);
+        login.setOnClickListener(this);
         confirmation.setOnClickListener(this);
         logout.setOnClickListener(this);
         hotCalls.setOnClickListener(this);
@@ -79,7 +80,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
             case R.id.rlHotCalls_SetDFrgmt:
                 mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
                 break;
-            case R.id.rlSignUp_SetDFrgmt:
+            case R.id.rlSignIn_SetDFrgmt:
                 mCallback.onActionDialogSelected(DialogType.LOGIN);
                 break;
             case R.id.confirmation:
@@ -106,12 +107,15 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
         @Override
         public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-            SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
+            //SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
             if (data) {
-
+                SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
                 SPManager.getInstance(getActivity()).deleteResidentInformation();
                 getActivity().stopService(new Intent(getActivity(), RegistrationIntentService.class));
                 logout.setVisibility(View.GONE);
+                login.setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
         }
 

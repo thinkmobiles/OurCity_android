@@ -35,9 +35,12 @@ public class LoginLoader extends BaseLoader<LoginResponse> {
 
         try {
             response = cityApi.loginResidentAndGetAuthToken(residentSignInDetails);
+            if (response == null) {
+                response = new LoginResponse();
+            }
         } catch (RetrofitError e) {
             e.printStackTrace();
-            response = new LoginResponse();
+            response = null;
         }
         return  response;
     }
