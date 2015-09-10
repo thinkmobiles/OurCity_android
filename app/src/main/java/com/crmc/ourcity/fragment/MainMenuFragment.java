@@ -73,6 +73,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     ImageView[] ivBottomButtons;
 
     private MenuFull mMenuFull;
+    private MenuFull mMenuFullBottom;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -230,13 +231,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
             if (mMenuFull != null) {
-//                if (mMenuFull.getNodes().size() > 0) {
                     showContent();
                     loaderMenuFinish = false;
                     loaderMenuBottomFinish = false;
                     loaderLogoImageFinish = false;
                     loaderCityImageFinish = false;
-//                }
             } else {
                 showError("Server do not responds");
             }
@@ -310,10 +309,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 break;
 
             case LOADER_MENU_BOTTOM_ID:
-                mMenuFull = (MenuFull) _data;
-                if (mMenuFull.getSize() > 0) {
-                    mMenuBottom = mMenuFull.getNodes();
-                    for (int i = 0; i < mMenuFull.getSize(); i++) {
+                mMenuFullBottom = (MenuFull) _data;
+                if (mMenuFullBottom != null && mMenuFullBottom.getNodes() != null && mMenuFullBottom.getSize() > 0) {
+                    mMenuBottom = mMenuFullBottom.getNodes();
+                    for (int i = 0; i < mMenuFullBottom.getSize(); i++) {
                         llBottomButtons[i].setVisibility(View.VISIBLE);
                         tvBottomButtons[i].setText(mMenuBottom.get(i).title);
                         ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));

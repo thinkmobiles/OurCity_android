@@ -10,8 +10,6 @@ import com.crmc.ourcity.rest.request.menu.CityModel;
 import com.crmc.ourcity.rest.request.menu.Resident;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 
-import java.util.ArrayList;
-
 import retrofit.RetrofitError;
 
 /**
@@ -37,8 +35,7 @@ public class MenuBottomLoader extends BaseLoader<MenuFull> {
         try {
             menuNodes =  api.getMenuBottom(new CityModel(new Resident(residentId, cityNumber), lng));
         } catch (RetrofitError e) {
-            menuNodes = new MenuFull();
-            menuNodes.nodes = new ArrayList<>();
+            menuNodes = null;
         }
         return menuNodes;
     }
