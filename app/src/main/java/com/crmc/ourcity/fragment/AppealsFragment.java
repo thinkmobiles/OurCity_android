@@ -162,10 +162,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
+            showContent();
             if (data != null) {
-                Toast.makeText(getActivity(), "Ticket is send", Toast.LENGTH_SHORT).show();
+                clearFields();
+                Toast.makeText(getActivity(), "Ticket is sent", Toast.LENGTH_SHORT).show();
+
+
             } else {
-                Toast.makeText(getActivity(), "Ticket is not send", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -174,6 +178,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         }
     };
+
+    private void clearFields() {
+        etNameStreet.setText("");
+        etNumberHouse.setText("");
+        etDescription.setText("");
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
+                .darkenColor(0.2)));
+    }
 
     private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
             .LoaderCallbacks<AddressFull>() {
@@ -205,6 +217,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
+
             if (_data != null) {
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
@@ -395,6 +408,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 break;
             case R.id.btnSend_AF:
                 if (checkValidation()) {
+                    showLoading("Sending ticket...");
                     NewTicket ticket = new NewTicket();
                     ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
                             .getBitmap());
@@ -423,7 +437,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                     InputMethodManager imm2 = (InputMethodManager) getActivity().getSystemService(Context
                             .INPUT_METHOD_SERVICE);
                     imm2.showSoftInput(btnSend, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    popBackStack();
+//                    popBackStack();
                 }
                 break;
         }
