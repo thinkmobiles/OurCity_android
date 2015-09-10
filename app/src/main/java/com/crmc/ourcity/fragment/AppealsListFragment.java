@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -89,6 +90,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
         Image.init(Color.parseColor(color));

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -156,6 +157,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         Image.init(Color.parseColor(color));
         Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));

@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -78,6 +79,7 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvPhones = findView(R.id.lvPhones_FP);
         vUnderLine_FP = findView(R.id.vUnderLine_FP);
         Image.init(Color.parseColor(color));

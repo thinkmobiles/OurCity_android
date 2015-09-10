@@ -23,8 +23,9 @@
         <LinearLayout
             android:id="@+id/llBtnFirst_MMF"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
@@ -59,8 +60,9 @@
         <LinearLayout
             android:id="@+id/llBtnSecond_MMF"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
@@ -94,8 +96,9 @@
         <LinearLayout
             android:id="@+id/llBtnThird_MMF"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:visibility="gone"
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">

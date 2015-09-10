@@ -101,6 +101,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
         Image.init(Color.parseColor(color));

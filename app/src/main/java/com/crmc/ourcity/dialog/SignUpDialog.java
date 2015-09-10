@@ -167,7 +167,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         if (!TextUtils.isEmpty(etEmail.getText().toString())) {
             if (!Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches()) {
                 etEmail.setError(getResources().getString(R.string.sign_up_dialog_incorrect_email));
-                isValid = false;
+                isOptionalFieldValid = false;
             }
         } else {
             etEmail.setError(getResources().getString(R.string.sign_up_dialog_error_text));

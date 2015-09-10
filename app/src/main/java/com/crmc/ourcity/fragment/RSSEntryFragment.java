@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -70,6 +71,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);

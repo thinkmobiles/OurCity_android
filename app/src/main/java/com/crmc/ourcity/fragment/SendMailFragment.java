@@ -3,6 +3,7 @@ package com.crmc.ourcity.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +54,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         vTopLine_SMF = findView(R.id.vTopLine_SMF);
         vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
         etFirstName_SMF = findView(R.id.etFirstName_SMF);

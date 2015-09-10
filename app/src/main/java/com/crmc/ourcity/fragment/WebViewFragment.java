@@ -111,6 +111,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);

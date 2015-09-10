@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -103,6 +104,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         Image.init(Color.parseColor(color));

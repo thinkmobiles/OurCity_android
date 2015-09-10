@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -89,6 +90,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
         Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,
                 Image.darkenColor(0.2));

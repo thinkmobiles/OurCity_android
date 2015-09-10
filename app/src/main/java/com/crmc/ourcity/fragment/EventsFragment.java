@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -104,6 +105,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);
         Image.init(Color.parseColor(color));

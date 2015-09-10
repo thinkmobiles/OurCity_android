@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
@@ -88,6 +89,7 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvTitle = findView(R.id.tvTitle_EIF);
         tvDate_Text = findView(R.id.tvDate_Text_EIF);
         tvAddress_Text = findView(R.id.tvAddress_Text_EIF);

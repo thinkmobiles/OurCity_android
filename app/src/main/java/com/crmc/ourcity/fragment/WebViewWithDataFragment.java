@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +27,7 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         WebView mWebView = findView(R.id.webView_WVF);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");

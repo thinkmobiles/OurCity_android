@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -87,6 +88,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);

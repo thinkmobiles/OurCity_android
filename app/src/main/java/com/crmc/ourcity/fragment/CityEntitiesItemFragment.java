@@ -3,6 +3,7 @@ package com.crmc.ourcity.fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +58,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvEntityName_CEIF = findView(R.id.tvEntityName_CEIF);
         tvDetails_Text_CEIF = findView(R.id.tvDetails_Text_CEIF);
         tvEmail_Text_CEIF = findView(R.id.tvEmail_Text_CEIF);

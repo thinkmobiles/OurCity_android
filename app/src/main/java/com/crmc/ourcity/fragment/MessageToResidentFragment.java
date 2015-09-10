@@ -89,6 +89,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void initViews() {
         super.initViews();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);
         Image.init(Color.parseColor(color));
