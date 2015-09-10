@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -113,8 +114,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string
-        // .app_name));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string
+         .app_name));
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
