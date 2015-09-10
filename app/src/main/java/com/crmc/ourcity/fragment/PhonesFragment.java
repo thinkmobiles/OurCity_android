@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
 
@@ -32,7 +30,7 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     private ListView lvPhones;
     private List<Phones> mPhonesList;
     private PhonesListAdapter mAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private View vUnderLine_FP;
     private String color;
     private String json;
     private String route;
@@ -80,14 +78,14 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
-        swipeRefreshLayout = findView(R.id.swipe_refresh_phones);
         lvPhones = findView(R.id.lvPhones_FP);
+        vUnderLine_FP = findView(R.id.vUnderLine_FP);
         Image.init(Color.parseColor(color));
+        vUnderLine_FP.setBackgroundColor(Image.lighterColor(0.2));
         lvPhones.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvPhones.setDividerHeight(4);
 
         if (type == Constants.PHONE_BOOK_LIST) {
-            swipeRefreshLayout.setRefreshing(false);
             mAdapter = new PhonesListAdapter(getActivity(), mPhonesList);
             lvPhones.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -98,19 +96,6 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void setListeners() {
         super.setListeners();
-        if (type == Constants.PHONE_LIST) {
-            swipeRefreshLayout.setOnRefreshListener(this);
-            swipeInStart();
-        }
-    }
-
-    public void swipeInStart() {
-        TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
-        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
-                .resourceId));
-        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
-        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -126,7 +111,6 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onLoadFinished(Loader<List<Phones>> _loader, List<Phones> _data) {
-        swipeRefreshLayout.setRefreshing(false);
         mAdapter = new PhonesListAdapter(getActivity(), _data);
         lvPhones.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();

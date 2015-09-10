@@ -32,6 +32,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     private String color;
     private String json;
     private String route;
+    private View vUnderLine_EF;
 
     private EventsListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
@@ -104,7 +105,9 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     protected void initViews() {
         super.initViews();
         lvEvents = findView(R.id.lvEvents_EF);
+        vUnderLine_EF = findView(R.id.vUnderLine_EF);
         Image.init(Color.parseColor(color));
+        vUnderLine_EF.setBackgroundColor(Image.lighterColor(0.2));
         lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvEvents.setDividerHeight(4);
     }

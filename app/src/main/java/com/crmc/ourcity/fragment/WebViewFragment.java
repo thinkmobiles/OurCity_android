@@ -31,6 +31,7 @@ import com.crmc.ourcity.utils.Image;
 public class WebViewFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Documents> {
 
     private WebView mWebView;
+    private View vUnderLine_WVF;
     private TextView tvTitle_WVF;
     private String link;
     private ProgressBar pbLoading;
@@ -112,7 +113,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
+        vUnderLine_WVF = findView(R.id.vUnderLine_WVF);
         Image.init(Color.parseColor(color));
+        vUnderLine_WVF.setBackgroundColor(Image.lighterColor(0.2));
         pbLoading.getIndeterminateDrawable().setColorFilter(Image.lighterColor(0.2), PorterDuff.Mode.SRC_IN);
         pbLoading.getProgressDrawable().setColorFilter(Image.darkenColor(0.2), PorterDuff.Mode.SRC_IN);
         mWebView.setWebViewClient(new MyWebViewClient());

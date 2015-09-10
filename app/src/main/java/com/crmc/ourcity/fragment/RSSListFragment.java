@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,6 +26,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
         OnItemClickListener {
 
     private ListView lvRssEntries;
+    private View vUnderLine_RssFrg;
     private String color;
     private String rssLink;
 
@@ -101,7 +101,9 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     protected void initViews() {
         super.initViews();
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
+        vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
         Image.init(Color.parseColor(color));
+        vUnderLine_RssFrg.setBackgroundColor(Image.lighterColor(0.2));
         lvRssEntries.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvRssEntries.setDividerHeight(4);
     }

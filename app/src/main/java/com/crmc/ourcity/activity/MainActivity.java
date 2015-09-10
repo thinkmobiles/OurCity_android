@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -60,15 +60,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener,
-        OnListItemActionListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener {
+        OnListItemActionListener, FragmentManager.OnBackStackChangedListener {
 
+    private Toolbar mToolbar;
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private boolean isLogIn;
-    private ImageView ivMenuHome;
-    private ImageView ivMenuBack;
-    private ImageView ivMenuSettings;
 
 
     @Override
@@ -89,15 +87,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             }
         }
 
-        ivMenuHome = (ImageView) findViewById(R.id.menu_home);
-        ivMenuBack = (ImageView) findViewById(R.id.menu_back);
-        ivMenuSettings = (ImageView) findViewById(R.id.menu_settings);
-
-        ivMenuBack.setOnClickListener(this);
-        ivMenuHome.setOnClickListener(this);
-        ivMenuSettings.setOnClickListener(this);
-
 //        cityNumber = getResources().getInteger(R.integer.city_id);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
         if(tickers!= null) {
@@ -105,6 +96,21 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             mTicker.setOnTickerActionListener(this);
             mTicker.startAnimation();
         }
+
+        setSupportActionBar(mToolbar);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //getSupportActionBar().setTitle("OurCity");
+
+//            Configuration config = getResources().getConfiguration();
+//            if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+//                mToolbar.setNavigationIcon(R.drawable.ic_back_rtl);
+//            } else {
+//                mToolbar.setNavigationIcon(R.drawable.ic_back_ltr);
+//            }
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
@@ -312,28 +318,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.menu_settings:
-                Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
-                        SubMenuFragment;
-                Intent intent = new Intent(this, DialogActivity.class);
-                intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
-                EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-                startActivity(intent);
-                break;
-            case R.id.menu_back:
-                popBackStack();
-                break;
-            case R.id.menu_home:
-                clearBackStack();
-                setTopFragment(MainMenuFragment.newInstance());
-                break;
-        }
 
-    }
 
     @Override
     public void onBackStackChanged() {
@@ -344,18 +329,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         } else {
             findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
         }
-
-        if (f instanceof MainMenuFragment) {
-            changeMenuButtonVisibility(true, false, false);
-        } else {
-            changeMenuButtonVisibility(true, true, true);
-        }
-    }
-
-    private void changeMenuButtonVisibility(final boolean _settings, final boolean _home, final boolean _back) {
-        ivMenuHome.setVisibility(_home ? View.VISIBLE : View.GONE);
-        ivMenuSettings.setVisibility(_settings ? View.VISIBLE : View.GONE);
-        ivMenuBack.setVisibility(_back ? View.VISIBLE : View.GONE);
     }
 
 }

@@ -27,6 +27,7 @@ import java.util.List;
 public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>, AdapterView.OnItemClickListener {
 
     private ListView lvLinks;
+    private View vUnderLine_LLF;
     private String color;
     private String json;
     private String route;
@@ -102,7 +103,9 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     protected void initViews() {
         super.initViews();
         lvLinks = findView(R.id.lvLinks_LLF);
+        vUnderLine_LLF = findView(R.id.vUnderLine_LLF);
         Image.init(Color.parseColor(color));
+        vUnderLine_LLF.setBackgroundColor(Image.lighterColor(0.2));
         lvLinks.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvLinks.setDividerHeight(4);
     }

@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.View;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
@@ -20,6 +21,7 @@ import com.crmc.ourcity.utils.Image;
  */
 public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult> {
     private ListView lvAppeals;
+    private View vUnderLine_ALF;
     private String color;
     private String json;
     private String route;
@@ -88,7 +90,9 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     protected void initViews() {
         super.initViews();
         lvAppeals = findView(R.id.lvCityEntities_CEF);
+        vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
         Image.init(Color.parseColor(color));
+        vUnderLine_ALF.setBackgroundColor(Image.darkenColor(0.2));
         lvAppeals.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvAppeals.setDividerHeight(4);
     }

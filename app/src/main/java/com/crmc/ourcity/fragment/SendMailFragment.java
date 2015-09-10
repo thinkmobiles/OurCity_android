@@ -63,8 +63,10 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         btnOk_SMF = findView(R.id.btnOk_SMF);
 
         Image.init(Color.parseColor(color));
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{vTopLine_SMF, vUnderLine_SMF, etFirstName_SMF,
+        Image.setBackgroundColorArrayView(getActivity(), new View[]{etFirstName_SMF,
                 etLastName_SMF, etMail_SMF, etDescription_SMF}, R.drawable.boarder_round_green_ff);
+        vUnderLine_SMF.setBackgroundColor(Image.lighterColor(0.0));
+        vTopLine_SMF.setBackgroundColor(Image.lighterColor(0.0));
         Image.setBackgroundColorArrayView(getActivity(), new View[]{btnCancel_SMF, btnOk_SMF}, R.drawable
                 .selector_button_green_ff);
     }

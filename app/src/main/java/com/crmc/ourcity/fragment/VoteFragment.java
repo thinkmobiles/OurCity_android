@@ -42,6 +42,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private static final String CONFIGURATION_KEY_COLOR = "KEY_COLOR";
     private static final String CONFIGURATION_KEY_jSON = "KEY_JSON";
     private static final String CONFIGURATION_KEY_ROUTE = "KEY_ROUTE";
+    private View vUnderLine_VF;
     private String color;
     private String json;
     private String route;
@@ -87,6 +88,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     protected void initViews() {
         super.initViews();
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
+        vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);
         tvGender = findView(R.id.tvGender_VF);
         llAge = findView(R.id.llAge_VF);
@@ -98,6 +100,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Image.init(Color.parseColor(color));
+        vUnderLine_VF.setBackgroundColor(Image.lighterColor(0.2));
         tvAge.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
         tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable

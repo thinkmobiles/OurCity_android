@@ -3,7 +3,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <View
+        android:id="@+id/vUnderLine_EF"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/black"/>
     <ListView
         android:id="@+id/lvEvents_EF"
         android:layoutDirection="rtl"

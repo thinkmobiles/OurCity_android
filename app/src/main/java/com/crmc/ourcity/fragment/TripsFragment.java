@@ -32,6 +32,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     private ListView lvTrips;
     private TripsListAdapter mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private View vUnderLine_FT;
     private String color;
     private String json;
     private String route;
@@ -91,8 +92,10 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     protected void initViews() {
         super.initViews();
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
+        vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);
         Image.init(Color.parseColor(color));
+        vUnderLine_FT.setBackgroundColor(Image.lighterColor(0.2));
         lvTrips.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvTrips.setDividerHeight(4);
     }

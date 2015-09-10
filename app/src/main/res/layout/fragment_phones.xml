@@ -1,9 +1,15 @@
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/swipe_refresh_phones"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/vUnderLine_FP"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/black"/>
 
     <ListView
         android:id="@+id/lvPhones_FP"
@@ -13,5 +19,4 @@
         android:dividerHeight="4dp"
         tools:listitem="@layout/listview_row_fp">
     </ListView>
-
-</android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
