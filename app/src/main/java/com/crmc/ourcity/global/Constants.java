@@ -3,6 +3,8 @@ package com.crmc.ourcity.global;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
+import com.crmc.ourcity.rest.responce.menu.MenuFull;
+
 /**
  * Created by SetKrul on 23.07.2015.
  */
@@ -16,6 +18,8 @@ public class Constants {
 
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
+    public static MenuFull mMenuFull = null;
+    public static MenuFull mMenuFullBottom = null;
 
     //for request
     final public static String REQUEST_INTENT_TYPE_PHOTO = "type";
