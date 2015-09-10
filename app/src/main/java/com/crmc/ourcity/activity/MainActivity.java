@@ -92,7 +92,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
-        if(tickers!= null) {
+        if (tickers != null) {
             mTicker.setData((List) tickers);
             mTicker.setOnTickerActionListener(this);
             mTicker.startAnimation();
@@ -117,6 +117,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
+
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
@@ -294,7 +295,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 startActivity(intent);
                 break;
             case android.R.id.home:
-                getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+                setTitle();
                 popBackStack();
                 break;
             case R.id.menu_home:
@@ -321,7 +322,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
 
-
     @Override
     public void onBackStackChanged() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
@@ -332,5 +332,21 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setTitle();
+    }
+
+    private void setTitle() {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
+        if (f instanceof MainMenuFragment) {
+            getSupportActionBar().setTitle("");
+        } else {
+            getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+        }
+    }
+
 
 }

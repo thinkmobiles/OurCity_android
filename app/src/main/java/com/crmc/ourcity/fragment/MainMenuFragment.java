@@ -111,7 +111,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
