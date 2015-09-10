@@ -125,7 +125,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ivPhoto = findView(R.id.ivPhoto_AF);
         ivRotate = findView(R.id.ivRotate_AF);
         etNameCity = findView(R.id.etCityName_AF);
@@ -278,6 +278,13 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         if (mLocation != null) {
             mLocation.stopLocationUpdates();
         }
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm.isAcceptingText()) {
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        } else {
+//            writeToLog("Software Keyboard was not shown");
+        }
+
     }
 
     @Override
