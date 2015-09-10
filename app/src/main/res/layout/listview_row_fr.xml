@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     android:baselineAligned="false"
+    android:layoutDirection="rtl"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:layoutDirection="rtl"
         android:paddingStart="5dp">
 
         <TextView

@@ -157,7 +157,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         Image.init(Color.parseColor(color));
         Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
@@ -175,20 +175,29 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
             bounds = new LatLngBounds.Builder();
             ArrayList<com.google.android.gms.maps.model.Marker> temp = new ArrayList<>();
             mDialogMapMarkers = new ArrayList<>();
-            for (int i = 0; i < _data.size(); i++) {
-                for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
-                    temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
-                            .getInterestedPointDescription(j)).position(new LatLng(_data.get(i).getInterestedPointLat
-                            (j), _data.get(i).getInterestedPointLon(j))).icon(BitmapDescriptorFactory.fromBitmap
-                            (Image.convertBase64ToBitmap(_data.get(i).icon)))));
-                    bounds.include(new LatLng(_data.get(i).getInterestedPointLat(j), _data.get(i)
-                            .getInterestedPointLon(j)));
+            if (_data != null) {
+                try {
+                    for (int i = 0; i < _data.size(); i++) {
+                        for (int j = 0; j < _data.get(i).getInterestedPointList().size(); j++) {
+                            temp.add(mGoogleMap.addMarker(new MarkerOptions().title("\u200e" + _data.get(i)
+                                    .getInterestedPointDescription(j)).position(new LatLng(_data.get(i)
+                                    .getInterestedPointLat(j), _data.get(i).getInterestedPointLon(j))).icon
+                                    (BitmapDescriptorFactory.fromBitmap(Image.convertBase64ToBitmap(_data.get(i)
+                                            .icon)))));
+                            bounds.include(new LatLng(_data.get(i).getInterestedPointLat(j), _data.get(i)
+                                    .getInterestedPointLon(j)));
+                        }
+                        mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
+                        mDialogMapMarkers.add(new MapMarker(_data.get(i).categoryId, _data.get(i).categoryName, true));
+                        temp.clear();
+                    }
+                    setCamera(mGoogleMap);
+                } catch (Exception e) {
+                    showError("Server does not respond");
                 }
-                mMarkersCategory.put(_data.get(i).categoryId, new ArrayList<>(temp));
-                mDialogMapMarkers.add(new MapMarker(_data.get(i).categoryId, _data.get(i).categoryName, true));
-                temp.clear();
+            } else {
+                showError("Server does not respond");
             }
-            setCamera(mGoogleMap);
         }
     }
 
@@ -203,6 +212,10 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
 
     @Override
     public final void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_INTERESTED_POINTS_ID, bundle, this);
     }
 
     @Override

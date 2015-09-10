@@ -265,8 +265,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onPhoneBookItemAction(List<Phones> _phones) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones, Constants
-                .PHONE_BOOK_LIST));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones));
     }
 
     @Override

@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -36,8 +35,7 @@ public class MapInterestPointLoader extends BaseLoader<List<MapCategory>> {
         try {
             mapCategories =  api.getMapDetails(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            mapCategories = new ArrayList<>();
-            mapCategories.add(new MapCategory());
+            mapCategories = null;
         }
         return mapCategories;
     }

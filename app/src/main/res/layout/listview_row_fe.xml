@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layoutDirection="rtl"
         android:orientation="vertical"
-        android:paddingStart="5dp"
-        android:layoutDirection="rtl">
+        android:paddingStart="5dp">
 
         <TextView
             android:id="@+id/tvTitle_EIF"
@@ -22,10 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             android:layout_weight="1"
-
             android:gravity="center_vertical|left"
-            android:singleLine="true"
             android:paddingStart="15dp"
+            android:singleLine="true"
             android:text="Title"
             android:textSize="@dimen/cf_item_text_size"
             android:textStyle="bold"

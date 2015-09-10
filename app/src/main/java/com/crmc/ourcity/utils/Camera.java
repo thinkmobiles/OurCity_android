@@ -59,6 +59,8 @@ public class Camera{
             } else {
                 Toast.makeText(mActivity, mActivity.getResources().getString(R.string.cant_create_photo), Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(mActivity, mActivity.getResources().getString(R.string.not_found_camera), Toast.LENGTH_SHORT).show();
         }
         return mPhotoFilePath;
     }

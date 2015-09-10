@@ -111,7 +111,6 @@ public class Constants {
     public static final String CONFIGURATION_KEY_RSS = "rss";
     public static final String CONFIGURATION_KEY_MAIL = "mail";
 
-
     //action type
     final public static int ACTION_TYPE_LIST = 1;
     final public static int ACTION_TYPE_LIST_EVENTS = 1;
