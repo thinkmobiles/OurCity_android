@@ -34,7 +34,11 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup _parent, int _position) {
         View view = LayoutInflater.from(_parent.getContext()).inflate(R.layout.grid_item_vf, _parent, false);
-        //Image.init(Color.parseColor(color));
+//        try {
+//            Image.init(Color.parseColor(color));
+//        } catch (Exception e){
+//            Image.init(Color.BLACK);
+//        }
         return new ViewHolder(view);
     }
 

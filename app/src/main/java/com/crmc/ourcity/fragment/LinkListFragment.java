@@ -107,7 +107,11 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_LLF.setBackgroundColor(Image.darkenColor(0.2));
         lvLinks.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvLinks.setDividerHeight(4);

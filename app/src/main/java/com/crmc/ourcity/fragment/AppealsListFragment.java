@@ -93,7 +93,11 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
-        Image.init(Color.parseColor(color));
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
         vUnderLine_ALF.setBackgroundColor(Image.darkenColor(0.2));
         lvAppeals.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvAppeals.setDividerHeight(4);
