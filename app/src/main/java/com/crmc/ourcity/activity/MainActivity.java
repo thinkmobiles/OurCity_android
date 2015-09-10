@@ -117,7 +117,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
-
+        getSupportActionBar().setTitle("");
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 

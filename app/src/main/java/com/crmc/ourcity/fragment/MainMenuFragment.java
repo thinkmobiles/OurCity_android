@@ -184,6 +184,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         Log.d("TAG", cityNumber + " id from Menu");
         lng = "en";
         residentId = SPManager.getInstance(getActivity()).getResidentId();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
     }
 
     @Override
