@@ -266,24 +266,12 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         swGpsOnOff.setOnCheckedChangeListener(this);
         btnSend.setOnClickListener(this);
         flDescription.setOnClickListener(this);
-        etNameStreet.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        clearErrorIconOnFields();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (etNameStreet.getText().length() > 0) {
-                    etNameStreet.setError(null);
-                }
-            }
-        });
 
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -471,5 +459,42 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         }
 
         return isValid;
+    }
+
+    private void clearErrorIconOnFields() {
+        etDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (etDescription.getText().length() > 0) {
+                    etDescription.setError(null);
+                }
+            }
+        });
+        etNameStreet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (etNameStreet.getText().length() > 0) {
+                    etNameStreet.setError(null);
+                }
+            }
+        });
     }
 }
