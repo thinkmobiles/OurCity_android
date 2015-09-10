@@ -185,6 +185,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         lng = "en";
         residentId = SPManager.getInstance(getActivity()).getResidentId();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
+        Constants.PREVIOUSTITLE = "";
     }
 
     @Override

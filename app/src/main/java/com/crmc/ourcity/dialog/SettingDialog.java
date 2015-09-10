@@ -57,6 +57,11 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
             } else {
                 logout.setVisibility(View.GONE);
             }
+        } else {
+            if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
+
+                login.setVisibility(View.GONE);
+            }
         }
         showContent();
     }

@@ -117,7 +117,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
-        getSupportActionBar().setTitle("");
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
@@ -334,6 +333,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setTitle();
+
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         setTitle();
@@ -343,6 +349,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
         if (f instanceof MainMenuFragment) {
             getSupportActionBar().setTitle("");
+            Constants.PREVIOUSTITLE = "";
         } else {
             getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
         }
