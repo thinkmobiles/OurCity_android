@@ -45,6 +45,9 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     private LinearLayout llPrice;
     private LinearLayout llDescription;
 
+    private View vUnderLine_EIF;
+    private View vBottomLine_EIF;
+
     private ImageView ivCallSkype;
     private ImageView ivSendMail;
     private ImageView ivLink;
@@ -106,6 +109,9 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         ivSendMail = findView(R.id.ivSendMail_EIF);
         ivLink = findView(R.id.ivLink_EIF);
 
+        vUnderLine_EIF = findView(R.id.vUnderLine_EIF);
+        vBottomLine_EIF = findView(R.id.vBottomLine_EIF);
+
         mWebView = findView(R.id.webView_EIF);
     }
 
@@ -166,6 +172,8 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         } else {
             ivLink.setVisibility(View.GONE);
         }
+        vUnderLine_EIF.setBackgroundColor(Image.lighterColor(0.2));
+        vBottomLine_EIF.setBackgroundColor(Image.lighterColor(0.2));
     }
 
     @Override

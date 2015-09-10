@@ -28,6 +28,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         AdapterView.OnItemClickListener {
 
     private ListView lvPhoneBook;
+    private View vUnderLine_PBF;
     private String color;
     private String json;
     private String route;
@@ -99,7 +100,9 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     protected void initViews() {
         super.initViews();
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
+        vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
         Image.init(Color.parseColor(color));
+        vUnderLine_PBF.setBackgroundColor(Image.lighterColor(0.2));
         lvPhoneBook.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvPhoneBook.setDividerHeight(4);
     }

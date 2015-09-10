@@ -1,18 +1,20 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:paddingBottom="12dp"
-    android:paddingTop="12dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/vUnderLine_RssEFrgm"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
 
         <TextView
             android:id="@+id/tvTitle_RssEFrgm"
@@ -20,6 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:text="title"
             android:textColor="@color/black"
             android:textSize="@dimen/event25"
@@ -29,9 +33,11 @@
             android:id="@+id/llDate_RssEFrgm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:layout_gravity="start"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="15dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:weightSum="4">
 
             <TextView
@@ -60,9 +66,11 @@
             android:id="@+id/llDescription_RssEFrgm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:layout_marginBottom="5dp"
-            android:weightSum="4"
-            android:layout_gravity="start">
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/tvDescription_RssEFrgm"
@@ -88,7 +96,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start">
+            android:gravity="start"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
 
             <ImageView
                 android:id="@+id/ivLink_RssEFrgm"
@@ -101,5 +111,11 @@
                 tools:background="@android:color/darker_gray"/>
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/vBottomLine_RssEFrgm"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
     </LinearLayout>
 </ScrollView>

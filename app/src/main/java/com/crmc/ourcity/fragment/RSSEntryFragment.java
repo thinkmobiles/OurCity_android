@@ -27,6 +27,9 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
     private TextView tvDate_Text;
     private TextView tvDescription_Text;
 
+    private View vUnderLine_RssEFrgm;
+    private View vBottomLine_RssEFrgm;
+
     private LinearLayout llDate;
     private LinearLayout llDescription;
 
@@ -74,6 +77,9 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
         llDate = findView(R.id.llDate_RssEFrgm);
         llDescription = findView(R.id.llDescription_RssEFrgm);
         ivLink = findView(R.id.ivLink_RssEFrgm);
+
+        vUnderLine_RssEFrgm = findView(R.id.vUnderLine_RssEFrgm);
+        vBottomLine_RssEFrgm = findView(R.id.vBottomLine_RssEFrgm);
     }
 
     @Override
@@ -114,6 +120,8 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
         } else {
             ivLink.setVisibility(View.GONE);
         }
+        vUnderLine_RssEFrgm.setBackgroundColor(Image.lighterColor(0.2));
+        vBottomLine_RssEFrgm.setBackgroundColor(Image.lighterColor(0.2));
     }
 
     @Override

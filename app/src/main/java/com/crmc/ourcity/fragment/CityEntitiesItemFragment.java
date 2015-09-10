@@ -29,6 +29,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
     private TextView tvInformation_Text_CEIF;
     private TextView tvPhone_Text_CEIF;
 
+    private View vUnderLine_CEIF;
+    private View vBottomLine_CEIF;
 
     private LinearLayout llDetails_CEIF;
     private LinearLayout llEmail_CEIF;
@@ -60,6 +62,9 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
         tvEmail_Text_CEIF = findView(R.id.tvEmail_Text_CEIF);
         tvInformation_Text_CEIF = findView(R.id.tvInformation_Text_CEIF);
         tvPhone_Text_CEIF = findView(R.id.tvPhone_Text_CEIF);
+
+        vUnderLine_CEIF = findView(R.id.vUnderLine_CEIF);
+        vBottomLine_CEIF = findView(R.id.vBottomLine_CEIF);
 
         llDetails_CEIF = findView(R.id.llDetails_CEIF);
         llEmail_CEIF = findView(R.id.llEmail_CEIF);
@@ -103,6 +108,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
+        vUnderLine_CEIF.setBackgroundColor(Image.lighterColor(0.2));
+        vBottomLine_CEIF.setBackgroundColor(Image.lighterColor(0.2));
     }
 
     @Override

@@ -28,6 +28,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         AdapterView.OnItemClickListener {
 
     private ListView lvCityEntities;
+    private View vUnderLine_CEF;
     private String color;
     private String json;
     private String route;
@@ -103,7 +104,9 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     protected void initViews() {
         super.initViews();
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
+        vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         Image.init(Color.parseColor(color));
+        vUnderLine_CEF.setBackgroundColor(Image.lighterColor(0.2));
         lvCityEntities.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvCityEntities.setDividerHeight(4);
     }
