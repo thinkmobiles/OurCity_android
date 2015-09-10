@@ -88,7 +88,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
             mAdapter.notifyDataSetChanged();
             showContent();
         } else {
-            showError("Server do not response!");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 

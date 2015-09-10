@@ -85,7 +85,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
             mAdapter.notifyDataSetChanged();
             showContent();
         } else {
-            showEmpty("Server do not response");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 

@@ -87,7 +87,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
             mAdapter.notifyDataSetChanged();
             showContent();
         } else {
-            showError("Server do not response!");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 
@@ -103,6 +103,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     protected void initViews() {
         super.initViews();
+        //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);

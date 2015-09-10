@@ -193,10 +193,10 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
                     }
                     setCamera(mGoogleMap);
                 } catch (Exception e) {
-                    showError("Server does not respond");
+                    showError(getResources().getString(R.string.connection_error));
                 }
             } else {
-                showError("Server does not respond");
+                showError(getResources().getString(R.string.connection_error));
             }
         }
     }

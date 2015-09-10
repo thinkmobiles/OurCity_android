@@ -138,7 +138,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
             mAdapter.notifyDataSetChanged();
             showContent();
         } else {
-            showError("Server do not response!");
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 
