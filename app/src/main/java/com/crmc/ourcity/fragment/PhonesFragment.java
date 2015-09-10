@@ -81,7 +81,7 @@ public class PhonesFragment extends BaseFourStatesFragment implements LoaderMana
         lvPhones = findView(R.id.lvPhones_FP);
         vUnderLine_FP = findView(R.id.vUnderLine_FP);
         Image.init(Color.parseColor(color));
-        vUnderLine_FP.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_FP.setBackgroundColor(Image.darkenColor(0.2));
         lvPhones.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvPhones.setDividerHeight(4);
 

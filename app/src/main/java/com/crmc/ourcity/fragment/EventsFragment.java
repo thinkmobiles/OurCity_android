@@ -107,7 +107,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);
         Image.init(Color.parseColor(color));
-        vUnderLine_EF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_EF.setBackgroundColor(Image.darkenColor(0.2));
         lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvEvents.setDividerHeight(4);
     }

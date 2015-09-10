@@ -103,7 +103,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
         Image.init(Color.parseColor(color));
-        vUnderLine_RssFrg.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_RssFrg.setBackgroundColor(Image.darkenColor(0.2));
         lvRssEntries.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvRssEntries.setDividerHeight(4);
     }

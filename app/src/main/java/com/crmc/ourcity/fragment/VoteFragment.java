@@ -100,7 +100,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Image.init(Color.parseColor(color));
-        vUnderLine_VF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_VF.setBackgroundColor(Image.darkenColor(0.2));
         tvAge.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
         tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable

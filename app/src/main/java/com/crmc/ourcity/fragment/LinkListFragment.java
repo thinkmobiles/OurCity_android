@@ -105,7 +105,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);
         Image.init(Color.parseColor(color));
-        vUnderLine_LLF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_LLF.setBackgroundColor(Image.darkenColor(0.2));
         lvLinks.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvLinks.setDividerHeight(4);
     }

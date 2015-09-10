@@ -95,7 +95,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);
         Image.init(Color.parseColor(color));
-        vUnderLine_FT.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_FT.setBackgroundColor(Image.darkenColor(0.2));
         lvTrips.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvTrips.setDividerHeight(4);
     }

@@ -106,7 +106,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         Image.init(Color.parseColor(color));
-        vUnderLine_CEF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_CEF.setBackgroundColor(Image.darkenColor(0.2));
         lvCityEntities.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvCityEntities.setDividerHeight(4);
     }

@@ -108,8 +108,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
-        vUnderLine_CEIF.setBackgroundColor(Image.lighterColor(0.2));
-        vBottomLine_CEIF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
+        vBottomLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
     }
 
     @Override

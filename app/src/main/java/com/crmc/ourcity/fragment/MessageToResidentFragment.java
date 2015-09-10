@@ -91,7 +91,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);
         Image.init(Color.parseColor(color));
-        vUnderLine_MTRF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_MTRF.setBackgroundColor(Image.darkenColor(0.2));
         lvMassageToResident.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvMassageToResident.setDividerHeight(4);
     }

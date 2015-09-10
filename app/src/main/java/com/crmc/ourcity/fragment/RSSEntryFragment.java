@@ -120,8 +120,8 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
         } else {
             ivLink.setVisibility(View.GONE);
         }
-        vUnderLine_RssEFrgm.setBackgroundColor(Image.lighterColor(0.2));
-        vBottomLine_RssEFrgm.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_RssEFrgm.setBackgroundColor(Image.darkenColor(0.2));
+        vBottomLine_RssEFrgm.setBackgroundColor(Image.darkenColor(0.2));
     }
 
     @Override

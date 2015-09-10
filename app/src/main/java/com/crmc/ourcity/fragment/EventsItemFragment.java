@@ -172,8 +172,8 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
         } else {
             ivLink.setVisibility(View.GONE);
         }
-        vUnderLine_EIF.setBackgroundColor(Image.lighterColor(0.2));
-        vBottomLine_EIF.setBackgroundColor(Image.lighterColor(0.2));
+        vUnderLine_EIF.setBackgroundColor(Image.darkenColor(0.2));
+        vBottomLine_EIF.setBackgroundColor(Image.darkenColor(0.2));
     }
 
     @Override
