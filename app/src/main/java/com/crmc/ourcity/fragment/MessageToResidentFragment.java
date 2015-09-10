@@ -73,7 +73,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
                 showError(getResources().getString(R.string.connection_error));
             }
         } else {
-            showError(getResources().getString(R.string.connection_error));
+            showError("Do not have message for you");
         }
     }
 
