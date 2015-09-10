@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -36,7 +35,7 @@ public class MapTripsLoader extends BaseLoader<List<MapTrips>> {
         try {
             mapTrips =  api.getMapTrips(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException e) {
-            mapTrips = new ArrayList<>();
+            mapTrips = null;
         }
         return mapTrips;
     }

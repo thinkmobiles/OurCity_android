@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -71,6 +70,8 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
             } else {
                 showEmpty("No messages for you!");
             }
+        } else {
+            showError("Server do not response!");
         }
     }
 
@@ -104,5 +105,9 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_MESSAGE_TO_RESIDENT, bundle, this);
     }
 }

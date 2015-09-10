@@ -10,7 +10,6 @@ import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.utils.SPManager;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -38,8 +37,7 @@ public class MassageToResidentLoader extends BaseLoader<List<MassageToResident>>
         try {
             mMassageToResident = api.getMessagesToResident(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException e) {
-            mMassageToResident = new ArrayList<>();
-            mMassageToResident.add(new MassageToResident());
+            mMassageToResident = null;
         }
         return mMassageToResident;
     }

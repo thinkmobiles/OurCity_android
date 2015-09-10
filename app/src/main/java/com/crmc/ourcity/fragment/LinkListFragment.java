@@ -79,10 +79,14 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
-        mAdapter = new LinksListAdapter(getActivity(), _data);
-        lvLinks.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        showContent();
+        if (_data != null) {
+            mAdapter = new LinksListAdapter(getActivity(), _data);
+            lvLinks.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showError("Server do not response!");
+        }
     }
 
     @Override
@@ -126,5 +130,9 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_LIST_LINK_ID, bundle, this);
     }
 }

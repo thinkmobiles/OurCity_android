@@ -127,10 +127,14 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     @Override
     public void onLoadFinished(Loader<List<MapTrips>> _loader, List<MapTrips> _data) {
         swipeRefreshLayout.setRefreshing(false);
-        mAdapter = new TripsListAdapter(getActivity(), _data);
-        lvTrips.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        showContent();
+        if (_data != null) {
+            mAdapter = new TripsListAdapter(getActivity(), _data);
+            lvTrips.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showError("Server do not response!");
+        }
     }
 
     @Override
@@ -149,10 +153,15 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
 
     @Override
     public void onRetryClick() {
+        restartLoader();
     }
 
     @Override
     public void onRefresh() {
+        restartLoader();
+    }
+
+    void restartLoader() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

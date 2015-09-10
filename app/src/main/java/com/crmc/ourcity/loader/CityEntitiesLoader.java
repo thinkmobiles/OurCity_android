@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -36,7 +35,7 @@ public class CityEntitiesLoader extends BaseLoader<List<CityEntities>> {
         try {
             mCityEntities = api.getCityEntities(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            mCityEntities = new ArrayList<>();
+            mCityEntities = null;
         }
         return mCityEntities;
     }

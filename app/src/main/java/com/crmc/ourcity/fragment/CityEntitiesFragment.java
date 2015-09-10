@@ -80,10 +80,14 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onLoadFinished(Loader<List<CityEntities>> _loader, List<CityEntities> _data) {
-        mAdapter = new CityEntitiesListAdapter(getActivity(), _data);
-        lvCityEntities.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        showContent();
+        if (_data != null) {
+            mAdapter = new CityEntitiesListAdapter(getActivity(), _data);
+            lvCityEntities.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showError("Server do not response!");
+        }
     }
 
     @Override
@@ -127,5 +131,9 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_CITY_ENTITIES_ID, bundle, this);
     }
 }
