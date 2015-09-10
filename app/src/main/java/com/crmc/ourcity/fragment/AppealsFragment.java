@@ -165,10 +165,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
+            showContent();
             if (data != null) {
-                Toast.makeText(getActivity(), "Ticket is send", Toast.LENGTH_SHORT).show();
+                clearFields();
+                Toast.makeText(getActivity(), "Ticket is sent", Toast.LENGTH_SHORT).show();
+
+
             } else {
-                Toast.makeText(getActivity(), "Ticket is not send", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -177,6 +181,14 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         }
     };
+
+    private void clearFields() {
+        etNameStreet.setText("");
+        etNumberHouse.setText("");
+        etDescription.setText("");
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
+                .darkenColor(0.2)));
+    }
 
     private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
             .LoaderCallbacks<AddressFull>() {
@@ -208,6 +220,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
 
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
+
             if (_data != null) {
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
@@ -256,24 +269,12 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         swGpsOnOff.setOnCheckedChangeListener(this);
         btnSend.setOnClickListener(this);
         flDescription.setOnClickListener(this);
-        etNameStreet.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        clearErrorIconOnFields();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (etNameStreet.getText().length() > 0) {
-                    etNameStreet.setError(null);
-                }
-            }
-        });
 
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -405,6 +406,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 break;
             case R.id.btnSend_AF:
                 if (checkValidation()) {
+                    showLoading("Sending ticket...");
                     NewTicket ticket = new NewTicket();
                     ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
                             .getBitmap());
@@ -433,7 +435,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                     InputMethodManager imm2 = (InputMethodManager) getActivity().getSystemService(Context
                             .INPUT_METHOD_SERVICE);
                     imm2.showSoftInput(btnSend, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    popBackStack();
+//                    popBackStack();
                 }
                 break;
         }
@@ -460,5 +462,42 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         }
 
         return isValid;
+    }
+
+    private void clearErrorIconOnFields() {
+        etDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (etDescription.getText().length() > 0) {
+                    etDescription.setError(null);
+                }
+            }
+        });
+        etNameStreet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (etNameStreet.getText().length() > 0) {
+                    etNameStreet.setError(null);
+                }
+            }
+        });
     }
 }

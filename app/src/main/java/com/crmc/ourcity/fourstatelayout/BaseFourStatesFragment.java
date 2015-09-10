@@ -19,7 +19,7 @@ import com.crmc.ourcity.fragment.BaseFragment;
 public abstract class BaseFourStatesFragment extends BaseFragment implements FourStateLayout.OnRetryClickListener {
 
     private Button mRetryButton;
-    private TextView mErrorTitle, mEmptyTitle;
+    private TextView mErrorTitle, mEmptyTitle, mLoadingTitle;
     private FourStateLayout mainView;
     private View rootView;
 
@@ -45,6 +45,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         mRetryButton = (Button) mErrorLayout.findViewById(R.id.btn_try_again);
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);
         mErrorTitle = (TextView) mErrorLayout.findViewById(R.id.error_title);
+        mLoadingTitle = (TextView) mLoadingLayout.findViewById(R.id.loadingTitle);
 
         mainView.initFourStates((ViewGroup) _inflater.inflate(getContentView(), null), mLoadingLayout, mEmptyLayout,
                 mErrorLayout);
@@ -75,6 +76,13 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     protected void showLoading() {
         mainView.showLoading();
     }
+
+    protected void showLoading(final String _message) {
+        mLoadingTitle.setText(_message);
+        showLoading();
+    }
+
+
 
     protected void showEmpty() {
         mainView.showEmpty();
