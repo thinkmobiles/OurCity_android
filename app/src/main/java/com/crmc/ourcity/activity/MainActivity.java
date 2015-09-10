@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -126,6 +127,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onItemAction(MenuModel _menuModel) {
+        getSupportActionBar().setTitle(_menuModel.title);
         switch (_menuModel.actionType) {
             case Constants.ACTION_TYPE_LIST:
                 switch (_menuModel.listType) {
@@ -292,6 +294,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 startActivity(intent);
                 break;
             case android.R.id.home:
+                getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
                 popBackStack();
                 break;
             case R.id.menu_home:

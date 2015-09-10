@@ -15,6 +15,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_CRMCUSERNAME = "crmcusername";
     public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
 
+    public static String PREVIOUSTITLE;
 
     public static BitmapDrawable cityImage = null;
     public static Bitmap logoImage = null;
