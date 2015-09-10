@@ -72,9 +72,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     TextView[] tvBottomButtons;
     ImageView[] ivBottomButtons;
 
-    private MenuFull mMenuFull;
-    private MenuFull mMenuFullBottom;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MenuGridAdapter mAdapter;
@@ -180,7 +177,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = getResources().getInteger(R.integer.city_id);
         Log.d("TAG", cityNumber + " id from Menu");
@@ -207,7 +203,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
         getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this);
-
     }
 
     @Override
@@ -229,7 +224,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
-            if (mMenuFull != null) {
+            if (Constants.mMenuFull != null) {
                 showContent();
                 loaderMenuFinish = false;
                 loaderMenuBottomFinish = false;
@@ -298,9 +293,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         switch (loader.getId()) {
 
             case LOADER_MENU_ID:
-                mMenuFull = (MenuFull) _data;
-                if (mMenuFull != null && mMenuFull.getNodes() != null && mMenuFull.getSize() > 0) {
-                    mAdapter = new MenuGridAdapter(mMenuFull.getNodes(), activity);
+                if (Constants.mMenuFull == null){
+                    Constants.mMenuFull = (MenuFull) _data;
+                }
+                if (Constants.mMenuFull != null && Constants.mMenuFull.getNodes() != null && Constants.mMenuFull.getSize() > 0) {
+                    mAdapter = new MenuGridAdapter(Constants.mMenuFull.getNodes(), activity);
                     mRecyclerView.setAdapter(mAdapter);
                 }
                 loaderMenuFinish = true;
@@ -308,10 +305,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 break;
 
             case LOADER_MENU_BOTTOM_ID:
-                mMenuFullBottom = (MenuFull) _data;
-                if (mMenuFullBottom != null && mMenuFullBottom.getNodes() != null && mMenuFullBottom.getSize() > 0) {
-                    mMenuBottom = mMenuFullBottom.getNodes();
-                    for (int i = 0; i < mMenuFullBottom.getSize(); i++) {
+                if (Constants.mMenuFullBottom == null){
+                    Constants.mMenuFullBottom = (MenuFull) _data;
+                }
+                if (Constants.mMenuFullBottom != null && Constants.mMenuFullBottom.getNodes() != null && Constants.mMenuFullBottom.getSize() > 0) {
+                    mMenuBottom = Constants.mMenuFullBottom.getNodes();
+                    for (int i = 0; i < Constants.mMenuFullBottom.getSize(); i++) {
                         llBottomButtons[i].setVisibility(View.VISIBLE);
                         tvBottomButtons[i].setText(mMenuBottom.get(i).title);
                         ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));
