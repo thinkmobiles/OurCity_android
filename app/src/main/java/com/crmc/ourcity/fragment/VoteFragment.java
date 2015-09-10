@@ -176,7 +176,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     }
 
     public void voteReply(Integer _surveyOptionId, Integer _gender, Integer _age) {
-        //getActivity().getSupportLoaderManager().destroyLoader(Constants.LOADER_VOTE_ID);
+        getActivity().getSupportLoaderManager().destroyLoader(Constants.LOADER_VOTE_ID);
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID, _surveyOptionId);
         bundle.putInt(Constants.BUNDLE_CONSTANT_AGE, _age);

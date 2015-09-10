@@ -57,7 +57,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     LinearLayout llBtnSecond_MMF;
     LinearLayout llBtnThird_MMF;
 
-
     RelativeLayout rlMenu_MMF;
 
     ImageView ivBtnFirst_MMF;
@@ -114,8 +113,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string
-         .app_name));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
@@ -232,11 +230,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
             if (mMenuFull != null) {
-                    showContent();
-                    loaderMenuFinish = false;
-                    loaderMenuBottomFinish = false;
-                    loaderLogoImageFinish = false;
-                    loaderCityImageFinish = false;
+                showContent();
+                loaderMenuFinish = false;
+                loaderMenuBottomFinish = false;
+                loaderLogoImageFinish = false;
+                loaderCityImageFinish = false;
             } else {
                 showError("Server do not responds");
             }
@@ -301,7 +299,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
             case LOADER_MENU_ID:
                 mMenuFull = (MenuFull) _data;
-                if (mMenuFull != null && mMenuFull.getNodes() !=null && mMenuFull.getSize() > 0) {
+                if (mMenuFull != null && mMenuFull.getNodes() != null && mMenuFull.getSize() > 0) {
                     mAdapter = new MenuGridAdapter(mMenuFull.getNodes(), activity);
                     mRecyclerView.setAdapter(mAdapter);
                 }
