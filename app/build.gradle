@@ -92,6 +92,12 @@ android {
             versionCode 1
             versionName '1.0.0'
         }
+        ungvar {
+            applicationId = "com.crmc.ungvar"
+            signingConfig signingConfigs.config
+            versionCode 1
+            versionName '1.0.0'
+        }
     }
 
 }

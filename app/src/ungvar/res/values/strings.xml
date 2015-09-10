@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ungvar</string>
+    <integer name="city_id">42</integer>
+</resources>
