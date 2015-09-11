@@ -6,7 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,10 +28,11 @@ import java.util.List;
  * Created by SetKrul on 31.08.2015.
  */
 public class CityEntitiesFragment  extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<CityEntities>>,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lvCityEntities;
     private View vUnderLine_CEF;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private String color;
     private String json;
     private String route;
@@ -82,6 +85,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onLoadFinished(Loader<List<CityEntities>> _loader, List<CityEntities> _data) {
+        swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             mAdapter = new CityEntitiesListAdapter(getActivity(), _data);
             lvCityEntities.setAdapter(mAdapter);
@@ -104,7 +108,9 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void initViews() {
         super.initViews();
+        //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         try {
@@ -121,6 +127,17 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     protected void setListeners() {
         super.setListeners();
         lvCityEntities.setOnItemClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -140,6 +157,14 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_CITY_ENTITIES_ID, bundle, this);
+    }
+
+    @Override
+    public void onRefresh() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

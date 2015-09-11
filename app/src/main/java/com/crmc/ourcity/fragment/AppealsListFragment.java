@@ -5,7 +5,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
 
@@ -20,12 +22,14 @@ import com.crmc.ourcity.utils.Image;
 /**
  * Created by podo on 04.09.15.
  */
-public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult> {
+public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult>,
+        SwipeRefreshLayout.OnRefreshListener {
     private ListView lvAppeals;
     private View vUnderLine_ALF;
     private String color;
     private String json;
     private String route;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private AppealsAdapter mAdapter;
 
@@ -77,7 +81,8 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
-        if (data != null ){
+        swipeRefreshLayout.setRefreshing(false);
+        if (data != null) {
             mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
             lvAppeals.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -90,12 +95,14 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //noinspection ConstantConditions
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_ALF.setBackgroundColor(Image.darkenColor(0.2));
@@ -104,7 +111,31 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     }
 
     @Override
+    protected void setListeners() {
+        super.setListeners();
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
     public void onLoaderReset(Loader<WSResult> loader) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_APPEALS_ID, bundle, this);
+    }
+
+    @Override
+    public void onRefresh() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

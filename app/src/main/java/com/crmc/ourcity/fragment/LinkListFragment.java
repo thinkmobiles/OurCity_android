@@ -6,7 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,13 +27,15 @@ import java.util.List;
 /**
  * Created by SetKrul on 09.09.2015.
  */
-public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>, AdapterView.OnItemClickListener {
+public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
+        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lvLinks;
     private View vUnderLine_LLF;
     private String color;
     private String json;
     private String route;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private LinksListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
@@ -81,6 +85,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
+        swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             mAdapter = new LinksListAdapter(getActivity(), _data);
             lvLinks.setAdapter(mAdapter);
@@ -104,12 +109,13 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     protected void initViews() {
         super.initViews();
         //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_LLF.setBackgroundColor(Image.darkenColor(0.2));
@@ -121,6 +127,17 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     protected void setListeners() {
         super.setListeners();
         lvLinks.setOnItemClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -140,6 +157,14 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_LIST_LINK_ID, bundle, this);
+    }
+
+    @Override
+    public void onRefresh() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

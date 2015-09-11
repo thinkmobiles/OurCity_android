@@ -88,6 +88,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     protected void initViews() {
         super.initViews();
+        //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
@@ -142,7 +143,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                     startActivityForResult(intent, Constants.REQUEST_VOTE);
                     mVoteFull = _data;
                 } else {
-                    //Toast.makeText()
                     ivVoteError.setImageResource(R.drawable.error_vote);
                 }
             }
@@ -187,7 +187,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         bundle.putInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID, _surveyOptionId);
         bundle.putInt(Constants.BUNDLE_CONSTANT_AGE, _age);
         bundle.putInt(Constants.BUNDLE_CONSTANT_GENDER, _gender);
-//        getLoaderManager().restartLoader(Constants.LOADER_VOTE_REPLY_ID, bundle, mVoteReplyCallBack);
         if (getLoaderManager().getLoader(Constants.LOADER_VOTE_REPLY_ID) == null) {
             getLoaderManager().initLoader(Constants.LOADER_VOTE_REPLY_ID, bundle, mVoteReplyCallBack);
         } else {
@@ -239,12 +238,10 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private List<VoteDetails> getVote(Integer _surveyId) {
         for (int i = 0; i < mVoteFull.size(); i++) {
             if (_surveyId.equals(mVoteFull.get(i).surveyId)) {
-                //Log.d("TAG", "TAG: " + mVoteFull.get(i).optionsList.get(0).image);
                 if (mVoteFull.get(i).optionsList != null) {
                     return mVoteFull.get(i).optionsList;
                 } else {
                     mVoteFull.get(i).optionsList = new ArrayList<>();
-                    //mVoteFull.get(i).optionsList.add(new VoteDetails());
                     return mVoteFull.get(i).optionsList;
                 }
             }

@@ -1,21 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <View
         android:id="@+id/vUnderLine_EF"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/black"/>
-    <ListView
-        android:id="@+id/lvEvents_EF"
-        android:layoutDirection="rtl"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/holo_blue_light"
-        android:dividerHeight="4dp"
-        tools:listitem="@layout/listview_row_fe">
-    </ListView>
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/lvEvents_EF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/holo_blue_light"
+            android:dividerHeight="4dp"
+            android:layoutDirection="rtl"
+            tools:listitem="@layout/listview_row_fe">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
+

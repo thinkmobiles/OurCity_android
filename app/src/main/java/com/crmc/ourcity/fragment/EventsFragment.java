@@ -6,7 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,13 +29,14 @@ import java.util.List;
  * Created by SetKrul on 15.07.2015.
  */
 public class EventsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
-        OnItemClickListener {
+        OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lvEvents;
     private String color;
     private String json;
     private String route;
     private View vUnderLine_EF;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private EventsListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
@@ -83,6 +86,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
+        swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             mAdapter = new EventsListAdapter(getActivity(), _data, mOnListItemActionListener);
             lvEvents.setAdapter(mAdapter);
@@ -105,7 +109,9 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
+        //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);
         try {
@@ -122,6 +128,17 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     protected void setListeners() {
         super.setListeners();
         lvEvents.setOnItemClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -141,6 +158,14 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_EVENTS_ID, bundle, this);
+    }
+
+    @Override
+    public void onRefresh() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

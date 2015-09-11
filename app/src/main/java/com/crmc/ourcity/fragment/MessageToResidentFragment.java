@@ -5,7 +5,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
 
@@ -23,13 +25,14 @@ import java.util.List;
  * Created by SetKrul on 28.08.2015.
  */
 public class MessageToResidentFragment extends BaseFourStatesFragment implements LoaderManager
-        .LoaderCallbacks<List<MassageToResident>> {
+        .LoaderCallbacks<List<MassageToResident>>, SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lvMassageToResident;
     private View vUnderLine_MTRF;
     private String color;
     private String json;
     private String route;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private MassageToResidentAdapter mAdapter;
 
@@ -63,6 +66,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<MassageToResident>> _loader, List<MassageToResident> _data) {
+        swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             if (_data.size() > 0) {
                 mAdapter = new MassageToResidentAdapter(getActivity(), _data);
@@ -70,10 +74,11 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
                 mAdapter.notifyDataSetChanged();
                 showContent();
             } else {
-                showError(getResources().getString(R.string.connection_error));
+                //showError(getResources().getString(R.string.connection_error));
+                showEmpty("There are no messages for you");
             }
         } else {
-            showError("Do not have message for you");
+            showEmpty("There are no messages for you");
         }
     }
 
@@ -89,7 +94,9 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void initViews() {
         super.initViews();
+        //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_message_to_resident);
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);
         try {
@@ -100,6 +107,22 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
         vUnderLine_MTRF.setBackgroundColor(Image.darkenColor(0.2));
         lvMassageToResident.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvMassageToResident.setDividerHeight(4);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -114,6 +137,14 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_MESSAGE_TO_RESIDENT, bundle, this);
+    }
+
+    @Override
+    public void onRefresh() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

@@ -6,7 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,10 +28,11 @@ import java.util.List;
  * Created by SetKrul on 27.08.2015.
  */
 public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<PhoneBook>>,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lvPhoneBook;
     private View vUnderLine_PBF;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private String color;
     private String json;
     private String route;
@@ -82,6 +85,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     @Override
     public void onLoadFinished(Loader<List<PhoneBook>> _loader, List<PhoneBook> _data) {
+        swipeRefreshLayout.setRefreshing(false);
         mAdapter = new PhoneBookListAdapter(getActivity(), _data, mOnListItemActionListener);
         lvPhoneBook.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
@@ -104,6 +108,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
         vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
+        swipeRefreshLayout = findView(R.id.swipe_refresh_phone_book);
         try {
             Image.init(Color.parseColor(color));
         } catch (Exception e){
@@ -118,6 +123,17 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     protected void setListeners() {
         super.setListeners();
         lvPhoneBook.setOnItemClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
+    }
+
+    public void swipeInStart() {
+        TypedValue typed_value = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
+                .resourceId));
+        if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -137,5 +153,13 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     @Override
     public void onRetryClick() {
+    }
+
+    @Override
+    public void onRefresh() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_EVENTS_ID, bundle, this);
     }
 }
