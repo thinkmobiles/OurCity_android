@@ -2,7 +2,7 @@
 <LinearLayout android:id="@+id/llMenuItem_MF"
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="105dp"
-              android:layout_height="115dp"
+              android:layout_height="118dp"
               android:layout_margin="8dp"
               android:background="@drawable/item_boarder_menu"
               android:clickable="true"
