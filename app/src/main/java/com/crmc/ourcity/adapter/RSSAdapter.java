@@ -114,7 +114,7 @@ public class RSSAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View v) {
-            mOnListItemActionListener.onEventsClickLinkAction(getItem(position).getLink());
+            mOnListItemActionListener.onEventsClickLinkAction(getItem(position).getLink(), getItem(position).getTitle());
         }
     }
 }

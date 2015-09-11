@@ -14,6 +14,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_PARCELABLE_TICKET = "ticket_parse";
     public static final String BUNDLE_CONSTANT_CRMCUSERNAME = "crmcusername";
     public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
+    public static final String NODE_TITLE = "node_title";
 
     public static String PREVIOUSTITLE;
 

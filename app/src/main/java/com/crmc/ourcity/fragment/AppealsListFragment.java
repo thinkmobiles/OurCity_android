@@ -29,16 +29,18 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     private String color;
     private String json;
     private String route;
+    private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private AppealsAdapter mAdapter;
 
-    public static AppealsListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static AppealsListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         AppealsListFragment mAppealsListFragment = new AppealsListFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mAppealsListFragment.setArguments(args);
         return mAppealsListFragment;
     }
@@ -49,6 +51,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -97,6 +100,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         super.initViews();
         //noinspection ConstantConditions
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         vUnderLine_ALF = findView(R.id.vUnderLine_ALF);

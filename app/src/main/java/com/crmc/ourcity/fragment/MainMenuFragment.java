@@ -141,7 +141,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 Constants.PREVIOUSTITLE = menuModel.title;
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+                //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
                 Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
                 if (Boolean.parseBoolean(menuModel.requestLogin)) {
                     if (isLogIn) {

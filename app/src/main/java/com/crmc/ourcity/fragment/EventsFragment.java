@@ -37,16 +37,19 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     private String route;
     private View vUnderLine_EF;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private String title;
 
     private EventsListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static EventsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static EventsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         EventsFragment mEventsFragment = new EventsFragment();
+
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mEventsFragment.setArguments(args);
         return mEventsFragment;
     }
@@ -57,6 +60,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -111,6 +115,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         super.initViews();
         //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);

@@ -35,12 +35,13 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private MenuGridAdapter mAdapter;
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
-    public static String previousTitle;
+    public String title;
 
-    public static SubMenuFragment newInstance(List<MenuModel> _submenu) {
+    public static SubMenuFragment newInstance(List<MenuModel> _submenu, String _title) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU, (ArrayList<? extends Parcelable>) _submenu);
+        args.putString(Constants.NODE_TITLE, _title);
         subMenuFragment.setArguments(args);
         return subMenuFragment;
     }
@@ -64,6 +65,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(previousTitle);
         mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
@@ -102,6 +104,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         mData = getArguments().getParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU);
+        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override

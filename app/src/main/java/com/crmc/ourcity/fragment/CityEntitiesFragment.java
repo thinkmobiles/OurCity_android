@@ -36,16 +36,18 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     private String color;
     private String json;
     private String route;
+    private String title;
 
     private CityEntitiesListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static CityEntitiesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static CityEntitiesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute,String _title) {
         CityEntitiesFragment mCityEntitiesFragment = new CityEntitiesFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mCityEntitiesFragment.setArguments(args);
         return mCityEntitiesFragment;
     }
@@ -56,6 +58,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -110,6 +113,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         super.initViews();
         //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);

@@ -90,6 +90,7 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     protected void initViews() {
         super.initViews();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mEvents.title);
         tvTitle = findView(R.id.tvTitle_EIF);
         tvDate_Text = findView(R.id.tvDate_Text_EIF);
         tvAddress_Text = findView(R.id.tvAddress_Text_EIF);
@@ -222,7 +223,7 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
                 }
                 break;
             case R.id.ivLink_EIF:
-                mOnListItemActionListener.onEventsClickLinkAction(mEvents.link);
+                mOnListItemActionListener.onEventsClickLinkAction(mEvents.link, mEvents.title);
                 break;
         }
     }

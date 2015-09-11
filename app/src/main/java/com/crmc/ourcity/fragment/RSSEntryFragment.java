@@ -133,7 +133,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     public void onClick(View v) {
-        mOnListItemActionListener.onEventsClickLinkAction(entry.getLink());
+        mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle());
     }
 
     @Override

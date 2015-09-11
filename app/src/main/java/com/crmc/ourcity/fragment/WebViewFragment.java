@@ -40,6 +40,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private String json;
     private String route;
     private boolean error = false;
+    private String title;
 
     public static WebViewFragment newInstance(String _link, String _colorItem) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
@@ -50,12 +51,23 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         return mWebViewFragment;
     }
 
-    public static WebViewFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static WebViewFragment newInstance(String _link, String _colorItem, String _title) {
+        WebViewFragment mWebViewFragment = new WebViewFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.NODE_TITLE, _title);
+        mWebViewFragment.setArguments(args);
+        return mWebViewFragment;
+    }
+
+    public static WebViewFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mWebViewFragment.setArguments(args);
         return mWebViewFragment;
     }
@@ -69,6 +81,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -112,6 +125,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     protected void initViews() {
         super.initViews();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
         tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);

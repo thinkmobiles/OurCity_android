@@ -130,21 +130,21 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 switch (_menuModel.listType) {
                     case Constants.ACTION_TYPE_LIST_EVENTS:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                         break;
                     case Constants.ACTION_TYPE_LIST_APPEALS:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsListFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                         break;
                     case Constants.ACTION_TYPE_LIST_LINK:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, LinkListFragment.newInstance(_menuModel
-                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                                .colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                         break;
                 }
                 break;
             case Constants.ACTION_TYPE_LINK:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link,
-                        _menuModel.colorItem));
+                        _menuModel.colorItem, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_DOCUMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
@@ -164,7 +164,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                     case 2:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat
                                 (), _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel
-                                .requestRoute));
+                                .requestRoute, _menuModel.title));
                         break;
                 }
                 break;
@@ -203,11 +203,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_MAP_TRIPS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat(),
-                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_ENTITIES:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesFragment.newInstance(_menuModel
-                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_SEND_MAIL_FRAGMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem,
@@ -251,14 +251,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapTripsFragment.newInstance(_trips, _lat, _lon));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapTripsFragment.newInstance(_trips, _lat, _lon, _trips.tripName));
     }
 
     @Override
-    public void onEventsClickLinkAction(String _link) {
+    public void onEventsClickLinkAction(String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
             replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
-                    ()));
+                    (), _title));
         }
     }
 
@@ -269,7 +269,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onMenuModelPrepared(List<MenuModel> _menuModel) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel, Constants.PREVIOUSTITLE));
     }
 
     @Override
@@ -339,15 +339,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        setTitle();
+        //setTitle();
     }
 
     private void setTitle() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
-        if (f instanceof MainMenuFragment) {
-            getSupportActionBar().setTitle("");
-            Constants.PREVIOUSTITLE = "";
-        } else {
+
+        if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
             getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
         }
     }

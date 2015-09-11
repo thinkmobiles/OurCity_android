@@ -35,17 +35,19 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     private String color;
     private String json;
     private String route;
+    private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private LinksListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static LinkListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static LinkListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         LinkListFragment mLinkListFragment = new LinkListFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mLinkListFragment.setArguments(args);
         return mLinkListFragment;
     }
@@ -56,6 +58,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -110,6 +113,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         super.initViews();
         //noinspection ConstantConditions
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);
@@ -142,7 +146,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).link);
+        mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).link, mAdapter.getItem(_position).title);
     }
 
     @Override

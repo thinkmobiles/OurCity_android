@@ -162,7 +162,7 @@ public class EventsListAdapter extends BaseAdapter {
                     }
                     break;
                 case R.id.ivLink_EF:
-                    mOnListItemActionListener.onEventsClickLinkAction(getItem(position).link);
+                    mOnListItemActionListener.onEventsClickLinkAction(getItem(position).link, getItem(position).title);
                     break;
             }
         }

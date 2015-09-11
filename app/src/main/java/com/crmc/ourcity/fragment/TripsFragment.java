@@ -39,10 +39,11 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     private String route;
     private Double lat;
     private Double lon;
+    private String title;
     private OnListItemActionListener mOnListItemActionListener;
 
     public static TripsFragment newInstance(Double _lat, Double _lon, String _colorItem, String _requestJson, String
-            _requestRoute) {
+            _requestRoute, String _title) {
         TripsFragment mTripsFragment = new TripsFragment();
         Bundle args = new Bundle();
         args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
@@ -50,6 +51,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mTripsFragment.setArguments(args);
         return mTripsFragment;
     }
@@ -78,6 +80,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -94,6 +97,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         super.initViews();
         //noinspection ConstantConditions
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
         vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);

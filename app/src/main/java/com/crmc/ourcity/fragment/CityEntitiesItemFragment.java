@@ -59,6 +59,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
     protected void initViews() {
         super.initViews();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mCityEntities.entityName);
         tvEntityName_CEIF = findView(R.id.tvEntityName_CEIF);
         tvDetails_Text_CEIF = findView(R.id.tvDetails_Text_CEIF);
         tvEmail_Text_CEIF = findView(R.id.tvEmail_Text_CEIF);

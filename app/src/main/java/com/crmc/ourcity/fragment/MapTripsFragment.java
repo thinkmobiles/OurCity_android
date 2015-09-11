@@ -33,13 +33,15 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     private Button btnAnotherTrips;
     private MapTrips mMapTrips;
     private LatLngBounds.Builder bounds;
+    private String title;
 
-    public static MapTripsFragment newInstance(MapTrips _trips, Double _lat, Double _lon) {
+    public static MapTripsFragment newInstance(MapTrips _trips, Double _lat, Double _lon, String _title) {
         MapTripsFragment mMapTripsFragment = new MapTripsFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CONFIGURATION_KEY_TRIPS, _trips);
         args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
         args.putDouble(Constants.CONFIGURATION_KEY_LON, _lon);
+        args.putString(Constants.NODE_TITLE, _title);
         mMapTripsFragment.setArguments(args);
         return mMapTripsFragment;
     }
@@ -50,6 +52,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
         mMapTrips = getArguments().getParcelable(Constants.CONFIGURATION_KEY_TRIPS);
         lat = getArguments().getDouble(Constants.CONFIGURATION_KEY_LAT);
         lon = getArguments().getDouble(Constants.CONFIGURATION_KEY_LON);
+        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -91,6 +94,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     protected void initViews() {
         super.initViews();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
         Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,
                 Image.darkenColor(0.2));
