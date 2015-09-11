@@ -10,7 +10,6 @@ import android.view.View;
  */
 public class HotCallsDialog extends HotCallsEditableDialog {
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

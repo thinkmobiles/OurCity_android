@@ -93,7 +93,7 @@ public class RSSAdapter extends BaseAdapter {
                 title.setVisibility(View.GONE);
             } else {
                 title.setVisibility(View.VISIBLE);
-                title.setText(_entry.getTitle().toString().trim());
+                title.setText(_entry.getTitle().trim());
             }
 
             if (TextUtils.isEmpty(_entry.getPubDate())) {

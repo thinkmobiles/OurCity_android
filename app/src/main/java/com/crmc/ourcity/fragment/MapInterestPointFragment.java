@@ -157,7 +157,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         try {
             Image.init(Color.parseColor(color));

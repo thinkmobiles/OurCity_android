@@ -124,7 +124,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onItemAction(MenuModel _menuModel) {
-        getSupportActionBar().setTitle(_menuModel.title);
+        getDelegate().getSupportActionBar().setTitle(_menuModel.title);
         switch (_menuModel.actionType) {
             case Constants.ACTION_TYPE_LIST:
                 switch (_menuModel.listType) {
@@ -309,8 +309,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this, Constants.PLAY_SERVICES_RESOLUTION_REQUEST)
                         .show();
             } else {
-                //Device not supported.
-                //finish();
+                Toast.makeText(this, "Device does not supported", Toast.LENGTH_SHORT).show();
             }
             return false;
         }
@@ -346,7 +345,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
 
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
-            getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+            getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
         }
     }
 

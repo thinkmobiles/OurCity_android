@@ -59,6 +59,7 @@ public class Constants {
     public static final int LOADER_LOGIN_ID = 21;
     public static final int LOADER_LIST_LINK_ID = 22;
     public static final int LOADER_SEND_APPEALS_ID = 23;
+    public static final int LOADER_VOTE_ALREADY_ID = 24;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -79,6 +80,7 @@ public class Constants {
     final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
     final public static String BUNDLE_MARKERS = "MARKER";
     final public static String BUNDLE_INTEGER = "INTEGER";
+    final public static String BUNDLE_BOOLEAN = "BOOLEAN";
     final public static String BUNDLE_CONSTANT_USER_NAME = "USER_NAME";
     final public static String BUNDLE_CONSTANT_PASSWORD = "PASSWORD";
     final public static String IMAGE_MIME_TYPE_PREFIX = "image";
@@ -96,6 +98,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_AUTH_TOKEN = "AUTH_TOKEN";
     public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
     public static final String BUNDLE_CONSTANT_RSS_LINK = "rss_link";
+    public static final String BUNDLE_CONSTANT_SURVEY_ID = "SURVEY_ID";
 
     //for Instance
     final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";

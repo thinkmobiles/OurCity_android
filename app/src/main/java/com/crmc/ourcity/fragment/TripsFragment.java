@@ -80,7 +80,6 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -96,8 +95,8 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     protected void initViews() {
         super.initViews();
         //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
         vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);

@@ -58,7 +58,6 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        this.title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
@@ -112,8 +111,8 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     protected void initViews() {
         super.initViews();
         //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);

@@ -89,7 +89,7 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mEvents.title);
         tvTitle = findView(R.id.tvTitle_EIF);
         tvDate_Text = findView(R.id.tvDate_Text_EIF);
