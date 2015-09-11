@@ -108,8 +108,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     protected void initViews() {
         super.initViews();
-        //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);

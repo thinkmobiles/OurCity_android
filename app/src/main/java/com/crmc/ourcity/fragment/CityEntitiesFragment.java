@@ -108,8 +108,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void initViews() {
         super.initViews();
-        //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);

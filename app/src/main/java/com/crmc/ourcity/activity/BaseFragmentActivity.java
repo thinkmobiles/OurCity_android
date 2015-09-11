@@ -41,7 +41,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
                 .commit();
     }
 
-
+    @SuppressWarnings("unchecked")
     public final <T extends Fragment> T getFragmentById(final @IdRes int containerId){
         return (T) getSupportFragmentManager().findFragmentById(containerId);
     }

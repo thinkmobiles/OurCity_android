@@ -70,7 +70,6 @@ public class AppealsAdapter extends BaseAdapter {
         final ImageView ivPhoto;
         final View view;
         final Context mContext;
-        private int position;
 
         public ViewHolder(@NonNull final View _view, Context _context) {
             date = (TextView) _view.findViewById(R.id.tvDate_AF);
@@ -86,7 +85,6 @@ public class AppealsAdapter extends BaseAdapter {
         }
 
         public void setData(ResultObject _item, int _position) {
-            this.position = _position;
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(_item.AttachedFiles));
                 tvPhotoText_AF.setText("");

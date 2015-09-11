@@ -15,11 +15,16 @@ import java.util.List;
  */
 public interface OnListItemActionListener {
     void onEventsItemAction(Events _events);
+
     void onCityEntitiesItemAction(CityEntities _cityEntities);
+
     void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon);
+
     void onEventsClickLinkAction(String _link);
+
     void onPhoneBookItemAction(List<Phones> _phones);
+
     void onRSSItemAction(RSSEntry _entry);
+
     void onTickerAction(View _view, String _link);
-    //void onAppealsItemAction();
 }

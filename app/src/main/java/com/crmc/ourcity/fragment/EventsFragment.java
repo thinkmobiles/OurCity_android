@@ -109,8 +109,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
-        //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
         vUnderLine_EF = findView(R.id.vUnderLine_EF);

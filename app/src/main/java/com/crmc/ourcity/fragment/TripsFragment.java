@@ -92,8 +92,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     @Override
     protected void initViews() {
         super.initViews();
-        //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
         vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);

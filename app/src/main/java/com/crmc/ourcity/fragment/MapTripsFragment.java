@@ -90,7 +90,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
         Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,
                 Image.darkenColor(0.2));
@@ -112,8 +112,8 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
         _googleMap.getUiSettings().setZoomControlsEnabled(true);
         bounds = new LatLngBounds.Builder();
         for (int i = 0; i < mMapTrips.mapTripsDetails.size(); i++) {
-            _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new
-                    LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
+            _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new LatLng
+                    (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
             bounds.include(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)));
 
             if (i > 0) {
