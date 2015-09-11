@@ -110,7 +110,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     protected void initViews() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
@@ -141,7 +141,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
             public void onItemClick(Context _context, View _view, int _position) {
                 MenuModel menuModel = mAdapter.getItem(_position);
                 Constants.PREVIOUSTITLE = menuModel.title;
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+                ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
                 Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
                 if (Boolean.parseBoolean(menuModel.requestLogin)) {
                     if (isLogIn) {
@@ -184,7 +184,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         Log.d("TAG", cityNumber + " id from Menu");
         lng = "en";
         residentId = SPManager.getInstance(getActivity()).getResidentId();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle("");
         Constants.PREVIOUSTITLE = "";
     }
 

@@ -24,12 +24,14 @@ import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.VoteAlreadyLoader;
 import com.crmc.ourcity.loader.VoteLoader;
 import com.crmc.ourcity.loader.VoteReplyLoader;
 import com.crmc.ourcity.rest.responce.vote.VoteDetails;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -60,6 +62,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private Integer age;
     private Integer gender;
     private List<VoteFull> mVoteFull;
+    private Boolean isActive;
 
     public static VoteFragment newInstance(String _colorItem, String _json, String _route) {
         VoteFragment mVoteFragment = new VoteFragment();
@@ -88,7 +91,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);
@@ -103,7 +106,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_VF.setBackgroundColor(Image.darkenColor(0.2));
@@ -137,7 +140,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 if (_data.size() > 0) {
                     Intent intent = new Intent(getActivity(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
-                    intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>) _data);
+                    intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>)
+                            _data);
 
                     startActivityForResult(intent, Constants.REQUEST_VOTE);
                     mVoteFull = _data;
@@ -162,7 +166,56 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
             //TODO:add checked vote
-                mAdapter.setVisibleVotePercent(true);
+            mAdapter.setVisibleVotePercent(true);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<String> _loader) {
+        }
+    };
+
+    private LoaderManager.LoaderCallbacks<String> mVoteAlreadyCallBack = new LoaderManager.LoaderCallbacks<String>() {
+
+        @Override
+        public Loader<String> onCreateLoader(int _id, Bundle _args) {
+            return new VoteAlreadyLoader(getActivity(), _args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<String> _loader, String _data) {
+            List<VoteDetails> voteDetails = getVote(surveyId);
+            if (voteDetails.size() > 0) {
+                mAdapter = new VoteGridAdapter(getVote(surveyId), color, getActivity());
+                mRecyclerView.setAdapter(mAdapter);
+                if (_data.equals("false") && isActive) {
+                    mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
+                            .getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Context _context, View _view, int _position) {
+                            VoteDetails voteDetails = mAdapter.getItem(_position);
+                            if (voteDetails.surveyOptionId != null) {
+                                if (gender != null && age != null) {
+                                    voteReply(voteDetails.surveyOptionId, gender, age);
+                                } else {
+                                    Toast.makeText(getActivity(), "Not selected age or gender!", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            }
+                        }
+                    }));
+                } else {
+                    mAdapter.setVisibleVotePercent(true);
+                    if (isActive) {
+                        Toast.makeText(getActivity(), "You already survey!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Vote is already close!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } else {
+                Toast.makeText(getActivity(), "Vote is empty!", Toast.LENGTH_SHORT).show();
+                ivVoteError.setImageResource(R.drawable.error_vote);
+            }
+            showContent();
         }
 
         @Override
@@ -210,7 +263,12 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
             case Constants.REQUEST_VOTE:
                 if (_data != null) {
                     surveyId = _data.getIntExtra(Constants.BUNDLE_INTEGER, 0);
-                    showVote(surveyId);
+                    isActive = _data.getBooleanExtra(Constants.BUNDLE_BOOLEAN, true);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.BUNDLE_CONSTANT_SURVEY_ID, surveyId.toString());
+                    bundle.putString(Constants.BUNDLE_CONSTANT_RESIDENT_ID, String.valueOf(SPManager.getInstance
+                            (getActivity()).getResidentId()));
+                    getLoaderManager().initLoader(Constants.LOADER_VOTE_ALREADY_ID, bundle, mVoteAlreadyCallBack);
                 } else {
                     if (surveyId == null) {
                         popBackStack();
@@ -246,31 +304,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
             }
         }
         return new ArrayList<>();
-    }
-
-    private void showVote(Integer _surveyId) {
-        List<VoteDetails> voteDetails = getVote(_surveyId);
-        if (voteDetails.size() > 0) {
-            mAdapter = new VoteGridAdapter(getVote(_surveyId), color, getActivity());
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
-                @Override
-                public void onItemClick(Context _context, View _view, int _position) {
-                    VoteDetails voteDetails = mAdapter.getItem(_position);
-                    if (voteDetails.surveyOptionId != null) {
-                        if (gender != null && age != null) {
-                            voteReply(voteDetails.surveyOptionId, gender, age);
-                        } else {
-                            Toast.makeText(getActivity(), "Not selected age or gender!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }));
-        } else {
-            Toast.makeText(getActivity(), "Vote is empty!", Toast.LENGTH_SHORT).show();
-            ivVoteError.setImageResource(R.drawable.error_vote);
-        }
-        showContent();
     }
 
     @Override

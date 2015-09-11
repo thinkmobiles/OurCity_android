@@ -77,6 +77,6 @@ public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterV
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mCallback.onActionDialogDataInteger(mAdapter.getItem(_position).surveyId);
+        mCallback.onActionDialogVote(mAdapter.getItem(_position).surveyId, mAdapter.getItem(_position).isActive);
     }
 }

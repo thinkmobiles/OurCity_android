@@ -111,6 +111,14 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     }
 
     @Override
+    public void onActionDialogVote(Integer _integer, boolean _active) {
+        intent.putExtra(Constants.BUNDLE_BOOLEAN, _active);
+        intent.putExtra(Constants.BUNDLE_INTEGER, _integer);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
     public void onActionDialogCancel(boolean _check) {
         intent.putExtra(Constants.REQUEST_TYPE, Constants.REQUEST_CANCEL);
         setResult(RESULT_OK, intent);

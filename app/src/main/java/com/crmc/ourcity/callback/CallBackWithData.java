@@ -12,5 +12,7 @@ public interface CallBackWithData {
 
     void onActionDialogDataInteger(Integer _integer);
 
+    void onActionDialogVote(Integer _integer, boolean _active);
+
     void onActionDialogCancel(boolean _check);
 }

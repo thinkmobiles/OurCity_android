@@ -6,6 +6,7 @@ import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
 import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
+import com.crmc.ourcity.rest.request.vote.VoteAlready;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
@@ -144,6 +145,13 @@ public interface CityApi {
      */
     @POST("/AddSurveyVote")
     String replyVote(@Body VoteModel voteModel);
+
+    /**
+     * @param voteAlready
+     * @return
+     */
+    @POST("/AlreadyVoted")
+    String alreadyVoted(@Body VoteAlready voteAlready);
 
     /**
      * @param baseModel city number
