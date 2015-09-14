@@ -111,6 +111,9 @@
     <string name="dialog_setting_update_info">פרטים אישיים</string>
     <string name="dialog_setting_sign_in">הירשם</string>
     <string name="connection_error">Server does not respond</string>
+    <string name="loading_string">Sending ticket...</string>
+    <string name="incorrect_credentials">Incorrect username or password</string>
+    <string name="loading_string_sign_up_dialog">Loading...</string>
 
 
 </resources>

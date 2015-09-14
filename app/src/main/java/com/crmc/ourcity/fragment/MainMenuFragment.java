@@ -87,7 +87,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     private boolean loaderCityImageFinish = false;
 
 
-
     public static MainMenuFragment newInstance() {
         return new MainMenuFragment();
     }
@@ -111,7 +110,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
@@ -137,34 +135,32 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
                 RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(Context _context, View _view, int _position) {
-                MenuModel menuModel = mAdapter.getItem(_position);
-                Constants.PREVIOUSTITLE = menuModel.title;
-                //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
-                Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
-                if (Boolean.parseBoolean(menuModel.requestLogin)) {
-                    if (isLogIn) {
-                        if (menuModel.menu != null) {
-                            mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    @Override
+                    public void onItemClick(Context _context, View _view, int _position) {
+                        MenuModel menuModel = mAdapter.getItem(_position);
+                        Constants.PREVIOUSTITLE = menuModel.title;
+                        Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+                        if (Boolean.parseBoolean(menuModel.requestLogin)) {
+                            if (isLogIn) {
+                                if (menuModel.menu != null) {
+                                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                                } else {
+                                    mCallBackMenuModel.onItemAction(menuModel);
+                                }
+                            } else {
+                                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                                startActivity(intent);
+                            }
                         } else {
-                            mCallBackMenuModel.onItemAction(menuModel);
-
+                            if (menuModel.menu != null) {
+                                mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                            } else {
+                                mCallBackMenuModel.onItemAction(menuModel);
+                            }
                         }
-                    } else {
-                        Intent intent = new Intent(getActivity(), DialogActivity.class);
-                        EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
-                        startActivity(intent);
                     }
-                } else {
-                    if (menuModel.menu != null) {
-                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                    } else {
-                        mCallBackMenuModel.onItemAction(menuModel);
-                    }
-                }
-            }
-        }));
+                }));
     }
 
     @Override
@@ -181,10 +177,9 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = getResources().getInteger(R.integer.city_id);
-        Log.d("TAG", cityNumber + " id from Menu");
         lng = "en";
         residentId = SPManager.getInstance(getActivity()).getResidentId();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle("");
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle("");
         Constants.PREVIOUSTITLE = "";
     }
 
@@ -297,7 +292,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         switch (loader.getId()) {
 
             case LOADER_MENU_ID:
-                if (Constants.mMenuFull == null){
+                if (Constants.mMenuFull == null) {
                     Constants.mMenuFull = (MenuFull) _data;
                 }
                 if (Constants.mMenuFull != null && Constants.mMenuFull.getNodes() != null && Constants.mMenuFull.getSize() > 0) {
@@ -309,10 +304,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                 break;
 
             case LOADER_MENU_BOTTOM_ID:
-                if (Constants.mMenuFullBottom == null){
+                if (Constants.mMenuFullBottom == null) {
                     Constants.mMenuFullBottom = (MenuFull) _data;
                 }
-                if (Constants.mMenuFullBottom != null && Constants.mMenuFullBottom.getNodes() != null && Constants.mMenuFullBottom.getSize() > 0) {
+                if (Constants.mMenuFullBottom != null
+                        && Constants.mMenuFullBottom.getNodes() != null
+                        && Constants.mMenuFullBottom.getSize() > 0) {
                     mMenuBottom = Constants.mMenuFullBottom.getNodes();
                     for (int i = 0; i < Constants.mMenuFullBottom.getSize(); i++) {
                         llBottomButtons[i].setVisibility(View.VISIBLE);
@@ -324,7 +321,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         }
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
                             Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
-                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
+                                            .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
                                     mMenuBottom.get(i).borderWidth);
                         }
                     }

@@ -26,20 +26,17 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
     private RelativeLayout confirmation;
     private RelativeLayout logout;
     private RelativeLayout hotCalls;
-
-
-
     private OnActionDialogListener mCallback;
 
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
 
-        try{
+        try {
             mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString()
-                            + " must implement OnActionDialogListener");
+                    + " must implement OnActionDialogListener");
         }
     }
 
@@ -81,7 +78,7 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     public void onClick(View _view) {
-        switch (_view.getId()){
+        switch (_view.getId()) {
             case R.id.rlHotCalls_SetDFrgmt:
                 mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
                 break;
@@ -97,10 +94,6 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
                 bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
                 getLoaderManager().initLoader(1, bundle, mLogoutCallback);
                 break;
-//            case R.id.button2:
-//                break;
-//            case R.id.button3:
-//                break;
         }
     }
 
@@ -112,7 +105,6 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
         @Override
         public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-            //SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
             if (data) {
                 SPManager.getInstance(getActivity()).setIsLoggedStatus(false);
                 SPManager.getInstance(getActivity()).deleteResidentInformation();

@@ -2,7 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSubMenu_FSM"

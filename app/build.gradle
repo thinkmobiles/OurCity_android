@@ -98,6 +98,12 @@ android {
             versionCode 1
             versionName '1.0.0'
         }
+        yeruham {
+            applicationId = "com.crmc.yeruham"
+            signingConfig signingConfigs.config
+            versionCode 1
+            versionName '1.0.0'
+        }
     }
 
 }

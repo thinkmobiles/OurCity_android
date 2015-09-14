@@ -25,7 +25,6 @@ import com.crmc.ourcity.utils.Image;
 public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult>,
         SwipeRefreshLayout.OnRefreshListener {
     private ListView lvAppeals;
-    private View vUnderLine_ALF;
     private String color;
     private String json;
     private String route;
@@ -102,7 +101,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
-        vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
+        View vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
         try {
             Image.init(Color.parseColor(color));
         } catch (Exception e) {

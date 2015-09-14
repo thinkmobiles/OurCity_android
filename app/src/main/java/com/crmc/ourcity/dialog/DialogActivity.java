@@ -28,6 +28,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
 
         DialogType type = EnumUtil.deserialize(DialogType.class).from(getIntent());
         switch (type) {
+
             case VOTE_CHOICE:
                 ArrayList<VoteFull> mVoteFull = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_INTEGER);
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, VoteChoiceDialog.newInstance
@@ -58,9 +59,11 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case SETTING:
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SettingDialog());
                 break;
+
             case LOGIN:
                 replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SignInDialog());
                 break;
+
             case HOT_CALLS:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsDialog());
                 break;
@@ -70,25 +73,31 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     @Override
     public void onActionDialogSelected(DialogType _action) {
         switch (_action) {
+
             case PHOTO_CAM:
                 intent.putExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, Constants.REQUEST_PHOTO);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
+
             case PHOTO_GALLERY:
                 intent.putExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, Constants.REQUEST_GALLERY_IMAGE);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
+
             case HOT_CALLS_EDITABLE:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsEditableDialog());
                 break;
+
             case LOGIN:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignInDialog());
                 break;
+
             case REGISTER:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignUpDialog());
                 break;
+
             case CONFIRMATION:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
                 break;

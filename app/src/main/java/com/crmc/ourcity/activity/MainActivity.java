@@ -1,7 +1,11 @@
 package com.crmc.ourcity.activity;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +14,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -66,14 +71,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private Ticker mTicker;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
-    private boolean isLogIn;
+    private boolean isLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        isLogIn = SPManager.getInstance(this).getIsLoggedStatus();
-        if (isLogIn) {
+        isLoggedIn = SPManager.getInstance(this).getIsLoggedStatus();
+        if (isLoggedIn) {
             if (checkPlayServices()) {
                 if (TextUtils.isEmpty(SPManager.getInstance(this).getPushToken())) {
                     Intent intent = new Intent(this, RegistrationIntentService.class);
@@ -85,7 +90,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             }
         }
 
-//        cityNumber = getResources().getInteger(R.integer.city_id);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
@@ -96,19 +100,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
 
         setSupportActionBar(mToolbar);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        //getSupportActionBar().setTitle("OurCity");
-
-//            Configuration config = getResources().getConfiguration();
-//            if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-//                mToolbar.setNavigationIcon(R.drawable.ic_back_rtl);
-//            } else {
-//                mToolbar.setNavigationIcon(R.drawable.ic_back_ltr);
-//            }
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
@@ -148,7 +139,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_DOCUMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_MAP:
                 switch (_menuModel.showOnMap) {
@@ -243,7 +234,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
     }
 
-
     @Override
     public void onCityEntitiesItemAction(CityEntities _cityEntities) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
@@ -316,7 +306,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         return true;
     }
 
-
     @Override
     public void onBackStackChanged() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
@@ -332,22 +321,28 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     protected void onResume() {
         super.onResume();
         setTitle();
-
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //setTitle();
+        hideKeyboard(this);
+    }
+
+    private void hideKeyboard(Context _context) {
+        InputMethodManager inputManager = (InputMethodManager) _context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        // check if no view has focus:
+        View v = ((Activity) _context).getCurrentFocus();
+        if (v == null)
+            return;
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     private void setTitle() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
-
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
             getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
         }
     }
-
-
 }

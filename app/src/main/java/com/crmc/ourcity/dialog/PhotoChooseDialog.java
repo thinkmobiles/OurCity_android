@@ -38,7 +38,7 @@ public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClick
         vFstDivider = findView(R.id.vFirstDivider_CFD);
         vScnDivider = findView(R.id.vSecondDivider_CFD);
         vThdDivider = findView(R.id.vThirdDivider_CFD);
-        Image.setBackgroundColorArrayViewWithoutDrawable(getActivity(), new View[] {vFstDivider, vScnDivider, vThdDivider}, Image.darkenColor(0.0));
+        Image.setBackgroundColorArrayViewWithoutDrawable(getActivity(), new View[]{vFstDivider, vScnDivider, vThdDivider}, Image.darkenColor(0.0));
         showContent();
     }
 

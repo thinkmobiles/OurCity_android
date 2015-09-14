@@ -15,5 +15,5 @@ public class HotCallsDialog extends HotCallsEditableDialog {
         super.onViewCreated(view, savedInstanceState);
         editMode(false);
     }
-//TODO: finish activity when onBackPressed
+    //TODO:finish activity when onBackPressed
 }

@@ -42,10 +42,11 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
         if(!TextUtils.isEmpty(item.colorItem))
         Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
                 (item.colorItem));
-        if (!TextUtils.isEmpty(item.borderColor)) {
-            Image.setBorderColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor(item.borderColor),
-                   item.borderWidth);
-        }
+//        if (!TextUtils.isEmpty(item.borderColor)) {
+//            Image.setBorderColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor(item.borderColor),
+//                   item.borderWidth);
+//        }
+
         _holder.ivMenuIcon.setImageBitmap(Image.convertBase64ToBitmap(item.iconItem));
         _holder.tvTitle.setText(item.title);
     }

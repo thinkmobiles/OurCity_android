@@ -32,7 +32,6 @@ public class HotCallsEditableDialog extends BaseFragment implements View.OnClick
     private ImageView ivCallSecond;
     private ImageView ivCallThird;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -117,8 +116,7 @@ public class HotCallsEditableDialog extends BaseFragment implements View.OnClick
                 SPManager.getInstance(getActivity()).setFirstEmergencyNumber(getFirstEmergencyNumber());
                 SPManager.getInstance(getActivity()).setSecondEmergencyNum(getSecondEmergencyNumber());
                 SPManager.getInstance(getActivity()).setThirdEmergencyNumber(getThirdEmergencyNumber());
-                InputMethodManager imm = (InputMethodManager)getActivity(). getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(btnSavePhones.getWindowToken(), 0);
+                hideKeyboard(getActivity());
                 popBackStack();
                 break;
         }

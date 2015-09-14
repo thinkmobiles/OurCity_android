@@ -20,5 +20,4 @@ public enum DialogType {
     PHOTO_CAM,
     PHOTO_GALLERY,
     LOGIN, HOT_CALLS, HOT_CALLS_EDITABLE,
-
 }
