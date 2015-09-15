@@ -24,7 +24,7 @@ public class ConfirmationDialog extends BaseFourStatesFragment implements View.O
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
 
-        try{
+        try {
             mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString()

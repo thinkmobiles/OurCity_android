@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -185,6 +187,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         etNameStreet.setText("");
         etNumberHouse.setText("");
         etDescription.setText("");
+        mPhotoFilePath = "";
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
     }
@@ -269,11 +272,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         btnSend.setOnClickListener(this);
         flDescription.setOnClickListener(this);
         clearErrorIconOnFields();
-
-
     }
-
-
 
     @Override
     public void onDestroy() {
@@ -386,11 +385,10 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         switch (_view.getId()) {
             case R.id.flDescriptionContainer_AF:
                 etDescription.requestFocus();
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context
-                        .INPUT_METHOD_SERVICE);
-                imm.showSoftInput(etDescription, InputMethodManager.SHOW_IMPLICIT);
+                hideKeyboard(getActivity());
                 break;
             case R.id.ivPhoto_AF:
+                hideKeyboard(getActivity());
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                 startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
@@ -403,39 +401,40 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
                 break;
             case R.id.btnSend_AF:
                 if (checkValidation()) {
-                    showLoading("Sending ticket...");
-                    NewTicket ticket = new NewTicket();
-                    ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
-                            .getBitmap());
-                    ticket.Description = etDescription.getText().toString();
-                    Location location = new Location();
-                    location.StreetName = etNameStreet.getText().toString();
-                    location.HouseNumber = etNumberHouse.getText().toString();
-                    ticket.Location = location;
-                    CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
-                    WSAddress wsAddress = new WSAddress();
-                    WSPhoneNumber phoneNumber = new WSPhoneNumber();
-                    ticket.ReporterAddress = wsAddress;
-                    ticket.ReporterFaxNumber = phoneNumber;
-                    ticket.ReporterHomePhoneNumber = phoneNumber;
-                    ticket.ReporterMobilePhoneNumber = phoneNumber;
-                    ticketWrapper.newTicket = ticket;
-                    ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
-                    ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
-                    ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
-                    ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
-                    NewTicketObj ticketObj = new NewTicketObj(ticketWrapper);
-
+                    showLoading(getResources() .getString(R.string.loading_string));
+                    NewTicketObj ticketObj = createNewTicket();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                     getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
-                    InputMethodManager imm2 = (InputMethodManager) getActivity().getSystemService(Context
-                            .INPUT_METHOD_SERVICE);
-                    imm2.showSoftInput(btnSend, InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    popBackStack();
+                    hideKeyboard(getActivity());
                 }
                 break;
         }
+    }
+
+    @NonNull
+    private NewTicketObj createNewTicket() {
+        NewTicket ticket = new NewTicket();
+        ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
+                .getBitmap());
+        ticket.Description = etDescription.getText().toString();
+        Location location = new Location();
+        location.StreetName = etNameStreet.getText().toString();
+        location.HouseNumber = etNumberHouse.getText().toString();
+        ticket.Location = location;
+        CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
+        WSAddress wsAddress = new WSAddress();
+        WSPhoneNumber phoneNumber = new WSPhoneNumber();
+        ticket.ReporterAddress = wsAddress;
+        ticket.ReporterFaxNumber = phoneNumber;
+        ticket.ReporterHomePhoneNumber = phoneNumber;
+        ticket.ReporterMobilePhoneNumber = phoneNumber;
+        ticketWrapper.newTicket = ticket;
+        ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
+        ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
+        ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
+        ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
+        return new NewTicketObj(ticketWrapper);
     }
 
     @Override
@@ -497,4 +496,5 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
             }
         });
     }
+
 }

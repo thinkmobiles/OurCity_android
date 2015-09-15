@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 
 android {
@@ -19,6 +20,11 @@ android {
 
     compileSdkVersion 21
     buildToolsVersion '21.1.2'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.crmc.ourcity"
@@ -94,6 +100,12 @@ android {
         }
         ungvar {
             applicationId = "com.crmc.ungvar"
+            signingConfig signingConfigs.config
+            versionCode 1
+            versionName '1.0.0'
+        }
+        yeruham {
+            applicationId = "com.crmc.yeruham"
             signingConfig signingConfigs.config
             versionCode 1
             versionName '1.0.0'

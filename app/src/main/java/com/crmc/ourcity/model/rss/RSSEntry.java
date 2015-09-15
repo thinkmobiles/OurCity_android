@@ -84,7 +84,7 @@ public class RSSEntry implements Parcelable {
         return encodedContent;
     }
 
-    private String extractCData(String data){
+    private String extractCData(String data) {
         data = data.replaceAll("<!\\[CDATA\\[", "");
         data = data.replaceAll("\\]\\]>", "");
         return data;

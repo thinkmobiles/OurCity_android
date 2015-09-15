@@ -4,6 +4,7 @@ package com.crmc.ourcity.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -11,7 +12,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +29,7 @@ import com.crmc.ourcity.utils.SPManager;
 /**
  * Created by podo on 19.08.15.
  */
-public class SignInDialog extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<LoginResponse>, View.OnFocusChangeListener {
+public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCallbacks<LoginResponse> {
 
     private EditText etUsername;
     private EditText etPassword;
@@ -41,7 +41,7 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
 
-        try{
+        try {
             mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString()
@@ -55,7 +55,6 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
         View root = inflater.inflate(R.layout.fragment_dialog_sign_in, container, false);
         findUI(root);
         setListeners();
-
         return root;
     }
 
@@ -67,10 +66,35 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     private void setListeners() {
-        btnSignIn.setOnClickListener(this);
-        tvSignUp.setOnClickListener(this);
-        etPassword.setOnFocusChangeListener(this);
-        etUsername.setOnFocusChangeListener(this);
+        btnSignIn.setOnClickListener(handleClicks());
+        tvSignUp.setOnClickListener(handleClicks());
+        etPassword.setOnFocusChangeListener(handleFocusChanging());
+        etUsername.setOnFocusChangeListener(handleFocusChanging());
+    }
+
+    @NonNull
+    private View.OnClickListener handleClicks() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.btnSignIn_SIDF:
+                    hideKeyboard(getActivity());
+                    if (checkValidation()) {
+                        Bundle bundle = createBundleForResident();
+                        getLoaderManager().restartLoader(1, bundle, this);
+                    }
+                    break;
+                case R.id.tvSignUp_SIDF:
+                    mCallback.onActionDialogSelected(DialogType.REGISTER);
+                    break;
+            }
+        };
+    }
+
+    @NonNull
+    private View.OnFocusChangeListener handleFocusChanging() {
+        return (v, hasFocus) -> {
+            if (!hasFocus) hideKeyboard(getActivity());
+        };
     }
 
     private Bundle createBundleForResident() {
@@ -79,22 +103,6 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
         return bundle;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSignIn_SIDF :
-                hideKeyboard(btnSignIn);
-                if(checkValidation()) {
-                    Bundle bundle = createBundleForResident();
-                getLoaderManager().restartLoader(1, bundle, this);
-                }
-                break;
-            case R.id.tvSignUp_SIDF :
-                mCallback.onActionDialogSelected(DialogType.REGISTER);
-                break;
-        }
     }
 
     private boolean checkValidation() {
@@ -119,7 +127,7 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
-        if (data != null){
+        if (data != null) {
             if (data.authToken != null) {
                 SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
                 SPManager.getInstance(getActivity()).setResidentId(data.residentId);
@@ -128,9 +136,8 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
                 SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
                 getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
                 getActivity().finish();
-            } else  {
-                Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_SHORT).show();
-
+            } else {
+                Toast.makeText(getActivity(), R.string.incorrect_credentials, Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
@@ -139,18 +146,5 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onLoaderReset(Loader<LoginResponse> loader) {
-
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(!hasFocus) {
-            hideKeyboard(v);
-        }
-    }
-
-    private void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity(). getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

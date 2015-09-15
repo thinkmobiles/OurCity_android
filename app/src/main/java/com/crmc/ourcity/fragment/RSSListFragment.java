@@ -49,7 +49,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
@@ -104,13 +104,13 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         swipeRefreshLayout = findView(R.id.swipe_refresh_rss);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_RssFrg.setBackgroundColor(Image.darkenColor(0.2));

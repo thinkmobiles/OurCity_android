@@ -71,7 +71,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);
@@ -90,7 +90,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
         checkData(entry.getTitle(), tvTitle, tvTitle);
         checkData(entry.getPubDate(), tvDate_Text, llDate);
         //checkData(entry.getDescription(), tvDescription_Text, llDescription);
-        if(TextUtils.isEmpty(entry.getDescription())){
+        if (TextUtils.isEmpty(entry.getDescription())) {
             llDescription.setVisibility(View.GONE);
         } else {
             tvDescription_Text.setText(Html.fromHtml(entry.getDescription()));

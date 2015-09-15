@@ -88,7 +88,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         chbGlobalNotifications = (CheckBox) _root.findViewById(R.id.chbGlobalNotifications_SUDF);
         chbPersonalNotifications = (CheckBox) _root.findViewById(R.id.chbPersonalNotifications_SUDF);
         btnSignUpOrEdit = (Button) _root.findViewById(R.id.btnSignUpOrEdit_SUDF);
-        ScrollView view = (ScrollView)_root.findViewById(R.id.scrollView);
+        ScrollView view = (ScrollView) _root.findViewById(R.id.scrollView);
         view.setVerticalScrollBarEnabled(false);
         view.setHorizontalScrollBarEnabled(false);
     }
@@ -108,7 +108,6 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_MOBILE_NUMBER, etMobileNumber.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_HOUSE_NUMBER, etHouseNumber.getText().toString());
         bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, selectedStreetID);
-
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());
         bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
@@ -121,7 +120,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (checkValidation()) {
-           registerResident();
+            registerResident();
         }
     }
 
@@ -205,30 +204,24 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         }
 
         if (selectedStreetID == -1) {
-            etStreet.setError(getResources(). getString(R.string.sign_up_dialog_error_text));
+            etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 
         return isValid && isOptionalFieldValid;
     }
 
-    private void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity
-                .INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
-            hideKeyboard(v);
+            hideKeyboard(getActivity());
         }
     }
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         Loader loader = null;
-        dialogLoading.setMessage("Loading...");
+        dialogLoading.setMessage(getResources().getString(R.string.loading_string_sign_up_dialog));
         dialogLoading.show();
         switch (id) {
             case LOADER_REGISTER_NEW_RESIDENT_ID:
@@ -240,7 +233,6 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
             case Constants.LOADER_STREETS_ID:
                 loader = new StreetsLoader(getActivity(), args);
                 break;
-
         }
         return loader;
     }
@@ -248,7 +240,6 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     private void login() {
         Bundle bundle = createBundleForResident();
         getLoaderManager().initLoader(LOADER_LOGIN_ID, bundle, this);
-
     }
 
     @Override
@@ -288,7 +279,7 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
                 if (streetData != null) {
                     int numbersStreets = streetData.streetsList.size();
                     streets = new StreetsItem[numbersStreets];
-                    String []streetNames = new String[numbersStreets];
+                    String[] streetNames = new String[numbersStreets];
                     for (int i = 0; i < numbersStreets; i++) {
                         streets[i] = streetData.streetsList.get(i);
                         streetNames[i] = streetData.streetsList.get(i).streetName;
@@ -303,11 +294,9 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
 
                 break;
         }
-
     }
 
     @Override
     public void onLoaderReset(Loader loader) {
-
     }
 }
