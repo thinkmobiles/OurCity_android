@@ -34,7 +34,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     private String color;
     private String json;
     private String route;
-    private View vUnderLine_EF;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String title;
 
@@ -120,7 +119,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
-        vUnderLine_EF = findView(R.id.vUnderLine_EF);
+        View vUnderLine_EF = findView(R.id.vUnderLine_EF);
         try {
             Image.init(Color.parseColor(color));
         } catch (Exception e){

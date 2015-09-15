@@ -3,6 +3,7 @@ package com.crmc.ourcity.fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.crmc.ourcity.utils.IntentUtils;
 /**
  * Created by SetKrul on 31.08.2015.
  */
-public class CityEntitiesItemFragment extends BaseFourStatesFragment implements View.OnClickListener {
+public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private CityEntities mCityEntities;
     private TextView tvEntityName_CEIF;
@@ -118,8 +119,34 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivCall_CEIF.setOnClickListener(this);
-        ivSendMail_CEIF.setOnClickListener(this);
+        ivCall_CEIF.setOnClickListener(handleClick());
+        ivSendMail_CEIF.setOnClickListener(handleClick());
+    }
+
+    @NonNull
+    private View.OnClickListener handleClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.ivCall_CEIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.phoneNumber), getResources()
+                                .getString(R.string.call_hint)));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivSendMail_CEIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentMail(mCityEntities.emailAddress), getResources().getString(R
+                                .string.send_mail_hint)));
+                    } catch (ActivityNotFoundException ex) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        };
     }
 
     @Override
@@ -136,27 +163,4 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment implements 
         super.onStop();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivCall_CEIF:
-                try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.phoneNumber), getResources()
-                            .getString(R.string.call_hint)));
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
-                            .LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.ivSendMail_CEIF:
-                try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentMail(mCityEntities.emailAddress), getResources().getString(R
-                            .string.send_mail_hint)));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
-                            .LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
 }

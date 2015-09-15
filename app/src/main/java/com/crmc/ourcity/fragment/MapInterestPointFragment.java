@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,7 @@ import java.util.Set;
  * Created by SetKrul on 31.07.2015.
  */
 public final class MapInterestPointFragment extends BaseFourStatesFragment implements OnMapReadyCallback,
-        LoaderManager.LoaderCallbacks<List<MapCategory>>, OnClickListener {
+        LoaderManager.LoaderCallbacks<List<MapCategory>> {
 
     private Double lat;
     private Double lon;
@@ -107,24 +108,6 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         setUpMapIfNeeded();
     }
 
-
-    @Override
-    public void onClick(View _view) {
-        switch (_view.getId()) {
-            case R.id.btnMarkerFilter_MIPF:
-                //if (mDialogMarkers != null) {
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
-                intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
-                        Parcelable>) mDialogMapMarkers);
-                startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
-                //} else {
-                //    Toast.makeText(getActivity(), "Do not have interested points!", Toast.LENGTH_SHORT).show();
-                //}
-                break;
-        }
-    }
-
     @Override
     public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
         super.onActivityResult(_requestCode, _resultCode, _data);
@@ -170,7 +153,26 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     @Override
     protected void setListeners() {
         super.setListeners();
-        btnFilter.setOnClickListener(this);
+        btnFilter.setOnClickListener(handleClick());
+    }
+
+    @NonNull
+    private OnClickListener handleClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.btnMarkerFilter_MIPF:
+                    //if (mDialogMarkers != null) {
+                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
+                    intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
+                            Parcelable>) mDialogMapMarkers);
+                    startActivityForResult(intent, Constants.REQUEST_MARKER_FILTER);
+                    //} else {
+                    //    Toast.makeText(getActivity(), "Do not have interested points!", Toast.LENGTH_SHORT).show();
+                    //}
+                    break;
+            }
+        };
     }
 
     @Override

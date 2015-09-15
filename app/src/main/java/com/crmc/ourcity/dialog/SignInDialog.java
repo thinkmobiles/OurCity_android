@@ -85,6 +85,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
                     break;
                 case R.id.tvSignUp_SIDF:
                     mCallback.onActionDialogSelected(DialogType.REGISTER);
+                    hideKeyboard(getActivity());
                     break;
             }
         };

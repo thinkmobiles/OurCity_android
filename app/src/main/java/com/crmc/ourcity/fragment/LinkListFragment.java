@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,8 +28,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 09.09.2015.
  */
-public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
-        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>> {
 
     private ListView lvLinks;
     private View vUnderLine_LLF;
@@ -79,10 +79,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onResume() {
         super.onResume();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_LIST_LINK_ID, bundle, this);
+        loadLinkList();
     }
 
     @Override
@@ -129,9 +126,15 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     protected void setListeners() {
         super.setListeners();
-        lvLinks.setOnItemClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        lvLinks.setOnItemClickListener(handleLinkItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this::loadLinkList);
         swipeInStart();
+    }
+
+    @NonNull
+    private AdapterView.OnItemClickListener handleLinkItemClick() {
+        return (parent, view, _position, id) ->
+                mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).link, mAdapter.getItem(_position).title);
     }
 
     public void swipeInStart() {
@@ -141,11 +144,6 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsClickLinkAction(mAdapter.getItem(_position).link, mAdapter.getItem(_position).title);
     }
 
     @Override
@@ -160,14 +158,10 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onRetryClick() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_LIST_LINK_ID, bundle, this);
+        loadLinkList();
     }
 
-    @Override
-    public void onRefresh() {
+    private void loadLinkList() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

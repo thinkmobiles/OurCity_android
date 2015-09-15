@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,8 +28,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 31.08.2015.
  */
-public class CityEntitiesFragment  extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<CityEntities>>,
-        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class CityEntitiesFragment  extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<CityEntities>> {
 
     private ListView lvCityEntities;
     private View vUnderLine_CEF;
@@ -80,10 +80,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     public void onResume() {
         super.onResume();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_CITY_ENTITIES_ID, bundle, this);
+        loadCityEntities();
     }
 
     @Override
@@ -129,9 +126,15 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void setListeners() {
         super.setListeners();
-        lvCityEntities.setOnItemClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        lvCityEntities.setOnItemClickListener(handleItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this::loadCityEntities);
         swipeInStart();
+    }
+
+    @NonNull
+    private AdapterView.OnItemClickListener handleItemClick() {
+        return (_parent, _view, _position, _id) ->
+                mOnListItemActionListener.onCityEntitiesItemAction(mAdapter.getItem(_position));
     }
 
     public void swipeInStart() {
@@ -141,11 +144,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onCityEntitiesItemAction(mAdapter.getItem(_position));
     }
 
     @Override
@@ -160,14 +158,10 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onRetryClick() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_CITY_ENTITIES_ID, bundle, this);
+        loadCityEntities();
     }
 
-    @Override
-    public void onRefresh() {
+    private void loadCityEntities() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
