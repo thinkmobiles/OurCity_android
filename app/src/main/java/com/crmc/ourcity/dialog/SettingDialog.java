@@ -3,6 +3,7 @@ package com.crmc.ourcity.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.crmc.ourcity.utils.SPManager;
 /**
  * Created by podo on 21.07.15.
  */
-public class SettingDialog extends BaseFourStatesFragment implements View.OnClickListener {
+public class SettingDialog extends BaseFourStatesFragment {
 
     private RelativeLayout login;
     private RelativeLayout confirmation;
@@ -70,31 +71,33 @@ public class SettingDialog extends BaseFourStatesFragment implements View.OnClic
 
     @Override
     protected void setListeners() {
-        login.setOnClickListener(this);
-        confirmation.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        hotCalls.setOnClickListener(this);
+        login.setOnClickListener(handleClicks());
+        confirmation.setOnClickListener(handleClicks());
+        logout.setOnClickListener(handleClicks());
+        hotCalls.setOnClickListener(handleClicks());
     }
 
-    @Override
-    public void onClick(View _view) {
-        switch (_view.getId()) {
-            case R.id.rlHotCalls_SetDFrgmt:
-                mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
-                break;
-            case R.id.rlSignIn_SetDFrgmt:
-                mCallback.onActionDialogSelected(DialogType.LOGIN);
-                break;
-            case R.id.confirmation:
-                Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();
-                mCallback.onActionDialogSelected(DialogType.CONFIRMATION);
-                break;
-            case R.id.rlLogout_FDS:
-                Bundle bundle = new Bundle();
-                bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
-                getLoaderManager().initLoader(1, bundle, mLogoutCallback);
-                break;
-        }
+    @NonNull
+    private View.OnClickListener handleClicks() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.rlHotCalls_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.HOT_CALLS_EDITABLE);
+                    break;
+                case R.id.rlSignIn_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.LOGIN);
+                    break;
+                case R.id.confirmation:
+                    Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();
+                    mCallback.onActionDialogSelected(DialogType.CONFIRMATION);
+                    break;
+                case R.id.rlLogout_FDS:
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
+                    getLoaderManager().initLoader(1, bundle, mLogoutCallback);
+                    break;
+            }
+        };
     }
 
     private LoaderManager.LoaderCallbacks<Boolean> mLogoutCallback = new LoaderManager.LoaderCallbacks<Boolean>() {

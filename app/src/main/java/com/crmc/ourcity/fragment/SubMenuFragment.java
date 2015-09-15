@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -82,34 +83,34 @@ public class SubMenuFragment extends BaseFourStatesFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
-                RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Context _context, View _view, int _position) {
-                        MenuModel menuModel = mAdapter.getItem(_position);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), handleMenuItemClick()));
+    }
 
-                        Boolean isLoggedIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
-                        if (Boolean.parseBoolean(menuModel.requestLogin)) {
-                            if (isLoggedIn) {
-                                if (menuModel.menu != null) {
-                                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                                } else {
-                                    mCallBackMenuModel.onItemAction(menuModel);
-                                }
-                            } else {
-                                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
-                                startActivity(intent);
-                            }
-                        } else {
-                            if (menuModel.menu != null) {
-                                mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                            } else {
-                                mCallBackMenuModel.onItemAction(menuModel);
-                            }
-                        }
+    @NonNull
+    private RecyclerItemClickListener.OnItemClickListener handleMenuItemClick() {
+        return (_context, _view, _position) -> {
+            MenuModel menuModel = mAdapter.getItem(_position);
+            Boolean isLoggedIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+            if (Boolean.parseBoolean(menuModel.requestLogin)) {
+                if (isLoggedIn) {
+                    if (menuModel.menu != null) {
+                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    } else {
+                        mCallBackMenuModel.onItemAction(menuModel);
                     }
-                }));
+                } else {
+                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                    startActivity(intent);
+                }
+            } else {
+                if (menuModel.menu != null) {
+                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                } else {
+                    mCallBackMenuModel.onItemAction(menuModel);
+                }
+            }
+        };
     }
 
     @Override

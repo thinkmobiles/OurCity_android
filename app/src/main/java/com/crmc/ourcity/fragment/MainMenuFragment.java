@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -49,8 +50,7 @@ import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
 /**
  * Created by SetKrul on 28.07.2015.
  */
-public class MainMenuFragment extends BaseFourStatesFragment implements View.OnClickListener, LoaderManager
-        .LoaderCallbacks<Object> {
+public class MainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Object> {
 
     LinearLayout llBtn_MMF;
     LinearLayout llBtnFirst_MMF;
@@ -133,42 +133,16 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
 
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new
-                RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Context _context, View _view, int _position) {
-                        MenuModel menuModel = mAdapter.getItem(_position);
-                        Constants.PREVIOUSTITLE = menuModel.title;
-                        Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
-                        if (Boolean.parseBoolean(menuModel.requestLogin)) {
-                            if (isLogIn) {
-                                if (menuModel.menu != null) {
-                                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                                } else {
-                                    mCallBackMenuModel.onItemAction(menuModel);
-                                }
-                            } else {
-                                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
-                                startActivity(intent);
-                            }
-                        } else {
-                            if (menuModel.menu != null) {
-                                mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
-                            } else {
-                                mCallBackMenuModel.onItemAction(menuModel);
-                            }
-                        }
-                    }
-                }));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                                                 getActivity().getApplicationContext(), handleItemClick()));
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
-        llBtnFirst_MMF.setOnClickListener(this);
-        llBtnSecond_MMF.setOnClickListener(this);
-        llBtnThird_MMF.setOnClickListener(this);
+        llBtnFirst_MMF.setOnClickListener(handleBtnClick());
+        llBtnSecond_MMF.setOnClickListener(handleBtnClick());
+        llBtnThird_MMF.setOnClickListener(handleBtnClick());
     }
 
     @Override
@@ -202,23 +176,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
         bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
         bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
         getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.llBtnFirst_MMF:
-                mCallBackMenuModel.onItemAction(mMenuBottom.get(0));
-                break;
-
-            case R.id.llBtnSecond_MMF:
-                mCallBackMenuModel.onItemAction(mMenuBottom.get(1));
-                break;
-
-            case R.id.llBtnThird_MMF:
-                mCallBackMenuModel.onItemAction(mMenuBottom.get(2));
-                break;
-        }
     }
 
     private void showView() {
@@ -371,5 +328,52 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     public void onLoaderReset(Loader<Object> loader) {
 
+    }
+
+    @NonNull
+    private RecyclerItemClickListener.OnItemClickListener handleItemClick() {
+        return (_context, _view, _position) -> {
+            MenuModel menuModel = mAdapter.getItem(_position);
+            Constants.PREVIOUSTITLE = menuModel.title;
+            Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+            if (Boolean.parseBoolean(menuModel.requestLogin)) {
+                if (isLogIn) {
+                    if (menuModel.menu != null) {
+                        mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                    } else {
+                        mCallBackMenuModel.onItemAction(menuModel);
+                    }
+                } else {
+                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                    startActivity(intent);
+                }
+            } else {
+                if (menuModel.menu != null) {
+                    mCallBackMenuModel.onMenuModelPrepared(menuModel.menu);
+                } else {
+                    mCallBackMenuModel.onItemAction(menuModel);
+                }
+            }
+        };
+    }
+
+    @NonNull
+    private View.OnClickListener handleBtnClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.llBtnFirst_MMF:
+                    mCallBackMenuModel.onItemAction(mMenuBottom.get(0));
+                    break;
+
+                case R.id.llBtnSecond_MMF:
+                    mCallBackMenuModel.onItemAction(mMenuBottom.get(1));
+                    break;
+
+                case R.id.llBtnThird_MMF:
+                    mCallBackMenuModel.onItemAction(mMenuBottom.get(2));
+                    break;
+            }
+        };
     }
 }

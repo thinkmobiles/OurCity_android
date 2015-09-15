@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.crmc.ourcity.utils.SPManager;
 /**
  * Created by podo on 03.09.15.
  */
-public class HotCallsEditableDialog extends BaseFragment implements View.OnClickListener {
+public class HotCallsEditableDialog extends BaseFragment {
 
     private View root;
     private EditText etFirstEmergencyNumber;
@@ -54,10 +55,10 @@ public class HotCallsEditableDialog extends BaseFragment implements View.OnClick
     }
 
     private void setListeners() {
-        ivCallFirst.setOnClickListener(this);
-        ivCallSecond.setOnClickListener(this);
-        ivCallThird.setOnClickListener(this);
-        btnSavePhones.setOnClickListener(this);
+        ivCallFirst.setOnClickListener(handleClick());
+        ivCallSecond.setOnClickListener(handleClick());
+        ivCallThird.setOnClickListener(handleClick());
+        btnSavePhones.setOnClickListener(handleClick());
     }
 
     private void enableInput(boolean _isEnabled) {
@@ -99,29 +100,6 @@ public class HotCallsEditableDialog extends BaseFragment implements View.OnClick
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivCallFirst_FDHC:
-                doCall(getFirstEmergencyNumber());
-                break;
-            case R.id.ivCallSecond_FDHC:
-                doCall(getSecondEmergencyNumber());
-                break;
-            case R.id.ivCallThird_FDHC:
-                doCall(getThirdEmergencyNumber());
-                break;
-
-            case R.id.btnSavePhones_FDHC:
-                SPManager.getInstance(getActivity()).setFirstEmergencyNumber(getFirstEmergencyNumber());
-                SPManager.getInstance(getActivity()).setSecondEmergencyNum(getSecondEmergencyNumber());
-                SPManager.getInstance(getActivity()).setThirdEmergencyNumber(getThirdEmergencyNumber());
-                hideKeyboard(getActivity());
-                popBackStack();
-                break;
-        }
-    }
-
     private String getFirstEmergencyNumber() {
         return etFirstEmergencyNumber.getText().toString();
     }
@@ -132,5 +110,30 @@ public class HotCallsEditableDialog extends BaseFragment implements View.OnClick
 
     private String getThirdEmergencyNumber() {
         return etThirdEmergencyNumber.getText().toString();
+    }
+
+    @NonNull
+    private View.OnClickListener handleClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.ivCallFirst_FDHC:
+                    doCall(getFirstEmergencyNumber());
+                    break;
+                case R.id.ivCallSecond_FDHC:
+                    doCall(getSecondEmergencyNumber());
+                    break;
+                case R.id.ivCallThird_FDHC:
+                    doCall(getThirdEmergencyNumber());
+                    break;
+
+                case R.id.btnSavePhones_FDHC:
+                    SPManager.getInstance(getActivity()).setFirstEmergencyNumber(getFirstEmergencyNumber());
+                    SPManager.getInstance(getActivity()).setSecondEmergencyNum(getSecondEmergencyNumber());
+                    SPManager.getInstance(getActivity()).setThirdEmergencyNumber(getThirdEmergencyNumber());
+                    hideKeyboard(getActivity());
+                    popBackStack();
+                    break;
+            }
+        };
     }
 }
