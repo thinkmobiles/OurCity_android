@@ -4,6 +4,7 @@ package com.crmc.ourcity.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -11,7 +12,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +29,7 @@ import com.crmc.ourcity.utils.SPManager;
 /**
  * Created by podo on 19.08.15.
  */
-public class SignInDialog extends BaseFragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<LoginResponse>, View.OnFocusChangeListener {
+public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCallbacks<LoginResponse> {
 
     private EditText etUsername;
     private EditText etPassword;
@@ -66,10 +66,35 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     private void setListeners() {
-        btnSignIn.setOnClickListener(this);
-        tvSignUp.setOnClickListener(this);
-        etPassword.setOnFocusChangeListener(this);
-        etUsername.setOnFocusChangeListener(this);
+        btnSignIn.setOnClickListener(handleClicks());
+        tvSignUp.setOnClickListener(handleClicks());
+        etPassword.setOnFocusChangeListener(handleFocusChanging());
+        etUsername.setOnFocusChangeListener(handleFocusChanging());
+    }
+
+    @NonNull
+    private View.OnClickListener handleClicks() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.btnSignIn_SIDF:
+                    hideKeyboard(getActivity());
+                    if (checkValidation()) {
+                        Bundle bundle = createBundleForResident();
+                        getLoaderManager().restartLoader(1, bundle, this);
+                    }
+                    break;
+                case R.id.tvSignUp_SIDF:
+                    mCallback.onActionDialogSelected(DialogType.REGISTER);
+                    break;
+            }
+        };
+    }
+
+    @NonNull
+    private View.OnFocusChangeListener handleFocusChanging() {
+        return (v, hasFocus) -> {
+            if (!hasFocus) hideKeyboard(getActivity());
+        };
     }
 
     private Bundle createBundleForResident() {
@@ -78,22 +103,6 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
         bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
         return bundle;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSignIn_SIDF:
-                hideKeyboard(getActivity());
-                if (checkValidation()) {
-                    Bundle bundle = createBundleForResident();
-                    getLoaderManager().restartLoader(1, bundle, this);
-                }
-                break;
-            case R.id.tvSignUp_SIDF:
-                mCallback.onActionDialogSelected(DialogType.REGISTER);
-                break;
-        }
     }
 
     private boolean checkValidation() {
@@ -136,12 +145,6 @@ public class SignInDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onLoaderReset(Loader<LoginResponse> loader) {}
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus) {
-            hideKeyboard(getActivity());
-        }
+    public void onLoaderReset(Loader<LoginResponse> loader) {
     }
 }
