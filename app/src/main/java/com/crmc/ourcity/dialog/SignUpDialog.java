@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +43,10 @@ import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
 /**
  * Created by podo on 19.08.15.
  */
-public class SignUpDialog extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener, LoaderManager.LoaderCallbacks {
+public class SignUpDialog extends BaseFragment implements View.OnFocusChangeListener, LoaderManager.LoaderCallbacks {
     private View root;
-    private EditText etLastName, etFirstName, etUsername, etPassword, etPhoneNumber, etMobileNumber, etEmail,
-            etHouseNumber, etCityName;
+    private EditText etLastName, etFirstName, etUsername, etPassword, etPhoneNumber, etMobileNumber,
+                     etEmail, etHouseNumber, etCityName;
     private EditTextStreetAutoComplete etStreet;
     private CheckBox chbGlobalNotifications, chbPersonalNotifications;
     private Button btnSignUpOrEdit;
@@ -94,7 +97,23 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
     }
 
     private void setListeners() {
-        btnSignUpOrEdit.setOnClickListener(this);
+        btnSignUpOrEdit.setOnClickListener(handleClick());
+        etStreet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (etStreet.getText().length() > 0) {
+                    etStreet.setError(null);
+                }
+            }
+        });
     }
 
     private Bundle createBundleForResident() {
@@ -117,12 +136,12 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         return bundle;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (checkValidation()) {
-            registerResident();
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        if (checkValidation()) {
+//            registerResident();
+//        }
+//    }
 
     private void registerResident() {
         Bundle args = createBundleForResident();
@@ -224,12 +243,15 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
         dialogLoading.setMessage(getResources().getString(R.string.loading_string_sign_up_dialog));
         dialogLoading.show();
         switch (id) {
+
             case LOADER_REGISTER_NEW_RESIDENT_ID:
                 loader = new RegisterLoader(getActivity(), args);
                 break;
+
             case LOADER_LOGIN_ID:
                 loader = new LoginLoader(getActivity(), args);
                 break;
+
             case Constants.LOADER_STREETS_ID:
                 loader = new StreetsLoader(getActivity(), args);
                 break;
@@ -298,5 +320,14 @@ public class SignUpDialog extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onLoaderReset(Loader loader) {
+    }
+
+    @NonNull
+    private View.OnClickListener handleClick() {
+        return v -> {
+            if (checkValidation()) {
+                registerResident();
+            }
+        };
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +24,13 @@ import java.util.ArrayList;
 
 public class SplashScreenActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks {
 
-
     private RelativeLayout rlBackground;
     private Handler mHandler = new Handler();
     private int cityNumber;
     private Drawable drawable;
     private ArrayList<TickerModel> tickers;
     private Bundle loaderBundle;
-
-    private int SPLASH_DELAY ;
+    private int SPLASH_DELAY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +100,8 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
                 if (!TextUtils.isEmpty(dataString)) {
                     drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(dataString));
                     rlBackground.setBackground(drawable);
-
                 }
-                mHandler.postDelayed(mEndSplash, SPLASH_DELAY * 1000);
+                mHandler.postDelayed(endSplash(), SPLASH_DELAY * 1000);
                 break;
             case Constants.LOADER_TICKERS_ID:
                 tickers = (ArrayList<TickerModel>) data;
@@ -111,9 +109,21 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         }
     }
 
-    @Override
-    public void onLoaderReset(Loader loader) {
-
+    @NonNull
+    private Runnable endSplash() {
+        return () -> {
+            if (!isFinishing()) {
+                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                intent.putParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST, tickers);
+                getSupportLoaderManager().destroyLoader(Constants.LOADER_BACKGROUND_IMAGE_ID);
+                getSupportLoaderManager().destroyLoader(Constants.LOADER_TICKERS_ID);
+                startActivity(intent);
+                finish();
+            }
+        };
     }
 
+    @Override
+    public void onLoaderReset(Loader loader) {
+    }
 }
