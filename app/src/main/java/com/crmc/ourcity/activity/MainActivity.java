@@ -148,7 +148,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_DOCUMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_MAP:
                 switch (_menuModel.showOnMap) {
@@ -236,10 +236,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onTickerAction(View _view, String _link) {
+    public void onTickerAction(View _view, String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
             replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
-                    ()));
+                    (), _title));
         }
     }
 

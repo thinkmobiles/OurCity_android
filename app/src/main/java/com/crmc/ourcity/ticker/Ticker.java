@@ -101,7 +101,7 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
     @Override
     public void onClick(View v) {
         if (onTickerActionListener != null && mData != null && !mData.isEmpty()) {
-            onTickerActionListener.onTickerAction(v, mData.get(count).link);
+            onTickerActionListener.onTickerAction(v, mData.get(count).link, mData.get(count).title);
         }
     }
 }

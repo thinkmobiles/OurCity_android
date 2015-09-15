@@ -321,11 +321,13 @@ public class MainMenuFragment extends BaseFourStatesFragment implements View.OnC
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
                             Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
                                     .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
+                            Log.d("TAGG", mMenuBottom.get(i).colorItem + " Item2");
                         }
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
                             Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
                                     .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
                                     mMenuBottom.get(i).borderWidth);
+                            Log.d("TAGG", mMenuBottom.get(i).borderColor + " Boarder2");
                         }
                     }
                     llBtn_MMF.setVisibility(View.VISIBLE);

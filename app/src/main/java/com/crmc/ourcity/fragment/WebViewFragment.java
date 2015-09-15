@@ -42,14 +42,14 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private boolean error = false;
     private String title;
 
-    public static WebViewFragment newInstance(String _link, String _colorItem) {
-        WebViewFragment mWebViewFragment = new WebViewFragment();
-        Bundle args = new Bundle();
-        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
-        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
-        mWebViewFragment.setArguments(args);
-        return mWebViewFragment;
-    }
+//    public static WebViewFragment newInstance(String _link, String _colorItem) {
+//        WebViewFragment mWebViewFragment = new WebViewFragment();
+//        Bundle args = new Bundle();
+//        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
+//        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+//        mWebViewFragment.setArguments(args);
+//        return mWebViewFragment;
+//    }
 
     public static WebViewFragment newInstance(String _link, String _colorItem, String _title) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
@@ -80,7 +80,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        this.title = getArguments().getString(Constants.NODE_TITLE, "");
+        title = getArguments().getString(Constants.NODE_TITLE, "");
     }
 
     @Override
