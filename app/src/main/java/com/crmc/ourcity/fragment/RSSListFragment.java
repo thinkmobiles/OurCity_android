@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -25,8 +26,7 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RSSEntry>>,
-        OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RSSEntry>> {
 
     private ListView lvRssEntries;
     private View vUnderLine_RssFrg;
@@ -121,9 +121,23 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void setListeners() {
         super.setListeners();
-        lvRssEntries.setOnItemClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        lvRssEntries.setOnItemClickListener(handleRssEntryClick());
+        swipeRefreshLayout.setOnRefreshListener(swipeToRefresh());
         swipeInStart();
+    }
+
+    @NonNull
+    private OnItemClickListener handleRssEntryClick() {
+        return (parent, view, position, id) -> mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(position));
+    }
+
+    @NonNull
+    private SwipeRefreshLayout.OnRefreshListener swipeToRefresh() {
+        return () -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, rssLink);
+            getLoaderManager().restartLoader(Constants.LOADER_RSS_ID, bundle, this);
+        };
     }
 
     public void swipeInStart() {
@@ -133,11 +147,6 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(_position));
     }
 
     @Override
@@ -154,10 +163,10 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     public void onRetryClick() {
     }
 
-    @Override
-    public void onRefresh() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, rssLink);
-        getLoaderManager().restartLoader(Constants.LOADER_RSS_ID, bundle, this);
-    }
+//    @Override
+//    public void onRefresh() {
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, rssLink);
+//        getLoaderManager().restartLoader(Constants.LOADER_RSS_ID, bundle, this);
+//    }
 }

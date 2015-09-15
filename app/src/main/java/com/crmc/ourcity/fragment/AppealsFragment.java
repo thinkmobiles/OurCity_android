@@ -62,7 +62,7 @@ import java.io.IOException;
 /**
  * Created by SetKrul on 23.07.2015.
  */
-public class AppealsFragment extends BaseFourStatesFragment implements OnClickListener, OnCheckedChangeListener {
+public class AppealsFragment extends BaseFourStatesFragment {
 
     private String color;
     private String json;
@@ -144,7 +144,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         ivRotate.setEnabled(false);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
@@ -170,8 +170,6 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
             if (data != null) {
                 clearFields();
                 Toast.makeText(getActivity(), "Ticket is sent", Toast.LENGTH_SHORT).show();
-
-
             } else {
                 Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
@@ -266,11 +264,11 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivPhoto.setOnClickListener(this);
-        ivRotate.setOnClickListener(this);
-        swGpsOnOff.setOnCheckedChangeListener(this);
-        btnSend.setOnClickListener(this);
-        flDescription.setOnClickListener(this);
+        ivPhoto.setOnClickListener(handleClick());
+        ivRotate.setOnClickListener(handleClick());
+        swGpsOnOff.setOnCheckedChangeListener(handleCheck());
+        btnSend.setOnClickListener(handleClick());
+        flDescription.setOnClickListener(handleClick());
         clearErrorIconOnFields();
     }
 
@@ -280,20 +278,7 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         if (mLocation != null) {
             mLocation.stopLocationUpdates();
         }
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if (imm.isAcceptingText()) {
-            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton _buttonView, boolean _isChecked) {
-        if (_isChecked) {
-            getLocation();
-        } else {
-            mLocation.stopLocationUpdates();
-            mLocation = null;
-        }
+        hideKeyboard(getActivity());
     }
 
     @Override
@@ -380,37 +365,6 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         return R.layout.fragment_appeals;
     }
 
-    @Override
-    public void onClick(View _view) {
-        switch (_view.getId()) {
-            case R.id.flDescriptionContainer_AF:
-                etDescription.requestFocus();
-                hideKeyboard(getActivity());
-                break;
-            case R.id.ivPhoto_AF:
-                hideKeyboard(getActivity());
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
-                startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
-                break;
-            case R.id.ivRotate_AF:
-                if (!mPhotoFilePath.equals("")) {
-                    Bitmap bitmap = Image.rotateImage(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap(), 90);
-                    ivPhoto.setImageBitmap(bitmap);
-                }
-                break;
-            case R.id.btnSend_AF:
-                if (checkValidation()) {
-                    showLoading(getResources() .getString(R.string.loading_string));
-                    NewTicketObj ticketObj = createNewTicket();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
-                    getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
-                    hideKeyboard(getActivity());
-                }
-                break;
-        }
-    }
 
     @NonNull
     private NewTicketObj createNewTicket() {
@@ -497,4 +451,49 @@ public class AppealsFragment extends BaseFourStatesFragment implements OnClickLi
         });
     }
 
+    @NonNull
+    private View.OnClickListener handleClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.flDescriptionContainer_AF:
+                    etDescription.requestFocus();
+                    hideKeyboard(getActivity());
+                    break;
+                case R.id.ivPhoto_AF:
+                    hideKeyboard(getActivity());
+                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
+                    startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
+                    break;
+                case R.id.ivRotate_AF:
+                    if (!mPhotoFilePath.equals("")) {
+                        Bitmap bitmap = Image.rotateImage(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap(), 90);
+                        ivPhoto.setImageBitmap(bitmap);
+                    }
+                    break;
+                case R.id.btnSend_AF:
+                    if (checkValidation()) {
+                        showLoading(getResources().getString(R.string.loading_string));
+                        NewTicketObj ticketObj = createNewTicket();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
+                        getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
+                        hideKeyboard(getActivity());
+                    }
+                    break;
+            }
+        };
+    }
+
+    @NonNull
+    private OnCheckedChangeListener handleCheck() {
+        return (buttonView, isChecked) -> {
+            if (isChecked) {
+                getLocation();
+            } else {
+                mLocation.stopLocationUpdates();
+                mLocation = null;
+            }
+        };
+    }
 }

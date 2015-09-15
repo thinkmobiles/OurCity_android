@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -28,8 +28,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 15.07.2015.
  */
-public class EventsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>>,
-        OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class EventsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>> {
 
     private ListView lvEvents;
     private String color;
@@ -82,10 +81,14 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     public void onResume() {
         super.onResume();
+        loadEvents();
+    }
+
+    private void loadEvents() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_EVENTS_ID, bundle, this);
+        getLoaderManager().restartLoader(Constants.LOADER_EVENTS_ID, bundle, this);
     }
 
     @Override
@@ -131,9 +134,14 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void setListeners() {
         super.setListeners();
-        lvEvents.setOnItemClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        lvEvents.setOnItemClickListener(handleEventItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this::loadEvents);
         swipeInStart();
+    }
+
+    @NonNull
+    private OnItemClickListener handleEventItemClick() {
+        return (_parent, _view, _position, id) -> mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
     }
 
     public void swipeInStart() {
@@ -143,11 +151,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
     }
 
     @Override
@@ -162,17 +165,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onRetryClick() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_EVENTS_ID, bundle, this);
-    }
-
-    @Override
-    public void onRefresh() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_EVENTS_ID, bundle, this);
+        loadEvents();
     }
 }
