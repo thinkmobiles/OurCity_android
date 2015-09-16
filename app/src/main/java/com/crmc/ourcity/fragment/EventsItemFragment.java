@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.crmc.ourcity.utils.IntentUtils;
 /**
  * Created by SetKrul on 16.07.2015.
  */
-public class EventsItemFragment extends BaseFourStatesFragment implements View.OnClickListener {
+public class EventsItemFragment extends BaseFourStatesFragment {
 
     private Events mEvents;
     private TextView tvTitle;
@@ -182,9 +183,38 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivCallSkype.setOnClickListener(this);
-        ivSendMail.setOnClickListener(this);
-        ivLink.setOnClickListener(this);
+        ivCallSkype.setOnClickListener(handleClick());
+        ivSendMail.setOnClickListener(handleClick());
+        ivLink.setOnClickListener(handleClick());
+    }
+
+    @NonNull
+    private View.OnClickListener handleClick() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.ivCallSkype_EIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources()
+                                .getString(R.string.call_hint)));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivSendMail_EIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentMail(mEvents.email), getResources()
+                                .getString(R.string.send_mail_hint)));
+                    } catch (ActivityNotFoundException ex) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivLink_EIF:
+                    mOnListItemActionListener.onEventsClickLinkAction(mEvents.link, mEvents.title);
+                    break;
+            }
+        };
     }
 
     @Override
@@ -199,33 +229,6 @@ public class EventsItemFragment extends BaseFourStatesFragment implements View.O
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivCallSkype_EIF:
-                try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources()
-                            .getString(R.string.call_hint)));
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
-                            .LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.ivSendMail_EIF:
-                try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentMail(mEvents.email), getResources()
-                            .getString(R.string.send_mail_hint)));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
-                            .LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.ivLink_EIF:
-                mOnListItemActionListener.onEventsClickLinkAction(mEvents.link, mEvents.title);
-                break;
-        }
     }
 
     private class MyWebViewClient extends WebViewClient {

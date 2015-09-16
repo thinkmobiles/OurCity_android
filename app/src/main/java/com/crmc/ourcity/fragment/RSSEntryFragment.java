@@ -20,7 +20,7 @@ import com.crmc.ourcity.utils.Image;
 /**
  * Created by podo on 02.09.15.
  */
-public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnClickListener {
+public class RSSEntryFragment extends BaseFourStatesFragment {
 
 
     private RSSEntry entry;
@@ -102,7 +102,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivLink.setOnClickListener(this);
+        ivLink.setOnClickListener(v -> mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle()));
     }
 
     private void checkData(String _text, TextView _tvView, View _view) {
@@ -132,14 +132,8 @@ public class RSSEntryFragment extends BaseFourStatesFragment implements View.OnC
     }
 
     @Override
-    public void onClick(View v) {
-        mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle());
-    }
-
-    @Override
     protected int getContentView() {
         return R.layout.fragment_rss_entry;
     }
-
 
 }

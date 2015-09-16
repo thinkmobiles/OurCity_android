@@ -25,7 +25,7 @@ import java.util.List;
  * Created by SetKrul on 28.08.2015.
  */
 public class MessageToResidentFragment extends BaseFourStatesFragment implements LoaderManager
-        .LoaderCallbacks<List<MassageToResident>>, SwipeRefreshLayout.OnRefreshListener {
+        .LoaderCallbacks<List<MassageToResident>> {
 
     private ListView lvMassageToResident;
     private View vUnderLine_MTRF;
@@ -58,10 +58,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_MESSAGE_TO_RESIDENT, bundle, this);
+        loadMessagesToResident();
     }
 
     @Override
@@ -111,7 +108,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void setListeners() {
         super.setListeners();
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this::loadMessagesToResident);
         swipeInStart();
     }
 
@@ -136,14 +133,10 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public void onRetryClick() {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().restartLoader(Constants.LOADER_MESSAGE_TO_RESIDENT, bundle, this);
+        loadMessagesToResident();
     }
 
-    @Override
-    public void onRefresh() {
+    private void loadMessagesToResident() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

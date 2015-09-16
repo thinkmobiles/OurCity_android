@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,8 +28,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 25.08.2015.
  */
-public class TripsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<MapTrips>>,
-        SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
+public class TripsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<MapTrips>> {
 
     private ListView lvTrips;
     private TripsListAdapter mAdapter;
@@ -85,10 +85,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     @Override
     public void onResume() {
         super.onResume();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
-        getLoaderManager().initLoader(Constants.LOADER_TRIPS_ID, bundle, this);
+        loadTrips();
     }
 
     @Override
@@ -111,15 +108,11 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     }
 
     @Override
-    public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onTripsItemAction(mAdapter.getItem(_position), lat, lon);
-    }
-
-    @Override
     protected void setListeners() {
         super.setListeners();
-        lvTrips.setOnItemClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        lvTrips.setOnItemClickListener((parent, view, position, id) ->
+                mOnListItemActionListener.onTripsItemAction(mAdapter.getItem(position), lat, lon));
+        swipeRefreshLayout.setOnRefreshListener(this::loadTrips);
         swipeInStart();
     }
 
@@ -169,12 +162,11 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
         restartLoader();
     }
 
-    @Override
-    public void onRefresh() {
-        restartLoader();
+    void restartLoader() {
+        loadTrips();
     }
 
-    void restartLoader() {
+    private void loadTrips() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);

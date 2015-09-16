@@ -162,11 +162,4 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onRetryClick() {
     }
-
-//    @Override
-//    public void onRefresh() {
-//        Bundle bundle = new Bundle();
-//        bundle.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, rssLink);
-//        getLoaderManager().restartLoader(Constants.LOADER_RSS_ID, bundle, this);
-//    }
 }
