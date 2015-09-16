@@ -45,7 +45,7 @@
     <!-- four state layout-->
     <string name="empty_message">No data</string>
     <string name="error_message">Some error</string>
-    <string name="refresh_button_text">Try again</string>
+    <string name="refresh_button_text">נסה שנית</string>
 
     <!--map fragment -->
     <!--<string name="btn_interest_point_title">נקודות עניין</string>-->
@@ -110,10 +110,11 @@
     <string name="do_you_want_to_receive_personal_notifications">אתה מעוניין לקבל הודעות אישיות?</string>
     <string name="dialog_setting_update_info">פרטים אישיים</string>
     <string name="dialog_setting_sign_in">הירשם</string>
-    <string name="connection_error">Server does not respond</string>
-    <string name="loading_string">Sending ticket...</string>
+    <string name="connection_error">שרת אינו מגיב</string>
+    <string name="loading_string">שולח פניה</string>
     <string name="incorrect_credentials">Incorrect username or password</string>
     <string name="loading_string_sign_up_dialog">Loading...</string>
+    <string name="no_messages_for_resident">אין הודעות</string>
 
 
 </resources>

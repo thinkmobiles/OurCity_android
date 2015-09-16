@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.crmc.ourcity.R;
@@ -38,6 +39,11 @@ public final class MapClearFragment extends BaseFourStatesFragment implements On
         super.onCreate(_savedInstanceState);
         lat = getArguments().getDouble(Constants.CONFIGURATION_KEY_LAT);
         lon = getArguments().getDouble(Constants.CONFIGURATION_KEY_LON);
+    }
+
+    @Override
+    protected void initViews() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

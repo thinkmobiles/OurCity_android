@@ -72,10 +72,10 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
                 showContent();
             } else {
                 //showError(getResources().getString(R.string.connection_error));
-                showEmpty("There are no messages for you");
+                showEmpty(getResources().getString(R.string.no_messages_for_resident));
             }
         } else {
-            showEmpty("There are no messages for you");
+            showEmpty(getResources().getString(R.string.no_messages_for_resident));
         }
     }
 

@@ -343,6 +343,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
             getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+        } else if (f instanceof MainMenuFragment) {
+            getDelegate().getSupportActionBar().setTitle("");
         }
     }
 }
