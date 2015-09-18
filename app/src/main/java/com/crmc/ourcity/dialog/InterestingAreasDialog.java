@@ -87,6 +87,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     @NonNull
     private View.OnClickListener sendSelectedInterestingAreasToServer() {
         return v -> {
+
             List<InterestingArea> selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool)
                     .filter(item -> item.Value)
                     .map(item -> item.Key)

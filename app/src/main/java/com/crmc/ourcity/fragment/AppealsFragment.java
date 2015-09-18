@@ -489,6 +489,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                 mLocation.stopLocationUpdates();
                 mLocation = null;
                 etNameCity.setText(getResources().getString(R.string.app_name));
+                etNameStreet.setText("");
             }
         };
     }
