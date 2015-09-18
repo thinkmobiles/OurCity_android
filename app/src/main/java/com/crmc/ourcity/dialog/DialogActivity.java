@@ -101,6 +101,8 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
             case CONFIRMATION:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
                 break;
+            case INTEREST_AREAS:
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new InterestingAreasDialog());
         }
     }
 

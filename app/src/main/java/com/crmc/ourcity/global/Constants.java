@@ -16,6 +16,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
     public static final String NODE_TITLE = "node_title";
 
+
     public static String PREVIOUSTITLE;
 
     public static BitmapDrawable cityImage = null;
@@ -60,6 +61,8 @@ public class Constants {
     public static final int LOADER_LIST_LINK_ID = 22;
     public static final int LOADER_SEND_APPEALS_ID = 23;
     public static final int LOADER_VOTE_ALREADY_ID = 24;
+    public static final int LOADER_INTERESTING_AREAS_ID = 25;
+    public static final int LOADER_SEND_INTERESTING_AREAS_ID = 26;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;
@@ -99,6 +102,7 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_PUSH_TOKEN = "PUSH_TOKEN";
     public static final String BUNDLE_CONSTANT_RSS_LINK = "rss_link";
     public static final String BUNDLE_CONSTANT_SURVEY_ID = "SURVEY_ID";
+    public static final String BUNDLE_SELECTED_AREAS = "selected_areas";
 
     //for Instance
     final public static String CONFIGURATION_KEY_LINK = "KEY_LINK";

@@ -102,9 +102,9 @@
 
         <!-- uncomment visibility -->
         <RelativeLayout
-            android:id="@+id/setting_interest_category"
+            android:id="@+id/rlInterestAreas_SetDFrgmt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_marginTop="@dimen/settings10"
             android:background="@drawable/new_rec_setting"
             android:clickable="true"
@@ -118,13 +118,12 @@
                 android:layout_centerInParent="true"
                 android:text="תחומי עניין"
                 android:textColor="#148989"
-
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/icon_interesting" />
         </RelativeLayout>

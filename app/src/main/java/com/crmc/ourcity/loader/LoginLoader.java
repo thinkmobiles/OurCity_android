@@ -23,6 +23,7 @@ public class LoginLoader extends BaseLoader<LoginResponse> {
         residentSignInDetails = new ResidentSignInDetails();
         residentSignInDetails.userName = _bundle.getString(Constants.BUNDLE_CONSTANT_USER_NAME, "default value");
         residentSignInDetails.password = _bundle.getString(Constants.BUNDLE_CONSTANT_PASSWORD, "default value");
+        residentSignInDetails.cityId = _bundle.getInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, 1);
         residentSignInDetails.authToken = _bundle.getString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, "");
         residentSignInDetails.pushToken = _bundle.getString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, "");
     }

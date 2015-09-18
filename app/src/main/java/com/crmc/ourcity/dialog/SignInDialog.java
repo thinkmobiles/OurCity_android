@@ -102,6 +102,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, etUsername.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
         bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
         return bundle;
     }

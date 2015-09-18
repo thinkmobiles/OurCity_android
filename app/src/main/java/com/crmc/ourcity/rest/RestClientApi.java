@@ -11,6 +11,7 @@ import retrofit.client.OkClient;
  */
 public class RestClientApi {
     private static final String BASE_URL = "http://134.249.164.30:8081/OurCityWS/Service.svc";
+    //private static final String BASE_URL = "http://192.168.88.26:8081/OurCityWS/Service.svc";
 
     private CityApi cityApi;
     private static RestClientApi mInstance;

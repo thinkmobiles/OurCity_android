@@ -6,6 +6,7 @@ import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
 import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
+import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteAlready;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
@@ -17,6 +18,7 @@ import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.News;
 import com.crmc.ourcity.rest.responce.events.PhoneBook;
 import com.crmc.ourcity.rest.responce.events.Phones;
+import com.crmc.ourcity.rest.responce.interestAreas.ResidentResponse;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
@@ -199,4 +201,10 @@ public interface CityApi {
 
     @POST("/{path}")
     Documents getDocuments(@Path("path") String q, @Body TypedInput body);
+
+    @POST("/GetResidentById")
+    ResidentResponse getResidentById(@Body ResidentModel resident);
+
+    @POST("/SetInterestAreasToResident")
+    boolean sendSelectedInterestingAreas(@Body ResidentModel resident);
 }

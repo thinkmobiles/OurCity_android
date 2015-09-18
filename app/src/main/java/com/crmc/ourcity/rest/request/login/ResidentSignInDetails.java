@@ -6,9 +6,11 @@ package com.crmc.ourcity.rest.request.login;
 public class ResidentSignInDetails {
     public String userName;
     public String password;
+    public int cityId;
     public String authToken;
     public String applianceType = "android";
     public String pushToken;
+
 
     public ResidentSignInDetails() {
     }

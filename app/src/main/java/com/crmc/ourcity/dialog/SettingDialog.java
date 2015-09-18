@@ -27,6 +27,7 @@ public class SettingDialog extends BaseFourStatesFragment {
     private RelativeLayout confirmation;
     private RelativeLayout logout;
     private RelativeLayout hotCalls;
+    private RelativeLayout interestingAreas;
     private OnActionDialogListener mCallback;
 
     @Override
@@ -47,18 +48,22 @@ public class SettingDialog extends BaseFourStatesFragment {
         confirmation = findView(R.id.confirmation);
         logout = findView(R.id.rlLogout_FDS);
         hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
+        interestingAreas = findView(R.id.rlInterestAreas_SetDFrgmt);
         boolean isFromMainActivity = getActivity().getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
         if (isFromMainActivity) {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
                 login.setVisibility(View.GONE);
+                interestingAreas.setVisibility(View.VISIBLE);
             } else {
                 logout.setVisibility(View.GONE);
+                interestingAreas.setVisibility(View.GONE);
             }
         } else {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
 
                 login.setVisibility(View.GONE);
+                interestingAreas.setVisibility(View.VISIBLE);
             }
         }
         showContent();
@@ -75,6 +80,7 @@ public class SettingDialog extends BaseFourStatesFragment {
         confirmation.setOnClickListener(handleClicks());
         logout.setOnClickListener(handleClicks());
         hotCalls.setOnClickListener(handleClicks());
+        interestingAreas.setOnClickListener(handleClicks());
     }
 
     @NonNull
@@ -96,6 +102,8 @@ public class SettingDialog extends BaseFourStatesFragment {
                     bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
                     getLoaderManager().initLoader(1, bundle, mLogoutCallback);
                     break;
+                case R.id.rlInterestAreas_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.INTEREST_AREAS);
             }
         };
     }
@@ -114,6 +122,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                 getActivity().stopService(new Intent(getActivity(), RegistrationIntentService.class));
                 logout.setVisibility(View.GONE);
                 login.setVisibility(View.VISIBLE);
+                interestingAreas.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
