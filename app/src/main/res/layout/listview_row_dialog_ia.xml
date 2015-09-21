@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layoutDirection="rtl">
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/cbInterestingArea_DIA"
+        android:layout_width="0dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|left"
+        android:layout_weight="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        tools:background="@android:color/holo_blue_bright"/>
 
     <TextView
         android:id="@+id/tvInterestingAreaTitle_DIA"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
+        android:layout_gravity="center_vertical|right"
         android:layout_weight="5"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
@@ -19,16 +29,5 @@
         android:textSize="@dimen/cf_item_text_size"
         android:textStyle="bold"
         tools:background="@android:color/holo_orange_dark"/>
-
-    <CheckBox
-        android:id="@+id/cbInterestingArea_DIA"
-        android:layout_width="0dp"
-        android:textColor="@android:color/black"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_weight="1"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        tools:background="@android:color/holo_blue_bright"/>
 
 </LinearLayout>
