@@ -5,37 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:layoutDirection="rtl">
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingStart="5dp"
-        android:layoutDirection="rtl">
-
-        <TextView
-            android:id="@+id/tvTitle_LLF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:gravity="center_vertical|left"
-            android:singleLine="true"
-            android:paddingStart="15dp"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
@@ -46,5 +21,28 @@
             android:padding="15dp"
             android:src="@drawable/event_arrow"
             tools:background="@android:color/darker_gray"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="5dp">
+
+        <TextView
+            android:id="@+id/tvTitle_LLF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:paddingRight="15dp"
+            android:text="Title"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark"/>
     </LinearLayout>
 </LinearLayout>

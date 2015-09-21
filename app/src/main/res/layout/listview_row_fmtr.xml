@@ -5,32 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     android:orientation="horizontal"
-    android:baselineAligned="false"
-    android:layoutDirection="rtl">
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:paddingStart="5dp"
-        android:layoutDirection="rtl">
-
-        <TextView
-            android:id="@+id/tvMessage_MTRF"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_vertical|start"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|end"
-            android:maxLines="2"
-            android:paddingStart="15dp"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark"/>
-    </LinearLayout>
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="50dp"
@@ -46,5 +21,28 @@
             android:padding="15dp"
             android:src="@drawable/event_arrow"
             tools:background="@android:color/darker_gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingLeft="5dp">
+
+        <TextView
+            android:id="@+id/tvMessage_MTRF"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:maxLines="2"
+            android:paddingRight="15dp"
+            android:text="Title"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark"/>
     </LinearLayout>
 </LinearLayout>
