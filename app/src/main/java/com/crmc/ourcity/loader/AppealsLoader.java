@@ -2,11 +2,13 @@ package com.crmc.ourcity.loader;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
+import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 
 import java.io.UnsupportedEncodingException;
@@ -17,11 +19,10 @@ import retrofit.mime.TypedByteArray;
 /**
  * Created by podo on 04.09.15.
  */
-public class AppealsLoader extends BaseLoader<WSResult>{
+public class AppealsLoader extends BaseLoader<WSResult> {
 
     private String json;
     private String route;
-
 
 
     public AppealsLoader(Context _context, Bundle _args) {
@@ -40,6 +41,15 @@ public class AppealsLoader extends BaseLoader<WSResult>{
 
         try {
             wsResult = api.getAppeals(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
+            if (wsResult.getResultObjects() != null) {
+                for (int i = 0; i < wsResult.getResultObjects().size(); i++) {
+                    if (!TextUtils.isEmpty(wsResult.getResultObjects().get(i).AttachedFiles)) {
+                        wsResult.getResultObjects().get(i).AttachedFilesBitmap = Image.convertBase64ToBitmap(wsResult
+                                .getResultObjects().get(i).AttachedFiles);
+
+                    }
+                }
+            }
         } catch (RetrofitError | UnsupportedEncodingException _e) {
             wsResult = null;
         }
