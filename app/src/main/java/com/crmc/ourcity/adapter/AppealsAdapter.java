@@ -56,6 +56,10 @@ public class AppealsAdapter extends BaseAdapter {
             holder = (ViewHolder) _convertView.getTag();
         }
         holder.setData(getItem(_position), _position);
+        ImageView ivPhoto = (ImageView) _convertView.findViewById(R.id.ivImage_AF);
+        if (!TextUtils.isEmpty(getItem(_position).AttachedCompressFile)) {
+            ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(getItem(_position).AttachedCompressFile));
+        }
         return _convertView;
     }
 
@@ -66,7 +70,7 @@ public class AppealsAdapter extends BaseAdapter {
         final TextView status;
         final TextView referenceID;
         final TextView tvPhotoText_AF;
-        final ImageView ivPhoto;
+//        final ImageView ivPhoto;
         final View view;
         final Context mContext;
 
@@ -77,21 +81,14 @@ public class AppealsAdapter extends BaseAdapter {
             status = (TextView) _view.findViewById(R.id.tvStat_AF);
             tvPhotoText_AF = (TextView) _view.findViewById(R.id.tvPhotoText_AF);
             referenceID = (TextView) _view.findViewById(R.id.tvReferenceID_AF);
-            ivPhoto = (ImageView) _view.findViewById(R.id.ivImage_AF);
+//            ivPhoto = (ImageView) _view.findViewById(R.id.ivImage_AF);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
         }
 
         public void setData(ResultObject _item, int _position) {
-            if (_item.AttachedFilesBitmap == null) {
-                if (!TextUtils.isEmpty(_item.AttachedFiles)) {
-                    _item.AttachedFilesBitmap = Image.convertBase64ToBitmap(_item.AttachedFiles);
-                    ivPhoto.setImageBitmap(_item.AttachedFilesBitmap);
-                    tvPhotoText_AF.setText("");
-                }
-            } else {
-                ivPhoto.setImageBitmap(_item.AttachedFilesBitmap);
+            if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");
             }
 

@@ -155,6 +155,20 @@ public class Image {
         }
     }
 
+    public static String compressBitmap(Bitmap _bitmap) {
+        try {
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            _bitmap = Bitmap.createScaledBitmap(_bitmap, (int) (_bitmap.getWidth() * 0.3), (int) (_bitmap.getHeight()
+                    * 0.3), true);
+            _bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     /**
      * Convert base64 string image to bitmap
      *
@@ -256,11 +270,12 @@ public class Image {
         _view.setBackground(d);
     }
 
-    public static void setBorderColorView(Context _context, View _view, int _drawable, int _borderColor, int _borderWidth) {
+    public static void setBorderColorView(Context _context, View _view, int _drawable, int _borderColor, int
+            _borderWidth) {
         GradientDrawable gd = new GradientDrawable();
         //gd.setColor(_borderColor);
         gd.setCornerRadius(10);
-        gd.setStroke(_borderWidth * 2 ,_borderColor);
+        gd.setStroke(_borderWidth * 2, _borderColor);
         _view.setBackgroundDrawable(gd);
 
     }
