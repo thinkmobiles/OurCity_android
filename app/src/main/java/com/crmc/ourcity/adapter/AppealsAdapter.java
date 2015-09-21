@@ -14,7 +14,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.utils.Image;
 
-
 import java.util.List;
 
 /**
@@ -85,8 +84,14 @@ public class AppealsAdapter extends BaseAdapter {
         }
 
         public void setData(ResultObject _item, int _position) {
-            if (!TextUtils.isEmpty(_item.AttachedFiles)) {
-                ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(_item.AttachedFiles));
+            if (_item.AttachedFilesBitmap == null) {
+                if (!TextUtils.isEmpty(_item.AttachedFiles)) {
+                    _item.AttachedFilesBitmap = Image.convertBase64ToBitmap(_item.AttachedFiles);
+                    ivPhoto.setImageBitmap(_item.AttachedFilesBitmap);
+                    tvPhotoText_AF.setText("");
+                }
+            } else {
+                ivPhoto.setImageBitmap(_item.AttachedFilesBitmap);
                 tvPhotoText_AF.setText("");
             }
 
