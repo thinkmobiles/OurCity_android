@@ -5,38 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/cf_item_row_size"
     android:baselineAligned="false"
-    android:layoutDirection="rtl"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layoutDirection="rtl"
-        android:paddingStart="5dp">
+    <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical"-->
+        <!--android:paddingLeft="5dp">-->
 
-        <TextView
-            android:id="@+id/tvEntityName_CEF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|start"
-            android:maxLines="2"
-            android:paddingStart="15dp"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark"/>
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/tvEntityName_CEF"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical|start"-->
+            <!--android:layout_weight="1"-->
+            <!--android:ellipsize="end"-->
+            <!--android:gravity="center_vertical|start"-->
+            <!--android:maxLines="2"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:text="Title"-->
+            <!--android:textSize="@dimen/cf_item_text_size"-->
+            <!--android:textStyle="bold"-->
+            <!--tools:background="@android:color/holo_orange_dark"/>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="140dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
+        android:gravity="center_vertical|left"
+        android:layout_gravity="center_vertical|left"
         android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivArrowCityEntities_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:padding="15dp"
+            android:src="@drawable/event_arrow"
+            tools:background="@android:color/darker_gray"/>
+
+        <ImageView
+            android:id="@+id/ivCall_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_margin="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/phone"
+            tools:background="@android:color/darker_gray"/>
 
         <ImageView
             android:id="@+id/ivMail_CEF"
@@ -48,23 +66,46 @@
             android:src="@drawable/mail"
             tools:background="@android:color/darker_gray"/>
 
-        <ImageView
-            android:id="@+id/ivCall_CEF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/phone"
-            tools:background="@android:color/darker_gray"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/ivCall_CEF"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:scaleType="centerInside"-->
+            <!--android:src="@drawable/phone"-->
+            <!--tools:background="@android:color/darker_gray"/>-->
 
-        <ImageView
-            android:id="@+id/ivArrowCityEntities_CEF"
+        <!--<ImageView-->
+            <!--android:id="@+id/ivArrowCityEntities_CEF"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:padding="15dp"-->
+            <!--android:src="@drawable/event_arrow"-->
+            <!--tools:background="@android:color/darker_gray"/>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="5dp">
+
+        <TextView
+            android:id="@+id/tvEntityName_CEF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="15dp"
-            android:src="@drawable/event_arrow"
-            tools:background="@android:color/darker_gray"/>
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:maxLines="2"
+            android:paddingLeft="15dp"
+            android:text="Title"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark"/>
     </LinearLayout>
 </LinearLayout>
