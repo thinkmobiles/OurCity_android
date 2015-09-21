@@ -9,9 +9,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by AndroIT304 on 10/12/2014.
- */
 public class RSSHandler extends DefaultHandler {
 
     // Feed and RSSEntry objects to use for temporary storage

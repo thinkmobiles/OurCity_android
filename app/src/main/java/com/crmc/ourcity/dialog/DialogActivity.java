@@ -101,10 +101,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 signUpDialog.setArguments(args);
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, signUpDialog);
                 break;
-
-            case CONFIRMATION:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
-                break;
+//            case CONFIRMATION:
+//                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
+//                break;
             case INTEREST_AREAS:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new InterestingAreasDialog());
                 break;
