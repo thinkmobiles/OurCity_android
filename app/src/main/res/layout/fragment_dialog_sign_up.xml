@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/settings10"
     android:paddingRight="@dimen/settings10"
     android:scrollbarSize="0dp"
-    android:scrollbars="none">
+    android:scrollbars="none"
+    android:layoutDirection="ltr">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -74,7 +75,7 @@
                     android:paddingEnd="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="rtl"
+                    android:textDirection="ltr"
                     android:textSize="@dimen/sign_up_dialog_textSize" />
 
                 <EditText
@@ -90,7 +91,7 @@
                     android:paddingStart="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="rtl"
+                    android:textDirection="ltr"
                     android:textSize="@dimen/sign_up_dialog_textSize"
 
                     />
