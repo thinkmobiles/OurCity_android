@@ -3,15 +3,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:background="#9E9E9E"
-              android:padding="10dp">
+              android:background="#9E9E9E">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="#C3C3C3"
-        android:gravity="center|start"
+        android:gravity="center|right"
         android:padding="10dp"
         android:text="@string/dialog_map_filter_header_text"
         android:textColor="#098686"

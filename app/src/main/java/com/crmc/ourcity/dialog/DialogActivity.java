@@ -95,14 +95,26 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 break;
 
             case REGISTER:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignUpDialog());
+                Bundle args = new Bundle();
+                args.putBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, false);
+                SignUpDialog signUpDialog = new SignUpDialog();
+                signUpDialog.setArguments(args);
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, signUpDialog);
                 break;
-
-            case CONFIRMATION:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
-                break;
+//            case CONFIRMATION:
+//                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
+//                break;
             case INTEREST_AREAS:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new InterestingAreasDialog());
+                break;
+            case UPDATE_RESIDENT_INFO:
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, true);
+                SignUpDialog editableResidentInfoDialog = new SignUpDialog();
+                editableResidentInfoDialog.setArguments(bundle);
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, editableResidentInfoDialog);
+                break;
+
         }
     }
 

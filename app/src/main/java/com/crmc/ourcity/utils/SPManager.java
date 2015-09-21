@@ -3,9 +3,6 @@ package com.crmc.ourcity.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by crm on 19/11/2014.
- */
 public class SPManager {
     private static final String CRMCUSERNAME = "crmcUsername";
     private static final String CRMCPASSWORD = "crmcPassword";

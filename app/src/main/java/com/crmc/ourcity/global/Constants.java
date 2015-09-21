@@ -15,6 +15,8 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_CRMCUSERNAME = "crmcusername";
     public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
     public static final String NODE_TITLE = "node_title";
+    public static final String BUNDLE_CONSTANT_EDITABLE_RESIDENT = "editable_resident_info";
+
 
 
     public static String PREVIOUSTITLE;
@@ -63,6 +65,8 @@ public class Constants {
     public static final int LOADER_VOTE_ALREADY_ID = 24;
     public static final int LOADER_INTERESTING_AREAS_ID = 25;
     public static final int LOADER_SEND_INTERESTING_AREAS_ID = 26;
+    public static final int LOADER_GET_RESIDENT_INFO_ID = 27;
+    public static final int LOADER_UPDATE_RESIDENT_INFO = 28;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

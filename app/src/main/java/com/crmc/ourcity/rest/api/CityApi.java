@@ -6,6 +6,7 @@ import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 import com.crmc.ourcity.rest.request.login.ResidentSignInDetails;
 import com.crmc.ourcity.rest.request.logout.LogoutModel;
 import com.crmc.ourcity.rest.request.menu.CityModel;
+import com.crmc.ourcity.rest.request.registration.ResidentDetails;
 import com.crmc.ourcity.rest.request.resident.ResidentModel;
 import com.crmc.ourcity.rest.request.vote.VoteAlready;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
@@ -207,4 +208,12 @@ public interface CityApi {
 
     @POST("/SetInterestAreasToResident")
     boolean sendSelectedInterestingAreas(@Body ResidentModel resident);
+
+    @POST("/GetResidentById")
+    ResidentDetails getResidentInfo(@Body ResidentModel resident);
+
+    @POST("/EditResidentDetails")
+    boolean updateResidentInfo(@Body com.crmc.ourcity.rest.request.registration.ResidentModel
+                                       _residentModel);
+
 }

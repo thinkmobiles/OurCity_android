@@ -116,6 +116,7 @@
     <string name="loading_string_sign_up_dialog">Loading...</string>
     <string name="no_messages_for_resident">אין הודעות</string>
     <string name="dialog_title_interest_area">תחומי עניי</string>
+    <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
 
 
 </resources>

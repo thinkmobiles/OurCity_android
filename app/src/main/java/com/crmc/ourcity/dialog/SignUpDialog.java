@@ -1,6 +1,5 @@
 package com.crmc.ourcity.dialog;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,8 +25,11 @@ import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LoginLoader;
 import com.crmc.ourcity.loader.RegisterLoader;
+import com.crmc.ourcity.loader.ResidentInfoLoader;
 import com.crmc.ourcity.loader.StreetsLoader;
+import com.crmc.ourcity.loader.UpdateResidentInfoLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
+import com.crmc.ourcity.rest.request.registration.ResidentDetails;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.address.StreetsItem;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
@@ -37,24 +38,29 @@ import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import static com.crmc.ourcity.global.Constants.LOADER_GET_RESIDENT_INFO_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_UPDATE_RESIDENT_INFO;
 
 /**
  * Created by podo on 19.08.15.
  */
+
+//TODO: CHECk ON SERVER global notification value
 public class SignUpDialog extends BaseFragment implements View.OnFocusChangeListener, LoaderManager.LoaderCallbacks {
+
     private View root;
     private EditText etLastName, etFirstName, etUsername, etPassword, etPhoneNumber, etMobileNumber,
-                     etEmail, etHouseNumber, etCityName;
+            etEmail, etHouseNumber, etCityName;
     private EditTextStreetAutoComplete etStreet;
     private CheckBox chbGlobalNotifications, chbPersonalNotifications;
     private Button btnSignUpOrEdit;
     private int residentId;
     private StreetsItem[] streets;
     private int selectedStreetID = -1;
-    ProgressDialog dialogLoading;
-
+    private ProgressDialog dialogLoading;
+    private boolean isEditable;
 
     @Override
     public void onResume() {
@@ -64,6 +70,13 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 "\"userName\":\"Webit\",\"password\":\"HdrMoked                                          \"}}");
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
         getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, this);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isEditable = getArguments().getBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, false);
     }
 
     @Nullable
@@ -136,24 +149,6 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         return bundle;
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        if (checkValidation()) {
-//            registerResident();
-//        }
-//    }
-
-    private void registerResident() {
-        Bundle args = createBundleForResident();
-
-        if (residentId == -3) {
-            getLoaderManager().restartLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
-        } else {
-            getLoaderManager().initLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
-        }
-
-    }
-
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -214,13 +209,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
             isValid = false;
         }
 
-        String street = etStreet.getText().toString();
-        for (int i = 0; i < streets.length; i++) {
-            if (street.equals(streets[i].streetName)) {
-                selectedStreetID = streets[i].streetId;
-                break;
-            }
-        }
+        getSelectedStreetId();
 
         if (selectedStreetID == -1) {
             etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
@@ -228,6 +217,16 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         }
 
         return isValid && isOptionalFieldValid;
+    }
+
+    private void getSelectedStreetId() {
+        String street = etStreet.getText().toString();
+        for (int i = 0; i < streets.length; i++) {
+            if (street.equals(streets[i].streetName)) {
+                selectedStreetID = streets[i].streetId;
+                break;
+            }
+        }
     }
 
     @Override
@@ -244,6 +243,14 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         dialogLoading.show();
         switch (id) {
 
+            case LOADER_GET_RESIDENT_INFO_ID:
+                loader = new ResidentInfoLoader(getActivity(), args);
+                break;
+
+            case LOADER_UPDATE_RESIDENT_INFO:
+                loader = new UpdateResidentInfoLoader(getActivity(), args);
+                break;
+
             case LOADER_REGISTER_NEW_RESIDENT_ID:
                 loader = new RegisterLoader(getActivity(), args);
                 break;
@@ -259,9 +266,27 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         return loader;
     }
 
+    private void registerResident() {
+        Bundle args = createBundleForResident();
+
+        if (residentId == -3) {
+            getLoaderManager().restartLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
+        } else {
+            getLoaderManager().initLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
+        }
+    }
+
     private void login() {
         Bundle bundle = createBundleForResident();
         getLoaderManager().initLoader(LOADER_LOGIN_ID, bundle, this);
+    }
+
+    private void updateResident() {
+        getSelectedStreetId();
+        Bundle args = createBundleForResident();
+        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+
+        getLoaderManager().restartLoader(LOADER_UPDATE_RESIDENT_INFO, args, this);
     }
 
     @Override
@@ -281,6 +306,16 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                     SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
 
                     login();
+                }
+                break;
+
+            case LOADER_UPDATE_RESIDENT_INFO:
+                boolean result = (Boolean) data;
+
+                if (result) {
+                    login();
+                } else {
+                    //TODO: do something
                 }
                 break;
             case LOADER_LOGIN_ID:
@@ -310,11 +345,47 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
                             streetNames);
                     etStreet.setAdapter(adapter);
+
+                    if (isEditable) {
+                        Bundle args = new Bundle();
+                        args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
+                        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+                        getLoaderManager().initLoader(Constants.LOADER_GET_RESIDENT_INFO_ID, args, this);
+                    }
+
                 } else {
                     popBackStack();
                 }
-
                 break;
+
+            case Constants.LOADER_GET_RESIDENT_INFO_ID:
+                ResidentDetails residentInfo = (ResidentDetails) data;
+                setResidentInfo(residentInfo);
+                break;
+        }
+    }
+
+    private void setResidentInfo(ResidentDetails residentInfo) {
+        etLastName.setText(residentInfo.lastName);
+        etFirstName.setText(residentInfo.firstName);
+        etUsername.setText(residentInfo.userName);
+        etPassword.setText(residentInfo.password);
+        etPhoneNumber.setText(residentInfo.phoneNumber != null ? residentInfo.phoneNumber : "");
+        etMobileNumber.setText(residentInfo.mobileNumber);
+        etEmail.setText(residentInfo.email);
+        etHouseNumber.setText(residentInfo.houseNumber);
+        setStreetName(residentInfo);
+        etCityName.setText(getResources().getString(R.string.app_name));
+        chbGlobalNotifications.setChecked(residentInfo.isGetGlobalNotification);
+        chbPersonalNotifications.setChecked(residentInfo.isGetPersonalNotification);
+    }
+
+    private void setStreetName(ResidentDetails residentInfo) {
+        for (int i = 0; i < streets.length; i++) {
+            if (residentInfo.streetId.equals(streets[i].streetId)) {
+                etStreet.setText(streets[i].streetName);
+                break;
+            }
         }
     }
 
@@ -326,7 +397,11 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private View.OnClickListener handleClick() {
         return v -> {
             if (checkValidation()) {
-                registerResident();
+                if (isEditable) {
+                    updateResident();
+                } else {
+                    registerResident();
+                }
             }
         };
     }

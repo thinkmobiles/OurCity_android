@@ -24,10 +24,11 @@ import com.crmc.ourcity.utils.SPManager;
 public class SettingDialog extends BaseFourStatesFragment {
 
     private RelativeLayout login;
-    private RelativeLayout confirmation;
+   // private RelativeLayout confirmation;
     private RelativeLayout logout;
     private RelativeLayout hotCalls;
     private RelativeLayout interestingAreas;
+    private RelativeLayout updateResidentInfo;
     private OnActionDialogListener mCallback;
 
     @Override
@@ -45,25 +46,29 @@ public class SettingDialog extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         login = findView(R.id.rlSignIn_SetDFrgmt);
-        confirmation = findView(R.id.confirmation);
+        //confirmation = findView(R.id.confirmation);
         logout = findView(R.id.rlLogout_FDS);
         hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
         interestingAreas = findView(R.id.rlInterestAreas_SetDFrgmt);
+        updateResidentInfo = findView(R.id.rlUpdateResidentInfo_SetDFrgmt);
         boolean isFromMainActivity = getActivity().getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
         if (isFromMainActivity) {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
                 login.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.VISIBLE);
+                updateResidentInfo.setVisibility(View.VISIBLE);
             } else {
                 logout.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.GONE);
+                updateResidentInfo.setVisibility(View.GONE);
             }
         } else {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
 
                 login.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.VISIBLE);
+                updateResidentInfo.setVisibility(View.VISIBLE);
             }
         }
         showContent();
@@ -77,10 +82,11 @@ public class SettingDialog extends BaseFourStatesFragment {
     @Override
     protected void setListeners() {
         login.setOnClickListener(handleClicks());
-        confirmation.setOnClickListener(handleClicks());
+        //confirmation.setOnClickListener(handleClicks());
         logout.setOnClickListener(handleClicks());
         hotCalls.setOnClickListener(handleClicks());
         interestingAreas.setOnClickListener(handleClicks());
+        updateResidentInfo.setOnClickListener(handleClicks());
     }
 
     @NonNull
@@ -93,10 +99,10 @@ public class SettingDialog extends BaseFourStatesFragment {
                 case R.id.rlSignIn_SetDFrgmt:
                     mCallback.onActionDialogSelected(DialogType.LOGIN);
                     break;
-                case R.id.confirmation:
-                    Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();
-                    mCallback.onActionDialogSelected(DialogType.CONFIRMATION);
-                    break;
+//                case R.id.confirmation:
+//                    Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();
+//                    mCallback.onActionDialogSelected(DialogType.CONFIRMATION);
+//                    break;
                 case R.id.rlLogout_FDS:
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
@@ -104,6 +110,10 @@ public class SettingDialog extends BaseFourStatesFragment {
                     break;
                 case R.id.rlInterestAreas_SetDFrgmt:
                     mCallback.onActionDialogSelected(DialogType.INTEREST_AREAS);
+                    break;
+                case R.id.rlUpdateResidentInfo_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.UPDATE_RESIDENT_INFO);
+                    break;
             }
         };
     }
@@ -123,6 +133,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                 logout.setVisibility(View.GONE);
                 login.setVisibility(View.VISIBLE);
                 interestingAreas.setVisibility(View.GONE);
+                updateResidentInfo.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
