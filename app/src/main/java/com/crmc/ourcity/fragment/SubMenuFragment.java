@@ -75,7 +75,7 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(new StringBuilder(title).reverse().toString());
         mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), handleMenuItemClick()));
