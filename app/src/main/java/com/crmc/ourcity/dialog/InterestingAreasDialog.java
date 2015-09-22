@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ import java.util.List;
 
 import static com.crmc.ourcity.global.Constants.LOADER_INTERESTING_AREAS_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_SEND_INTERESTING_AREAS_ID;
-
 
 
 /**
@@ -87,14 +87,13 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         return v -> {
 
             List<InterestingArea> selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool)
-                    .filter(item -> item.Value)
-                    .map(item -> item.Key)
-                    .collect(Collectors.toList());
+                    .filter(item -> item.Value).map(item -> item.Key).collect(Collectors.toList());
 
             Bundle args = new Bundle();
             args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
             args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
-            args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>) selectedInterestingAreas);
+            args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>)
+                    selectedInterestingAreas);
 
             getLoaderManager().restartLoader(LOADER_SEND_INTERESTING_AREAS_ID, args, this);
         };
@@ -122,13 +121,22 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
 
     @Override
     public void onLoadFinished(Loader _loader, Object _data) {
-        if (dialogLoading.isShowing())
-            dialogLoading.dismiss();
+        if (dialogLoading.isShowing()) dialogLoading.dismiss();
         switch (_loader.getId()) {
             case LOADER_INTERESTING_AREAS_ID:
-                mResidentResponse = (ResidentResponse) _data;
-                mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
-                mLvInterestiongAreas.setAdapter(mAdapter);
+                if (_data != null) {
+                    mResidentResponse = (ResidentResponse) _data;
+                    if (mResidentResponse.interestAreasModelsBool != null) {
+                        mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
+                        mLvInterestiongAreas.setAdapter(mAdapter);
+                    }
+                } else {
+                    new AlertDialog.Builder(getActivity()).setTitle("Error").setMessage("Server does not respond!")
+                            .setPositiveButton
+                            (android.R.string.yes, (dialog, which) -> {
+                        popBackStack();
+                    }).setIcon(android.R.drawable.ic_dialog_alert).show();
+                }
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
                 boolean response = (Boolean) _data;
