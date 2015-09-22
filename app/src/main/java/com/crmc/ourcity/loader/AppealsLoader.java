@@ -44,7 +44,7 @@ public class AppealsLoader extends BaseLoader<WSResult> {
             if (wsResult.getResultObjects() != null) {
                 for (int i = 0; i < wsResult.getResultObjects().size(); i++) {
                     if (!TextUtils.isEmpty(wsResult.getResultObjects().get(i).AttachedFiles)) {
-                        wsResult.getResultObjects().get(i).AttachedCompressFile = Image.compressBitmap(Image
+                        wsResult.getResultObjects().get(i).AttachedFiles = Image.compressBitmap(Image
                                 .convertBase64ToBitmap(wsResult.getResultObjects().get(i).AttachedFiles));
 
                     }

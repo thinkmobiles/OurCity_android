@@ -9,41 +9,41 @@ import android.support.v4.app.Fragment;
  */
 public abstract class BaseFragmentActivity extends BaseActivity {
 
-    protected final void addFragment(final @IdRes int containerId, final Fragment fragment) {
+    protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {
         getSupportFragmentManager().beginTransaction()
-                .add(containerId, fragment)
+                .add(_containerId, _fragment)
                 .commit();
     }
 
-    protected final void addFragmentWithBackStack(final @IdRes int containerId, final Fragment fragment) {
+    protected final void addFragmentWithBackStack(final @IdRes int _containerId, final Fragment _fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .add(containerId, fragment)
+                .add(_containerId, _fragment)
                 .commit();
     }
 
-    public final void replaceFragmentWithBackStack(final @IdRes int containerId, final Fragment fragment) {
+    public final void replaceFragmentWithBackStack(final @IdRes int _containerId, final Fragment _fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .replace(containerId, fragment)
+                .replace(_containerId, _fragment)
                 .commitAllowingStateLoss( );
     }
 
-    public final void replaceFragmentWithoutBackStack(final @IdRes int containerId, final Fragment fragment) {
+    public final void replaceFragmentWithoutBackStack(final @IdRes int _containerId, final Fragment _fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(containerId, fragment)
+                .replace(_containerId, _fragment)
                 .commit();
     }
 
-    public final void destroyFragment(final Fragment fragment){
+    public final void destroyFragment(final Fragment _fragment){
         getSupportFragmentManager().beginTransaction()
-                .remove(fragment)
+                .remove(_fragment)
                 .commit();
     }
 
     @SuppressWarnings("unchecked")
-    public final <T extends Fragment> T getFragmentById(final @IdRes int containerId){
-        return (T) getSupportFragmentManager().findFragmentById(containerId);
+    public final <T extends Fragment> T getFragmentById(final @IdRes int _containerId){
+        return (T) getSupportFragmentManager().findFragmentById(_containerId);
     }
 
     public final void clearBackStack(){

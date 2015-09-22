@@ -51,8 +51,8 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_dialog_sign_in, container, false);
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        View root = _inflater.inflate(R.layout.fragment_dialog_sign_in, _container, false);
         findUI(root);
         setListeners();
         return root;
@@ -123,18 +123,18 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public Loader<LoginResponse> onCreateLoader(int id, Bundle args) {
-        return new LoginLoader(getActivity(), args);
+    public Loader<LoginResponse> onCreateLoader(int _id, Bundle _args) {
+        return new LoginLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoadFinished(Loader<LoginResponse> loader, LoginResponse data) {
-        if (data != null) {
-            if (data.authToken != null) {
-                SPManager.getInstance(getActivity()).setAuthToken(data.authToken);
-                SPManager.getInstance(getActivity()).setResidentId(data.residentId);
-                SPManager.getInstance(getActivity()).setCRMCUsername(data.crmcUsername);
-                SPManager.getInstance(getActivity()).setCRMCPassword(data.crmcPassword);
+    public void onLoadFinished(Loader<LoginResponse> _loader, LoginResponse _data) {
+        if (_data != null) {
+            if (_data.authToken != null) {
+                SPManager.getInstance(getActivity()).setAuthToken(_data.authToken);
+                SPManager.getInstance(getActivity()).setResidentId(_data.residentId);
+                SPManager.getInstance(getActivity()).setCRMCUsername(_data.crmcUsername);
+                SPManager.getInstance(getActivity()).setCRMCPassword(_data.crmcPassword);
                 SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
                 getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
                 getActivity().finish();
@@ -147,6 +147,6 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public void onLoaderReset(Loader<LoginResponse> loader) {
+    public void onLoaderReset(Loader<LoginResponse> _loader) {
     }
 }

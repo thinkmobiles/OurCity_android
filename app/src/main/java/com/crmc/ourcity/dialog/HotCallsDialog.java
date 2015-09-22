@@ -11,8 +11,8 @@ import android.view.View;
 public class HotCallsDialog extends HotCallsEditableDialog {
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(View _view, @Nullable Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
         editMode(false);
     }
     //TODO:finish activity when onBackPressed

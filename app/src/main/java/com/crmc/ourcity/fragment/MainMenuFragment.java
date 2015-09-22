@@ -1,7 +1,6 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -41,6 +39,7 @@ import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
 import java.util.List;
+import java.util.Locale;
 
 import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_CITY_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
@@ -151,7 +150,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = getResources().getInteger(R.integer.city_id);
-        lng = "en";
+        if (Locale.getDefault().toString().equals("en_US")){
+            lng = "en";
+        } else {
+            lng = "he";
+        }
         residentId = SPManager.getInstance(getActivity()).getResidentId();
         ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle("");
         Constants.PREVIOUSTITLE = "";
@@ -275,13 +278,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
                             Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
                                     .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
-                            Log.d("TAGG", mMenuBottom.get(i).colorItem + " Item2");
                         }
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
                             Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
                                             .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
                                     mMenuBottom.get(i).borderWidth);
-                            Log.d("TAGG", mMenuBottom.get(i).borderColor + " Boarder2");
                         }
                     }
                     llBtn_MMF.setVisibility(View.VISIBLE);

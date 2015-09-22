@@ -21,7 +21,6 @@
             android:layout_height="match_parent"
             android:divider="@android:color/holo_blue_light"
             android:dividerHeight="4dp"
-            android:layoutDirection="rtl"
             tools:listitem="@layout/listview_row_fce">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>

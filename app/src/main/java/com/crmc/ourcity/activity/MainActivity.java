@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -74,8 +72,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private boolean isLoggedIn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_main);
         isLoggedIn = SPManager.getInstance(this).getIsLoggedStatus();
         if (isLoggedIn) {
@@ -109,9 +107,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
-    private void setTopFragment(final Fragment fragment) {
+    private void setTopFragment(final Fragment _fragment) {
         clearBackStack();
-        replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, fragment);
+        replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, _fragment);
     }
 
     @Override
@@ -264,14 +262,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onCreateOptionsMenu(Menu _menu) {
+        getMenuInflater().inflate(R.menu.menu_main, _menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem _item) {
+        switch (_item.getItemId()) {
             case R.id.menu_settings:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
                 boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
@@ -290,7 +288,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 setTopFragment(MainMenuFragment.newInstance());
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(_item);
     }
 
     private boolean checkPlayServices() {
@@ -300,7 +298,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this, Constants.PLAY_SERVICES_RESOLUTION_REQUEST)
                         .show();
             } else {
-                Toast.makeText(this, "Device does not supported", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.device_not_supported), Toast.LENGTH_SHORT).show();
             }
             return false;
         }

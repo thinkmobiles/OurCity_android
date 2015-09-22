@@ -8,7 +8,6 @@ import android.webkit.WebViewClient;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
-import com.crmc.ourcity.utils.HtmlFormatter;
 
 /**
  * Created by SetKrul on 17.07.2015.
@@ -32,9 +31,9 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
         String imageUrl = "http://artkiev.com/blog/wp-content/uploads/2012/12/Android1.png";
-        String textWebView = getResources().getString(R.string.long_text);
-        String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(textWebView, imageUrl, "justify", "right");
-        mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
+//        String textWebView = getResources().getString(R.string.long_text);
+//        String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(textWebView, imageUrl, "justify", "right");
+//        mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);
     }
 
     @Override

@@ -44,7 +44,6 @@
                 android:layout_gravity="left|center_vertical"
                 android:padding="3dp"
                 android:singleLine="true"
-                android:text="Third"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -111,7 +110,6 @@
                 android:layout_gravity="left|center_vertical"
                 android:padding="3dp"
                 android:singleLine="true"
-                android:text="Second"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -147,7 +145,6 @@
                 android:layout_gravity="left|center_vertical"
                 android:padding="3dp"
                 android:singleLine="true"
-                android:text="First"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>

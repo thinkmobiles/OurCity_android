@@ -164,7 +164,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
             showContent();
             if (data != null) {
                 clearFields();
-                Toast.makeText(getActivity(), "Ticket is sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.ticket_is_sent, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }

@@ -75,7 +75,6 @@
                     android:paddingEnd="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="ltr"
                     android:textSize="@dimen/sign_up_dialog_textSize" />
 
                 <EditText
@@ -88,10 +87,9 @@
                     android:hint="@string/last_name"
                     android:inputType="text"
                     android:padding="@dimen/person5"
-                    android:paddingStart="@dimen/person5"
+                    android:paddingLeft="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="ltr"
                     android:textSize="@dimen/sign_up_dialog_textSize"
 
                     />
@@ -113,7 +111,6 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="rtl"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <EditText
@@ -133,7 +130,6 @@
                 android:textAlignment="gravity"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="ltr"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <EditText
@@ -151,7 +147,6 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="rtl"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <EditText
@@ -169,7 +164,6 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="rtl"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <EditText
@@ -187,7 +181,6 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="rtl"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <LinearLayout
@@ -212,7 +205,6 @@
                     android:padding="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="rtl"
                     android:textSize="@dimen/sign_up_dialog_textSize" />
 
                 <com.crmc.ourcity.view.EditTextStreetAutoComplete
@@ -230,7 +222,6 @@
                     android:singleLine="true"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textDirection="rtl"
                     android:textSize="@dimen/sign_up_dialog_textSize" />
             </LinearLayout>
 
@@ -250,7 +241,6 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textDirection="rtl"
                 android:textSize="@dimen/sign_up_dialog_textSize" />
 
             <LinearLayout
@@ -306,7 +296,7 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:inputType="text"
                 android:padding="@dimen/person5"
-                android:text="Username is already used"
+                android:text="@string/username_is_already_used"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/sign_up_dialog_textSize"
                 android:visibility="gone" />

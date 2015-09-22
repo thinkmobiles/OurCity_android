@@ -43,7 +43,7 @@ public final class MapClearFragment extends BaseFourStatesFragment implements On
 
     @Override
     protected void initViews() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

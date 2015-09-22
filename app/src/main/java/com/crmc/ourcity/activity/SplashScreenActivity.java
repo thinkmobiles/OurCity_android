@@ -34,8 +34,8 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     private int SPLASH_DELAY ;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
         SPLASH_DELAY = getResources().getInteger(R.integer.banner_delay); //seconds
@@ -83,26 +83,26 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     };
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
+    public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
 
-        switch (id) {
+        switch (_id) {
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
-                loader = new ImageLoader(SplashScreenActivity.this, args);
+                loader = new ImageLoader(SplashScreenActivity.this, _args);
                 break;
             case Constants.LOADER_TICKERS_ID:
-                loader = new TickerLoader(SplashScreenActivity.this, args);
+                loader = new TickerLoader(SplashScreenActivity.this, _args);
                 break;
         }
         return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader loader, Object data) {
-        switch (loader.getId()) {
+    public void onLoadFinished(Loader _loader, Object _data) {
+        switch (_loader.getId()) {
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
 
-                String dataString = (String) data;
+                String dataString = (String) _data;
                 if (!TextUtils.isEmpty(dataString)) {
                     drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(dataString));
                     rlBackground.setBackground(drawable);
@@ -111,13 +111,13 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
                 mHandler.postDelayed(mEndSplash, SPLASH_DELAY * 1000);
                 break;
             case Constants.LOADER_TICKERS_ID:
-                tickers = (ArrayList<TickerModel>) data;
+                tickers = (ArrayList<TickerModel>) _data;
                 break;
         }
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {
+    public void onLoaderReset(Loader _loader) {
 
     }
 

@@ -37,13 +37,13 @@ public class AppealsAdapter extends BaseAdapter {
     }
 
     @Override
-    public ResultObject getItem(int position) {
-        return resultObjects.get(position);
+    public ResultObject getItem(int _position) {
+        return resultObjects.get(_position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int _position) {
+        return _position;
     }
 
     @Override
@@ -55,10 +55,10 @@ public class AppealsAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) _convertView.getTag();
         }
-        holder.setData(getItem(_position), _position);
+        holder.setData(getItem(_position));
         ImageView ivPhoto = (ImageView) _convertView.findViewById(R.id.ivImage_AF);
-        if (!TextUtils.isEmpty(getItem(_position).AttachedCompressFile)) {
-            ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(getItem(_position).AttachedCompressFile));
+        if (!TextUtils.isEmpty(getItem(_position).AttachedFiles)) {
+            ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(getItem(_position).AttachedFiles));
         }
         return _convertView;
     }
@@ -87,7 +87,7 @@ public class AppealsAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
-        public void setData(ResultObject _item, int _position) {
+        public void setData(ResultObject _item) {
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");
             }

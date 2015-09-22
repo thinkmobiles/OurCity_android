@@ -39,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="textPassword"
-        android:textDirection="rtl"
         android:ems="10"
         android:textColorHint="#616161"
         android:textSize="@dimen/sign_up_dialog_textSize"
