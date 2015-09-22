@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,10 +77,12 @@ public class EventsListAdapter extends BaseAdapter {
         final ImageView ivSendMail;
         final ImageView ivLink;
         final View view;
+        final LinearLayout llEventsControl_EF;
         final Context mContext;
         private int position;
 
         public ViewHolder(@NonNull final View _view, Context _context) {
+            llEventsControl_EF = (LinearLayout) _view.findViewById(R.id.llEventsControl_EF);
             title = (TextView) _view.findViewById(R.id.tvTitle_EIF);
             date = (TextView) _view.findViewById(R.id.tvDate_EIF);
             address = (TextView) _view.findViewById(R.id.tvAddress_EIF);

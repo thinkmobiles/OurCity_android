@@ -43,7 +43,7 @@
     <string name="dialog_camera_add_photo">Add Photo!</string>
     <string name="dialog_camera_btn_camera">Take Photo</string>
     <string name="dialog_camera_btn_gallery">Choose from Gallery</string>
-    <string name="dialog_map_filter_header_text">Interested points filter</string>
+    <string name="dialog_map_filter_header_text">פילטר תחומי עניין</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="btn_ok">Ok</string>
@@ -71,7 +71,7 @@
 
     <!--map fragment -->
     <!--<string name="btn_interest_point_title">נקודות עניין</string>-->
-    <string name="map_btn_filter">filter</string>
+    <string name="map_btn_filter">פילטר</string>
     <string name="map_btn_trips">trips</string>
 
     <!-- nodes titles -->
