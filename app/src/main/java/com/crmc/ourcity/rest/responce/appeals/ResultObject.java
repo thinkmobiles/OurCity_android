@@ -6,7 +6,6 @@ package com.crmc.ourcity.rest.responce.appeals;
  */
 public class ResultObject {
     public String AttachedFiles;
-    public String AttachedCompressFile;
     public int CRMCTicketID;
     public String DateCreated;
     public String DateCreatedClient;

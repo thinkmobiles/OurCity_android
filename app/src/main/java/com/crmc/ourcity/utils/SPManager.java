@@ -21,6 +21,7 @@ public class SPManager {
     public static final String FIRST_EMERGENCY_NUM = "firstEmergencyNum";
     public static final String SECOND_EMERGENCY_NUM = "secondEmergencyNum";
     public static final String THIRD_EMERGENCY_NUM = "thirdEmergencyNum";
+    public static final String SP_NAME="user_data";
 
     public static SPManager getInstance(Context context) {
         if (spManager == null) {
@@ -39,11 +40,11 @@ public class SPManager {
     }
 
     public SPManager(Context context) {
-        sharedPreferences = context.getSharedPreferences(Strings.SP_NAME, Context.MODE_MULTI_PROCESS);
+        sharedPreferences = context.getSharedPreferences(SP_NAME, Context.MODE_MULTI_PROCESS);
     }
 
     public void deleteSP(Context context) {
-        SharedPreferences sharedPreferences1 = context.getSharedPreferences(Strings.SP_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences1 = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         sharedPreferences1.edit().clear().commit();
     }
 

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:layout_weight="5"
-        android:paddingStart="15dp"/>
+        android:paddingLeft="15dp"/>
 
     <ImageView
         android:id="@+id/ivVoteStatus_DCV"

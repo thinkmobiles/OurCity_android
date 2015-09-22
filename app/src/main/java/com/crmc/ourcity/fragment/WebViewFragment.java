@@ -123,8 +123,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
@@ -241,19 +241,19 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         @Override
         public void onReceivedSslError(WebView view, @NonNull SslErrorHandler handler, SslError error) {
             super.onReceivedSslError(view, handler, error);
-            String message = "SSL error: \n";
+            String message = getResources().getString(R.string.ssl_error) + "\n";
             switch (error.getPrimaryError()) {
                 case SslError.SSL_UNTRUSTED:
-                    message += "The certificate authority is not trusted.";
+                    message += getResources().getString(R.string.the_certificate_authority_is_not_trusted);
                     break;
                 case SslError.SSL_EXPIRED:
-                    message += "The certificate has expired.";
+                    message += getResources().getString(R.string.the_certificate_has_expired);
                     break;
                 case SslError.SSL_IDMISMATCH:
-                    message += "The certificate Hostname mismatch.";
+                    message += getResources().getString(R.string.the_certificate_hostname_mismatch);
                     break;
                 case SslError.SSL_NOTYETVALID:
-                    message += "The certificate is not yet valid.";
+                    message += getResources().getString(R.string.the_certificate_is_not_yet_valid);
                     break;
             }
             pbLoading.setVisibility(View.GONE);

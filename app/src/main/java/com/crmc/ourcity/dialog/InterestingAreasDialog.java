@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.InterestingAreaLoader;
 import com.crmc.ourcity.loader.SendingAreasLoader;
-import com.crmc.ourcity.rest.responce.interestAreas.FullInterestArea;
 import com.crmc.ourcity.rest.responce.interestAreas.InterestingArea;
 import com.crmc.ourcity.rest.responce.interestAreas.ResidentResponse;
 import com.crmc.ourcity.utils.SPManager;
@@ -58,8 +56,8 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_dialog_interest_areas, container, false);
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        root = _inflater.inflate(R.layout.fragment_dialog_interest_areas, _container, false);
         findUI(root);
         setListeners();
         dialogLoading = new ProgressDialog(getActivity());
@@ -104,17 +102,17 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
 
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
+    public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
         dialogLoading.setMessage(getResources().getString(R.string.loading_string_sign_up_dialog));
         dialogLoading.show();
 
-        switch (id) {
+        switch (_id) {
             case LOADER_INTERESTING_AREAS_ID:
-                loader = new InterestingAreaLoader(getActivity(), args);
+                loader = new InterestingAreaLoader(getActivity(), _args);
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
-                loader = new SendingAreasLoader(getActivity(), args);
+                loader = new SendingAreasLoader(getActivity(), _args);
                 break;
 
         }
@@ -123,17 +121,17 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     }
 
     @Override
-    public void onLoadFinished(Loader loader, Object data) {
+    public void onLoadFinished(Loader _loader, Object _data) {
         if (dialogLoading.isShowing())
             dialogLoading.dismiss();
-        switch (loader.getId()) {
+        switch (_loader.getId()) {
             case LOADER_INTERESTING_AREAS_ID:
-                mResidentResponse = (ResidentResponse) data;
+                mResidentResponse = (ResidentResponse) _data;
                 mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
                 mLvInterestiongAreas.setAdapter(mAdapter);
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
-                boolean response = (Boolean) data;
+                boolean response = (Boolean) _data;
                 break;
         }
     }

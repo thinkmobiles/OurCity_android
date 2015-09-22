@@ -54,7 +54,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         vTopLine_SMF = findView(R.id.vTopLine_SMF);
         vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
         etFirstName_SMF = findView(R.id.etFirstName_SMF);
@@ -108,13 +108,13 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         }
     }
 
-    public final void sendMail(final String[] _mailAdress, final String title, final String text) {
+    public final void sendMail(final String[] _mailAddress, final String title, final String text) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL, _mailAdress);
+        i.putExtra(Intent.EXTRA_EMAIL, _mailAddress);
         i.putExtra(Intent.EXTRA_SUBJECT, title);
         i.putExtra(Intent.EXTRA_TEXT, text);
-        getActivity().startActivity(Intent.createChooser(i, "Send mail..."));
+        getActivity().startActivity(Intent.createChooser(i, getResources().getString(R.string.send_mail_hint)));
 
     }
 

@@ -84,7 +84,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="כתובת:"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 

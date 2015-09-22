@@ -197,8 +197,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                                 if (gender != null && age != null) {
                                     voteReply(voteDetails.surveyOptionId, gender, age);
                                 } else {
-                                    Toast.makeText(getActivity(), "Not selected age or gender!", Toast.LENGTH_SHORT)
-                                            .show();
+                                    Toast.makeText(getActivity(), getResources().getString(R.string
+                                            .not_selected_age_or_gender), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -206,13 +206,16 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 } else {
                     mAdapter.setVisibleVotePercent(true);
                     if (isActive) {
-                        Toast.makeText(getActivity(), "You already survey!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(R.string.you_already_survey), Toast
+                                .LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "Vote is already close!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(R.string.vote_is_already_close), Toast
+                                .LENGTH_SHORT).show();
                     }
                 }
             } else {
-                Toast.makeText(getActivity(), "Vote is empty!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.vote_is_empty), Toast.LENGTH_SHORT)
+                        .show();
                 ivVoteError.setImageResource(R.drawable.error_vote);
             }
             showContent();

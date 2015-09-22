@@ -1,6 +1,5 @@
 package com.crmc.ourcity.dialog;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,8 +33,8 @@ public class HotCallsEditableDialog extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_dialog_hotcalls, container, false);
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        root = _inflater.inflate(R.layout.fragment_dialog_hotcalls, _container, false);
         findUI(root);
         setListeners();
         editMode(true);
@@ -44,14 +42,14 @@ public class HotCallsEditableDialog extends BaseFragment {
         return root;
     }
 
-    private void findUI(View root) {
-        etFirstEmergencyNumber = (EditText) root.findViewById(R.id.etFirstEmergencyNumber_FDHC);
-        etSecondEmergencyNumber = (EditText) root.findViewById(R.id.etSecondEmergencyNumber_FDHC);
-        etThirdEmergencyNumber = (EditText) root.findViewById(R.id.etThirdEmergencyNumber_FDHC);
-        ivCallFirst = (ImageView) root.findViewById(R.id.ivCallFirst_FDHC);
-        ivCallSecond = (ImageView) root.findViewById(R.id.ivCallSecond_FDHC);
-        ivCallThird = (ImageView) root.findViewById(R.id.ivCallThird_FDHC);
-        btnSavePhones = (Button) root.findViewById(R.id.btnSavePhones_FDHC);
+    private void findUI(View _root) {
+        etFirstEmergencyNumber = (EditText) _root.findViewById(R.id.etFirstEmergencyNumber_FDHC);
+        etSecondEmergencyNumber = (EditText) _root.findViewById(R.id.etSecondEmergencyNumber_FDHC);
+        etThirdEmergencyNumber = (EditText) _root.findViewById(R.id.etThirdEmergencyNumber_FDHC);
+        ivCallFirst = (ImageView) _root.findViewById(R.id.ivCallFirst_FDHC);
+        ivCallSecond = (ImageView) _root.findViewById(R.id.ivCallSecond_FDHC);
+        ivCallThird = (ImageView) _root.findViewById(R.id.ivCallThird_FDHC);
+        btnSavePhones = (Button) _root.findViewById(R.id.btnSavePhones_FDHC);
     }
 
     private void setListeners() {

@@ -157,7 +157,6 @@ public class Image {
 
     public static String compressBitmap(Bitmap _bitmap) {
         try {
-
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             _bitmap = Bitmap.createScaledBitmap(_bitmap, (int) (_bitmap.getWidth() * 0.3), (int) (_bitmap.getHeight()
                     * 0.3), true);

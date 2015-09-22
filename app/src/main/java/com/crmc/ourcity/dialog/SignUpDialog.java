@@ -74,15 +74,15 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(@Nullable Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
         isEditable = getArguments().getBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, false);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_dialog_sign_up, container, false);
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        root = _inflater.inflate(R.layout.fragment_dialog_sign_up, _container, false);
         findUI(root);
         setListeners();
         dialogLoading = new ProgressDialog(getActivity());
@@ -230,37 +230,37 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus) {
+    public void onFocusChange(View _v, boolean _hasFocus) {
+        if (!_hasFocus) {
             hideKeyboard(getActivity());
         }
     }
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
+    public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
         dialogLoading.setMessage(getResources().getString(R.string.loading_string_sign_up_dialog));
         dialogLoading.show();
-        switch (id) {
+        switch (_id) {
 
             case LOADER_GET_RESIDENT_INFO_ID:
-                loader = new ResidentInfoLoader(getActivity(), args);
+                loader = new ResidentInfoLoader(getActivity(), _args);
                 break;
 
             case LOADER_UPDATE_RESIDENT_INFO:
-                loader = new UpdateResidentInfoLoader(getActivity(), args);
+                loader = new UpdateResidentInfoLoader(getActivity(), _args);
                 break;
 
             case LOADER_REGISTER_NEW_RESIDENT_ID:
-                loader = new RegisterLoader(getActivity(), args);
+                loader = new RegisterLoader(getActivity(), _args);
                 break;
 
             case LOADER_LOGIN_ID:
-                loader = new LoginLoader(getActivity(), args);
+                loader = new LoginLoader(getActivity(), _args);
                 break;
 
             case Constants.LOADER_STREETS_ID:
-                loader = new StreetsLoader(getActivity(), args);
+                loader = new StreetsLoader(getActivity(), _args);
                 break;
         }
         return loader;
@@ -290,12 +290,12 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     }
 
     @Override
-    public void onLoadFinished(Loader loader, Object data) {
+    public void onLoadFinished(Loader _loader, Object _data) {
         if (dialogLoading.isShowing())
             dialogLoading.dismiss();
-        switch (loader.getId()) {
+        switch (_loader.getId()) {
             case LOADER_REGISTER_NEW_RESIDENT_ID:
-                residentId = (Integer) data;
+                residentId = (Integer) _data;
 
                 if (residentId == -3) {
                     root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
@@ -310,7 +310,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 break;
 
             case LOADER_UPDATE_RESIDENT_INFO:
-                boolean result = (Boolean) data;
+                boolean result = (Boolean) _data;
 
                 if (result) {
                     login();
@@ -319,7 +319,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 }
                 break;
             case LOADER_LOGIN_ID:
-                LoginResponse dataLogin = (LoginResponse) data;
+                LoginResponse dataLogin = (LoginResponse) _data;
                 SPManager.getInstance(getActivity()).setAuthToken(dataLogin.authToken);
                 SPManager.getInstance(getActivity()).setCRMCUsername(dataLogin.crmcUsername);
                 SPManager.getInstance(getActivity()).setCRMCPassword(dataLogin.crmcPassword);
@@ -332,7 +332,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
                 break;
             case Constants.LOADER_STREETS_ID:
-                StreetsFull streetData = (StreetsFull) data;
+                StreetsFull streetData = (StreetsFull) _data;
                 if (streetData != null) {
                     int numbersStreets = streetData.streetsList.size();
                     streets = new StreetsItem[numbersStreets];
@@ -359,30 +359,30 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 break;
 
             case Constants.LOADER_GET_RESIDENT_INFO_ID:
-                ResidentDetails residentInfo = (ResidentDetails) data;
+                ResidentDetails residentInfo = (ResidentDetails) _data;
                 setResidentInfo(residentInfo);
                 break;
         }
     }
 
-    private void setResidentInfo(ResidentDetails residentInfo) {
-        etLastName.setText(residentInfo.lastName);
-        etFirstName.setText(residentInfo.firstName);
-        etUsername.setText(residentInfo.userName);
-        etPassword.setText(residentInfo.password);
-        etPhoneNumber.setText(residentInfo.phoneNumber != null ? residentInfo.phoneNumber : "");
-        etMobileNumber.setText(residentInfo.mobileNumber);
-        etEmail.setText(residentInfo.email);
-        etHouseNumber.setText(residentInfo.houseNumber);
-        setStreetName(residentInfo);
+    private void setResidentInfo(ResidentDetails _residentInfo) {
+        etLastName.setText(_residentInfo.lastName);
+        etFirstName.setText(_residentInfo.firstName);
+        etUsername.setText(_residentInfo.userName);
+        etPassword.setText(_residentInfo.password);
+        etPhoneNumber.setText(_residentInfo.phoneNumber != null ? _residentInfo.phoneNumber : "");
+        etMobileNumber.setText(_residentInfo.mobileNumber);
+        etEmail.setText(_residentInfo.email);
+        etHouseNumber.setText(_residentInfo.houseNumber);
+        setStreetName(_residentInfo);
         etCityName.setText(getResources().getString(R.string.app_name));
-        chbGlobalNotifications.setChecked(residentInfo.isGetGlobalNotification);
-        chbPersonalNotifications.setChecked(residentInfo.isGetPersonalNotification);
+        chbGlobalNotifications.setChecked(_residentInfo.isGetGlobalNotification);
+        chbPersonalNotifications.setChecked(_residentInfo.isGetPersonalNotification);
     }
 
-    private void setStreetName(ResidentDetails residentInfo) {
+    private void setStreetName(ResidentDetails _residentInfo) {
         for (int i = 0; i < streets.length; i++) {
-            if (residentInfo.streetId.equals(streets[i].streetId)) {
+            if (_residentInfo.streetId.equals(streets[i].streetId)) {
                 etStreet.setText(streets[i].streetName);
                 break;
             }
@@ -390,7 +390,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {
+    public void onLoaderReset(Loader _loader) {
     }
 
     @NonNull

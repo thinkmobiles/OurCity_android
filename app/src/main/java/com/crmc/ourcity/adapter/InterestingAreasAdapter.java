@@ -15,7 +15,6 @@ import com.crmc.ourcity.rest.responce.interestAreas.FullInterestArea;
 import com.crmc.ourcity.rest.responce.interestAreas.InterestingArea;
 import com.crmc.ourcity.rest.responce.interestAreas.ResidentResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,14 +39,14 @@ public class InterestingAreasAdapter extends BaseAdapter {
     }
 
     @Override
-    public FullInterestArea getItem(int position) {
-        return residentResponse.interestAreasModelsBool.get(position);
+    public FullInterestArea getItem(int _position) {
+        return residentResponse.interestAreasModelsBool.get(_position);
     }
 
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int _position) {
+        return _position;
     }
 
     @Override

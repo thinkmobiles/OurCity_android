@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/dialog_map_filter_btn_cancel"
+            android:text="@string/btn_cancel"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/black"/>
 

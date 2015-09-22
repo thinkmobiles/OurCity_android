@@ -18,14 +18,36 @@
     <string name="download_susses">Download susses</string>
     <string name="download_fail">Download fail</string>
     <string name="no_application_to_open_pdf">No Application Available to View PDF</string>
-    <string name="long_text">ברוכים הבאים לאפליקציה החדשנית של המועצה המקומית יסוד המעלה. המועצה המקומית יסוד המעלה נבחריה ועובדיה רואים חשיבות רבה בקשר עם התושבים ומחויבים לשרות מתקדם ויעיל, לפיכך אנו משקיעים תשומות במימוש ובחיזוק הקשר באמצעות מערכת מתקדמת ויעילה. באמצעות האפליקציה "פוקוס ניהול עירוני" ניתן יהיה לקבל ולשלוח מידע אודות המתרחש במושבה. אנו מאמינים כי השימוש באפליקציה יביא עימו, שרות איכותי ומהיר יותר לרווחת התושב. כראש הרשות אני מאמין בשקיפות מלאה ורואה באפליקציה כמו מערכת "הפוקוס ניהול עירוני" (מוקד) , ערוץ קשר חשוב. אתם מוזמנים לקבל מידע ולהזרים מידע על הקורה במושבה דרך האפליקציה . נשמח לקבל פניותיכם , הצעותיכם והיענותכם למוקד העירוני דרך האפליקציה , אתר האינטרנט והפייסבוק. אנחנו כאן למענכם ולשירותכם. בברכה, אילן אור ראש המועצה מ.מ יסוד המעלה</string>
+    <string name="device_not_supported">Device does not supported</string>
+    <string name="ticket_is_sent">Ticket is sent</string>
+    <string name="not_selected_age_or_gender">Not selected age or gender!</string>
+    <string name="you_already_survey">You already survey!</string>
+    <string name="vote_is_already_close">Vote is already close!</string>
+    <string name="vote_is_empty">Vote is empty!</string>
+    <string name="ssl_error">SSL error:</string>
+    <string name="the_certificate_authority_is_not_trusted">The certificate authority is not trusted.</string>
+    <string name="the_certificate_has_expired">The certificate has expired.</string>
+    <string name="the_certificate_hostname_mismatch">The certificate Hostname mismatch.</string>
+    <string name="the_certificate_is_not_yet_valid">The certificate is not yet valid.</string>
+    <string name="notification">Notification</string>
+    <string name="username_is_already_used">Username is already used</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="description">description</string>
+    <string name="vote_title">Vote Title</string>
+    <string name="choose_another_vote">choose another vote</string>
+    <string name="in_order_to_vote_you_must_select_the_gender_and_age">In order to vote you must select the gender
+        and age</string>
 
     <!--dialogs-->
     <string name="dialog_camera_add_photo">Add Photo!</string>
     <string name="dialog_camera_btn_camera">Take Photo</string>
     <string name="dialog_camera_btn_gallery">Choose from Gallery</string>
     <string name="dialog_map_filter_header_text">Interested points filter</string>
-    <string name="dialog_map_filter_btn_cancel">Cancel</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="dialog_map_filter_btn_select">Select</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
