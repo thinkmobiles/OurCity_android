@@ -107,7 +107,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             if (TextUtils.isEmpty(_item.entityName)) {
                 title.setVisibility(View.GONE);
             } else {
-                title.setText(_item.entityName);
+                title.setText(_item.entityName.trim());
             }
         }
 

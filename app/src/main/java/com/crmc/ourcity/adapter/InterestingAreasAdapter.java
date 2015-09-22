@@ -79,7 +79,7 @@ public class InterestingAreasAdapter extends BaseAdapter {
 
         public void setData(FullInterestArea _item, int _position) {
             this.position = _position;
-            tvInterestingAreaTitle.setText(_item.Key.interestAreaName);
+            tvInterestingAreaTitle.setText(_item.Key.interestAreaName.trim());
             cbInterestingArea.setChecked(_item.Value);
         }
 

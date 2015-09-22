@@ -75,7 +75,7 @@ public class LinksListAdapter extends BaseAdapter {
         public void setData(Events _item) {
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow,
                     Image.darkenColor(0.2)));
-                title.setText(_item.title);
+                title.setText(_item.title.trim());
         }
     }
 }

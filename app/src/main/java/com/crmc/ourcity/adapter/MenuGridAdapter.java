@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
 //        }
 
         _holder.ivMenuIcon.setImageBitmap(Image.convertBase64ToBitmap(item.iconItem));
-        _holder.tvTitle.setText(item.title);
+        _holder.tvTitle.setText(item.title.trim());
     }
 
     @Override

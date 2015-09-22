@@ -100,7 +100,7 @@ public class RSSAdapter extends BaseAdapter {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText(_entry.getPubDate());
+                date.setText(_entry.getPubDate().trim());
             }
 
             if (!TextUtils.isEmpty(_entry.getLink())) {

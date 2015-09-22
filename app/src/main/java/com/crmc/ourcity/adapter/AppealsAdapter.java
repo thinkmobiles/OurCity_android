@@ -93,19 +93,19 @@ public class AppealsAdapter extends BaseAdapter {
             }
 
             if (!TextUtils.isEmpty(_item.DateCreatedClient)) {
-                date.setText(_item.DateCreatedClient);
+                date.setText(_item.DateCreatedClient.trim());
             }
             if (!TextUtils.isEmpty(_item.Location.StreetName)) {
                 address.setText(_item.Location.HouseNumber + " " + _item.Location.StreetName);
             }
             if (!TextUtils.isEmpty(_item.Description)) {
-                description.setText(_item.Description);
+                description.setText(_item.Description.trim());
             }
             if (!TextUtils.isEmpty(_item.Status)) {
                 status.setText(_item.Status);
             }
             if (!TextUtils.isEmpty(_item.ReferenceID)) {
-                referenceID.setText(_item.ReferenceID);
+                referenceID.setText(_item.ReferenceID.trim());
             }
 
         }

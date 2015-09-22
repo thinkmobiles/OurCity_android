@@ -127,19 +127,19 @@ public class EventsListAdapter extends BaseAdapter {
                 title.setVisibility(View.GONE);
             } else {
                 title.setVisibility(View.VISIBLE);
-                title.setText(_item.title);
+                title.setText(_item.title.trim());
             }
             if (TextUtils.isEmpty(_item.eventDateToMobileClient)){
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText(_item.eventDateToMobileClient);
+                date.setText(_item.eventDateToMobileClient.trim());
             }
             if (TextUtils.isEmpty(_item.address)){
                 address.setVisibility(View.GONE);
             } else {
                 address.setVisibility(View.VISIBLE);
-                address.setText(_item.address);
+                address.setText(_item.address.trim());
             }
         }
 

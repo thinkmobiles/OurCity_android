@@ -77,7 +77,7 @@ public class MarkersListAdapter extends BaseAdapter{
 
         public void setData(MapMarker _item, int _position) {
             this.position = _position;
-            tvCategoryMarkers.setText(_item.title);
+            tvCategoryMarkers.setText(_item.title.trim());
             cbCategoryMarkersVisible.setChecked(_item.visible);
         }
 
