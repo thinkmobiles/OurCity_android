@@ -105,6 +105,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
+        getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 

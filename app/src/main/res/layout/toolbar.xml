@@ -12,7 +12,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        local:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        local:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:rotationY="180"/>
 
     <LinearLayout
         android:layout_width="match_parent"
