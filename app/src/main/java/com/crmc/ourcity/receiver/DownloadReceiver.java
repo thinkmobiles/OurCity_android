@@ -35,7 +35,7 @@ public class DownloadReceiver extends BroadcastReceiver {
                     String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
                     File file = new File(new FilePath().getPath(_context, Uri.parse(uriString)));
                     if (file.exists()) {
-                        Toast.makeText(_context, _context.getResources().getString(R.string.download_susses), Toast
+                        Toast.makeText(_context, _context.getResources().getString(R.string.download_success), Toast
                                 .LENGTH_SHORT).show();
                     }
                 } else if (status == DownloadManager.STATUS_FAILED) {

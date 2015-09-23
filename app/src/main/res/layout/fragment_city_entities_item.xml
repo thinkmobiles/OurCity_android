@@ -147,6 +147,64 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llPost_CEIF"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvPost_Text_CEIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvPost_CEIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="הודעה:"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMobile_CEIF"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvMobile_Text_CEIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvMobile_CEIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="נייד:"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
@@ -161,7 +219,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/phone"
+                android:src="@drawable/phone2"
                 tools:background="@android:color/darker_gray"/>
 
             <ImageView
@@ -172,6 +230,16 @@
                 android:layout_margin="5dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/mail"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivCall_Mobile_CEIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
                 tools:background="@android:color/darker_gray"/>
 
         </LinearLayout>

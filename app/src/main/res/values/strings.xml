@@ -15,7 +15,7 @@
     <string name="cant_get_location">Can not get location!</string>
     <string name="download">Download</string>
     <string name="download_from">Download from</string>
-    <string name="download_susses">Download susses</string>
+    <string name="download_success">Download success</string>
     <string name="download_fail">Download fail</string>
     <string name="no_application_to_open_pdf">No Application Available to View PDF</string>
     <string name="device_not_supported">Device does not supported</string>

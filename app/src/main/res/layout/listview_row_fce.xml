@@ -31,7 +31,7 @@
     <!--</LinearLayout>-->
 
     <LinearLayout
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical|left"
         android:layout_gravity="center_vertical|left"
@@ -53,7 +53,7 @@
             android:layout_gravity="center_vertical|left"
             android:layout_margin="5dp"
             android:scaleType="centerInside"
-            android:src="@drawable/phone"
+            android:src="@drawable/phone2"
             tools:background="@android:color/darker_gray"/>
 
         <ImageView
@@ -64,6 +64,16 @@
             android:layout_margin="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/mail"
+            tools:background="@android:color/darker_gray"/>
+
+        <ImageView
+            android:id="@+id/ivCall_Mobile_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_margin="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/phone"
             tools:background="@android:color/darker_gray"/>
 
         <!--<ImageView-->
@@ -106,5 +116,21 @@
             android:textSize="@dimen/cf_item_text_size"
             android:textStyle="bold"
             tools:background="@android:color/holo_orange_dark"/>
+
+        <TextView
+            android:id="@+id/tvPost_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:maxLines="2"
+            android:text="Post"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark"/>
+
+
     </LinearLayout>
 </LinearLayout>

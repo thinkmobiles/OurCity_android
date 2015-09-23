@@ -65,20 +65,25 @@ public class CityEntitiesListAdapter extends BaseAdapter {
 
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
+        final TextView post;
         final ImageView ivArrowEvent;
         final ImageView ivCall;
         final ImageView ivSendMail;
+        final ImageView ivCall_Mobile;
         final View view;
         final Context mContext;
         private int position;
 
         public ViewHolder(@NonNull final View _view, Context _context) {
             title = (TextView) _view.findViewById(R.id.tvEntityName_CEF);
+            post = (TextView) _view.findViewById(R.id.tvPost_CEF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowCityEntities_CEF);
             ivCall = (ImageView) _view.findViewById(R.id.ivCall_CEF);
             ivSendMail = (ImageView) _view.findViewById(R.id.ivMail_CEF);
+            ivCall_Mobile = (ImageView) _view.findViewById(R.id.ivCall_Mobile_CEF);
             ivCall.setOnClickListener(this);
             ivSendMail.setOnClickListener(this);
+            ivCall_Mobile.setOnClickListener(this);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
@@ -89,7 +94,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
             if (!TextUtils.isEmpty(_item.phoneNumber)) {
-                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
+                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
                         Image.darkenColor(0.2)));
 
                 ivCall.setVisibility(View.VISIBLE);
@@ -104,10 +109,25 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             } else {
                 ivSendMail.setVisibility(View.GONE);
             }
+            if (!TextUtils.isEmpty(_item.mobileNumber)) {
+                ivCall_Mobile.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
+                        Image.darkenColor(0.2)));
+
+                ivCall_Mobile.setVisibility(View.VISIBLE);
+            } else {
+                ivCall_Mobile.setVisibility(View.GONE);
+            }
             if (TextUtils.isEmpty(_item.entityName)) {
                 title.setVisibility(View.GONE);
             } else {
+                title.setVisibility(View.VISIBLE);
                 title.setText(_item.entityName.trim());
+            }
+            if (TextUtils.isEmpty(_item.entityPost)) {
+                post.setVisibility(View.GONE);
+            } else {
+                post.setVisibility(View.VISIBLE);
+                post.setText(_item.entityPost.trim());
             }
         }
 
@@ -129,6 +149,15 @@ public class CityEntitiesListAdapter extends BaseAdapter {
                                 .emailAddress), mContext.getResources().getString(R.string.send_mail_hint)));
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivCall_Mobile_CEF:
+                    try {
+                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentCall(getItem(position)
+                                .mobileNumber), mContext.getResources().getString(R.string.call_hint)));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
                                 Toast.LENGTH_SHORT).show();
                     }
                     break;

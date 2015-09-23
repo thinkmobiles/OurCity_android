@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +29,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     private TextView tvEmail_Text_CEIF;
     private TextView tvInformation_Text_CEIF;
     private TextView tvPhone_Text_CEIF;
+    private TextView tvPost_Text_CEIF;
+    private TextView tvMobile_Text_CEIF;
 
     private View vUnderLine_CEIF;
     private View vBottomLine_CEIF;
@@ -38,9 +39,12 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     private LinearLayout llEmail_CEIF;
     private LinearLayout llInformation_CEIF;
     private LinearLayout llPhone_CEIF;
+    private LinearLayout llPost_CEIF;
+    private LinearLayout llMobile_CEIF;
 
     private ImageView ivCall_CEIF;
     private ImageView ivSendMail_CEIF;
+    private ImageView ivCall_Mobile_CEIF;
 
     public static CityEntitiesItemFragment newInstance(CityEntities _cityEntities) {
         CityEntitiesItemFragment mCityEntitiesItemFragment = new CityEntitiesItemFragment();
@@ -68,6 +72,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         tvEmail_Text_CEIF = findView(R.id.tvEmail_Text_CEIF);
         tvInformation_Text_CEIF = findView(R.id.tvInformation_Text_CEIF);
         tvPhone_Text_CEIF = findView(R.id.tvPhone_Text_CEIF);
+        tvPost_Text_CEIF = findView(R.id.tvPost_Text_CEIF);
+        tvMobile_Text_CEIF = findView(R.id.tvMobile_Text_CEIF);
 
         vUnderLine_CEIF = findView(R.id.vUnderLine_CEIF);
         vBottomLine_CEIF = findView(R.id.vBottomLine_CEIF);
@@ -76,9 +82,12 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         llEmail_CEIF = findView(R.id.llEmail_CEIF);
         llInformation_CEIF = findView(R.id.llInformation_CEIF);
         llPhone_CEIF = findView(R.id.llPhone_CEIF);
+        llPost_CEIF = findView(R.id.llPost_CEIF);
+        llMobile_CEIF = findView(R.id.llMobile_CEIF);
 
         ivCall_CEIF = findView(R.id.ivCall_CEIF);
         ivSendMail_CEIF = findView(R.id.ivSendMail_CEIF);
+        ivCall_Mobile_CEIF = findView(R.id.ivCall_Mobile_CEIF);
     }
 
     @Override
@@ -89,6 +98,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         checkData(mCityEntities.emailAddress, tvEmail_Text_CEIF, llEmail_CEIF);
         checkData(mCityEntities.information, tvInformation_Text_CEIF, llInformation_CEIF);
         checkData(mCityEntities.phoneNumber, tvPhone_Text_CEIF, llPhone_CEIF);
+        checkData(mCityEntities.entityPost, tvPost_Text_CEIF, llPost_CEIF);
+        checkData(mCityEntities.mobileNumber, tvMobile_Text_CEIF, llMobile_CEIF);
         setImage();
         showContent();
     }
@@ -103,7 +114,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private void setImage(){
         if (!TextUtils.isEmpty(mCityEntities.phoneNumber)){
-            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
                     .darkenColor(0.2)));
         } else {
             ivCall_CEIF.setVisibility(View.GONE);
@@ -114,6 +125,12 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
+        if (!TextUtils.isEmpty(mCityEntities.mobileNumber)){
+            ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+                    .darkenColor(0.2)));
+        } else {
+            ivCall_Mobile_CEIF.setVisibility(View.GONE);
+        }
         vUnderLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
     }
@@ -123,6 +140,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         super.setListeners();
         ivCall_CEIF.setOnClickListener(handleClick());
         ivSendMail_CEIF.setOnClickListener(handleClick());
+        ivCall_Mobile_CEIF.setOnClickListener(handleClick());
     }
 
     @NonNull
@@ -140,10 +158,18 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                     break;
                 case R.id.ivSendMail_CEIF:
                     try {
-                        startActivity(Intent.createChooser(IntentUtils.getIntentMail(mCityEntities.emailAddress), getResources().getString(R
-                                .string.send_mail_hint)));
+                        startActivity(Intent.createChooser(IntentUtils.getIntentMail(mCityEntities.emailAddress), getResources().getString(R.string.send_mail_hint)));
                     } catch (ActivityNotFoundException ex) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivCall_Mobile_CEIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.mobileNumber), getResources()
+                                .getString(R.string.call_hint)));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
                     }
                     break;
