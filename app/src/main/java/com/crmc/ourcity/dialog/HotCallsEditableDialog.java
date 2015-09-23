@@ -1,7 +1,7 @@
 package com.crmc.ourcity.dialog;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 
 /**
@@ -89,10 +90,12 @@ public class HotCallsEditableDialog extends BaseFragment {
 
     private void doCall(String _phone) {
         if (_phone.length() > 0) {
-            String uri = "tel:" + _phone;
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse(uri));
-            startActivity(intent);
+            try {
+                startActivity(Intent.createChooser(IntentUtils.getIntentCall(_phone), getResources().getString(R.string.call_hint)));
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client),
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.ivalid_number), Toast.LENGTH_SHORT).show();
         }

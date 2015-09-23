@@ -39,6 +39,10 @@ public abstract class BaseFragment extends Fragment {
         getFragmentManager().popBackStack();
     }
 
+    public final void popBackStackImmediate() {
+        getFragmentManager().popBackStackImmediate();
+    }
+
     protected void hideKeyboard(Context _context) {
         InputMethodManager inputManager = (InputMethodManager) _context
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
