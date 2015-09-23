@@ -24,7 +24,7 @@ public class MenuModel implements Parcelable {
     @SerializedName("BorderColor")
     public String borderColor;
     @SerializedName("BorderWidth")
-    public int borderWidth;
+    public Integer borderWidth;
     @SerializedName("Email")
     public String email;
     @SerializedName("Link")

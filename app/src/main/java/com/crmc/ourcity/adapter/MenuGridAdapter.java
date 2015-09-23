@@ -2,6 +2,7 @@ package com.crmc.ourcity.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -39,12 +40,24 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder _holder, int _position) {
         MenuModel item = mMenuModels.get(_position);
-        if(!TextUtils.isEmpty(item.colorItem))
-        Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
-                (item.colorItem));
+        if (!TextUtils.isEmpty(item.colorItem)) {
+
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setShape(GradientDrawable.RECTANGLE);
+            if (!TextUtils.isEmpty(item.borderColor) && item.borderWidth != null) {
+                drawable.setStroke(item.borderWidth, Color.parseColor(item.borderColor));
+            }
+            drawable.setCornerRadius(5);
+            drawable.setColor(Color.parseColor(item.colorItem));
+            _holder.llMenuItem.setBackground(drawable);
+//
+//
+//            Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
+//                    (item.colorItem));
+        }
 //        if (!TextUtils.isEmpty(item.borderColor)) {
-//            Image.setBorderColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor(item.borderColor),
-//                   item.borderWidth);
+//            Image.setBorderColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
+//                    (item.borderColor), item.borderWidth);
 //        }
 
         _holder.ivMenuIcon.setImageBitmap(Image.convertBase64ToBitmap(item.iconItem));
