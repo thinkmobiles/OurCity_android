@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by SetKrul on 31.08.2015.
  */
-public class CityEntities implements Parcelable{
+public class CityEntities implements Parcelable {
     @SerializedName("cityId")
     public Integer cityId;
     @SerializedName("details")
@@ -24,6 +24,12 @@ public class CityEntities implements Parcelable{
     @SerializedName("phoneNumber")
     public String phoneNumber;
 
+    @SerializedName("entityPost")
+    public String entityPost;
+    @SerializedName("mobileNumber")
+    public String mobileNumber;
+
+
     protected CityEntities(Parcel in) {
         cityId = in.readInt();
         details = in.readString();
@@ -32,6 +38,8 @@ public class CityEntities implements Parcelable{
         entityName = in.readString();
         information = in.readString();
         phoneNumber = in.readString();
+        entityPost = in.readString();
+        mobileNumber = in.readString();
     }
 
     public static final Creator<CityEntities> CREATOR = new Creator<CityEntities>() {
@@ -60,5 +68,7 @@ public class CityEntities implements Parcelable{
         dest.writeString(entityName);
         dest.writeString(information);
         dest.writeString(phoneNumber);
+        dest.writeString(entityPost);
+        dest.writeString(mobileNumber);
     }
 }
