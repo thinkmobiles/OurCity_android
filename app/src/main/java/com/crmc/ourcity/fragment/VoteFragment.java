@@ -91,7 +91,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);

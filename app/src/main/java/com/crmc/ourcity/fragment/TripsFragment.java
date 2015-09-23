@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.TripsListAdapter;
@@ -93,8 +94,11 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     protected void initViews() {
         super.initViews();
         //noinspection ConstantConditions
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(new StringBuilder(title).reverse().toString());
+//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+
+        configureActionBar(true, true, title);
+
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
         vUnderLine_FT = findView(R.id.vUnderLine_FT);
         lvTrips = findView(R.id.lvTrips_FT);

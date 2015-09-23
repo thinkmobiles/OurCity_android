@@ -71,7 +71,8 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);

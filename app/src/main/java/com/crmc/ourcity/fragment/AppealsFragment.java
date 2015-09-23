@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -121,7 +122,14 @@ public class AppealsFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
+        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
+        mActionBack.setVisibility(View.VISIBLE);
+        mActionHome.setVisibility(View.VISIBLE);
+        //TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
+        //mTitle.setText(title);
         ivPhoto = findView(R.id.ivPhoto_AF);
         ivRotate = findView(R.id.ivRotate_AF);
         etNameCity = findView(R.id.etCityName_AF);
@@ -322,7 +330,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile1 = new File(mPhotoFilePath);
                         if (imageFile1.exists()) {
-                            ivPhoto.setImageURI(Uri.fromFile(imageFile1));
+                            ivPhoto.setImageBitmap(Image.compressImage(imageFile1, 300));
                             ivRotate.setEnabled(true);
                         } else {
                             Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),

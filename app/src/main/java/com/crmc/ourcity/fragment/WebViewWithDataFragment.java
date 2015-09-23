@@ -26,7 +26,8 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         WebView mWebView = findView(R.id.webView_WVF);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");

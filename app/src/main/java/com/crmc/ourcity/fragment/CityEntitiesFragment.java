@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CityEntitiesListAdapter;
@@ -108,8 +109,9 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);

@@ -104,7 +104,8 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
         vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
         swipeRefreshLayout = findView(R.id.swipe_refresh_phone_book);

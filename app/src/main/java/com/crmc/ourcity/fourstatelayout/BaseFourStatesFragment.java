@@ -3,13 +3,16 @@ package com.crmc.ourcity.fourstatelayout;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
@@ -112,5 +115,43 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     @SuppressWarnings("unchecked")
     protected final <T extends View> T findView(@IdRes int _id) {
         return (T) rootView.findViewById(_id);
+    }
+
+    protected void configureActionBar (boolean isBackVisible, boolean isHomeVisible, String title) {
+        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
+        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
+        TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
+
+        if (isBackVisible) {
+            mActionBack.setVisibility(View.VISIBLE);
+        } else {
+            mActionBack.setVisibility(View.GONE);
+        }
+        if (isHomeVisible) {
+            mActionHome.setVisibility(View.VISIBLE);
+        } else {
+            mActionHome.setVisibility(View.GONE);
+        }
+
+        if (!TextUtils.isEmpty(title)) mTitle.setText(title);
+    }
+
+    protected void configureActionBar (boolean isBackVisible, boolean isHomeVisible) {
+        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
+        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
+        TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
+
+        if (isBackVisible) {
+            mActionBack.setVisibility(View.VISIBLE);
+        } else {
+            mActionBack.setVisibility(View.GONE);
+        }
+        if (isHomeVisible) {
+            mActionHome.setVisibility(View.VISIBLE);
+        } else {
+            mActionHome.setVisibility(View.GONE);
+        }
     }
 }

@@ -9,7 +9,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.AppealsAdapter;
@@ -97,8 +99,9 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         View vUnderLine_ALF = findView(R.id.vUnderLine_ALF);

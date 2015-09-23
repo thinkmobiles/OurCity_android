@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.LinksListAdapter;
@@ -109,8 +110,11 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     protected void initViews() {
         super.initViews();
         //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+
+        configureActionBar(true, true, title);
+
         swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);
         vUnderLine_LLF = findView(R.id.vUnderLine_LLF);

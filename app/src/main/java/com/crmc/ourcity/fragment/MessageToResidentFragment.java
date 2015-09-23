@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
@@ -32,16 +31,18 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     private String color;
     private String json;
     private String route;
+    private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private MassageToResidentAdapter mAdapter;
 
-    public static MessageToResidentFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static MessageToResidentFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         MessageToResidentFragment mMessageToResidentFragment = new MessageToResidentFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mMessageToResidentFragment.setArguments(args);
         return mMessageToResidentFragment;
     }
@@ -49,10 +50,12 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true, "insert title");
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -91,13 +94,14 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_message_to_resident);
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_MTRF.setBackgroundColor(Image.darkenColor(0.2));

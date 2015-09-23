@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.EventsListAdapter;
@@ -115,8 +116,9 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
+        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
         View vUnderLine_EF = findView(R.id.vUnderLine_EF);

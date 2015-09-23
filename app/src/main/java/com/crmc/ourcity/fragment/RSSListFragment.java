@@ -103,7 +103,8 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         swipeRefreshLayout = findView(R.id.swipe_refresh_rss);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);

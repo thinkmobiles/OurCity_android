@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -65,8 +68,12 @@ import java.util.List;
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener,
         OnListItemActionListener, FragmentManager.OnBackStackChangedListener {
 
-    private Toolbar mToolbar;
+   // private Toolbar mToolbar;
     private Ticker mTicker;
+    private ImageView mActionHome;
+    private ImageView mActionBack;
+    private ImageView mActionSettings;
+    private TextView mTitle;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private boolean isLoggedIn;
@@ -88,7 +95,20 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             }
         }
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mActionHome = findView(R.id.action_home);
+        mActionSettings = findView(R.id.action_settings);
+        mTitle = findView(R.id.action_title);
+        mActionBack = findView(R.id.action_back);
+
+        mActionSettings.setOnClickListener(handleClicks());
+        mActionHome.setOnClickListener(handleClicks());
+        mActionBack.setOnClickListener(handleClicks());
+
+
+
+
+
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
         if (tickers != null) {
@@ -97,15 +117,40 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             mTicker.startAnimation();
         }
 
-        setSupportActionBar(mToolbar);
+      //  setSupportActionBar(mToolbar);
 
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
-        getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
+       // getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+    }
+
+    @NonNull
+    private View.OnClickListener handleClicks() {
+        return v -> {
+            switch (v.getId()) {
+                case R.id.action_home:
+                    clearBackStack();
+                    setTopFragment(MainMenuFragment.newInstance());
+                    break;
+                case R.id.action_settings:
+                    Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+                    boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
+                            SubMenuFragment;
+                    Intent intent = new Intent(this, DialogActivity.class);
+                    intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
+                    EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
+                    startActivity(intent);
+                    break;
+                case R.id.action_back:
+                    setTitle();
+                    popBackStack();
+                    break;
+            }
+        };
     }
 
     private void setTopFragment(final Fragment _fragment) {
@@ -115,7 +160,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onItemAction(MenuModel _menuModel) {
-        getDelegate().getSupportActionBar().setTitle(_menuModel.title);
+//        getDelegate().getSupportActionBar().setTitle(_menuModel.title);
+        mTitle.setText(_menuModel.title);
         switch (_menuModel.actionType) {
             case Constants.ACTION_TYPE_LIST:
                 switch (_menuModel.listType) {
@@ -211,7 +257,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(_menuModel
-                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute));
+                        .colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
         }
     }
@@ -262,35 +308,35 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel, Constants.PREVIOUSTITLE));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu _menu) {
-        getMenuInflater().inflate(R.menu.menu_main, _menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem _item) {
-        switch (_item.getItemId()) {
-            case R.id.menu_settings:
-                Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
-                        SubMenuFragment;
-                Intent intent = new Intent(this, DialogActivity.class);
-                intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
-                EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-                startActivity(intent);
-                break;
-            case android.R.id.home:
-                setTitle();
-                popBackStack();
-                break;
-            case R.id.menu_home:
-                clearBackStack();
-                setTopFragment(MainMenuFragment.newInstance());
-                break;
-        }
-        return super.onOptionsItemSelected(_item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu _menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, _menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem _item) {
+//        switch (_item.getItemId()) {
+//            case R.id.menu_settings:
+//                Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+//                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
+//                        SubMenuFragment;
+//                Intent intent = new Intent(this, DialogActivity.class);
+//                intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
+//                EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
+//                startActivity(intent);
+//                break;
+//            case android.R.id.home:
+//                setTitle();
+//                popBackStack();
+//                break;
+//            case R.id.menu_home:
+//                clearBackStack();
+//                setTopFragment(MainMenuFragment.newInstance());
+//                break;
+//        }
+//        return super.onOptionsItemSelected(_item);
+//    }
 
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -342,9 +388,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private void setTitle() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
-            getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+ //           getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+            mTitle.setText(Constants.PREVIOUSTITLE);
         } else if (f instanceof MainMenuFragment) {
-            getDelegate().getSupportActionBar().setTitle("");
+//           getDelegate().getSupportActionBar().setTitle("");
+            mTitle.setText("");
         }
     }
 }

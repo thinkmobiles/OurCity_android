@@ -54,7 +54,8 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
-        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true);
         vTopLine_SMF = findView(R.id.vTopLine_SMF);
         vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
         etFirstName_SMF = findView(R.id.etFirstName_SMF);

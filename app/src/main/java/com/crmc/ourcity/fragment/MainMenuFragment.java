@@ -51,6 +51,7 @@ import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
  */
 public class MainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Object> {
 
+    View actionBar;
     LinearLayout llBtn_MMF;
     LinearLayout llBtnFirst_MMF;
     LinearLayout llBtnSecond_MMF;
@@ -108,7 +109,13 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     protected void initViews() {
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+       // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        actionBar = getActivity().findViewById(R.id.rlActionBar);
+//        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
+//        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
+//        mActionHome.setVisibility(View.GONE);
+//        mActionBack.setVisibility(View.GONE);
+        configureActionBar(false, false);
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
         llBtnFirst_MMF = findView(R.id.llBtnFirst_MMF);
@@ -156,7 +163,9 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
             lng = "he";
         }
         residentId = SPManager.getInstance(getActivity()).getResidentId();
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle("");
+        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle("");
+        TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
+        mTitle.setText("");
         Constants.PREVIOUSTITLE = "";
     }
 
@@ -219,11 +228,11 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this).forceLoad();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.getItem(0).setVisible(false);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        menu.getItem(0).setVisible(false);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
     @Override
     public Loader<Object> onCreateLoader(int id, Bundle args) {
