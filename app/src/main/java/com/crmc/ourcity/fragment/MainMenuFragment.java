@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
@@ -132,8 +133,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
-                                                 getActivity().getApplicationContext(), handleItemClick()));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
+                handleItemClick()));
     }
 
     @Override
@@ -150,7 +151,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
         cityNumber = getResources().getInteger(R.integer.city_id);
-        if (Locale.getDefault().toString().equals("en_US")){
+        if (Locale.getDefault().toString().equals("en_US")) {
             lng = "en";
         } else {
             lng = "he";
@@ -255,7 +256,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                 if (Constants.mMenuFull == null) {
                     Constants.mMenuFull = (MenuFull) _data;
                 }
-                if (Constants.mMenuFull != null && Constants.mMenuFull.getNodes() != null && Constants.mMenuFull.getSize() > 0) {
+                if (Constants.mMenuFull != null && Constants.mMenuFull.getNodes() != null && Constants.mMenuFull
+                        .getSize() > 0) {
                     mAdapter = new MenuGridAdapter(Constants.mMenuFull.getNodes(), activity);
                     mRecyclerView.setAdapter(mAdapter);
                 }
@@ -267,22 +269,32 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                 if (Constants.mMenuFullBottom == null) {
                     Constants.mMenuFullBottom = (MenuFull) _data;
                 }
-                if (Constants.mMenuFullBottom != null
-                        && Constants.mMenuFullBottom.getNodes() != null
-                        && Constants.mMenuFullBottom.getSize() > 0) {
+                if (Constants.mMenuFullBottom != null && Constants.mMenuFullBottom.getNodes() != null && Constants
+                        .mMenuFullBottom.getSize() > 0) {
                     mMenuBottom = Constants.mMenuFullBottom.getNodes();
                     for (int i = 0; i < Constants.mMenuFullBottom.getSize(); i++) {
                         llBottomButtons[i].setVisibility(View.VISIBLE);
                         tvBottomButtons[i].setText(mMenuBottom.get(i).title);
                         ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
-                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
-                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
-                        }
-                        if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
-                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
-                                            .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
-                                    mMenuBottom.get(i).borderWidth);
+//                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
+//                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
+//                        }
+//                        if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
+//                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
+//                                            .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
+//                                    mMenuBottom.get(i).borderWidth);
+//                        }
+                            GradientDrawable drawable = new GradientDrawable();
+                            drawable.setShape(GradientDrawable.RECTANGLE);
+                            if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor) && mMenuBottom.get(i).borderWidth
+                                    != null) {
+                                drawable.setStroke(mMenuBottom.get(i).borderWidth, Color.parseColor(mMenuBottom.get
+                                        (i).borderColor));
+                            }
+                            drawable.setCornerRadius(5);
+                            drawable.setColor(Color.parseColor(mMenuBottom.get(i).colorItem));
+                            llBottomButtons[i].setBackground(drawable);
                         }
                     }
                     llBtn_MMF.setVisibility(View.VISIBLE);
