@@ -60,13 +60,13 @@ public class MassageToResidentAdapter extends BaseAdapter {
 
     private class ViewHolder {
         final TextView tvMessage_MTRF;
-        final ImageView ivArrowMessageToResident_MTRF;
+        //final ImageView ivArrowMessageToResident_MTRF;
         final View view;
         final Context mContext;
 
         public ViewHolder(@NonNull final View _view, Context _context) {
             tvMessage_MTRF = (TextView) _view.findViewById(R.id.tvMessage_MTRF);
-            ivArrowMessageToResident_MTRF = (ImageView) _view.findViewById(R.id.ivArrowMessageToResident_MTRF);
+//            ivArrowMessageToResident_MTRF = (ImageView) _view.findViewById(R.id.ivArrowMessageToResident_MTRF);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
