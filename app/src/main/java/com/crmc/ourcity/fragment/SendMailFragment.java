@@ -28,12 +28,14 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     private Button btnOk_SMF;
     private String color;
     private String mail;
+    private String title;
 
-    public static SendMailFragment newInstance(String _colorItem, String _mail) {
+    public static SendMailFragment newInstance(String _colorItem, String _mail,  String _title) {
         SendMailFragment mSendMailFragment = new SendMailFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_MAIL, _mail);
+        args.putString(Constants.NODE_TITLE, _title);
         mSendMailFragment.setArguments(args);
         return mSendMailFragment;
     }
@@ -43,6 +45,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         mail = getArguments().getString(Constants.CONFIGURATION_KEY_MAIL);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     protected void initViews() {
         super.initViews();
        // ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
+        configureActionBar(true, true, title);
         vTopLine_SMF = findView(R.id.vTopLine_SMF);
         vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
         etFirstName_SMF = findView(R.id.etFirstName_SMF);

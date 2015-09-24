@@ -36,12 +36,14 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
 
     private ImageView ivLink;
     private OnListItemActionListener mOnListItemActionListener;
+    private String title;
 
 
-    public static RSSEntryFragment newInstance(RSSEntry _entry) {
+    public static RSSEntryFragment newInstance(RSSEntry _entry, String _title) {
         RSSEntryFragment rssEntryFragment = new RSSEntryFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CONFIGURATION_KEY_RSS, _entry);
+        args.putString(Constants.NODE_TITLE, _title);
         rssEntryFragment.setArguments(args);
         return rssEntryFragment;
     }
@@ -50,6 +52,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         entry = getArguments().getParcelable(Constants.CONFIGURATION_KEY_RSS);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
+        configureActionBar(true, true, entry.getTitle());
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);

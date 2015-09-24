@@ -63,13 +63,15 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private Integer gender;
     private List<VoteFull> mVoteFull;
     private Boolean isActive;
+    private String title;
 
-    public static VoteFragment newInstance(String _colorItem, String _json, String _route) {
+    public static VoteFragment newInstance(String _colorItem, String _json, String _route, String _title) {
         VoteFragment mVoteFragment = new VoteFragment();
         Bundle args = new Bundle();
         args.putString(CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(CONFIGURATION_KEY_jSON, _json);
         args.putString(CONFIGURATION_KEY_ROUTE, _route);
+        args.putString(Constants.NODE_TITLE, _title);
         mVoteFragment.setArguments(args);
         return mVoteFragment;
     }
@@ -80,6 +82,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         color = getArguments().getString(CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(CONFIGURATION_KEY_jSON);
         route = getArguments().getString(CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
 
@@ -92,7 +95,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
+        configureActionBar(true, true, title);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);

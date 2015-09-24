@@ -79,13 +79,15 @@ public class AppealsFragment extends BaseFourStatesFragment {
     private Gallery mGallery;
     private SwitchCompat swGpsOnOff;
     private String[] streets;
+    private String title;
 
-    public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         AppealsFragment mAppealsFragment = new AppealsFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mAppealsFragment.setArguments(args);
         return mAppealsFragment;
     }
@@ -96,6 +98,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -123,6 +126,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true, title);
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
