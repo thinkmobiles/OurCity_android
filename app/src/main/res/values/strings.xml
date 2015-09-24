@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">חדרה</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="send_mail_hint">Send mail...</string>
-    <string name="call_hint">Call...</string>
-    <string name="app_no_mail_client">There are no email clients installed.</string>
-    <string name="app_no_call_client">There are no call clients installed.</string>
-    <string name="play_service_do_not_supported">This device is not supported google play service.</string>
-    <string name="not_found_camera">This device has no camera</string>
-    <string name="cant_create_photo">Can not create photo</string>
-    <string name="file_is_not_found">File is not found!</string>
-    <string name="uncompilable_type">Uncompilable type!</string>
-    <string name="cant_get_location">Can not get location!</string>
-    <string name="download">Download</string>
-    <string name="download_from">Download from</string>
-    <string name="download_success">Download success</string>
-    <string name="download_fail">Download fail</string>
-    <string name="no_application_to_open_pdf">No Application Available to View PDF</string>
-    <string name="device_not_supported">Device does not supported</string>
-    <string name="ticket_is_sent">Ticket is sent</string>
-    <string name="not_selected_age_or_gender">Not selected age or gender!</string>
-    <string name="you_already_survey">You already survey!</string>
-    <string name="vote_is_already_close">Vote is already close!</string>
-    <string name="vote_is_empty">Vote is empty!</string>
-    <string name="ssl_error">SSL error:</string>
-    <string name="the_certificate_authority_is_not_trusted">The certificate authority is not trusted.</string>
-    <string name="the_certificate_has_expired">The certificate has expired.</string>
-    <string name="the_certificate_hostname_mismatch">The certificate Hostname mismatch.</string>
-    <string name="the_certificate_is_not_yet_valid">The certificate is not yet valid.</string>
-    <string name="notification">Notification</string>
-    <string name="username_is_already_used">Username is already used</string>
-    <string name="title">title</string>
-    <string name="date">date</string>
-    <string name="description">description</string>
-    <string name="vote_title">Vote Title</string>
-    <string name="choose_another_vote">choose another vote</string>
-    <string name="in_order_to_vote_you_must_select_the_gender_and_age">In order to vote you must select the gender
-        and age</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="send_mail_hint">שלח דואר...</string>
+    <string name="call_hint">חיוג...</string>
+    <string name="app_no_mail_client">אין תיבת דואר אלקטרוני מותקנת</string>
+    <string name="app_no_call_client">אין תוכנת טלפון מותקנת</string>
+    <string name="play_service_do_not_supported">מכשיר זה אינו תומך שירותי google play</string>
+    <string name="not_found_camera">למכשיר הזה אין מצלמה</string>
+    <string name="cant_create_photo">אין אפשרות ליצור תמונה</string>
+    <string name="file_is_not_found">הקובץ לא נמצא</string>
+    <string name="uncompilable_type">סוג מזוהה</string>
+    <string name="cant_get_location">לא ניתן לאתר את המיקום</string>
+    <string name="download">הורדה</string>
+    <string name="download_from">להוריד מ</string>
+    <string name="download_success">הורדה הושלמה</string>
+    <string name="download_fail">לא ניתן להוריד את הקובץ הדרוש \ הורדה נכשלה</string>
+    <string name="no_application_to_open_pdf">אין יישום זמין לתצוגה PDF</string>
+    <string name="device_not_supported">המכשיר אינו נתמך</string>
+    <string name="ticket_is_sent">פניה נשלחה</string>
+    <string name="not_selected_age_or_gender">לא בחרת "מין" ו"גיל"</string>
+    <string name="you_already_survey">אתה כבר הצבעתה</string>
+    <string name="vote_is_already_close">ההצבעה כבר נסגרה</string>
+    <string name="vote_is_empty">לא בחרת</string>
+    <string name="ssl_error">שגיאת SSL</string>
+    <string name="the_certificate_authority_is_not_trusted">חותם הרישיון אינו אמין</string>
+    <string name="the_certificate_has_expired">הרישיון פג תוקף</string>
+    <string name="the_certificate_hostname_mismatch">אין התאמה בין HOSTNAME לרישיון</string>
+    <string name="the_certificate_is_not_yet_valid">הרישיון עדיין אינו פעיל</string>
+    <string name="notification">הודעה</string>
+    <string name="username_is_already_used">שם המשתמש כבר נמצא בשימוש</string>
+    <string name="title">כותרת</string>
+    <string name="date">תאריך</string>
+    <string name="description">תאור</string>
+    <string name="vote_title">שם ההצבעה</string>
+    <string name="choose_another_vote">לבחור הצבעה נוספת</string>
+    <string name="in_order_to_vote_you_must_select_the_gender_and_age">כדי להצביעה אתה חייב לבחור "מין" ו"גיל"</string>
 
     <!--dialogs-->
-    <string name="dialog_camera_add_photo">Add Photo!</string>
-    <string name="dialog_camera_btn_camera">Take Photo</string>
-    <string name="dialog_camera_btn_gallery">Choose from Gallery</string>
+    <string name="dialog_camera_add_photo">הוסף תמונה</string>
+    <string name="dialog_camera_btn_camera">צלם תמונה</string>
+    <string name="dialog_camera_btn_gallery">לבחור מתוך הגלריה</string>
     <string name="dialog_map_filter_header_text">פילטר תחומי עניין</string>
-    <string name="age">Age</string>
-    <string name="gender">Gender</string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancel</string>
-    <string name="dialog_map_filter_btn_select">Select</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="age">גיל</string>
+    <string name="gender">מין</string>
+    <string name="btn_ok">אישור</string>
+    <string name="btn_cancel">בטל</string>
+    <string name="dialog_map_filter_btn_select">בחר</string>
+    <string name="male">זכר</string>
+    <string name="female">נקבה</string>
 
     <!--menu-->
-    <string name="menu_settings">settings</string>
-    <string name="menu_home">home</string>
-    <string name="menu_back">back</string>
-    <string name="menu_refresh">refresh</string>
+    <string name="menu_settings">הגדרות</string>
+    <string name="menu_home">בית</string>
+    <string name="menu_back">חזרה</string>
+    <string name="menu_refresh">רענן</string>
 
     <!-- emergency buttons-->
     <string name="emergency_btn_city_site_title">אתר העירייה</string>
@@ -65,14 +63,14 @@
     <string name="emergency_btn_focus">חיוג למוקד</string>
     <string name="emergency_btn_quick_phone">לחצן מצוקה</string>
     <!-- four state layout-->
-    <string name="empty_message">No data</string>
-    <string name="error_message">Some error</string>
+    <string name="empty_message">אין נתונים</string>
+    <string name="error_message">שגיאה</string>
     <string name="refresh_button_text">נסה שנית</string>
 
     <!--map fragment -->
     <!--<string name="btn_interest_point_title">נקודות עניין</string>-->
     <string name="map_btn_filter">פילטר</string>
-    <string name="map_btn_trips">trips</string>
+    <string name="map_btn_trips">מסלולים</string>
 
     <!-- nodes titles -->
     <string name="node_payments_title">תשלומים</string>
@@ -81,36 +79,36 @@
     <string name="node_voting_title">סקרים</string>
     <string name="node_map_title">מפות</string>
     <string name="node_getting_notification">הודעות עבורך</string>
-    <string name="title_activity_dialog">DialogActivity</string>
+    <string name="title_activity_dialog">הדו-שיח</string>
 
 
     <!-- for test, remove after -->
     <string name="focus_address">רחוב</string>
     <string name="focus_number">מספר</string>
-    <string name="focus_f_name">first name</string>
-    <string name="focus_l_name">last name</string>
+    <string name="focus_f_name">שם פרטי</string>
+    <string name="focus_l_name">שם משפחה</string>
     <string name="focus_descripstion">תאור המפגע</string>
-    <string name="focus_phon">phone number</string>
-    <string name="focus_mobile">mobile number</string>
-    <string name="focus_email">email</string>
+    <string name="focus_phon">מספר טלפון</string>
+    <string name="focus_mobile">טלפון נייד</string>
+    <string name="focus_email">דואר אלקטרוני</string>
     <string name="focus_titel">דיווח למוקד </string>
     <string name="focus_titel2">עדכון פרטים </string>
-    <string name="focus_name_city">city name</string>
+    <string name="focus_name_city">שם העיר</string>
     <string name="txt_gcn">האם את מעוניין/ת לקבל הודעות?</string>
     <string name="txt_login">כדי להנות מהאפלקציה מומלץ לשתף את פרטיך האישיים, מעוניין/ת עכשיו?</string>
-    <string name="resident_userName">username</string>
+    <string name="resident_userName">שם משתמש</string>
 
     <string name="sign_in_dialog_login">כניסה</string>
-    <string name="sign_up_dialog_lName">last name</string>
-    <string name="sign_up_dialog_fName">first name</string>
-    <string name="focus_street">street</string>
-    <string name="focus_house">house</string>
-    <string name="sign_up_dialog_error_text">fill this field</string>
-    <string name="sign_up_dialog_incorrect_phone_number">incorrect phone number</string>
-    <string name="sign_up_dialog_incorrect_email">incorrect email</string>
+    <string name="sign_up_dialog_lName">שם משפחה</string>
+    <string name="sign_up_dialog_fName">שם פרטי</string>
+    <string name="focus_street">רחוב</string>
+    <string name="focus_house">בית</string>
+    <string name="sign_up_dialog_error_text">למלא שדה זה</string>
+    <string name="sign_up_dialog_incorrect_phone_number">מספר טלפון שגוי</string>
+    <string name="sign_up_dialog_incorrect_email">דואר אלקטרוני שגוי</string>
     <string name="gcm_SenderID">226589076343</string>
-    <string name="setting_dialog_logout">Logout</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="setting_dialog_logout">התנתק</string>
+    <string name="title_activity_splash_screen">מסך הקדמה</string>
     <string name="ivalid_number">מספר לא תקין</string>
     <string name="contact_mail">support@quickwork.co.il</string>
     <string name="personal_area_id">מספר פניה</string>
@@ -134,8 +132,8 @@
     <string name="dialog_setting_sign_in">הירשם</string>
     <string name="connection_error">שרת אינו מגיב</string>
     <string name="loading_string">שולח פניה</string>
-    <string name="incorrect_credentials">Incorrect username or password</string>
-    <string name="loading_string_sign_up_dialog">Loading...</string>
+    <string name="incorrect_credentials">שם משתמש או סיסמה שגוי</string>
+    <string name="loading_string_sign_up_dialog">שולח...</string>
     <string name="no_messages_for_resident">אין הודעות</string>
     <string name="dialog_title_interest_area">תחומי עניי</string>
     <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
