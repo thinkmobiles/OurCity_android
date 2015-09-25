@@ -66,7 +66,8 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"1\"," +
+        int cityNumber = getResources().getInteger(R.integer.city_id);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"" + cityNumber +"\"," +
                 "\"userName\":\"Webit\",\"password\":\"HdrMoked                                          \"}}");
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
         getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, this);
@@ -204,14 +205,14 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
             }
         }
 
-        if (TextUtils.isEmpty(etHouseNumber.getText().toString())) {
+        if (etHouseNumber.isEnabled() & TextUtils.isEmpty(etHouseNumber.getText().toString())) {
             etHouseNumber.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 
         getSelectedStreetId();
 
-        if (selectedStreetID == -1) {
+        if (etStreet.isEnabled() & selectedStreetID == -1 ) {
             etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
@@ -335,6 +336,13 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 StreetsFull streetData = (StreetsFull) _data;
                 if (streetData != null) {
                     int numbersStreets = streetData.streetsList.size();
+                    if (numbersStreets == 0) {
+                        etStreet.setEnabled(false);
+                        etHouseNumber.setEnabled(false);
+                    } else {
+                        etStreet.setEnabled(true);
+                        etHouseNumber.setEnabled(true);
+                    }
                     streets = new StreetsItem[numbersStreets];
                     String[] streetNames = new String[numbersStreets];
                     for (int i = 0; i < numbersStreets; i++) {
