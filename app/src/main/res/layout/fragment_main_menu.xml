@@ -7,6 +7,7 @@
                 android:orientation="vertical">
 
     <LinearLayout
+        android:splitMotionEvents="false"
         android:id="@+id/llBtn_MMF"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -19,6 +20,7 @@
         android:padding="5dp"
         tools:background="@android:color/holo_blue_bright">
         <LinearLayout
+            android:splitMotionEvents="false"
             android:id="@+id/llBtnThird_MMF"
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -85,6 +87,7 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:splitMotionEvents="false"
             android:id="@+id/llBtnSecond_MMF"
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -120,6 +123,7 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:splitMotionEvents="false"
             android:id="@+id/llBtnFirst_MMF"
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -185,7 +189,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMenu_FMM"
-
         android:rotationY="180"
         android:layout_width="330dp"
         android:splitMotionEvents="false"
