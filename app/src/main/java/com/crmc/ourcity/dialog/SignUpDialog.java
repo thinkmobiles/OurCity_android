@@ -355,10 +355,15 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                     etStreet.setAdapter(adapter);
 
                     if (isEditable) {
+                        etUsername.setEnabled(false);
+                        etPassword.setEnabled(false);
                         Bundle args = new Bundle();
                         args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
                         args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
                         getLoaderManager().initLoader(Constants.LOADER_GET_RESIDENT_INFO_ID, args, this);
+                    } else {
+                        etUsername.setEnabled(true);
+                        etPassword.setEnabled(true);
                     }
 
                 } else {
