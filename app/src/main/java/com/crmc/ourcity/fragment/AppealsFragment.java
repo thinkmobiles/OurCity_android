@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
@@ -464,7 +462,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
             switch (v.getId()) {
                 case R.id.flDescriptionContainer_AF:
                     etDescription.requestFocus();
-                    hideKeyboard(getActivity());
+                    showKeyboard(getActivity(), etDescription);
                     break;
                 case R.id.ivPhoto_AF:
                     hideKeyboard(getActivity());

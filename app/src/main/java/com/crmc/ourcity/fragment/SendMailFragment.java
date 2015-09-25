@@ -3,7 +3,6 @@ package com.crmc.ourcity.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,9 +97,11 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     public void onClick(View _view) {
         switch (_view.getId()) {
             case R.id.btnCancel_SMF:
+                hideKeyboard(getActivity());
                 popBackStack();
                 break;
             case R.id.btnOk_SMF:
+                hideKeyboard(getActivity());
                 String[] send = {mail};
                 String title = "יצירת קשר אפליקציה ";
                 String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
@@ -119,11 +120,16 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         i.putExtra(Intent.EXTRA_SUBJECT, title);
         i.putExtra(Intent.EXTRA_TEXT, text);
         getActivity().startActivity(Intent.createChooser(i, getResources().getString(R.string.send_mail_hint)));
-
     }
 
     @Override
     public void onRetryClick() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        hideKeyboard(getActivity());
     }
 }

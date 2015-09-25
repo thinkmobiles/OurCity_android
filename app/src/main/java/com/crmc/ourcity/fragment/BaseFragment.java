@@ -44,12 +44,19 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void hideKeyboard(Context _context) {
-        InputMethodManager inputManager = (InputMethodManager) _context
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputManager = (InputMethodManager) _context.getSystemService(Context.INPUT_METHOD_SERVICE);
         // check if no view has focus:
         View v = ((Activity) _context).getCurrentFocus();
-        if (v == null)
-            return;
+        if (v == null) return;
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+
+    protected void showKeyboard(Context _context, View _view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) _context.getSystemService(Context
+                .INPUT_METHOD_SERVICE);
+        if (!inputMethodManager.isAcceptingText()) {
+            inputMethodManager.showSoftInput(_view, 0);
+        }
+    }
+
 }
