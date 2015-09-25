@@ -133,7 +133,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
                 } else {
                     new AlertDialog.Builder(getActivity()).setTitle("Error").setMessage("Server does not respond!")
                             .setPositiveButton
-                            (android.R.string.yes, (dialog, which) -> {
+                            (R.string.btn_ok, (dialog, which) -> {
                         popBackStack();
                     }).setIcon(android.R.drawable.ic_dialog_alert).show();
                 }

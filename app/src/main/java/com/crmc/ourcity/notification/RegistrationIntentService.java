@@ -2,7 +2,6 @@ package com.crmc.ourcity.notification;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.text.TextUtils;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.RestClientApi;
@@ -49,7 +48,12 @@ public class RegistrationIntentService extends IntentService {
     private void sendPushTokenToServer(String _authToken, String _pushToken) {
         CityApi cityApi = RestClientApi.getCityApi();
 
-        boolean isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
+        boolean isPushUpdated;
+        try {
+            isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
+        } catch (Exception e){
+            isPushUpdated = false;
+        }
         if (isPushUpdated)
             SPManager.getInstance(this).setPushToken(_pushToken);
     }
