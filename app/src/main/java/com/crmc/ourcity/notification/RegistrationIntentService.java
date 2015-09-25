@@ -51,7 +51,6 @@ public class RegistrationIntentService extends IntentService {
         boolean isPushUpdated;
         try {
             isPushUpdated = cityApi.updatePushTokenOnWS(new PushTokenUpdatingModel(new PushTokenAndAuthToken(_authToken, _pushToken)));
-
         } catch (Exception e){
             isPushUpdated = false;
         }
