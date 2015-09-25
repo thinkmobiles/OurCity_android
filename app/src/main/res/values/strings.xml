@@ -22,7 +22,7 @@
     <string name="not_selected_age_or_gender">לא בחרת "מין" ו"גיל"</string>
     <string name="you_already_survey">אתה כבר הצבעתה</string>
     <string name="vote_is_already_close">ההצבעה כבר נסגרה</string>
-    <string name="vote_is_empty">לא בחרת</string>
+    <string name="vote_is_empty">אין הצבעות פעילות</string>
     <string name="ssl_error">שגיאת SSL</string>
     <string name="the_certificate_authority_is_not_trusted">חותם הרישיון אינו אמין</string>
     <string name="the_certificate_has_expired">הרישיון פג תוקף</string>
@@ -135,7 +135,7 @@
     <string name="incorrect_credentials">שם משתמש או סיסמה שגוי</string>
     <string name="loading_string_sign_up_dialog">שולח...</string>
     <string name="no_messages_for_resident">אין הודעות</string>
-    <string name="dialog_title_interest_area">תחומי עניי</string>
+    <string name="dialog_title_interest_area">תחומי עניין</string>
     <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
 
 
