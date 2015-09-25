@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.content.ComponentCallbacks;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -36,16 +37,18 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     private String color;
     private String json;
     private String route;
+    private String title;
 
     private PhoneBookListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static PhoneBookFragment newInstance(String _colorItem, String _requestJson, String _requestRoute) {
+    public static PhoneBookFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         PhoneBookFragment mPhoneBookFragment = new PhoneBookFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mPhoneBookFragment.setArguments(args);
         return mPhoneBookFragment;
     }
@@ -56,6 +59,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -105,7 +109,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
+        configureActionBar(true, true, title);
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
         vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
         swipeRefreshLayout = findView(R.id.swipe_refresh_phone_book);

@@ -99,8 +99,6 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);

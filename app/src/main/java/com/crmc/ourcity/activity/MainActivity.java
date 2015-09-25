@@ -193,7 +193,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                     case 1:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapInterestPointFragment.newInstance
                                 (_menuModel.getLat(), _menuModel.getLon(), _menuModel.colorItem, _menuModel
-                                        .requestJson, _menuModel.requestRoute));
+                                        .requestJson, _menuModel.requestRoute, _menuModel.title));
                         break;
                     case 2:
                         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat
@@ -204,11 +204,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_ADD_APPEALS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_VOTE:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_CALL:
                 try {
@@ -229,11 +229,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_PHONE_BOOK:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhoneBookFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.requestJson, _menuModel.requestRoute));
+                        _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_RSS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSListFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.link));
+                        _menuModel.link, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_MAP_TRIPS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat(),
@@ -245,7 +245,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_SEND_MAIL_FRAGMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SendMailFragment.newInstance(_menuModel.colorItem,
-                        _menuModel.email));
+                        _menuModel.email, _menuModel.title));
                 break;
             case Constants.ACTION_HOT_CALL:
                 Intent intent = new Intent(this, DialogActivity.class);
@@ -266,7 +266,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onRSSItemAction(RSSEntry _entry) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry, _entry.getTitle()));
     }
 
     @Override

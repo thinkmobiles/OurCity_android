@@ -55,10 +55,11 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     private Button btnFilter;
     private List<MapMarker> mDialogMapMarkers;
     private LatLngBounds.Builder bounds;
+    private String title;
     private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
 
     public static MapInterestPointFragment newInstance(Double _lat, Double _lon, String _colorItem, String
-            _requestJson, String _requestRoute) {
+            _requestJson, String _requestRoute, String _title) {
         MapInterestPointFragment mMapInterestPointFragment = new MapInterestPointFragment();
         Bundle args = new Bundle();
         args.putDouble(Constants.CONFIGURATION_KEY_LAT, _lat);
@@ -66,6 +67,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
         args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
         mMapInterestPointFragment.setArguments(args);
         return mMapInterestPointFragment;
     }
@@ -78,6 +80,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
 
@@ -141,6 +144,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        configureActionBar(true, true, title);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         try {
             Image.init(Color.parseColor(color));

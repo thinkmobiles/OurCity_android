@@ -31,16 +31,18 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     private View vUnderLine_RssFrg;
     private String color;
     private String rssLink;
+    private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private RSSAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static RSSListFragment newInstance(String _colorItem, String _rssLink) {
+    public static RSSListFragment newInstance(String _colorItem, String _rssLink, String _title) {
         RSSListFragment rssListFragment = new RSSListFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
         args.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, _rssLink);
+        args.putString(Constants.NODE_TITLE, _title);
         rssListFragment.setArguments(args);
         return rssListFragment;
     }
@@ -48,10 +50,9 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -103,8 +104,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-       // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
+        configureActionBar(true, true, title);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         swipeRefreshLayout = findView(R.id.swipe_refresh_rss);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);
