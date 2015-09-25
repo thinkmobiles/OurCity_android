@@ -10,6 +10,7 @@
     android:paddingRight="@dimen/settings10">
     <!-- header -->
     <LinearLayout
+        android:splitMotionEvents="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -39,9 +40,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
->
+        android:splitMotionEvents="false"
+        >
 
         <RelativeLayout
+            android:splitMotionEvents="false"
             android:id="@+id/rlHotCalls_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -75,6 +78,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:splitMotionEvents="false"
             android:id="@+id/rlUpdateResidentInfo_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -106,6 +110,7 @@
 
 
         <RelativeLayout
+            android:splitMotionEvents="false"
             android:id="@+id/rlSignIn_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -135,6 +140,7 @@
 
         <!-- uncomment visibility -->
         <RelativeLayout
+            android:splitMotionEvents="false"
             android:id="@+id/rlInterestAreas_SetDFrgmt"
             android:layout_width="match_parent"
             android:layout_height="44dp"
@@ -164,7 +170,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-
+            android:splitMotionEvents="false"
             android:id="@+id/rlLogout_FDS"
             android:layout_width="match_parent"
             android:layout_height="44dp"
