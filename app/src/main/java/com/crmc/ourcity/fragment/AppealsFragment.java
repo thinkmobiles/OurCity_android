@@ -48,6 +48,7 @@ import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Gallery;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
+import com.crmc.ourcity.utils.SoftKeyboard;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 
 import java.io.File;
@@ -78,6 +79,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
     private SwitchCompat swGpsOnOff;
     private String[] streets;
     private String title;
+
 
     public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         AppealsFragment mAppealsFragment = new AppealsFragment();
@@ -123,6 +125,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
+
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         configureActionBar(true, true, title);
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
@@ -477,13 +480,15 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     }
                     break;
                 case R.id.btnSend_AF:
+                    softKeyboard.closeSoftKeyboard();
                     if (checkValidation()) {
                         showLoading(getResources().getString(R.string.loading_string));
                         NewTicketObj ticketObj = createNewTicket();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                         getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
-                        hideKeyboard(getActivity());
+
+                        //hideKeyboard(getActivity());
                     }
                     break;
             }

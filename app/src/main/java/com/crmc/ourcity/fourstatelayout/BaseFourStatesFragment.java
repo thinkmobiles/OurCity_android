@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fourstatelayout;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.utils.SoftKeyboard;
 
 /**
  * base class for detail fragment with state: loading, no data, connection error, show content
@@ -28,6 +30,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     private TextView mErrorTitle, mEmptyTitle, mLoadingTitle;
     private FourStateLayout mainView;
     private View rootView;
+    protected SoftKeyboard softKeyboard;
 
 
     protected int getLayoutResource() {
@@ -47,6 +50,8 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         ViewGroup mEmptyLayout = (ViewGroup) _inflater.inflate(R.layout.empty_layout, _root, false);
         ViewGroup mErrorLayout = (ViewGroup) _inflater.inflate(R.layout.error_layout, _root, false);
         ViewGroup mLoadingLayout = (ViewGroup) _inflater.inflate(R.layout.loading_layout, _root, false);
+        InputMethodManager im = (InputMethodManager)getActivity(). getSystemService(Service.INPUT_METHOD_SERVICE);
+        softKeyboard = new SoftKeyboard(_root, im);
 
         mRetryButton = (Button) mErrorLayout.findViewById(R.id.btn_try_again);
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);

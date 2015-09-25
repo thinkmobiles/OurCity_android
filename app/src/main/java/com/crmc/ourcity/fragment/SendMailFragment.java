@@ -124,7 +124,6 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
 
     @Override
     public void onRetryClick() {
-
     }
 
     @Override

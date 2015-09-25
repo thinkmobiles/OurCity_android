@@ -54,9 +54,9 @@ public abstract class BaseFragment extends Fragment {
     protected void showKeyboard(Context _context, View _view) {
         InputMethodManager inputMethodManager = (InputMethodManager) _context.getSystemService(Context
                 .INPUT_METHOD_SERVICE);
-        if (!inputMethodManager.isAcceptingText()) {
+      //  if (!inputMethodManager.isAcceptingText()) {
             inputMethodManager.showSoftInput(_view, 0);
         }
-    }
-
+//    }
+//
 }
