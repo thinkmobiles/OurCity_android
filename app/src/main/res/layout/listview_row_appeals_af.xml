@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/person10"
                 android:gravity="center"
@@ -52,8 +51,9 @@
 
             <ImageView
                 android:id="@+id/ivImage_AF"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:padding="5dp"
                 />
         </RelativeLayout>
@@ -101,7 +101,7 @@
                 android:drawableRight="@drawable/icon_address"
                 android:gravity="right|top"
                 android:maxLines="3"
-
+                android:layout_marginLeft="5dp"
                 android:singleLine="false"
                 android:text="נזילה בצנרת "
                 android:textSize="@dimen/person16"

@@ -90,6 +90,8 @@ public class AppealsAdapter extends BaseAdapter {
         public void setData(ResultObject _item) {
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");
+            } else {
+                tvPhotoText_AF.setText("אין תמונה");
             }
 
             if (!TextUtils.isEmpty(_item.DateCreatedClient)) {

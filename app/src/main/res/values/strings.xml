@@ -10,7 +10,7 @@
     <string name="not_found_camera">למכשיר הזה אין מצלמה</string>
     <string name="cant_create_photo">אין אפשרות ליצור תמונה</string>
     <string name="file_is_not_found">הקובץ לא נמצא</string>
-    <string name="uncompilable_type">סוג מזוהה</string>
+    <string name="uncompilable_type">סוג הקובץ לא מתאים</string>
     <string name="cant_get_location">לא ניתן לאתר את המיקום</string>
     <string name="download">הורדה</string>
     <string name="download_from">להוריד מ</string>
@@ -132,7 +132,7 @@
     <string name="dialog_setting_sign_in">הירשם</string>
     <string name="connection_error">שרת אינו מגיב</string>
     <string name="loading_string">שולח פניה</string>
-    <string name="incorrect_credentials">שם משתמש או סיסמה שגוי</string>
+    <string name="incorrect_credentials">שם  משתמש או סיסמה שגוי</string>
     <string name="loading_string_sign_up_dialog">שולח...</string>
     <string name="no_messages_for_resident">אין הודעות</string>
     <string name="dialog_title_interest_area">תחומי עניין</string>

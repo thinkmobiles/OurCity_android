@@ -48,7 +48,6 @@ import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Gallery;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
-import com.crmc.ourcity.utils.SoftKeyboard;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 
 import java.io.File;
@@ -81,7 +80,8 @@ public class AppealsFragment extends BaseFourStatesFragment {
     private String title;
 
 
-    public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
+    public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
+            _title) {
         AppealsFragment mAppealsFragment = new AppealsFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
@@ -377,8 +377,11 @@ public class AppealsFragment extends BaseFourStatesFragment {
     @NonNull
     private NewTicketObj createNewTicket() {
         NewTicket ticket = new NewTicket();
-        ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable())
-                .getBitmap());
+        if (!TextUtils.isEmpty(mPhotoFilePath)) {
+            ticket.AttachedFiles = Image.convertBitmapToBase64(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+        } else {
+            ticket.AttachedFiles = "";
+        }
         ticket.Description = etDescription.getText().toString();
         Location location = new Location();
         location.StreetName = etNameStreet.getText().toString();
@@ -480,7 +483,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     }
                     break;
                 case R.id.btnSend_AF:
-                    softKeyboard.closeSoftKeyboard();
+                    hideKeyboard(getActivity());
                     if (checkValidation()) {
                         showLoading(getResources().getString(R.string.loading_string));
                         NewTicketObj ticketObj = createNewTicket();
