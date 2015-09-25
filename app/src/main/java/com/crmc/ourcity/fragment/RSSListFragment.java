@@ -127,11 +127,6 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @NonNull
-    private OnItemClickListener handleRssEntryClick() {
-        return (parent, view, position, id) -> mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(position));
-    }
-
-    @NonNull
     private SwipeRefreshLayout.OnRefreshListener swipeToRefresh() {
         return () -> {
             Bundle bundle = new Bundle();
@@ -147,6 +142,11 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @NonNull
+    private OnItemClickListener handleRssEntryClick() {
+        return (parent, view, position, id) -> mOnListItemActionListener.onRSSItemAction(mAdapter.getItem(position));
     }
 
     @Override
