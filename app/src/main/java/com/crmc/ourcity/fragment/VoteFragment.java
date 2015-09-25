@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -150,7 +149,10 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                     startActivityForResult(intent, Constants.REQUEST_VOTE);
                     mVoteFull = _data;
                 } else {
-                    ivVoteError.setImageResource(R.drawable.error_vote);
+                    showEmpty("לא בחרת");
+//                    btnChooseAnotherVote.setOnClickListener(null);
+//                    btnChooseAnotherVote.setVisibility(View.GONE);
+//                    ivVoteError.setImageResource(R.drawable.error_vote);
                 }
             }
         }
