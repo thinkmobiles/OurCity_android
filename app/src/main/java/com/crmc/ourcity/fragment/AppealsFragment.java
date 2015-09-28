@@ -483,15 +483,14 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     }
                     break;
                 case R.id.btnSend_AF:
-                    hideKeyboard(getActivity());
+                    //hideKeyboard(getActivity());
                     if (checkValidation()) {
                         showLoading(getResources().getString(R.string.loading_string));
                         NewTicketObj ticketObj = createNewTicket();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                         getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
-
-                        //hideKeyboard(getActivity());
+                        hideKeyboard(getActivity());
                     }
                     break;
             }
