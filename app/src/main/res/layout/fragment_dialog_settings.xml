@@ -85,6 +85,7 @@
             android:layout_marginTop="@dimen/settings10"
             android:background="@drawable/new_rec_setting"
             android:clickable="true"
+            android:visibility="gone"
             android:padding="@dimen/settings10">
 
 

@@ -65,7 +65,6 @@ public class SettingDialog extends BaseFourStatesFragment {
             }
         } else {
             if (SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
-
                 login.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.VISIBLE);
                 updateResidentInfo.setVisibility(View.VISIBLE);

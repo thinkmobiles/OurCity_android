@@ -85,7 +85,6 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     @Override
     public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
-
         switch (_id) {
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
                 loader = new ImageLoader(SplashScreenActivity.this, _args);
