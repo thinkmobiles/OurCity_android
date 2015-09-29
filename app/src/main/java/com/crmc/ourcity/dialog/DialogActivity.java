@@ -113,7 +113,6 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 editableResidentInfoDialog.setArguments(bundle);
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, editableResidentInfoDialog);
                 break;
-
         }
     }
 
