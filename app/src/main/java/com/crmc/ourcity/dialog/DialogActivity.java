@@ -43,8 +43,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
 
             case AGE:
                 Integer age = getIntent().getIntExtra(Constants.BUNDLE_INTEGER, 25);
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, AgeDialog.newInstance
-                        ((age)));
+                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, AgeDialog.newInstance((age)));
                 break;
 
             case GENDER:
@@ -118,6 +117,11 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @Override
     public void onActionDialogDataMarker(List<MapMarker> _list) {
@@ -147,4 +151,5 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         setResult(RESULT_OK, intent);
         finish();
     }
+
 }
