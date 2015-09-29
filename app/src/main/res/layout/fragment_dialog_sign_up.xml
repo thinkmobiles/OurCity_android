@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/settings10"
     android:scrollbarSize="0dp"
     android:scrollbars="none"
-    android:layoutDirection="ltr">
+    >
 
     <ScrollView
         android:id="@+id/scrollView"

@@ -25,6 +25,7 @@ public class AppealsLoader extends BaseLoader<WSResult> {
     private String route;
 
 
+
     public AppealsLoader(Context _context, Bundle _args) {
         super(_context);
         json = _args.getString(Constants.BUNDLE_CONSTANT_REQUEST_JSON);

@@ -31,7 +31,8 @@ public class WebViewWithDataFragment extends BaseFourStatesFragment {
         WebView mWebView = findView(R.id.webView_WVF);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
-        String imageUrl = "http://artkiev.com/blog/wp-content/uploads/2012/12/Android1.png";
+        //String imageUrl = "http://artkiev.com/blog/wp-content/uploads/2012/12/Android1.png";
+
 //        String textWebView = getResources().getString(R.string.long_text);
 //        String htmlWebView = new HtmlFormatter(getActivity()).htmlForWebView(textWebView, imageUrl, "justify", "right");
 //        mWebView.loadDataWithBaseURL(null, htmlWebView, "text/html", "UTF-8", null);

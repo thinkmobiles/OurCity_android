@@ -161,7 +161,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
         ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
                 Image.darkenColor(0.2)));
         Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
-                flDescription, llPhoto}, R.drawable.boarder_round_green_ff);
+                flDescription, llPhoto}, R.drawable.boarder_round_green_ff, Image.lighterColor(0.2));
         Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
     }
 

@@ -81,8 +81,8 @@ public class Image {
 
     public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage, int width, int height)
             throws IOException {
-        int MAX_HEIGHT = 1024;
-        int MAX_WIDTH = 1024;
+//        int MAX_HEIGHT = 1024;
+//        int MAX_WIDTH = 1024;
 // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -313,7 +313,7 @@ public class Image {
      * @param _color   color to paint view background
      */
     public static void setBackgroundColorArrayViewWithoutDrawable(Context _context, View[] _view, int _color) {
-        Drawable d;
+        //Drawable d;
         for (View a_view : _view) {
             a_view.setBackgroundColor(_color);
         }

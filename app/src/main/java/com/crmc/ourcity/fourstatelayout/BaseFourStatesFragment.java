@@ -146,7 +146,6 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
-        TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
 
         if (isBackVisible) {
             mActionBack.setVisibility(View.VISIBLE);

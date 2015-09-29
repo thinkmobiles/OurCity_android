@@ -1,20 +1,19 @@
 <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--local:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--local:theme="@style/ThemeOverlay.AppCompat.Dark">-->
+    <!--android:id="@+id/toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--local:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+    <!--local:theme="@style/ThemeOverlay.AppCompat.Dark">-->
 
-        <include layout="@layout/action_bar"/>
+    <include layout="@layout/action_bar" />
 
     <!--</android.support.v7.widget.Toolbar>-->
 
@@ -26,32 +25,32 @@
         android:orientation="horizontal">
 
         <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:src="@drawable/sub_bar_background" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:src="@drawable/sub_bar_background" />-->
 
         <!--<ImageView-->
-            <!--android:id="@+id/ivTown_MA"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical|left"-->
-            <!--android:layout_margin="5dp"/>-->
+        <!--android:id="@+id/ivTown_MA"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical|left"-->
+        <!--android:layout_margin="5dp"/>-->
 
         <ImageView
 
+            android:id="@+id/ivTown_MA"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/ivTown_MA"
-            android:layout_weight="1"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:src="@drawable/sub_bar_background"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            android:src="@drawable/sub_bar_background" />
     </LinearLayout>
 
     <FrameLayout
