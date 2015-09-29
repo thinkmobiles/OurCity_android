@@ -44,7 +44,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private ImageView ivCall_CEIF;
     private ImageView ivSendMail_CEIF;
-//    private ImageView ivCall_Mobile_CEIF;
+    private ImageView ivCall_Mobile_CEIF;
 
     public static CityEntitiesItemFragment newInstance(CityEntities _cityEntities) {
         CityEntitiesItemFragment mCityEntitiesItemFragment = new CityEntitiesItemFragment();
@@ -87,7 +87,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
         ivCall_CEIF = findView(R.id.ivCall_CEIF);
         ivSendMail_CEIF = findView(R.id.ivSendMail_CEIF);
-//        ivCall_Mobile_CEIF = findView(R.id.ivCall_Mobile_CEIF);
+        ivCall_Mobile_CEIF = findView(R.id.ivCall_Mobile_CEIF);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private void setImage(){
         if (!TextUtils.isEmpty(mCityEntities.phoneNumber)){
-            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
                     .darkenColor(0.2)));
         } else {
             ivCall_CEIF.setVisibility(View.GONE);
@@ -125,12 +125,12 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
-//        if (!TextUtils.isEmpty(mCityEntities.mobileNumber)){
-//            ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
-//                    .darkenColor(0.2)));
-//        } else {
-//            ivCall_Mobile_CEIF.setVisibility(View.GONE);
-//        }
+        if (!TextUtils.isEmpty(mCityEntities.mobileNumber)){
+            ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+                    .darkenColor(0.2)));
+        } else {
+            ivCall_Mobile_CEIF.setVisibility(View.GONE);
+        }
         vUnderLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
     }
@@ -140,7 +140,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         super.setListeners();
         ivCall_CEIF.setOnClickListener(handleClick());
         ivSendMail_CEIF.setOnClickListener(handleClick());
-//        ivCall_Mobile_CEIF.setOnClickListener(handleClick());
+        ivCall_Mobile_CEIF.setOnClickListener(handleClick());
     }
 
     @NonNull
@@ -164,15 +164,15 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                                 .LENGTH_SHORT).show();
                     }
                     break;
-//                case R.id.ivCall_Mobile_CEIF:
-//                    try {
-//                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.mobileNumber), getResources()
-//                                .getString(R.string.call_hint)));
-//                    } catch (ActivityNotFoundException e) {
-//                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
-//                                .LENGTH_SHORT).show();
-//                    }
-//                    break;
+                case R.id.ivCall_Mobile_CEIF:
+                    try {
+                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.mobileNumber), getResources()
+                                .getString(R.string.call_hint)));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
             }
         };
     }

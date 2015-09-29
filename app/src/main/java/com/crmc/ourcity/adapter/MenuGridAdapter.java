@@ -51,7 +51,6 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
             drawable.setColor(Color.parseColor(item.colorItem));
             _holder.llMenuItem.setBackground(drawable);
 //
-//
 //            Image.setBackgroundColorView(mContext, _holder.llMenuItem, R.drawable.item_boarder_menu, Color.parseColor
 //                    (item.colorItem));
         }

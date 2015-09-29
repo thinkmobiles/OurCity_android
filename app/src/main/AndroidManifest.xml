@@ -26,6 +26,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false"/>
@@ -64,6 +65,7 @@
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
+
         <activity
             android:name=".dialog.DialogActivity"
             android:label="@string/title_activity_dialog"
@@ -95,6 +97,7 @@
             android:name=".notification.RegistrationIntentService"
             android:exported="false">
         </service>
+
         <service
             android:name=".notification.GCMListenerService"
             android:exported="false">
@@ -102,6 +105,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
             </intent-filter>
         </service>
+
         <service
             android:name=".notification.InstanceIdListenerService"
             android:exported="false">

@@ -231,15 +231,15 @@
                 android:src="@drawable/mail"
                 tools:background="@android:color/darker_gray"/>
 
-            <!--<ImageView-->
-                <!--android:id="@+id/ivCall_Mobile_CEIF"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:scaleType="centerInside"-->
-                <!--android:src="@drawable/phone"-->
-                <!--tools:background="@android:color/darker_gray"/>-->
+            <ImageView
+                android:id="@+id/ivCall_Mobile_CEIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
+                tools:background="@android:color/darker_gray"/>
 
         </LinearLayout>
         <View
