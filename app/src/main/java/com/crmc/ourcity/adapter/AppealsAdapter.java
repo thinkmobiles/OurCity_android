@@ -59,6 +59,8 @@ public class AppealsAdapter extends BaseAdapter {
         ImageView ivPhoto = (ImageView) _convertView.findViewById(R.id.ivImage_AF);
         if (!TextUtils.isEmpty(getItem(_position).AttachedFiles)) {
             ivPhoto.setImageBitmap(Image.convertBase64ToBitmap(getItem(_position).AttachedFiles));
+        } else {
+            ivPhoto.setImageBitmap(null);
         }
         return _convertView;
     }
@@ -98,7 +100,7 @@ public class AppealsAdapter extends BaseAdapter {
                 date.setText(_item.DateCreatedClient.trim());
             }
             if (!TextUtils.isEmpty(_item.Location.StreetName)) {
-                address.setText(_item.Location.HouseNumber + " " + _item.Location.StreetName);
+                address.setText(_item.Location.HouseNumber.trim() + " " + _item.Location.StreetName.trim());
             }
             if (!TextUtils.isEmpty(_item.Description)) {
                 description.setText(_item.Description.trim());

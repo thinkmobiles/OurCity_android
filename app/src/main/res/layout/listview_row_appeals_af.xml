@@ -111,59 +111,69 @@
 
     <!-- </LinearLayout> -->
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="3"
         android:layout_marginBottom="@dimen/person3">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/person10">
-
-            <TextView
-                android:id="@+id/tvStat_AF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/person10"
-                android:maxLength="23"
-                android:singleLine="true"
-                android:text="נשלח" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:singleLine="true"
-
-                android:text="@string/personal_status"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:gravity="left"
             android:layout_marginLeft="@dimen/person10">
 
             <TextView
                 android:id="@+id/tvReferenceID_AF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/person10"
-
+                android:layout_marginRight="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:text="12345" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-
                 android:text="@string/personal_area_id"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textStyle="bold" />
         </LinearLayout>
-    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/person10">
+
+            <TextView
+                android:id="@+id/tvStat_AF"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginLeft="2dp"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:maxLength="23"
+                android:text="נשלח" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/personal_status"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
