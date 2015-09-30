@@ -32,6 +32,7 @@ import com.crmc.ourcity.fragment.MapClearFragment;
 import com.crmc.ourcity.fragment.MapInterestPointFragment;
 import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.MessageToResidentFragment;
+import com.crmc.ourcity.fragment.OldDAppealsFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
 import com.crmc.ourcity.fragment.RSSEntryFragment;
@@ -203,7 +204,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 }
                 break;
             case Constants.ACTION_TYPE_ADD_APPEALS:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealsFragment.newInstance(_menuModel.colorItem,
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, OldDAppealsFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_VOTE:
