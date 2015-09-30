@@ -160,9 +160,9 @@ public class AppealsFragment extends BaseFourStatesFragment {
                 .darkenColor(0.2)));
         ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
                 Image.darkenColor(0.2)));
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{etNameCity, etNameStreet, etNumberHouse,
-                flDescription, llPhoto}, R.drawable.boarder_round_green_ff, Image.lighterColor(0.2));
-        Image.setBackgroundColorView(getActivity(), btnSend, R.drawable.selector_button_green_ff);
+        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff", new View[]{etNameCity, etNameStreet, etNumberHouse,
+                flDescription, llPhoto});
+        Image.setBoarderBackgroundColor(getActivity(), color, 2, 5, color, btnSend);
     }
 
     private LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager.LoaderCallbacks<WSResult>() {

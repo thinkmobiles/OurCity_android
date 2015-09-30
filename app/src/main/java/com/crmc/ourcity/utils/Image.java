@@ -213,14 +213,14 @@ public class Image {
         return mDrawable;
     }
 
-    public static void setBoarderBackgroundColor(String _boarderColor, Integer _borderWidth, Integer _cornerRadius, String _colorItem, View
+    public static void setBoarderBackgroundColor(Context _context, String _boarderColor, Integer _borderWidth, Integer _cornerRadius, String _colorItem, View
             _view) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         if (!TextUtils.isEmpty(_boarderColor) && _borderWidth != null) {
-            drawable.setStroke(_borderWidth, Color.parseColor(_boarderColor));
+            drawable.setStroke(getDpi(_borderWidth, _context), Color.parseColor(_boarderColor));
         }
-        drawable.setCornerRadius(_cornerRadius);
+        drawable.setCornerRadius(getDpi(_cornerRadius, _context));
         drawable.setColor(Color.parseColor(_colorItem));
         _view.setBackground(drawable);
     }
@@ -228,7 +228,7 @@ public class Image {
     public static void setBoarderBackgroundColorArray(Context _context, String _boarderColor, Integer _borderWidth, Integer _cornerRadius, String _colorItem,
                                                       View[] _view) {
         for (View a_view : _view) {
-            setBoarderBackgroundColor(_boarderColor, getDpi(_borderWidth, _context), getDpi(_cornerRadius, _context), _colorItem, a_view);
+            setBoarderBackgroundColor(_context, _boarderColor, _borderWidth, _cornerRadius, _colorItem, a_view);
         }
     }
 
