@@ -106,6 +106,8 @@ public class AppealsFragment extends BaseFourStatesFragment {
         super.onViewCreated(_view, _savedInstanceState);
         mCamera = new Camera(getActivity());
         mGallery = new Gallery(getActivity());
+        getLocation();
+        swGpsOnOff.setChecked(true);
     }
 
     @Override
