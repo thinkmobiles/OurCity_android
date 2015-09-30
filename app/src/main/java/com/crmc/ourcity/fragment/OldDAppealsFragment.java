@@ -365,7 +365,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             public void onFailure(boolean result) {
                 if (!result) {
 
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.uncompilable_type),
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.cant_get_location),
                             Toast.LENGTH_SHORT).show();
                 }
             }
