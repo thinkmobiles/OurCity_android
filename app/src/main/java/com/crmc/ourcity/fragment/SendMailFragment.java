@@ -72,12 +72,15 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         } catch (Exception e){
             Image.init(Color.BLACK);
         }
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{etFirstName_SMF,
-                etLastName_SMF, etMail_SMF, etDescription_SMF}, R.drawable.boarder_round_green_ff);
+//        Image.setBackgroundColorArrayView(getActivity(), new View[]{etFirstName_SMF,
+//                etLastName_SMF, etMail_SMF, etDescription_SMF}, R.drawable.boarder_round_green_ff);
+        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff", new View[]{etFirstName_SMF,
+                etLastName_SMF, etMail_SMF, etDescription_SMF});
         vUnderLine_SMF.setBackgroundColor(Image.darkenColor(0.0));
         vTopLine_SMF.setBackgroundColor(Image.darkenColor(0.0));
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{btnCancel_SMF, btnOk_SMF}, R.drawable
-                .selector_button_green_ff);
+//        Image.setBackgroundColorArrayView(getActivity(), new View[]{btnCancel_SMF, btnOk_SMF}, R.drawable
+//                .selector_button_green_ff);
+        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, color, new View[]{btnCancel_SMF, btnOk_SMF});
     }
 
     @Override
