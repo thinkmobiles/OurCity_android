@@ -14,6 +14,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 
@@ -208,9 +209,19 @@ public class Image {
         int color = getColorWithoutAlpha(_color);
         PorterDuffColorFilter mFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         mDrawable.setColorFilter(mFilter);
-
-
         return mDrawable;
+    }
+
+    public static void setBoarderBackGroundColor(String _boarderColor, Integer _borderWidth, String _colorItem, View
+            _view){
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        if (!TextUtils.isEmpty(_boarderColor) && _borderWidth != null) {
+            drawable.setStroke(_borderWidth, Color.parseColor(_boarderColor));
+        }
+        drawable.setCornerRadius(5);
+        drawable.setColor(Color.parseColor(_colorItem));
+        _view.setBackground(drawable);
     }
 
     /**
