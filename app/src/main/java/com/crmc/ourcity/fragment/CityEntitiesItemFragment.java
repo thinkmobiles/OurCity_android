@@ -149,8 +149,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
             switch (v.getId()) {
                 case R.id.ivCall_CEIF:
                     try {
-                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.phoneNumber), getResources()
-                                .getString(R.string.call_hint)));
+                        startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities
+                                .phoneNumber), getResources().getString(R.string.call_hint)), 58);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
@@ -166,8 +166,8 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                     break;
                 case R.id.ivCall_Mobile_CEIF:
                     try {
-                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities.mobileNumber), getResources()
-                                .getString(R.string.call_hint)));
+                        startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities
+                                .mobileNumber), getResources().getString(R.string.call_hint)), 59);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
@@ -175,6 +175,11 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                     break;
             }
         };
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

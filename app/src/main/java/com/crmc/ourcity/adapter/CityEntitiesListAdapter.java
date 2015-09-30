@@ -2,7 +2,6 @@ package com.crmc.ourcity.adapter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
-import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
 
@@ -28,8 +27,11 @@ public class CityEntitiesListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<CityEntities> mCityEntities;
     private Context mContext;
+    private OnListItemActionListener mOnListItemActionListener;
 
-    public CityEntitiesListAdapter(Context _context, List<CityEntities> _cityEntitiesList) {
+    public CityEntitiesListAdapter(Context _context, List<CityEntities> _cityEntitiesList, OnListItemActionListener
+            _onListItemActionListener) {
+        this.mOnListItemActionListener = _onListItemActionListener;
         this.mCityEntities = _cityEntitiesList;
         this.mInflater = LayoutInflater.from(_context);
         this.mContext = _context;
@@ -136,8 +138,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             switch (_view.getId()) {
                 case R.id.ivCall_CEF:
                     try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentCall(getItem(position)
-                                .phoneNumber), mContext.getResources().getString(R.string.call_hint)));
+                        mOnListItemActionListener.onActionCall(getItem(position).phoneNumber);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
                                 Toast.LENGTH_SHORT).show();
@@ -145,8 +146,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
                     break;
                 case R.id.ivMail_CEF:
                     try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentMail(getItem(position)
-                                .emailAddress), mContext.getResources().getString(R.string.send_mail_hint)));
+                        mOnListItemActionListener.onActionMail(getItem(position).emailAddress);
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
                                 Toast.LENGTH_SHORT).show();
@@ -154,8 +154,7 @@ public class CityEntitiesListAdapter extends BaseAdapter {
                     break;
                 case R.id.ivCall_Mobile_CEF:
                     try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentCall(getItem(position)
-                                .mobileNumber), mContext.getResources().getString(R.string.call_hint)));
+                        mOnListItemActionListener.onActionCall(getItem(position).mobileNumber);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
                                 Toast.LENGTH_SHORT).show();

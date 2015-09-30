@@ -9,6 +9,5 @@ import java.util.List;
  */
 public interface OnItemActionListener {
     void onItemAction(final MenuModel _menuModel);
-
     void onMenuModelPrepared(List<MenuModel> _menuModel);
 }
