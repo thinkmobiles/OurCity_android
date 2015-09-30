@@ -212,8 +212,8 @@ public class Image {
         return mDrawable;
     }
 
-    public static void setBoarderBackGroundColor(String _boarderColor, Integer _borderWidth, String _colorItem, View
-            _view){
+    public static void setBoarderBackgroundColor(String _boarderColor, Integer _borderWidth, String _colorItem, View
+            _view) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         if (!TextUtils.isEmpty(_boarderColor) && _borderWidth != null) {
@@ -222,6 +222,13 @@ public class Image {
         drawable.setCornerRadius(5);
         drawable.setColor(Color.parseColor(_colorItem));
         _view.setBackground(drawable);
+    }
+
+    public static void setBoarderBackgroundColorArray(String _boarderColor, Integer _borderWidth, String _colorItem,
+                                                      View[] _view) {
+        for (View a_view : _view) {
+            setBoarderBackgroundColor(_boarderColor, _borderWidth, _colorItem, a_view);
+        }
     }
 
     /**
