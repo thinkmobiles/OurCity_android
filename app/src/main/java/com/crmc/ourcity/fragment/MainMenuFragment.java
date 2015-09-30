@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -286,14 +283,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                         tvBottomButtons[i].setText(mMenuBottom.get(i).title);
                         ivBottomButtons[i].setImageBitmap(Image.convertBase64ToBitmap(mMenuBottom.get(i).iconItem));
                         if (!TextUtils.isEmpty(mMenuBottom.get(i).colorItem)) {
-//                            Image.setBackgroundColorView(getActivity(), llBottomButtons[i], R.drawable
-//                                    .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).colorItem));
-//                        }
-//                        if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor)) {
-//                            Image.setBorderColorView(getActivity(), llBottomButtons[i], R.drawable
-//                                            .boarder_round_red_vf, Color.parseColor(mMenuBottom.get(i).borderColor),
-//                                    mMenuBottom.get(i).borderWidth);
-//                        }
                             GradientDrawable drawable = new GradientDrawable();
                             drawable.setShape(GradientDrawable.RECTANGLE);
                             if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor) && mMenuBottom.get(i).borderWidth
