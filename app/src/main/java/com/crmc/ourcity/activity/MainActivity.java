@@ -62,10 +62,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseFragmentActivity implements OnItemActionListener,
-        OnListItemActionListener, FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener,
+        FragmentManager.OnBackStackChangedListener {
 
-   // private Toolbar mToolbar;
+    // private Toolbar mToolbar;
     private Ticker mTicker;
     private ImageView mActionHome;
     private ImageView mActionBack;
@@ -102,9 +102,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         mActionBack.setOnClickListener(handleClicks());
 
 
-
-
-
 //        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
@@ -114,13 +111,13 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             mTicker.startAnimation();
         }
 
-      //  setSupportActionBar(mToolbar);
+        //  setSupportActionBar(mToolbar);
 
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
-       // getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
+        // getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
@@ -212,8 +209,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_CALL:
                 try {
-                    startActivity(Intent.createChooser(IntentUtils.getIntentCall(_menuModel.phoneNumber),
-                            getResources().getString(R.string.call_hint)));
+                    startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(_menuModel.phoneNumber),
+                            getResources().getString(R.string.call_hint)), 55); //spike
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(this, getResources().getString(R.string.app_no_call_client), Toast.LENGTH_SHORT)
                             .show();
@@ -237,7 +234,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 break;
             case Constants.ACTION_TYPE_MAP_TRIPS:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, TripsFragment.newInstance(_menuModel.getLat(),
-                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
+                        _menuModel.getLon(), _menuModel.colorItem, _menuModel.requestJson, _menuModel.requestRoute,
+                        _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_ENTITIES:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesFragment.newInstance(_menuModel
@@ -260,6 +258,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onEventsItemAction(Events _events) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, EventsItemFragment.newInstance(_events));
     }
@@ -278,13 +281,26 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
+    public void onActionMail(String _mail) {
+        startActivity(Intent.createChooser(IntentUtils.getIntentMail(_mail),
+                getResources().getString(R.string.send_mail_hint)));
+    }
+
+    @Override
+    public void onActionCall(String _number) {
+        startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(_number), getResources().getString(R
+                .string.call_hint)), 56);
+    }
+
+    @Override
     public void onCityEntitiesItemAction(CityEntities _cityEntities) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, CityEntitiesItemFragment.newInstance(_cityEntities));
     }
 
     @Override
     public void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapTripsFragment.newInstance(_trips, _lat, _lon, _trips.tripName));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MapTripsFragment.newInstance(_trips, _lat, _lon, _trips
+                .tripName));
     }
 
     @Override
@@ -302,7 +318,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onMenuModelPrepared(List<MenuModel> _menuModel) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel, Constants.PREVIOUSTITLE));
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, SubMenuFragment.newInstance(_menuModel, Constants
+                .PREVIOUSTITLE));
     }
 
 //    @Override
@@ -342,7 +359,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this, Constants.PLAY_SERVICES_RESOLUTION_REQUEST)
                         .show();
             } else {
-                Toast.makeText(this, getResources().getString(R.string.device_not_supported), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.device_not_supported), Toast.LENGTH_SHORT)
+                        .show();
             }
             return false;
         }
@@ -373,19 +391,17 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     private void hideKeyboard(Context _context) {
-        InputMethodManager inputManager = (InputMethodManager) _context
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputManager = (InputMethodManager) _context.getSystemService(Context.INPUT_METHOD_SERVICE);
         // check if no view has focus:
         View v = ((Activity) _context).getCurrentFocus();
-        if (v == null)
-            return;
+        if (v == null) return;
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     private void setTitle() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
- //           getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
+            //           getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
             mTitle.setText(Constants.PREVIOUSTITLE);
         } else if (f instanceof MainMenuFragment) {
 //           getDelegate().getSupportActionBar().setTitle("");

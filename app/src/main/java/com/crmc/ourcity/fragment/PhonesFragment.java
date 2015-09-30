@@ -1,14 +1,15 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.PhonesListAdapter;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.Phones;
@@ -26,6 +27,7 @@ public class PhonesFragment extends BaseFourStatesFragment {
     private List<Phones> mPhonesList;
     private PhonesListAdapter mAdapter;
     private View vUnderLine_FP;
+    private OnListItemActionListener mOnListItemActionListener;
 
     public static PhonesFragment newInstance(List<Phones> _phonesList) {
         PhonesFragment mPhonesFragment = new PhonesFragment();
@@ -34,6 +36,22 @@ public class PhonesFragment extends BaseFourStatesFragment {
                 _phonesList);
         mPhonesFragment.setArguments(args);
         return mPhonesFragment;
+    }
+
+    @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        super.onDetach();
     }
 
     @Override
@@ -57,7 +75,7 @@ public class PhonesFragment extends BaseFourStatesFragment {
         vUnderLine_FP.setBackgroundColor(Image.darkenColor(0.2));
         lvPhones.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
         lvPhones.setDividerHeight(4);
-        mAdapter = new PhonesListAdapter(getActivity(), mPhonesList);
+        mAdapter = new PhonesListAdapter(getActivity(), mPhonesList, mOnListItemActionListener);
         lvPhones.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();

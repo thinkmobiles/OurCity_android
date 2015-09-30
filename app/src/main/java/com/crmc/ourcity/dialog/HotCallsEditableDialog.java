@@ -91,7 +91,8 @@ public class HotCallsEditableDialog extends BaseFragment {
     private void doCall(String _phone) {
         if (_phone.length() > 0) {
             try {
-                startActivity(Intent.createChooser(IntentUtils.getIntentCall(_phone), getResources().getString(R.string.call_hint)));
+                startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(_phone), getResources()
+                        .getString(R.string.call_hint)), 57);
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client),
                         Toast.LENGTH_SHORT).show();
@@ -99,6 +100,11 @@ public class HotCallsEditableDialog extends BaseFragment {
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.ivalid_number), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private String getFirstEmergencyNumber() {

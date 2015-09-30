@@ -2,7 +2,6 @@ package com.crmc.ourcity.adapter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.utils.Image;
-import com.crmc.ourcity.utils.IntentUtils;
 
 import java.util.List;
 
@@ -102,40 +100,39 @@ public class EventsListAdapter extends BaseAdapter {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
-            if (!TextUtils.isEmpty(getItem(position).phone)){
-                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image
-                        .darkenColor(0.2)));
+            if (!TextUtils.isEmpty(getItem(position).phone)) {
+                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
+                        Image.darkenColor(0.2)));
                 ivCall.setVisibility(View.VISIBLE);
             } else {
                 ivCall.setVisibility(View.GONE);
             }
-            if (!TextUtils.isEmpty(getItem(position).email)){
-                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image
-                        .darkenColor(0.2)));
+            if (!TextUtils.isEmpty(getItem(position).email)) {
+                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
+                        (0.2)));
                 ivSendMail.setVisibility(View.VISIBLE);
             } else {
                 ivSendMail.setVisibility(View.GONE);
             }
-            if (!TextUtils.isEmpty(getItem(position).link)){
-                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
-                        .darkenColor(0.2)));
+            if (!TextUtils.isEmpty(getItem(position).link)) {
+                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image.darkenColor(0.2)));
                 ivLink.setVisibility(View.VISIBLE);
             } else {
                 ivLink.setVisibility(View.GONE);
             }
-            if (TextUtils.isEmpty(_item.title)){
+            if (TextUtils.isEmpty(_item.title)) {
                 title.setVisibility(View.GONE);
             } else {
                 title.setVisibility(View.VISIBLE);
                 title.setText(_item.title.trim());
             }
-            if (TextUtils.isEmpty(_item.eventDateToMobileClient)){
+            if (TextUtils.isEmpty(_item.eventDateToMobileClient)) {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
                 date.setText(_item.eventDateToMobileClient.trim());
             }
-            if (TextUtils.isEmpty(_item.address)){
+            if (TextUtils.isEmpty(_item.address)) {
                 address.setVisibility(View.GONE);
             } else {
                 address.setVisibility(View.VISIBLE);
@@ -148,8 +145,7 @@ public class EventsListAdapter extends BaseAdapter {
             switch (_view.getId()) {
                 case R.id.ivCallSkype_EF:
                     try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentCall(getItem(position)
-                                .phone), mContext.getResources().getString(R.string.call_hint)));
+                        mOnListItemActionListener.onActionCall(getItem(position).phone);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
                                 Toast.LENGTH_SHORT).show();
@@ -157,8 +153,7 @@ public class EventsListAdapter extends BaseAdapter {
                     break;
                 case R.id.ivSendMail_EF:
                     try {
-                        mContext.startActivity(Intent.createChooser(IntentUtils.getIntentMail(getItem(position)
-                                .email), mContext.getResources().getString(R.string.send_mail_hint)));
+                        mOnListItemActionListener.onActionMail(getItem(position).email);
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
                                 Toast.LENGTH_SHORT).show();

@@ -88,7 +88,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     public void onLoadFinished(Loader<List<CityEntities>> _loader, List<CityEntities> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new CityEntitiesListAdapter(getActivity(), _data);
+            mAdapter = new CityEntitiesListAdapter(getActivity(), _data, mOnListItemActionListener);
             lvCityEntities.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             showContent();

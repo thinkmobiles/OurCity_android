@@ -3,10 +3,8 @@ package com.crmc.ourcity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
@@ -22,7 +20,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.utils.Image;
-import com.crmc.ourcity.utils.IntentUtils;
 
 /**
  * Created by SetKrul on 16.07.2015.
@@ -196,8 +193,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
             switch (v.getId()) {
                 case R.id.ivCallSkype_EIF:
                     try {
-                        startActivity(Intent.createChooser(IntentUtils.getIntentCall(mEvents.phone), getResources()
-                                .getString(R.string.call_hint)));
+                        mOnListItemActionListener.onActionCall(mEvents.phone);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
@@ -205,8 +201,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
                     break;
                 case R.id.ivSendMail_EIF:
                     try {
-                        startActivity(Intent.createChooser(IntentUtils.getIntentMail(mEvents.email), getResources()
-                                .getString(R.string.send_mail_hint)));
+                        mOnListItemActionListener.onActionMail(mEvents.email);
                     } catch (ActivityNotFoundException ex) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
                                 .LENGTH_SHORT).show();
