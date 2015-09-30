@@ -44,9 +44,9 @@ public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHo
             GradientDrawable drawable = new GradientDrawable();
             drawable.setShape(GradientDrawable.RECTANGLE);
             if (!TextUtils.isEmpty(item.borderColor) && item.borderWidth != null) {
-                drawable.setStroke(item.borderWidth, Color.parseColor(item.borderColor));
+                drawable.setStroke(Image.getDpi(item.borderWidth, mContext), Color.parseColor(item.borderColor));
             }
-            drawable.setCornerRadius(5);
+            drawable.setCornerRadius(Image.getDpi(5, mContext));
             drawable.setColor(Color.parseColor(item.colorItem));
             _holder.llMenuItem.setBackground(drawable);
         }

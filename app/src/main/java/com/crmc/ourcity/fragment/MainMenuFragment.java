@@ -107,7 +107,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     protected void initViews() {
-       // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         actionBar = getActivity().findViewById(R.id.rlActionBar);
 //        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
 //        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
@@ -287,10 +287,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                             drawable.setShape(GradientDrawable.RECTANGLE);
                             if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor) && mMenuBottom.get(i).borderWidth
                                     != null) {
-                                drawable.setStroke(mMenuBottom.get(i).borderWidth, Color.parseColor(mMenuBottom.get
-                                        (i).borderColor));
+                                drawable.setStroke(Image.getDpi(mMenuBottom.get(i).borderWidth, getActivity()), Color
+                                        .parseColor(mMenuBottom.get(i).borderColor));
                             }
-                            drawable.setCornerRadius(5);
+                            drawable.setCornerRadius(Image.getDpi(5, getActivity()));
                             drawable.setColor(Color.parseColor(mMenuBottom.get(i).colorItem));
                             llBottomButtons[i].setBackground(drawable);
                         }
