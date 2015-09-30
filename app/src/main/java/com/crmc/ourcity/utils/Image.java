@@ -16,6 +16,7 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.TypedValue;
 import android.view.View;
 
 import java.io.ByteArrayOutputStream;
@@ -212,23 +213,29 @@ public class Image {
         return mDrawable;
     }
 
-    public static void setBoarderBackgroundColor(String _boarderColor, Integer _borderWidth, String _colorItem, View
+    public static void setBoarderBackgroundColor(String _boarderColor, Integer _borderWidth, Integer _cornerRadius, String _colorItem, View
             _view) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         if (!TextUtils.isEmpty(_boarderColor) && _borderWidth != null) {
             drawable.setStroke(_borderWidth, Color.parseColor(_boarderColor));
         }
-        drawable.setCornerRadius(5);
+        drawable.setCornerRadius(_cornerRadius);
         drawable.setColor(Color.parseColor(_colorItem));
         _view.setBackground(drawable);
     }
 
-    public static void setBoarderBackgroundColorArray(String _boarderColor, Integer _borderWidth, String _colorItem,
+    public static void setBoarderBackgroundColorArray(Context _context, String _boarderColor, Integer _borderWidth, Integer _cornerRadius, String _colorItem,
                                                       View[] _view) {
         for (View a_view : _view) {
-            setBoarderBackgroundColor(_boarderColor, _borderWidth, _colorItem, a_view);
+            setBoarderBackgroundColor(_boarderColor, getDpi(_borderWidth, _context), getDpi(_cornerRadius, _context), _colorItem, a_view);
         }
+    }
+
+    public static int getDpi(int _i, Context _context) {
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, _i, _context.getResources()
+                        .getDisplayMetrics());
     }
 
     /**
