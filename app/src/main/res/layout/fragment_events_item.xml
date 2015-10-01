@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="תאריך:"
+                android:text="תאריך ושעה:"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -247,7 +247,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/phone"
+                android:src="@drawable/phone2"
                 tools:background="@android:color/darker_gray"/>
 
             <ImageView

@@ -1,5 +1,6 @@
 package com.crmc.ourcity.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -94,6 +95,7 @@ public class EventsListAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
+        @SuppressLint("SetTextI18n")
         public void setData(Events _item, int _position) {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
@@ -128,7 +130,7 @@ public class EventsListAdapter extends BaseAdapter {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText(_item.eventDateToMobileClient.trim());
+                date.setText("תאריך ושעה" +   ": " +_item.eventDateToMobileClient.trim());
             }
             if (TextUtils.isEmpty(_item.address)) {
                 address.setVisibility(View.GONE);
