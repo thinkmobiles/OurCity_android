@@ -169,7 +169,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         Image.setBoarderBackgroundColor(getActivity(), color, 2, 5, color, btnSend);
     }
 
-    private LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager.LoaderCallbacks<WSResult>() {
+    private final LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager.LoaderCallbacks<WSResult>() {
 
         @Override
         public Loader<WSResult> onCreateLoader(int id, Bundle args) {
@@ -202,7 +202,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                 .darkenColor(0.2)));
     }
 
-    private LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
+    private final LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
             .LoaderCallbacks<AddressFull>() {
 
         @Override
@@ -222,7 +222,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         }
     };
 
-    private LoaderManager.LoaderCallbacks<StreetsFull> mStreetsCallBack = new LoaderManager
+    private final LoaderManager.LoaderCallbacks<StreetsFull> mStreetsCallBack = new LoaderManager
             .LoaderCallbacks<StreetsFull>() {
 
         @Override
@@ -252,7 +252,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         }
     };
 
-    public void getAddress(double _lat, double _lon) {
+    private void getAddress(double _lat, double _lon) {
         getActivity().getSupportLoaderManager().destroyLoader(Constants.LOADER_STREETS_ID);
         Bundle bundle = new Bundle();
         bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, _lat);
@@ -354,7 +354,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         }
     }
 
-    public void getLocation() {
+    private void getLocation() {
         LocationCallBack locationCallBack = new LocationCallBack() {
             @Override
             public void onSuccess(double lat, double lon) {
@@ -365,7 +365,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             public void onFailure(boolean result) {
                 if (!result) {
 
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.uncompilable_type),
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.cant_get_location),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -426,7 +426,6 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             etNumberHouse.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
-
         return isValid;
     }
 
@@ -512,14 +511,8 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                         etNameCity.setText(getResources().getString(R.string.app_name));
                         etNameStreet.setText("");
                     }
-                    break;
+                break;
             }
         };
     }
-
-
-
-
-
-
 }
