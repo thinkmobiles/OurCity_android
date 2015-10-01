@@ -1,24 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:id="@+id/scrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#424242"
+    android:layout_centerHorizontal="true"
     android:clickable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/settings10"
-    android:paddingLeft="@dimen/settings10"
-    android:paddingRight="@dimen/settings10"
-    android:scrollbarSize="0dp"
-    android:scrollbars="none"
-    >
+    android:focusableInTouchMode="true">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:background="#424242"
         android:clickable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/settings10"
+        android:paddingLeft="@dimen/settings10"
+        android:paddingRight="@dimen/settings10"
+        android:scrollbarSize="0dp"
+        android:scrollbars="none">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,7 +41,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:paddingRight="5dp"
-                    android:src="@drawable/icon_details" />
+                    android:src="@drawable/icon_details"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -75,7 +77,7 @@
                     android:paddingEnd="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize" />
+                    android:textSize="@dimen/sign_up_dialog_textSize"/>
 
                 <EditText
                     android:id="@+id/etLastName_SUDF"
@@ -111,7 +113,7 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <EditText
                 android:id="@+id/etPassword_SUDF"
@@ -130,7 +132,7 @@
                 android:textAlignment="gravity"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <EditText
                 android:id="@+id/etPhoneNumber_SUDF"
@@ -147,7 +149,7 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <EditText
                 android:id="@+id/etMobileNumber_SUDF"
@@ -164,7 +166,7 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <EditText
                 android:id="@+id/etEmail_SUDF"
@@ -181,7 +183,7 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -205,7 +207,7 @@
                     android:padding="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize" />
+                    android:textSize="@dimen/sign_up_dialog_textSize"/>
 
                 <com.crmc.ourcity.view.EditTextStreetAutoComplete
                     android:id="@+id/etStreetName_SUDF"
@@ -222,7 +224,7 @@
                     android:singleLine="true"
                     android:textColor="#000"
                     android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize" />
+                    android:textSize="@dimen/sign_up_dialog_textSize"/>
             </LinearLayout>
 
             <EditText
@@ -241,7 +243,7 @@
                 android:padding="@dimen/person5"
                 android:textColor="#000"
                 android:textColorHint="#616161"
-                android:textSize="@dimen/sign_up_dialog_textSize" />
+                android:textSize="@dimen/sign_up_dialog_textSize"/>
 
             <LinearLayout
                 android:id="@+id/global_push_layout"
@@ -257,12 +259,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_receive_global_notifications"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <CheckBox
                     android:id="@+id/chbGlobalNotifications_SUDF"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
@@ -278,12 +280,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_receive_personal_notifications"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <CheckBox
                     android:id="@+id/chbPersonalNotifications_SUDF"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <TextView
@@ -299,7 +301,7 @@
                 android:text="@string/username_is_already_used"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/sign_up_dialog_textSize"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
 
             <Button
@@ -315,7 +317,7 @@
                 android:text="הירשם"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                 />
+                />
 
             <ProgressBar
                 android:id="@+id/pb_SUDF"
@@ -323,9 +325,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
 
-    </ScrollView>
-
-</RelativeLayout>
