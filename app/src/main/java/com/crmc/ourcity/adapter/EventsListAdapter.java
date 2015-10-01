@@ -1,6 +1,5 @@
 package com.crmc.ourcity.adapter;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -11,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
@@ -71,9 +69,9 @@ public class EventsListAdapter extends BaseAdapter {
         final TextView date;
         final TextView address;
         final ImageView ivArrowEvent;
-        final ImageView ivCall;
-        final ImageView ivSendMail;
-        final ImageView ivLink;
+//        final ImageView ivCall;
+//        final ImageView ivSendMail;
+//        final ImageView ivLink;
         final View view;
         final LinearLayout llEventsControl_EF;
         final Context mContext;
@@ -85,12 +83,12 @@ public class EventsListAdapter extends BaseAdapter {
             date = (TextView) _view.findViewById(R.id.tvDate_EIF);
             address = (TextView) _view.findViewById(R.id.tvAddress_EIF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_EF);
-            ivCall = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
-            ivSendMail = (ImageView) _view.findViewById(R.id.ivSendMail_EF);
-            ivLink = (ImageView) _view.findViewById(R.id.ivLink_EF);
-            ivCall.setOnClickListener(this);
-            ivSendMail.setOnClickListener(this);
-            ivLink.setOnClickListener(this);
+//            ivCall = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
+//            ivSendMail = (ImageView) _view.findViewById(R.id.ivSendMail_EF);
+//            ivLink = (ImageView) _view.findViewById(R.id.ivLink_EF);
+//            ivCall.setOnClickListener(this);
+//            ivSendMail.setOnClickListener(this);
+//            ivLink.setOnClickListener(this);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
@@ -100,26 +98,26 @@ public class EventsListAdapter extends BaseAdapter {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
-            if (!TextUtils.isEmpty(getItem(position).phone)) {
-                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
-                        Image.darkenColor(0.2)));
-                ivCall.setVisibility(View.VISIBLE);
-            } else {
-                ivCall.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(getItem(position).email)) {
-                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
-                        (0.2)));
-                ivSendMail.setVisibility(View.VISIBLE);
-            } else {
-                ivSendMail.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(getItem(position).link)) {
-                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image.darkenColor(0.2)));
-                ivLink.setVisibility(View.VISIBLE);
-            } else {
-                ivLink.setVisibility(View.GONE);
-            }
+//            if (!TextUtils.isEmpty(getItem(position).phone)) {
+//                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
+//                        Image.darkenColor(0.2)));
+//                ivCall.setVisibility(View.VISIBLE);
+//            } else {
+//                ivCall.setVisibility(View.GONE);
+//            }
+//            if (!TextUtils.isEmpty(getItem(position).email)) {
+//                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
+//                        (0.2)));
+//                ivSendMail.setVisibility(View.VISIBLE);
+//            } else {
+//                ivSendMail.setVisibility(View.GONE);
+//            }
+//            if (!TextUtils.isEmpty(getItem(position).link)) {
+//                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image.darkenColor(0.2)));
+//                ivLink.setVisibility(View.VISIBLE);
+//            } else {
+//                ivLink.setVisibility(View.GONE);
+//            }
             if (TextUtils.isEmpty(_item.title)) {
                 title.setVisibility(View.GONE);
             } else {
@@ -142,27 +140,27 @@ public class EventsListAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View _view) {
-            switch (_view.getId()) {
-                case R.id.ivCallSkype_EF:
-                    try {
-                        mOnListItemActionListener.onActionCall(getItem(position).phone);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case R.id.ivSendMail_EF:
-                    try {
-                        mOnListItemActionListener.onActionMail(getItem(position).email);
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case R.id.ivLink_EF:
-                    mOnListItemActionListener.onEventsClickLinkAction(getItem(position).link, getItem(position).title);
-                    break;
-            }
+//            switch (_view.getId()) {
+//                case R.id.ivCallSkype_EF:
+//                    try {
+//                        mOnListItemActionListener.onActionCall(getItem(position).phone);
+//                    } catch (ActivityNotFoundException e) {
+//                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    break;
+//                case R.id.ivSendMail_EF:
+//                    try {
+//                        mOnListItemActionListener.onActionMail(getItem(position).email);
+//                    } catch (android.content.ActivityNotFoundException ex) {
+//                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    break;
+//                case R.id.ivLink_EF:
+//                    mOnListItemActionListener.onEventsClickLinkAction(getItem(position).link, getItem(position).title);
+//                    break;
+//            }
         }
     }
 }

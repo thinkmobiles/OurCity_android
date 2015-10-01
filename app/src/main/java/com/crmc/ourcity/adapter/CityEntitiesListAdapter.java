@@ -1,6 +1,5 @@
 package com.crmc.ourcity.adapter;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
@@ -69,9 +67,9 @@ public class CityEntitiesListAdapter extends BaseAdapter {
         final TextView title;
         final TextView post;
         final ImageView ivArrowEvent;
-        final ImageView ivCall;
-        final ImageView ivSendMail;
-        final ImageView ivCall_Mobile;
+//        final ImageView ivCall;
+//        final ImageView ivSendMail;
+//        final ImageView ivCall_Mobile;
         final View view;
         final Context mContext;
         private int position;
@@ -80,12 +78,12 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             title = (TextView) _view.findViewById(R.id.tvEntityName_CEF);
             post = (TextView) _view.findViewById(R.id.tvPost_CEF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowCityEntities_CEF);
-            ivCall = (ImageView) _view.findViewById(R.id.ivCall_CEF);
-            ivSendMail = (ImageView) _view.findViewById(R.id.ivMail_CEF);
-            ivCall_Mobile = (ImageView) _view.findViewById(R.id.ivCall_Mobile_CEF);
-            ivCall.setOnClickListener(this);
-            ivSendMail.setOnClickListener(this);
-            ivCall_Mobile.setOnClickListener(this);
+//            ivCall = (ImageView) _view.findViewById(R.id.ivCall_CEF);
+//            ivSendMail = (ImageView) _view.findViewById(R.id.ivMail_CEF);
+//            ivCall_Mobile = (ImageView) _view.findViewById(R.id.ivCall_Mobile_CEF);
+//            ivCall.setOnClickListener(this);
+//            ivSendMail.setOnClickListener(this);
+//            ivCall_Mobile.setOnClickListener(this);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
@@ -95,30 +93,29 @@ public class CityEntitiesListAdapter extends BaseAdapter {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
-            if (!TextUtils.isEmpty(_item.phoneNumber)) {
-                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
-                        Image.darkenColor(0.2)));
-
-                ivCall.setVisibility(View.VISIBLE);
-            } else {
-                ivCall.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(_item.emailAddress)) {
-                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
-                        (0.2)));
-
-                ivSendMail.setVisibility(View.VISIBLE);
-            } else {
-                ivSendMail.setVisibility(View.GONE);
-            }
-            if (!TextUtils.isEmpty(_item.mobileNumber)) {
-                ivCall_Mobile.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
-                        Image.darkenColor(0.2)));
-
-                ivCall_Mobile.setVisibility(View.VISIBLE);
-            } else {
-                ivCall_Mobile.setVisibility(View.GONE);
-            }
+//            if (!TextUtils.isEmpty(_item.phoneNumber)) {
+//                ivCall.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
+//                        Image.darkenColor(0.2)));
+//
+//                ivCall.setVisibility(View.VISIBLE);
+//            } else {
+//                ivCall.setVisibility(View.GONE);
+//            }
+//            if (!TextUtils.isEmpty(_item.emailAddress)) {
+//                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail, Image.darkenColor
+//                        (0.2)));
+//
+//                ivSendMail.setVisibility(View.VISIBLE);
+//            } else {
+//                ivSendMail.setVisibility(View.GONE);
+//            }
+//            if (!TextUtils.isEmpty(_item.mobileNumber)) {
+//                ivCall_Mobile.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone,
+//                        Image.darkenColor(0.2)));
+//                ivCall_Mobile.setVisibility(View.VISIBLE);
+//            } else {
+//                ivCall_Mobile.setVisibility(View.GONE);
+//            }
             if (TextUtils.isEmpty(_item.entityName)) {
                 title.setVisibility(View.GONE);
             } else {
@@ -135,32 +132,32 @@ public class CityEntitiesListAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View _view) {
-            switch (_view.getId()) {
-                case R.id.ivCall_CEF:
-                    try {
-                        mOnListItemActionListener.onActionCall(getItem(position).phoneNumber);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case R.id.ivMail_CEF:
-                    try {
-                        mOnListItemActionListener.onActionMail(getItem(position).emailAddress);
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case R.id.ivCall_Mobile_CEF:
-                    try {
-                        mOnListItemActionListener.onActionCall(getItem(position).mobileNumber);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
+//            switch (_view.getId()) {
+//                case R.id.ivCall_CEF:
+//                    try {
+//                        mOnListItemActionListener.onActionCall(getItem(position).phoneNumber);
+//                    } catch (ActivityNotFoundException e) {
+//                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    break;
+//                case R.id.ivMail_CEF:
+//                    try {
+//                        mOnListItemActionListener.onActionMail(getItem(position).emailAddress);
+//                    } catch (android.content.ActivityNotFoundException ex) {
+//                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    break;
+//                case R.id.ivCall_Mobile_CEF:
+//                    try {
+//                        mOnListItemActionListener.onActionCall(getItem(position).mobileNumber);
+//                    } catch (ActivityNotFoundException e) {
+//                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    break;
+//            }
         }
     }
 }

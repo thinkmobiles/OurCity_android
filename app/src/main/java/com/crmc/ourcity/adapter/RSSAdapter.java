@@ -67,7 +67,7 @@ public class RSSAdapter extends BaseAdapter {
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
         final TextView date;
-        final ImageView ivLink;
+//        final ImageView ivLink;
         final ImageView ivArrowEvent;
         final View view;
         final Context mContext;
@@ -76,8 +76,8 @@ public class RSSAdapter extends BaseAdapter {
         ViewHolder(@NonNull final View _view, Context _context) {
             this.title = (TextView) _view.findViewById(R.id.tvTitle_RssFrgmt);
             this.date = (TextView) _view.findViewById(R.id.tvDate_RssFrgmt);
-            this.ivLink = (ImageView) _view.findViewById(R.id.ivLink_RssFrgmt);
-            this.ivLink.setOnClickListener(this);
+//            this.ivLink = (ImageView) _view.findViewById(R.id.ivLink_RssFrgmt);
+//            this.ivLink.setOnClickListener(this);
             this.ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_RssFrgmt);
             this.view = _view;
             this.mContext = _context;
@@ -103,13 +103,13 @@ public class RSSAdapter extends BaseAdapter {
                 date.setText(_entry.getPubDate().trim());
             }
 
-            if (!TextUtils.isEmpty(_entry.getLink())) {
-                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
-                        .darkenColor(0.2)));
-                ivLink.setVisibility(View.VISIBLE);
-            } else {
-                ivLink.setVisibility(View.GONE);
-            }
+//            if (!TextUtils.isEmpty(_entry.getLink())) {
+//                ivLink.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.link, Image
+//                        .darkenColor(0.2)));
+//                ivLink.setVisibility(View.VISIBLE);
+//            } else {
+//                ivLink.setVisibility(View.GONE);
+//            }
         }
 
         @Override
