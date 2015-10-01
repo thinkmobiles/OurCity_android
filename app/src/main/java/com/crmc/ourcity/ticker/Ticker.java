@@ -42,7 +42,7 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
 
         setOnClickListener(this);
         mAimator = ObjectAnimator.ofFloat(this, "translationX", -1 * width, width);
-        mAimator.setDuration(7000);
+        mAimator.setDuration(5000);
         mAimator.addListener(this);
         mAimator.setRepeatCount(ValueAnimator.INFINITE);
 
