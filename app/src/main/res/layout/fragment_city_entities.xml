@@ -22,14 +22,12 @@
             android:hint="חיפוש"
             android:layout_margin="5dp"
             android:background="@drawable/boarder_round_ef"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
             android:textColorHint="#616161"
             android:layout_height="match_parent"
             android:singleLine="true"
             android:gravity="center"
             android:maxLines="1"
             android:ellipsize="end"
-
             android:layout_width="match_parent"/>
     </LinearLayout>
 

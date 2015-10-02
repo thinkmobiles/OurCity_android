@@ -35,7 +35,8 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
     public CityEntitiesListAdapter(Context _context, List<CityEntities> _cityEntitiesList, OnListItemActionListener
             _onListItemActionListener) {
         this.mOnListItemActionListener = _onListItemActionListener;
-        this.filterableList = _cityEntitiesList;
+        filterableList = new ArrayList<>();
+        filterableList.addAll(_cityEntitiesList);
         this.mCityEntities = _cityEntitiesList;
         this.mInflater = LayoutInflater.from(_context);
         this.mContext = _context;
@@ -95,6 +96,7 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
         }
 
         private List<CityEntities> getFilteredList(String text) {
+            String search = null;
             filterableList.clear();
             if (text.isEmpty()) {
                 filterableList = new ArrayList<>();
@@ -104,8 +106,16 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
                 for (CityEntities wp : mCityEntities) {
                     String name = wp.entityName;
                     String post = wp.entityPost;
-                    if (TextUtils.isEmpty(name) || TextUtils.isEmpty(post)) {
-                        filterableList.add(wp);
+                    if (!TextUtils.isEmpty(name)){
+                        search += name;
+                    }
+                    if (!TextUtils.isEmpty(post)){
+                        search += " " + post;
+                    }
+                    if (!TextUtils.isEmpty(search)) {
+                        if (search.contains(text)){
+                            filterableList.add(wp);
+                        }
                     }
                 }
                 return filterableList;
