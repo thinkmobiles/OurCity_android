@@ -2,17 +2,13 @@ package com.crmc.ourcity.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
-import com.crmc.ourcity.utils.Image;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,7 +27,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     private Double lat;
     private Double lon;
     private SupportMapFragment mMap;
-    private Button btnAnotherTrips;
+//    private Button btnAnotherTrips;
     private MapTrips mMapTrips;
     private LatLngBounds.Builder bounds;
     private String title;
@@ -85,9 +81,9 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     @Override
     public void onClick(View _view) {
         switch (_view.getId()) {
-            case R.id.btnAnotherTrips_MTF:
-                popBackStack();
-                break;
+//            case R.id.btnAnotherTrips_MTF:
+//                popBackStack();
+//                break;
         }
     }
 
@@ -99,15 +95,15 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
 
         configureActionBar(true, true, title);
 
-        btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
-        Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,
-                Image.darkenColor(0.2));
+//        btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
+//        Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,
+//                Image.darkenColor(0.2));
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
-        btnAnotherTrips.setOnClickListener(this);
+//        btnAnotherTrips.setOnClickListener(this);
     }
 
     @Override

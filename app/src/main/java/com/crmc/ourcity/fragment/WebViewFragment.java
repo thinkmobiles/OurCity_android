@@ -16,7 +16,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -32,7 +31,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     private WebView mWebView;
     private View vUnderLine_WVF;
-    private TextView tvTitle_WVF;
+//    private TextView tvTitle_WVF;
     private String link;
     private ProgressBar pbLoading;
     private String color;
@@ -95,7 +94,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         if (_data != null) {
             mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
                     .documentData, "text/html", "UTF-8", null);
-            tvTitle_WVF.setText(_data.documentTitle);
+//            tvTitle_WVF.setText(_data.documentTitle);
             showContent();
         } else {
             showError(getResources().getString(R.string.connection_error));
@@ -129,7 +128,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
         configureActionBar(true, true, title);
 
-        tvTitle_WVF = findView(R.id.tvTitle_WFV);
+//        tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
         vUnderLine_WVF = findView(R.id.vUnderLine_WVF);
@@ -181,7 +180,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 //            String pdfLink = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
 //            if (pdfLink.substring(pdfLink.lastIndexOf(".") + 1).equals(""));
             mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _link);
-            tvTitle_WVF.setVisibility(View.GONE);
+//            tvTitle_WVF.setVisibility(View.GONE);
 //            new DownloadFile().downloadPdf(getActivity(), _link);
 //            popBackStack();
         } else if (!TextUtils.isEmpty(json)) {
@@ -192,7 +191,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
             getLoaderManager().initLoader(Constants.LOADER_DOCUMENTS_ID, bundle, this);
         } else {
-            tvTitle_WVF.setVisibility(View.GONE);
+//            tvTitle_WVF.setVisibility(View.GONE);
             mWebView.loadUrl(_link);
         }
     }

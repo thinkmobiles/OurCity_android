@@ -23,7 +23,6 @@ public class RestClientApi {
                 .setEndpoint(BASE_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
-
         cityApi = restAdapter.create(CityApi.class);
     }
 

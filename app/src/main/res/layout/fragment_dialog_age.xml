@@ -9,11 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/age"
-        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:textSize="20sp"
-        android:layout_gravity="start|center_vertical"/>
+        android:gravity="right|center_vertical"/>
 
     <NumberPicker
         android:id="@+id/npAge_DFA"

@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choice vote"
-        android:layout_gravity="start|center_vertical"
-        android:paddingStart="15dp"
+        android:gravity="right|center_vertical"
+        android:paddingRight="10dp"
         android:textSize="20sp"
         android:textStyle="bold"/>
 

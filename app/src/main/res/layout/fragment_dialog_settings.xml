@@ -14,7 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:gravity="right|center_vertical"
         android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical|right"
+            android:padding="5dp"
+            android:text="הגדרות"
+            android:textColor="@color/turquoise"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -22,17 +34,6 @@
             android:layout_gravity="center_vertical|right"
             android:paddingRight="5dp"
             android:src="@drawable/settingbtn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center|right"
-            android:padding="5dp"
-            android:text="הגדרות"
-            android:textColor="@color/turquoise"
-            android:textSize="24sp"
-            android:textStyle="bold" />
     </LinearLayout>
     <!-- main -->
 

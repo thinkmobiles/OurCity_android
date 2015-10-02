@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="#C3C3C3"
-        android:gravity="center|left"
+        android:gravity="right|center_vertical"
         android:padding="10dp"
         android:text="@string/dialog_title_interest_area"
         android:textColor="#098686"
