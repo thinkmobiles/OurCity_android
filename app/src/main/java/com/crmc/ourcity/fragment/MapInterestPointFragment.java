@@ -108,6 +108,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     @Override
     public void onResume() {
         super.onResume();
+        configureActionBar(true, true, title);
         setUpMapIfNeeded();
     }
 
@@ -140,11 +141,11 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         }
     }
 
+
+
     @Override
     protected void initViews() {
         super.initViews();
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         btnFilter = findView(R.id.btnMarkerFilter_MIPF);
         try {
             Image.init(Color.parseColor(color));
