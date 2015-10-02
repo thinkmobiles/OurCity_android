@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -61,7 +60,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         return mWebViewFragment;
     }
 
-    public static WebViewFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
+    public static WebViewFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
+            _title) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
@@ -75,7 +75,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-       // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
@@ -93,7 +93,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
         //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
         if (_data != null) {
-            mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data.documentData, "text/html", "UTF-8", null);
+            mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
+                    .documentData, "text/html", "UTF-8", null);
             tvTitle_WVF.setText(_data.documentTitle);
             showContent();
         } else {
@@ -134,7 +135,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         vUnderLine_WVF = findView(R.id.vUnderLine_WVF);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_WVF.setBackgroundColor(Image.darkenColor(0.2));
@@ -213,17 +214,21 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            if (!error) {
-                showContent();
+            if (isAdded()) {
+                if (!error) {
+                    showContent();
+                }
+                pbLoading.setVisibility(View.VISIBLE);
             }
-            pbLoading.setVisibility(View.VISIBLE);
         }
 
         public void onPageFinished(WebView _view, String _url) {
-            if (error) {
-                showError(getResources().getString(R.string.connection_error));
+            if (isAdded()) {
+                if (error) {
+                    showError(getResources().getString(R.string.connection_error));
+                }
+                pbLoading.setVisibility(View.GONE);
             }
-            pbLoading.setVisibility(View.GONE);
         }
 
         @Override

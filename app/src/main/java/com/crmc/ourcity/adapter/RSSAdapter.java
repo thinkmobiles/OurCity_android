@@ -1,5 +1,6 @@
 package com.crmc.ourcity.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -84,6 +85,7 @@ public class RSSAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
+        @SuppressLint("SetTextI18n")
         void setData(RSSEntry _entry, int _position) {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
@@ -100,7 +102,7 @@ public class RSSAdapter extends BaseAdapter {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText(_entry.getPubDate().trim());
+                date.setText("תאריך ושעה" +   ": " +_entry.getPubDate().trim());
             }
 
 //            if (!TextUtils.isEmpty(_entry.getLink())) {

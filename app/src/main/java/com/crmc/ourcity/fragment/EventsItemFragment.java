@@ -158,7 +158,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
 
     private void setImage() {
         if (!TextUtils.isEmpty(mEvents.phone)) {
-            ivCallSkype.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+            ivCallSkype.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
                     .darkenColor(0.2)));
         } else {
             ivCallSkype.setVisibility(View.GONE);

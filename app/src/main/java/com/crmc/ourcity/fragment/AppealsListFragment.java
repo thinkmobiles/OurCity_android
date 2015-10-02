@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.AppealsAdapter;
@@ -87,10 +84,14 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     public void onLoadFinished(Loader<WSResult> loader, WSResult data) {
         swipeRefreshLayout.setRefreshing(false);
         if (data != null) {
-            mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
-            lvAppeals.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (data.getResultObjects() != null && data.getResultObjects().size() > 0) {
+                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
+                lvAppeals.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else {
+                showEmpty(getResources().getString(R.string.no_messages_for_resident));
+            }
         } else {
             showError(getResources().getString(R.string.connection_error));
         }
