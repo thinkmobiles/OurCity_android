@@ -2,6 +2,7 @@ package com.crmc.ourcity.dialog;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -357,6 +358,8 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                     if (isEditable) {
                         etUsername.setEnabled(false);
                         etPassword.setEnabled(false);
+                        etUsername.setTextColor(Color.GRAY);
+                        etPassword.setTextColor(Color.GRAY);
                         Bundle args = new Bundle();
                         args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
                         args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
