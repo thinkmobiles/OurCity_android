@@ -74,11 +74,11 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
                 mAdapter.notifyDataSetChanged();
                 showContent();
             } else {
-                //showError(getResources().getString(R.string.connection_error));
                 showEmpty(getResources().getString(R.string.no_messages_for_resident));
             }
         } else {
-            showEmpty(getResources().getString(R.string.no_messages_for_resident));
+//            showEmpty(getResources().getString(R.string.no_messages_for_resident));
+            showError(getResources().getString(R.string.connection_error));
         }
     }
 
