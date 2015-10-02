@@ -138,12 +138,12 @@
     <string name="dialog_title_interest_area">תחומי עניין</string>
     <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
 
-    <string name="header_trun_on_text">לא הכתובת הנכונה?</string>
-    <string name="middle_trun_on_text">להזנה ידנית של</string>
-    <string name="footer_trun_on_text">הפרטים לחצו כאן</string>
+    <string name="header_trun_on_text">הפעלת GPS</string>
+    <string name="middle_trun_on_text">להזנת הפרטים אוטומטית</string>
+    <string name="footer_trun_on_text">לחצו כאן</string>
 
-    <string name="header_trun_off_text">הפעלת GPS</string>
-    <string name="middle_trun_off_text">להזנת הפרטים אוטומטית</string>
+    <string name="header_trun_off_text">לא הכתובת הנכונה?</string>
+    <string name="middle_trun_off_text">להזנה ידנית של הפרטים</string>
     <string name="footer_trun_off_text">לחצו כאן</string>
     <string name="btn_send_appeal_fragment">שלח</string>
 
