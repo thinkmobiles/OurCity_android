@@ -67,7 +67,7 @@ public class EventsListAdapter extends BaseAdapter {
 
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
-        final TextView date;
+//        final TextView date;
         final TextView address;
         final ImageView ivArrowEvent;
 //        final ImageView ivCall;
@@ -81,7 +81,7 @@ public class EventsListAdapter extends BaseAdapter {
         public ViewHolder(@NonNull final View _view, Context _context) {
             llEventsControl_EF = (LinearLayout) _view.findViewById(R.id.llEventsControl_EF);
             title = (TextView) _view.findViewById(R.id.tvTitle_EIF);
-            date = (TextView) _view.findViewById(R.id.tvDate_EIF);
+//            date = (TextView) _view.findViewById(R.id.tvDate_EIF);
             address = (TextView) _view.findViewById(R.id.tvAddress_EIF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_EF);
 //            ivCall = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
@@ -126,12 +126,12 @@ public class EventsListAdapter extends BaseAdapter {
                 title.setVisibility(View.VISIBLE);
                 title.setText(_item.title.trim());
             }
-            if (TextUtils.isEmpty(_item.eventDateToMobileClient)) {
-                date.setVisibility(View.GONE);
-            } else {
-                date.setVisibility(View.VISIBLE);
-                date.setText("תאריך ושעה" +   ": " +_item.eventDateToMobileClient.trim());
-            }
+//            if (TextUtils.isEmpty(_item.eventDateToMobileClient)) {
+//                date.setVisibility(View.GONE);
+//            } else {
+//                date.setVisibility(View.VISIBLE);
+//                date.setText("תאריך ושעה" +   ": " +_item.eventDateToMobileClient.trim());
+//            }
             if (TextUtils.isEmpty(_item.address)) {
                 address.setVisibility(View.GONE);
             } else {
