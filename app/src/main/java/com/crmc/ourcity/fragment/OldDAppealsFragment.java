@@ -69,7 +69,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     private LinearLayout llAppeals;
     private EditTextStreetAutoComplete etNameStreet;
     private EditText etNameCity, etDescription;
-    private TextView tvHeaderText, tvMiddleText;
+    private TextView tvHeaderText, tvMiddleText, tvFooterText;
     private FrameLayout flDescription;
     private EditText etNumberHouse;
     private Button btnSend;
@@ -145,6 +145,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         etDescription = findView(R.id.etDescription_AF);
         tvHeaderText = findView(R.id.tvHeader_AF);
         tvMiddleText = findView(R.id.tvMiddle_AF);
+        tvFooterText = findView(R.id.tvFooter_AF);
         flDescription = findView(R.id.flDescriptionContainer_AF);
         btnSend = findView(R.id.btnSend_AF);
         etNumberHouse = findView(R.id.etNumberHouse_AF);
@@ -502,10 +503,13 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                     if(isChecked) {
                         tvHeaderText.setText(getResources().getString(R.string.header_trun_off_text));
                         tvMiddleText.setText(getResources().getString(R.string.middle_trun_off_text));
+                        tvFooterText.setText(getResources().getString(R.string.footer_trun_off_text));
+
                         getLocation();
                     } else {
                         tvHeaderText.setText(getResources().getString(R.string.header_trun_on_text));
                         tvMiddleText.setText(getResources().getString(R.string.middle_trun_on_text));
+                        tvFooterText.setText(getResources().getString(R.string.footer_trun_on_text));
                         mLocation.stopLocationUpdates();
                         mLocation = null;
                         etNameCity.setText(getResources().getString(R.string.app_name));

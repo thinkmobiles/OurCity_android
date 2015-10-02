@@ -56,7 +56,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/survey10"
-
                             android:gravity="center_horizontal"
                             android:singleLine="true"
                             android:text="@string/header_trun_off_text"
@@ -72,12 +71,25 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/survey10"
                             android:ellipsize="end"
+                            android:text="@string/middle_trun_off_text"
                             android:gravity="center_horizontal"
-                            android:maxLines="2"
-                            android:paddingLeft="1dp"
+                            android:paddingLeft="@dimen/survey5"
                             android:paddingRight="@dimen/survey5"
                             android:singleLine="false"
-                            android:text="@string/middle_trun_off_text"
+                            android:textSize="@dimen/person18sp_from_ardmn" />
+
+                        <TextView
+                            android:id="@+id/tvFooter_AF"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvMiddle_AF"
+                            android:layout_centerHorizontal="true"
+                            android:ellipsize="end"
+                            android:gravity="center_horizontal"
+                            android:text="@string/footer_trun_off_text"
+                            android:paddingLeft="@dimen/survey5"
+                            android:paddingRight="@dimen/survey5"
+                            android:singleLine="false"
                             android:textSize="@dimen/person18sp_from_ardmn" />
 
                     </RelativeLayout>
