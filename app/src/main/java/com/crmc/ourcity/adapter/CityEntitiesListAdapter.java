@@ -17,6 +17,7 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +27,15 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 
     private LayoutInflater mInflater;
     private List<CityEntities> mCityEntities;
+    private List<CityEntities> filterableList;
     private Context mContext;
+    private EntitiesFilter mFilter;
     private OnListItemActionListener mOnListItemActionListener;
 
     public CityEntitiesListAdapter(Context _context, List<CityEntities> _cityEntitiesList, OnListItemActionListener
             _onListItemActionListener) {
         this.mOnListItemActionListener = _onListItemActionListener;
+        this.filterableList = _cityEntitiesList;
         this.mCityEntities = _cityEntitiesList;
         this.mInflater = LayoutInflater.from(_context);
         this.mContext = _context;
@@ -39,12 +43,12 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public int getCount() {
-        return mCityEntities.size();
+        return filterableList.size();
     }
 
     @Override
     public CityEntities getItem(int _position) {
-        return mCityEntities.get(_position);
+        return filterableList.get(_position);
     }
 
     @Override
@@ -67,14 +71,63 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public Filter getFilter() {
-        return null;
+        if (mFilter == null) {
+            mFilter = new EntitiesFilter();
+        }
+        return mFilter;
+    }
+
+
+    private class EntitiesFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<CityEntities> prospects;
+            try {
+                prospects = getFilteredList(constraint.toString());
+            } catch (IllegalArgumentException ignored) {
+                prospects = mCityEntities;
+            }
+            results.count = prospects.size();
+            results.values = prospects;
+            return results;
+        }
+
+        private List<CityEntities> getFilteredList(String text) {
+            filterableList.clear();
+            if (text.isEmpty()) {
+                filterableList = new ArrayList<>();
+                filterableList.addAll(mCityEntities);
+                return filterableList;
+            } else {
+                for (CityEntities wp : mCityEntities) {
+                    String name = wp.entityName;
+                    String post = wp.entityPost;
+                    if (TextUtils.isEmpty(name) || TextUtils.isEmpty(post)) {
+                        filterableList.add(wp);
+                    }
+                }
+                return filterableList;
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            if (results.count == 0) {
+                notifyDataSetInvalidated();
+            } else {
+                filterableList = (List<CityEntities>) results.values;
+                notifyDataSetChanged();
+            }
+        }
     }
 
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
         final TextView post;
         final ImageView ivArrowEvent;
-//        final ImageView ivCall;
+        //        final ImageView ivCall;
 //        final ImageView ivSendMail;
 //        final ImageView ivCall_Mobile;
         final View view;
