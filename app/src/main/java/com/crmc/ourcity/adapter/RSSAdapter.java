@@ -102,7 +102,7 @@ public class RSSAdapter extends BaseAdapter {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText("תאריך ושעה" +   ": " +_entry.getPubDate().trim());
+                date.setText("תאריך ושעה" +   ": " +getDateTime(_entry.getPubDate().trim()));
             }
 
 //            if (!TextUtils.isEmpty(_entry.getLink())) {
@@ -112,6 +112,26 @@ public class RSSAdapter extends BaseAdapter {
 //            } else {
 //                ivLink.setVisibility(View.GONE);
 //            }
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        public String getDateTime(String _data) {
+//            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy " +
+//                    "HH:mm:ss");
+//            Date date = null;
+//            try {
+//                date = formatter.parse(_data);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            DateFormat dt1 = new SimpleDateFormat("EEE, dd.mm.yyyy HH:mm");
+//            return dt1.format(date) + "";
+////            return formatter.format(date);
+            if (!TextUtils.isEmpty(_data)){
+                return _data.substring(0, _data.length() - 3);
+            } else {
+                return "";
+            }
         }
 
         @Override
