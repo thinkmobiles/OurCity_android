@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/sub_actionbar_height"
-        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical|right"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -38,19 +38,18 @@
         <!--android:layout_margin="5dp"/>-->
 
         <ImageView
-
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="4"
+            android:src="@drawable/sub_bar_background" />
+        <ImageView
             android:id="@+id/ivTown_MA"
             android:layout_width="0dp"
+            android:layout_gravity="right|center_vertical"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_weight="4"
-            android:src="@drawable/sub_bar_background" />
     </LinearLayout>
 
     <FrameLayout
