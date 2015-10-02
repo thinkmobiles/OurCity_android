@@ -101,7 +101,7 @@
                         android:layout_height="@dimen/surveyheight_lm_two"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="@dimen/survey2"
-
+                        android:padding="5dp"
                         android:layout_marginRight="@dimen/survey5"
                         android:layout_marginTop="@dimen/survey5"
                         android:background="@drawable/boarder_round_green_ff">
