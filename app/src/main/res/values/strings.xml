@@ -42,9 +42,9 @@
     <string name="dialog_camera_btn_camera">צלם תמונה</string>
     <string name="dialog_camera_btn_gallery">לבחור מתוך הגלריה</string>
     <string name="dialog_map_filter_header_text">פילטר תחומי עניין</string>
-    <string name="age">גיל</string>
-    <string name="gender">מין</string>
-    <string name="choice_vote">לבחור הצבעה</string>
+    <string name="age">בחר גיל</string>
+    <string name="gender">בחר מין</string>
+    <string name="choice_vote">בחר הצבעה</string>
     <string name="btn_ok">אישור</string>
     <string name="btn_cancel">בטל</string>
     <string name="dialog_map_filter_btn_select">בחר</string>
@@ -135,7 +135,7 @@
     <string name="loading_string">שולח פניה</string>
     <string name="incorrect_credentials">שם  משתמש או סיסמה שגוי</string>
     <string name="loading_string_sign_up_dialog">שולח...</string>
-    <string name="no_messages_for_resident">אין הודעות</string>
+    <string name="no_messages_for_resident">אין הודעות חדשות</string>
     <string name="dialog_title_interest_area">תחומי עניין</string>
     <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
 
