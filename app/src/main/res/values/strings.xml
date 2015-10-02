@@ -44,7 +44,7 @@
     <string name="dialog_map_filter_header_text">פילטר תחומי עניין</string>
     <string name="age">גיל</string>
     <string name="gender">מין</string>
-    <string name="choice_vote">לבחור הצבעה נוספת</string>
+    <string name="choice_vote">לבחור הצבעה</string>
     <string name="btn_ok">אישור</string>
     <string name="btn_cancel">בטל</string>
     <string name="dialog_map_filter_btn_select">בחר</string>
