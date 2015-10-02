@@ -146,7 +146,7 @@
                         android:weightSum="3">
 
                         <EditText
-                            android:id="@+id/etNumberHouse_AF"
+                            android:id="@+id/etHouse_AF"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/survey50"
                             android:layout_marginRight="@dimen/survey5"

@@ -148,7 +148,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         tvFooterText = findView(R.id.tvFooter_AF);
         flDescription = findView(R.id.flDescriptionContainer_AF);
         btnSend = findView(R.id.btnSend_AF);
-        etNumberHouse = findView(R.id.etNumberHouse_AF);
+        etNumberHouse = findView(R.id.etHouse_AF);
         llPhoto = findView(R.id.flPhoto_AP);
         llAppeals = findView(R.id.llAppeals_AF);
 

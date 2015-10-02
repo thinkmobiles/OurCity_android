@@ -75,11 +75,11 @@
                     android:background="@drawable/boarder_round_green_ff"
                     android:gravity="center_vertical|right"
                     android:hint="מספר בית"
-                    android:inputType="text"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textColor="#242424"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:inputType="number"/>
 
                 <com.crmc.ourcity.view.EditTextStreetAutoComplete
                     android:id="@+id/etStreetName_SUDF"

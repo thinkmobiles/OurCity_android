@@ -56,6 +56,12 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     }
 
     @Override
+    public void onDestroy() {
+        hideKeyboard(getActivity());
+        super.onDestroy();
+    }
+
+    @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
