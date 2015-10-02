@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Created by SetKrul on 31.08.2015.
  */
-public class CityEntitiesListAdapter extends BaseAdapter {
+public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 
     private LayoutInflater mInflater;
     private List<CityEntities> mCityEntities;
@@ -61,6 +63,11 @@ public class CityEntitiesListAdapter extends BaseAdapter {
         }
         holder.setData(getItem(_position), _position);
         return _convertView;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     private class ViewHolder implements View.OnClickListener {

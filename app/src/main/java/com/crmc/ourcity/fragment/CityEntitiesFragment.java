@@ -8,12 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.CityEntitiesListAdapter;
@@ -33,6 +34,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     private ListView lvCityEntities;
     private View vUnderLine_CEF;
+    private EditText etSearch_CEF;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String color;
     private String json;
@@ -113,6 +115,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 //        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
+        etSearch_CEF = findView(R.id.etSearch_CEF);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
         vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         try {
@@ -131,6 +134,18 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         lvCityEntities.setOnItemClickListener(handleItemClick());
         swipeRefreshLayout.setOnRefreshListener(this::loadCityEntities);
         swipeInStart();
+        etSearch_CEF.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mAdapter.getFilter().filter(s.toString());
+            }
+        });
     }
 
     @NonNull
