@@ -129,7 +129,7 @@
     <string name="do_you_want_to_receive_global_notifications">אתה מעוניין לקבל הודעות כלליות?</string>
     <string name="do_you_want_to_receive_personal_notifications">אתה מעוניין לקבל הודעות אישיות?</string>
     <string name="dialog_setting_update_info">פרטים אישיים</string>
-    <string name="dialog_setting_sign_in">הירשם</string>
+    <string name="dialog_setting_sign_in">כניסה</string>
     <string name="connection_error">שרת אינו מגיב</string>
     <string name="loading_string">שולח פניה</string>
     <string name="incorrect_credentials">שם  משתמש או סיסמה שגוי</string>

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// This does not break the build when Android Studio is missing the JRebel for Android plugin.
+apply plugin: 'com.zeroturnaround.jrebel.android'
 apply plugin: 'me.tatarka.retrolambda'
 
 
@@ -7,13 +9,13 @@ android {
         config {
             keyAlias 'CRMC_KEY'
             keyPassword 'AppCrmc15'
-            storeFile file('/home/klim/Android/Projects/OurCityProject/keystore/CRMC_KEY.jks')
+            storeFile file('/home/andrei/Projects/ThinkMobiles/OurCity_android/keystore/CRMC_KEY.jks')
             storePassword 'AppCrmc15'
         }
         configShoham {
             keyAlias 'gy7hu8ji9'
             keyPassword 'Gy7hu8ji9'
-            storeFile file('/home/podo/Projects/ThinkMobiles/OurCityProject/keystore/shoam.jks')
+            storeFile file('/home/andrei/Projects/ThinkMobiles/OurCity_android/keystore/shoam.jks')
             storePassword 'Gy7hu8ji9'
         }
     }
@@ -36,11 +38,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
     }
 
     productFlavors {
@@ -106,6 +103,12 @@ android {
         }
         yeruham {
             applicationId = "com.crmc.yeruham"
+            signingConfig signingConfigs.config
+            versionCode 1
+            versionName '1.0.0'
+        }
+        puma {
+            applicationId = "com.crmc.puma"
             signingConfig signingConfigs.config
             versionCode 1
             versionName '1.0.0'
