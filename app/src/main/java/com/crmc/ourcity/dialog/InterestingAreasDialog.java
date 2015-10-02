@@ -131,9 +131,8 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
                         mLvInterestiongAreas.setAdapter(mAdapter);
                     }
                 } else {
-                    new AlertDialog.Builder(getActivity()).setTitle("Error").setMessage("Server does not respond!")
-                            .setPositiveButton
-                            (R.string.btn_ok, (dialog, which) -> {
+                    new AlertDialog.Builder(getActivity()).setTitle("שגיאת").setMessage(R.string.connection_error)
+                            .setPositiveButton(R.string.btn_ok, (dialog, which) -> {
                         popBackStack();
                     }).setIcon(android.R.drawable.ic_dialog_alert).show();
                 }
