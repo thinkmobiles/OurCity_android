@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/tvDetails_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/tvPost_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/tvEmail_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -137,7 +137,7 @@
 
             <TextView
                 android:id="@+id/tvInformation_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -166,7 +166,7 @@
 
             <TextView
                 android:id="@+id/tvPhone_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -195,11 +195,11 @@
 
             <TextView
                 android:id="@+id/tvMobile_CEIF"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text=" טלפון נייד:"
+                android:text="טלפון נייד:"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
