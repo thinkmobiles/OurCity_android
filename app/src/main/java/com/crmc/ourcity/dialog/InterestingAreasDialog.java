@@ -85,9 +85,9 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     @NonNull
     private View.OnClickListener sendSelectedInterestingAreasToServer() {
         return v -> {
-
-            List<InterestingArea> selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool)
-                    .filter(item -> item.Value).map(item -> item.Key).collect(Collectors.toList());
+            List<InterestingArea> selectedInterestingAreas;
+            if (mResidentResponse != null && mResidentResponse.interestAreasModelsBool != null) {
+                selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool).filter(item -> item.Value).map(item -> item.Key).collect(Collectors.toList());
 
             Bundle args = new Bundle();
             args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
@@ -96,6 +96,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
                     selectedInterestingAreas);
 
             getLoaderManager().restartLoader(LOADER_SEND_INTERESTING_AREAS_ID, args, this);
+            }
         };
     }
 

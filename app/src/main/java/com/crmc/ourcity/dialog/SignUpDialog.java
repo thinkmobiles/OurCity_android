@@ -375,8 +375,10 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 break;
 
             case Constants.LOADER_GET_RESIDENT_INFO_ID:
-                ResidentDetails residentInfo = (ResidentDetails) _data;
-                setResidentInfo(residentInfo);
+                if (_data != null) {
+                    ResidentDetails residentInfo = (ResidentDetails) _data;
+                    setResidentInfo(residentInfo);
+                }
                 break;
         }
     }
