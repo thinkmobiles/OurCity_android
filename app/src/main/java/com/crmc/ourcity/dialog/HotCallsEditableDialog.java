@@ -2,26 +2,22 @@ package com.crmc.ourcity.dialog;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 
 /**
  * Created by podo on 03.09.15.
  */
-public class HotCallsEditableDialog extends BaseFragment {
+public class HotCallsEditableDialog extends BaseFourStatesFragment {
 
     private View root;
     private EditText etFirstEmergencyNumber;
@@ -32,28 +28,27 @@ public class HotCallsEditableDialog extends BaseFragment {
     private ImageView ivCallSecond;
     private ImageView ivCallThird;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
-        root = _inflater.inflate(R.layout.fragment_dialog_hotcalls, _container, false);
-        findUI(root);
-        setListeners();
+    protected int getContentView() {
+        return R.layout.fragment_dialog_hotcalls;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        etFirstEmergencyNumber = findView(R.id.etFirstEmergencyNumber_FDHC);
+        etSecondEmergencyNumber = findView(R.id.etSecondEmergencyNumber_FDHC);
+        etThirdEmergencyNumber = findView(R.id.etThirdEmergencyNumber_FDHC);
+        ivCallFirst = findView(R.id.ivCallFirst_FDHC);
+        ivCallSecond = findView(R.id.ivCallSecond_FDHC);
+        ivCallThird = findView(R.id.ivCallThird_FDHC);
+        btnSavePhones = findView(R.id.btnSavePhones_FDHC);
         editMode(true);
-
-        return root;
+        showContent();
     }
 
-    private void findUI(View _root) {
-        etFirstEmergencyNumber = (EditText) _root.findViewById(R.id.etFirstEmergencyNumber_FDHC);
-        etSecondEmergencyNumber = (EditText) _root.findViewById(R.id.etSecondEmergencyNumber_FDHC);
-        etThirdEmergencyNumber = (EditText) _root.findViewById(R.id.etThirdEmergencyNumber_FDHC);
-        ivCallFirst = (ImageView) _root.findViewById(R.id.ivCallFirst_FDHC);
-        ivCallSecond = (ImageView) _root.findViewById(R.id.ivCallSecond_FDHC);
-        ivCallThird = (ImageView) _root.findViewById(R.id.ivCallThird_FDHC);
-        btnSavePhones = (Button) _root.findViewById(R.id.btnSavePhones_FDHC);
-    }
-
-    private void setListeners() {
+    @Override
+    protected void setListeners() {
         ivCallFirst.setOnClickListener(handleClick());
         ivCallSecond.setOnClickListener(handleClick());
         ivCallThird.setOnClickListener(handleClick());
@@ -142,5 +137,10 @@ public class HotCallsEditableDialog extends BaseFragment {
                     break;
             }
         };
+    }
+
+    @Override
+    public void onRetryClick() {
+
     }
 }

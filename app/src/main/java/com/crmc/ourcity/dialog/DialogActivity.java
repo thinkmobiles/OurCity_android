@@ -119,7 +119,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        if (isTaskRoot()) {
+            finish();
+        }
     }
 
     @Override

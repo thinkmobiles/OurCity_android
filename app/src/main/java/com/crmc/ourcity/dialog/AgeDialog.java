@@ -49,6 +49,12 @@ public class AgeDialog extends BaseFourStatesFragment implements View.OnClickLis
     }
 
     @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
+    @Override
     protected void initViews() {
         btnCancelFilter = findView(R.id.btnCancel_DFA);
         btnSelectFilter = findView(R.id.btnOk_DFA);

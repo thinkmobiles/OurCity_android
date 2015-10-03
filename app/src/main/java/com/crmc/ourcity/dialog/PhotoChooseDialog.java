@@ -32,6 +32,12 @@ public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClick
     }
 
     @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
+    @Override
     protected void initViews() {
         tvCamera = findView(R.id.tvCamera_CFD);
         tvGallery = findView(R.id.tvGallery_CFD);
