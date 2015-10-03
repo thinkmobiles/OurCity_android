@@ -19,7 +19,6 @@ import com.crmc.ourcity.utils.SPManager;
  */
 public class HotCallsEditableDialog extends BaseFourStatesFragment {
 
-    private View root;
     private EditText etFirstEmergencyNumber;
     private EditText etSecondEmergencyNumber;
     private EditText etThirdEmergencyNumber;
