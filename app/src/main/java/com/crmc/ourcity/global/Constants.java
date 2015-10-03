@@ -18,7 +18,6 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_EDITABLE_RESIDENT = "editable_resident_info";
 
 
-
     public static String PREVIOUSTITLE;
 
     public static BitmapDrawable cityImage = null;
@@ -37,6 +36,7 @@ public class Constants {
     final public static int REQUEST_GENDER = 6;
     final public static String REQUEST_TYPE = "REQUEST_TYPE";
     final public static int REQUEST_CANCEL = 8;
+    public static final int REQUEST_HOT_CALLS = 9;
 
     //for loaders
     final public static int LOADER_ADDRESS_ID = 1;
@@ -121,6 +121,7 @@ public class Constants {
     final public static String CONFIGURATION_KEY_PHONE_LIST = "PHONE_LIST";
     final public static String CONFIGURATION_KEY_PHONE_LIST_OR_PHONE_BOOK = "LIST_BOOK";
     final public static String CONFIGURATION_KEY_CITY_ENINIES = "CITY_ENINIES";
+    public static final String CONFIGURATION_KEY_APPEAL_ITEM = "APPEAL_ITEM";
     public static final String CONFIGURATION_KEY_RSS = "rss";
     public static final String CONFIGURATION_KEY_MAIL = "mail";
 

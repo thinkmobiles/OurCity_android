@@ -147,6 +147,9 @@
     <string name="middle_trun_off_text">להזנה ידנית של הפרטים</string>
     <string name="footer_trun_off_text">לחצו כאן</string>
     <string name="btn_send_appeal_fragment">שלח</string>
+    <string name="item_description">תיאור:</string>
+    <string name="item_address">כתובת:</string>
+    <string name="item_date_time">תאריך ושעה:</string>
 
 
 </resources>

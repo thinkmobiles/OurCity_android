@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="כתובת:"
+                android:text="@string/item_address"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="תיאור:"
+                android:text="@string/item_description"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -226,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="תאריך ושעה:"
+                android:text="@string/item_date_time"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
         </LinearLayout>

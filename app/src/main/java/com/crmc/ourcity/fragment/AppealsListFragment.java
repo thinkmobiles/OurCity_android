@@ -1,17 +1,23 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.AppealsAdapter;
+import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AppealsLoader;
@@ -29,6 +35,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     private String route;
     private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private OnListItemActionListener mOnListItemActionListener;
 
     private AppealsAdapter mAdapter;
 
@@ -41,6 +48,22 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         args.putString(Constants.NODE_TITLE, _title);
         mAppealsListFragment.setArguments(args);
         return mAppealsListFragment;
+    }
+
+    @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        super.onDetach();
     }
 
     @Override
@@ -117,9 +140,17 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void setListeners() {
         super.setListeners();
+        //TODO: uncomment this line to get detail Appeal
+        //lvAppeals.setOnItemClickListener(handleItemClick());
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeInStart();
     }
+
+    @NonNull
+    private AdapterView.OnItemClickListener handleItemClick() {
+        return (parent, view, position, id) -> mOnListItemActionListener.onAppealsItemAction(mAdapter.getItem(position));
+    }
+
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();

@@ -135,13 +135,13 @@ public class EventsItemFragment extends BaseFourStatesFragment {
         setImage();
     }
 
-    private void checkData(String _text, TextView _tvView, View _view) {
-        if (!TextUtils.isEmpty(_text)) {
-            _tvView.setText(_text);
-        } else {
-            _view.setVisibility(View.GONE);
-        }
-    }
+//    private void checkData(String _text, TextView _tvView, View _view) {
+//        if (!TextUtils.isEmpty(_text)) {
+//            _tvView.setText(_text);
+//        } else {
+//            _view.setVisibility(View.GONE);
+//        }
+//    }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebView(String _html) {

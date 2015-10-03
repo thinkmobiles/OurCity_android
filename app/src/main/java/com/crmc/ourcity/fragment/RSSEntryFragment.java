@@ -109,14 +109,14 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         ivLink.setOnClickListener(v -> mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle()));
     }
 
-    private void checkData(String _text, TextView _tvView, View _view) {
-
-        if (!TextUtils.isEmpty(_text)) {
-            _tvView.setText(_text);
-        } else {
-            _view.setVisibility(View.GONE);
-        }
-    }
+//    private void checkData(String _text, TextView _tvView, View _view) {
+//
+//        if (!TextUtils.isEmpty(_text)) {
+//            _tvView.setText(_text);
+//        } else {
+//            _view.setVisibility(View.GONE);
+//        }
+//    }
 
     private void setImage() {
 

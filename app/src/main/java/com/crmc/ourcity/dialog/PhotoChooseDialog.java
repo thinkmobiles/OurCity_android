@@ -72,7 +72,5 @@ public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClick
     }
 
     @Override
-    public void onRetryClick() {
-
-    }
+    public void onRetryClick() {}
 }

@@ -104,13 +104,13 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         showContent();
     }
 
-    private void checkData(String _text, TextView _tvView, View _view){
-        if (!TextUtils.isEmpty(_text)){
-            _tvView.setText(_text);
-        } else {
-            _view.setVisibility(View.GONE);
-        }
-    }
+//    private void checkData(String _text, TextView _tvView, View _view){
+//        if (!TextUtils.isEmpty(_text)){
+//            _tvView.setText(_text);
+//        } else {
+//            _view.setVisibility(View.GONE);
+//        }
+//    }
 
     private void setImage(){
         if (!TextUtils.isEmpty(mCityEntities.phoneNumber)){

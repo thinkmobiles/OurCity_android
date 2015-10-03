@@ -20,6 +20,7 @@ import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
+import com.crmc.ourcity.fragment.AppealItemFragment;
 import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.AppealsListFragment;
 import com.crmc.ourcity.fragment.CityEntitiesFragment;
@@ -46,6 +47,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.notification.GCMListenerService;
 import com.crmc.ourcity.notification.RegistrationIntentService;
+import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
@@ -261,6 +263,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onAppealsItemAction(ResultObject resultObject) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, AppealItemFragment.newInstance(resultObject));
     }
 
     @Override

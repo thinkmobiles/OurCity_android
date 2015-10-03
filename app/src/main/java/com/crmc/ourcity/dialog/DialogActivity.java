@@ -3,6 +3,7 @@ package com.crmc.ourcity.dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.FragmentManager;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.BaseFragmentActivity;
@@ -67,6 +68,8 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsDialog());
                 break;
         }
+
+
     }
 
     @Override

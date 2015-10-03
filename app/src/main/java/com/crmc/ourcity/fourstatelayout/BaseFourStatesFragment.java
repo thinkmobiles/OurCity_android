@@ -142,6 +142,14 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         if (!TextUtils.isEmpty(title)) mTitle.setText(title);
     }
 
+    protected void checkData(String _text, TextView _tvView, View _view){
+        if (!TextUtils.isEmpty(_text)){
+            _tvView.setText(_text);
+        } else {
+            _view.setVisibility(View.GONE);
+        }
+    }
+
     protected void configureActionBar (boolean isBackVisible, boolean isHomeVisible) {
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
