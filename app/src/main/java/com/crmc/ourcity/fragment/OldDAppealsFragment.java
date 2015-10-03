@@ -129,7 +129,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         super.initViews();
 
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
+//        configureActionBar(true, true, title);
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
@@ -268,6 +268,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     @Override
     public void onResume() {
         super.onResume();
+        configureActionBar(true, true, title);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
