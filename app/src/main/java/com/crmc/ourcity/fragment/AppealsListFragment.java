@@ -141,7 +141,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     protected void setListeners() {
         super.setListeners();
         //TODO: uncomment this line to get detail Appeal
-        //lvAppeals.setOnItemClickListener(handleItemClick());
+        lvAppeals.setOnItemClickListener(handleItemClick());
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeInStart();
     }
