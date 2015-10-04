@@ -68,6 +68,12 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         showContent();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        configureActionBar(true, true, resultObject.ReferenceID);
+    }
+
     private void setImage(){
         vUnderLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
