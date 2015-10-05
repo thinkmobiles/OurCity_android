@@ -251,7 +251,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             case Constants.ACTION_HOT_CALL:
                 Intent intent = new Intent(this, DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.HOT_CALLS).to(intent);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.REQUEST_HOT_CALLS);
                 break;
             case Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(_menuModel

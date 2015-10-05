@@ -20,10 +20,13 @@ public class HotCallsDialog extends HotCallsEditableDialog {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        if (isAdded()) {
-            getActivity().onBackPressed();
-        }
+    public void onSaveInstanceState(Bundle outState) {
+
     }
+
+    @Override
+    public void onDetach() {
+        getActivity().finish();
+        super.onDetach();    }
+
 }
