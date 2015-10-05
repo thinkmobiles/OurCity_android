@@ -77,6 +77,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
@@ -123,7 +124,6 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     protected void initViews() {
         super.initViews();
-        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
         lvAppeals = findView(R.id.lvCityEntities_CEF);
         View vUnderLine_ALF = findView(R.id.vUnderLine_ALF);

@@ -88,6 +88,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         loadCityEntities();
     }
@@ -117,9 +118,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
-        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         etSearch_CEF = findView(R.id.etSearch_CEF);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);

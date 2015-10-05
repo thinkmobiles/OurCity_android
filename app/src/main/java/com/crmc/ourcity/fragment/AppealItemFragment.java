@@ -40,6 +40,12 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    public void onResume() {
+        configureActionBar(true, true, resultObject.ReferenceID);
+        super.onResume();
+    }
+
+    @Override
     protected void initViews() {
         super.initViews();
         tvDescription = findView(R.id.tvDescription_Text_AIF);
@@ -66,12 +72,6 @@ public class AppealItemFragment extends BaseFourStatesFragment {
             ivDetailPhoto.setImageBitmap(Image.convertBase64ToBitmap(resultObject.AttachedFiles));
         setImage();
         showContent();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        configureActionBar(true, true, resultObject.ReferenceID);
     }
 
     private void setImage(){

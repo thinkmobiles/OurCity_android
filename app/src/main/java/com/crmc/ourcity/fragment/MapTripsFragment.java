@@ -74,6 +74,7 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         setUpMapIfNeeded();
     }
@@ -90,10 +91,6 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
     @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
-
-        configureActionBar(true, true, title);
 
 //        btnAnotherTrips = findView(R.id.btnAnotherTrips_MTF);
 //        Image.setBackgroundColorView(getActivity(), btnAnotherTrips, R.drawable.btn_selector_mf,

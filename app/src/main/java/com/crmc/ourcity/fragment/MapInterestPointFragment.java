@@ -107,8 +107,8 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
 
     @Override
     public void onResume() {
-        super.onResume();
         configureActionBar(true, true, title);
+        super.onResume();
         setUpMapIfNeeded();
     }
 

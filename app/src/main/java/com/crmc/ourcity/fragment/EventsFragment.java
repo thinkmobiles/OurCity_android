@@ -80,6 +80,7 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         loadEvents();
     }
@@ -116,9 +117,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
-        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_events);
         lvEvents = findView(R.id.lvEvents_EF);
         View vUnderLine_EF = findView(R.id.vUnderLine_EF);

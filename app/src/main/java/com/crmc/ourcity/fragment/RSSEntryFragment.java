@@ -56,6 +56,12 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    public void onResume() {
+        configureActionBar(true, true, entry.getTitle());
+        super.onResume();
+    }
+
+    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
@@ -74,8 +80,6 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, entry.getTitle());
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);

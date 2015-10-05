@@ -85,6 +85,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     }
 
 
+
+
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
@@ -93,8 +95,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     @Override
     protected void initViews() {
         super.initViews();
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         btnChooseAnotherVote = findView(R.id.btnChooseAnotherVote_VF);
         vUnderLine_VF = findView(R.id.vUnderLine_VF);
         tvAge = findView(R.id.tvAge_VF);
@@ -235,6 +235,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);

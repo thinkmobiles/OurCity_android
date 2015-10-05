@@ -62,6 +62,7 @@ public class PhonesFragment extends BaseFourStatesFragment {
 
     @Override
     public void onResume() {
+        configureActionBar(true, true);
         super.onResume();
     }
 
@@ -69,7 +70,6 @@ public class PhonesFragment extends BaseFourStatesFragment {
     protected void initViews() {
         super.initViews();
        // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true);
         lvPhones = findView(R.id.lvPhones_FP);
         vUnderLine_FP = findView(R.id.vUnderLine_FP);
         vUnderLine_FP.setBackgroundColor(Image.darkenColor(0.2));

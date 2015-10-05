@@ -61,11 +61,14 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    public void onResume() {
+        configureActionBar(true, true, mCityEntities.entityName);
+        super.onResume();
+    }
+
+    @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(mCityEntities.entityName);
-        configureActionBar(true, true, mCityEntities.entityName);
 
         tvEntityName_CEIF = findView(R.id.tvEntityName_CEIF);
         tvDetails_Text_CEIF = findView(R.id.tvDetails_Text_CEIF);

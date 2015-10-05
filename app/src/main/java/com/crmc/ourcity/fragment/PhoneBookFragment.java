@@ -80,6 +80,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
@@ -108,8 +109,6 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     @Override
     protected void initViews() {
         super.initViews();
-        //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         lvPhoneBook = findView(R.id.lvPhoneBook_PBF);
         vUnderLine_PBF = findView(R.id.vUnderLine_PBF);
         swipeRefreshLayout = findView(R.id.swipe_refresh_phone_book);

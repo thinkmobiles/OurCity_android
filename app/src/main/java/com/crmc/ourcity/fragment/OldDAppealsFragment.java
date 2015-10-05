@@ -127,16 +127,11 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        configureActionBar(true, true, title);
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
         mActionBack.setVisibility(View.VISIBLE);
         mActionHome.setVisibility(View.VISIBLE);
-        //TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
-        //mTitle.setText(title);
         ivPhoto = findView(R.id.ivPhoto_AF);
         ivRotate = findView(R.id.ivRotate_AF);
         etNameCity = findView(R.id.etCityName_AF);

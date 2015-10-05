@@ -83,6 +83,12 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
+    public void onResume() {
+        configureActionBar(true, true, title);
+        super.onResume();
+    }
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         loadUrl(link);
@@ -123,12 +129,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setTitle(title);
 
-        configureActionBar(true, true, title);
-
-//        tvTitle_WVF = findView(R.id.tvTitle_WFV);
         mWebView = findView(R.id.webView_WVF);
         pbLoading = findView(R.id.pbLoading_WVF);
         vUnderLine_WVF = findView(R.id.vUnderLine_WVF);

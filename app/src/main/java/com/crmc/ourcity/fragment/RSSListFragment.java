@@ -73,6 +73,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_RSS_LINK, rssLink);
@@ -104,7 +105,6 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     protected void initViews() {
         super.initViews();
-        configureActionBar(true, true, title);
         lvRssEntries = findView(R.id.lvRSS_RssFrg);
         swipeRefreshLayout = findView(R.id.swipe_refresh_rss);
         vUnderLine_RssFrg = findView(R.id.vUnderLine_RssFrg);

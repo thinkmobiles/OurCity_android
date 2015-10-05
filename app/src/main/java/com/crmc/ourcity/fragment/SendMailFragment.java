@@ -48,6 +48,12 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     }
 
     @Override
+    public void onResume() {
+        configureActionBar(true, true, title);
+        super.onResume();
+    }
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         showContent();
@@ -56,8 +62,6 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     protected void initViews() {
         super.initViews();
-       // ((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         vTopLine_SMF = findView(R.id.vTopLine_SMF);
         vUnderLine_SMF = findView(R.id.vUnderLine_SMF);
         etFirstName_SMF = findView(R.id.etFirstName_SMF);

@@ -80,6 +80,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         loadLinkList();
     }
@@ -109,11 +110,6 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     protected void initViews() {
         super.initViews();
-        //noinspection ConstantConditions
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
-
-        configureActionBar(true, true, title);
 
         swipeRefreshLayout = findView(R.id.swipe_refresh_links);
         lvLinks = findView(R.id.lvLinks_LLF);

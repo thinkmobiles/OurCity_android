@@ -101,6 +101,8 @@ public class AppealsFragment extends BaseFourStatesFragment {
         title = getArguments().getString(Constants.NODE_TITLE);
     }
 
+
+
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
@@ -128,8 +130,6 @@ public class AppealsFragment extends BaseFourStatesFragment {
     protected void initViews() {
         super.initViews();
 
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         View actionBar = getActivity().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
@@ -264,6 +264,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
