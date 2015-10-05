@@ -19,10 +19,10 @@ import com.crmc.ourcity.utils.Image;
 public class AppealItemFragment extends BaseFourStatesFragment {
 
     private ResultObject resultObject;
-    private TextView tvDescription, tvAddress, tvDate;
+    private TextView tvDescription, tvAddress, tvDate, tvStat;
     private ImageView ivDetailPhoto;
     private View vUnderLine_AIF, vBottomLine_AIF;
-    private LinearLayout llAddress, llDescription, llDate;
+    private LinearLayout llAddress, llDescription, llDate, llStat;
 
 
     public static AppealItemFragment newInstance(ResultObject _resultObject) {
@@ -51,11 +51,13 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         tvDescription = findView(R.id.tvDescription_Text_AIF);
         tvAddress = findView(R.id.tvAddress_Text_AIF);
         tvDate = findView(R.id.tvDate_Text_AIF);
+        tvStat = findView(R.id.tvStat_Text_AIF);
         ivDetailPhoto = findView(R.id.ivPhoto_AIF);
 
         llAddress = findView(R.id.llAddress_AIF);
         llDescription = findView(R.id.llDescription_AIF);
         llDate = findView(R.id.llDate_AIF);
+        llStat = findView(R.id.llStat_AIF);
 
         vUnderLine_AIF = findView(R.id.vUnderLine_AIF);
         vBottomLine_AIF = findView(R.id.vBottomLine_AIF);
@@ -66,6 +68,7 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         super.onViewCreated(_view, _savedInstanceState);
         checkData(resultObject.Description, tvDescription, llDescription);
         checkData(resultObject.DateCreatedClient, tvDate, llDate);
+        checkData(resultObject.Status, tvStat, llStat);
         checkData(resultObject.Location.HouseNumber.trim() + " " + resultObject.Location.StreetName.trim(),
                 tvAddress, llAddress);
         if(!TextUtils.isEmpty(resultObject.AttachedFiles))

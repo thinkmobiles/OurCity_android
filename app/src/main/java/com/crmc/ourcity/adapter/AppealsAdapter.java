@@ -1,5 +1,6 @@
 package com.crmc.ourcity.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -89,6 +90,7 @@ public class AppealsAdapter extends BaseAdapter {
             _view.setTag(this);
         }
 
+        @SuppressLint("SetTextI18n")
         public void setData(ResultObject _item) {
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");

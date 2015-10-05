@@ -44,7 +44,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center|center_horizontal"
                 android:layout_marginBottom="@dimen/person10"
-                android:gravity="center|center_horizontal"
+                android:gravity="center"
                 android:text="לא צורפה תמונה לדווח"
                 android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="2dp"
                 />
         </RelativeLayout>
 
