@@ -130,7 +130,7 @@ public class EventsListAdapter extends BaseAdapter {
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText(_item.eventDateToMobileClient.trim());
+                date.setText(_item.eventDateToMobileClient.trim() + " ");
             }
             if (TextUtils.isEmpty(_item.address)) {
                 address.setVisibility(View.GONE);
