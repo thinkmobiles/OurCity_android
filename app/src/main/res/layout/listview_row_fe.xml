@@ -79,6 +79,19 @@
             android:textStyle="bold"
             tools:background="@android:color/holo_orange_dark"/>
 
+        <TextView
+            android:id="@+id/tvAddress_EIF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:maxLines="2"
+            android:text="Date"
+            android:textSize="@dimen/cf_item_text_size"
+            tools:background="@android:color/holo_blue_bright"/>
+
         <LinearLayout
             android:id="@+id/llDate_EIF"
             android:layout_width="match_parent"
@@ -103,19 +116,6 @@
                 android:text="@string/item_date_time"
                 />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvAddress_EIF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|right"
-            android:maxLines="2"
-            android:text="Date"
-            android:textSize="@dimen/cf_item_text_size"
-            tools:background="@android:color/holo_blue_bright"/>
 
 
     </LinearLayout>
