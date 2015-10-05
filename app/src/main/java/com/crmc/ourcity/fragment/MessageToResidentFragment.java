@@ -93,6 +93,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void initViews() {
         super.initViews();
+        //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout = findView(R.id.swipe_refresh_message_to_resident);
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);

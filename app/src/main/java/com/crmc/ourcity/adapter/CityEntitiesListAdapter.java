@@ -106,14 +106,14 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
                 for (CityEntities wp : mCityEntities) {
                     String name = wp.entityName;
                     String post = wp.entityPost;
-                    if (!TextUtils.isEmpty(name)){
-                        search += name;
-                    }
+//                    if (!TextUtils.isEmpty(name)){
+//                        search = name;
+//                    }
 //                    if (!TextUtils.isEmpty(post)){
 //                        search += " " + post;
 //                    }
-                    if (!TextUtils.isEmpty(search)) {
-                        if (search.contains(text)){
+                    if (!TextUtils.isEmpty(text)) {
+                        if (name.contains(text)){
                             filterableList.add(wp);
                         }
                     }

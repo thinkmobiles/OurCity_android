@@ -30,6 +30,10 @@ public class CityEntities implements Parcelable {
     public String mobileNumber;
 
 
+    public CityEntities(String _entityName){
+        this.entityName = _entityName;
+    }
+
     protected CityEntities(Parcel in) {
         cityId = in.readInt();
         details = in.readString();

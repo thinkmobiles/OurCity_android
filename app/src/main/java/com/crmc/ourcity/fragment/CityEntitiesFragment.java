@@ -113,6 +113,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public void onLoaderReset(Loader<List<CityEntities>> _loader) {
+
     }
 
     @Override
@@ -147,7 +148,9 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mAdapter.getFilter().filter(s.toString());
+                if (mAdapter != null) {
+                    mAdapter.getFilter().filter(s.toString());
+                }
             }
         });
     }
