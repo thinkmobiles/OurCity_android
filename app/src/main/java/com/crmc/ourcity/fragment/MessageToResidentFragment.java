@@ -51,7 +51,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, "insert title");
+//        configureActionBar(true, true, "insert title");
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
@@ -60,6 +60,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public void onResume() {
+        configureActionBar(true, true, title);
         super.onResume();
         loadMessagesToResident();
     }
@@ -95,7 +96,6 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     protected void initViews() {
         super.initViews();
         //((AppCompatActivity)getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        configureActionBar(true, true, title);
         swipeRefreshLayout = findView(R.id.swipe_refresh_message_to_resident);
         lvMassageToResident = findView(R.id.lvMassageToResident_MTRF);
         vUnderLine_MTRF = findView(R.id.vUnderLine_MTRF);

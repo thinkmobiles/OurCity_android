@@ -1,12 +1,9 @@
 package com.crmc.ourcity.fourstatelayout;
 
-import android.app.Activity;
 import android.app.Service;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,8 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
+import com.crmc.ourcity.fragment.MainMenuFragment;
+import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.utils.SoftKeyboard;
 
 /**
@@ -62,6 +61,14 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
                 mErrorLayout);
         initViews();
         setListeners();
+
+        Fragment f = getFragmentManager().findFragmentById(R.id.flContainer_MA);
+
+        if (f instanceof MainMenuFragment || f instanceof SubMenuFragment) {
+            getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.VISIBLE);
+        } else {
+            getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
+        }
         return rootView;
     }
 
