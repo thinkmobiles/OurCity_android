@@ -113,7 +113,7 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 //                        search += " " + post;
 //                    }
                     if (!TextUtils.isEmpty(text)) {
-                        if (name.contains(text)){
+                        if (name.contains(text) || post.contains((text))){
                             filterableList.add(wp);
                         }
                     }
