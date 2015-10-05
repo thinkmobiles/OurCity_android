@@ -2,7 +2,6 @@ package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -101,7 +100,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         if (TextUtils.isEmpty(entry.getDescription())) {
             llDescription.setVisibility(View.GONE);
         } else {
-            tvDescription_Text.setText(Html.fromHtml(entry.getDescription()));
+            tvDescription_Text.setText(Html.fromHtml(entry.getDescription().substring(0, entry.getDescription().length() - 3)));
         }
         setImage();
         showContent();
