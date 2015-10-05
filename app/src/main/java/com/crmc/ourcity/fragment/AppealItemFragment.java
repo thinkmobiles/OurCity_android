@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
@@ -21,6 +22,7 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     private ResultObject resultObject;
     private TextView tvDescription, tvAddress, tvDate, tvStat;
     private ImageView ivDetailPhoto;
+    private RelativeLayout rlImageTicketAIF;
     private View vUnderLine_AIF, vBottomLine_AIF;
     private LinearLayout llAddress, llDescription, llDate, llStat;
 
@@ -58,6 +60,7 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         llDescription = findView(R.id.llDescription_AIF);
         llDate = findView(R.id.llDate_AIF);
         llStat = findView(R.id.llStat_AIF);
+        rlImageTicketAIF = findView(R.id.rlImageTicketAIF);
 
         vUnderLine_AIF = findView(R.id.vUnderLine_AIF);
         vBottomLine_AIF = findView(R.id.vBottomLine_AIF);
@@ -71,13 +74,16 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         checkData(resultObject.Status, tvStat, llStat);
         checkData(resultObject.Location.HouseNumber.trim() + " " + resultObject.Location.StreetName.trim(),
                 tvAddress, llAddress);
-        if(!TextUtils.isEmpty(resultObject.AttachedFiles))
+        if (!TextUtils.isEmpty(resultObject.AttachedFiles)) {
             ivDetailPhoto.setImageBitmap(Image.convertBase64ToBitmap(resultObject.AttachedFiles));
+        } else {
+            rlImageTicketAIF.setVisibility(View.GONE);
+        }
         setImage();
         showContent();
     }
 
-    private void setImage(){
+    private void setImage() {
         vUnderLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
     }
