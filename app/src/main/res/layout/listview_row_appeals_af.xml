@@ -17,12 +17,11 @@
         android:weightSum="3">
 
         <RelativeLayout
-            android:id="@+id/last_appeals_image_layout"
+            android:id="@+id/rlImagePlaceholder_ALF"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/edittext_green"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:padding="@dimen/person10">
@@ -59,13 +58,12 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/last_appeals_data_layout"
+            android:id="@+id/llInformationPlaceholder_ALF"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/person5"
             android:layout_weight="2"
-            android:background="@drawable/edittext_green"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingRight="@dimen/person20">

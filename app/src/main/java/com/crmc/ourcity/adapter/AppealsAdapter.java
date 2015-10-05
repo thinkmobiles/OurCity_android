@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
@@ -25,11 +27,13 @@ public class AppealsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<ResultObject> resultObjects;
     private Context mContext;
+    private String color;
 
-    public AppealsAdapter(Context _context, List<ResultObject> _resultObjects) {
+    public AppealsAdapter(Context _context, List<ResultObject> _resultObjects, String _color) {
         this.resultObjects = _resultObjects;
         this.mInflater = LayoutInflater.from(_context);
         this.mContext = _context;
+        this.color = _color;
     }
 
     @Override
@@ -73,17 +77,22 @@ public class AppealsAdapter extends BaseAdapter {
         final TextView status;
         final TextView referenceID;
         final TextView tvPhotoText_AF;
+        final RelativeLayout rlImagePlaceholder;
+        final LinearLayout llInfoPlaceholder;
 //        final ImageView ivPhoto;
         final View view;
         final Context mContext;
 
         public ViewHolder(@NonNull final View _view, Context _context) {
+
             date = (TextView) _view.findViewById(R.id.tvDate_AF);
             address = (TextView) _view.findViewById(R.id.tvAddress_AF);
             description = (TextView) _view.findViewById(R.id.tvDescription_AF);
             status = (TextView) _view.findViewById(R.id.tvStat_AF);
             tvPhotoText_AF = (TextView) _view.findViewById(R.id.tvPhotoText_AF);
             referenceID = (TextView) _view.findViewById(R.id.tvReferenceID_AF);
+            rlImagePlaceholder = (RelativeLayout) _view.findViewById(R.id.rlImagePlaceholder_ALF);
+            llInfoPlaceholder = (LinearLayout) _view.findViewById(R.id.llInformationPlaceholder_ALF);
 //            ivPhoto = (ImageView) _view.findViewById(R.id.ivImage_AF);
             this.view = _view;
             this.mContext = _context;
@@ -92,6 +101,9 @@ public class AppealsAdapter extends BaseAdapter {
 
         @SuppressLint("SetTextI18n")
         public void setData(ResultObject _item) {
+            Image.setBoarderBackgroundColorArray(mContext, color , 2, 5, "#ffffff",
+                    new View[]{rlImagePlaceholder, llInfoPlaceholder});
+
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");
             } else {

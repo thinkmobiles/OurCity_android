@@ -109,7 +109,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         swipeRefreshLayout.setRefreshing(false);
         if (data != null) {
             if (data.getResultObjects() != null && data.getResultObjects().size() > 0) {
-                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects());
+                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects(), color);
                 lvAppeals.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 showContent();
