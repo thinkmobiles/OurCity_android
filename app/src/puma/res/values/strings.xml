@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">puma</string>
-    <integer name="city_id">78</integer>
+    <string name="app_name">chaderaTest</string>
+    <integer name="city_id">3047</integer>
 
 </resources>
