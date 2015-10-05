@@ -194,6 +194,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         etNumberHouse.setText("");
         etDescription.setText("");
         mPhotoFilePath = "";
+        ivRotate.setVisibility(View.GONE);
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
     }
@@ -313,8 +314,10 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                             try {
                                 ivPhoto.setImageBitmap(Image.handleSamplingAndRotationBitmap(getActivity(), Uri
                                         .fromFile(imageFile), 400, 400));
+                                ivRotate.setVisibility(View.VISIBLE);
                                 ivRotate.setEnabled(true);
                             } catch (IOException e) {
+                                ivRotate.setVisibility(View.GONE);
                                 ivRotate.setEnabled(false);
                                 e.printStackTrace();
                             }
@@ -337,6 +340,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                         File imageFile1 = new File(mPhotoFilePath);
                         if (imageFile1.exists()) {
                             ivPhoto.setImageBitmap(Image.compressImage(imageFile1, 300));
+                            ivRotate.setVisibility(View.VISIBLE);
                             ivRotate.setEnabled(true);
                         } else {
                             Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
