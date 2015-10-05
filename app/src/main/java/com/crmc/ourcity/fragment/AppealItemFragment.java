@@ -86,6 +86,8 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     private void setImage() {
         vUnderLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
+        Image.setBoarderBackgroundColor(getActivity(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0)), 2,
+                5, "#ffffff", rlImageTicketAIF);
     }
 
     @Override
