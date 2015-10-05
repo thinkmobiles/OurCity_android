@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
+                android:layout_gravity="center|center_horizontal"
                 android:layout_marginBottom="@dimen/person10"
-                android:gravity="center"
+                android:gravity="center|center_horizontal"
                 android:text="לא צורפה תמונה לדווח"
                 android:textStyle="bold" />
 
