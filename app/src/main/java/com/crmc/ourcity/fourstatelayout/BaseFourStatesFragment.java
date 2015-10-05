@@ -67,7 +67,11 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         if (f instanceof MainMenuFragment || f instanceof SubMenuFragment) {
             getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.VISIBLE);
         } else {
-            getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
+            try {
+                getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
+            } catch (Exception _e){
+
+            }
         }
         return rootView;
     }
