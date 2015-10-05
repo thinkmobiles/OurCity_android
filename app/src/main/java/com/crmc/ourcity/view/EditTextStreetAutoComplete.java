@@ -2,6 +2,7 @@ package com.crmc.ourcity.view;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.AutoCompleteTextView;
 
@@ -46,7 +47,7 @@ public class EditTextStreetAutoComplete extends AutoCompleteTextView {
     protected void onFocusChanged(boolean _focused, int _direction, Rect _previouslyFocusedRect) {
         super.onFocusChanged(_focused, _direction, _previouslyFocusedRect);
         if (_focused) {
-            if (!(getText().toString().equals(""))) {
+            if (!TextUtils.isEmpty(getText().toString())) {
                 performFiltering(getText(), 0);
             }
             showDropDown();
