@@ -112,8 +112,8 @@
     <string name="title_activity_splash_screen">מסך הקדמה</string>
     <string name="ivalid_number">מספר לא תקין</string>
     <string name="contact_mail">support@quickwork.co.il</string>
-    <string name="personal_area_id">מספר פניה</string>
-    <string name="personal_status">סטטוס</string>
+    <string name="personal_area_id">מספר פניה:</string>
+    <string name="personal_status">סטטוס:</string>
 
     <string name="not_a_member">אינו חבר? הירשם כאן</string>
     <string name="username">שם משתמש</string>

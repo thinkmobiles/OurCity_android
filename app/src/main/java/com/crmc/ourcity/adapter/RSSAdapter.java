@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
@@ -68,6 +69,7 @@ public class RSSAdapter extends BaseAdapter {
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
         final TextView date;
+        final LinearLayout llDate;
 //        final ImageView ivLink;
         final ImageView ivArrowEvent;
         final View view;
@@ -76,7 +78,8 @@ public class RSSAdapter extends BaseAdapter {
 
         ViewHolder(@NonNull final View _view, Context _context) {
             this.title = (TextView) _view.findViewById(R.id.tvTitle_RssFrgmt);
-            this.date = (TextView) _view.findViewById(R.id.tvDate_RssFrgmt);
+            this.date = (TextView) _view.findViewById(R.id.tvDate_Text_RssFrgmt);
+            this.llDate = (LinearLayout) _view.findViewById(R.id.llDate_RssFrgmt);
 //            this.ivLink = (ImageView) _view.findViewById(R.id.ivLink_RssFrgmt);
 //            this.ivLink.setOnClickListener(this);
             this.ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_RssFrgmt);
@@ -100,9 +103,11 @@ public class RSSAdapter extends BaseAdapter {
 
             if (TextUtils.isEmpty(_entry.getPubDate())) {
                 date.setVisibility(View.GONE);
+                llDate.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
-                date.setText("תאריך ושעה" +   ": " +getDateTime(_entry.getPubDate().trim()));
+                llDate.setVisibility(View.VISIBLE);
+                date.setText(getDateTime(_entry.getPubDate().trim()));
             }
 
 //            if (!TextUtils.isEmpty(_entry.getLink())) {

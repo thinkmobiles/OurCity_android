@@ -121,7 +121,7 @@
     <dimen name="person16sp">14.66sp</dimen>
     <dimen name="person12sp">10.99sp</dimen>
 
-    <dimen name="person18sp_from_ardmn">13sp</dimen>
+    <dimen name="person18sp_from_ardmn">12sp</dimen>
     <!--phone-->
     <dimen name="phone2">1.83dp</dimen>
 

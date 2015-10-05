@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/cf_item_row_size"
+    android:layout_height="wrap_content"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
@@ -55,17 +55,29 @@
             android:textStyle="bold"
             tools:background="@android:color/holo_orange_dark"/>
 
-        <TextView
-            android:id="@+id/tvDate_RssFrgmt"
-            android:layout_width="wrap_content"
+          <LinearLayout
+            android:id="@+id/llDate_RssFrgmt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|right"
-            android:maxLines="2"
-            android:text="Date"
-            android:textSize="@dimen/cf_item_text_size"
-            tools:background="@android:color/holo_green_dark"/>
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:paddingLeft="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDate_Text_RssFrgmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                />
+
+            <TextView
+                android:id="@+id/tvDate_RssFrgmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/item_date_time"
+                />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

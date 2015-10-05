@@ -251,7 +251,6 @@
                 android:id="@+id/global_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/etCityName_SUDF"
                 android:gravity="right|center_vertical"
                 android:orientation="horizontal">
@@ -261,7 +260,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_receive_global_notifications"
                     android:textColor="#fff"
-                    android:textSize="14sp"/>
+                    android:ellipsize="end"
+                    android:textSize="12sp"/>
 
                 <CheckBox
                     android:id="@+id/chbGlobalNotifications_SUDF"
@@ -273,7 +273,6 @@
                 android:id="@+id/personal_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/global_push_layout"
                 android:gravity="right|center_horizontal">
 
@@ -282,7 +281,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_receive_personal_notifications"
                     android:textColor="#fff"
-                    android:textSize="14sp"/>
+                    android:ellipsize="end"
+                    android:textSize="12sp"/>
 
                 <CheckBox
                     android:id="@+id/chbPersonalNotifications_SUDF"
