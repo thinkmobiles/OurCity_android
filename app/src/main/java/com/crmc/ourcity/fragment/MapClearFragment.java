@@ -69,6 +69,7 @@ public final class MapClearFragment extends BaseFourStatesFragment implements On
     @Override
     public void onResume() {
         super.onResume();
+        configureActionBar(true, true);
         setUpMapIfNeeded();
     }
 

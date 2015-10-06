@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -62,6 +63,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private int selectedStreetID = -1;
     private ProgressDialog dialogLoading;
     private boolean isEditable;
+    private Handler mHandler;
 
     @Override
     public void onResume() {
@@ -87,6 +89,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         root = _inflater.inflate(R.layout.fragment_dialog_sign_up, _container, false);
         findUI(root);
         setListeners();
+        mHandler = new Handler(getActivity().getMainLooper());
         dialogLoading = new ProgressDialog(getActivity());
         return root;
     }
@@ -320,16 +323,22 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 }
                 break;
             case LOADER_LOGIN_ID:
-                LoginResponse dataLogin = (LoginResponse) _data;
-                SPManager.getInstance(getActivity()).setAuthToken(dataLogin.authToken);
-                SPManager.getInstance(getActivity()).setCRMCUsername(dataLogin.crmcUsername);
-                SPManager.getInstance(getActivity()).setCRMCPassword(dataLogin.crmcPassword);
-                SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
-                if ((chbGlobalNotifications.isChecked() || chbPersonalNotifications.isChecked()) && checkPlayServices()) {
-                    Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
-                    getActivity().startService(intent);
-                }
-                getActivity().finish();
+                mHandler.postAtFrontOfQueue(() -> {
+                    LoginResponse dataLogin = (LoginResponse) _data;
+                    SPManager.getInstance(getActivity()).setAuthToken(dataLogin.authToken);
+                    SPManager.getInstance(getActivity()).setCRMCUsername(dataLogin.crmcUsername);
+                    SPManager.getInstance(getActivity()).setCRMCPassword(dataLogin.crmcPassword);
+                    SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
+                    if ((chbGlobalNotifications.isChecked() || chbPersonalNotifications.isChecked()) && checkPlayServices()) {
+                        Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
+                        getActivity().startService(intent);
+                    }
+
+                    popBackStack();
+
+                });
+
+                //getActivity().finish();
 
                 break;
             case Constants.LOADER_STREETS_ID:
