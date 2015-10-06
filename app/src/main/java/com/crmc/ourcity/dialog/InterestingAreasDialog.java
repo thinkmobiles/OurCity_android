@@ -45,16 +45,6 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     private InterestingAreasAdapter mAdapter;
     private ProgressDialog dialogLoading;
     private Handler mHandler;
-//
-//    @Override
-//    protected void initViews() {
-//        super.initViews();
-//        mLvInterestiongAreas = findView(R.id.lvInterestingAreas_DIA);
-//        mBtnSave = findView(R.id.btnSave_DIA);
-//        mAdapter = new InterestingAreasAdapter(getActivity(), mInterestingAreas);
-//        mLvInterestiongAreas.setAdapter(mAdapter);
-//        showContent();
-//    }
 
     @Nullable
     @Override
@@ -90,7 +80,10 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         return v -> {
             List<InterestingArea> selectedInterestingAreas;
             if (mResidentResponse != null && mResidentResponse.interestAreasModelsBool != null) {
-                selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool).filter(item -> item.Value).map(item -> item.Key).collect(Collectors.toList());
+                selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool)
+                                                 .filter(item -> item.Value)
+                                                 .map(item -> item.Key)
+                                                 .collect(Collectors.toList());
 
                 Bundle args = new Bundle();
                 args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
@@ -143,7 +136,8 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
                 mLvInterestiongAreas.setAdapter(mAdapter);
             }
         } else {
-            new AlertDialog.Builder(getActivity()).setTitle("שגיאת").setMessage(R.string.connection_error)
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("שגיאת").setMessage(R.string.connection_error)
                     .setPositiveButton(R.string.btn_ok, (dialog, which) -> {
                         popBackStack();
                     }).setIcon(android.R.drawable.ic_dialog_alert).show();
@@ -151,7 +145,5 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {
-
-    }
+    public void onLoaderReset(Loader loader) {}
 }

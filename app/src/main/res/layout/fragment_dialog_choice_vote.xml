@@ -10,9 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choice_vote"
+        android:textColor="@color/turquoise"
+        android:background="#424242"
         android:gravity="right|center_vertical"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"/>
 
     <ListView

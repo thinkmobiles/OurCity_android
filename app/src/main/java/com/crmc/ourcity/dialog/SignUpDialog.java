@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
+import com.annimon.stream.Stream;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
@@ -271,53 +272,20 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         return loader;
     }
 
-    private void registerResident() {
-        Bundle args = createBundleForResident();
-
-        if (residentId == -3) {
-            getLoaderManager().restartLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
-        } else {
-            getLoaderManager().initLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
-        }
-    }
-
-    private void login() {
-        Bundle bundle = createBundleForResident();
-        getLoaderManager().initLoader(LOADER_LOGIN_ID, bundle, this);
-    }
-
-    private void updateResident() {
-        getSelectedStreetId();
-        Bundle args = createBundleForResident();
-        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
-        getLoaderManager().restartLoader(LOADER_UPDATE_RESIDENT_INFO, args, this);
-    }
-
     @Override
     public void onLoadFinished(Loader _loader, Object _data) {
         if (dialogLoading.isShowing())
             dialogLoading.dismiss();
         switch (_loader.getId()) {
             case LOADER_REGISTER_NEW_RESIDENT_ID:
-                residentId = (Integer) _data;
-
-                if (residentId == -3) {
-                    root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
-
-                } else if (residentId > 0) {
-                    SPManager.getInstance(getActivity()).setResidentId(residentId);
-                    SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
-                    SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
-
-                    login();
-                }
+                registerResidentAndAutologin((Integer) _data);
                 break;
 
             case LOADER_UPDATE_RESIDENT_INFO:
                 boolean result = (Boolean) _data;
 
                 if (result) {
-                    login();
+                    startLoginLoader();
                 } else {
                     //TODO: do something
                 }
@@ -391,6 +359,44 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         }
     }
 
+    private void registerResidentAndAutologin(Integer _data) {
+        residentId = _data;
+
+        if (residentId == -3) {
+            root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
+
+        } else if (residentId > 0) {
+            SPManager.getInstance(getActivity()).setResidentId(residentId);
+            SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
+            SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
+
+            startLoginLoader();
+        }
+    }
+
+    private void startRegisterResidentLoader() {
+        Bundle args = createBundleForResident();
+
+        if (residentId == -3) {
+            getLoaderManager().restartLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
+        } else {
+            getLoaderManager().initLoader(LOADER_REGISTER_NEW_RESIDENT_ID, args, this);
+        }
+    }
+
+    private void startLoginLoader() {
+        Bundle bundle = createBundleForResident();
+        getLoaderManager().initLoader(LOADER_LOGIN_ID, bundle, this);
+    }
+
+    private void startUpdateResidentLoader() {
+        getSelectedStreetId();
+        Bundle args = createBundleForResident();
+        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+        getLoaderManager().restartLoader(LOADER_UPDATE_RESIDENT_INFO, args, this);
+    }
+
+
     private void setResidentInfo(ResidentDetails _residentInfo) {
         etLastName.setText(_residentInfo.lastName);
         etFirstName.setText(_residentInfo.firstName);
@@ -424,9 +430,9 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         return v -> {
             if (checkValidation()) {
                 if (isEditable) {
-                    updateResident();
+                    startUpdateResidentLoader();
                 } else {
-                    registerResident();
+                    startRegisterResidentLoader();
                 }
             }
         };

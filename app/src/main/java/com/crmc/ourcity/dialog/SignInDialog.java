@@ -49,6 +49,12 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         }
     }
 
+    @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
@@ -150,6 +156,5 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public void onLoaderReset(Loader<LoginResponse> _loader) {
-    }
+    public void onLoaderReset(Loader<LoginResponse> _loader) {}
 }

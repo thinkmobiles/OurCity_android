@@ -24,7 +24,6 @@ import com.crmc.ourcity.utils.SPManager;
 public class SettingDialog extends BaseFourStatesFragment {
 
     private RelativeLayout login;
-   // private RelativeLayout confirmation;
     private RelativeLayout logout;
     private RelativeLayout hotCalls;
     private RelativeLayout interestingAreas;
@@ -44,9 +43,14 @@ public class SettingDialog extends BaseFourStatesFragment {
     }
 
     @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
+    @Override
     protected void initViews() {
         login = findView(R.id.rlSignIn_SetDFrgmt);
-        //confirmation = findView(R.id.confirmation);
         logout = findView(R.id.rlLogout_FDS);
         hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
         interestingAreas = findView(R.id.rlInterestAreas_SetDFrgmt);
@@ -82,7 +86,6 @@ public class SettingDialog extends BaseFourStatesFragment {
     @Override
     protected void setListeners() {
         login.setOnClickListener(handleClicks());
-        //confirmation.setOnClickListener(handleClicks());
         logout.setOnClickListener(handleClicks());
         hotCalls.setOnClickListener(handleClicks());
         interestingAreas.setOnClickListener(handleClicks());
@@ -99,10 +102,6 @@ public class SettingDialog extends BaseFourStatesFragment {
                 case R.id.rlSignIn_SetDFrgmt:
                     mCallback.onActionDialogSelected(DialogType.LOGIN);
                     break;
-//                case R.id.confirmation:
-//                    Toast.makeText(getActivity().getApplicationContext(), "Clicked confirmation", Toast.LENGTH_SHORT).show();
-//                    mCallback.onActionDialogSelected(DialogType.CONFIRMATION);
-//                    break;
                 case R.id.rlLogout_FDS:
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
@@ -140,13 +139,9 @@ public class SettingDialog extends BaseFourStatesFragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<Boolean> loader) {
-
-        }
+        public void onLoaderReset(Loader<Boolean> loader) {}
     };
 
     @Override
-    public void onRetryClick() {
-
-    }
+    public void onRetryClick() {}
 }

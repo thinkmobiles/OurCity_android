@@ -10,9 +10,11 @@
         android:layout_height="wrap_content"
         android:text="@string/gender"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:textColor="@color/turquoise"
         android:gravity="right|center_vertical"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:background="#424242"/>
 
     <RadioGroup
         android:id="@+id/rgGender_FDG"
@@ -36,19 +38,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#424242"
+        >
 
         <Button
             android:id="@+id/btnCancel_DFG"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_cancel"
+            android:layout_margin="4dp"
+            android:background="@color/turquoise"
+            android:textColor="@android:color/white"
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnOk_DFG"
             android:layout_width="0dp"
             android:text="@string/btn_ok"
+            android:textColor="@android:color/white"
+            android:layout_margin="4dp"
+            android:background="@color/turquoise"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
