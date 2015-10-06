@@ -48,7 +48,8 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     private View vUnderLine_EIF;
     private View vBottomLine_EIF;
 
-    private ImageView ivCallSkype;
+    private ImageView ivMobilePhone;
+    private ImageView ivPhone;
     private ImageView ivSendMail;
     private ImageView ivLink;
 
@@ -113,7 +114,8 @@ public class EventsItemFragment extends BaseFourStatesFragment {
         llPrice = findView(R.id.llPrice_EIF);
         llDescription = findView(R.id.llDescription_EIF);
 
-        ivCallSkype = findView(R.id.ivCallSkype_EIF);
+        ivMobilePhone = findView(R.id.ivPhoneMobile_EIF);
+        ivPhone = findView(R.id.ivPhone_EIF);
         ivSendMail = findView(R.id.ivSendMail_EIF);
         ivLink = findView(R.id.ivLink_EIF);
 
@@ -162,11 +164,17 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     }
 
     private void setImage() {
-        if (!TextUtils.isEmpty(mEvents.phone)) {
-            ivCallSkype.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
+        if (!TextUtils.isEmpty(mEvents.mobile)) {
+            ivMobilePhone.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
                     .darkenColor(0.2)));
         } else {
-            ivCallSkype.setVisibility(View.GONE);
+            ivMobilePhone.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(mEvents.phone)) {
+            ivPhone.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
+                    .darkenColor(0.2)));
+        } else {
+            ivPhone.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(mEvents.email)) {
             ivSendMail.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.mail, Image.darkenColor
@@ -187,7 +195,8 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivCallSkype.setOnClickListener(handleClick());
+        ivMobilePhone.setOnClickListener(handleClick());
+        ivPhone.setOnClickListener(handleClick());
         ivSendMail.setOnClickListener(handleClick());
         ivLink.setOnClickListener(handleClick());
     }
@@ -196,7 +205,15 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     private View.OnClickListener handleClick() {
         return v -> {
             switch (v.getId()) {
-                case R.id.ivCallSkype_EIF:
+                case R.id.ivPhoneMobile_EIF:
+                    try {
+                        mOnListItemActionListener.onActionCall(mEvents.mobile);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                                .LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.ivPhone_EIF:
                     try {
                         mOnListItemActionListener.onActionCall(mEvents.phone);
                     } catch (ActivityNotFoundException e) {

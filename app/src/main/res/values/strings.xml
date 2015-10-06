@@ -32,7 +32,7 @@
     <string name="username_is_already_used">שם המשתמש כבר נמצא בשימוש</string>
     <string name="title">כותרת</string>
     <string name="date">תאריך</string>
-    <string name="description">תאור</string>
+    <string name="description">תאור:</string>
     <string name="vote_title">שם ההצבעה</string>
     <string name="choose_another_vote">לבחור הצבעה נוספת</string>
     <string name="in_order_to_vote_you_must_select_the_gender_and_age">כדי להצביעה אתה חייב לבחור "מין" ו"גיל"</string>

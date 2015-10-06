@@ -238,9 +238,18 @@
             android:paddingRight="12dp"
             android:gravity="right">
 
+            <ImageView
+                android:id="@+id/ivPhoneMobile_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
+                tools:background="@android:color/darker_gray"/>
 
             <ImageView
-                android:id="@+id/ivCallSkype_EIF"
+                android:id="@+id/ivPhone_EIF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
