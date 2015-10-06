@@ -19,7 +19,7 @@ public class RestClientApi {
     private RestClientApi() {
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setClient(new OkClient(new OkHttpClient()))
+                .setClient(new OkClient(new OkHttpClient()))//
                 .setEndpoint(BASE_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();

@@ -78,6 +78,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
     private SwitchCompat swGpsOnOff;
     private String[] streets;
     private String title;
+    private StreetsFull baseStreests;
 
 
     public static AppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
@@ -230,8 +231,8 @@ public class AppealsFragment extends BaseFourStatesFragment {
 
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
-
             if (_data != null) {
+                baseStreests = _data;
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
                 for (int i = 0; i < numbersStreets; i++) {
@@ -241,6 +242,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
                         streets);
                 etNameStreet.setAdapter(adapter);
+                getLocation();
             }
             showContent();
         }
@@ -377,7 +379,6 @@ public class AppealsFragment extends BaseFourStatesFragment {
     }
 
 
-    @NonNull
     private NewTicketObj createNewTicket() {
         NewTicket ticket = new NewTicket();
         if (!TextUtils.isEmpty(mPhotoFilePath)) {
@@ -387,7 +388,23 @@ public class AppealsFragment extends BaseFourStatesFragment {
         }
         ticket.Description = etDescription.getText().toString();
         Location location = new Location();
-        location.StreetName = etNameStreet.getText().toString();
+        if (baseStreests != null && baseStreests.streetsList != null){
+            int numbersStreets = baseStreests.streetsList.size();
+            String street = etNameStreet.getText().toString().trim();
+            if (!TextUtils.isEmpty(street)){
+                for (int i = 0; i < numbersStreets; i++) {
+                    if (street.equals(baseStreests.streetsList.get(i).streetName)){
+                        location.StreetName = etNameStreet.getText().toString().trim();
+                    }
+                }
+            }
+            if (location.StreetName == null){
+                Toast.makeText(getActivity(), "לא מוצא את הכתובת, הכנס בצורה ידנית.", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+
+        }
+        //location.StreetName = etNameStreet.getText().toString();
         location.HouseNumber = etNumberHouse.getText().toString();
         ticket.Location = location;
         CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
@@ -490,10 +507,12 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     if (checkValidation()) {
                         showLoading(getResources().getString(R.string.loading_string));
                         NewTicketObj ticketObj = createNewTicket();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
-                        getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
-                        hideKeyboard(getActivity());
+                        if (ticketObj != null) {
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
+                            getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
+                        }
+                            hideKeyboard(getActivity());
                     }
                     break;
             }

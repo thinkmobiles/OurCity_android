@@ -79,6 +79,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     private String[] streets;
     private String title;
     private boolean isChecked = true;
+    private StreetsFull baseStreests;
 
 
     public static OldDAppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
@@ -197,6 +198,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         ivRotate.setVisibility(View.GONE);
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
+        getLocation();
     }
 
     private final LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
@@ -231,6 +233,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
 
             if (_data != null) {
+                baseStreests = _data;
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
                 for (int i = 0; i < numbersStreets; i++) {
@@ -379,8 +382,6 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         return R.layout.fragment_appeals_like_old_app;
     }
 
-
-    @NonNull
     private NewTicketObj createNewTicket() {
         NewTicket ticket = new NewTicket();
         if (!TextUtils.isEmpty(mPhotoFilePath)) {
@@ -390,7 +391,23 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         }
         ticket.Description = etDescription.getText().toString();
         Location location = new Location();
-        location.StreetName = etNameStreet.getText().toString();
+        if (baseStreests != null && baseStreests.streetsList != null){
+            int numbersStreets = baseStreests.streetsList.size();
+            String street = etNameStreet.getText().toString().trim();
+            if (!TextUtils.isEmpty(street)){
+                for (int i = 0; i < numbersStreets; i++) {
+                    if (street.equals(baseStreests.streetsList.get(i).streetName)){
+                        location.StreetName = etNameStreet.getText().toString().trim();
+                    }
+                }
+            }
+            if (location.StreetName == null){
+                Toast.makeText(getActivity(), "לא מוצא את הכתובת, הכנס בצורה ידנית.", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+
+        }
+        //location.StreetName = etNameStreet.getText().toString();
         location.HouseNumber = etNumberHouse.getText().toString();
         ticket.Location = location;
         CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
@@ -490,11 +507,13 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                 case R.id.btnSend_AF:
                     //hideKeyboard(getActivity());
                     if (checkValidation()) {
-                        showLoading(getResources().getString(R.string.loading_string));
                         NewTicketObj ticketObj = createNewTicket();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
-                        getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
+                        if (ticketObj != null) {
+                            showLoading(getResources().getString(R.string.loading_string));
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
+                            getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
+                        }
                         hideKeyboard(getActivity());
                     }
                     break;
