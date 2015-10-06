@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.RelativeLayout;
@@ -31,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     private ArrayList<TickerModel> tickers;
     private Bundle loaderBundle;
 
-    private int SPLASH_DELAY ;
+    private int SPLASH_DELAY;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -40,16 +41,13 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
 
         SPLASH_DELAY = getResources().getInteger(R.integer.banner_delay); //seconds
         cityNumber = getResources().getInteger(R.integer.city_id);
-        drawable = getResources().getDrawable(R.drawable.splash);
+        drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.splash, null);
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
-        rlBackground.setBackground(getResources().getDrawable(R.drawable.splash));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                buildLoaderBundle();
-                loadTicker();
-                loadBackgroundImage();
-            }
+        rlBackground.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.splash, null));
+        new Handler().postDelayed(() -> {
+            buildLoaderBundle();
+            loadTicker();
+            loadBackgroundImage();
         }, 3000);
 
     }
@@ -66,7 +64,8 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     private void buildLoaderBundle() {
         loaderBundle = new Bundle();
         loaderBundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL);
+        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants
+                .BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL);
     }
 
     private Runnable mEndSplash = new Runnable() {
