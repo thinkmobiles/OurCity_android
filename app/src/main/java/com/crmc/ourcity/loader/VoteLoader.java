@@ -9,7 +9,6 @@ import com.crmc.ourcity.rest.api.CityApi;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -36,7 +35,7 @@ public class VoteLoader extends BaseLoader<List<VoteFull>> {
         try {
             mVote =  api.getVote(route, new TypedByteArray("application/json", json.getBytes("UTF-8")));
         } catch (RetrofitError | UnsupportedEncodingException _e) {
-            mVote = new ArrayList<>();
+            mVote = null;
         }
         return mVote;
     }

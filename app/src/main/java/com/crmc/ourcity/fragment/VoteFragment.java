@@ -154,6 +154,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 //                    btnChooseAnotherVote.setVisibility(View.GONE);
 //                    ivVoteError.setImageResource(R.drawable.error_vote);
                 }
+            } else {
+                showError(getResources().getString(R.string.connection_error));
             }
         }
 
@@ -264,6 +266,10 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
     @Override
     public void onRetryClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
+        getLoaderManager().restartLoader(Constants.LOADER_VOTE_ID, bundle, mVoteCallBack);
     }
 
     @Override
