@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="70dp"
     android:orientation="horizontal"
     android:baselineAligned="false">
 
@@ -28,6 +29,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="center_vertical|right"
         android:paddingRight="10dp">
 
         <TextView

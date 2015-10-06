@@ -180,7 +180,11 @@ public class Image {
         try {
             String imageDataBytes = _image.substring(_image.indexOf(",") + 1);
             byte[] decodedString = Base64.decode(imageDataBytes, Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            try {
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            } catch (Exception _e){
+                return null;
+            }
         } catch (Exception e) {
             return null;
         }
