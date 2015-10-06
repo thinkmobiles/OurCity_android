@@ -17,6 +17,8 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -107,7 +109,7 @@ public class RSSAdapter extends BaseAdapter {
             } else {
                 date.setVisibility(View.VISIBLE);
                 llDate.setVisibility(View.VISIBLE);
-                date.setText(getDateTime(_entry.getPubDate().trim()));
+                date.setText(getDateTime(_entry.getPubDate().trim()) + " ");
             }
 
 //            if (!TextUtils.isEmpty(_entry.getLink())) {
@@ -121,22 +123,8 @@ public class RSSAdapter extends BaseAdapter {
 
         @SuppressLint("SimpleDateFormat")
         public String getDateTime(String _data) {
-//            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy " +
-//                    "HH:mm:ss");
-//            Date date = null;
-//            try {
-//                date = formatter.parse(_data);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            DateFormat dt1 = new SimpleDateFormat("EEE, dd.mm.yyyy HH:mm");
-//            return dt1.format(date) + "";
-////            return formatter.format(date);
-            if (!TextUtils.isEmpty(_data)){
-                return _data.substring(0, _data.length() - 3);
-            } else {
-                return "";
-            }
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            return formatter.format(new Date(_data));
         }
 
         @Override
