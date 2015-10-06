@@ -139,7 +139,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public void onLoadFinished(Loader<List<VoteFull>> _loader, List<VoteFull> _data) {
-            if (mVoteFull == null) {
+            if (_data != null) {
                 if (_data.size() > 0) {
                     Intent intent = new Intent(getActivity(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
