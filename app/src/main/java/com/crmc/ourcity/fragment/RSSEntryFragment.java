@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,6 +16,9 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by podo on 02.09.15.
@@ -95,7 +99,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         checkData(entry.getTitle(), tvTitle, tvTitle);
-        checkData(entry.getPubDate(), tvDate_Text, llDate);
+        checkData(getDateTime(entry.getPubDate()) + " ", tvDate_Text, llDate);
         //checkData(entry.getDescription(), tvDescription_Text, llDescription);
         if (TextUtils.isEmpty(entry.getDescription())) {
             llDescription.setVisibility(View.GONE);
@@ -141,6 +145,12 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     protected int getContentView() {
         return R.layout.fragment_rss_entry;
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getDateTime(String _data) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        return formatter.format(new Date(_data));
     }
 
 }

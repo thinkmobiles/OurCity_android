@@ -30,35 +30,32 @@
             android:textSize="@dimen/event25"
             android:textStyle="bold"/>
 
+
+
         <LinearLayout
             android:id="@+id/llDate_RssEFrgm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="12dp"
+            android:gravity="right"
             android:paddingRight="12dp"
-            android:weightSum="4">
+            >
 
             <TextView
                 android:id="@+id/tvDate_Text_RssEFrgm"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
+                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/tvDate_RssEFrgm"
-                android:layout_width="55dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="right"
-                android:text="תאריך ושעה:"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="none"
+                android:text="@string/item_date_time" />
 
 
         </LinearLayout>
@@ -91,9 +88,11 @@
                 android:text="@string/description"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
-
-
         </LinearLayout>
+
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
