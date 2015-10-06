@@ -117,9 +117,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
             case LOADER_SEND_INTERESTING_AREAS_ID:
                 loader = new SendingAreasLoader(getActivity(), _args);
                 break;
-
         }
-
         return loader;
     }
 

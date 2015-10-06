@@ -287,7 +287,6 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         getSelectedStreetId();
         Bundle args = createBundleForResident();
         args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
-
         getLoaderManager().restartLoader(LOADER_UPDATE_RESIDENT_INFO, args, this);
     }
 
