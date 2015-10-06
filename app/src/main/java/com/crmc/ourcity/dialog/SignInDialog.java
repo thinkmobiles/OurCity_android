@@ -52,6 +52,9 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        if(SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
+            getActivity().finish();
+        }
         View root = _inflater.inflate(R.layout.fragment_dialog_sign_in, _container, false);
         findUI(root);
         setListeners();

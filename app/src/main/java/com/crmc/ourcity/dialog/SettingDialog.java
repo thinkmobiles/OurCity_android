@@ -70,6 +70,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                 updateResidentInfo.setVisibility(View.VISIBLE);
             }
         }
+
         showContent();
     }
 
