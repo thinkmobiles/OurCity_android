@@ -140,6 +140,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
                 boolean response = (Boolean) _data;
+                getActivity().finish();
 //                popBackStackImmediate();
                 break;
         }
