@@ -2,6 +2,7 @@ package com.crmc.ourcity.dialog;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     private ResidentResponse mResidentResponse;
     private InterestingAreasAdapter mAdapter;
     private ProgressDialog dialogLoading;
+    private Handler mHandler;
 //
 //    @Override
 //    protected void initViews() {
@@ -60,6 +62,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         root = _inflater.inflate(R.layout.fragment_dialog_interest_areas, _container, false);
         findUI(root);
         setListeners();
+        mHandler = new Handler(getActivity().getMainLooper());
         dialogLoading = new ProgressDialog(getActivity());
         return root;
     }
@@ -89,13 +92,13 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
             if (mResidentResponse != null && mResidentResponse.interestAreasModelsBool != null) {
                 selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool).filter(item -> item.Value).map(item -> item.Key).collect(Collectors.toList());
 
-            Bundle args = new Bundle();
-            args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
-            args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
-            args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>)
-                    selectedInterestingAreas);
+                Bundle args = new Bundle();
+                args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+                args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
+                args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>)
+                        selectedInterestingAreas);
 
-            getLoaderManager().restartLoader(LOADER_SEND_INTERESTING_AREAS_ID, args, this);
+                getLoaderManager().restartLoader(LOADER_SEND_INTERESTING_AREAS_ID, args, this);
             }
         };
     }
@@ -125,23 +128,27 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         if (dialogLoading.isShowing()) dialogLoading.dismiss();
         switch (_loader.getId()) {
             case LOADER_INTERESTING_AREAS_ID:
-                if (_data != null) {
-                    mResidentResponse = (ResidentResponse) _data;
-                    if (mResidentResponse.interestAreasModelsBool != null) {
-                        mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
-                        mLvInterestiongAreas.setAdapter(mAdapter);
-                    }
-                } else {
-                    new AlertDialog.Builder(getActivity()).setTitle("שגיאת").setMessage(R.string.connection_error)
-                            .setPositiveButton(R.string.btn_ok, (dialog, which) -> {
-                        popBackStack();
-                    }).setIcon(android.R.drawable.ic_dialog_alert).show();
-                }
+                getInterestAreas(_data);
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
                 boolean response = (Boolean) _data;
-//                popBackStackImmediate();
+                mHandler.postAtFrontOfQueue(this::popBackStack);
                 break;
+        }
+    }
+
+    private void getInterestAreas(Object _data) {
+        if (_data != null) {
+            mResidentResponse = (ResidentResponse) _data;
+            if (mResidentResponse.interestAreasModelsBool != null) {
+                mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
+                mLvInterestiongAreas.setAdapter(mAdapter);
+            }
+        } else {
+            new AlertDialog.Builder(getActivity()).setTitle("שגיאת").setMessage(R.string.connection_error)
+                    .setPositiveButton(R.string.btn_ok, (dialog, which) -> {
+                        popBackStack();
+                    }).setIcon(android.R.drawable.ic_dialog_alert).show();
         }
     }
 
