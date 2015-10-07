@@ -20,8 +20,8 @@ public class VoteAlreadyLoader extends BaseLoader<String> {
 
     public VoteAlreadyLoader(Context _context, Bundle _args) {
         super(_context);
-        residentId = _args.getInt(Constants.BUNDLE_CONSTANT_SURVEY_ID);
-        surveyId = _args.getInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID);
+        residentId = _args.getInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID);
+        surveyId = _args.getInt(Constants.BUNDLE_CONSTANT_SURVEY_ID);
     }
 
     @Override

@@ -36,6 +36,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";
     private View vUnderLine_VF;
     private View vUnderLine1_VF;
+    private boolean isVote = false;
     private TextView tvAge;
     private TextView tvGender;
     private LinearLayout llAge;
@@ -112,6 +113,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         public void onLoadFinished(Loader<String> _loader, String _data) {
             //TODO:add checked vote
             mAdapter.setVisibleVotePercent(true);
+isVote = true;
         }
 
         @Override
@@ -131,7 +133,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
             if (mVoteFulls != null && mVoteFulls.optionsList != null) {
                 mAdapter = new VoteGridAdapter(mVoteFulls.optionsList, getActivity());
                 mRecyclerView.setAdapter(mAdapter);
-                if (_data.equals("false") && mVoteFulls.isActive) {
+                if (_data.equals("false") && mVoteFulls.isActive != null && mVoteFulls.isActive && !isVote) {
                     mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
                             .getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
