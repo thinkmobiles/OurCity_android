@@ -40,12 +40,11 @@
             android:gravity="center"
             android:background="@color/turquoise"
             android:text="@string/btn_cancel"
+            android:layout_margin="4dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"/>
 
-        <Space
-            android:layout_width="4dp"
-            android:layout_height="wrap_content" />
+
 
         <TextView
             android:id="@+id/btnSelect_Filter_DMF"
@@ -55,6 +54,7 @@
             android:gravity="center"
             android:background="@color/turquoise"
             android:text="@string/dialog_map_filter_btn_select"
+            android:layout_margin="4dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"/>
     </LinearLayout>
