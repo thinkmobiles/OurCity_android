@@ -120,17 +120,17 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
                 case R.id.ivCallFirst_FDHC:
                     doCall(getFirstEmergencyNumber());
                     break;
+
                 case R.id.ivCallSecond_FDHC:
                     doCall(getSecondEmergencyNumber());
                     break;
+
                 case R.id.ivCallThird_FDHC:
                     doCall(getThirdEmergencyNumber());
                     break;
 
                 case R.id.btnSavePhones_FDHC:
-                    SPManager.getInstance(getActivity()).setFirstEmergencyNumber(getFirstEmergencyNumber());
-                    SPManager.getInstance(getActivity()).setSecondEmergencyNum(getSecondEmergencyNumber());
-                    SPManager.getInstance(getActivity()).setThirdEmergencyNumber(getThirdEmergencyNumber());
+                    saveEmergencyNumbers();
                     hideKeyboard(getActivity());
                     popBackStack();
                     break;
@@ -138,8 +138,12 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
         };
     }
 
-    @Override
-    public void onRetryClick() {
-
+    private void saveEmergencyNumbers() {
+        SPManager.getInstance(getActivity()).setFirstEmergencyNumber(getFirstEmergencyNumber());
+        SPManager.getInstance(getActivity()).setSecondEmergencyNum(getSecondEmergencyNumber());
+        SPManager.getInstance(getActivity()).setThirdEmergencyNumber(getThirdEmergencyNumber());
     }
+
+    @Override
+    public void onRetryClick() {}
 }

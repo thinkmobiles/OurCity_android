@@ -3,7 +3,6 @@ package com.crmc.ourcity.dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentManager;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.BaseFragmentActivity;
@@ -75,7 +74,6 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     @Override
     public void onActionDialogSelected(DialogType _action) {
         switch (_action) {
-
             case PHOTO_CAM:
                 intent.putExtra(Constants.REQUEST_INTENT_TYPE_PHOTO, Constants.REQUEST_PHOTO);
                 setResult(RESULT_OK, intent);
@@ -103,12 +101,11 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 signUpDialog.setArguments(args);
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, signUpDialog);
                 break;
-//            case CONFIRMATION:
-//                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new ConfirmationDialog());
-//                break;
+
             case INTEREST_AREAS:
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, new InterestingAreasDialog());
                 break;
+
             case UPDATE_RESIDENT_INFO:
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, true);
@@ -155,5 +152,4 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         setResult(RESULT_OK, intent);
         finish();
     }
-
 }

@@ -48,6 +48,12 @@ public class GenderDialog extends BaseFourStatesFragment implements View.OnClick
     }
 
     @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
+    @Override
     protected void initViews() {
         btnCancelFilter = findView(R.id.btnCancel_DFG);
         btnSelectFilter = findView(R.id.btnOk_DFG);
@@ -83,6 +89,5 @@ public class GenderDialog extends BaseFourStatesFragment implements View.OnClick
     }
 
     @Override
-    public void onRetryClick() {
-    }
+    public void onRetryClick() {}
 }

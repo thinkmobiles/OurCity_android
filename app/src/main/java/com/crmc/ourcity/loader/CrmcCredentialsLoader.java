@@ -2,8 +2,6 @@ package com.crmc.ourcity.loader;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
-
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.RestClientApi;
 import com.crmc.ourcity.rest.api.CityApi;
