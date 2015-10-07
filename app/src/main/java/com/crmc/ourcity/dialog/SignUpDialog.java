@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
+import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
@@ -42,8 +43,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import static com.crmc.ourcity.global.Constants.LOADER_GET_RESIDENT_INFO_ID;
-import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
+import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_UPDATE_RESIDENT_INFO;
 
 /**
@@ -61,7 +62,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private Button btnSignUpOrEdit;
     private int residentId;
     private StreetsItem[] streets;
-    private int selectedStreetID = -1;
+    private int selectedStreetID;
     private ProgressDialog dialogLoading;
     private boolean isEditable;
     private Handler mHandler;
@@ -71,8 +72,10 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         super.onResume();
         Bundle bundle = new Bundle();
         int cityNumber = getResources().getInteger(R.integer.city_id);
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"" + cityNumber +"\"," +
-                "\"userName\":\"Webit\",\"password\":\"HdrMoked                                          \"}}");
+        String crmcUsername = SPManager.getInstance(getActivity()).getCRMCUsername();
+        String crmcPassword = SPManager.getInstance(getActivity()).getCRMCPassword();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"" + cityNumber + "\"," +
+                "\"userName\":\"" + crmcUsername + "\",\"password\":\"" + crmcPassword + "\"}}");
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
         getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, this);
 
@@ -217,22 +220,12 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
         getSelectedStreetId();
 
-        if (etStreet.isEnabled() & selectedStreetID == -1 ) {
+        if (etStreet.isEnabled() & selectedStreetID == -1) {
             etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
 
         return isValid && isOptionalFieldValid;
-    }
-
-    private void getSelectedStreetId() {
-        String street = etStreet.getText().toString();
-        for (int i = 0; i < streets.length; i++) {
-            if (street.equals(streets[i].streetName)) {
-                selectedStreetID = streets[i].streetId;
-                break;
-            }
-        }
     }
 
     @Override
@@ -301,12 +294,10 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                         Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
                         getActivity().startService(intent);
                     }
-
+                    hideKeyboard(getActivity());
                     popBackStack();
 
                 });
-
-                //getActivity().finish();
 
                 break;
             case Constants.LOADER_STREETS_ID:
@@ -412,12 +403,26 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         chbPersonalNotifications.setChecked(_residentInfo.isGetPersonalNotification);
     }
 
+    private void getSelectedStreetId() {
+        String street = etStreet.getText().toString();
+        Optional<Integer> set = Stream.of(streets)
+                .filter(item -> street.equals(item.streetName))
+                .map(item -> selectedStreetID = item.streetId).findFirst();
+
+        if (set.isPresent()) {
+            selectedStreetID = set.get();
+        } else {
+            selectedStreetID = -1;
+        }
+    }
+
     private void setStreetName(ResidentDetails _residentInfo) {
-        for (int i = 0; i < streets.length; i++) {
-            if (_residentInfo.streetId.equals(streets[i].streetId)) {
-                etStreet.setText(streets[i].streetName);
-                break;
-            }
+        Optional<String> streetName = Stream.of(streets).filter(item -> _residentInfo.streetId.equals(item.streetId))
+                .map(item -> item.streetName).findFirst();
+        if(streetName.isPresent()) {
+            etStreet.setText(streetName.get());
+        } else {
+            etStreet.setText("");
         }
     }
 

@@ -12,6 +12,7 @@ import com.crmc.ourcity.rest.request.vote.VoteAlready;
 import com.crmc.ourcity.rest.request.vote.VoteModel;
 import com.crmc.ourcity.rest.responce.address.StreetsFull;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
+import com.crmc.ourcity.rest.responce.crmcCredentials.CRMCCredentials;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.rest.responce.events.Events;
@@ -79,6 +80,9 @@ public interface CityApi {
 
     @POST("/GetTickerEventsList")
     ArrayList<TickerModel> getTickers(@Body BaseModel baseModel);
+
+    @POST("/GetCRMCCredentials")
+    CRMCCredentials getCrmcCredentials(@Body BaseModel baseModel);
 
     /**
      * @return map marker category and markers with data

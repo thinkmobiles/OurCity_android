@@ -31,7 +31,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     private WebView mWebView;
     private View vUnderLine_WVF;
-//    private TextView tvTitle_WVF;
     private String link;
     private ProgressBar pbLoading;
     private String color;
@@ -39,15 +38,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private String route;
     private boolean error = false;
     private String title;
-
-//    public static WebViewFragment newInstance(String _link, String _colorItem) {
-//        WebViewFragment mWebViewFragment = new WebViewFragment();
-//        Bundle args = new Bundle();
-//        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
-//        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
-//        mWebViewFragment.setArguments(args);
-//        return mWebViewFragment;
-//    }
 
     public static WebViewFragment newInstance(String _link, String _colorItem, String _title) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
@@ -74,7 +64,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         link = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
@@ -96,11 +85,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Documents> _loader, Documents _data) {
-        //String html = new HtmlFormatter(getActivity()).htmlForWebView(_data.documentData, "", "justify", "right");
         if (_data != null) {
             mWebView.loadDataWithBaseURL(null, "<meta name=\"viewport\" content=\"width=device-width\">" + _data
                     .documentData, "text/html", "UTF-8", null);
-//            tvTitle_WVF.setText(_data.documentTitle);
             showContent();
         } else {
             showError(getResources().getString(R.string.connection_error));
@@ -113,14 +100,12 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public void onLoaderReset(Loader<Documents> _loader) {
-    }
+    public void onLoaderReset(Loader<Documents> _loader) {}
 
 
     @Override
     public void onRetryClick() {
         error = false;
-//        showContent();
         loadUrl(link);
     }
 
@@ -153,9 +138,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 pbLoading.setProgress(newProgress);
-//                if (newProgress == 100){
-//                    showContent();
-//                }
             }
         });
     }
@@ -178,21 +160,13 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     private void loadUrl(String _link) {
         if (!TextUtils.isEmpty(_link) && _link.contains(".pdf")) {
-//            String pdfLink = "http://dlcdnet.asus.com/pub/ASUS/mb/socket775/P5B/e2620_p5b.pdf";
-//            if (pdfLink.substring(pdfLink.lastIndexOf(".") + 1).equals(""));
             mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _link);
-//            tvTitle_WVF.setVisibility(View.GONE);
-//            new DownloadFile().downloadPdf(getActivity(), _link);
-//            popBackStack();
         } else if (!TextUtils.isEmpty(json)) {
-            //mWebView.setInitialScale(100);
-//            mWebView.getSettings().setMinimumFontSize(20);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
             bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
             getLoaderManager().initLoader(Constants.LOADER_DOCUMENTS_ID, bundle, this);
         } else {
-//            tvTitle_WVF.setVisibility(View.GONE);
             mWebView.loadUrl(_link);
         }
     }
@@ -203,7 +177,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         public boolean shouldOverrideUrlLoading(WebView _view, String _url) {
             if (_url.contains(".pdf") && !(_url.contains("docs.google.com"))) {
                 _view.loadUrl("http://docs.google.com/gview?embedded=true&url=" + _url);
-
             } else {
                 _view.loadUrl(_url);
             }

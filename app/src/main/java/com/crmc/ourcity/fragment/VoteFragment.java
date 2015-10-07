@@ -84,7 +84,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         title = getArguments().getString(Constants.NODE_TITLE);
     }
 
-
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
@@ -117,8 +116,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
 
         Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff", new View[]{llAge, llGender});
-//        Image.setBackgroundColorArrayView(getActivity(), new View[]{llAge, llGender}, R.drawable
-// .boarder_round_red_vf);
         Image.setBackgroundColorView(getActivity(), btnChooseAnotherVote, R.drawable.selector_button_red_vf);
     }
 
@@ -349,6 +346,5 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 startActivityForResult(intentGender, Constants.REQUEST_GENDER);
                 break;
         }
-
     }
 }

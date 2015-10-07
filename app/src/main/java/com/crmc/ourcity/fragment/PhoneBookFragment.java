@@ -1,14 +1,12 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
-import android.content.ComponentCallbacks;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -114,7 +112,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         swipeRefreshLayout = findView(R.id.swipe_refresh_phone_book);
         try {
             Image.init(Color.parseColor(color));
-        } catch (Exception e){
+        } catch (Exception e) {
             Image.init(Color.BLACK);
         }
         vUnderLine_PBF.setBackgroundColor(Image.darkenColor(0.2));

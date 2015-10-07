@@ -14,10 +14,13 @@ import android.widget.RelativeLayout;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.global.Constants;
+import com.crmc.ourcity.loader.CrmcCredentialsLoader;
 import com.crmc.ourcity.loader.ImageLoader;
 import com.crmc.ourcity.loader.TickerLoader;
+import com.crmc.ourcity.rest.responce.crmcCredentials.CRMCCredentials;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 
 import java.util.ArrayList;
 
@@ -46,10 +49,15 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         rlBackground.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.splash, null));
         new Handler().postDelayed(() -> {
             buildLoaderBundle();
+            loadCrmcCredential();
             loadTicker();
             loadBackgroundImage();
         }, 3000);
 
+    }
+
+    private void loadCrmcCredential() {
+        getSupportLoaderManager().initLoader(Constants.LOADER_CRMC_CREDENTIAL_ID, loaderBundle, this);
     }
 
     private void loadTicker() {
@@ -85,6 +93,9 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
         switch (_id) {
+            case Constants.LOADER_CRMC_CREDENTIAL_ID:
+                loader = new CrmcCredentialsLoader(SplashScreenActivity.this, _args);
+                break;
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
                 loader = new ImageLoader(SplashScreenActivity.this, _args);
                 break;
@@ -98,13 +109,18 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     @Override
     public void onLoadFinished(Loader _loader, Object _data) {
         switch (_loader.getId()) {
+            case Constants.LOADER_CRMC_CREDENTIAL_ID:
+                CRMCCredentials credentials = (CRMCCredentials) _data;
+                if (credentials != null) {
+                    saveCredentials(credentials);
+                }
+                break;
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
 
                 String dataString = (String) _data;
                 if (!TextUtils.isEmpty(dataString)) {
                     drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(dataString));
                     rlBackground.setBackground(drawable);
-
                 }
                 mHandler.postDelayed(mEndSplash, SPLASH_DELAY * 1000);
                 break;
@@ -112,6 +128,11 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
                 tickers = (ArrayList<TickerModel>) _data;
                 break;
         }
+    }
+
+    private void saveCredentials(CRMCCredentials credentials) {
+        SPManager.getInstance(this).setCRMCUsername(credentials.login);
+        SPManager.getInstance(this).setCRMCPassword(credentials.password);
     }
 
     @Override

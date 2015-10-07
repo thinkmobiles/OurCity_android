@@ -86,11 +86,9 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         tvTitle = findView(R.id.tvTitle_RssEFrgm);
         tvDate_Text = findView(R.id.tvDate_Text_RssEFrgm);
         tvDescription_Text = findView(R.id.tvDescription_Text_RssEFrgm);
-
         llDate = findView(R.id.llDate_RssEFrgm);
         llDescription = findView(R.id.llDescription_RssEFrgm);
         ivLink = findView(R.id.ivLink_RssEFrgm);
-
         vUnderLine_RssEFrgm = findView(R.id.vUnderLine_RssEFrgm);
         vBottomLine_RssEFrgm = findView(R.id.vBottomLine_RssEFrgm);
     }
@@ -100,7 +98,6 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         super.onViewCreated(_view, _savedInstanceState);
         checkData(entry.getTitle(), tvTitle, tvTitle);
         checkData(getDateTime(entry.getPubDate()) + " ", tvDate_Text, llDate);
-        //checkData(entry.getDescription(), tvDescription_Text, llDescription);
         if (TextUtils.isEmpty(entry.getDescription())) {
             llDescription.setVisibility(View.GONE);
         } else {
@@ -116,15 +113,6 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         ivLink.setOnClickListener(v -> mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle()));
     }
 
-//    private void checkData(String _text, TextView _tvView, View _view) {
-//
-//        if (!TextUtils.isEmpty(_text)) {
-//            _tvView.setText(_text);
-//        } else {
-//            _view.setVisibility(View.GONE);
-//        }
-//    }
-
     private void setImage() {
 
         if (!TextUtils.isEmpty(entry.getLink())) {
@@ -138,9 +126,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onRetryClick() {
-
-    }
+    public void onRetryClick() {}
 
     @Override
     protected int getContentView() {
@@ -152,5 +138,4 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         return formatter.format(new Date(_data));
     }
-
 }

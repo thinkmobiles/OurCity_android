@@ -67,6 +67,7 @@ public class Constants {
     public static final int LOADER_SEND_INTERESTING_AREAS_ID = 26;
     public static final int LOADER_GET_RESIDENT_INFO_ID = 27;
     public static final int LOADER_UPDATE_RESIDENT_INFO = 28;
+    public static final int LOADER_CRMC_CREDENTIAL_ID = 29;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

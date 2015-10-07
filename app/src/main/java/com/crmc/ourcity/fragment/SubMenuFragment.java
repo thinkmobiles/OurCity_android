@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
@@ -23,8 +20,6 @@ import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,16 +35,6 @@ public class SubMenuFragment extends BaseFourStatesFragment {
     private ArrayList<MenuModel> mData;
     private OnItemActionListener mCallBackMenuModel;
     public String title;
-
-//    public static SubMenuFragment newInstance(List<MenuModel> _submenu, String _title, String _color) {
-//        SubMenuFragment subMenuFragment = new SubMenuFragment();
-//        Bundle args = new Bundle();
-//        args.putParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU, (ArrayList<? extends Parcelable>) _submenu);
-//        args.putString(Constants.NODE_TITLE, _title);
-//        args.putString("Color", _color);
-//        subMenuFragment.setArguments(args);
-//        return subMenuFragment;
-//    }
 
     public static SubMenuFragment newInstance(List<MenuModel> _submenu, String _title) {
         SubMenuFragment subMenuFragment = new SubMenuFragment();
@@ -78,8 +63,6 @@ public class SubMenuFragment extends BaseFourStatesFragment {
 
     @Override
     protected void initViews() {
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle(title);
         configureActionBar(true, true, title);
         mRecyclerView = findView(R.id.rvSubMenu_FSM);
         mRecyclerView.setHasFixedSize(true);
@@ -118,7 +101,6 @@ public class SubMenuFragment extends BaseFourStatesFragment {
         super.onCreate(_savedInstanceState);
         mData = getArguments().getParcelableArrayList(Constants.CONFIGURATION_KEY_SUBMENU);
         this.title = getArguments().getString(Constants.NODE_TITLE, "");
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor( getArguments().getString("Color"))));
     }
 
     @Override
