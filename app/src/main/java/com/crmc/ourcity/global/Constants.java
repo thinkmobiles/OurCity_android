@@ -84,6 +84,7 @@ public class Constants {
     final public static String BUNDLE_CONSTANT_SELECTED_OPTION_ID = "SELECTED_OPTION_ID";
     final public static String BUNDLE_CONSTANT_AGE = "AGE";
     final public static String BUNDLE_CONSTANT_GENDER = "GENDER";
+    final public static String BUNDLE_CONSTANT_LAST_USER = "LAST_USER";
     final public static String BUNDLE_CONSTANT_LOAD_IMAGE_TYPE = "LOAD_IMAGE_TYPE";
     final public static String BUNDLE_CONSTANT_RESIDENT_ID = "RESIDENT_ID";
     final public static String BUNDLE_MARKERS = "MARKER";

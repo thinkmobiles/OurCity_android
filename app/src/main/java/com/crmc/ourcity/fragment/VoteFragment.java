@@ -90,8 +90,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 , 2, 5, "#ffffff", new View[]{llAge, llGender});
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_SURVEY_ID, mVoteFulls.surveyId);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity())
-                .getResidentId());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
         getLoaderManager().initLoader(Constants.LOADER_VOTE_ALREADY_ID, bundle, mVoteAlreadyCallBack);
     }
 
@@ -183,6 +182,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         bundle.putInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID, _surveyOptionId);
         bundle.putInt(Constants.BUNDLE_CONSTANT_AGE, _age);
         bundle.putInt(Constants.BUNDLE_CONSTANT_GENDER, _gender);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_LAST_USER, SPManager.getInstance(getActivity()).getResidentId());
         if (getLoaderManager().getLoader(Constants.LOADER_VOTE_REPLY_ID) == null) {
             getLoaderManager().initLoader(Constants.LOADER_VOTE_REPLY_ID, bundle, mVoteReplyCallBack);
         } else {
