@@ -21,7 +21,6 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fragment.AppealItemFragment;
-import com.crmc.ourcity.fragment.AppealsFragment;
 import com.crmc.ourcity.fragment.AppealsListFragment;
 import com.crmc.ourcity.fragment.CityEntitiesFragment;
 import com.crmc.ourcity.fragment.CityEntitiesItemFragment;
@@ -42,6 +41,7 @@ import com.crmc.ourcity.fragment.SendMailFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.fragment.TripsFragment;
 import com.crmc.ourcity.fragment.VoteFragment;
+import com.crmc.ourcity.fragment.VoteListFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.model.rss.RSSEntry;
@@ -54,6 +54,7 @@ import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
+import com.crmc.ourcity.rest.responce.vote.VoteFull;
 import com.crmc.ourcity.ticker.Ticker;
 import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
@@ -207,7 +208,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                         _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_VOTE:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_menuModel.colorItem,
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteListFragment.newInstance(_menuModel.colorItem,
                         _menuModel.requestJson, _menuModel.requestRoute, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_CALL:
@@ -298,6 +299,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     public void onActionCall(String _number) {
         startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(_number), getResources().getString(R
                 .string.call_hint)), 56);
+    }
+
+    @Override
+    public void onVoteAction(VoteFull _voteFull) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_voteFull));
     }
 
     @Override

@@ -22,13 +22,11 @@ import java.util.List;
 public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHolder> {
 
     private List<VoteDetails> mVoteDetailsList;
-    private String color;
     private Context mContext;
     private boolean visibleVotePercent = false;
 
-    public VoteGridAdapter(List<VoteDetails> _optionsList, String _color, Context _context) {
+    public VoteGridAdapter(List<VoteDetails> _optionsList, Context _context) {
         this.mVoteDetailsList = _optionsList;
-        this.color = _color;
         this.mContext = _context;
     }
 
