@@ -113,7 +113,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         public void onLoadFinished(Loader<String> _loader, String _data) {
             //TODO:add checked vote
             mAdapter.setVisibleVotePercent(true);
-isVote = true;
+            isVote = true;
         }
 
         @Override
@@ -151,6 +151,7 @@ isVote = true;
                     }));
                 } else {
                     mAdapter.setVisibleVotePercent(true);
+                    isVote = true;
                     if (mVoteFulls.isActive) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.you_already_survey), Toast
                                 .LENGTH_SHORT).show();
