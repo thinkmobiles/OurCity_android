@@ -28,9 +28,6 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by SetKrul on 10.08.2015.
  */
@@ -92,9 +89,9 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         Image.setBoarderBackgroundColorArray(getActivity(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0))
                 , 2, 5, "#ffffff", new View[]{llAge, llGender});
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.BUNDLE_CONSTANT_SURVEY_ID, mVoteFulls.surveyId.toString());
-        bundle.putString(Constants.BUNDLE_CONSTANT_RESIDENT_ID, String.valueOf(SPManager.getInstance(getActivity())
-                .getResidentId()));
+        bundle.putInt(Constants.BUNDLE_CONSTANT_SURVEY_ID, mVoteFulls.surveyId);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity())
+                .getResidentId());
         getLoaderManager().initLoader(Constants.LOADER_VOTE_ALREADY_ID, bundle, mVoteAlreadyCallBack);
     }
 
