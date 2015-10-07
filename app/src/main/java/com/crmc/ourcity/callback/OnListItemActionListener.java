@@ -8,6 +8,7 @@ import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
+import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
 import java.util.List;
 
@@ -25,4 +26,5 @@ public interface OnListItemActionListener {
     void onTickerAction(View _view, String _link, String _title);
     void onActionMail(String _mail);
     void onActionCall(String _number);
+    void onVoteAction(VoteFull _voteFull);
 }

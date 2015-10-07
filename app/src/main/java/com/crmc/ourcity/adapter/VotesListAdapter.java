@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
+import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
@@ -21,9 +22,11 @@ public class VotesListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<VoteFull> mVoteFull;
+    private Context mContext;
 
     public VotesListAdapter(Context _context, List<VoteFull> _voteFull) {
         this.mVoteFull = _voteFull;
+        this.mContext = _context;
         mInflater = LayoutInflater.from(_context);
     }
 
@@ -46,8 +49,8 @@ public class VotesListAdapter extends BaseAdapter {
     public View getView(final int _position, View _convertView, ViewGroup _parent) {
         final ViewHolder holder;
         if (_convertView == null) {
-            _convertView = mInflater.inflate(R.layout.listview_row_dialog_cv, _parent, false);
-            holder = new ViewHolder(_convertView);
+            _convertView = mInflater.inflate(R.layout.listview_row_vlf, _parent, false);
+            holder = new ViewHolder(_convertView, mContext);
         } else {
             holder = (ViewHolder) _convertView.getTag();
         }
@@ -56,23 +59,31 @@ public class VotesListAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        final TextView tvVoteTitle;
-        final ImageView ivVoteStatus;
+        final TextView tvTitle_VLF;
+        final ImageView ivLock_VLF;
+        final ImageView ivArrowEvent_VLF;
         final View view;
+        final Context mContext;
 
-        public ViewHolder(@NonNull final View _view) {
-            tvVoteTitle = (TextView) _view.findViewById(R.id.tvVoteTitle_DCV);
-            ivVoteStatus = (ImageView) _view.findViewById(R.id.ivVoteStatus_DCV);
+        public ViewHolder(@NonNull final View _view, Context _context) {
+            tvTitle_VLF = (TextView) _view.findViewById(R.id.tvTitle_VLF);
+            ivLock_VLF = (ImageView) _view.findViewById(R.id.ivLock_VLF);
+            ivArrowEvent_VLF = (ImageView) _view.findViewById(R.id.ivArrowEvent_VLF);
             this.view = _view;
+            this.mContext = _context;
             _view.setTag(this);
         }
 
         public void setData(VoteFull _item) {
-            tvVoteTitle.setText(_item.surveyTitle.trim());
+            ivArrowEvent_VLF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
+                    .darkenColor(0.2)));
+            tvTitle_VLF.setText(_item.surveyTitle.trim());
             if (_item.isActive) {
-                ivVoteStatus.setImageResource(R.drawable.new_menu_dvar_resh_hyer);
+                ivLock_VLF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image.darkenColor
+                        (0.2)));
+                ivLock_VLF.setVisibility(View.VISIBLE);
             } else {
-                ivVoteStatus.setImageResource(R.drawable.new_menu_cherom_red);
+                ivLock_VLF.setVisibility(View.GONE);
             }
         }
     }
