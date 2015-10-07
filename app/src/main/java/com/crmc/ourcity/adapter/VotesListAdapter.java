@@ -78,8 +78,8 @@ public class VotesListAdapter extends BaseAdapter {
             ivArrowEvent_VLF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
             tvTitle_VLF.setText(_item.surveyTitle.trim());
-            if (_item.isActive) {
-                ivLock_VLF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone, Image.darkenColor
+            if (!_item.isActive) {
+                ivLock_VLF.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.lock, Image.darkenColor
                         (0.2)));
                 ivLock_VLF.setVisibility(View.VISIBLE);
             } else {
