@@ -141,13 +141,13 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         public void onLoadFinished(Loader<List<VoteFull>> _loader, List<VoteFull> _data) {
             if (_data != null) {
                 if (_data.size() > 0) {
-                    Intent intent = new Intent(getActivity(), DialogActivity.class);
-                    EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
-                    intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>)
-                            _data);
-
-                    startActivityForResult(intent, Constants.REQUEST_VOTE);
-                    mVoteFull = _data;
+                    if (mVoteFull == null) {
+                        Intent intent = new Intent(getActivity(), DialogActivity.class);
+                        EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
+                        intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>) _data);
+                        startActivityForResult(intent, Constants.REQUEST_VOTE);
+                        mVoteFull = _data;
+                    }
                 } else {
                     showEmpty("לא בחרת");
 //                    btnChooseAnotherVote.setOnClickListener(null);
