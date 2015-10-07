@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#424242"
+              android:background="@android:color/darker_gray"
               android:orientation="vertical">
 
     <TextView
@@ -13,6 +13,7 @@
         android:padding="10dp"
         android:textStyle="bold"
         android:textSize="24sp"
+        android:background="#424242"
         android:gravity="right|center_vertical"/>
 
     <NumberPicker
