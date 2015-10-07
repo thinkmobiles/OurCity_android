@@ -130,7 +130,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
-            if (mVoteFulls != null) {
+            if (mVoteFulls != null && mVoteFulls.optionsList != null) {
                 mAdapter = new VoteGridAdapter(mVoteFulls.optionsList, getActivity());
                 mRecyclerView.setAdapter(mAdapter);
                 if (_data.equals("false") && mVoteFulls.isActive) {
@@ -159,8 +159,11 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                                 .LENGTH_SHORT).show();
                     }
                 }
+                showContent();
+            } else {
+                showEmpty();
             }
-            showContent();
+
         }
 
         @Override
