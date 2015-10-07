@@ -19,12 +19,14 @@ public class VoteReplyLoader extends BaseLoader<String> {
     private int selectedOptionId;
     private int age;
     private int gender;
+    private int lastModifyUserId;
 
     public VoteReplyLoader(Context _context, Bundle _args) {
         super(_context);
         selectedOptionId = _args.getInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID);
         age = _args.getInt(Constants.BUNDLE_CONSTANT_AGE);
         gender = _args.getInt(Constants.BUNDLE_CONSTANT_GENDER);
+        lastModifyUserId = _args.getInt(Constants.BUNDLE_CONSTANT_LAST_USER);
     }
 
     @Override
@@ -32,7 +34,7 @@ public class VoteReplyLoader extends BaseLoader<String> {
         CityApi api = RestClientApi.getCityApi();
         String result;
         try {
-            result =  api.replyVote(new VoteModel(new VoteDetails(selectedOptionId, age, gender)));
+            result =  api.replyVote(new VoteModel(new VoteDetails(selectedOptionId, age, gender, lastModifyUserId)));
         } catch (RetrofitError _e) {
             result = null;
         }
