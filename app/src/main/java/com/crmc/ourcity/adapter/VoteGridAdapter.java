@@ -1,5 +1,6 @@
 package com.crmc.ourcity.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,13 +43,16 @@ public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder _viewHolder, int _position) {
         VoteDetails voteDetails = mVoteDetailsList.get(_position);
         _viewHolder.tvVoteTitle.setText(voteDetails.optionDescription.trim());
         _viewHolder.ivVote.setImageBitmap(Image.convertBase64ToBitmap(voteDetails.image));
         _viewHolder.tvVotePercent.setText(voteDetails.votePercent + "");
-        Image.setBackgroundColorView(mContext, _viewHolder.flVoteItemBoarder, R.drawable.boarder_round_red_vf);
+//        Image.setBackgroundColorView(mContext, _viewHolder.flVoteItemBoarder, R.drawable.boarder_round_red_vf);
+        Image.setBoarderBackgroundColorArray(mContext, String.format("#%06X", 0xFFFFFF & Image.lighterColor(0.0)), 2,
+                5, "#ffffff", new View[]{_viewHolder.flVoteItemBoarder});
 
         if (visibleVotePercent) {
             _viewHolder.ivVotePercent.setVisibility(View.VISIBLE);

@@ -30,7 +30,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:padding="3dp"/>
+                android:padding="2dp"/>
 
             <ImageView
                 android:id="@+id/ivVote_VF"

@@ -85,8 +85,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     }
 
 
-
-
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
@@ -117,7 +115,10 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
         tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
-        Image.setBackgroundColorArrayView(getActivity(), new View[]{llAge, llGender}, R.drawable.boarder_round_red_vf);
+
+        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff", new View[]{llAge, llGender});
+//        Image.setBackgroundColorArrayView(getActivity(), new View[]{llAge, llGender}, R.drawable
+// .boarder_round_red_vf);
         Image.setBackgroundColorView(getActivity(), btnChooseAnotherVote, R.drawable.selector_button_red_vf);
     }
 
@@ -144,7 +145,8 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                     if (mVoteFull == null) {
                         Intent intent = new Intent(getActivity(), DialogActivity.class);
                         EnumUtil.serialize(DialogType.class, DialogType.VOTE_CHOICE).to(intent);
-                        intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends Parcelable>) _data);
+                        intent.putParcelableArrayListExtra(Constants.BUNDLE_INTEGER, (ArrayList<? extends
+                                Parcelable>) _data);
                         startActivityForResult(intent, Constants.REQUEST_VOTE);
                         mVoteFull = _data;
                     }
