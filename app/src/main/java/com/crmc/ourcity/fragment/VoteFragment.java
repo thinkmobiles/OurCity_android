@@ -164,7 +164,6 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
             } else {
                 showEmpty();
             }
-
         }
 
         @Override
@@ -240,6 +239,5 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                 startActivityForResult(intentGender, Constants.REQUEST_GENDER);
                 break;
         }
-
     }
 }

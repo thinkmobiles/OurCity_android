@@ -266,7 +266,10 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
     @Override
     public void onResume() {
+        View current =getActivity(). getCurrentFocus();
+        if (current != null) current.clearFocus();
         super.onResume();
+
         configureActionBar(true, true, title);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
