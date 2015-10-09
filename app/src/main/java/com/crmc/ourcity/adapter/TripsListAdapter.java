@@ -58,7 +58,7 @@ public class TripsListAdapter extends BaseAdapter {
         return _convertView;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         final TextView tvTripName_TF;
         final TextView tvDescription_TF;
         final ImageView ivArrowEvent;

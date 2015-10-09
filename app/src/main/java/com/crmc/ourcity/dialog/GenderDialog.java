@@ -89,5 +89,6 @@ public class GenderDialog extends BaseFourStatesFragment implements View.OnClick
     }
 
     @Override
-    public void onRetryClick() {}
+    public void onRetryClick() {
+    }
 }

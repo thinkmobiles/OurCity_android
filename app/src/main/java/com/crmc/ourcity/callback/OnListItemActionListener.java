@@ -17,14 +17,24 @@ import java.util.List;
  */
 public interface OnListItemActionListener {
     void onAppealsItemAction(ResultObject resultObject);
+
     void onEventsItemAction(Events _events);
+
     void onCityEntitiesItemAction(CityEntities _cityEntities);
+
     void onTripsItemAction(MapTrips _trips, Double _lat, Double _lon);
+
     void onEventsClickLinkAction(String _link, String _title);
+
     void onPhoneBookItemAction(List<Phones> _phones);
+
     void onRSSItemAction(RSSEntry _entry);
+
     void onTickerAction(View _view, String _link, String _title);
+
     void onActionMail(String _mail);
+
     void onActionCall(String _number);
+
     void onVoteAction(VoteFull _voteFull);
 }

@@ -53,6 +53,5 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     public final void popBackStack() {
         getSupportFragmentManager().popBackStack();
     }
-
 }
 

@@ -12,12 +12,15 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -78,7 +81,6 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
         return mFilter;
     }
 
-
     private class EntitiesFilter extends Filter {
 
         @Override
@@ -95,29 +97,35 @@ public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
             return results;
         }
 
+
+
         private List<CityEntities> getFilteredList(String text) {
-            String search = null;
+            //String search = null;
             filterableList.clear();
             if (text.isEmpty()) {
                 filterableList = new ArrayList<>();
                 filterableList.addAll(mCityEntities);
                 return filterableList;
             } else {
-                for (CityEntities wp : mCityEntities) {
-                    String name = wp.entityName;
-                    String post = wp.entityPost;
-//                    if (!TextUtils.isEmpty(name)){
-//                        search = name;
+//                for (CityEntities wp : mCityEntities) {
+//                    String name = wp.entityName;
+//                    String post = wp.entityPost;
+////                    if (!TextUtils.isEmpty(name)){
+////                        search = name;
+////                    }
+////                    if (!TextUtils.isEmpty(post)){
+////                        search += " " + post;
+////                    }
+//                    if (!TextUtils.isEmpty(text)) {
+//                        if (name.contains(text) || post.contains((text))) {
+//                            filterableList.add(wp);
+//                        }
 //                    }
-//                    if (!TextUtils.isEmpty(post)){
-//                        search += " " + post;
-//                    }
-                    if (!TextUtils.isEmpty(text)) {
-                        if (name.contains(text) || post.contains((text))){
-                            filterableList.add(wp);
-                        }
-                    }
-                }
+//                }
+                filterableList = Stream.of(mCityEntities)
+                                       .filter(item -> item.entityName.contains(text) || item.entityPost.contains(text))
+                                       .collect(Collectors.toList());
+
                 return filterableList;
             }
         }

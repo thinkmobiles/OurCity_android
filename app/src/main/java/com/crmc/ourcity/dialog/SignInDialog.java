@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
@@ -36,6 +37,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     private Button btnSignIn;
     private TextView tvSignUp;
     private OnActionDialogListener mCallback;
+    private FragmentActivity mActivity;
 
     @Override
     public void onAttach(Activity _activity) {
@@ -58,8 +60,9 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
-        if(SPManager.getInstance(getActivity()).getIsLoggedStatus()) {
-            getActivity().finish();
+        mActivity = getActivity();
+        if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
+            mActivity.finish();
         }
         View root = _inflater.inflate(R.layout.fragment_dialog_sign_in, _container, false);
         findUI(root);
@@ -86,7 +89,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         return v -> {
             switch (v.getId()) {
                 case R.id.btnSignIn_SIDF:
-                    hideKeyboard(getActivity());
+                    hideKeyboard(mActivity);
                     if (checkValidation()) {
                         Bundle bundle = createBundleForResident();
                         getLoaderManager().restartLoader(1, bundle, this);
@@ -94,7 +97,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
                     break;
                 case R.id.tvSignUp_SIDF:
                     mCallback.onActionDialogSelected(DialogType.REGISTER);
-                    hideKeyboard(getActivity());
+                    hideKeyboard(mActivity);
                     break;
             }
         };
@@ -103,7 +106,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     @NonNull
     private View.OnFocusChangeListener handleFocusChanging() {
         return (v, hasFocus) -> {
-            if (!hasFocus) hideKeyboard(getActivity());
+            if (!hasFocus) hideKeyboard(mActivity);
         };
     }
 
@@ -112,7 +115,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, etUsername.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, getResources().getInteger(R.integer.city_id));
-        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
+        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(mActivity).getPushToken());
         return bundle;
     }
 
@@ -140,21 +143,22 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<LoginResponse> _loader, LoginResponse _data) {
         if (_data != null) {
             if (_data.authToken != null) {
-                SPManager.getInstance(getActivity()).setAuthToken(_data.authToken);
-                SPManager.getInstance(getActivity()).setResidentId(_data.residentId);
-                SPManager.getInstance(getActivity()).setCRMCUsername(_data.crmcUsername);
-                SPManager.getInstance(getActivity()).setCRMCPassword(_data.crmcPassword);
-                SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
-                getActivity().startService(new Intent(getActivity(), RegistrationIntentService.class));
-                getActivity().finish();
+                SPManager.getInstance(mActivity).setAuthToken(_data.authToken);
+                SPManager.getInstance(mActivity).setResidentId(_data.residentId);
+                SPManager.getInstance(mActivity).setCRMCUsername(_data.crmcUsername);
+                SPManager.getInstance(mActivity).setCRMCPassword(_data.crmcPassword);
+                SPManager.getInstance(mActivity).setIsLoggedStatus(true);
+                mActivity.startService(new Intent(mActivity, RegistrationIntentService.class));
+                mActivity.finish();
             } else {
-                Toast.makeText(getActivity(), R.string.incorrect_credentials, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.incorrect_credentials, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, R.string.connection_error, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<LoginResponse> _loader) {}
+    public void onLoaderReset(Loader<LoginResponse> _loader) {
+    }
 }

@@ -1,11 +1,8 @@
 package com.crmc.ourcity.dialog;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-
-import com.crmc.ourcity.callback.CallBackWithData;
 
 
 /**
@@ -20,7 +17,8 @@ public class HotCallsDialog extends HotCallsEditableDialog {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {}
+    public void onSaveInstanceState(Bundle outState) {
+    }
 
     @Override
     public void onDetach() {

@@ -13,6 +13,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final <T extends View> T findView(@IdRes int _id) {
         return (T) findViewById(_id);
     }
-
-
 }

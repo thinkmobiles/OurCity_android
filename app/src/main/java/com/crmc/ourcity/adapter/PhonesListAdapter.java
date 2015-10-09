@@ -103,20 +103,20 @@ public class PhonesListAdapter extends BaseAdapter {
         public void onClick(View _view) {
             switch (_view.getId()) {
                 case R.id.btnCallSkype_FP:
-                        try {
-                            mOnListItemActionListener.onActionCall(getItem(position).phoneNumber);
-                        } catch (ActivityNotFoundException e) {
-                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    try {
+                        mOnListItemActionListener.onActionCall(getItem(position).phoneNumber);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_call_client),
+                                Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.btnSendMail_FP:
-                        try {
-                            mOnListItemActionListener.onActionMail(getItem(position).emailAddress);
-                        } catch (android.content.ActivityNotFoundException ex) {
-                            Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    try {
+                        mOnListItemActionListener.onActionMail(getItem(position).emailAddress);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.app_no_mail_client),
+                                Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }

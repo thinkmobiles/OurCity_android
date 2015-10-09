@@ -12,10 +12,8 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.interestAreas.FullInterestArea;
-import com.crmc.ourcity.rest.responce.interestAreas.InterestingArea;
 import com.crmc.ourcity.rest.responce.interestAreas.ResidentResponse;
 
-import java.util.List;
 
 /**
  * Created by andrei on 17.09.15.
@@ -24,7 +22,7 @@ public class InterestingAreasAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private ResidentResponse residentResponse;
-    private List<InterestingArea> interestingAreasList;
+    // private List<InterestingArea> interestingAreasList;
 
     public InterestingAreasAdapter(Context _context, ResidentResponse _residentResponse) {
         this.mInflater = LayoutInflater.from(_context);
@@ -58,7 +56,7 @@ public class InterestingAreasAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) _convertView.getTag();
         }
-        holder.setData(getItem(_position),_position);
+        holder.setData(getItem(_position), _position);
 
         return _convertView;
     }
@@ -89,7 +87,7 @@ public class InterestingAreasAdapter extends BaseAdapter {
         }
     }
 
-    public ResidentResponse getResidentResponse() {
-        return this.residentResponse;
-    }
+//    public ResidentResponse getResidentResponse() {
+//        return this.residentResponse;
+//    }
 }

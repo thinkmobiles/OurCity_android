@@ -336,36 +336,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 .PREVIOUSTITLE));
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu _menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, _menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem _item) {
-//        switch (_item.getItemId()) {
-//            case R.id.menu_settings:
-//                Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-//                boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
-//                        SubMenuFragment;
-//                Intent intent = new Intent(this, DialogActivity.class);
-//                intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
-//                EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-//                startActivity(intent);
-//                break;
-//            case android.R.id.home:
-//                setTitle();
-//                popBackStack();
-//                break;
-//            case R.id.menu_home:
-//                clearBackStack();
-//                setTopFragment(MainMenuFragment.newInstance());
-//                break;
-//        }
-//        return super.onOptionsItemSelected(_item);
-//    }
-
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -415,10 +385,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private void setTitle() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.flContainer_MA);
         if (!TextUtils.isEmpty(Constants.PREVIOUSTITLE) && !(f instanceof MainMenuFragment)) {
-            //           getDelegate().getSupportActionBar().setTitle(Constants.PREVIOUSTITLE);
             mTitle.setText(Constants.PREVIOUSTITLE);
         } else if (f instanceof MainMenuFragment) {
-//           getDelegate().getSupportActionBar().setTitle("");
             mTitle.setText("");
         }
     }

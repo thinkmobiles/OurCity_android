@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
@@ -45,15 +46,17 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     private InterestingAreasAdapter mAdapter;
     private ProgressDialog dialogLoading;
     private Handler mHandler;
+    private FragmentActivity mActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
+        mActivity = getActivity();
         root = _inflater.inflate(R.layout.fragment_dialog_interest_areas, _container, false);
         findUI(root);
         setListeners();
-        mHandler = new Handler(getActivity().getMainLooper());
-        dialogLoading = new ProgressDialog(getActivity());
+        mHandler = new Handler(mActivity.getMainLooper());
+        dialogLoading = new ProgressDialog(mActivity);
         return root;
     }
 
@@ -62,7 +65,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         super.onResume();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity).getResidentId());
         getLoaderManager().restartLoader(LOADER_INTERESTING_AREAS_ID, bundle, this);
     }
 
@@ -81,12 +84,12 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
             List<InterestingArea> selectedInterestingAreas;
             if (mResidentResponse != null && mResidentResponse.interestAreasModelsBool != null) {
                 selectedInterestingAreas = Stream.of(mResidentResponse.interestAreasModelsBool)
-                                                 .filter(item -> item.Value)
-                                                 .map(item -> item.Key)
-                                                 .collect(Collectors.toList());
+                        .filter(item -> item.Value)
+                        .map(item -> item.Key)
+                        .collect(Collectors.toList());
 
                 Bundle args = new Bundle();
-                args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+                args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity).getResidentId());
                 args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
                 args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>)
                         selectedInterestingAreas);
@@ -105,10 +108,10 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
 
         switch (_id) {
             case LOADER_INTERESTING_AREAS_ID:
-                loader = new InterestingAreaLoader(getActivity(), _args);
+                loader = new InterestingAreaLoader(mActivity, _args);
                 break;
             case LOADER_SEND_INTERESTING_AREAS_ID:
-                loader = new SendingAreasLoader(getActivity(), _args);
+                loader = new SendingAreasLoader(mActivity, _args);
                 break;
         }
         return loader;
@@ -132,11 +135,11 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
         if (_data != null) {
             mResidentResponse = (ResidentResponse) _data;
             if (mResidentResponse.interestAreasModelsBool != null) {
-                mAdapter = new InterestingAreasAdapter(getActivity(), mResidentResponse);
+                mAdapter = new InterestingAreasAdapter(mActivity, mResidentResponse);
                 mLvInterestiongAreas.setAdapter(mAdapter);
             }
         } else {
-            new AlertDialog.Builder(getActivity())
+            new AlertDialog.Builder(mActivity)
                     .setTitle("שגיאת").setMessage(R.string.connection_error)
                     .setPositiveButton(R.string.btn_ok, (dialog, which) -> {
                         popBackStack();
@@ -145,5 +148,6 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {}
+    public void onLoaderReset(Loader loader) {
+    }
 }

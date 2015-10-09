@@ -2,8 +2,8 @@ package com.crmc.ourcity.dialog;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.TextView;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnActionDialogListener;
@@ -72,5 +72,6 @@ public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClick
     }
 
     @Override
-    public void onRetryClick() {}
+    public void onRetryClick() {
+    }
 }

@@ -1,6 +1,7 @@
 package com.crmc.ourcity.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -34,19 +35,19 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     private Drawable drawable;
     private ArrayList<TickerModel> tickers;
     private Bundle loaderBundle;
-
     private int SPLASH_DELAY;
+    private Resources resources;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        resources = getResources();
         SPLASH_DELAY = getResources().getInteger(R.integer.banner_delay); //seconds
         cityNumber = getResources().getInteger(R.integer.city_id);
-        drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.splash, null);
+        drawable = ResourcesCompat.getDrawable(resources, R.drawable.splash, null);
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
-        rlBackground.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.splash, null));
+        rlBackground.setBackground(ResourcesCompat.getDrawable(resources, R.drawable.splash, null));
         new Handler().postDelayed(() -> {
             buildLoaderBundle();
             loadCrmcCredential();
@@ -119,8 +120,7 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
 
                 String dataString = (String) _data;
                 if (!TextUtils.isEmpty(dataString)) {
-                    drawable = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap(dataString));
-                    rlBackground.setBackground(drawable);
+                    setBackgroundImage(dataString);
                 }
                 mHandler.postDelayed(mEndSplash, SPLASH_DELAY * 1000);
                 break;
@@ -130,14 +130,16 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         }
     }
 
+    private void setBackgroundImage(String dataString) {
+        drawable = new BitmapDrawable(resources, Image.convertBase64ToBitmap(dataString));
+        rlBackground.setBackground(drawable);
+    }
+
     private void saveCredentials(CRMCCredentials credentials) {
         SPManager.getInstance(this).setCRMCUsername(credentials.login);
         SPManager.getInstance(this).setCRMCPassword(credentials.password);
     }
 
     @Override
-    public void onLoaderReset(Loader _loader) {
-
-    }
-
+    public void onLoaderReset(Loader _loader) {}
 }

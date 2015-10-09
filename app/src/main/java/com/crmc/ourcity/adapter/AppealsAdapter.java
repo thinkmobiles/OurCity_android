@@ -79,7 +79,7 @@ public class AppealsAdapter extends BaseAdapter {
         final TextView tvPhotoText_AF;
         final RelativeLayout rlImagePlaceholder;
         final LinearLayout llInfoPlaceholder;
-//        final ImageView ivPhoto;
+        //        final ImageView ivPhoto;
         final View view;
         final Context mContext;
 
@@ -93,7 +93,6 @@ public class AppealsAdapter extends BaseAdapter {
             referenceID = (TextView) _view.findViewById(R.id.tvReferenceID_AF);
             rlImagePlaceholder = (RelativeLayout) _view.findViewById(R.id.rlImagePlaceholder_ALF);
             llInfoPlaceholder = (LinearLayout) _view.findViewById(R.id.llInformationPlaceholder_ALF);
-//            ivPhoto = (ImageView) _view.findViewById(R.id.ivImage_AF);
             this.view = _view;
             this.mContext = _context;
             _view.setTag(this);
@@ -101,7 +100,7 @@ public class AppealsAdapter extends BaseAdapter {
 
         @SuppressLint("SetTextI18n")
         public void setData(ResultObject _item) {
-            Image.setBoarderBackgroundColorArray(mContext, color , 2, 5, "#ffffff",
+            Image.setBoarderBackgroundColorArray(mContext, color, 2, 5, "#ffffff",
                     new View[]{rlImagePlaceholder, llInfoPlaceholder});
 
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
@@ -125,7 +124,6 @@ public class AppealsAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(_item.ReferenceID)) {
                 referenceID.setText(_item.ReferenceID.trim());
             }
-
         }
     }
 }
