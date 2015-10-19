@@ -69,12 +69,12 @@ import java.util.List;
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener,
         FragmentManager.OnBackStackChangedListener {
 
-    // private Toolbar mToolbar;
     private Ticker mTicker;
     private ImageView mActionHome;
     private ImageView mActionBack;
     private ImageView mActionSettings;
     private TextView mTitle;
+    private WebViewFragment webViewFragment;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private boolean isLoggedIn;
@@ -105,8 +105,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         mActionHome.setOnClickListener(handleClicks());
         mActionBack.setOnClickListener(handleClicks());
 
-
-//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTicker = (Ticker) findViewById(R.id.ticker_MA);
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
         if (tickers != null) {
@@ -115,13 +113,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             mTicker.startAnimation();
         }
 
-        //  setSupportActionBar(mToolbar);
-
-
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
-        // getDelegate().getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_right);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
@@ -158,7 +152,6 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onItemAction(MenuModel _menuModel) {
-//        getDelegate().getSupportActionBar().setTitle(_menuModel.title);
         mTitle.setText(_menuModel.title);
         switch (_menuModel.actionType) {
             case Constants.ACTION_TYPE_LIST:
@@ -178,8 +171,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 }
                 break;
             case Constants.ACTION_TYPE_LINK:
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link,
-                        _menuModel.colorItem, _menuModel.title));
+                webViewFragment = WebViewFragment.newInstance(_menuModel.link, _menuModel.colorItem, _menuModel.title);
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
                 break;
             case Constants.ACTION_TYPE_DOCUMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
@@ -284,8 +277,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onTickerAction(View _view, String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
-                    (), _title));
+            webViewFragment = WebViewFragment.newInstance(_link, Image.getStringColor
+                    (), _title);
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
         }
     }
 
@@ -320,8 +314,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsClickLinkAction(String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
-                    (), _title));
+            webViewFragment = WebViewFragment.newInstance(_link, Image.getStringColor
+                    (), _title);
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
         }
     }
 
@@ -370,8 +365,14 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        hideKeyboard(this);
+        if (webViewFragment != null && this.webViewFragment.canGoBack()) {
+            this.webViewFragment.goBack();
+
+        } else {
+            super.onBackPressed();
+            hideKeyboard(this);
+        }
+
     }
 
     private void hideKeyboard(Context _context) {

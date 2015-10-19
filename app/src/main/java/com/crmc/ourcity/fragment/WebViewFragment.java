@@ -100,7 +100,8 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public void onLoaderReset(Loader<Documents> _loader) {}
+    public void onLoaderReset(Loader<Documents> _loader) {
+    }
 
 
     @Override
@@ -108,7 +109,6 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         error = false;
         loadUrl(link);
     }
-
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -133,6 +133,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(true);
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -242,4 +243,15 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
             handler.proceed();
         }
     }
+
+    public boolean canGoBack() {
+        return this.mWebView != null && this.mWebView.canGoBack();
+    }
+
+    public void goBack() {
+        if (this.mWebView != null) {
+            this.mWebView.goBack();
+        }
+    }
+
 }
