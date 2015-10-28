@@ -3,6 +3,7 @@ package com.crmc.ourcity.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,14 +106,18 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
                 popBackStack();
                 break;
             case R.id.btnOk_SMF:
-                hideKeyboard(getActivity());
-                String[] send = {mail};
-                String title = "יצירת קשר אפליקציה ";
-                String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
-                        .toString() + "\n" + "כתובת דואר אלקטרוני" + ":  " + etMail_SMF.getText().toString() + "\n" +
-                        "מידע" + ":  " + etDescription_SMF.getText().toString();
-                sendMail(send, title, subject);
+                if (checkValidation()) {
+                    hideKeyboard(getActivity());
+                    String[] send = {mail};
+                    String title = "יצירת קשר אפליקציה ";
+                    String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
+                            .toString() + "\n" + "כתובת דואר אלקטרוני" + ":  " + etMail_SMF.getText().toString() + "\n" +
+                            "מידע" + ":  " + etDescription_SMF.getText().toString();
+                    sendMail(send, title, subject);
+                }
                 break;
+
+
         }
     }
 
@@ -134,4 +139,28 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         super.onDestroy();
         hideKeyboard(getActivity());
     }
+
+    private boolean checkValidation() {
+        boolean isValid = true;
+
+        if (TextUtils.isEmpty(etDescription_SMF.getText().toString())) {
+            etDescription_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(etFirstName_SMF.getText().toString())) {
+            etFirstName_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(etLastName_SMF.getText().toString())) {
+            etLastName_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+        if (TextUtils.isEmpty(etMail_SMF.getText().toString())) {
+            etMail_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
 }

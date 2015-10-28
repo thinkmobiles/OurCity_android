@@ -23,6 +23,7 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.AppealsLoader;
 import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.SPManager;
 
 /**
  * Created by podo on 04.09.15.
@@ -79,6 +80,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     public void onResume() {
         configureActionBar(true, true, title);
         super.onResume();
+        amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(getActivity()).getAmountOfVisibleTickets());
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
@@ -109,7 +111,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         swipeRefreshLayout.setRefreshing(false);
         if (data != null) {
             if (data.getResultObjects() != null && data.getResultObjects().size() > 0) {
-                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects(), color);
+                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects(), color, amountOfVisibleTickets);
                 lvAppeals.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 showContent();

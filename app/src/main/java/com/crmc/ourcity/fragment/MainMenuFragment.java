@@ -372,19 +372,40 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @NonNull
     private View.OnClickListener handleBtnClick() {
         return v -> {
+            Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
             switch (v.getId()) {
                 case R.id.llBtnFirst_MMF:
-                    mCallBackMenuModel.onItemAction(mMenuBottom.get(0));
+                    checkRootLogin(mMenuBottom, 0, isLogIn);
                     break;
 
                 case R.id.llBtnSecond_MMF:
-                    mCallBackMenuModel.onItemAction(mMenuBottom.get(1));
+                    checkRootLogin(mMenuBottom, 1, isLogIn);
                     break;
 
                 case R.id.llBtnThird_MMF:
-                    mCallBackMenuModel.onItemAction(mMenuBottom.get(2));
+                    checkRootLogin(mMenuBottom, 2, isLogIn);
                     break;
             }
         };
+    }
+
+    private void checkRootLogin(List<MenuModel> mMenuBottom, int position, boolean isLogin) {
+        if (Boolean.parseBoolean(mMenuBottom.get(position).requestLogin)) {
+            if (isLogin) {
+                mCallBackMenuModel.onItemAction(mMenuBottom.get(position));
+            } else {
+                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
+                startActivity(intent);
+            }
+        } else {
+            mCallBackMenuModel.onItemAction(mMenuBottom.get(position));
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRecyclerView.addOnItemTouchListener(null);
     }
 }

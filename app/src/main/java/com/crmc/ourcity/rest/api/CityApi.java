@@ -25,6 +25,7 @@ import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.rest.responce.map.MapCategory;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
+import com.crmc.ourcity.rest.responce.mobileUISettings.MobileUISettings;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
@@ -210,14 +211,37 @@ public interface CityApi {
     @POST("/GetResidentById")
     ResidentResponse getResidentById(@Body ResidentModel resident);
 
+    /**
+     * method that sends choosed interesting areas for specified resident
+     *
+     * @param resident
+     * @return boolean
+     */
     @POST("/SetInterestAreasToResident")
     boolean sendSelectedInterestingAreas(@Body ResidentModel resident);
 
+    /**
+     * @param resident
+     * @return ResidentDetails object with full resident information
+     */
     @POST("/GetResidentById")
     ResidentDetails getResidentInfo(@Body ResidentModel resident);
 
+    /**
+     *
+     * @param _residentModel
+     * @return boolean value
+     */
     @POST("/EditResidentDetails")
     boolean updateResidentInfo(@Body com.crmc.ourcity.rest.request.registration.ResidentModel
                                        _residentModel);
+
+    /**
+     *
+     * @param baseModel city number
+     * @return MobileUISettings object which contains list of properties
+     */
+    @POST("/GetMobileUISettings")
+    MobileUISettings getMobileUISettings(@Body BaseModel baseModel);
 
 }

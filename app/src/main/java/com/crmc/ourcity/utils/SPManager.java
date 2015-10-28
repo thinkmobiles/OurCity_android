@@ -3,6 +3,8 @@ package com.crmc.ourcity.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.crmc.ourcity.R;
+
 public class SPManager {
     private static final String CRMCUSERNAME = "crmcUsername";
     private static final String CRMCPASSWORD = "crmcPassword";
@@ -22,6 +24,10 @@ public class SPManager {
     public static final String SECOND_EMERGENCY_NUM = "secondEmergencyNum";
     public static final String THIRD_EMERGENCY_NUM = "thirdEmergencyNum";
     public static final String SP_NAME="user_data";
+    public static final String AMOUNT_OF_VISIBLE_TICKETS = "amountOfVisibleTickets";
+    public static final String SHOW_INTEREST_AREAS = "ShowIntrestAreas";
+    public static final String SHOW_HOT_CALLS = "ShowHotCalls";
+
 
     public static SPManager getInstance(Context context) {
         if (spManager == null) {
@@ -74,6 +80,30 @@ public class SPManager {
         setAuthToken("");
         setPushToken("");
         setIsLoggedStatus(false);
+    }
+
+    public void setShowInterestAreas(int _value) {
+        saveInt(SHOW_INTEREST_AREAS, _value);
+    }
+
+    public int getShowInterestAreas() {
+        return retrieveInt(SHOW_INTEREST_AREAS, 0);
+    }
+
+    public void setShowHotCalls(int _value) {
+        saveInt(SHOW_HOT_CALLS, _value);
+    }
+
+    public int getShowHotCalls() {
+        return retrieveInt(SHOW_HOT_CALLS, 0);
+    }
+
+    public void setAmountOfVisibleTickets(int _amountOfVisibleTickets){
+        saveInt(AMOUNT_OF_VISIBLE_TICKETS, _amountOfVisibleTickets);
+    }
+
+    public int getAmountOfVisibleTickets() {
+        return retrieveInt(AMOUNT_OF_VISIBLE_TICKETS, R.id.rbVisibleTickets100_FDVT);
     }
 
     public void setFirstEmergencyNumber(String _phone) {

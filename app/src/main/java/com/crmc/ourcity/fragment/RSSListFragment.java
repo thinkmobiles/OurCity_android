@@ -19,12 +19,12 @@ import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.RSSLoader;
-import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.rss.RssItem;
 
 import java.util.List;
 
-public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RSSEntry>> {
+public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RssItem>> {
 
     private ListView lvRssEntries;
     private View vUnderLine_RssFrg;
@@ -79,7 +79,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public void onLoadFinished(Loader<List<RSSEntry>> _loader, List<RSSEntry> _data) {
+    public void onLoadFinished(Loader<List<RssItem>> _loader, List<RssItem> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
@@ -92,12 +92,12 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public Loader<List<RSSEntry>> onCreateLoader(int _id, Bundle _args) {
+    public Loader<List<RssItem>> onCreateLoader(int _id, Bundle _args) {
         return new RSSLoader(getActivity(), _args);
     }
 
     @Override
-    public void onLoaderReset(Loader<List<RSSEntry>> _loader) {
+    public void onLoaderReset(Loader<List<RssItem>> _loader) {
     }
 
     @Override

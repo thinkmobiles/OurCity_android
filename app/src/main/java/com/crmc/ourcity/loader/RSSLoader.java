@@ -3,22 +3,19 @@ package com.crmc.ourcity.loader;
 import android.content.Context;
 import android.os.Bundle;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.rss.RSSEntry;
-import com.crmc.ourcity.utils.RSSHandler;
-import org.xml.sax.InputSource;
+import com.crmc.ourcity.utils.rss.RssFeed;
+import com.crmc.ourcity.utils.rss.RssItem;
+import com.crmc.ourcity.utils.rss.RssReader;
+
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by podo on 01.09.15.
  */
-public class RSSLoader extends BaseLoader<List<RSSEntry>> {
+public class RSSLoader extends BaseLoader<List<RssItem>> {
 
     private String link;
 
@@ -28,25 +25,29 @@ public class RSSLoader extends BaseLoader<List<RSSEntry>> {
     }
 
     @Override
-    public List<RSSEntry> loadInBackground() {
+    public List<RssItem> loadInBackground() {
 
         URL url;
 
         try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            SAXParser parser = parserFactory.newSAXParser();
-            XMLReader reader = parser.getXMLReader();
+//            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+//            SAXParser parser = parserFactory.newSAXParser();
+//            XMLReader reader = parser.getXMLReader();
+//
+//            url = new URL(link);
+//            RSSHandler RSSHandler = new RSSHandler();
+//            reader.setContentHandler(RSSHandler);
+//            InputSource inputSource = new InputSource(url.openStream());
+//            inputSource.setEncoding("UTF-8");
+//            reader.parse(inputSource);
 
             url = new URL(link);
-            RSSHandler RSSHandler = new RSSHandler();
-            reader.setContentHandler(RSSHandler);
-            InputSource inputSource = new InputSource(url.openStream());
-            inputSource.setEncoding("UTF-8");
-            reader.parse(inputSource);
+            RssFeed feed = RssReader.read(url);
 
-            return RSSHandler.getRSSEntryList();
 
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+            return feed.getRssItems();
+
+        } catch ( SAXException | IOException e) {
             e.printStackTrace();
         }
 

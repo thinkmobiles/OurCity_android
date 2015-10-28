@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">חדרה</string>
     <integer name="city_id">1</integer>
-
+    <string name="update_url"><![CDATA[https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en]]></string>
 </resources>

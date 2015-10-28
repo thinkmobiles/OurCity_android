@@ -14,7 +14,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
 
 import java.text.SimpleDateFormat;
@@ -25,8 +24,6 @@ import java.util.Date;
  */
 public class RSSEntryFragment extends BaseFourStatesFragment {
 
-
-    private RSSEntry entry;
     private TextView tvTitle;
     private TextView tvDate_Text;
     private TextView tvDescription_Text;
@@ -40,13 +37,20 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     private ImageView ivLink;
     private OnListItemActionListener mOnListItemActionListener;
     private String title;
+    private String entryTitle;
+    private String entryDescription;
+    private String entryDate;
+    private String entryLink;
 
 
-    public static RSSEntryFragment newInstance(RSSEntry _entry, String _title) {
+
+    public static RSSEntryFragment newInstance(String _entryTitle, String _description, String _link, String _date) {
         RSSEntryFragment rssEntryFragment = new RSSEntryFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.CONFIGURATION_KEY_RSS, _entry);
-        args.putString(Constants.NODE_TITLE, _title);
+        args.putString(Constants.CONFIGURATION_KEY_ENTRY_TITLE, _entryTitle);
+        args.putString(Constants.CONFIGURATION_KEY_ENTRY_DESCR, _description);
+        args.putString(Constants.CONFIGURATION_KEY_ENTRY_DATE, _date);
+        args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
         rssEntryFragment.setArguments(args);
         return rssEntryFragment;
     }
@@ -54,13 +58,16 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        entry = getArguments().getParcelable(Constants.CONFIGURATION_KEY_RSS);
         title = getArguments().getString(Constants.NODE_TITLE);
+        entryTitle = getArguments().getString(Constants.CONFIGURATION_KEY_ENTRY_TITLE);
+        entryDescription = getArguments().getString(Constants.CONFIGURATION_KEY_ENTRY_DESCR);
+        entryDate = getArguments().getString(Constants.CONFIGURATION_KEY_ENTRY_DATE);
+        entryLink = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
     }
 
     @Override
     public void onResume() {
-        configureActionBar(true, true, entry.getTitle());
+        configureActionBar(true, true, entryTitle);
         super.onResume();
     }
 
@@ -96,12 +103,20 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        checkData(entry.getTitle(), tvTitle, tvTitle);
-        checkData(getDateTime(entry.getPubDate()) + " ", tvDate_Text, llDate);
-        if (TextUtils.isEmpty(entry.getDescription())) {
+        checkData(entryTitle, tvTitle, tvTitle);
+        //checkData(getDateTime(entry.getPubDate()) + " ", tvDate_Text, llDate);
+        if (TextUtils.isEmpty(getDateTime(entryDate))) {
+            tvDate_Text.setVisibility(View.GONE);
+            llDate.setVisibility(View.GONE);
+        } else {
+            tvDate_Text.setVisibility(View.VISIBLE);
+            llDate.setVisibility(View.VISIBLE);
+            tvDate_Text.setText(getDateTime(entryDate).trim() + " ");
+        }
+        if (TextUtils.isEmpty(entryDescription)) {
             llDescription.setVisibility(View.GONE);
         } else {
-            tvDescription_Text.setText(Html.fromHtml(entry.getDescription().substring(0, entry.getDescription().length() - 3)));
+            tvDescription_Text.setText(Html.fromHtml(entryDescription.substring(0, entryDescription.length() - 3)));
         }
         setImage();
         showContent();
@@ -110,12 +125,12 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     @Override
     protected void setListeners() {
         super.setListeners();
-        ivLink.setOnClickListener(v -> mOnListItemActionListener.onEventsClickLinkAction(entry.getLink(), entry.getTitle()));
+        ivLink.setOnClickListener(v -> mOnListItemActionListener.onEventsClickLinkAction(entryLink, entryTitle));
     }
 
     private void setImage() {
 
-        if (!TextUtils.isEmpty(entry.getLink())) {
+        if (!TextUtils.isEmpty(entryLink)) {
             ivLink.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.link,
                     Image.darkenColor(0.2)));
         } else {
@@ -135,7 +150,10 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
 
     @SuppressLint("SimpleDateFormat")
     public String getDateTime(String _data) {
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        return formatter.format(new Date(_data));
+        if (_data != null) {
+            return formatter.format(new Date(_data));
+        } else return null;
     }
 }

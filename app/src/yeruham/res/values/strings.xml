@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">ירוחם</string>
     <integer name="city_id">28</integer>
+    <string name="update_url"></string>
 </resources>

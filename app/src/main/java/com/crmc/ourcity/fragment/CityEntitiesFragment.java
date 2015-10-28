@@ -159,8 +159,8 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     private AdapterView.OnItemClickListener handleItemClick() {
         return (_parent, _view, _position, _id) -> {
             hideKeyboard(getActivity());
-            etSearch_CEF.setText("");
             mOnListItemActionListener.onCityEntitiesItemAction(mAdapter.getItem(_position));
+            etSearch_CEF.setText("");
         };
     }
 

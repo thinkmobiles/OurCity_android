@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,9 +11,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -223,24 +227,26 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         @Override
         public void onReceivedSslError(WebView view, @NonNull SslErrorHandler handler, SslError error) {
             super.onReceivedSslError(view, handler, error);
-            String message = getResources().getString(R.string.ssl_error) + "\n";
-            switch (error.getPrimaryError()) {
-                case SslError.SSL_UNTRUSTED:
-                    message += getResources().getString(R.string.the_certificate_authority_is_not_trusted);
-                    break;
-                case SslError.SSL_EXPIRED:
-                    message += getResources().getString(R.string.the_certificate_has_expired);
-                    break;
-                case SslError.SSL_IDMISMATCH:
-                    message += getResources().getString(R.string.the_certificate_hostname_mismatch);
-                    break;
-                case SslError.SSL_NOTYETVALID:
-                    message += getResources().getString(R.string.the_certificate_is_not_yet_valid);
-                    break;
+            if (isAdded()) {
+                String message = getResources().getString(R.string.ssl_error) + "\n";
+                switch (error.getPrimaryError()) {
+                    case SslError.SSL_UNTRUSTED:
+                        message += getResources().getString(R.string.the_certificate_authority_is_not_trusted);
+                        break;
+                    case SslError.SSL_EXPIRED:
+                        message += getResources().getString(R.string.the_certificate_has_expired);
+                        break;
+                    case SslError.SSL_IDMISMATCH:
+                        message += getResources().getString(R.string.the_certificate_hostname_mismatch);
+                        break;
+                    case SslError.SSL_NOTYETVALID:
+                        message += getResources().getString(R.string.the_certificate_is_not_yet_valid);
+                        break;
+                }
+                pbLoading.setVisibility(View.GONE);
+                showError(message);
+                handler.proceed();
             }
-            pbLoading.setVisibility(View.GONE);
-            showError(message);
-            handler.proceed();
         }
     }
 
@@ -254,4 +260,9 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         }
     }
 
+//    private int getScale() {
+//        Display display = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+//        int width = display.getWidth();
+//        Double val = new Double(width) / new Double(PIC_WIDTH);
+//    }
 }

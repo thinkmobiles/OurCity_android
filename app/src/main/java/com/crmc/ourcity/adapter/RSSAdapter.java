@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnListItemActionListener;
-import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.utils.Image;
+import com.crmc.ourcity.utils.rss.RssItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,11 +27,11 @@ import java.util.List;
 public class RSSAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private List<RSSEntry> mRSSEnties;
+    private List<RssItem> mRSSEnties;
     private Context mContext;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public RSSAdapter(final Context _context, final List<RSSEntry> _rssEntries, OnListItemActionListener
+    public RSSAdapter(final Context _context, final List<RssItem> _rssEntries, OnListItemActionListener
             _onListItemActionListener) {
         mContext = _context;
         mInflater = LayoutInflater.from(mContext);
@@ -45,7 +45,7 @@ public class RSSAdapter extends BaseAdapter {
     }
 
     @Override
-    public RSSEntry getItem(int _position) {
+    public RssItem getItem(int _position) {
         return mRSSEnties.get(_position);
     }
 
@@ -91,7 +91,7 @@ public class RSSAdapter extends BaseAdapter {
         }
 
         @SuppressLint("SetTextI18n")
-        void setData(RSSEntry _entry, int _position) {
+        void setData(RssItem _entry, int _position) {
             this.position = _position;
             ivArrowEvent.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.event_arrow, Image
                     .darkenColor(0.2)));
@@ -103,13 +103,13 @@ public class RSSAdapter extends BaseAdapter {
                 title.setText(_entry.getTitle().trim());
             }
 
-            if (TextUtils.isEmpty(_entry.getPubDate())) {
+            if (TextUtils.isEmpty(getDateTime(_entry.getPubDate()))) {
                 date.setVisibility(View.GONE);
                 llDate.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);
                 llDate.setVisibility(View.VISIBLE);
-                date.setText(getDateTime(_entry.getPubDate().trim()) + " ");
+                date.setText(getDateTime(_entry.getPubDate()).trim() + " ");
             }
 
 //            if (!TextUtils.isEmpty(_entry.getLink())) {
@@ -123,8 +123,11 @@ public class RSSAdapter extends BaseAdapter {
 
         @SuppressLint("SimpleDateFormat")
         public String getDateTime(String _data) {
+
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-            return formatter.format(new Date(_data));
+            if (_data != null) {
+                return formatter.format(new Date(_data));
+            } else return null;
         }
 
         @Override

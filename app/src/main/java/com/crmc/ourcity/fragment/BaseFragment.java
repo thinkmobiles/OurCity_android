@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.crmc.ourcity.activity.Application;
+import com.squareup.leakcanary.RefWatcher;
+
 /**
  * Created by SetKrul on 14.07.2015.
  */
@@ -59,4 +62,12 @@ public abstract class BaseFragment extends Fragment {
         }
 //    }
 //
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
 }

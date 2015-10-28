@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.MassageToResidentAdapter;
+import com.crmc.ourcity.callback.OnItemActionListener;
+import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.MassageToResidentLoader;
@@ -32,7 +35,11 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     private String json;
     private String route;
     private String title;
+    private boolean isForPush;
+    private String pushMessage, pushLink;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private OnItemActionListener mItemActionListener;
+    private OnListItemActionListener mOnListItemActionListener;
 
     private MassageToResidentAdapter mAdapter;
 
@@ -47,13 +54,50 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
         return mMessageToResidentFragment;
     }
 
+    public static MessageToResidentFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title, boolean  _isForPush,
+                                                        String _pushMessage, String _pushLink) {
+        MessageToResidentFragment mMessageToResidentFragment = new MessageToResidentFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(Constants.CONFIGURATION_KEY_FOR_PUSH, _isForPush);
+        args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
+        args.putString(Constants.CONFIGURATION_KEY_JSON, _requestJson);
+        args.putString(Constants.CONFIGURATION_KEY_ROUTE, _requestRoute);
+        args.putString(Constants.NODE_TITLE, _title);
+        args.putString(Constants.CONFIGURATION_KEY_LINK, _pushLink);
+        args.putString(Constants.CONFIGURATION_KEY_MESSAGE, _pushMessage);
+        mMessageToResidentFragment.setArguments(args);
+        return mMessageToResidentFragment;
+    }
+
+    @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+            mItemActionListener = (OnItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnItemActionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        mItemActionListener = null;
+        super.onDetach();
+    }
+
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        isForPush = getArguments().getBoolean(Constants.CONFIGURATION_KEY_FOR_PUSH, false);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
         title = getArguments().getString(Constants.NODE_TITLE);
+        pushMessage = getArguments().getString(Constants.CONFIGURATION_KEY_MESSAGE);
+        pushLink = getArguments().getString(Constants.CONFIGURATION_KEY_LINK);
+        if (isForPush) mItemActionListener.onMessageToResidentDetailTransition(pushMessage, pushLink);
     }
 
     @Override
@@ -110,6 +154,9 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     @Override
     protected void setListeners() {
         super.setListeners();
+        lvMassageToResident.setOnItemClickListener((parent, view, position, id) -> {
+            mOnListItemActionListener.onMessageItenAction(mAdapter.getItem(position));
+        });
         swipeRefreshLayout.setOnRefreshListener(this::loadMessagesToResident);
         swipeInStart();
     }

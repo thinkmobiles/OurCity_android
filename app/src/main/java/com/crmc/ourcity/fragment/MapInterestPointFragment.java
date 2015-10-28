@@ -249,4 +249,10 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         _googleMap.moveCamera(cameraUpdate);
         showContent();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        btnFilter.setOnClickListener(null);
+    }
 }

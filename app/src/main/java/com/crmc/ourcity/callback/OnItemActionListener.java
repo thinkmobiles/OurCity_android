@@ -11,4 +11,7 @@ public interface OnItemActionListener {
     void onItemAction(final MenuModel _menuModel);
 
     void onMenuModelPrepared(List<MenuModel> _menuModel);
+
+    void onMessageToResidentDetailTransition(String _message, String _link);
+
 }

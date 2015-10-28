@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -198,7 +200,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         ivRotate.setVisibility(View.GONE);
         ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
-        getLocation();
+        //getLocation();
     }
 
     private final LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
@@ -211,8 +213,14 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
         @Override
         public void onLoadFinished(Loader<AddressFull> _loader, AddressFull _data) {
-            etNameCity.setText(_data.address.city);
+            if (!TextUtils.isEmpty(_data.address.city)) {
+                etNameCity.setText(_data.address.city);
+            }
+            if(!TextUtils.isEmpty(_data.address.town)) {
+                etNameCity.setText(_data.address.town);
+            }
             etNameStreet.setText(_data.address.street);
+            etNumberHouse.setText(_data.address.house);
             etNameStreet.setError(null);
         }
 
@@ -232,8 +240,9 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         @Override
         public void onLoadFinished(Loader<StreetsFull> _loader, StreetsFull _data) {
 
-            if (_data != null) {
+            if (_data != null && _data.streetsList != null) {
                 baseStreests = _data;
+
                 int numbersStreets = _data.streetsList.size();
                 streets = new String[numbersStreets];
                 for (int i = 0; i < numbersStreets; i++) {
@@ -517,7 +526,10 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                             bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                             getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
                         }
-                        hideKeyboard(getActivity());
+//                        hideKeyboard(getActivity());
+                        InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                     }
                     break;
                 case R.id.swGpsOnOff_AF:
@@ -536,6 +548,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                         mLocation = null;
                         etNameCity.setText(getResources().getString(R.string.app_name));
                         etNameStreet.setText("");
+                        etNumberHouse.setText("");
                     }
                 break;
             }

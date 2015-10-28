@@ -68,6 +68,7 @@ public class EventsListAdapter extends BaseAdapter {
     private class ViewHolder implements View.OnClickListener {
         final TextView title;
         final TextView date;
+        final LinearLayout llDate;
         final TextView address;
         final ImageView ivArrowEvent;
 //        final ImageView ivCall;
@@ -82,6 +83,7 @@ public class EventsListAdapter extends BaseAdapter {
             llEventsControl_EF = (LinearLayout) _view.findViewById(R.id.llEventsControl_EF);
             title = (TextView) _view.findViewById(R.id.tvTitle_EIF);
             date = (TextView) _view.findViewById(R.id.tvDate_Text_EIF);
+            llDate = (LinearLayout) _view.findViewById(R.id.llDate_EIF);
             address = (TextView) _view.findViewById(R.id.tvAddress_EIF);
             ivArrowEvent = (ImageView) _view.findViewById(R.id.ivArrowEvent_EF);
 //            ivCall = (ImageView) _view.findViewById(R.id.ivCallSkype_EF);
@@ -127,6 +129,7 @@ public class EventsListAdapter extends BaseAdapter {
                 title.setText(_item.title.trim());
             }
             if (TextUtils.isEmpty(_item.eventDateToMobileClient)) {
+                llDate.setVisibility(View.GONE);
                 date.setVisibility(View.GONE);
             } else {
                 date.setVisibility(View.VISIBLE);

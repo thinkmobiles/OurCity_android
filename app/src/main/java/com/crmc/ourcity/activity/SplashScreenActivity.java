@@ -17,8 +17,11 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.CrmcCredentialsLoader;
 import com.crmc.ourcity.loader.ImageLoader;
+import com.crmc.ourcity.loader.MobileUISettingsLoader;
 import com.crmc.ourcity.loader.TickerLoader;
 import com.crmc.ourcity.rest.responce.crmcCredentials.CRMCCredentials;
+import com.crmc.ourcity.rest.responce.mobileUISettings.MobileUISettings;
+import com.crmc.ourcity.rest.responce.mobileUISettings.SettingItem;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
@@ -50,11 +53,16 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
         rlBackground.setBackground(ResourcesCompat.getDrawable(resources, R.drawable.splash, null));
         new Handler().postDelayed(() -> {
             buildLoaderBundle();
+            loadMobileUISettings();
             loadCrmcCredential();
             loadTicker();
             loadBackgroundImage();
         }, 3000);
 
+    }
+
+    private void loadMobileUISettings() {
+        getSupportLoaderManager().initLoader(Constants.LOADER_MOBILE_UI_SETTINGS_ID, loaderBundle, this);
     }
 
     private void loadCrmcCredential() {
@@ -94,6 +102,9 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     public Loader onCreateLoader(int _id, Bundle _args) {
         Loader loader = null;
         switch (_id) {
+            case Constants.LOADER_MOBILE_UI_SETTINGS_ID:
+                loader = new MobileUISettingsLoader(SplashScreenActivity.this, _args);
+                break;
             case Constants.LOADER_CRMC_CREDENTIAL_ID:
                 loader = new CrmcCredentialsLoader(SplashScreenActivity.this, _args);
                 break;
@@ -110,6 +121,14 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
     @Override
     public void onLoadFinished(Loader _loader, Object _data) {
         switch (_loader.getId()) {
+            case Constants.LOADER_MOBILE_UI_SETTINGS_ID:
+                MobileUISettings settings = (MobileUISettings) _data;
+
+                if (settings != null & settings.properties != null & settings.properties.size() > 0) {
+                    saveMobileUISettings(settings);
+                }
+                break;
+
             case Constants.LOADER_CRMC_CREDENTIAL_ID:
                 CRMCCredentials credentials = (CRMCCredentials) _data;
                 if (credentials != null) {
@@ -127,6 +146,18 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
             case Constants.LOADER_TICKERS_ID:
                 tickers = (ArrayList<TickerModel>) _data;
                 break;
+        }
+    }
+
+    private void saveMobileUISettings(MobileUISettings settings) {
+
+        for (SettingItem item : settings.properties) {
+            if(item.propertyName.contains("ShowIntrestAreasId")) {
+                SPManager.getInstance(this).setShowInterestAreas(item.propertyValue);
+            }
+            if (item.propertyName.contains("ShowHotCallsId")) {
+                SPManager.getInstance(this).setShowHotCalls(item.propertyValue);
+            }
         }
     }
 

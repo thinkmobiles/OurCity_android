@@ -113,6 +113,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 editableResidentInfoDialog.setArguments(bundle);
                 replaceFragmentWithBackStack(R.id.fragment_dialog_container, editableResidentInfoDialog);
                 break;
+
+            case VISIBLE_TICKETS:
+                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new VisibleTicketsDialog());
         }
     }
 
@@ -149,6 +152,14 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
     @Override
     public void onActionDialogCancel(boolean _check) {
         intent.putExtra(Constants.REQUEST_TYPE, Constants.REQUEST_CANCEL);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onLogoutListener() {
+        Intent intent = new Intent();
+        intent.putExtra(Constants.BUNDLE_LOGOUT, Constants.LOGOUT_KEY);
         setResult(RESULT_OK, intent);
         finish();
     }

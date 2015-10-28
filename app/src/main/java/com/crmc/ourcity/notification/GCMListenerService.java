@@ -28,6 +28,7 @@ import android.util.Log;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.MainActivity;
+import com.crmc.ourcity.global.Constants;
 import com.google.android.gms.gcm.GcmListenerService;
 
 public class GCMListenerService extends GcmListenerService {
@@ -45,8 +46,13 @@ public class GCMListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
+        String url = data.getString("url");
         Log.d(TAG, "From: " + from);
+
+        Log.d(TAG, data.getString("time"));
         Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "URL: " + url);
+
 
         /**
          * Production applications would usually process the message here.
@@ -59,7 +65,7 @@ public class GCMListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+        sendNotification(message, url);
     }
     // [END receive_message]
 
@@ -68,11 +74,13 @@ public class GCMListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message) {
+    private void sendNotification(String message, String url) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE, message);
+        intent.putExtra(Constants.BUNDLE_CONSTANT_PUSH_LINK, url);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)

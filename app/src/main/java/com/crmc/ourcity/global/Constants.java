@@ -16,6 +16,16 @@ public class Constants {
     public static final String BUNDLE_CONSTANT_CRMCPASSWORD = "crmcpassword";
     public static final String NODE_TITLE = "node_title";
     public static final String BUNDLE_CONSTANT_EDITABLE_RESIDENT = "editable_resident_info";
+    public static final String CONFIGURATION_KEY_FOR_PUSH = "FOR_PUSH";
+    public static final String CONFIGURATION_KEY_MESSAGE = "PUSH MESSAGE";
+    public static final String BUNDLE_CONSTANT_PUSH_MESSAGE = "PUSH_MESSAGE";
+    public static final String BUNDLE_CONSTANT_PUSH_LINK = "PUSH_LINK";
+    public static final String CONFIGURATION_KEY_MESSAGE_TO_RESIDENT = "Current_message_to_resident";
+    public static final String BUNDLE_LOGOUT = "doLogout";
+    public static final int LOGOUT_KEY = 99223561;
+    public static final String CONFIGURATION_KEY_ENTRY_TITLE = "rssEntryTitle";
+    public static final String CONFIGURATION_KEY_ENTRY_DESCR = "rssEntryDescr";
+    public static final String CONFIGURATION_KEY_ENTRY_DATE = "rssEntryDate";
 
 
     public static String PREVIOUSTITLE;
@@ -68,6 +78,7 @@ public class Constants {
     public static final int LOADER_GET_RESIDENT_INFO_ID = 27;
     public static final int LOADER_UPDATE_RESIDENT_INFO = 28;
     public static final int LOADER_CRMC_CREDENTIAL_ID = 29;
+    public static final int LOADER_MOBILE_UI_SETTINGS_ID = 30;
 
     //for bundle
     final public static int BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO = 0;

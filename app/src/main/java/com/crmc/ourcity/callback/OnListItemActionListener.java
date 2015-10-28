@@ -2,13 +2,14 @@ package com.crmc.ourcity.callback;
 
 import android.view.View;
 
-import com.crmc.ourcity.model.rss.RSSEntry;
 import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
+import com.crmc.ourcity.utils.rss.RssItem;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface OnListItemActionListener {
 
     void onPhoneBookItemAction(List<Phones> _phones);
 
-    void onRSSItemAction(RSSEntry _entry);
+    void onRSSItemAction(RssItem _entry);
 
     void onTickerAction(View _view, String _link, String _title);
 
@@ -37,4 +38,6 @@ public interface OnListItemActionListener {
     void onActionCall(String _number);
 
     void onVoteAction(VoteFull _voteFull);
+
+    void onMessageItenAction(MassageToResident _mtr);
 }

@@ -31,8 +31,8 @@
         android:ellipsize="end"
         android:gravity="center_horizontal|top"
         android:maxLines="2"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:textColor="#fff"
         android:textSize="13.5sp"/>
 </LinearLayout>

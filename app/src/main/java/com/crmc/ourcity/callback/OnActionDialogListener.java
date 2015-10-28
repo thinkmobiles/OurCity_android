@@ -12,4 +12,5 @@ import com.crmc.ourcity.dialog.DialogType;
 
 public interface OnActionDialogListener {
     void onActionDialogSelected(DialogType _action);
+    void onLogoutListener();
 }

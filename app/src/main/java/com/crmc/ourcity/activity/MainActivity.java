@@ -1,14 +1,19 @@
 package com.crmc.ourcity.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -32,6 +37,7 @@ import com.crmc.ourcity.fragment.MapClearFragment;
 import com.crmc.ourcity.fragment.MapInterestPointFragment;
 import com.crmc.ourcity.fragment.MapTripsFragment;
 import com.crmc.ourcity.fragment.MessageToResidentFragment;
+import com.crmc.ourcity.fragment.MessagesToResidentDetailFragment;
 import com.crmc.ourcity.fragment.OldDAppealsFragment;
 import com.crmc.ourcity.fragment.PhoneBookFragment;
 import com.crmc.ourcity.fragment.PhonesFragment;
@@ -44,14 +50,15 @@ import com.crmc.ourcity.fragment.VoteFragment;
 import com.crmc.ourcity.fragment.VoteListFragment;
 import com.crmc.ourcity.fragment.WebViewFragment;
 import com.crmc.ourcity.global.Constants;
-import com.crmc.ourcity.model.rss.RSSEntry;
-import com.crmc.ourcity.notification.GCMListenerService;
+import com.crmc.ourcity.loader.MenuLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.rest.responce.events.Events;
+import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.rest.responce.events.Phones;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
+import com.crmc.ourcity.rest.responce.menu.MenuFull;
 import com.crmc.ourcity.rest.responce.menu.MenuModel;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
@@ -60,14 +67,23 @@ import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
+import com.crmc.ourcity.utils.rss.RssItem;
+import com.crmc.ourcity.utils.updateApp.OnReceiveListener;
+import com.crmc.ourcity.utils.updateApp.WVersionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends BaseFragmentActivity implements OnItemActionListener, OnListItemActionListener,
-        FragmentManager.OnBackStackChangedListener {
+        FragmentManager.OnBackStackChangedListener, LoaderManager.LoaderCallbacks {
 
     private Ticker mTicker;
     private ImageView mActionHome;
@@ -78,19 +94,22 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private boolean isLoggedIn;
+    private int cityNumber, residentId;
+    private String lng;
+    private Handler mHandler;
+    private WVersionManager versionManager;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mHandler = new Handler(this.getMainLooper());
         isLoggedIn = SPManager.getInstance(this).getIsLoggedStatus();
         if (isLoggedIn) {
             if (checkPlayServices()) {
                 if (TextUtils.isEmpty(SPManager.getInstance(this).getPushToken())) {
                     Intent intent = new Intent(this, RegistrationIntentService.class);
-                    startService(intent);
-                } else {
-                    Intent intent = new Intent(this, GCMListenerService.class);
                     startService(intent);
                 }
             }
@@ -113,6 +132,20 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             mTicker.startAnimation();
         }
 
+        cityNumber = getResources().getInteger(R.integer.city_id);
+        if (Locale.getDefault().toString().equals("en_US")) {
+            lng = "en";
+        } else {
+            lng = "he";
+        }
+        residentId = SPManager.getInstance(this).getResidentId();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
+        getSupportLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
+
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
             setTopFragment(MainMenuFragment.newInstance());
         }
@@ -129,13 +162,15 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                     setTopFragment(MainMenuFragment.newInstance());
                     break;
                 case R.id.action_settings:
-                    Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-                    boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
-                            SubMenuFragment;
+//                    Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
+//                    boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
+//                            SubMenuFragment;
                     Intent intent = new Intent(this, DialogActivity.class);
-                    intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
+                    //intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
                     EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-                    startActivity(intent);
+
+                    //startActivity(intent);
+                    startActivityForResult(intent, 1);
                     break;
                 case R.id.action_back:
                     setTitle();
@@ -257,6 +292,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            if((data != null ? data.getIntExtra(Constants.BUNDLE_LOGOUT, 0) : 0) == Constants.LOGOUT_KEY)
+            setTopFragment(MainMenuFragment.newInstance());
+        }
     }
 
     @Override
@@ -270,8 +309,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onRSSItemAction(RSSEntry _entry) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, RSSEntryFragment.newInstance(_entry, _entry.getTitle()));
+    public void onRSSItemAction(RssItem _entry) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER,
+                RSSEntryFragment.newInstance(_entry.getTitle(),
+                                             _entry.getDescription(),
+                                             _entry.getLink(),
+                                             _entry.getPubDate()));
     }
 
     @Override
@@ -298,6 +341,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onVoteAction(VoteFull _voteFull) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER, VoteFragment.newInstance(_voteFull));
+    }
+
+    @Override
+    public void onMessageItenAction(MassageToResident _mtr) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessagesToResidentDetailFragment.newInstance(_mtr));
     }
 
     @Override
@@ -331,6 +379,12 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 .PREVIOUSTITLE));
     }
 
+    @Override
+    public void onMessageToResidentDetailTransition(String _message, String _link) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessagesToResidentDetailFragment.newInstance(_message, _link));
+    }
+
+
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -361,19 +415,38 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     protected void onResume() {
         super.onResume();
         setTitle();
+        checkForUpdates();
+    }
+
+    private void checkForUpdates() {
+        versionManager = new WVersionManager(this);
+        versionManager.setVersionContentUrl(getString(R.string.update_url));
+        versionManager.setTitle(getString(R.string.alertdialog_update_available));
+        versionManager.setUpdateNowLabel(getString(R.string.alertdialog_update_now));
+        versionManager.setRemindMeLaterLabel(getString(R.string.alertdialog_remind_me_later));
+        versionManager.setReminderTimer(Integer.valueOf(getString(R.string.update_timer)));
+        versionManager.checkVersion();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        goToDetailResidentMessage(intent);
     }
 
     @Override
     public void onBackPressed() {
-        if (webViewFragment != null && this.webViewFragment.canGoBack()) {
-            this.webViewFragment.goBack();
-
-        } else {
-            super.onBackPressed();
-            hideKeyboard(this);
+//        if (webViewFragment != null && this.webViewFragment.canGoBack()) {
+//            this.webViewFragment.goBack();
+//
+//        } else {
+        super.onBackPressed();
+        hideKeyboard(this);
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            setTopFragment(MainMenuFragment.newInstance());
         }
-
     }
+
 
     private void hideKeyboard(Context _context) {
         InputMethodManager inputManager = (InputMethodManager) _context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -390,5 +463,47 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         } else if (f instanceof MainMenuFragment) {
             mTitle.setText("");
         }
+    }
+
+    //--> loading menu nodes
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        return new MenuLoader(this, args);
+    }
+
+    @Override
+    public void onLoadFinished(Loader loader, Object _data) {
+        mHandler.postAtFrontOfQueue(() -> {
+            Constants.mMenuFull = (MenuFull) _data;
+            Intent intent = getIntent();
+            if (!TextUtils.isEmpty(intent.getExtras().getString(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE))) {
+                goToDetailResidentMessage(intent);
+            } else {
+                if (getFragmentById(FRAGMENT_CONTAINER) == null) {
+                    setTopFragment(MainMenuFragment.newInstance());
+                }
+            }
+        });
+    }
+
+    private void goToDetailResidentMessage(Intent intent) {
+        for (int i = 0; i < Constants.mMenuFull.getNodes().size(); i++) {
+            if (Constants.mMenuFull.getNodes().get(i).actionType == Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT) {
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(
+                        Constants.mMenuFull.getNodes().get(i).colorItem,
+                        Constants.mMenuFull.getNodes().get(i).requestJson,
+                        Constants.mMenuFull.getNodes().get(i).requestRoute,
+                        Constants.mMenuFull.getNodes().get(i).title, true,
+                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE),
+                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_LINK)));
+
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+
     }
 }

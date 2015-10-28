@@ -88,12 +88,13 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     public void onResume() {
         super.onResume();
         loadTrips();
+        configureActionBar(true, true, title);
     }
 
     @Override
     protected void initViews() {
         super.initViews();
-        configureActionBar(true, true, title);
+//        configureActionBar(true, true, title);
 
         swipeRefreshLayout = findView(R.id.swipe_refresh_trips);
         vUnderLine_FT = findView(R.id.vUnderLine_FT);

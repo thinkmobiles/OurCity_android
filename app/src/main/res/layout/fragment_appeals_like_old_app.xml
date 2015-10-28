@@ -186,7 +186,10 @@
 
                         <EditText
                             android:id="@+id/etDescription_AF"
-
+                            android:scrollbars="vertical"
+                            android:scrollbarStyle="insideOverlay"
+                            android:fadeScrollbars="true"
+                            android:fadingEdge="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"

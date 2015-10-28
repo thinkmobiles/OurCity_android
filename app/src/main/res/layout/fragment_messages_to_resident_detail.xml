@@ -1,0 +1,72 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/vUnderLine_MTRF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/llMessages_MTRF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvMessage_Text_MTRF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="@dimen/person16"/>
+
+            <TextView
+                android:id="@+id/tvMessage_MTRF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_resident_message"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/ivLink_MTRF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/link"
+            tools:background="@android:color/darker_gray"/>
+
+
+        <View
+            android:id="@+id/vBottomLine_MTRF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+    </LinearLayout>
+</ScrollView>

@@ -12,6 +12,7 @@ import retrofit.client.OkClient;
 public class RestClientApi {
     private static final String BASE_URL = "http://194.42.200.114:8081/OurCityWS/Service.svc";
 //    private static final String BASE_URL = "http://192.168.88.26:8081/OurCityWS/Service.svc";
+    //private static final String BASE_URL = "http://192.168.88.236:8081/OurCityWS/Service.svc";
 
     private CityApi cityApi;
     private static RestClientApi mInstance;
@@ -19,7 +20,7 @@ public class RestClientApi {
     private RestClientApi() {
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setClient(new OkClient(new OkHttpClient()))//
+                .setClient(new OkClient(new OkHttpClient()))
                 .setEndpoint(BASE_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();

@@ -41,7 +41,7 @@
     <string name="dialog_camera_add_photo">הוסף תמונה</string>
     <string name="dialog_camera_btn_camera">צלם תמונה</string>
     <string name="dialog_camera_btn_gallery">לבחור מתוך הגלריה</string>
-    <string name="dialog_map_filter_header_text">פילטר תחומי עניין</string>
+    <string name="dialog_map_filter_header_text">מסנן תחומי עניין</string>
     <string name="age">בחר גיל</string>
     <string name="gender">בחר מין</string>
     <string name="choice_vote">בחר הצבעה</string>
@@ -150,6 +150,15 @@
     <string name="item_description">תיאור:</string>
     <string name="item_address">כתובת:</string>
     <string name="item_date_time">תאריך ושעה:</string>
+    <string name="item_resident_message">ההודעה:</string>
+    <string name="visible_tickets_20">20</string>
+    <string name="visible_tickets_50">50</string>
+    <string name="visible_tickets_100">100</string>
+    <string name="dialog_title_visible_tickets">מספר פניות לצפיה</string>
+    <string name="update_timer">1440</string>
+    <string name="alertdialog_remind_me_later">ביצוע עדכון</string>
+    <string name="alertdialog_update_now">לא כרגע</string>
+    <string name="alertdialog_update_available">גרסה חדשה זמינה להורדה</string>
 
 
 </resources>

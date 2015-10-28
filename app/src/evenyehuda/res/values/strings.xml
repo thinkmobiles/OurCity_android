@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">אבן יהודה</string>
     <integer name="city_id">43</integer>
+    <string name="update_url"></string>
 </resources>

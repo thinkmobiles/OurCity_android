@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.Application;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LogoutLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.utils.SPManager;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by podo on 21.07.15.
@@ -29,8 +31,11 @@ public class SettingDialog extends BaseFourStatesFragment {
     private RelativeLayout hotCalls;
     private RelativeLayout interestingAreas;
     private RelativeLayout updateResidentInfo;
+    private RelativeLayout visibleTickets;
     private OnActionDialogListener mCallback;
     private FragmentActivity mActivity;
+    int showInterestAreas;
+    int showHotCalls;
 
     @Override
     public void onAttach(Activity _activity) {
@@ -52,31 +57,48 @@ public class SettingDialog extends BaseFourStatesFragment {
 
     @Override
     protected void initViews() {
+
         mActivity = getActivity();
+
+        showHotCalls = SPManager.getInstance(mActivity).getShowHotCalls();
+        showInterestAreas = SPManager.getInstance(mActivity).getShowInterestAreas();
+
         login = findView(R.id.rlSignIn_SetDFrgmt);
         logout = findView(R.id.rlLogout_FDS);
         hotCalls = findView(R.id.rlHotCalls_SetDFrgmt);
         interestingAreas = findView(R.id.rlInterestAreas_SetDFrgmt);
         updateResidentInfo = findView(R.id.rlUpdateResidentInfo_SetDFrgmt);
-        boolean isFromMainActivity = mActivity.getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
-        if (isFromMainActivity) {
+        visibleTickets = findView(R.id.rlVisibleTickets_SetDFrgmt);
+
+//        boolean isFromMainActivity = mActivity.getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
+//        if (isFromMainActivity) {
             if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
                 login.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.VISIBLE);
                 updateResidentInfo.setVisibility(View.VISIBLE);
+                visibleTickets.setVisibility(View.VISIBLE);
             } else {
                 logout.setVisibility(View.GONE);
                 interestingAreas.setVisibility(View.GONE);
                 updateResidentInfo.setVisibility(View.GONE);
+                visibleTickets.setVisibility(View.GONE);
             }
-        } else {
-            if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
-                login.setVisibility(View.GONE);
-                interestingAreas.setVisibility(View.VISIBLE);
-                updateResidentInfo.setVisibility(View.VISIBLE);
-            }
-        }
+//        } else {
+//            if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
+//                login.setVisibility(View.GONE);
+//                visibleTickets.setVisibility(View.VISIBLE);
+//                interestingAreas.setVisibility(View.VISIBLE);
+//                updateResidentInfo.setVisibility(View.VISIBLE);
+//            }
+//        }
+
+       if(showInterestAreas == 0) {
+           interestingAreas.setVisibility(View.GONE);
+       }
+       if(showHotCalls == 0) {
+           hotCalls.setVisibility(View.GONE);
+       }
 
         showContent();
     }
@@ -93,6 +115,7 @@ public class SettingDialog extends BaseFourStatesFragment {
         hotCalls.setOnClickListener(handleClicks());
         interestingAreas.setOnClickListener(handleClicks());
         updateResidentInfo.setOnClickListener(handleClicks());
+        visibleTickets.setOnClickListener(handleClicks());
     }
 
     @NonNull
@@ -116,6 +139,8 @@ public class SettingDialog extends BaseFourStatesFragment {
                 case R.id.rlUpdateResidentInfo_SetDFrgmt:
                     mCallback.onActionDialogSelected(DialogType.UPDATE_RESIDENT_INFO);
                     break;
+                case R.id.rlVisibleTickets_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.VISIBLE_TICKETS);
             }
         };
     }
@@ -136,6 +161,8 @@ public class SettingDialog extends BaseFourStatesFragment {
                 login.setVisibility(View.VISIBLE);
                 interestingAreas.setVisibility(View.GONE);
                 updateResidentInfo.setVisibility(View.GONE);
+                visibleTickets.setVisibility(View.GONE);
+                mCallback.onLogoutListener();
             } else {
                 Toast.makeText(mActivity, R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
@@ -148,5 +175,12 @@ public class SettingDialog extends BaseFourStatesFragment {
 
     @Override
     public void onRetryClick() {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }

@@ -247,12 +247,34 @@
                 android:textColorHint="#616161"
                 android:textSize="@dimen/sign_up_dialog_textSize"/>
 
+            <!--<LinearLayout-->
+                <!--android:id="@+id/personal_push_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/global_push_layout"-->
+                <!--android:gravity="right|center_horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/do_you_want_to_receive_personal_notifications"-->
+                    <!--android:textColor="#fff"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:textSize="12sp"/>-->
+
+                <!--<CheckBox-->
+                    <!--android:id="@+id/chbPersonalNotifications_SUDF"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"/>-->
+            <!--</LinearLayout>-->
+
             <LinearLayout
-                android:id="@+id/personal_push_layout"
+                android:id="@+id/global_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/global_push_layout"
-                android:gravity="right|center_horizontal">
+                android:layout_below="@+id/etCityName_SUDF"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -266,15 +288,15 @@
                     android:id="@+id/chbPersonalNotifications_SUDF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/global_push_layout"
+                android:id="@+id/personal_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etCityName_SUDF"
-                android:gravity="right|center_vertical"
-                android:orientation="horizontal">
+                android:layout_below="@+id/global_push_layout"
+                android:gravity="right|center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
