@@ -177,10 +177,10 @@ public class SettingDialog extends BaseFourStatesFragment {
     public void onRetryClick() {
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
-        refWatcher.watch(this);
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+//        refWatcher.watch(this);
+//    }
 }

@@ -200,11 +200,11 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         return result;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mRetryButton.setOnClickListener(null);
-        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
-        refWatcher.watch(this);
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        mRetryButton.setOnClickListener(null);
+//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+//        refWatcher.watch(this);
+//    }
 }

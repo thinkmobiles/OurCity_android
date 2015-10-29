@@ -45,15 +45,16 @@ android {
             applicationId = "com.crmc.afula"
             signingConfig signingConfigs.config
             versionCode 11
-            versionName '2.2.0'
+            versionName '2.3.0'
         }
         biniamina {
             applicationId = "com.crmc.biniamina"
             signingConfig signingConfigs.config
             versionCode 12
-            versionName '2.0.0'
+            versionName '2.3.0'
         }
         chadera {
+            //понижена версия для тестирования обновления
             applicationId = "com.crmc.chadera"
             signingConfig signingConfigs.config
             versionCode 22
@@ -63,7 +64,7 @@ android {
             applicationId = "com.crmc.machonvizman"
             signingConfig signingConfigs.config
             versionCode 20
-            versionName '3.0.0'
+            versionName '2.3.0'
         }
         migdal {
             applicationId = "com.crmc.migdal"
@@ -75,7 +76,7 @@ android {
             applicationId = "com.crmc.shderot"
             signingConfig signingConfigs.config
             versionCode 11
-            versionName '2.2.0'
+            versionName '2.3.0'
         }
         shoham {
             applicationId = "com.ctconnect.shoam"
@@ -87,13 +88,13 @@ android {
             applicationId = "com.crmc.yesod"
             signingConfig signingConfigs.config
             versionCode 20
-            versionName '2.0.0'
+            versionName '2.3.0'
         }
         evenyehuda {
             applicationId = "com.crmc.evenyehuda"
             signingConfig signingConfigs.config
             versionCode 2
-            versionName '2.2.0'
+            versionName '2.3.0'
         }
         ungvar {
             applicationId = "com.crmc.ungvar"
@@ -105,13 +106,13 @@ android {
             applicationId = "com.crmc.yeruham"
             signingConfig signingConfigs.config
             versionCode 3
-            versionName '2.2.0'
+            versionName '2.3.0'
         }
         puma {
             applicationId = "com.crmc.puma"
             signingConfig signingConfigs.config
             versionCode 3
-            versionName '2.2.0'
+            versionName '2.3.0'
         }
     }
 
