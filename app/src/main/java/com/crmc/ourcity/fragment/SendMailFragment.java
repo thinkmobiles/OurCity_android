@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -155,7 +156,12 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
             etLastName_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
-        if (TextUtils.isEmpty(etMail_SMF.getText().toString())) {
+        if (!TextUtils.isEmpty(etMail_SMF.getText().toString())) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(etMail_SMF.getText().toString()).matches()) {
+                etMail_SMF.setError(getResources().getString(R.string.sign_up_dialog_incorrect_email));
+
+            }
+        } else {
             etMail_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));
             isValid = false;
         }
