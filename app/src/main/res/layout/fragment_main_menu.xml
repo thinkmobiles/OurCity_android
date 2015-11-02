@@ -30,14 +30,6 @@
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
-            <ImageView
-                android:id="@+id/ivBtnThird_MMF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:padding="3dp"
-                android:src="@drawable/ic_launcher"/>
-
             <TextView
                 android:id="@+id/tvBtnThird_MMF"
                 android:layout_width="wrap_content"
@@ -49,6 +41,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/ivBtnThird_MMF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="3dp"
+                android:src="@drawable/ic_launcher"/>
+
+
         </LinearLayout>
 
         <!--<LinearLayout-->
@@ -97,14 +99,6 @@
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
-            <ImageView
-                android:id="@+id/ivBtnSecond_MMF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:padding="3dp"
-                android:src="@drawable/ic_launcher"/>
-
             <TextView
                 android:id="@+id/tvBtnSecond_MMF"
                 android:layout_width="wrap_content"
@@ -116,6 +110,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/ivBtnSecond_MMF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:padding="3dp"
+                android:src="@drawable/ic_launcher"/>
+
+
         </LinearLayout>
 
         <Space
@@ -133,14 +137,6 @@
             android:background="@drawable/boarder_round_red_vf"
             android:clickable="true">
 
-            <ImageView
-                android:id="@+id/ivBtnFirst_MMF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:padding="3dp"
-                android:src="@drawable/ic_launcher"/>
-
             <TextView
                 android:id="@+id/tvBtnFirst_MMF"
                 android:layout_width="wrap_content"
@@ -151,7 +147,19 @@
                 android:singleLine="true"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"/>одо
+
+
+
+            <ImageView
+                android:id="@+id/ivBtnFirst_MMF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:padding="3dp"
+                android:src="@drawable/ic_launcher"/>
+
+
 
         </LinearLayout>
 

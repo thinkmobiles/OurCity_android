@@ -14,13 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.activity.Application;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.utils.SoftKeyboard;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * base class for detail fragment with state: loading, no data, connection error, show content

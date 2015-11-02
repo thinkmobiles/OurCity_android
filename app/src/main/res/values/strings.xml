@@ -156,8 +156,8 @@
     <string name="visible_tickets_100">100</string>
     <string name="dialog_title_visible_tickets">מספר פניות לצפיה</string>
     <string name="update_timer">1440</string>
-    <string name="alertdialog_remind_me_later">ביצוע עדכון</string>
-    <string name="alertdialog_update_now">לא כרגע</string>
+    <string name="alertdialog_remind_me_later">לא כרגע</string>
+    <string name="alertdialog_update_now">ביצוע עדכון</string>
     <string name="alertdialog_update_available">גרסה חדשה זמינה להורדה</string>
 
 

@@ -302,8 +302,12 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                 break;
             case Constants.LOADER_STREETS_ID:
                 StreetsFull streetData = (StreetsFull) _data;
+                int numbersStreets = 0;
+
                 if (streetData != null) {
-                    int numbersStreets = streetData.streetsList.size();
+                    if (streetData.streetsList != null) {
+                         numbersStreets = streetData.streetsList.size();
+                    }
                     if (numbersStreets == 0) {
                         etStreet.setEnabled(false);
                         etHouseNumber.setEnabled(false);

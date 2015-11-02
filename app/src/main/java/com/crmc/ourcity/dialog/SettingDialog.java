@@ -12,14 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
-import com.crmc.ourcity.activity.Application;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.LogoutLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.utils.SPManager;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by podo on 21.07.15.

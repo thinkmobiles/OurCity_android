@@ -110,7 +110,6 @@
             android:maxLines="2"
             android:text="Title"
             android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
             tools:background="@android:color/holo_orange_dark"/>
 
     </LinearLayout>

@@ -1,7 +1,6 @@
 package com.crmc.ourcity.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -68,17 +67,12 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.utils.rss.RssItem;
-import com.crmc.ourcity.utils.updateApp.OnReceiveListener;
 import com.crmc.ourcity.utils.updateApp.WVersionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
