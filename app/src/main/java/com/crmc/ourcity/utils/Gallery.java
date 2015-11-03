@@ -10,9 +10,6 @@ import com.crmc.ourcity.global.Constants;
 
 import java.io.File;
 
-/**
- * Created by SetKrul on 08.08.2015.
- */
 public class Gallery {
 
     Activity mActivity;

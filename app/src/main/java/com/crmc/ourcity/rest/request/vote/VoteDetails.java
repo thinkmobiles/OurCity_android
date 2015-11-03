@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.request.vote;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class VoteDetails {
     public int selectedOptionId;
     public int age;

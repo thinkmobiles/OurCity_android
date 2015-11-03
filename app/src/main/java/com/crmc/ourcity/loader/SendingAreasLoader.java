@@ -15,9 +15,6 @@ import java.util.List;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 18.09.15.
- */
 public class SendingAreasLoader extends BaseLoader<Boolean> {
     private ResidentModel resident;
     private ResidentDetails residentDetails;

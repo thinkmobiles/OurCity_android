@@ -9,9 +9,6 @@ import android.webkit.WebViewClient;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
-/**
- * Created by SetKrul on 17.07.2015.
- */
 public class WebViewWithDataFragment extends BaseFourStatesFragment {
 
     public static WebViewWithDataFragment newInstance() {

@@ -13,9 +13,6 @@ import java.io.UnsupportedEncodingException;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 21.08.2015.
- */
 public class DocumentsLoader extends BaseLoader<Documents> {
 
     private String json;

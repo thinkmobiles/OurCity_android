@@ -3,9 +3,6 @@ package com.crmc.ourcity.rest.responce.interestAreas;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by andrei on 17.09.15.
- */
 public class InterestingArea implements Parcelable {
     public int cityId;
     public int lastModifyUserId;

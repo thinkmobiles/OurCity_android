@@ -1,0 +1,25 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/toolbar"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flContainer_MA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@android:color/holo_orange_dark"/>
+</LinearLayout>

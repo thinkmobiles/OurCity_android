@@ -14,9 +14,6 @@ import org.jsoup.Jsoup;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/**
- * Created by andrei on 27.10.15.
- */
 public class AppInfoLoader extends BaseLoader<AppInfo> {
 
     private String url;

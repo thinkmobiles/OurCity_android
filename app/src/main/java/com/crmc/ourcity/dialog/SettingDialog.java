@@ -19,9 +19,6 @@ import com.crmc.ourcity.loader.LogoutLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.utils.SPManager;
 
-/**
- * Created by podo on 21.07.15.
- */
 public class SettingDialog extends BaseFourStatesFragment {
 
     private RelativeLayout login;

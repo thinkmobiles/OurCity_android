@@ -6,9 +6,6 @@ import android.support.v4.content.AsyncTaskLoader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public abstract class BaseLoader<T> extends AsyncTaskLoader<T> {
 
     private T mData;

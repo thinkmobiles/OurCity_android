@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.crmc.ourcity.R;
 
-/**
- * Created by SetKrul on 20.07.2015.
- */
 public class HtmlFormatter {
 
     Context mContext;

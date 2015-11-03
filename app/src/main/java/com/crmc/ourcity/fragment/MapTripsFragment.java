@@ -19,9 +19,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-/**
- * Created by SetKrul on 25.08.2015.
- */
 public final class MapTripsFragment extends BaseFourStatesFragment implements OnMapReadyCallback, OnClickListener {
 
     private Double lat;

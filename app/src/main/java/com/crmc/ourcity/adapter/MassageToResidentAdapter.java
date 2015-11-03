@@ -14,9 +14,6 @@ import com.crmc.ourcity.rest.responce.events.MassageToResident;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 28.08.2015.
- */
 public class MassageToResidentAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

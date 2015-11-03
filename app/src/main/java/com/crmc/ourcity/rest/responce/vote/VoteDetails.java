@@ -2,9 +2,6 @@ package com.crmc.ourcity.rest.responce.vote;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class VoteDetails {
 
     @SerializedName("image")

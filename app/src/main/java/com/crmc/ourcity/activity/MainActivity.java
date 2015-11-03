@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -67,12 +68,11 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.utils.rss.RssItem;
-import com.crmc.ourcity.utils.updateApp.WVersionManager;
+import com.crmc.ourcity.utils.updateApp.VersionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -91,12 +91,26 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private int cityNumber, residentId;
     private String lng;
     private Handler mHandler;
-    private WVersionManager versionManager;
+    private VersionManager versionManager;
+    private Configuration config;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
+//        String lang = "iw";
+//        String country = "IL";
+//        Locale locale = new Locale(lang, country);
+//        Locale.setDefault(locale);
+//
+//        config = new Configuration(getBaseContext(). getResources().getConfiguration());
+//        config.locale = locale;
+//        getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
         super.onCreate(_savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        config = new Configuration(getBaseContext().getResources().getConfiguration());
+        Log.d("LOC", config.locale.getDisplayLanguage());
 
         mHandler = new Handler(this.getMainLooper());
         isLoggedIn = SPManager.getInstance(this).getIsLoggedStatus();
@@ -413,7 +427,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     private void checkForUpdates() {
-        versionManager = new WVersionManager(this);
+        versionManager = new VersionManager(this);
         versionManager.setVersionContentUrl(getString(R.string.update_url));
         versionManager.setTitle(getString(R.string.alertdialog_update_available));
         versionManager.setUpdateNowLabel(getString(R.string.alertdialog_update_now));

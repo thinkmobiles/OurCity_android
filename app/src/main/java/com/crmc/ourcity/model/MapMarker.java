@@ -3,9 +3,6 @@ package com.crmc.ourcity.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by SetKrul on 04.08.2015.
- */
 public class MapMarker implements Parcelable{
     public int categoryId;
     public String title;

@@ -16,9 +16,6 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by andrei on 20.10.15.
- */
 public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
 
     private String message;

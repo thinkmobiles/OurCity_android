@@ -38,24 +38,26 @@
             android:paddingRight="12dp"
             android:weightSum="4">
 
-            <TextView
-                android:id="@+id/tvAddress_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="@dimen/person16"/>
+
 
             <TextView
                 android:id="@+id/tvAddress_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_address"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAddress_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="@dimen/person16"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,23 +70,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvEmail_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="@dimen/person16"/>
-
-            <TextView
                 android:id="@+id/tvEmail_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="דואר אלקטרוני:"
+                android:gravity="left"
+                android:text="@string/item_email"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvEmail_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="@dimen/person16"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -97,23 +101,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvMobile_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvMobile_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="נייד:"
+                android:gravity="left"
+                android:text="@string/item_mobile_phone"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvMobile_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/llPhone_EIF"
@@ -125,23 +131,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvPhone_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvPhone_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="מספר טלפון:"
+                android:gravity="left"
+                android:text="@string/item_phone_number"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvPhone_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/llPrice_EIF"
@@ -153,23 +161,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvPrice_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvPrice_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="מחיר:"
+                android:gravity="left"
+                android:text="@string/item_price"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvPrice_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -182,23 +192,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvDescription_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvDescription_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_description"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvDescription_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
 
         </LinearLayout>
 
@@ -212,23 +224,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvDate_Text_EIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvDate_EIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_date_time"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvDate_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -236,26 +250,16 @@
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
-            android:gravity="right">
+            android:gravity="left">
 
             <ImageView
-                android:id="@+id/ivPhoneMobile_EIF"
+                android:id="@+id/ivLink_EIF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/phone"
-                tools:background="@android:color/darker_gray"/>
-
-            <ImageView
-                android:id="@+id/ivPhone_EIF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/phone2"
+                android:src="@drawable/link"
                 tools:background="@android:color/darker_gray"/>
 
             <ImageView
@@ -268,15 +272,31 @@
                 android:src="@drawable/mail"
                 tools:background="@android:color/darker_gray"/>
 
+
             <ImageView
-                android:id="@+id/ivLink_EIF"
+                android:id="@+id/ivPhone_EIF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/link"
+                android:src="@drawable/phone2"
                 tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivPhoneMobile_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
+                tools:background="@android:color/darker_gray"/>
+
+
+
+
+
 
         </LinearLayout>
         <View

@@ -16,9 +16,6 @@ import java.util.List;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 03.09.15.
- */
 public class TickerLoader extends BaseLoader<ArrayList<TickerModel>> {
 
     private int cityNumber;

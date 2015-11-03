@@ -12,9 +12,6 @@ import com.crmc.ourcity.rest.responce.mobileUISettings.MobileUISettings;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 22.10.15.
- */
 public class MobileUISettingsLoader extends BaseLoader<MobileUISettings> {
 
     private int cityNumber;

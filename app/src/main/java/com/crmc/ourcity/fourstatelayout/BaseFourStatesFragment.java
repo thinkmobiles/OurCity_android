@@ -21,8 +21,7 @@ import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.utils.SoftKeyboard;
 
 /**
- * base class for detail fragment with state: loading, no data, connection error, show content
- * Created by Klim on 15.07.2015.
+ * base class for detail fragment with state: loading, no data, connection error, show content *
  */
 public abstract class BaseFourStatesFragment extends BaseFragment implements FourStateLayout.OnRetryClickListener {
 

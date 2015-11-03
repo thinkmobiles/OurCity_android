@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.request.vote;
 
-/**
- * Created by SetKrul on 11.09.2015.
- */
 public class VoteAlready {
     public Integer residentId;
     public Integer surveyId;

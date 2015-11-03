@@ -27,9 +27,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="left"
                 android:padding="5dp"
-                android:text="על מנת ליצור איתנו קשר נא מלא את הפרטים הבאים"
+                android:text="@string/fragment_send_mail_to_contact_us"
                 android:textColor="#242424"
                 android:textSize="13sp"
                 android:textStyle="bold"/>
@@ -38,9 +38,9 @@
                 android:textColor="#242424"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="left"
                 android:paddingRight="5dp"
-                android:text="שם פרטי:"
+                android:text="@string/fragmend_send_mail_detail"
                 android:textSize="13dp"
                 android:textStyle="bold"/>
 
@@ -51,17 +51,17 @@
                 android:layout_height="28dp"
                 android:background="@drawable/boarder_round_green_ff"
                 android:ellipsize="end"
-                android:gravity="right"
-                android:paddingRight="5dp"
+                android:gravity="left"
+                android:paddingLeft="5dp"
                 android:textSize="15sp"/>
 
             <TextView
                 android:textColor="#242424"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingRight="5dp"
-                android:text="שם משפחה:"
+                android:layout_gravity="left"
+                android:paddingLeft="5dp"
+                android:text="@string/fragment_send_mail_lname"
                 android:textSize="13sp"
                 android:textStyle="bold"/>
 
@@ -72,17 +72,17 @@
                 android:layout_height="28dp"
                 android:background="@drawable/boarder_round_green_ff"
                 android:ellipsize="end"
-                android:gravity="right"
-                android:paddingRight="5dp"
+                android:gravity="left"
+                android:paddingLeft="5dp"
                 android:textSize="15sp"/>
 
             <TextView
                 android:textColor="#242424"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingRight="5dp"
-                android:text="כתובת דואר אלקטרוני:"
+                android:layout_gravity="left"
+                android:paddingLeft="5dp"
+                android:text="@string/fragment_send_mail_email"
                 android:textSize="13sp"
                 android:textStyle="bold"/>
 
@@ -93,18 +93,18 @@
                 android:layout_height="28dp"
                 android:background="@drawable/boarder_round_green_ff"
                 android:ellipsize="end"
-                android:gravity="right"
+                android:gravity="left"
                 android:inputType="textEmailAddress"
-                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:textSize="15sp"/>
 
             <TextView
                 android:textColor="#242424"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingRight="5dp"
-                android:text="תאור:"
+                android:layout_gravity="left"
+                android:paddingLeft="5dp"
+                android:text="@string/fragment_send_mail_description"
                 android:textSize="13sp"
                 android:textStyle="bold"/>
 
@@ -115,9 +115,9 @@
                 android:layout_height="80dp"
                 android:background="@drawable/boarder_round_green_ff"
                 android:ellipsize="end"
-                android:gravity="right"
+                android:gravity="left"
                 android:paddingBottom="5dp"
-                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 android:textSize="15sp"/>
         </LinearLayout>
 
@@ -146,7 +146,7 @@
                     android:layout_marginRight="55dp"
                     android:layout_weight="1"
                     android:background="@drawable/selector_button_green_ff"
-                    android:text="ביטול"
+                    android:text="@string/fragment_send_mail_cancel"
                     android:textColor="#fff"
                     android:textSize="19dp"
                     android:textStyle="bold"/>
@@ -157,7 +157,7 @@
                     android:layout_height="27dp"
                     android:layout_weight="1"
                     android:background="@drawable/selector_button_green_ff"
-                    android:text="אישור"
+                    android:text="@string/fragment_send_mail_send"
                     android:textColor="#fff"
                     android:textSize="19dp"
                     android:textStyle="bold"/>

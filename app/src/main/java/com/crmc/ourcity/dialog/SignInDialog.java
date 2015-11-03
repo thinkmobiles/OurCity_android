@@ -27,9 +27,6 @@ import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.utils.SPManager;
 
-/**
- * Created by podo on 19.08.15.
- */
 public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCallbacks<LoginResponse> {
 
     private EditText etUsername;

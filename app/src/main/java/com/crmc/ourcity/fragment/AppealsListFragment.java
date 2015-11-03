@@ -25,9 +25,6 @@ import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult>,
         SwipeRefreshLayout.OnRefreshListener {
     private ListView lvAppeals;

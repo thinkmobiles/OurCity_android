@@ -15,9 +15,6 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 27.08.2015.
- */
 public class PhoneBookLoader extends BaseLoader<List<PhoneBook>> {
 
     private String json;

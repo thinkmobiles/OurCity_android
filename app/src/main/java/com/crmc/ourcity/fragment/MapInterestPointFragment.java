@@ -38,10 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-/**
- * Created by SetKrul on 31.07.2015.
- */
 public final class MapInterestPointFragment extends BaseFourStatesFragment implements OnMapReadyCallback,
         LoaderManager.LoaderCallbacks<List<MapCategory>> {
 

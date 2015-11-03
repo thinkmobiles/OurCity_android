@@ -24,9 +24,6 @@ import com.crmc.ourcity.view.RecyclerItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class SubMenuFragment extends BaseFourStatesFragment {
 
     private RecyclerView mRecyclerView;

@@ -15,9 +15,6 @@ import java.util.List;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class NewsLoader extends BaseLoader<List<News>> {
 
     private int cityNumber;

@@ -10,9 +10,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SetKrul on 29.07.2015.
- */
 public class MenuModel implements Parcelable {
 
     @SerializedName("Nodes")

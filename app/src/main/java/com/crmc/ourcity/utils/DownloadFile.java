@@ -15,9 +15,6 @@ import com.crmc.ourcity.receiver.DownloadReceiver;
 
 import java.io.File;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class DownloadFile {
 
     public void downloadPdf(Context _context, String _url) {

@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="24sp"
         android:background="#424242"
-        android:gravity="right|center_vertical"/>
+        android:gravity="left|center_vertical"/>
 
     <NumberPicker
         android:id="@+id/npAge_DFA"
@@ -46,5 +46,9 @@
             android:background="@color/turquoise"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
+
+
+
+
     </LinearLayout>
 </LinearLayout>

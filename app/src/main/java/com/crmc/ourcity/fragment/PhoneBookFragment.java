@@ -23,9 +23,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 27.08.2015.
- */
 public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<PhoneBook>>,
         AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 

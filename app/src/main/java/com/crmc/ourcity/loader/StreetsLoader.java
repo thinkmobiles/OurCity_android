@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 31.07.2015.
- */
 public class StreetsLoader extends BaseLoader<StreetsFull> {
 
     private String json;

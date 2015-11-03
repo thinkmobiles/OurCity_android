@@ -26,9 +26,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class Image {
 
     private static int ColorNow = Color.BLACK;

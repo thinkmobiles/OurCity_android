@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by SetKrul on 31.08.2015.
- */
 public class CityEntitiesListAdapter extends BaseAdapter implements Filterable {
 
     private LayoutInflater mInflater;

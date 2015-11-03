@@ -7,6 +7,27 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/tvTitle_LLF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|left"
+            android:text="Title"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
@@ -18,29 +39,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="15dp"
+            android:rotationY="180"
             android:src="@drawable/event_arrow"
             tools:background="@android:color/darker_gray" />
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingRight="10dp">
 
-        <TextView
-            android:id="@+id/tvTitle_LLF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|right"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark" />
-    </LinearLayout>
 </LinearLayout>

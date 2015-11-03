@@ -4,9 +4,6 @@ import android.app.FragmentManager;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 
-/**
- * Created by SetKrul on 14.07.2015.
- */
 public abstract class BaseFragmentActivity extends BaseActivity {
 
     protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {

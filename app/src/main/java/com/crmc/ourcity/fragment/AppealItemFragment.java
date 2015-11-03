@@ -14,9 +14,6 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by andrei on 04.10.15.
- */
 public class AppealItemFragment extends BaseFourStatesFragment {
 
     private ResultObject resultObject;

@@ -14,9 +14,6 @@ import java.io.UnsupportedEncodingException;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class AppealsLoader extends BaseLoader<WSResult> {
 
     private String json;

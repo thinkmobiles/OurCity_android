@@ -14,9 +14,6 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 31.08.2015.
- */
 public class CityEntitiesLoader extends BaseLoader<List<CityEntities>> {
 
     private String json;

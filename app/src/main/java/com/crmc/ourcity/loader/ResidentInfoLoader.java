@@ -12,9 +12,6 @@ import com.crmc.ourcity.rest.request.resident.ResidentModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 18.09.15.
- */
 public class ResidentInfoLoader extends BaseLoader<ResidentDetails> {
 
     private ResidentModel resident;

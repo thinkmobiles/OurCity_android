@@ -3,9 +3,6 @@ package com.crmc.ourcity.rest.responce.appeals;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class Location implements Parcelable {
     public String HouseNumber;
     public String StreetName;

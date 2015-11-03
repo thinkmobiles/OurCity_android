@@ -14,10 +14,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.rest.responce.interestAreas.FullInterestArea;
 import com.crmc.ourcity.rest.responce.interestAreas.ResidentResponse;
 
-
-/**
- * Created by andrei on 17.09.15.
- */
 public class InterestingAreasAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

@@ -34,10 +34,6 @@ import java.util.List;
 import static com.crmc.ourcity.global.Constants.LOADER_INTERESTING_AREAS_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_SEND_INTERESTING_AREAS_ID;
 
-
-/**
- * Created by andrei on 17.09.15.
- */
 public class InterestingAreasDialog extends BaseFragment implements LoaderManager.LoaderCallbacks {
     private View root;
     private ListView mLvInterestiongAreas;

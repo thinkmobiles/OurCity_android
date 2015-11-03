@@ -19,9 +19,6 @@ import com.crmc.ourcity.utils.Image;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by podo on 02.09.15.
- */
 public class RSSEntryFragment extends BaseFourStatesFragment {
 
     private TextView tvTitle;

@@ -18,9 +18,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by podo on 05.08.15.
- */
 public class MenuGridAdapter extends RecyclerView.Adapter<MenuGridAdapter.ViewHolder> {
 
     private List<MenuModel> mMenuModels;

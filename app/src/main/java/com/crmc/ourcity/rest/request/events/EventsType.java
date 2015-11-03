@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.request.events;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class EventsType {
     public String typeName;
     public int cityId;

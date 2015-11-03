@@ -19,9 +19,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 15.07.2015.
- */
 public class PhonesListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

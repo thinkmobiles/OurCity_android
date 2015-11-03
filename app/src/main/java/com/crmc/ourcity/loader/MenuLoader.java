@@ -12,9 +12,6 @@ import com.crmc.ourcity.rest.responce.menu.MenuFull;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 29.07.2015.
- */
 public class MenuLoader extends BaseLoader<MenuFull> {
 
     private int cityNumber;

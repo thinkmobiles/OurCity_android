@@ -18,9 +18,6 @@ import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
 
-/**
- * Created by SetKrul on 31.08.2015.
- */
 public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private CityEntities mCityEntities;

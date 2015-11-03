@@ -21,9 +21,6 @@ import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by SetKrul on 16.07.2015.
- */
 public class EventsItemFragment extends BaseFourStatesFragment {
 
     private Events mEvents;

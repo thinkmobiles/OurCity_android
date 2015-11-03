@@ -15,9 +15,6 @@ import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 
 import java.util.List;
 
-/**
- * Created by klim on 21.07.15.
- */
 public class Ticker extends TextView implements Animator.AnimatorListener, View.OnClickListener {
     private ObjectAnimator mAimator;
     private List<TickerModel> mData;

@@ -45,8 +45,8 @@
     <string name="age">בחר גיל</string>
     <string name="gender">בחר מין</string>
     <string name="choice_vote">בחר הצבעה</string>
-    <string name="btn_ok">אישור</string>
-    <string name="btn_cancel">בטל</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="dialog_map_filter_btn_select">בחר</string>
     <string name="male">זכר</string>
     <string name="female">נקבה</string>
@@ -159,6 +159,27 @@
     <string name="alertdialog_remind_me_later">לא כרגע</string>
     <string name="alertdialog_update_now">ביצוע עדכון</string>
     <string name="alertdialog_update_available">גרסה חדשה זמינה להורדה</string>
-
+    <string name="text_search">Search</string>
+    <string name="dialog_hotcalls_header">לחצן מצוקה</string>
+    <string name="dialog_hotcalls_save">עדכן</string>
+    <string name="dialog_hotcalls_enter_number">הזן מספר</string>
+    <string name="dialog_hotcalls_set_emergency_numbers">הגדר מספרים לשעת חירום</string>
+    <string name="dialog_marker_areas_btn_confirm">אישור</string>
+    <string name="dialog_settings_emergency_button">לחצן מצוקה</string>
+    <string name="dialog_settings_header">הגדרות</string>
+    <string name="dialog_sign_up_btn_sign_up">הירשם</string>
+    <string name="dialog_visible_tickets_confirm">אישור</string>
+    <string name="item_email">דואר אלקטרוני:</string>
+    <string name="item_mobile_phone">נייד:</string>
+    <string name="item_phone_number">מספר טלפון:</string>
+    <string name="item_price">מחיר:</string>
+    <string name="dialog_settigns_interests">תחומי עניין</string>
+    <string name="fragment_send_mail_to_contact_us">על מנת ליצור איתנו קשר נא מלא את הפרטים הבאים</string>
+    <string name="fragmend_send_mail_detail">שם פרטי:</string>
+    <string name="fragment_send_mail_lname">שם משפחה:</string>
+    <string name="fragment_send_mail_email">כתובת דואר אלקטרוני:</string>
+    <string name="fragment_send_mail_description">תאור:</string>
+    <string name="fragment_send_mail_cancel">ביטול</string>
+    <string name="fragment_send_mail_send">אישור</string>
 
 </resources>

@@ -14,26 +14,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="right|center_vertical"
+        android:gravity="left|center_vertical"
         android:layout_marginBottom="5dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingLeft="5dp"
+            android:src="@drawable/settingbtn" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical|right"
             android:padding="5dp"
-            android:text="הגדרות"
+            android:text="@string/dialog_settings_header"
             android:textColor="@color/turquoise"
             android:textSize="24sp"
             android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical|right"
-            android:paddingRight="5dp"
-            android:src="@drawable/settingbtn" />
     </LinearLayout>
     <!-- main -->
 
@@ -41,8 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:splitMotionEvents="false"
-        >
+        android:splitMotionEvents="false">
 
         <RelativeLayout
             android:splitMotionEvents="false"
@@ -58,7 +57,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/icon_hotcalls" />
 
             <TextView
@@ -67,8 +66,8 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:text="לחצן מצוקה"
+                android:layout_alignParentLeft="true"
+                android:text="@string/dialog_settings_emergency_button"
                 android:textColor="#148989"
                 android:textSize="@dimen/settings16"
                 android:textStyle="bold"
@@ -94,15 +93,15 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/icon_details" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:text="@string/dialog_setting_update_resident_info"
                 android:textColor="#148989"
                 android:textSize="@dimen/settings16"
@@ -124,15 +123,15 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/icon_details" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:text="@string/dialog_setting_sign_in"
                 android:textColor="#148989"
                 android:textSize="@dimen/settings16"
@@ -155,17 +154,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/icon_interesting" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:text="תחומי עניין"
+                android:text="@string/dialog_settigns_interests"
                 android:textColor="#148989"
                 android:textSize="16dp"
+                android:paddingRight="5dp"
                 android:textStyle="bold" />
 
 
@@ -185,16 +185,17 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/icon_visible_tickets" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:text="@string/dialog_title_visible_tickets"
                 android:textColor="#148989"
+                android:paddingRight="5dp"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -215,7 +216,7 @@
             <ImageView
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/logout" />
 
             <TextView
@@ -223,10 +224,11 @@
                 android:id="@+id/tvLogout_FDS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:text="@string/setting_dialog_logout"
                 android:textColor="#148989"
+                android:paddingRight="5dp"
                 android:textSize="@dimen/settings16"
                 android:textStyle="bold" />
         </RelativeLayout>

@@ -37,9 +37,6 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.mime.TypedInput;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public interface CityApi {
 
     /**

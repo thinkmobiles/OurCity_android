@@ -6,9 +6,6 @@ import android.provider.MediaStore;
 
 import com.crmc.ourcity.global.Constants;
 
-/**
- * Created by SetKrul on 17.07.2015.
- */
 public final class IntentUtils {
 
     public static Intent getIntentCall(String _phoneNumber){

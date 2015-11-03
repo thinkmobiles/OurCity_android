@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by SetKrul on 31.08.2015.
- */
 public class CityEntities implements Parcelable {
     @SerializedName("cityId")
     public Integer cityId;

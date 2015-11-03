@@ -19,8 +19,8 @@ import com.crmc.ourcity.R;
 import java.util.Calendar;
 
 
-public class WVersionManager implements IWVersionManager {
-    private static final String TAG = "WVersionManager";
+public class VersionManager implements IWVersionManager {
+    private static final String TAG = "VersionManager";
 
     private static final int MODE_CHECK_VERSION = 100;
     private static final int MODE_ASK_FOR_RATE = 200;
@@ -53,7 +53,7 @@ public class WVersionManager implements IWVersionManager {
     private OnReceiveListener mOnReceiveListener;
     private String mResult;
 
-    public WVersionManager(Activity act) {
+    public VersionManager(Activity act) {
         this.activity = act;
         this.listener = new AlertDialogButtonListener();
         this.customTagHandler = new CustomTagHandler();

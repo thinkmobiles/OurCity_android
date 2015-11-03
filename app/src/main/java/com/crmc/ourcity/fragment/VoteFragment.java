@@ -28,9 +28,6 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
-/**
- * Created by SetKrul on 10.08.2015.
- */
 public class VoteFragment extends BaseFourStatesFragment implements OnClickListener {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";

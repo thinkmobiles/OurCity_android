@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.request.base.BaseModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class ImageLoader extends BaseLoader<String> {
 
     private int cityNumber;

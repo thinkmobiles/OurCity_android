@@ -1,6 +1,5 @@
 package com.crmc.ourcity.fragment;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.IdRes;
@@ -8,10 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-
-/**
- * Created by SetKrul on 14.07.2015.
- */
 public abstract class BaseFragment extends Fragment {
 
     protected final void addFragment(final @IdRes int _containerId, final Fragment _fragment) {

@@ -19,9 +19,6 @@ import java.util.List;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 17.09.15.
- */
 public class InterestingAreaLoader extends BaseLoader<ResidentResponse> {
 
     private ResidentModel resident;

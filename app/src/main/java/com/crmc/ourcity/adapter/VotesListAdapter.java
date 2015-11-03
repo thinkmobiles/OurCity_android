@@ -15,9 +15,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 10.08.2015.
- */
 public class VotesListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

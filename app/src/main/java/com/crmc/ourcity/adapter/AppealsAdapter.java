@@ -21,9 +21,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class AppealsAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

@@ -1,0 +1,294 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/vUnderLine_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvTitle_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/event25"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/llAddress_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvAddress_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="@dimen/person16"/>
+
+            <TextView
+                android:id="@+id/tvAddress_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_address"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEmail_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvEmail_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="@dimen/person16"/>
+
+            <TextView
+                android:id="@+id/tvEmail_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_email"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMobile_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvMobile_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvMobile_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_mobile_phone"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llPhone_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvPhone_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvPhone_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_phone_number"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llPrice_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvPrice_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvPrice_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_price"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDescription_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDescription_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvDescription_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_description"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDate_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDate_Text_EIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvDate_EIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_date_time"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:gravity="right">
+
+            <ImageView
+                android:id="@+id/ivPhoneMobile_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivPhone_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/phone2"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivSendMail_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/mail"
+                tools:background="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/ivLink_EIF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/link"
+                tools:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+        <View
+            android:id="@+id/vBottomLine_EIF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+        <WebView
+            android:id="@+id/webView_EIF"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</ScrollView>

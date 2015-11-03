@@ -1,12 +1,8 @@
 package com.crmc.ourcity.rest.responce.mobileUISettings;
 
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by andrei on 22.10.15.
- */
 public class SettingItem implements Parcelable {
     public String propertyName;
     public Integer propertyValue;

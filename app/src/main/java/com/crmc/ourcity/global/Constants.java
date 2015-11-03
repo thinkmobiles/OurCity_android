@@ -5,9 +5,6 @@ import android.graphics.drawable.BitmapDrawable;
 
 import com.crmc.ourcity.rest.responce.menu.MenuFull;
 
-/**
- * Created by SetKrul on 23.07.2015.
- */
 public class Constants {
 
     final public static String TAG = "TAG";

@@ -15,9 +15,6 @@ import com.crmc.ourcity.model.MapMarker;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 04.08.2015.
- */
 public class MarkersListAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;

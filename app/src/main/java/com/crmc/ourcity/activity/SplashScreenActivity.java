@@ -28,7 +28,6 @@ import com.crmc.ourcity.utils.SPManager;
 
 import java.util.ArrayList;
 
-
 public class SplashScreenActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks {
 
 

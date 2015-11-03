@@ -6,9 +6,6 @@ import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
-/**
- * Created by SetKrul on 24.07.2015.
- */
 public class RestClientOpenStreetMap {
     private static final String BASE_URL = "http://nominatim.openstreetmap.org";
 

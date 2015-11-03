@@ -15,9 +15,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 09.09.2015.
- */
 public class LinksListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

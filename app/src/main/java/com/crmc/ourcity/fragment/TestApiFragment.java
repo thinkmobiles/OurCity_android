@@ -14,9 +14,6 @@ import com.crmc.ourcity.rest.responce.events.Phones;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class TestApiFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Phones>> {
     private int cityNumber;
     private String lng;

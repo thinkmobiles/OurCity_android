@@ -47,11 +47,6 @@ import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_UPDATE_RESIDENT_INFO;
 
-/**
- * Created by podo on 19.08.15.
- */
-
-//TODO: CHECk ON SERVER global notification value
 public class SignUpDialog extends BaseFragment implements View.OnFocusChangeListener, LoaderManager.LoaderCallbacks {
 
     private View root;

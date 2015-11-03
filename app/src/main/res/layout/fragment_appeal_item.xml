@@ -27,23 +27,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvDate_Text_AIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvDate_label_AIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_date_time"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvDate_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
 
         </LinearLayout>
 
@@ -57,23 +59,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvAddress_Text_AIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="@dimen/person16"/>
-
-            <TextView
                 android:id="@+id/tvAddress_AIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_address"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAddress_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="@dimen/person16"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,23 +90,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvDescription_Text_AIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvDescription_AIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/item_description"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvDescription_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
 
         </LinearLayout>
 
@@ -116,23 +122,25 @@
             android:weightSum="4">
 
             <TextView
-                android:id="@+id/tvStat_Text_AIF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:gravity="right"
-                android:textSize="15sp"/>
-
-            <TextView
                 android:id="@+id/tvStat_AIF"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="@string/personal_status"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvStat_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:gravity="left"
+                android:textSize="15sp"/>
+
+
 
         </LinearLayout>
     <LinearLayout

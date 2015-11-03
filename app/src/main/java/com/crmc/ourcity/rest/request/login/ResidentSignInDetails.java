@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.request.login;
 
-/**
- * Created by podo on 20.08.15.
- */
 public class ResidentSignInDetails {
     public String userName;
     public String password;

@@ -36,14 +36,6 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_gravity="center_vertical|left"-->
         <!--android:layout_margin="5dp"/>-->
-
-        <ImageView
-            android:rotationY="180"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="4"
-            android:src="@drawable/sub_bar_background" />
         <ImageView
             android:id="@+id/ivTown_MA"
             android:layout_width="0dp"
@@ -51,6 +43,14 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="4"
+            android:src="@drawable/sub_bar_background" />
+
     </LinearLayout>
 
     <FrameLayout

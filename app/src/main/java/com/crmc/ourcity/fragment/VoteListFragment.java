@@ -24,9 +24,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 07.10.2015.
- */
 public class VoteListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<VoteFull>> {
 
     private ListView lvVotes;

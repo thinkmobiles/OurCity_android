@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-/**
- * Created by podo on 01.09.15.
- */
 public class RSSLoader extends BaseLoader<List<RssItem>> {
 
     private String link;

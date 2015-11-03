@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.request.registration.ResidentModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 19.08.15.
- */
 public class RegisterLoader extends BaseLoader<Integer> {
 
     private ResidentDetails residentDetails;

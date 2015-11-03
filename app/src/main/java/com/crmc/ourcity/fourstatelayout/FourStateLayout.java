@@ -11,10 +11,6 @@ import android.widget.LinearLayout;
 
 import com.crmc.ourcity.R;
 
-/**
- *
- * Created by Klim on 15.07.2015.
- */
 public final class FourStateLayout extends LinearLayout {
     private ViewGroup mContentLayout, mLoadingLayout, mEmptyLayout, mErrorLayout;
     private int mState = States.STATE_LOADING;

@@ -10,9 +10,6 @@ import com.crmc.ourcity.rest.request.login.PushTokenUpdatingModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 21.08.15.
- */
 public class PushTokenLoader extends BaseLoader<Boolean> {
 
     //private PushTokenUpdatingModel pushTokenUpdatingModel;

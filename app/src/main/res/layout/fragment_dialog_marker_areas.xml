@@ -10,28 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical|left"
         android:paddingBottom="10dp"
         android:background="#424242"
         android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="10dp"
-            android:text="@string/dialog_title_interest_area"
-            android:textColor="@color/turquoise"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:gravity="center_vertical|right"
             android:src="@drawable/icon_interesting"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="@string/dialog_title_interest_area"
+            android:textColor="@color/turquoise"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="אישור"
+            android:text="@string/dialog_marker_areas_btn_confirm"
             android:background="@color/turquoise"
             android:id="@+id/btnSave_DIA" />
     </LinearLayout>

@@ -8,8 +8,7 @@
               android:clickable="true"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              android:weightSum="10"
-              android:rotationY="180">
+              android:weightSum="10">
 
     <FrameLayout
         android:layout_width="match_parent"

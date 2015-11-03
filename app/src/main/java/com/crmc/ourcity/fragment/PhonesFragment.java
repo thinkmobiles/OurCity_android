@@ -18,9 +18,6 @@ import com.crmc.ourcity.utils.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SetKrul on 05.08.2015.
- */
 public class PhonesFragment extends BaseFourStatesFragment {
 
     private ListView lvPhones;

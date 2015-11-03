@@ -14,9 +14,6 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 29.07.2015.
- */
 public class MapInterestPointLoader extends BaseLoader<List<MapCategory>> {
 
     private String json;

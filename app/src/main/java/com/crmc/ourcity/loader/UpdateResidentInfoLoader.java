@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.request.registration.ResidentModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 18.09.15.
- */
 public class UpdateResidentInfoLoader extends BaseLoader<Boolean> {
     private ResidentDetails residentDetails;
 

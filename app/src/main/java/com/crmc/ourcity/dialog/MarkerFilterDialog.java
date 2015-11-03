@@ -15,9 +15,6 @@ import com.crmc.ourcity.model.MapMarker;
 
 import java.util.ArrayList;
 
-/**
- * Created by SetKrul on 04.08.2015.
- */
 public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClickListener {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";

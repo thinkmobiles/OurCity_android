@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/**
- * Created by andrei on 22.10.15.
- */
 public class MobileUISettings implements Parcelable {
     public List<SettingItem> properties;
 

@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.responce.address.AddressDetails;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class AddressLoader extends BaseLoader<AddressFull> {
 
     private double lat, lon;

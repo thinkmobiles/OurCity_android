@@ -23,9 +23,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 28.08.2015.
- */
 public class MessageToResidentFragment extends BaseFourStatesFragment implements LoaderManager
         .LoaderCallbacks<List<MassageToResident>> {
 

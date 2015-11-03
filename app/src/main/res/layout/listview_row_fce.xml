@@ -7,28 +7,43 @@
     android:baselineAligned="false"
     android:orientation="horizontal">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:orientation="vertical"-->
-        <!--android:paddingLeft="5dp">-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="left"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
 
-        <!--<TextView-->
-            <!--android:id="@+id/tvEntityName_CEF"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical|start"-->
-            <!--android:layout_weight="1"-->
-            <!--android:ellipsize="end"-->
-            <!--android:gravity="center_vertical|start"-->
-            <!--android:maxLines="2"-->
-            <!--android:paddingLeft="15dp"-->
-            <!--android:text="Title"-->
-            <!--android:textSize="@dimen/cf_item_text_size"-->
-            <!--android:textStyle="bold"-->
-            <!--tools:background="@android:color/holo_orange_dark"/>-->
-    <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/tvPost_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|left"
+            android:maxLines="2"
+            android:text="Post"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            tools:background="@android:color/holo_orange_dark"/>
+
+        <TextView
+            android:id="@+id/tvEntityName_CEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|left"
+            android:maxLines="2"
+            android:text="Title"
+            android:textSize="@dimen/cf_item_text_size"
+            tools:background="@android:color/holo_orange_dark"/>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -43,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|left"
             android:padding="15dp"
+            android:rotationY="180"
             android:src="@drawable/event_arrow"
             tools:background="@android:color/darker_gray"/>
 
@@ -78,39 +94,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingRight="10dp">
 
-        <TextView
-            android:id="@+id/tvPost_CEF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|right"
-            android:maxLines="2"
-            android:text="Post"
-            android:textSize="@dimen/cf_item_text_size"
-            android:textStyle="bold"
-            tools:background="@android:color/holo_orange_dark"/>
-
-        <TextView
-            android:id="@+id/tvEntityName_CEF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical|right"
-            android:maxLines="2"
-            android:text="Title"
-            android:textSize="@dimen/cf_item_text_size"
-            tools:background="@android:color/holo_orange_dark"/>
-
-    </LinearLayout>
 </LinearLayout>

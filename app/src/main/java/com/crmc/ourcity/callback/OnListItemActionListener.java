@@ -13,9 +13,6 @@ import com.crmc.ourcity.utils.rss.RssItem;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 19.08.2015.
- */
 public interface OnListItemActionListener {
     void onAppealsItemAction(ResultObject resultObject);
 

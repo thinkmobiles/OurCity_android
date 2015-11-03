@@ -15,9 +15,6 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class MassageToResidentLoader extends BaseLoader<List<MassageToResident>> {
 
     private String json;

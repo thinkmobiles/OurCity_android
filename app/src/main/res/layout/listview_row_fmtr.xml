@@ -8,37 +8,22 @@
     android:orientation="horizontal"
     android:baselineAligned="false">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="vertical">-->
-
-        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/ivArrowMessageToResident_MTRF"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:padding="15dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:src="@drawable/event_arrow"&ndash;&gt;-->
-            <!--&lt;!&ndash;tools:background="@android:color/darker_gray"/>&ndash;&gt;-->
-    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_gravity="center_vertical|right"
-        android:gravity="center_vertical|right"
-        android:paddingRight="10dp">
+        android:layout_gravity="center_vertical|left"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/tvMessage_MTRF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:gravity="center_vertical|right"
+            android:layout_gravity="center_vertical|left"
+            android:gravity="center_vertical|left"
             android:layout_margin="5dp"
             android:text="Title"
             android:textSize="@dimen/cf_item_text_size"

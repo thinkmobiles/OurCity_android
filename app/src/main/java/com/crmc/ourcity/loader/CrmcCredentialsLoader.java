@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.responce.crmcCredentials.CRMCCredentials;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by andrei on 07.10.15.
- */
 public class CrmcCredentialsLoader extends BaseLoader<CRMCCredentials> {
 
     private int cityNumber;

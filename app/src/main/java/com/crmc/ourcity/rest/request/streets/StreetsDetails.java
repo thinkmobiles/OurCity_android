@@ -1,8 +1,5 @@
 package com.crmc.ourcity.rest.request.streets;
 
-/**
- * Created by SetKrul on 31.07.2015.
- */
 public class StreetsDetails {
     public int clientId;
     public String userName;

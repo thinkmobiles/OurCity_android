@@ -14,9 +14,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by SetKrul on 03.09.2015.
- */
 public class SendMailFragment extends BaseFourStatesFragment implements View.OnClickListener {
 
     private View vTopLine_SMF;

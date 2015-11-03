@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">chaderaTest</string>
-    <integer name="city_id">1</integer>
+    <integer name="city_id">1055</integer>
     <string name="update_url"><![CDATA[https://play.google.com/store/apps/details?id=com.crmc.puma&hl=en]]></string>
 </resources>

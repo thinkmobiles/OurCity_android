@@ -1,8 +1,5 @@
 package com.crmc.ourcity.callback;
 
-/**
- * Created by SetKrul on 15.07.2015.
- */
 public interface LocationCallBack {
     /**
      * @param _lat Latitude

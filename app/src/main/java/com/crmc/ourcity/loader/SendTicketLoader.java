@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.responce.appeals.WSResult;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class SendTicketLoader extends BaseLoader<WSResult> {
     NewTicketObj ticket;
 

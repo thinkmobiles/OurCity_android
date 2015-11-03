@@ -5,9 +5,6 @@ import com.crmc.ourcity.rest.responce.address.AddressFull;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
-/**
- * Created by SetKrul on 24.07.2015.
- */
 public interface AddressApi {
 
     /**

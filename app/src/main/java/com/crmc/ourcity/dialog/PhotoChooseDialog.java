@@ -10,9 +10,6 @@ import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by SetKrul on 23.07.2015.
- */
 public class PhotoChooseDialog extends BaseFourStatesFragment implements OnClickListener {
 
     private TextView tvCamera;

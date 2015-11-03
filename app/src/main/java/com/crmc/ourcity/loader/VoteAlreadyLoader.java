@@ -10,9 +10,6 @@ import com.crmc.ourcity.rest.request.vote.VoteAlready;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 11.09.2015.
- */
 public class VoteAlreadyLoader extends BaseLoader<String> {
 
     private int residentId;

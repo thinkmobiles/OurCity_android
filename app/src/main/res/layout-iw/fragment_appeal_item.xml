@@ -1,0 +1,176 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/vUnderLine_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+
+
+        <LinearLayout
+            android:id="@+id/llDate_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDate_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvDate_label_AIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_date_time"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAddress_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvAddress_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="@dimen/person16"/>
+
+            <TextView
+                android:id="@+id/tvAddress_AIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_address"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDescription_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvDescription_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvDescription_AIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/item_description"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStat_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tvStat_Text_AIF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:gravity="right"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvStat_AIF"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/personal_status"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/person5"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/rlImageTicketAIF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_green"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/person10">
+
+            <ImageView
+                android:id="@+id/ivPhoto_AIF"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+        <View
+            android:id="@+id/vBottomLine_AIF"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"/>
+    </LinearLayout>
+
+</ScrollView>

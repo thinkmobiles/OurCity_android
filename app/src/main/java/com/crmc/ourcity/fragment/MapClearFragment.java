@@ -16,9 +16,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * Created by SetKrul on 25.08.2015.
- */
 public final class MapClearFragment extends BaseFourStatesFragment implements OnMapReadyCallback {
 
     private Double lat;

@@ -6,9 +6,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.AutoCompleteTextView;
 
-/**
- * Created by SetKrul on 23.07.2015.
- */
 public class EditTextStreetAutoComplete extends AutoCompleteTextView {
 
     private int myThreshold;

@@ -44,9 +44,6 @@ import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_MENU_BOTTOM_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
 
-/**
- * Created by SetKrul on 28.07.2015.
- */
 public class MainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Object> {
 
     View actionBar;

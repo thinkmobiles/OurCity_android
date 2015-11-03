@@ -11,9 +11,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 
-/**
- * Created by SetKrul on 12.08.2015.
- */
 public class GenderDialog extends BaseFourStatesFragment implements View.OnClickListener {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";

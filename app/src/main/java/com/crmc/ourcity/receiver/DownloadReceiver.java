@@ -13,9 +13,6 @@ import com.crmc.ourcity.utils.FilePath;
 
 import java.io.File;
 
-/**
- * Created by SetKrul on 27.07.2015.
- */
 public class DownloadReceiver extends BroadcastReceiver {
     public DownloadReceiver() {
     }

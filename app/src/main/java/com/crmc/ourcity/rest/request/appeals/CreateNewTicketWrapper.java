@@ -3,9 +3,6 @@ package com.crmc.ourcity.rest.request.appeals;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class CreateNewTicketWrapper implements Parcelable {
     public int clientId;
     public String userName;

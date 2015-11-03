@@ -15,9 +15,6 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 
-/**
- * Created by podo on 03.09.15.
- */
 public class HotCallsEditableDialog extends BaseFourStatesFragment {
 
     private EditText etFirstEmergencyNumber;

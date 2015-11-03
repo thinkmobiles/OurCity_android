@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.request.vote.VoteModel;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class VoteReplyLoader extends BaseLoader<String> {
 
     private int selectedOptionId;

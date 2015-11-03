@@ -55,9 +55,6 @@ import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by andrei on 30.09.15.
- */
 public class OldDAppealsFragment extends BaseFourStatesFragment {
 
     private String color;

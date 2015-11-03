@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import com.crmc.ourcity.rest.responce.appeals.Location;
 
-/**
- * Created by podo on 04.09.15.
- */
 public class NewTicket implements Parcelable{
     public int CRMCTicketID;
     public String ReferenceID;

@@ -3,9 +3,6 @@ package com.crmc.ourcity.rest.responce.ticker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by podo on 03.09.15.
- */
 public class TickerModel implements Parcelable {
     public String link;
     public String title;

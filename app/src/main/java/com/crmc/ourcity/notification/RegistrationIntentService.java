@@ -14,9 +14,6 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
-/**
- * Created by podo on 21.08.15.
- */
 public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegIntentService";
     public static final String ACTION = "service action";

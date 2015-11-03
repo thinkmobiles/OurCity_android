@@ -1,9 +1,5 @@
 package com.crmc.ourcity.callback;
 
-/**
- * Created by podo on 22.07.15.
- */
-
 import com.crmc.ourcity.dialog.DialogType;
 
 /**

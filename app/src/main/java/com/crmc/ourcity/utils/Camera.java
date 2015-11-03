@@ -18,9 +18,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by SetKrul on 08.08.2015.
- */
 public class Camera{
 
     Activity mActivity;

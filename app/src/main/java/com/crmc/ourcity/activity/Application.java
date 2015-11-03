@@ -1,11 +1,6 @@
 package com.crmc.ourcity.activity;
 
-import android.content.Context;
 
-
-/**
- * Created by andrei on 28.10.15.
- */
 public class Application extends android.app.Application {
 
 //    private RefWatcher refWatcher;

@@ -11,9 +11,6 @@ import com.crmc.ourcity.rest.responce.login.LoginResponse;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 20.08.15.
- */
 public class LoginLoader extends BaseLoader<LoginResponse> {
 
     private ResidentSignInDetails residentSignInDetails;

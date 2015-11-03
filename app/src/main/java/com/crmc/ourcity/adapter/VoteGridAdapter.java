@@ -16,9 +16,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 11.08.2015.
- */
 public class VoteGridAdapter extends RecyclerView.Adapter<VoteGridAdapter.ViewHolder> {
 
     private List<VoteDetails> mVoteDetailsList;

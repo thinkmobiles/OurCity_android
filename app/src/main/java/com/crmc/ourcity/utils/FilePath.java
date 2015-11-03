@@ -10,9 +10,6 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-/**
- * Created by SetKrul on 23.07.2015.
- */
 public class FilePath {
 
     /**

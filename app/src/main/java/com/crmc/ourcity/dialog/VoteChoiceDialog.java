@@ -14,9 +14,6 @@ import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
 import java.util.ArrayList;
 
-/**
- * Created by SetKrul on 11.08.2015.
- */
 public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterView.OnItemClickListener {
 
     private static final String CONFIGURATION_KEY = "CONFIGURATION_KEY";

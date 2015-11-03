@@ -28,9 +28,6 @@ import com.crmc.ourcity.loader.DocumentsLoader;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.utils.Image;
 
-/**
- * Created by SetKrul on 20.07.2015.
- */
 public class WebViewFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Documents> {
 
     private WebView mWebView;

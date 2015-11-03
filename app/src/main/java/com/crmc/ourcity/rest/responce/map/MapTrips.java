@@ -7,9 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class MapTrips implements Parcelable{
 
     @SerializedName("latLngList")

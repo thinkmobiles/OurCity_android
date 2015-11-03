@@ -26,9 +26,6 @@ import com.crmc.ourcity.utils.Image;
 
 import java.util.List;
 
-/**
- * Created by SetKrul on 25.08.2015.
- */
 public class TripsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<MapTrips>> {
 
     private ListView lvTrips;

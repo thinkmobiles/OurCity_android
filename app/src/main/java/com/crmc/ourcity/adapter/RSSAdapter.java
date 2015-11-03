@@ -21,9 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by podo on 01.09.15.
- */
 public class RSSAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;

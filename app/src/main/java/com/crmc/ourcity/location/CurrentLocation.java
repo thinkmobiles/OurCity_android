@@ -17,10 +17,6 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-
-/**
- * Created by SetKrul on 15.07.2015.
- */
 public class CurrentLocation implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private Location mLocation;

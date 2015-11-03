@@ -10,9 +10,6 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.SPManager;
 
-/**
- * Created by andrei on 21.10.15.
- */
 public class VisibleTicketsDialog extends BaseFourStatesFragment {
 
     private Button btnSave;

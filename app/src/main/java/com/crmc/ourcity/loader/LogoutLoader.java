@@ -11,9 +11,6 @@ import com.crmc.ourcity.utils.SPManager;
 
 import retrofit.RetrofitError;
 
-/**
- * Created by podo on 21.08.15.
- */
 public class LogoutLoader extends BaseLoader<Boolean> {
 
     private LogoutModel logoutModel;

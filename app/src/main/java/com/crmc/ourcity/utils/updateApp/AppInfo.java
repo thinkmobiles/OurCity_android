@@ -3,9 +3,6 @@ package com.crmc.ourcity.utils.updateApp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by andrei on 26.10.15.
- */
 public class AppInfo  implements Parcelable{
 
     public String currentVersion;

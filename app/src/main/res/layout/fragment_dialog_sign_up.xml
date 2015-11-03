@@ -33,27 +33,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center_vertical|right"
+                android:gravity="center_vertical|left"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:layout_marginRight="10dp"
-                    android:text="פרטים אישיים"
-                    android:textColor="@color/turquoise"
-                    android:textSize="24sp"
-                    android:textStyle="bold"/>
+
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
                     android:gravity="center_vertical|right"
                     android:src="@drawable/icon_details"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginLeft="10dp"
+                    android:text="פרטים אישיים"
+                    android:textColor="@color/turquoise"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
@@ -64,15 +66,32 @@
 
                 android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/etLastName_SUDF"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/last_name"
+                    android:inputType="text"
+                    android:padding="@dimen/person5"
+                    android:paddingRight="@dimen/person5"
+                    android:textColor="#000"
+                    android:textColorHint="#616161"
+                    android:textSize="@dimen/sign_up_dialog_textSize"
+
+                    />
+
 
                 <EditText
                     android:id="@+id/etFirstName_SUDF"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="#fff"
-                    android:gravity="right|center_vertical"
+                    android:gravity="left|center_vertical"
                     android:hint="@string/first_name"
                     android:inputType="text"
                     android:padding="@dimen/person5"
@@ -81,22 +100,7 @@
                     android:textColorHint="#616161"
                     android:textSize="@dimen/sign_up_dialog_textSize"/>
 
-                <EditText
-                    android:id="@+id/etLastName_SUDF"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#fff"
-                    android:gravity="right|center_vertical"
-                    android:hint="@string/last_name"
-                    android:inputType="text"
-                    android:padding="@dimen/person5"
-                    android:paddingLeft="@dimen/person5"
-                    android:textColor="#000"
-                    android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize"
 
-                    />
 
             </LinearLayout>
 
@@ -109,7 +113,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:ems="10"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/username"
                 android:inputType="text"
                 android:padding="@dimen/person5"
@@ -127,7 +131,7 @@
 
                 android:background="#fff"
                 android:ems="10"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="@dimen/person5"
@@ -145,7 +149,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:ems="10"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:padding="@dimen/person5"
@@ -162,7 +166,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:ems="10"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/mobile_phone"
                 android:inputType="phone"
                 android:padding="@dimen/person5"
@@ -179,7 +183,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#fff"
                 android:ems="10"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/person5"
@@ -197,28 +201,16 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <EditText
-                    android:id="@+id/etHouseNumber_SUDF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#fff"
-                    android:gravity="right|center_vertical"
-                    android:hint="@string/house"
-                    android:inputType="number"
-                    android:padding="@dimen/person5"
-                    android:textColor="#000"
-                    android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize"/>
+
 
                 <com.crmc.ourcity.view.EditTextStreetAutoComplete
                     android:id="@+id/etStreetName_SUDF"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="2"
                     android:background="#fff"
-                    android:gravity="right|center_vertical"
+                    android:gravity="left|center_vertical"
                     android:hint="@string/street"
                     android:inputType="textAutoComplete"
                     android:paddingLeft="5dp"
@@ -227,6 +219,21 @@
                     android:textColor="#000"
                     android:textColorHint="#616161"
                     android:textSize="@dimen/sign_up_dialog_textSize"/>
+
+                <EditText
+                    android:id="@+id/etHouseNumber_SUDF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/house"
+                    android:inputType="number"
+                    android:padding="@dimen/person5"
+                    android:textColor="#000"
+                    android:textColorHint="#616161"
+                    android:textSize="@dimen/sign_up_dialog_textSize"/>
+
             </LinearLayout>
 
             <EditText
@@ -239,7 +246,7 @@
                 android:background="#fff"
                 android:clickable="false"
                 android:focusableInTouchMode="false"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:hint="@string/focus_name_city"
                 android:inputType="text"
                 android:padding="@dimen/person5"
@@ -273,8 +280,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etCityName_SUDF"
-                android:gravity="right|center_vertical"
+                android:gravity="left|center_vertical"
                 android:orientation="horizontal">
+
+
+
+                <CheckBox
+                    android:id="@+id/chbPersonalNotifications_SUDF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -284,11 +298,6 @@
                     android:ellipsize="end"
                     android:textSize="12sp"/>
 
-                <CheckBox
-                    android:id="@+id/chbPersonalNotifications_SUDF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -296,7 +305,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/global_push_layout"
-                android:gravity="right|center_horizontal">
+                android:gravity="left|center_horizontal">
+
+                <CheckBox
+                    android:id="@+id/chbGlobalNotifications_SUDF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -306,10 +320,7 @@
                     android:ellipsize="end"
                     android:textSize="12sp"/>
 
-                <CheckBox
-                    android:id="@+id/chbGlobalNotifications_SUDF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
 
@@ -340,10 +351,9 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/turquoise"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="הירשם"
+                android:text="@string/dialog_sign_up_btn_sign_up"
                 android:textColor="#fff"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp"/>
 
             <ProgressBar
                 android:id="@+id/pb_SUDF"

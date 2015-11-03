@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by SetKrul on 30.07.2015.
- */
 public class Events implements Parcelable {
 
     @SerializedName("address")
