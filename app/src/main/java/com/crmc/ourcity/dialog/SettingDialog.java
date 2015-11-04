@@ -27,6 +27,7 @@ public class SettingDialog extends BaseFourStatesFragment {
     private RelativeLayout interestingAreas;
     private RelativeLayout updateResidentInfo;
     private RelativeLayout visibleTickets;
+    private RelativeLayout language;
     private OnActionDialogListener mCallback;
     private FragmentActivity mActivity;
     int showInterestAreas;
@@ -64,9 +65,8 @@ public class SettingDialog extends BaseFourStatesFragment {
         interestingAreas = findView(R.id.rlInterestAreas_SetDFrgmt);
         updateResidentInfo = findView(R.id.rlUpdateResidentInfo_SetDFrgmt);
         visibleTickets = findView(R.id.rlVisibleTickets_SetDFrgmt);
+        language = findView(R.id.rlLanguage_SetDFrgmt);
 
-//        boolean isFromMainActivity = mActivity.getIntent().getBooleanExtra(Constants.IS_FROM_MAIN_ACTIVITY, false);
-//        if (isFromMainActivity) {
             if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
                 logout.setVisibility(View.VISIBLE);
                 login.setVisibility(View.GONE);
@@ -79,14 +79,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                 updateResidentInfo.setVisibility(View.GONE);
                 visibleTickets.setVisibility(View.GONE);
             }
-//        } else {
-//            if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
-//                login.setVisibility(View.GONE);
-//                visibleTickets.setVisibility(View.VISIBLE);
-//                interestingAreas.setVisibility(View.VISIBLE);
-//                updateResidentInfo.setVisibility(View.VISIBLE);
-//            }
-//        }
+
 
        if(showInterestAreas == 0) {
            interestingAreas.setVisibility(View.GONE);
@@ -111,6 +104,7 @@ public class SettingDialog extends BaseFourStatesFragment {
         interestingAreas.setOnClickListener(handleClicks());
         updateResidentInfo.setOnClickListener(handleClicks());
         visibleTickets.setOnClickListener(handleClicks());
+        language.setOnClickListener(handleClicks());
     }
 
     @NonNull
@@ -136,6 +130,12 @@ public class SettingDialog extends BaseFourStatesFragment {
                     break;
                 case R.id.rlVisibleTickets_SetDFrgmt:
                     mCallback.onActionDialogSelected(DialogType.VISIBLE_TICKETS);
+                    break;
+                case R.id.rlLanguage_SetDFrgmt:
+                    mCallback.onActionDialogSelected(DialogType.LANGUAGE);
+                    break;
+                default:
+                    break;
             }
         };
     }

@@ -28,7 +28,7 @@ import com.crmc.ourcity.utils.SPManager;
 
 import java.util.ArrayList;
 
-public class SplashScreenActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks {
+public class SplashScreenActivity extends BaseActivity implements LoaderManager.LoaderCallbacks {
 
 
     private RelativeLayout rlBackground;
@@ -123,9 +123,17 @@ public class SplashScreenActivity extends AppCompatActivity implements LoaderMan
             case Constants.LOADER_MOBILE_UI_SETTINGS_ID:
                 MobileUISettings settings = (MobileUISettings) _data;
 
-                if (settings != null & settings.properties != null & settings.properties.size() > 0) {
-                    saveMobileUISettings(settings);
+                if (settings != null) {
+                    if (settings.properties != null) {
+                        if (settings.properties.size() > 0) {
+                            saveMobileUISettings(settings);
+                        }
+                    }
                 }
+
+//                if (settings != null & settings.properties != null & settings.properties.size() > 0) {
+//                    saveMobileUISettings(settings);
+//                }
                 break;
 
             case Constants.LOADER_CRMC_CREDENTIAL_ID:

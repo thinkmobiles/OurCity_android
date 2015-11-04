@@ -181,6 +181,9 @@
     <string name="fragment_send_mail_description">תאור:</string>
     <string name="fragment_send_mail_cancel">ביטול</string>
     <string name="fragment_send_mail_send">אישור</string>
+    <string name="dialog_title_languages">שפה</string>
+    <string name="dialog_language_english">אנגלית (English)</string>
+    <string name="dialog_language_hebrew">עִברִית</string>
 
 
 </resources>

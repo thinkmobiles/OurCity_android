@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|left"
+        android:paddingBottom="10dp"
+        android:background="#424242"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical|right"
+            android:src="@drawable/ic_language_white_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="10dp"
+            android:text="@string/dialog_title_languages"
+            android:textColor="@color/turquoise"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <RadioGroup
+            android:id="@+id/rgLanguage_FDL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp">
+
+            <RadioButton
+                style="@style/RadioButtonWithBlackTextColorLtr"
+                android:id="@+id/rbLanguage_EN_FDL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/person5"
+                android:text="@string/dialog_language_english"/>
+
+            <RadioButton
+                style="@style/RadioButtonWithBlackTextColorLtr"
+                android:id="@+id/rbLanguage_HE_FDL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/person5"
+                android:text="@string/dialog_language_hebrew"/>
+
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/btn_ok"
+            android:background="@color/turquoise"
+            android:id="@+id/btnSave_FDL" />
+    </LinearLayout>
+
+</LinearLayout>

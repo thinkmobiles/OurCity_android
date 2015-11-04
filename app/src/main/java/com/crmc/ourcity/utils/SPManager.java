@@ -25,6 +25,9 @@ public class SPManager {
     public static final String THIRD_EMERGENCY_NUM = "thirdEmergencyNum";
     public static final String SP_NAME="user_data";
     public static final String AMOUNT_OF_VISIBLE_TICKETS = "amountOfVisibleTickets";
+    public static final String LANGUAGE = "language";
+    public static final String APP_LANG = "app_lang";
+    public static final String APP_COUNTRY = "app_country";
     public static final String SHOW_INTEREST_AREAS = "ShowIntrestAreas";
     public static final String SHOW_HOT_CALLS = "ShowHotCalls";
 
@@ -96,6 +99,30 @@ public class SPManager {
 
     public int getShowHotCalls() {
         return retrieveInt(SHOW_HOT_CALLS, 0);
+    }
+
+    public void setApplicationCountry(String _country) {
+        saveString(APP_COUNTRY, _country);
+    }
+
+    public String getApplicationCountry() {
+        return retrieveString(APP_COUNTRY, "IL");
+    }
+
+    public void setApplicationLanguage(String _language) {
+        saveString(APP_LANG, _language);
+    }
+
+    public String getApplicationLanguage() {
+        return retrieveString(APP_LANG, "iw");
+    }
+
+    public void setAppLanguage(int _language) {
+        saveInt(LANGUAGE, _language);
+    }
+
+    public int getAppLanguage() {
+        return retrieveInt(LANGUAGE, R.id.rbLanguage_HE_FDL);
     }
 
     public void setAmountOfVisibleTickets(int _amountOfVisibleTickets){

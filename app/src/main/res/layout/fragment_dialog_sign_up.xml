@@ -44,7 +44,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:paddingLeft="5dp"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical"
                     android:src="@drawable/icon_details"/>
 
                 <TextView
@@ -279,6 +279,7 @@
                 android:id="@+id/global_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_below="@+id/etCityName_SUDF"
                 android:gravity="left|center_vertical"
                 android:orientation="horizontal">
@@ -304,8 +305,10 @@
                 android:id="@+id/personal_push_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_below="@+id/global_push_layout"
-                android:gravity="left|center_horizontal">
+                android:gravity="left|center_horizontal|center_vertical">
 
                 <CheckBox
                     android:id="@+id/chbGlobalNotifications_SUDF"
@@ -323,17 +326,24 @@
 
             </LinearLayout>
 
+            <Space
+                android:id="@+id/space"
+                android:layout_below="@+id/personal_push_layout"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
 
 
             <TextView
                 android:id="@+id/tvErrorMessage_SUDF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/personal_push_layout"
+                android:layout_below="@+id/space"
                 android:layout_centerHorizontal="true"
                 android:ems="10"
                 android:gravity="center_horizontal|center_vertical"
                 android:inputType="text"
+
                 android:padding="@dimen/person5"
                 android:text="@string/username_is_already_used"
                 android:textColor="@android:color/holo_red_dark"

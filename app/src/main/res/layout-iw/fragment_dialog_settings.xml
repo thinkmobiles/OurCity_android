@@ -110,36 +110,6 @@
 
         </RelativeLayout>
 
-
-        <RelativeLayout
-            android:splitMotionEvents="false"
-            android:id="@+id/rlSignIn_SetDFrgmt"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/settings10"
-            android:background="@drawable/new_rec_setting"
-            android:clickable="true"
-            android:padding="@dimen/settings10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/icon_details" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:paddingLeft="5dp"
-                android:text="@string/dialog_setting_sign_in"
-                android:textColor="#148989"
-                android:textSize="@dimen/settings16"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-
         <!-- uncomment visibility -->
         <RelativeLayout
             android:splitMotionEvents="false"
@@ -199,6 +169,64 @@
                 android:textStyle="bold" />
 
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:splitMotionEvents="false"
+            android:id="@+id/rlLanguage_SetDFrgmt"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_language_white_24dp" />
+
+            <TextView
+
+                android:id="@+id/tvLanguage_FDS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="@string/dialog_title_languages"
+                android:textColor="#148989"
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:splitMotionEvents="false"
+            android:id="@+id/rlSignIn_SetDFrgmt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/settings10"
+            android:background="@drawable/new_rec_setting"
+            android:clickable="true"
+            android:padding="@dimen/settings10">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/icon_details" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="5dp"
+                android:text="@string/dialog_setting_sign_in"
+                android:textColor="#148989"
+                android:textSize="@dimen/settings16"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout

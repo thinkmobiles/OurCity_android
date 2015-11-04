@@ -19,6 +19,7 @@ import java.util.List;
 public class DialogActivity extends BaseFragmentActivity implements OnActionDialogListener, CallBackWithData {
 
     private Intent intent = new Intent();
+    private final int FRAGMENT_CONTAINER = R.id.fragment_dialog_container;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -31,40 +32,40 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
 
             case VOTE_CHOICE:
                 ArrayList<VoteFull> mVoteFull = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_INTEGER);
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, VoteChoiceDialog.newInstance
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, VoteChoiceDialog.newInstance
                         (mVoteFull));
                 break;
 
             case MARKER_FILTER:
                 ArrayList<MapMarker> mMapMarkers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_MARKERS);
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, MarkerFilterDialog.newInstance
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, MarkerFilterDialog.newInstance
                         (mMapMarkers));
                 break;
 
             case AGE:
                 Integer age = getIntent().getIntExtra(Constants.BUNDLE_INTEGER, 25);
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, AgeDialog.newInstance((age)));
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, AgeDialog.newInstance((age)));
                 break;
 
             case GENDER:
                 Integer gender = getIntent().getIntExtra(Constants.BUNDLE_INTEGER, -1);
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, GenderDialog.newInstance(gender));
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, GenderDialog.newInstance(gender));
                 break;
 
             case PHOTO:
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new PhotoChooseDialog());
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, new PhotoChooseDialog());
                 break;
 
             case SETTING:
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SettingDialog());
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, new SettingDialog());
                 break;
 
             case LOGIN:
-                replaceFragmentWithoutBackStack(R.id.fragment_dialog_container, new SignInDialog());
+                replaceFragmentWithoutBackStack(FRAGMENT_CONTAINER, new SignInDialog());
                 break;
 
             case HOT_CALLS:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsDialog());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new HotCallsDialog());
                 break;
         }
 
@@ -87,11 +88,11 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 break;
 
             case HOT_CALLS_EDITABLE:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new HotCallsEditableDialog());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new HotCallsEditableDialog());
                 break;
 
             case LOGIN:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new SignInDialog());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new SignInDialog());
                 break;
 
             case REGISTER:
@@ -103,7 +104,7 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 break;
 
             case INTEREST_AREAS:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new InterestingAreasDialog());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new InterestingAreasDialog());
                 break;
 
             case UPDATE_RESIDENT_INFO:
@@ -111,11 +112,19 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
                 bundle.putBoolean(Constants.BUNDLE_CONSTANT_EDITABLE_RESIDENT, true);
                 SignUpDialog editableResidentInfoDialog = new SignUpDialog();
                 editableResidentInfoDialog.setArguments(bundle);
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, editableResidentInfoDialog);
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, editableResidentInfoDialog);
                 break;
 
             case VISIBLE_TICKETS:
-                replaceFragmentWithBackStack(R.id.fragment_dialog_container, new VisibleTicketsDialog());
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new VisibleTicketsDialog());
+                break;
+
+            case LANGUAGE:
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, new LanguageDialog());
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -162,5 +171,9 @@ public class DialogActivity extends BaseFragmentActivity implements OnActionDial
         intent.putExtra(Constants.BUNDLE_LOGOUT, Constants.LOGOUT_KEY);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    public void doPositiveClick(){
+        popBackStack();
     }
 }
