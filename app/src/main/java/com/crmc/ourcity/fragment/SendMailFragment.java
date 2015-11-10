@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,9 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.utils.Image;
+
+import java.lang.ref.WeakReference;
 
 public class SendMailFragment extends BaseFourStatesFragment implements View.OnClickListener {
 
@@ -27,6 +31,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     private String color;
     private String mail;
     private String title;
+    private WeakReference<MainActivity> mActivity;
 
     public static SendMailFragment newInstance(String _colorItem, String _mail, String _title) {
         SendMailFragment mSendMailFragment = new SendMailFragment();
@@ -36,6 +41,18 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         args.putString(Constants.NODE_TITLE, _title);
         mSendMailFragment.setArguments(args);
         return mSendMailFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -75,11 +92,11 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         } catch (Exception e) {
             Image.init(Color.BLACK);
         }
-        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff",
+        Image.setBoarderBackgroundColorArray(mActivity.get(), color, 2, 5, "#ffffff",
                 new View[]{etFirstName_SMF, etLastName_SMF, etMail_SMF, etDescription_SMF});
         vUnderLine_SMF.setBackgroundColor(Image.darkenColor(0.0));
         vTopLine_SMF.setBackgroundColor(Image.darkenColor(0.0));
-        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, color,
+        Image.setBoarderBackgroundColorArray(mActivity.get(), color, 2, 5, color,
                 new View[]{btnCancel_SMF, btnOk_SMF});
     }
 
@@ -100,12 +117,12 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     public void onClick(View _view) {
         switch (_view.getId()) {
             case R.id.btnCancel_SMF:
-                hideKeyboard(getActivity());
+                hideKeyboard(mActivity.get());
                 popBackStack();
                 break;
             case R.id.btnOk_SMF:
                 if (checkValidation()) {
-                    hideKeyboard(getActivity());
+                    hideKeyboard(mActivity.get());
                     String[] send = {mail};
                     String title = "יצירת קשר אפליקציה ";
                     String subject = "שם" + ":  " + etFirstName_SMF.getText().toString() + " " + etLastName_SMF.getText()
@@ -125,7 +142,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         i.putExtra(Intent.EXTRA_EMAIL, _mailAddress);
         i.putExtra(Intent.EXTRA_SUBJECT, title);
         i.putExtra(Intent.EXTRA_TEXT, text);
-        getActivity().startActivity(Intent.createChooser(i, getResources().getString(R.string.send_mail_hint)));
+        mActivity.get().startActivity(Intent.createChooser(i, getResources().getString(R.string.send_mail_hint)));
     }
 
     @Override
@@ -135,7 +152,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
     @Override
     public void onDestroy() {
         super.onDestroy();
-        hideKeyboard(getActivity());
+        hideKeyboard(mActivity.get());
     }
 
     private boolean checkValidation() {
@@ -156,7 +173,7 @@ public class SendMailFragment extends BaseFourStatesFragment implements View.OnC
         if (!TextUtils.isEmpty(etMail_SMF.getText().toString())) {
             if (!Patterns.EMAIL_ADDRESS.matcher(etMail_SMF.getText().toString()).matches()) {
                 etMail_SMF.setError(getResources().getString(R.string.sign_up_dialog_incorrect_email));
-
+                isValid = false;
             }
         } else {
             etMail_SMF.setError(getResources().getString(R.string.sign_up_dialog_error_text));

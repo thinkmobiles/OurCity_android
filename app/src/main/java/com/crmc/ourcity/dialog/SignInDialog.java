@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnActionDialogListener;
 import com.crmc.ourcity.fragment.BaseFragment;
@@ -27,6 +28,8 @@ import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.rest.responce.login.LoginResponse;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCallbacks<LoginResponse> {
 
     private EditText etUsername;
@@ -34,13 +37,14 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     private Button btnSignIn;
     private TextView tvSignUp;
     private OnActionDialogListener mCallback;
-    private FragmentActivity mActivity;
+    private WeakReference<DialogActivity> mActivity;
 
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
 
         try {
+            mActivity = new WeakReference<>((DialogActivity) _activity);
             mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString()
@@ -51,15 +55,15 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     @Override
     public void onDetach() {
         mCallback = null;
+        mActivity.clear();
         super.onDetach();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) {
-        mActivity = getActivity();
-        if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
-            mActivity.finish();
+        if (SPManager.getInstance(mActivity.get()).getIsLoggedStatus()) {
+            mActivity.get().finish();
         }
         View root = _inflater.inflate(R.layout.fragment_dialog_sign_in, _container, false);
         findUI(root);
@@ -86,7 +90,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         return v -> {
             switch (v.getId()) {
                 case R.id.btnSignIn_SIDF:
-                    hideKeyboard(mActivity);
+                    hideKeyboard(mActivity.get());
                     if (checkValidation()) {
                         Bundle bundle = createBundleForResident();
                         getLoaderManager().restartLoader(1, bundle, this);
@@ -94,7 +98,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
                     break;
                 case R.id.tvSignUp_SIDF:
                     mCallback.onActionDialogSelected(DialogType.REGISTER);
-                    hideKeyboard(mActivity);
+                    hideKeyboard(mActivity.get());
                     break;
             }
         };
@@ -103,7 +107,7 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     @NonNull
     private View.OnFocusChangeListener handleFocusChanging() {
         return (v, hasFocus) -> {
-            if (!hasFocus) hideKeyboard(mActivity);
+            if (!hasFocus) hideKeyboard(mActivity.get());
         };
     }
 
@@ -111,8 +115,8 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_USER_NAME, etUsername.getText().toString());
         bundle.putString(Constants.BUNDLE_CONSTANT_PASSWORD, etPassword.getText().toString());
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, getResources().getInteger(R.integer.city_id));
-        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(mActivity).getPushToken());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, BuildConfig.CITY_ID);
+        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(mActivity.get()).getPushToken());
         return bundle;
     }
 
@@ -140,18 +144,18 @@ public class SignInDialog extends BaseFragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<LoginResponse> _loader, LoginResponse _data) {
         if (_data != null) {
             if (_data.authToken != null) {
-                SPManager.getInstance(mActivity).setAuthToken(_data.authToken);
-                SPManager.getInstance(mActivity).setResidentId(_data.residentId);
-                SPManager.getInstance(mActivity).setCRMCUsername(_data.crmcUsername);
-                SPManager.getInstance(mActivity).setCRMCPassword(_data.crmcPassword);
-                SPManager.getInstance(mActivity).setIsLoggedStatus(true);
-                mActivity.startService(new Intent(mActivity, RegistrationIntentService.class));
-                mActivity.finish();
+                SPManager.getInstance(mActivity.get()).setAuthToken(_data.authToken);
+                SPManager.getInstance(mActivity.get()).setResidentId(_data.residentId);
+                SPManager.getInstance(mActivity.get()).setCRMCUsername(_data.crmcUsername);
+                SPManager.getInstance(mActivity.get()).setCRMCPassword(_data.crmcPassword);
+                SPManager.getInstance(mActivity.get()).setIsLoggedStatus(true);
+                mActivity.get().startService(new Intent(mActivity.get(), RegistrationIntentService.class));
+                mActivity.get().finish();
             } else {
-                Toast.makeText(mActivity, R.string.incorrect_credentials, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), R.string.incorrect_credentials, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(mActivity, R.string.connection_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.get(), R.string.connection_error, Toast.LENGTH_SHORT).show();
         }
     }
 

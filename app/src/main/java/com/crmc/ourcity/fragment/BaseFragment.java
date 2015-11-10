@@ -39,12 +39,18 @@ public abstract class BaseFragment extends Fragment {
         getFragmentManager().popBackStackImmediate();
     }
 
-    protected void hideKeyboard(Context _context) {
-        InputMethodManager inputManager = (InputMethodManager) _context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    protected void hideKeyboard(Context _ctx) {
+        InputMethodManager inputManager = (InputMethodManager) _ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
         // check if no view has focus:
-        View v = ((Activity) _context).getCurrentFocus();
+        View v = ((Activity) _ctx).getCurrentFocus();
         if (v == null) return;
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    protected void hideKeyboard(Context _ctx,  View _v) {
+        _v.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) _ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(_v.getWindowToken(), 0);
     }
 
     protected void showKeyboard(Context _context, View _view) {

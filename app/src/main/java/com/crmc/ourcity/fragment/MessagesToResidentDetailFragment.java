@@ -10,11 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.utils.Image;
+
+import java.lang.ref.WeakReference;
 
 public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
 
@@ -27,6 +30,7 @@ public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
     private MassageToResident mtrItem;
     private String title;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mActivity;
 
 
     public static MessagesToResidentDetailFragment newInstance(MassageToResident _mtr) {
@@ -50,6 +54,7 @@ public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -60,6 +65,7 @@ public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
     public void onDetach() {
         super.onDetach();
         mOnListItemActionListener = null;
+        mActivity.clear();
     }
 
     @Override
@@ -125,7 +131,7 @@ public class MessagesToResidentDetailFragment extends BaseFourStatesFragment {
         vUnderLine_MTRDF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_MTRDF.setBackgroundColor(Image.darkenColor(0.2));
         if (!TextUtils.isEmpty(link)) {
-                ivLink_MTRDF.setImageDrawable(Image.setDrawableImageColor(getActivity().getApplicationContext(), R.drawable.link,
+                ivLink_MTRDF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.link,
                         Image.darkenColor(0.2)));
                 ivLink_MTRDF.setVisibility(View.VISIBLE);
             } else {

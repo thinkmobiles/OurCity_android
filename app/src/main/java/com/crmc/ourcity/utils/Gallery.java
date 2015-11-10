@@ -6,27 +6,29 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.global.Constants;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 public class Gallery {
 
-    Activity mActivity;
+    private final WeakReference<MainActivity> mActivity;
 
     public Gallery(Activity _activity){
-        this.mActivity = _activity;
+        this.mActivity = new WeakReference<>((MainActivity)_activity);
     }
 
     public ComponentName isCanGetGalleryPicture() {
         Intent galleryIntent = IntentUtils.getGalleryStartIntent();
-        return galleryIntent.resolveActivity(mActivity.getPackageManager());
+        return galleryIntent.resolveActivity(mActivity.get().getPackageManager());
     }
 
     public void openGallery(Fragment _fragment) {
         if (isCanGetGalleryPicture() != null) {
             Intent galleryIntent = IntentUtils.getGalleryStartIntent();
-            if (galleryIntent.resolveActivity(mActivity.getPackageManager()) != null) {
+            if (galleryIntent.resolveActivity(mActivity.get().getPackageManager()) != null) {
                 _fragment.startActivityForResult(galleryIntent, Constants.REQUEST_GALLERY_IMAGE);
             }
         }
@@ -37,7 +39,6 @@ public class Gallery {
         File f = new File(_mPhotoFilePath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
-        mActivity.sendBroadcast(mediaScanIntent);
+        mActivity.get().sendBroadcast(mediaScanIntent);
     }
-
 }

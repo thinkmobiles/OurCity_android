@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.VoteGridAdapter;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
@@ -27,6 +29,8 @@ import com.crmc.ourcity.utils.EnumUtil;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
+
+import java.lang.ref.WeakReference;
 
 public class VoteFragment extends BaseFourStatesFragment implements OnClickListener {
 
@@ -44,6 +48,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     private Integer age;
     private Integer gender;
     private VoteFull mVoteFulls;
+    private WeakReference<MainActivity> mActivity;
 
     public static VoteFragment newInstance(VoteFull _mVoteFull) {
         VoteFragment mVoteFragment = new VoteFragment();
@@ -51,6 +56,18 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         args.putParcelable(CONFIGURATION_KEY, _mVoteFull);
         mVoteFragment.setArguments(args);
         return mVoteFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -75,20 +92,20 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         llGender = findView(R.id.llGender_VF);
         mRecyclerView = findView(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        mLayoutManager = new GridLayoutManager(mActivity.get(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         vUnderLine_VF.setBackgroundColor(Image.darkenColor(0.2));
         vUnderLine1_VF.setBackgroundColor(Image.darkenColor(0.2));
-        tvAge.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
+        tvAge.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(mActivity.get(), R.drawable
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
-        tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(getActivity(), R.drawable
+        tvGender.setCompoundDrawablesWithIntrinsicBounds(Image.setDrawableImageColor(mActivity.get(), R.drawable
                 .arrow_red, Image.darkenColor(0.2)), null, null, null);
-        Image.setBoarderBackgroundColorArray(getActivity(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0))
+        Image.setBoarderBackgroundColorArray(mActivity.get(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0))
                 , 2, 5, "#ffffff", new View[]{llAge, llGender});
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_SURVEY_ID, mVoteFulls.surveyId);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity.get()).getResidentId());
         getLoaderManager().initLoader(Constants.LOADER_VOTE_ALREADY_ID, bundle, mVoteAlreadyCallBack);
     }
 
@@ -103,7 +120,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public Loader<String> onCreateLoader(int _id, Bundle _args) {
-            return new VoteReplyLoader(getActivity(), _args);
+            return new VoteReplyLoader(mActivity.get(), _args);
         }
 
         @Override
@@ -122,16 +139,16 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
 
         @Override
         public Loader<String> onCreateLoader(int _id, Bundle _args) {
-            return new VoteAlreadyLoader(getActivity(), _args);
+            return new VoteAlreadyLoader(mActivity.get(), _args);
         }
 
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
             if (mVoteFulls != null && mVoteFulls.optionsList != null) {
-                mAdapter = new VoteGridAdapter(mVoteFulls.optionsList, getActivity());
+                mAdapter = new VoteGridAdapter(mVoteFulls.optionsList, mActivity.get());
                 mRecyclerView.setAdapter(mAdapter);
                 if (_data.equals("false") && mVoteFulls.isActive != null && mVoteFulls.isActive && !isVote) {
-                    mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity()
+                    mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mActivity.get()
                             .getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(Context _context, View _view, int _position) {
@@ -140,7 +157,7 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                                 if (gender != null && age != null) {
                                     voteReply(voteDetails.surveyOptionId, gender, age);
                                 } else {
-                                    Toast.makeText(getActivity(), getResources().getString(R.string
+                                    Toast.makeText(mActivity.get(), getResources().getString(R.string
                                             .not_selected_age_or_gender), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -150,10 +167,10 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
                     mAdapter.setVisibleVotePercent(true);
                     isVote = true;
                     if (mVoteFulls.isActive) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.you_already_survey), Toast
+                        Toast.makeText(mActivity.get(), getResources().getString(R.string.you_already_survey), Toast
                                 .LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.vote_is_already_close), Toast
+                        Toast.makeText(mActivity.get(), getResources().getString(R.string.vote_is_already_close), Toast
                                 .LENGTH_SHORT).show();
                     }
                 }
@@ -176,12 +193,12 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     }
 
     public void voteReply(Integer _surveyOptionId, Integer _gender, Integer _age) {
-        getActivity().getSupportLoaderManager().destroyLoader(Constants.LOADER_VOTE_ID);
+        mActivity.get().getSupportLoaderManager().destroyLoader(Constants.LOADER_VOTE_ID);
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.BUNDLE_CONSTANT_SELECTED_OPTION_ID, _surveyOptionId);
         bundle.putInt(Constants.BUNDLE_CONSTANT_AGE, _age);
         bundle.putInt(Constants.BUNDLE_CONSTANT_GENDER, _gender);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_LAST_USER, SPManager.getInstance(getActivity()).getResidentId());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_LAST_USER, SPManager.getInstance(mActivity.get()).getResidentId());
         if (getLoaderManager().getLoader(Constants.LOADER_VOTE_REPLY_ID) == null) {
             getLoaderManager().initLoader(Constants.LOADER_VOTE_REPLY_ID, bundle, mVoteReplyCallBack);
         } else {
@@ -223,14 +240,14 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llAge_VF:
-                Intent intentAge = new Intent(getActivity(), DialogActivity.class);
+                Intent intentAge = new Intent(mActivity.get(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.AGE).to(intentAge);
                 intentAge.putExtra(Constants.BUNDLE_INTEGER, age);
                 startActivityForResult(intentAge, Constants.REQUEST_AGE);
                 break;
 
             case R.id.llGender_VF:
-                Intent intentGender = new Intent(getActivity(), DialogActivity.class);
+                Intent intentGender = new Intent(mActivity.get(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.GENDER).to(intentGender);
                 intentGender.putExtra(Constants.BUNDLE_INTEGER, gender);
                 startActivityForResult(intentGender, Constants.REQUEST_GENDER);

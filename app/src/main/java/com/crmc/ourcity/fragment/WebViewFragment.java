@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -22,11 +23,14 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.DocumentsLoader;
 import com.crmc.ourcity.rest.responce.events.Documents;
 import com.crmc.ourcity.utils.Image;
+
+import java.lang.ref.WeakReference;
 
 public class WebViewFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Documents> {
 
@@ -39,6 +43,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
     private String route;
     private boolean error = false;
     private String title;
+    private WeakReference<MainActivity> mActivity;
 
     public static WebViewFragment newInstance(String _link, String _colorItem, String _title) {
         WebViewFragment mWebViewFragment = new WebViewFragment();
@@ -60,6 +65,18 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         args.putString(Constants.NODE_TITLE, _title);
         mWebViewFragment.setArguments(args);
         return mWebViewFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -97,7 +114,7 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public Loader<Documents> onCreateLoader(int _id, Bundle _args) {
-        return new DocumentsLoader(getActivity(), _args);
+        return new DocumentsLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -257,9 +274,4 @@ public class WebViewFragment extends BaseFourStatesFragment implements LoaderMan
         }
     }
 
-//    private int getScale() {
-//        Display display = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        int width = display.getWidth();
-//        Double val = new Double(width) / new Double(PIC_WIDTH);
-//    }
 }

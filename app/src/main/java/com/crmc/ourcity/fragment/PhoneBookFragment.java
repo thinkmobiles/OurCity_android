@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.PhoneBookListAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -21,6 +22,7 @@ import com.crmc.ourcity.loader.PhoneBookLoader;
 import com.crmc.ourcity.rest.responce.events.PhoneBook;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<PhoneBook>>,
@@ -36,6 +38,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     private PhoneBookListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mActivity;
 
     public static PhoneBookFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         PhoneBookFragment mPhoneBookFragment = new PhoneBookFragment();
@@ -48,19 +51,12 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
         return mPhoneBookFragment;
     }
 
-    @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        title = getArguments().getString(Constants.NODE_TITLE);
-    }
 
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -70,8 +66,20 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
+
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
+    }
+
 
     @Override
     public void onResume() {
@@ -86,7 +94,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
     @Override
     public void onLoadFinished(Loader<List<PhoneBook>> _loader, List<PhoneBook> _data) {
         swipeRefreshLayout.setRefreshing(false);
-        mAdapter = new PhoneBookListAdapter(getActivity(), _data, mOnListItemActionListener);
+        mAdapter = new PhoneBookListAdapter(mActivity.get(), _data, mOnListItemActionListener);
         lvPhoneBook.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         showContent();
@@ -94,7 +102,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     @Override
     public Loader<List<PhoneBook>> onCreateLoader(int _id, Bundle _args) {
-        return new PhoneBookLoader(getActivity(), _args);
+        return new PhoneBookLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -127,7 +135,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

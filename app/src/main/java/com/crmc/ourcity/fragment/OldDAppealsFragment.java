@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.Editable;
@@ -26,7 +27,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.callback.LocationCallBack;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
@@ -54,8 +57,9 @@ import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
-public class OldDAppealsFragment extends BaseFourStatesFragment {
+public class OldDAppealsFragment extends BaseFourStatesFragment implements TextWatcher {
 
     private String color;
     private String json;
@@ -79,6 +83,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     private String title;
     private boolean isChecked = true;
     private StreetsFull baseStreests;
+    private WeakReference<MainActivity> mActivity;
 
 
     public static OldDAppealsFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
@@ -94,6 +99,26 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        mActivity = new WeakReference<>((MainActivity)_activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ivPhoto.setOnClickListener(null);
+        ivRotate.setOnClickListener(null);
+        swGpsOnOff.setOnClickListener(null);
+        btnSend.setOnClickListener(null);
+        flDescription.setOnClickListener(null);
+        etNameStreet.removeTextChangedListener(this);
+        etDescription.removeTextChangedListener(this);
+        hideKeyboard(mActivity.get(), etDescription);
+        mActivity.clear();
+    }
+
+    @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
@@ -105,8 +130,8 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        mCamera = new Camera(getActivity());
-        mGallery = new Gallery(getActivity());
+        mCamera = new Camera(mActivity.get());
+        mGallery = new Gallery(mActivity.get());
         getLocation();
     }
 
@@ -127,7 +152,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        View actionBar = mActivity.get().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
         mActionBack.setVisibility(View.VISIBLE);
@@ -156,20 +181,20 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             Image.init(Color.BLACK);
         }
         llAppeals.setBackgroundColor(Image.lighterColor(0.2));
-        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
-        ivRotate.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.rotate,
+        ivRotate.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.rotate,
                 Image.darkenColor(0.2)));
-        Image.setBoarderBackgroundColorArray(getActivity(), color, 2, 5, "#ffffff", new View[]{etNameCity, etNameStreet, etNumberHouse,
+        Image.setBoarderBackgroundColorArray(mActivity.get(), color, 2, 5, "#ffffff", new View[]{etNameCity, etNameStreet, etNumberHouse,
                 flDescription, llPhoto});
-        Image.setBoarderBackgroundColor(getActivity(), color, 2, 5, color, btnSend);
+        Image.setBoarderBackgroundColor(mActivity.get(), color, 2, 5, color, btnSend);
     }
 
     private final LoaderManager.LoaderCallbacks<WSResult> mSendTicket = new LoaderManager.LoaderCallbacks<WSResult>() {
 
         @Override
         public Loader<WSResult> onCreateLoader(int id, Bundle args) {
-            return new SendTicketLoader(getActivity(), args);
+            return new SendTicketLoader(mActivity.get(), args);
         }
 
         @Override
@@ -177,9 +202,9 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             showContent();
             if (data != null) {
                 clearFields();
-                Toast.makeText(getActivity(), R.string.ticket_is_sent, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), R.string.ticket_is_sent, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), R.string.connection_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -195,9 +220,8 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         etDescription.setText("");
         mPhotoFilePath = "";
         ivRotate.setVisibility(View.GONE);
-        ivPhoto.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.focus_camera, Image
+        ivPhoto.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.focus_camera, Image
                 .darkenColor(0.2)));
-        //getLocation();
     }
 
     private final LoaderManager.LoaderCallbacks<AddressFull> mAddressCallBack = new LoaderManager
@@ -205,7 +229,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
         @Override
         public Loader<AddressFull> onCreateLoader(int _id, Bundle _args) {
-            return new AddressLoader(getActivity(), _args);
+            return new AddressLoader(mActivity.get(), _args);
         }
 
         @Override
@@ -231,7 +255,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
         @Override
         public Loader<StreetsFull> onCreateLoader(int _id, Bundle _args) {
-            return new StreetsLoader(getActivity(), _args);
+            return new StreetsLoader(mActivity.get(), _args);
         }
 
         @Override
@@ -246,7 +270,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                     streets[i] = _data.streetsList.get(i).streetName;
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity.get(), android.R.layout.simple_list_item_1,
                         streets);
                 etNameStreet.setAdapter(adapter);
             }
@@ -259,7 +283,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
     };
 
     private void getAddress(double _lat, double _lon) {
-        getActivity().getSupportLoaderManager().destroyLoader(Constants.LOADER_STREETS_ID);
+        mActivity.get().getSupportLoaderManager().destroyLoader(Constants.LOADER_STREETS_ID);
         Bundle bundle = new Bundle();
         bundle.putDouble(Constants.BUNDLE_CONSTANTS_LAT, _lat);
         bundle.putDouble(Constants.BUNDLE_CONSTANTS_LON, _lon);
@@ -272,7 +296,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
     @Override
     public void onResume() {
-        View current =getActivity(). getCurrentFocus();
+        View current = mActivity.get(). getCurrentFocus();
         if (current != null) current.clearFocus();
         super.onResume();
 
@@ -291,7 +315,9 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         swGpsOnOff.setOnClickListener(handleClick());
         btnSend.setOnClickListener(handleClick());
         flDescription.setOnClickListener(handleClick());
-        clearErrorIconOnFields();
+        etDescription.addTextChangedListener(this);
+        etNameStreet.addTextChangedListener(this);
+        //clearErrorIconOnFields();
     }
 
     @Override
@@ -300,7 +326,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         if (mLocation != null) {
             mLocation.stopLocationUpdates();
         }
-        hideKeyboard(getActivity());
+        hideKeyboard(mActivity.get());
     }
 
     @Override
@@ -324,7 +350,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                         if (imageFile.exists()) {
                             mGallery.addPhotoToGallery(mPhotoFilePath);
                             try {
-                                ivPhoto.setImageBitmap(Image.handleSamplingAndRotationBitmap(getActivity(), Uri
+                                ivPhoto.setImageBitmap(Image.handleSamplingAndRotationBitmap(mActivity.get(), Uri
                                         .fromFile(imageFile), 400, 400));
                                 ivRotate.setVisibility(View.VISIBLE);
                                 ivRotate.setEnabled(true);
@@ -334,12 +360,11 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                                 e.printStackTrace();
                             }
                         } else {
-                            Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
+                            Toast.makeText(mActivity.get(), this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                     if (_resultCode == Activity.RESULT_CANCELED) {
-                        //noinspection ResultOfMethodCallIgnored
                         imageFile.delete();
                     }
                 }
@@ -347,7 +372,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
 
             case Constants.REQUEST_GALLERY_IMAGE:
                 if (_resultCode == Activity.RESULT_OK) {
-                    mPhotoFilePath = Image.getPath(getActivity(), _data.getData());
+                    mPhotoFilePath = Image.getPath(mActivity.get(), _data.getData());
                     if (!TextUtils.isEmpty(mPhotoFilePath)) {
                         File imageFile1 = new File(mPhotoFilePath);
                         if (imageFile1.exists()) {
@@ -355,11 +380,11 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                             ivRotate.setVisibility(View.VISIBLE);
                             ivRotate.setEnabled(true);
                         } else {
-                            Toast.makeText(getActivity(), this.getResources().getString(R.string.file_is_not_found),
+                            Toast.makeText(mActivity.get(), this.getResources().getString(R.string.file_is_not_found),
                                     Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getActivity(), this.getResources().getString(R.string.uncompilable_type),
+                        Toast.makeText(mActivity.get(), this.getResources().getString(R.string.uncompilable_type),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -378,12 +403,12 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             public void onFailure(boolean result) {
                 if (!result) {
 
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.cant_get_location),
+                    Toast.makeText(mActivity.get(), mActivity.get().getResources().getString(R.string.cant_get_location),
                             Toast.LENGTH_SHORT).show();
                 }
             }
         };
-        mLocation = new CurrentLocation(getActivity(), locationCallBack);
+        mLocation = new CurrentLocation(mActivity.get(), locationCallBack);
     }
 
     @Override
@@ -411,12 +436,11 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                 }
             }
             if (location.StreetName == null){
-                Toast.makeText(getActivity(), "לא מוצא את הכתובת, הכנס בצורה ידנית.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), R.string.cannot_find_street, Toast.LENGTH_SHORT).show();
                 return null;
             }
 
         }
-        //location.StreetName = etNameStreet.getText().toString();
         location.HouseNumber = etNumberHouse.getText().toString();
         ticket.Location = location;
         CreateNewTicketWrapper ticketWrapper = new CreateNewTicketWrapper();
@@ -427,10 +451,10 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
         ticket.ReporterHomePhoneNumber = phoneNumber;
         ticket.ReporterMobilePhoneNumber = phoneNumber;
         ticketWrapper.newTicket = ticket;
-        ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
-        ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
-        ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
-        ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
+        ticketWrapper.clientId = BuildConfig.CITY_ID;
+        ticketWrapper.ResidentId = SPManager.getInstance(mActivity.get()).getResidentId();
+        ticketWrapper.userName = SPManager.getInstance(mActivity.get()).getCRMCUsername();
+        ticketWrapper.password = SPManager.getInstance(mActivity.get()).getCRMCPassword();
         return new NewTicketObj(ticketWrapper);
     }
 
@@ -499,11 +523,11 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
             switch (v.getId()) {
                 case R.id.flDescriptionContainer_AF:
                     etDescription.requestFocus();
-                    showKeyboard(getActivity(), etDescription);
+                    showKeyboard(mActivity.get(), etDescription);
                     break;
                 case R.id.ivPhoto_AF:
-                    hideKeyboard(getActivity());
-                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    hideKeyboard(mActivity.get());
+                    Intent intent = new Intent(mActivity.get(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                     startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
                     break;
@@ -514,7 +538,6 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                     }
                     break;
                 case R.id.btnSend_AF:
-                    //hideKeyboard(getActivity());
                     if (checkValidation()) {
                         NewTicketObj ticketObj = createNewTicket();
                         if (ticketObj != null) {
@@ -523,8 +546,7 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                             bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                             getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
                         }
-//                        hideKeyboard(getActivity());
-                        InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        InputMethodManager inputManager = (InputMethodManager) mActivity.get().getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                     }
@@ -550,5 +572,25 @@ public class OldDAppealsFragment extends BaseFourStatesFragment {
                 break;
             }
         };
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (etDescription.getText().length() > 0) {
+            etDescription.setError(null);
+        }
+        if (etNameStreet.getText().length() > 0) {
+            etNameStreet.setError(null);
+        }
     }
 }

@@ -13,6 +13,7 @@ import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.model.MapMarker;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClickListener {
@@ -24,6 +25,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     private CallBackWithData mCallback;
     private ArrayList<MapMarker> mMapMarkers;
     private MarkersListAdapter mAdapter;
+    private WeakReference<DialogActivity> mActivity;
 
     public MarkerFilterDialog() {
         super();
@@ -47,6 +49,7 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((DialogActivity) _activity);
             mCallback = (CallBackWithData) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListenerWithData");
@@ -54,11 +57,18 @@ public class MarkerFilterDialog extends BaseFourStatesFragment implements OnClic
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
+        mActivity.clear();
+    }
+
+    @Override
     protected void initViews() {
         btnCancelFilter = findView(R.id.btnCancel_Filter_DMF);
         btnSelectFilter = findView(R.id.btnSelect_Filter_DMF);
         lvMarkerFilter = findView(R.id.lvMarkerFilter_DMF);
-        mAdapter = new MarkersListAdapter(getActivity(), mMapMarkers);
+        mAdapter = new MarkersListAdapter(mActivity.get(), mMapMarkers);
         lvMarkerFilter.setAdapter(mAdapter);
         showContent();
     }

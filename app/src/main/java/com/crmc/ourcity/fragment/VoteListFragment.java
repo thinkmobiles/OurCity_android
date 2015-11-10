@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.VotesListAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -22,6 +23,7 @@ import com.crmc.ourcity.loader.VoteLoader;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class VoteListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<VoteFull>> {
@@ -36,6 +38,7 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
 
     private VotesListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mActivity;
 
     public static VoteListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String
             _title) {
@@ -50,18 +53,10 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        title = getArguments().getString(Constants.NODE_TITLE);
-    }
-
-    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -71,8 +66,19 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
+    }
+
 
     @Override
     public void onResume() {
@@ -86,7 +92,7 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             if (_data.size() > 0) {
-                mAdapter = new VotesListAdapter(getActivity(), _data);
+                mAdapter = new VotesListAdapter(mActivity.get(), _data);
                 lvVotes.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 showContent();
@@ -100,7 +106,7 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public Loader<List<VoteFull>> onCreateLoader(int _id, Bundle _args) {
-        return new VoteLoader(getActivity(), _args);
+        return new VoteLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -138,7 +144,7 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

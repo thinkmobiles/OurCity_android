@@ -26,7 +26,6 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     private Events mEvents;
     private TextView tvTitle;
     private TextView tvDate_Text;
-    private TextView tvDate;
     private TextView tvAddress_Text;
     private TextView tvEmail_Text;
     private TextView tvMobile_Text;
@@ -95,7 +94,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
 
         tvTitle = findView(R.id.tvTitle_EIF);
         tvDate_Text = findView(R.id.tvDate_Text_EIF);
-        tvDate = findView(R.id.tvDate_EIF);
+        TextView tvDate = findView(R.id.tvDate_EIF);
         tvAddress_Text = findView(R.id.tvAddress_Text_EIF);
         tvEmail_Text = findView(R.id.tvEmail_Text_EIF);
         tvMobile_Text = findView(R.id.tvMobile_Text_EIF);

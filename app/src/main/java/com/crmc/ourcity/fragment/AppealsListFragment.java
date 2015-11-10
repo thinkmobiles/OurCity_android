@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.AppealsAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.callback.OnListItemActionListener;
@@ -25,6 +26,8 @@ import com.crmc.ourcity.rest.responce.appeals.WSResult;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class AppealsListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<WSResult>,
         SwipeRefreshLayout.OnRefreshListener {
     private ListView lvAppeals;
@@ -34,7 +37,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     private String title;
     private SwipeRefreshLayout swipeRefreshLayout;
     private OnListItemActionListener mOnListItemActionListener;
-
+    private WeakReference<MainActivity> mActivity;
     private AppealsAdapter mAdapter;
 
     public static AppealsListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
@@ -52,6 +55,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -61,6 +65,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
 
@@ -77,7 +82,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     public void onResume() {
         configureActionBar(true, true, title);
         super.onResume();
-        amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(getActivity()).getAmountOfVisibleTickets());
+        amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(mActivity.get()).getAmountOfVisibleTickets());
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
@@ -100,7 +105,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     @Override
     public Loader<WSResult> onCreateLoader(int id, Bundle args) {
-        return new AppealsLoader(getActivity(), args);
+        return new AppealsLoader(mActivity.get(), args);
     }
 
     @Override
@@ -108,7 +113,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         swipeRefreshLayout.setRefreshing(false);
         if (data != null) {
             if (data.getResultObjects() != null && data.getResultObjects().size() > 0) {
-                mAdapter = new AppealsAdapter(getActivity(), data.getResultObjects(), color, amountOfVisibleTickets);
+                mAdapter = new AppealsAdapter(mActivity.get(), data.getResultObjects(), color, amountOfVisibleTickets);
                 lvAppeals.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 showContent();
@@ -153,7 +158,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

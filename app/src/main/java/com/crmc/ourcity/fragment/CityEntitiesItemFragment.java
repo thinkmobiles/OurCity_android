@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.IntentUtils;
+
+import java.lang.ref.WeakReference;
 
 public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
@@ -42,6 +46,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     private ImageView ivCall_CEIF;
     private ImageView ivSendMail_CEIF;
     private ImageView ivCall_Mobile_CEIF;
+    private WeakReference<MainActivity> mActivity;
 
     public static CityEntitiesItemFragment newInstance(CityEntities _cityEntities) {
         CityEntitiesItemFragment mCityEntitiesItemFragment = new CityEntitiesItemFragment();
@@ -49,6 +54,18 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         args.putParcelable(Constants.CONFIGURATION_KEY_CITY_ENINIES, _cityEntities);
         mCityEntitiesItemFragment.setArguments(args);
         return mCityEntitiesItemFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -114,19 +131,19 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
 
     private void setImage(){
         if (!TextUtils.isEmpty(mCityEntities.phoneNumber)){
-            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone2, Image
+            ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.phone2, Image
                     .darkenColor(0.2)));
         } else {
             ivCall_CEIF.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(mCityEntities.emailAddress)){
-            ivSendMail_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.mail, Image
+            ivSendMail_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.mail, Image
                     .darkenColor(0.2)));
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(mCityEntities.mobileNumber)){
-            ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.phone, Image
+            ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.phone, Image
                     .darkenColor(0.2)));
         } else {
             ivCall_Mobile_CEIF.setVisibility(View.GONE);
@@ -152,7 +169,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                         startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities
                                 .phoneNumber), getResources().getString(R.string.call_hint)), 58);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                        Toast.makeText(mActivity.get(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
                     }
                     break;
@@ -160,7 +177,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                     try {
                         startActivity(Intent.createChooser(IntentUtils.getIntentMail(mCityEntities.emailAddress), getResources().getString(R.string.send_mail_hint)));
                     } catch (ActivityNotFoundException ex) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_mail_client), Toast
+                        Toast.makeText(mActivity.get(), getResources().getString(R.string.app_no_mail_client), Toast
                                 .LENGTH_SHORT).show();
                     }
                     break;
@@ -169,7 +186,7 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
                         startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(mCityEntities
                                 .mobileNumber), getResources().getString(R.string.call_hint)), 59);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client), Toast
+                        Toast.makeText(mActivity.get(), getResources().getString(R.string.app_no_call_client), Toast
                                 .LENGTH_SHORT).show();
                     }
                     break;

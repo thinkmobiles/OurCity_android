@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.adapter.InterestingAreasAdapter;
 import com.crmc.ourcity.fragment.BaseFragment;
@@ -60,7 +61,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
     public void onResume() {
         super.onResume();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
         bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity).getResidentId());
         getLoaderManager().restartLoader(LOADER_INTERESTING_AREAS_ID, bundle, this);
     }
@@ -86,7 +87,7 @@ public class InterestingAreasDialog extends BaseFragment implements LoaderManage
 
                 Bundle args = new Bundle();
                 args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity).getResidentId());
-                args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
+                args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
                 args.putParcelableArrayList(Constants.BUNDLE_SELECTED_AREAS, (ArrayList<? extends Parcelable>)
                         selectedInterestingAreas);
 

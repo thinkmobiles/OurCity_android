@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.LocationCallBack;
 import com.crmc.ourcity.dialog.DialogActivity;
@@ -282,14 +283,14 @@ public class AppealsFragment extends BaseFourStatesFragment {
         clearErrorIconOnFields();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mLocation != null) {
-            mLocation.stopLocationUpdates();
-        }
-        hideKeyboard(getActivity());
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        if (mLocation != null) {
+//            mLocation.stopLocationUpdates();
+//        }
+//        hideKeyboard(getActivity());
+//    }
 
     @Override
     public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -412,7 +413,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
         ticket.ReporterHomePhoneNumber = phoneNumber;
         ticket.ReporterMobilePhoneNumber = phoneNumber;
         ticketWrapper.newTicket = ticket;
-        ticketWrapper.clientId = getResources().getInteger(R.integer.city_id);
+        ticketWrapper.clientId = BuildConfig.CITY_ID;
         ticketWrapper.ResidentId = SPManager.getInstance(getActivity()).getResidentId();
         ticketWrapper.userName = SPManager.getInstance(getActivity()).getCRMCUsername();
         ticketWrapper.password = SPManager.getInstance(getActivity()).getCRMCPassword();
@@ -488,7 +489,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                     showKeyboard(getActivity(), etDescription);
                     break;
                 case R.id.ivPhoto_AF:
-                    hideKeyboard(getActivity());
+                   // hideKeyboard(getActivity());
                     Intent intent = new Intent(getActivity(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.PHOTO).to(intent);
                     startActivityForResult(intent, Constants.REQUEST_TYPE_PHOTO);
@@ -509,7 +510,7 @@ public class AppealsFragment extends BaseFourStatesFragment {
                             bundle.putParcelable(Constants.BUNDLE_CONSTANT_PARCELABLE_TICKET, ticketObj);
                             getLoaderManager().initLoader(Constants.LOADER_SEND_APPEALS_ID, bundle, mSendTicket);
                         }
-                            hideKeyboard(getActivity());
+                           // hideKeyboard(getActivity());
                     }
                     break;
             }

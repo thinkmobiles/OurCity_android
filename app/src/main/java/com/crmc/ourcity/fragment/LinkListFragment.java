@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.LinksListAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -24,6 +25,7 @@ import com.crmc.ourcity.loader.EventsLoader;
 import com.crmc.ourcity.rest.responce.events.Events;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class LinkListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<Events>> {
@@ -38,6 +40,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     private LinksListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mActivity;
 
     public static LinkListFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         LinkListFragment mLinkListFragment = new LinkListFragment();
@@ -63,6 +66,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -72,6 +76,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
 
@@ -86,7 +91,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new LinksListAdapter(getActivity(), _data);
+            mAdapter = new LinksListAdapter(mActivity.get(), _data);
             lvLinks.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             showContent();
@@ -97,7 +102,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public Loader<List<Events>> onCreateLoader(int _id, Bundle _args) {
-        return new EventsLoader(getActivity(), _args);
+        return new EventsLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -137,7 +142,7 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.dialog.DialogActivity;
 import com.crmc.ourcity.dialog.DialogType;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -32,6 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +56,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
     private LatLngBounds.Builder bounds;
     private String title;
     private Map<Integer, ArrayList<com.google.android.gms.maps.model.Marker>> mMarkersCategory = new HashMap<>();
+    private WeakReference<MainActivity> mActivity;
 
     public static MapInterestPointFragment newInstance(Double _lat, Double _lon, String _colorItem, String
             _requestJson, String _requestRoute, String _title) {
@@ -66,6 +70,18 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         args.putString(Constants.NODE_TITLE, _title);
         mMapInterestPointFragment.setArguments(args);
         return mMapInterestPointFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -148,7 +164,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
         } catch (Exception e){
             Image.init(Color.BLACK);
         }
-        Image.setBackgroundColorView(getActivity(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
+        Image.setBackgroundColorView(mActivity.get(), btnFilter, R.drawable.btn_selector_mf, Image.darkenColor(0.2));
     }
 
     @Override
@@ -163,7 +179,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
             switch (v.getId()) {
                 case R.id.btnMarkerFilter_MIPF:
                     //if (mDialogMarkers != null) {
-                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    Intent intent = new Intent(mActivity.get(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.MARKER_FILTER).to(intent);
                     intent.putParcelableArrayListExtra(Constants.BUNDLE_MARKERS, (ArrayList<? extends
                             Parcelable>) mDialogMapMarkers);
@@ -214,7 +230,7 @@ public final class MapInterestPointFragment extends BaseFourStatesFragment imple
 
     @Override
     public Loader<List<MapCategory>> onCreateLoader(int _id, Bundle _args) {
-        return new MapInterestPointLoader(getActivity(), _args);
+        return new MapInterestPointLoader(mActivity.get(), _args);
     }
 
     @Override

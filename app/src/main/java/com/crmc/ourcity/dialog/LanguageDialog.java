@@ -1,5 +1,6 @@
 package com.crmc.ourcity.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,8 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class LanguageDialog extends BaseFourStatesFragment {
 
 
@@ -21,6 +24,19 @@ public class LanguageDialog extends BaseFourStatesFragment {
     private RadioButton rbLangEn;
     private RadioButton rbLangHe;
     private int selectedItemID;
+    private WeakReference<DialogActivity> mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((DialogActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
+    }
 
     @Override
     protected void initViews() {
@@ -38,9 +54,9 @@ public class LanguageDialog extends BaseFourStatesFragment {
         super.setListeners();
         rgLanguages.setOnCheckedChangeListener(handleRbChecking());
         btnSave.setOnClickListener(v -> {
-            if (selectedItemID != SPManager.getInstance(getActivity()).getAppLanguage()) {
+            if (selectedItemID != SPManager.getInstance(mActivity.get()).getAppLanguage()) {
                 MyAlertDialogFragment frag = MyAlertDialogFragment.newInstance(selectedItemID);
-                frag.show(getActivity().getSupportFragmentManager(), "dialog");
+                frag.show(mActivity.get().getSupportFragmentManager(), "dialog");
             } else popBackStack();
         });
     }
@@ -62,7 +78,7 @@ public class LanguageDialog extends BaseFourStatesFragment {
     }
 
     private void setPreviousCheckedLanguage() {
-        selectedItemID = SPManager.getInstance(getActivity()).getAppLanguage();
+        selectedItemID = SPManager.getInstance(mActivity.get()).getAppLanguage();
         switch (selectedItemID) {
             case R.id.rbLanguage_EN_FDL:
                 rbLangEn.setChecked(true);
@@ -103,31 +119,31 @@ public class LanguageDialog extends BaseFourStatesFragment {
 
 
             return new AlertDialog.Builder(getActivity())
-                    .setTitle("Внимание")
-                    .setMessage("Изменения вступят в силу после перезагрузки")
-                    .setPositiveButton("ок", (dialog, which) -> {
+                    .setTitle(getResources().getString(R.string.attention_string))
+                    .setMessage(getResources().getString(R.string.restart_app_string))
+                    .setPositiveButton(getString(R.string.dialog_visible_tickets_confirm), (dialog, which) -> {
 
-                String lang = "";
-                String country = "";
+                        String lang = "";
+                        String country = "";
 
-                switch (selectedItemID) {
-                    case R.id.rbLanguage_HE_FDL:
-                        lang = "iw";
-                        country = "IL";
-                        break;
-                    case R.id.rbLanguage_EN_FDL:
-                        lang = "en";
-                        country = "GB";
-                        break;
-                    default:
-                        break;
-                }
+                        switch (selectedItemID) {
+                            case R.id.rbLanguage_HE_FDL:
+                                lang = "iw";
+                                country = "IL";
+                                break;
+                            case R.id.rbLanguage_EN_FDL:
+                                lang = "en";
+                                country = "GB";
+                                break;
+                            default:
+                                break;
+                        }
 
-                SPManager.getInstance(getActivity()).setAppLanguage(selectedItemID);
-                SPManager.getInstance(getActivity()).setApplicationLanguage(lang);
-                SPManager.getInstance(getActivity()).setApplicationCountry(country);
-                ((DialogActivity) getActivity()).doPositiveClick();
-            }).show();
+                        SPManager.getInstance(getActivity()).setAppLanguage(selectedItemID);
+                        SPManager.getInstance(getActivity()).setApplicationLanguage(lang);
+                        SPManager.getInstance(getActivity()).setApplicationCountry(country);
+                        ((DialogActivity) getActivity()).doPositiveClick();
+                    }).show();
         }
     }
 }

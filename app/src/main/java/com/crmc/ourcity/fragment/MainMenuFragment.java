@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.MenuGridAdapter;
@@ -36,8 +38,8 @@ import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.RecyclerItemClickListener;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Locale;
 
 import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_CITY_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_IMAGE_LOGO_ID;
@@ -46,40 +48,30 @@ import static com.crmc.ourcity.global.Constants.LOADER_MENU_ID;
 
 public class MainMenuFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<Object> {
 
-    View actionBar;
-    LinearLayout llBtn_MMF;
-    LinearLayout llBtnFirst_MMF;
-    LinearLayout llBtnSecond_MMF;
-    LinearLayout llBtnThird_MMF;
+    private View actionBar;
+    private LinearLayout llBtn_MMF;
+    private LinearLayout llBtnFirst_MMF;
+    private LinearLayout llBtnSecond_MMF;
+    private LinearLayout llBtnThird_MMF;
+    private RelativeLayout rlMenu_MMF;
+    private ImageView ivTown_MA;
 
-    RelativeLayout rlMenu_MMF;
-
-    ImageView ivBtnFirst_MMF;
-    ImageView ivBtnSecond_MMF;
-    ImageView ivBtnThird_MMF;
-    ImageView ivTown_MA;
-
-    TextView tvBtnFirst_MMF;
-    TextView tvBtnSecond_MMF;
-    TextView tvBtnThird_MMF;
-
-    LinearLayout[] llBottomButtons;
-    TextView[] tvBottomButtons;
-    ImageView[] ivBottomButtons;
+    private LinearLayout[] llBottomButtons;
+    private TextView[] tvBottomButtons;
+    private ImageView[] ivBottomButtons;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
     private MenuGridAdapter mAdapter;
     private List<MenuModel> mMenuBottom;
     private OnItemActionListener mCallBackMenuModel;
+    private WeakReference<MainActivity> mActivity;
 
-    private int cityNumber;
-    private String lng;
-    private int residentId;
     private boolean loaderMenuFinish = false;
     private boolean loaderMenuBottomFinish = false;
     private boolean loaderLogoImageFinish = false;
     private boolean loaderCityImageFinish = false;
+
+    private RecyclerItemClickListener recyclerItemClickListener;
 
 
     public static MainMenuFragment newInstance() {
@@ -90,6 +82,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity)_activity);
             mCallBackMenuModel = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnItemActionListener");
@@ -99,17 +92,18 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onDetach() {
         mCallBackMenuModel = null;
+        llBtnFirst_MMF.setOnClickListener(null);
+        llBtnSecond_MMF.setOnClickListener(null);
+        llBtnThird_MMF.setOnClickListener(null);
+        mRecyclerView.removeOnItemTouchListener(recyclerItemClickListener);
+        recyclerItemClickListener = null;
+        mActivity.clear();
         super.onDetach();
     }
 
     @Override
     protected void initViews() {
-        // ((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        actionBar = getActivity().findViewById(R.id.rlActionBar);
-//        ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
-//        ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
-//        mActionHome.setVisibility(View.GONE);
-//        mActionBack.setVisibility(View.GONE);
+        actionBar = mActivity.get().findViewById(R.id.rlActionBar);
         configureActionBar(false, false);
         setHasOptionsMenu(true);
         llBtn_MMF = findView(R.id.llBtn_MMF);
@@ -117,25 +111,21 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         llBtnSecond_MMF = findView(R.id.llBtnSecond_MMF);
         llBtnThird_MMF = findView(R.id.llBtnThird_MMF);
         llBottomButtons = new LinearLayout[]{llBtnFirst_MMF, llBtnSecond_MMF, llBtnThird_MMF};
-
         rlMenu_MMF = findView(R.id.rlMenu_MMF);
-
-        ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
-        ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
-        ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
+        ImageView ivBtnFirst_MMF = findView(R.id.ivBtnFirst_MMF);
+        ImageView ivBtnSecond_MMF = findView(R.id.ivBtnSecond_MMF);
+        ImageView ivBtnThird_MMF = findView(R.id.ivBtnThird_MMF);
         ivBottomButtons = new ImageView[]{ivBtnFirst_MMF, ivBtnSecond_MMF, ivBtnThird_MMF};
-
-        ivTown_MA = (ImageView) getActivity().findViewById(R.id.ivTown_MA);
-
-        tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
-        tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
-        tvBtnThird_MMF = findView(R.id.tvBtnThird_MMF);
+        ivTown_MA = (ImageView) mActivity.get().findViewById(R.id.ivTown_MA);
+        TextView tvBtnFirst_MMF = findView(R.id.tvBtnFirst_MMF);
+        TextView tvBtnSecond_MMF = findView(R.id.tvBtnSecond_MMF);
+        TextView tvBtnThird_MMF = findView(R.id.tvBtnThird_MMF);
         tvBottomButtons = new TextView[]{tvBtnFirst_MMF, tvBtnSecond_MMF, tvBtnThird_MMF};
-
         mRecyclerView = findView(R.id.rvMenu_FMM);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(),
-                handleItemClick()));
+        recyclerItemClickListener = new RecyclerItemClickListener(mActivity.get(),
+                handleItemClick());
+        mRecyclerView.addOnItemTouchListener(recyclerItemClickListener);
     }
 
     @Override
@@ -149,16 +139,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
-        mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mActivity.get(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        cityNumber = getResources().getInteger(R.integer.city_id);
-        if (Locale.getDefault().toString().equals("en_US")) {
-            lng = "en";
-        } else {
-            lng = "he";
-        }
-        residentId = SPManager.getInstance(getActivity()).getResidentId();
-        //((AppCompatActivity) getActivity()).getDelegate().getSupportActionBar().setTitle("");
         TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
         mTitle.setText("");
         Constants.PREVIOUSTITLE = "";
@@ -167,22 +149,15 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onResume() {
         super.onResume();
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
-        getLoaderManager().initLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, this);
+        Bundle menuBundle = buildMenuBundle(mActivity.get());
+        getLoaderManager().initLoader(Constants.LOADER_MENU_ID, menuBundle, this);
+        getLoaderManager().initLoader(Constants.LOADER_MENU_BOTTOM_ID, menuBundle, this);
 
-        Bundle bundle1 = new Bundle();
-        bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
-        getLoaderManager().initLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, this);
+        Bundle logoImgBundle = buildLogoImgBundle(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_LOGO_ID, logoImgBundle, this);
 
-        Bundle bundle2 = new Bundle();
-        bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
-        getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this);
+        Bundle cityImgBundle = buildLogoImgBundle(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
+        getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, cityImgBundle, this);
     }
 
     private void showView() {
@@ -207,44 +182,33 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onRetryClick() {
         showLoading();
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, bundle, this).forceLoad();
-        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, bundle, this).forceLoad();
-        Bundle bundle1 = new Bundle();
-        bundle1.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle1.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, bundle1, this).forceLoad();
-        Bundle bundle2 = new Bundle();
-        bundle2.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle2.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
-        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, bundle2, this).forceLoad();
-    }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        menu.getItem(0).setVisible(false);
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
+        Bundle menuBundle = buildMenuBundle(mActivity.get());
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_ID, menuBundle, this).forceLoad();
+        getLoaderManager().restartLoader(Constants.LOADER_MENU_BOTTOM_ID, menuBundle, this).forceLoad();
+
+        Bundle logoImgBundle = buildLogoImgBundle(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_LOGO);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_LOGO_ID, logoImgBundle, this).forceLoad();
+
+        Bundle cityImgBundle = buildLogoImgBundle(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_CITY);
+        getLoaderManager().restartLoader(Constants.LOADER_IMAGE_CITY_ID, cityImgBundle, this).forceLoad();
+    }
 
     @Override
     public Loader<Object> onCreateLoader(int id, Bundle args) {
         Loader loader = null;
-        MainActivity activity = (MainActivity) getActivity();
         switch (id) {
             case LOADER_MENU_ID:
-                loader = new MenuLoader(activity, args);
+                loader = new MenuLoader(mActivity.get(), args);
                 break;
             case LOADER_MENU_BOTTOM_ID:
-                loader = new MenuBottomLoader(activity, args);
+                loader = new MenuBottomLoader(mActivity.get(), args);
                 break;
             case LOADER_IMAGE_CITY_ID:
-                loader = new ImageLoader(activity, args);
+                loader = new ImageLoader(mActivity.get(), args);
                 break;
             case LOADER_IMAGE_LOGO_ID:
-                loader = new ImageLoader(activity, args);
+                loader = new ImageLoader(mActivity.get(), args);
                 break;
         }
         return loader;
@@ -252,7 +216,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<Object> loader, Object _data) {
-        MainActivity activity = (MainActivity) getActivity();
+
         switch (loader.getId()) {
 
             case LOADER_MENU_ID:
@@ -261,7 +225,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                 }
                 if (Constants.mMenuFull != null && Constants.mMenuFull.getNodes() != null && Constants.mMenuFull
                         .getSize() > 0) {
-                    mAdapter = new MenuGridAdapter(Constants.mMenuFull.getNodes(), activity);
+                    mAdapter = new MenuGridAdapter(Constants.mMenuFull.getNodes(), mActivity.get());
                     mRecyclerView.setAdapter(mAdapter);
                 }
                 loaderMenuFinish = true;
@@ -284,12 +248,12 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                             drawable.setShape(GradientDrawable.RECTANGLE);
                             if (!TextUtils.isEmpty(mMenuBottom.get(i).borderColor) && mMenuBottom.get(i).borderWidth
                                     != null) {
-                                drawable.setStroke(Image.getDpi(mMenuBottom.get(i).borderWidth, getActivity()), Color
+                                drawable.setStroke(Image.getDpi(mMenuBottom.get(i).borderWidth, mActivity.get()), Color
                                         .parseColor(mMenuBottom.get(i).borderColor));
                             }
-                            drawable.setCornerRadius(Image.getDpi(5, getActivity()));
+                            drawable.setCornerRadius(Image.getDpi(5, mActivity.get()));
                             drawable.setColor(Color.parseColor(mMenuBottom.get(i).colorItem));
-                            llBottomButtons[i].setBackground(drawable);
+                            llBottomButtons[i].setBackgroundDrawable(drawable);
                         }
                     }
                     llBtn_MMF.setVisibility(View.VISIBLE);
@@ -306,10 +270,10 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                         Constants.cityImage = new BitmapDrawable(getResources(), Image.convertBase64ToBitmap((String)
                                 _data));
 
-                        rlMenu_MMF.setBackground(Constants.cityImage);
+                        rlMenu_MMF.setBackgroundDrawable(Constants.cityImage);
                     }
                 } else {
-                    rlMenu_MMF.setBackground(Constants.cityImage);
+                    rlMenu_MMF.setBackgroundDrawable(Constants.cityImage);
                 }
                 loaderCityImageFinish = true;
                 showView();
@@ -343,7 +307,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         return (_context, _view, _position) -> {
             MenuModel menuModel = mAdapter.getItem(_position);
             Constants.PREVIOUSTITLE = menuModel.title;
-            Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+            Boolean isLogIn = SPManager.getInstance(mActivity.get()).getIsLoggedStatus();
             if (Boolean.parseBoolean(menuModel.requestLogin)) {
                 if (isLogIn) {
                     if (menuModel.menu != null) {
@@ -352,7 +316,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                         mCallBackMenuModel.onItemAction(menuModel);
                     }
                 } else {
-                    Intent intent = new Intent(getActivity(), DialogActivity.class);
+                    Intent intent = new Intent(mActivity.get(), DialogActivity.class);
                     EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
                     startActivity(intent);
                 }
@@ -369,7 +333,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @NonNull
     private View.OnClickListener handleBtnClick() {
         return v -> {
-            Boolean isLogIn = SPManager.getInstance(getActivity()).getIsLoggedStatus();
+            Boolean isLogIn = SPManager.getInstance(mActivity.get()).getIsLoggedStatus();
             switch (v.getId()) {
                 case R.id.llBtnFirst_MMF:
                     checkRootLogin(mMenuBottom, 0, isLogIn);
@@ -391,7 +355,7 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
             if (isLogin) {
                 mCallBackMenuModel.onItemAction(mMenuBottom.get(position));
             } else {
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
+                Intent intent = new Intent(mActivity.get(), DialogActivity.class);
                 EnumUtil.serialize(DialogType.class, DialogType.LOGIN).to(intent);
                 startActivity(intent);
             }
@@ -403,6 +367,38 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRecyclerView.addOnItemTouchListener(null);
+        //mRecyclerView.addOnItemTouchListener(null);
+//
+//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+//        refWatcher.watch(this);
+    }
+
+    private Bundle buildMenuBundle(Context _ctx) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
+        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, setLang(_ctx));
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, getResidentID(_ctx));
+        return bundle;
+    }
+
+    private Bundle buildLogoImgBundle(int _imgType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
+        bundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, _imgType);
+        return bundle;
+    }
+
+    private int getResidentID(Context _ctx) {
+        return SPManager.getInstance(_ctx).getResidentId();
+    }
+
+    private String setLang(Context _ctx) {
+        String lng;
+        if (SPManager.getInstance(_ctx).getApplicationLanguage().equals("iw")) {
+            lng = "he";
+        } else {
+            lng = "en";
+        }
+        return lng;
     }
 }

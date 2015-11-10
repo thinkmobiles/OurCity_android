@@ -16,14 +16,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String lang = SPManager.getInstance(getApplicationContext()).getApplicationLanguage();
-        String country = SPManager.getInstance(getApplicationContext()).getApplicationCountry();
-        Locale locale = new Locale(lang, country);
-        Locale.setDefault(locale);
 
-        config = new Configuration(getBaseContext(). getResources().getConfiguration());
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
         super.onCreate(savedInstanceState);
     }
 

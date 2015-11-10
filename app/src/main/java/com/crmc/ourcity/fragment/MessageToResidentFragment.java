@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.MassageToResidentAdapter;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.callback.OnListItemActionListener;
@@ -21,6 +22,7 @@ import com.crmc.ourcity.loader.MassageToResidentLoader;
 import com.crmc.ourcity.rest.responce.events.MassageToResident;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MessageToResidentFragment extends BaseFourStatesFragment implements LoaderManager
@@ -39,6 +41,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     private OnListItemActionListener mOnListItemActionListener;
 
     private MassageToResidentAdapter mAdapter;
+    private WeakReference<MainActivity> mActivity;
 
     public static MessageToResidentFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         MessageToResidentFragment mMessageToResidentFragment = new MessageToResidentFragment();
@@ -70,6 +73,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
             mItemActionListener = (OnItemActionListener) _activity;
         } catch (ClassCastException e) {
@@ -81,6 +85,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
     public void onDetach() {
         mOnListItemActionListener = null;
         mItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
 
@@ -109,7 +114,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
             if (_data.size() > 0) {
-                mAdapter = new MassageToResidentAdapter(getActivity(), _data);
+                mAdapter = new MassageToResidentAdapter(mActivity.get(), _data);
                 lvMassageToResident.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 showContent();
@@ -124,7 +129,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     @Override
     public Loader<List<MassageToResident>> onCreateLoader(int _id, Bundle _args) {
-        return new MassageToResidentLoader(getActivity(), _args);
+        return new MassageToResidentLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -160,7 +165,7 @@ public class MessageToResidentFragment extends BaseFourStatesFragment implements
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

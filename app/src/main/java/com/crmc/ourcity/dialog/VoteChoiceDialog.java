@@ -12,6 +12,7 @@ import com.crmc.ourcity.callback.CallBackWithData;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.rest.responce.vote.VoteFull;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterView.OnItemClickListener {
@@ -21,10 +22,11 @@ public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterV
     private ArrayList<VoteFull> mVoteFulls;
     private ListView lvChoiceVote;
     private VotesListAdapter mAdapter;
-
+    private WeakReference<DialogActivity> mActivity;
     public VoteChoiceDialog() {
         super();
     }
+
 
     public static VoteChoiceDialog newInstance(ArrayList<VoteFull> _mVoteFull) {
         VoteChoiceDialog mVoteChoiceDialog = new VoteChoiceDialog();
@@ -33,6 +35,8 @@ public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterV
         mVoteChoiceDialog.setArguments(args);
         return mVoteChoiceDialog;
     }
+
+
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
@@ -44,6 +48,7 @@ public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterV
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((DialogActivity) _activity);
             mCallback = (CallBackWithData) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString() + " must implement OnActionDialogListenerWithData");
@@ -51,9 +56,16 @@ public class VoteChoiceDialog extends BaseFourStatesFragment implements AdapterV
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
+        mActivity.clear();
+    }
+
+    @Override
     protected void initViews() {
         lvChoiceVote = findView(R.id.lvChoiceVote_DCV);
-        mAdapter = new VotesListAdapter(getActivity(), mVoteFulls);
+        mAdapter = new VotesListAdapter(mActivity.get(), mVoteFulls);
         lvChoiceVote.setAdapter(mAdapter);
         showContent();
     }

@@ -11,11 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,7 +40,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     private String entryDescription;
     private String entryDate;
     private String entryLink;
-
+    private WeakReference<MainActivity> mAcivity;
 
 
     public static RSSEntryFragment newInstance(String _entryTitle, String _description, String _link, String _date) {
@@ -50,6 +52,24 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         args.putString(Constants.CONFIGURATION_KEY_LINK, _link);
         rssEntryFragment.setArguments(args);
         return rssEntryFragment;
+    }
+
+    @Override
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        try {
+            mAcivity = new WeakReference<>((MainActivity) _activity);
+            mOnListItemActionListener = (OnListItemActionListener) _activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        mAcivity.clear();
+        super.onDetach();
     }
 
     @Override
@@ -68,21 +88,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
         super.onResume();
     }
 
-    @Override
-    public void onAttach(Activity _activity) {
-        super.onAttach(_activity);
-        try {
-            mOnListItemActionListener = (OnListItemActionListener) _activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        super.onDetach();
-    }
 
     @Override
     protected void initViews() {
@@ -128,7 +134,7 @@ public class RSSEntryFragment extends BaseFourStatesFragment {
     private void setImage() {
 
         if (!TextUtils.isEmpty(entryLink)) {
-            ivLink.setImageDrawable(Image.setDrawableImageColor(getActivity(), R.drawable.link,
+            ivLink.setImageDrawable(Image.setDrawableImageColor(mAcivity.get(), R.drawable.link,
                     Image.darkenColor(0.2)));
         } else {
             ivLink.setVisibility(View.GONE);

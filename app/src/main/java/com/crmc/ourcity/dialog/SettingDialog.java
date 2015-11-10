@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -19,6 +18,8 @@ import com.crmc.ourcity.loader.LogoutLoader;
 import com.crmc.ourcity.notification.RegistrationIntentService;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class SettingDialog extends BaseFourStatesFragment {
 
     private RelativeLayout login;
@@ -29,7 +30,7 @@ public class SettingDialog extends BaseFourStatesFragment {
     private RelativeLayout visibleTickets;
     private RelativeLayout language;
     private OnActionDialogListener mCallback;
-    private FragmentActivity mActivity;
+    private WeakReference<DialogActivity> mActivity;
     int showInterestAreas;
     int showHotCalls;
 
@@ -38,6 +39,7 @@ public class SettingDialog extends BaseFourStatesFragment {
         super.onAttach(_activity);
 
         try {
+            mActivity = new WeakReference<>((DialogActivity) _activity);
             mCallback = (OnActionDialogListener) _activity;
         } catch (ClassCastException _e) {
             throw new ClassCastException(_activity.toString()
@@ -48,16 +50,15 @@ public class SettingDialog extends BaseFourStatesFragment {
     @Override
     public void onDetach() {
         mCallback = null;
+        mActivity.clear();
         super.onDetach();
     }
 
     @Override
     protected void initViews() {
 
-        mActivity = getActivity();
-
-        showHotCalls = SPManager.getInstance(mActivity).getShowHotCalls();
-        showInterestAreas = SPManager.getInstance(mActivity).getShowInterestAreas();
+        showHotCalls = SPManager.getInstance(mActivity.get()).getShowHotCalls();
+        showInterestAreas = SPManager.getInstance(mActivity.get()).getShowInterestAreas();
 
         login = findView(R.id.rlSignIn_SetDFrgmt);
         logout = findView(R.id.rlLogout_FDS);
@@ -67,26 +68,26 @@ public class SettingDialog extends BaseFourStatesFragment {
         visibleTickets = findView(R.id.rlVisibleTickets_SetDFrgmt);
         language = findView(R.id.rlLanguage_SetDFrgmt);
 
-            if (SPManager.getInstance(mActivity).getIsLoggedStatus()) {
-                logout.setVisibility(View.VISIBLE);
-                login.setVisibility(View.GONE);
-                interestingAreas.setVisibility(View.VISIBLE);
-                updateResidentInfo.setVisibility(View.VISIBLE);
-                visibleTickets.setVisibility(View.VISIBLE);
-            } else {
-                logout.setVisibility(View.GONE);
-                interestingAreas.setVisibility(View.GONE);
-                updateResidentInfo.setVisibility(View.GONE);
-                visibleTickets.setVisibility(View.GONE);
-            }
+        if (SPManager.getInstance(mActivity.get()).getIsLoggedStatus()) {
+            logout.setVisibility(View.VISIBLE);
+            login.setVisibility(View.GONE);
+            interestingAreas.setVisibility(View.VISIBLE);
+            updateResidentInfo.setVisibility(View.VISIBLE);
+            visibleTickets.setVisibility(View.VISIBLE);
+        } else {
+            logout.setVisibility(View.GONE);
+            interestingAreas.setVisibility(View.GONE);
+            updateResidentInfo.setVisibility(View.GONE);
+            visibleTickets.setVisibility(View.GONE);
+        }
 
 
-       if(showInterestAreas == 0) {
-           interestingAreas.setVisibility(View.GONE);
-       }
-       if(showHotCalls == 0) {
-           hotCalls.setVisibility(View.GONE);
-       }
+        if (showInterestAreas == 0) {
+            interestingAreas.setVisibility(View.GONE);
+        }
+        if (showHotCalls == 0) {
+            hotCalls.setVisibility(View.GONE);
+        }
 
         showContent();
     }
@@ -119,7 +120,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                     break;
                 case R.id.rlLogout_FDS:
                     Bundle bundle = new Bundle();
-                    bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(mActivity).getAuthToken());
+                    bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(mActivity.get()).getAuthToken());
                     getLoaderManager().initLoader(1, bundle, mLogoutCallback);
                     break;
                 case R.id.rlInterestAreas_SetDFrgmt:
@@ -143,15 +144,15 @@ public class SettingDialog extends BaseFourStatesFragment {
     private LoaderManager.LoaderCallbacks<Boolean> mLogoutCallback = new LoaderManager.LoaderCallbacks<Boolean>() {
         @Override
         public Loader<Boolean> onCreateLoader(int id, Bundle args) {
-            return new LogoutLoader(mActivity, args);
+            return new LogoutLoader(mActivity.get(), args);
         }
 
         @Override
         public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
             if (data) {
-                SPManager.getInstance(mActivity).setIsLoggedStatus(false);
-                SPManager.getInstance(mActivity).deleteResidentInformation();
-                mActivity.stopService(new Intent(mActivity, RegistrationIntentService.class));
+                SPManager.getInstance(mActivity.get()).setIsLoggedStatus(false);
+                SPManager.getInstance(mActivity.get()).deleteResidentInformation();
+                mActivity.get().stopService(new Intent(mActivity.get(), RegistrationIntentService.class));
                 logout.setVisibility(View.GONE);
                 login.setVisibility(View.VISIBLE);
                 interestingAreas.setVisibility(View.GONE);
@@ -159,7 +160,7 @@ public class SettingDialog extends BaseFourStatesFragment {
                 visibleTickets.setVisibility(View.GONE);
                 mCallback.onLogoutListener();
             } else {
-                Toast.makeText(mActivity, R.string.connection_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), R.string.connection_error, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -171,11 +172,4 @@ public class SettingDialog extends BaseFourStatesFragment {
     @Override
     public void onRetryClick() {
     }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
-//        refWatcher.watch(this);
-//    }
 }

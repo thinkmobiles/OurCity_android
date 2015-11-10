@@ -11,8 +11,10 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.loader.CrmcCredentialsLoader;
@@ -26,6 +28,7 @@ import com.crmc.ourcity.rest.responce.ticker.TickerModel;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class SplashScreenActivity extends BaseActivity implements LoaderManager.LoaderCallbacks {
@@ -33,11 +36,10 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
 
     private RelativeLayout rlBackground;
     private Handler mHandler = new Handler();
-    private int cityNumber;
     private Drawable drawable;
     private ArrayList<TickerModel> tickers;
-    private Bundle loaderBundle;
-    private int SPLASH_DELAY;
+    private WeakReference<SplashScreenActivity> mActivity = new WeakReference<>(this);
+    private static final int SPLASH_DELAY = 1;
     private Resources resources;
 
     @Override
@@ -45,49 +47,46 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         resources = getResources();
-        SPLASH_DELAY = getResources().getInteger(R.integer.banner_delay); //seconds
-        cityNumber = getResources().getInteger(R.integer.city_id);
         drawable = ResourcesCompat.getDrawable(resources, R.drawable.splash, null);
         rlBackground = (RelativeLayout) findViewById(R.id.rlSplashScreen_SPA);
-        rlBackground.setBackground(ResourcesCompat.getDrawable(resources, R.drawable.splash, null));
+        rlBackground.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.splash, null));
         new Handler().postDelayed(() -> {
-            buildLoaderBundle();
-            loadMobileUISettings();
-            loadCrmcCredential();
-            loadTicker();
-            loadBackgroundImage();
+            Bundle loaderBundle = buildLoaderBundle();
+            loadMobileUISettings(loaderBundle);
+            loadCrmcCredential(loaderBundle);
+            loadTicker(loaderBundle);
+            loadBackgroundImage(loaderBundle);
         }, 3000);
-
     }
 
-    private void loadMobileUISettings() {
-        getSupportLoaderManager().initLoader(Constants.LOADER_MOBILE_UI_SETTINGS_ID, loaderBundle, this);
+    private void loadMobileUISettings(Bundle args) {
+        getSupportLoaderManager().initLoader(Constants.LOADER_MOBILE_UI_SETTINGS_ID, args, this);
     }
 
-    private void loadCrmcCredential() {
-        getSupportLoaderManager().initLoader(Constants.LOADER_CRMC_CREDENTIAL_ID, loaderBundle, this);
+    private void loadCrmcCredential(Bundle args) {
+        getSupportLoaderManager().initLoader(Constants.LOADER_CRMC_CREDENTIAL_ID, args, this);
     }
 
-    private void loadTicker() {
-        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, loaderBundle, this);
-
+    private void loadTicker(Bundle args) {
+        getSupportLoaderManager().initLoader(Constants.LOADER_TICKERS_ID, args, this);
     }
 
-    private void loadBackgroundImage() {
-        getSupportLoaderManager().initLoader(Constants.LOADER_BACKGROUND_IMAGE_ID, loaderBundle, this);
+    private void loadBackgroundImage(Bundle args) {
+        getSupportLoaderManager().initLoader(Constants.LOADER_BACKGROUND_IMAGE_ID, args, this);
     }
 
-    private void buildLoaderBundle() {
-        loaderBundle = new Bundle();
-        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
+    private Bundle buildLoaderBundle() {
+       Bundle loaderBundle = new Bundle();
+        loaderBundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
         loaderBundle.putInt(Constants.BUNDLE_CONSTANT_LOAD_IMAGE_TYPE, Constants
                 .BUNDLE_CONSTANT_LOAD_IMAGE_TYPE_PROMOTIONAL);
+        return loaderBundle;
     }
 
     private Runnable mEndSplash = new Runnable() {
         public void run() {
             if (!isFinishing()) {
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                Intent intent = new Intent(mActivity.get(), MainActivity.class);
                 intent.putParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST, tickers);
                 getSupportLoaderManager().destroyLoader(Constants.LOADER_BACKGROUND_IMAGE_ID);
                 getSupportLoaderManager().destroyLoader(Constants.LOADER_TICKERS_ID);
@@ -102,16 +101,16 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
         Loader loader = null;
         switch (_id) {
             case Constants.LOADER_MOBILE_UI_SETTINGS_ID:
-                loader = new MobileUISettingsLoader(SplashScreenActivity.this, _args);
+                loader = new MobileUISettingsLoader(mActivity.get(), _args);
                 break;
             case Constants.LOADER_CRMC_CREDENTIAL_ID:
-                loader = new CrmcCredentialsLoader(SplashScreenActivity.this, _args);
+                loader = new CrmcCredentialsLoader(mActivity.get(), _args);
                 break;
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
-                loader = new ImageLoader(SplashScreenActivity.this, _args);
+                loader = new ImageLoader(mActivity.get(), _args);
                 break;
             case Constants.LOADER_TICKERS_ID:
-                loader = new TickerLoader(SplashScreenActivity.this, _args);
+                loader = new TickerLoader(mActivity.get(), _args);
                 break;
         }
         return loader;
@@ -130,7 +129,6 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
                         }
                     }
                 }
-
 //                if (settings != null & settings.properties != null & settings.properties.size() > 0) {
 //                    saveMobileUISettings(settings);
 //                }
@@ -170,7 +168,7 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
 
     private void setBackgroundImage(String dataString) {
         drawable = new BitmapDrawable(resources, Image.convertBase64ToBitmap(dataString));
-        rlBackground.setBackground(drawable);
+        rlBackground.setBackgroundDrawable(drawable);
     }
 
     private void saveCredentials(CRMCCredentials credentials) {
@@ -180,4 +178,10 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(Loader _loader) {}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mActivity.clear();
+    }
 }

@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,11 +13,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.CityEntitiesListAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -25,18 +28,19 @@ import com.crmc.ourcity.loader.CityEntitiesLoader;
 import com.crmc.ourcity.rest.responce.events.CityEntities;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class CityEntitiesFragment  extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<CityEntities>> {
+public class CityEntitiesFragment  extends BaseFourStatesFragment implements TextWatcher, LoaderManager.LoaderCallbacks<List<CityEntities>> {
 
     private ListView lvCityEntities;
-    private View vUnderLine_CEF;
     private EditText etSearch_CEF;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String color;
     private String json;
     private String route;
     private String title;
+    private WeakReference<MainActivity> mActivity;
 
     private CityEntitiesListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
@@ -53,12 +57,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     }
 
     @Override
-    public void onDestroy() {
-        hideKeyboard(getActivity());
-        super.onDestroy();
-    }
-
-    @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
@@ -71,6 +69,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -80,6 +79,12 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        etSearch_CEF.removeTextChangedListener(this);
+        swipeRefreshLayout.setOnRefreshListener(null);
+        lvCityEntities.setOnItemClickListener(null);
+
+        hideKeyboard(mActivity.get(), etSearch_CEF);
+        mActivity.clear();
         super.onDetach();
     }
 
@@ -94,7 +99,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
     public void onLoadFinished(Loader<List<CityEntities>> _loader, List<CityEntities> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new CityEntitiesListAdapter(getActivity(), _data, mOnListItemActionListener);
+            mAdapter = new CityEntitiesListAdapter(mActivity.get(), _data, mOnListItemActionListener);
             lvCityEntities.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             showContent();
@@ -105,7 +110,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     @Override
     public Loader<List<CityEntities>> onCreateLoader(int _id, Bundle _args) {
-        return new CityEntitiesLoader(getActivity(), _args);
+        return new CityEntitiesLoader(mActivity.get(), _args);
     }
 
     @Override
@@ -119,7 +124,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
         etSearch_CEF = findView(R.id.etSearch_CEF);
         lvCityEntities = findView(R.id.lvCityEntities_CEF);
-        vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
+        View vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
         try {
             Image.init(Color.parseColor(color));
         } catch (Exception e){
@@ -136,26 +141,13 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         lvCityEntities.setOnItemClickListener(handleItemClick());
         swipeRefreshLayout.setOnRefreshListener(this::loadCityEntities);
         swipeInStart();
-        etSearch_CEF.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mAdapter != null) {
-                    mAdapter.getFilter().filter(s.toString());
-                }
-            }
-        });
+        etSearch_CEF.addTextChangedListener(this);
     }
 
     @NonNull
     private AdapterView.OnItemClickListener handleItemClick() {
         return (_parent, _view, _position, _id) -> {
-            hideKeyboard(getActivity());
+            hideKeyboard(mActivity.get());
             mOnListItemActionListener.onCityEntitiesItemAction(mAdapter.getItem(_position));
             etSearch_CEF.setText("");
         };
@@ -163,7 +155,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
@@ -190,5 +182,22 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Loa
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, json);
         bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, route);
         getLoaderManager().restartLoader(Constants.LOADER_CITY_ENTITIES_ID, bundle, this);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (mAdapter != null) {
+            mAdapter.getFilter().filter(s.toString());
+        }
     }
 }

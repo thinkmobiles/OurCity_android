@@ -1,6 +1,6 @@
 package com.crmc.ourcity.fourstatelayout;
 
-import android.app.Service;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -8,17 +8,18 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.BaseFragmentActivity;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.fragment.MainMenuFragment;
 import com.crmc.ourcity.fragment.SubMenuFragment;
 import com.crmc.ourcity.utils.SPManager;
-import com.crmc.ourcity.utils.SoftKeyboard;
+
+import java.lang.ref.WeakReference;
 
 /**
  * base class for detail fragment with state: loading, no data, connection error, show content *
@@ -29,9 +30,8 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     private TextView mErrorTitle, mEmptyTitle, mLoadingTitle;
     private FourStateLayout mainView;
     protected View rootView;
-    protected SoftKeyboard softKeyboard;
     protected int amountOfVisibleTickets;
-
+    private WeakReference<BaseFragmentActivity> mActivity;
 
     protected int getLayoutResource() {
         return R.layout.base_four_state_layout;
@@ -44,9 +44,22 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((BaseFragmentActivity) activity);
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(getActivity()).getAmountOfVisibleTickets());
+        amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(mActivity.get()).getAmountOfVisibleTickets());
     }
 
     @Override
@@ -57,8 +70,6 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         ViewGroup mEmptyLayout = (ViewGroup) _inflater.inflate(R.layout.empty_layout, _root, false);
         ViewGroup mErrorLayout = (ViewGroup) _inflater.inflate(R.layout.error_layout, _root, false);
         ViewGroup mLoadingLayout = (ViewGroup) _inflater.inflate(R.layout.loading_layout, _root, false);
-        InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Service.INPUT_METHOD_SERVICE);
-        softKeyboard = new SoftKeyboard(_root, im);
 
         mRetryButton = (Button) mErrorLayout.findViewById(R.id.btn_try_again);
         mEmptyTitle = (TextView) mEmptyLayout.findViewById(R.id.empty_title);
@@ -73,10 +84,10 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         Fragment f = getFragmentManager().findFragmentById(R.id.flContainer_MA);
 
         if (f instanceof MainMenuFragment || f instanceof SubMenuFragment) {
-            getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.VISIBLE);
+            mActivity.get().findViewById(R.id.ticker_container_MA).setVisibility(View.VISIBLE);
         } else {
             try {
-                getActivity().findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
+                mActivity.get().findViewById(R.id.ticker_container_MA).setVisibility(View.GONE);
             } catch (Exception _e) {
 
             }
@@ -136,7 +147,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     }
 
     protected void configureActionBar(boolean isBackVisible, boolean isHomeVisible, String title) {
-        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        View actionBar = mActivity.get().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
         TextView mTitle = (TextView) actionBar.findViewById(R.id.action_title);
@@ -164,7 +175,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     }
 
     protected void configureActionBar(boolean isBackVisible, boolean isHomeVisible) {
-        View actionBar = getActivity().findViewById(R.id.rlActionBar);
+        View actionBar = mActivity.get().findViewById(R.id.rlActionBar);
         ImageView mActionBack = (ImageView) actionBar.findViewById(R.id.action_back);
         ImageView mActionHome = (ImageView) actionBar.findViewById(R.id.action_home);
 
@@ -197,11 +208,11 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
         return result;
     }
 
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        mRetryButton.setOnClickListener(null);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRetryButton.setOnClickListener(null);
 //        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
 //        refWatcher.watch(this);
-//    }
+    }
 }

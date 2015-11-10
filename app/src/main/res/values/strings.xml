@@ -72,7 +72,7 @@
 
 
     <!-- for test, remove after -->
-    <string name="focus_address">St.</string>
+    <string name="focus_address">Street</string>
     <string name="focus_number">Num.</string>
     <string name="focus_f_name">First name</string>
     <string name="focus_l_name">Last name</string>
@@ -121,7 +121,7 @@
     <string name="incorrect_credentials">Incorrect username or passwordי</string>
     <string name="loading_string_sign_up_dialog">Loading</string>
     <string name="no_messages_for_resident">No messages for resident</string>
-    <string name="dialog_title_interest_area">Interest points</string>
+    <string name="dialog_title_interest_area">Interest areas</string>
     <string name="dialog_setting_update_resident_info">Personal details</string>
 
     <string name="header_trun_on_text">הפעלת GPS</string>
@@ -169,5 +169,16 @@
     <string name="dialog_title_languages">Language</string>
     <string name="dialog_language_english">English</string>
     <string name="dialog_language_hebrew">Hebrew (עִברִית)</string>
+    <string name="restart_app_string">Please restart the application for language changes to take place.</string>
+    <string name="attention_string">Attention</string>
+    <string name="cannot_find_street">Can not find the street address, pick it from dropdown list</string>
+    <string name="city_entity_detail">Details:</string>
+    <string name="city_entity_post">Post:</string>
+    <string name="city_entity_email">Email:</string>
+    <string name="city_entity_info">Information:</string>
+    <string name="city_entity_phone">Phone:</string>
+    <string name="city_entity_mobile_number">Mobile number:</string>
+    <string name="sign_up_update_profile_text">Save changes</string>
+
 
 </resources>

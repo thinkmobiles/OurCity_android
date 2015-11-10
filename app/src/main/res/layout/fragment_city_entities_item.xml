@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="פרטים:"
+                android:text="@string/city_entity_detail"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="הודעה:"
+                android:text="@string/city_entity_post"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="דואר אלקטרוני:"
+                android:text="@string/city_entity_email"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="מידע:"
+                android:text="@string/city_entity_info"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="מספר טלפון:"
+                android:text="@string/city_entity_phone"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="טלפון נייד:"
+                android:text="@string/city_entity_mobile_number"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 

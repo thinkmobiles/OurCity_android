@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.RSSAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -22,6 +23,7 @@ import com.crmc.ourcity.loader.RSSLoader;
 import com.crmc.ourcity.utils.Image;
 import com.crmc.ourcity.utils.rss.RssItem;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class RSSListFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<RssItem>> {
@@ -34,6 +36,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     private SwipeRefreshLayout swipeRefreshLayout;
     private RSSAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mAcivity;
 
     public static RSSListFragment newInstance(String _colorItem, String _rssLink, String _title) {
         RSSListFragment rssListFragment = new RSSListFragment();
@@ -46,17 +49,10 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     }
 
     @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
-        title = getArguments().getString(Constants.NODE_TITLE);
-    }
-
-    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mAcivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -66,7 +62,16 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mAcivity.clear();
         super.onDetach();
+    }
+
+    @Override
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        rssLink = getArguments().getString(Constants.BUNDLE_CONSTANT_RSS_LINK, "");
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -82,7 +87,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     public void onLoadFinished(Loader<List<RssItem>> _loader, List<RssItem> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new RSSAdapter(getActivity(), _data, mOnListItemActionListener);
+            mAdapter = new RSSAdapter(mAcivity.get(), _data, mOnListItemActionListener);
             lvRssEntries.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             showContent();
@@ -93,7 +98,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     @Override
     public Loader<List<RssItem>> onCreateLoader(int _id, Bundle _args) {
-        return new RSSLoader(getActivity(), _args);
+        return new RSSLoader(mAcivity.get(), _args);
     }
 
     @Override
@@ -135,7 +140,7 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mAcivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);

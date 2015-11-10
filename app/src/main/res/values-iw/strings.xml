@@ -57,12 +57,7 @@
     <string name="menu_back">חזרה</string>
     <string name="menu_refresh">רענן</string>
 
-    <!-- emergency buttons-->
-    <string name="emergency_btn_city_site_title">אתר העירייה</string>
-    <string name="emergency_btn_facebook_title">פייסבוק</string>
-    <string name="emergency_btn_phone_title">טלפונים</string>
-    <string name="emergency_btn_focus">חיוג למוקד</string>
-    <string name="emergency_btn_quick_phone">לחצן מצוקה</string>
+
     <!-- four state layout-->
     <string name="empty_message">אין נתונים</string>
     <string name="error_message">שגיאה</string>
@@ -73,13 +68,7 @@
     <string name="map_btn_filter">מסנן</string>
     <string name="map_btn_trips">מסלולים</string>
 
-    <!-- nodes titles -->
-    <string name="node_payments_title">תשלומים</string>
-    <string name="node_appeals_title">פניות למוקד</string>
-    <string name="node_common_info_title">העיריה שלי</string>
-    <string name="node_voting_title">סקרים</string>
-    <string name="node_map_title">מפות</string>
-    <string name="node_getting_notification">הודעות עבורך</string>
+
     <string name="title_activity_dialog">הדו-שיח</string>
 
 
@@ -95,9 +84,6 @@
     <string name="focus_titel">דיווח למוקד </string>
     <string name="focus_titel2">עדכון פרטים </string>
     <string name="focus_name_city">שם העיר</string>
-    <string name="txt_gcn">האם את מעוניין/ת לקבל הודעות?</string>
-    <string name="txt_login">כדי להנות מהאפלקציה מומלץ לשתף את פרטיך האישיים, מעוניין/ת עכשיו?</string>
-    <string name="resident_userName">שם משתמש</string>
 
     <string name="sign_in_dialog_login">כניסה</string>
     <string name="sign_up_dialog_lName">שם משפחה</string>
@@ -184,6 +170,16 @@
     <string name="dialog_title_languages">שפה</string>
     <string name="dialog_language_english">אנגלית (English)</string>
     <string name="dialog_language_hebrew">עִברִית</string>
+    <string name="restart_app_string">אנא הפעל מחדש את הבקשה לשינויי שפה להתקיים.</string>
+    <string name="attention_string">תשומת הלב</string>
+    <string name="cannot_find_street">לא יכול למצוא את כתובת הרחוב , להרים אותומרשימה נפתחת</string>
+    <string name="city_entity_detail">פרטים:</string>
+    <string name="city_entity_post">הודעה:</string>
+    <string name="city_entity_email">דואר אלקטרוני:</string>
+    <string name="city_entity_info">מידע:</string>
+    <string name="city_entity_phone">מספר טלפון:</string>
+    <string name="city_entity_mobile_number">טלפון נייד:</string>
+    <string name="sign_up_update_profile_text">שמור שינויים</string>
 
 
 </resources>

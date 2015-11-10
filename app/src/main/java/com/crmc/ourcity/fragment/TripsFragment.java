@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.adapter.TripsListAdapter;
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
@@ -24,6 +25,7 @@ import com.crmc.ourcity.loader.MapTripsLoader;
 import com.crmc.ourcity.rest.responce.map.MapTrips;
 import com.crmc.ourcity.utils.Image;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class TripsFragment extends BaseFourStatesFragment implements LoaderManager.LoaderCallbacks<List<MapTrips>> {
@@ -39,6 +41,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     private Double lon;
     private String title;
     private OnListItemActionListener mOnListItemActionListener;
+    private WeakReference<MainActivity> mActivity;
 
     public static TripsFragment newInstance(Double _lat, Double _lon, String _colorItem, String _requestJson, String
             _requestRoute, String _title) {
@@ -58,6 +61,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
+            mActivity = new WeakReference<>((MainActivity) _activity);
             mOnListItemActionListener = (OnListItemActionListener) _activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(_activity.toString() + " must implement OnListItemActionListener");
@@ -67,6 +71,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     @Override
     public void onDetach() {
         mOnListItemActionListener = null;
+        mActivity.clear();
         super.onDetach();
     }
 
@@ -117,7 +122,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
 
     public void swipeInStart() {
         TypedValue typed_value = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
+        mActivity.get().getTheme().resolveAttribute(android.R.attr.actionBarSize, typed_value, true);
         swipeRefreshLayout.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
@@ -133,7 +138,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     public void onLoadFinished(Loader<List<MapTrips>> _loader, List<MapTrips> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new TripsListAdapter(getActivity(), _data);
+            mAdapter = new TripsListAdapter(mActivity.get(), _data);
             lvTrips.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             showContent();
@@ -144,7 +149,7 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
 
     @Override
     public Loader<List<MapTrips>> onCreateLoader(int _id, Bundle _args) {
-        return new MapTripsLoader(getActivity(), _args);
+        return new MapTripsLoader(mActivity.get(), _args);
     }
 
     @Override

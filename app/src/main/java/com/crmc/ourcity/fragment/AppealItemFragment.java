@@ -1,5 +1,6 @@
 package com.crmc.ourcity.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crmc.ourcity.R;
+import com.crmc.ourcity.activity.MainActivity;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
 import com.crmc.ourcity.rest.responce.appeals.ResultObject;
 import com.crmc.ourcity.utils.Image;
+
+import java.lang.ref.WeakReference;
 
 public class AppealItemFragment extends BaseFourStatesFragment {
 
@@ -22,6 +26,7 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     private RelativeLayout rlImageTicketAIF;
     private View vUnderLine_AIF, vBottomLine_AIF;
     private LinearLayout llAddress, llDescription, llDate, llStat;
+    private WeakReference<MainActivity> mActivity;
 
 
     public static AppealItemFragment newInstance(ResultObject _resultObject) {
@@ -30,6 +35,18 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         args.putParcelable(Constants.CONFIGURATION_KEY_APPEAL_ITEM, _resultObject);
         frgmt.setArguments(args);
         return frgmt;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((MainActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -83,7 +100,7 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     private void setImage() {
         vUnderLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
-        Image.setBoarderBackgroundColor(getActivity(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0)), 2,
+        Image.setBoarderBackgroundColor(mActivity.get(), String.format("#%06X", 0xFFFFFF & Image.darkenColor(0.0)), 2,
                 5, "#ffffff", rlImageTicketAIF);
     }
 

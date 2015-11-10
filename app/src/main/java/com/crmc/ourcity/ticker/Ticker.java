@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.crmc.ourcity.callback.OnListItemActionListener;
 import com.crmc.ourcity.rest.responce.ticker.TickerModel;
+import com.crmc.ourcity.utils.SPManager;
 
 import java.util.List;
 
@@ -37,8 +38,18 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
         DisplayMetrics metrics = _context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
 
+        int firstEndVal = -1 * width;
+        int secEndVal = width;
+
+        if(SPManager.getInstance(getContext()).getApplicationLanguage().equals("en")) {
+            firstEndVal = firstEndVal * -1;
+            secEndVal = secEndVal * -1;
+        }
+
+
+
         setOnClickListener(this);
-        mAimator = ObjectAnimator.ofFloat(this, "translationX", -1 * width, width);
+        mAimator = ObjectAnimator.ofFloat(this, "translationX",  firstEndVal, secEndVal);
         mAimator.setDuration(12000);
         mAimator.addListener(this);
         mAimator.setRepeatCount(ValueAnimator.INFINITE);

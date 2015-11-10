@@ -1,5 +1,6 @@
 package com.crmc.ourcity.dialog;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import android.widget.ScrollView;
 
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fragment.BaseFragment;
 import com.crmc.ourcity.global.Constants;
@@ -41,6 +43,8 @@ import com.crmc.ourcity.utils.SPManager;
 import com.crmc.ourcity.view.EditTextStreetAutoComplete;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import java.lang.ref.WeakReference;
 
 import static com.crmc.ourcity.global.Constants.LOADER_GET_RESIDENT_INFO_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_LOGIN_ID;
@@ -61,19 +65,18 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private ProgressDialog dialogLoading;
     private boolean isEditable;
     private Handler mHandler;
+    private WeakReference<DialogActivity> mActivity;
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Bundle bundle = new Bundle();
-        int cityNumber = getResources().getInteger(R.integer.city_id);
-        String crmcUsername = SPManager.getInstance(getActivity()).getCRMCUsername();
-        String crmcPassword = SPManager.getInstance(getActivity()).getCRMCPassword();
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"" + cityNumber + "\"," +
-                "\"userName\":\"" + crmcUsername + "\",\"password\":\"" + crmcPassword + "\"}}");
-        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
-        getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, this);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((DialogActivity) activity);
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
     }
 
     @Override
@@ -88,9 +91,21 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         root = _inflater.inflate(R.layout.fragment_dialog_sign_up, _container, false);
         findUI(root);
         setListeners();
-        mHandler = new Handler(getActivity().getMainLooper());
-        dialogLoading = new ProgressDialog(getActivity());
+        mHandler = new Handler(mActivity.get().getMainLooper());
+        dialogLoading = new ProgressDialog(mActivity.get());
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle bundle = new Bundle();
+        String crmcUsername = SPManager.getInstance(mActivity.get()).getCRMCUsername();
+        String crmcPassword = SPManager.getInstance(mActivity.get()).getCRMCPassword();
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_JSON, "{\"getStreetListWrapper\":{\"clientId\":\"" + BuildConfig.CITY_ID + "\"," +
+                "\"userName\":\"" + crmcUsername + "\",\"password\":\"" + crmcPassword + "\"}}");
+        bundle.putString(Constants.BUNDLE_CONSTANT_REQUEST_ROUTE, "GetCRMCStreetList");
+        getLoaderManager().initLoader(Constants.LOADER_STREETS_ID, bundle, this);
     }
 
     private void findUI(View _root) {
@@ -108,6 +123,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         chbGlobalNotifications = (CheckBox) _root.findViewById(R.id.chbGlobalNotifications_SUDF);
         chbPersonalNotifications = (CheckBox) _root.findViewById(R.id.chbPersonalNotifications_SUDF);
         btnSignUpOrEdit = (Button) _root.findViewById(R.id.btnSignUpOrEdit_SUDF);
+        if (isEditable) btnSignUpOrEdit.setText(R.string.sign_up_update_profile_text);
         ScrollView view = (ScrollView) _root.findViewById(R.id.scrollView);
         view.setVerticalScrollBarEnabled(false);
         view.setHorizontalScrollBarEnabled(false);
@@ -146,15 +162,15 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         bundle.putInt(Constants.BUNDLE_CONSTANT_STREET_ID, selectedStreetID);
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_GLOBAL_NOTIFICATION_NEEDED, chbGlobalNotifications.isChecked());
         bundle.putBoolean(Constants.BUNDLE_CONSTANT_PERSONAL_NOTIFICATION_NEEDED, chbPersonalNotifications.isChecked());
-        bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(getActivity()).getAuthToken());
-        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(getActivity()).getPushToken());
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, getResources().getInteger(R.integer.city_id));
+        bundle.putString(Constants.BUNDLE_CONSTANT_AUTH_TOKEN, SPManager.getInstance(mActivity.get()).getAuthToken());
+        bundle.putString(Constants.BUNDLE_CONSTANT_PUSH_TOKEN, SPManager.getInstance(mActivity.get()).getPushToken());
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_ID, BuildConfig.CITY_ID);
 
         return bundle;
     }
 
     private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(mActivity.get());
         if (resultCode != ConnectionResult.SUCCESS) {
             return false;
         }
@@ -226,7 +242,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     @Override
     public void onFocusChange(View _v, boolean _hasFocus) {
         if (!_hasFocus) {
-            hideKeyboard(getActivity());
+            hideKeyboard(mActivity.get());
         }
     }
 
@@ -238,23 +254,23 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         switch (_id) {
 
             case LOADER_GET_RESIDENT_INFO_ID:
-                loader = new ResidentInfoLoader(getActivity(), _args);
+                loader = new ResidentInfoLoader(mActivity.get(), _args);
                 break;
 
             case LOADER_UPDATE_RESIDENT_INFO:
-                loader = new UpdateResidentInfoLoader(getActivity(), _args);
+                loader = new UpdateResidentInfoLoader(mActivity.get(), _args);
                 break;
 
             case LOADER_REGISTER_NEW_RESIDENT_ID:
-                loader = new RegisterLoader(getActivity(), _args);
+                loader = new RegisterLoader(mActivity.get(), _args);
                 break;
 
             case LOADER_LOGIN_ID:
-                loader = new LoginLoader(getActivity(), _args);
+                loader = new LoginLoader(mActivity.get(), _args);
                 break;
 
             case Constants.LOADER_STREETS_ID:
-                loader = new StreetsLoader(getActivity(), _args);
+                loader = new StreetsLoader(mActivity.get(), _args);
                 break;
         }
         return loader;
@@ -281,15 +297,15 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
             case LOADER_LOGIN_ID:
                 mHandler.postAtFrontOfQueue(() -> {
                     LoginResponse dataLogin = (LoginResponse) _data;
-                    SPManager.getInstance(getActivity()).setAuthToken(dataLogin.authToken);
-                    SPManager.getInstance(getActivity()).setCRMCUsername(dataLogin.crmcUsername);
-                    SPManager.getInstance(getActivity()).setCRMCPassword(dataLogin.crmcPassword);
-                    SPManager.getInstance(getActivity()).setIsLoggedStatus(true);
+                    SPManager.getInstance(mActivity.get()).setAuthToken(dataLogin.authToken);
+                    SPManager.getInstance(mActivity.get()).setCRMCUsername(dataLogin.crmcUsername);
+                    SPManager.getInstance(mActivity.get()).setCRMCPassword(dataLogin.crmcPassword);
+                    SPManager.getInstance(mActivity.get()).setIsLoggedStatus(true);
                     if ((chbGlobalNotifications.isChecked() || chbPersonalNotifications.isChecked()) && checkPlayServices()) {
-                        Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
-                        getActivity().startService(intent);
+                        Intent intent = new Intent(mActivity.get(), RegistrationIntentService.class);
+                        mActivity.get().startService(intent);
                     }
-                    hideKeyboard(getActivity());
+                    hideKeyboard(mActivity.get());
                     popBackStack();
 
                 });
@@ -317,7 +333,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                         streetNames[i] = streetData.streetsList.get(i).streetName;
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity.get(), android.R.layout.simple_list_item_1,
                             streetNames);
                     etStreet.setAdapter(adapter);
 
@@ -327,8 +343,8 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
                         etUsername.setTextColor(Color.GRAY);
                         etPassword.setTextColor(Color.GRAY);
                         Bundle args = new Bundle();
-                        args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, getResources().getInteger(R.integer.city_id));
-                        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+                        args.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
+                        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity.get()).getResidentId());
                         getLoaderManager().initLoader(Constants.LOADER_GET_RESIDENT_INFO_ID, args, this);
                     } else {
                         etUsername.setEnabled(true);
@@ -356,9 +372,9 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
             root.findViewById(R.id.tvErrorMessage_SUDF).setVisibility(View.VISIBLE);
 
         } else if (residentId > 0) {
-            SPManager.getInstance(getActivity()).setResidentId(residentId);
-            SPManager.getInstance(getActivity()).setUserName(etUsername.getText().toString());
-            SPManager.getInstance(getActivity()).setPassword(etPassword.getText().toString());
+            SPManager.getInstance(mActivity.get()).setResidentId(residentId);
+            SPManager.getInstance(mActivity.get()).setUserName(etUsername.getText().toString());
+            SPManager.getInstance(mActivity.get()).setPassword(etPassword.getText().toString());
 
             startLoginLoader();
         }
@@ -382,7 +398,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private void startUpdateResidentLoader() {
         getSelectedStreetId();
         Bundle args = createBundleForResident();
-        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(getActivity()).getResidentId());
+        args.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, SPManager.getInstance(mActivity.get()).getResidentId());
         getLoaderManager().restartLoader(LOADER_UPDATE_RESIDENT_INFO, args, this);
     }
 
@@ -404,12 +420,12 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
     private void getSelectedStreetId() {
         String street = etStreet.getText().toString();
-        Optional<Integer> set = Stream.of(streets)
+        Optional<Integer> optionalSelectedStreamId = Stream.of(streets)
                 .filter(item -> street.equals(item.streetName))
                 .map(item -> selectedStreetID = item.streetId).findFirst();
 
-        if (set.isPresent()) {
-            selectedStreetID = set.get();
+        if (optionalSelectedStreamId.isPresent()) {
+            selectedStreetID = optionalSelectedStreamId.get();
         } else {
             selectedStreetID = -1;
         }

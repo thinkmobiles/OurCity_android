@@ -1,5 +1,6 @@
 package com.crmc.ourcity.dialog;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class VisibleTicketsDialog extends BaseFourStatesFragment {
 
     private Button btnSave;
@@ -18,6 +21,19 @@ public class VisibleTicketsDialog extends BaseFourStatesFragment {
     private RadioButton rbVisibleTickets50;
     private RadioButton rbVisibleTickets100;
     private int selectedItemID;
+    private WeakReference<DialogActivity> mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((DialogActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
+    }
 
     @Override
     protected int getContentView() {
@@ -39,7 +55,7 @@ public class VisibleTicketsDialog extends BaseFourStatesFragment {
     }
 
     private void setPreviousCheckedRadioButton() {
-        selectedItemID = SPManager.getInstance(getActivity()).getAmountOfVisibleTickets();
+        selectedItemID = SPManager.getInstance(mActivity.get()).getAmountOfVisibleTickets();
         switch (selectedItemID) {
             case R.id.rbVisibleTickets20_FDVT:
                 rbVisibleTickets20.setChecked(true);
@@ -80,7 +96,7 @@ public class VisibleTicketsDialog extends BaseFourStatesFragment {
     @NonNull
     private View.OnClickListener handleClick() {
         return v -> {
-         SPManager.getInstance(getActivity()).setAmountOfVisibleTickets(selectedItemID);
+         SPManager.getInstance(mActivity.get()).setAmountOfVisibleTickets(selectedItemID);
          popBackStack();
         };
     }
@@ -89,21 +105,4 @@ public class VisibleTicketsDialog extends BaseFourStatesFragment {
     public void onRetryClick() {
 
     }
-
-//    private int getAmountOfVisibleClosedTickets(int rbId){
-//        //def value
-//        int result = 20;
-//        switch (rbId){
-//            case R.id.rbVisibleTickets20_FDVT:
-//                result = 20;
-//                break;
-//            case R.id.rbVisibleTickets50_FDVT:
-//                result = 50;
-//                break;
-//            case R.id.rbVisibleTickets100_FDVT:
-//                result = 100;
-//                break;
-//        }
-//        return result;
-//    }
 }

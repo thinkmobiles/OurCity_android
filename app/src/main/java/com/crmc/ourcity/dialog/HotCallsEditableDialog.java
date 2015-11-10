@@ -1,5 +1,6 @@
 package com.crmc.ourcity.dialog;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.utils.IntentUtils;
 import com.crmc.ourcity.utils.SPManager;
 
+import java.lang.ref.WeakReference;
+
 public class HotCallsEditableDialog extends BaseFourStatesFragment {
 
     private EditText etFirstEmergencyNumber;
@@ -24,7 +27,19 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
     private ImageView ivCallFirst;
     private ImageView ivCallSecond;
     private ImageView ivCallThird;
-    private FragmentActivity mActivity;
+    private WeakReference<DialogActivity> mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = new WeakReference<>((DialogActivity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity.clear();
+    }
 
     @Override
     protected int getContentView() {
@@ -34,7 +49,7 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        mActivity = getActivity();
+
         etFirstEmergencyNumber = findView(R.id.etFirstEmergencyNumber_FDHC);
         etSecondEmergencyNumber = findView(R.id.etSecondEmergencyNumber_FDHC);
         etThirdEmergencyNumber = findView(R.id.etThirdEmergencyNumber_FDHC);
@@ -66,14 +81,14 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
     }
 
     private void putValue() {
-        if (SPManager.getInstance(mActivity).getFirstEmergencyNum().length() > 0) {
-            etFirstEmergencyNumber.setText(SPManager.getInstance(getActivity()).getFirstEmergencyNum());
+        if (SPManager.getInstance(mActivity.get()).getFirstEmergencyNum().length() > 0) {
+            etFirstEmergencyNumber.setText(SPManager.getInstance(mActivity.get()).getFirstEmergencyNum());
         }
-        if (SPManager.getInstance(mActivity).getSecondEmergencyNum().length() > 0) {
-            etSecondEmergencyNumber.setText(SPManager.getInstance(getActivity()).getSecondEmergencyNum());
+        if (SPManager.getInstance(mActivity.get()).getSecondEmergencyNum().length() > 0) {
+            etSecondEmergencyNumber.setText(SPManager.getInstance(mActivity.get()).getSecondEmergencyNum());
         }
-        if (SPManager.getInstance(mActivity).getThirdEmergencyNum().length() > 0) {
-            etThirdEmergencyNumber.setText(SPManager.getInstance(getActivity()).getThirdEmergencyNum());
+        if (SPManager.getInstance(mActivity.get()).getThirdEmergencyNum().length() > 0) {
+            etThirdEmergencyNumber.setText(SPManager.getInstance(mActivity.get()).getThirdEmergencyNum());
         }
     }
 
@@ -88,11 +103,11 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
                 startActivityForResult(Intent.createChooser(IntentUtils.getIntentCall(_phone), getResources()
                         .getString(R.string.call_hint)), 57);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(getActivity(), getResources().getString(R.string.app_no_call_client),
+                Toast.makeText(mActivity.get(), getResources().getString(R.string.app_no_call_client),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.ivalid_number), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.get(), getResources().getString(R.string.ivalid_number), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -131,7 +146,7 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
 
                 case R.id.btnSavePhones_FDHC:
                     saveEmergencyNumbers();
-                    hideKeyboard(mActivity);
+                    hideKeyboard(mActivity.get());
                     popBackStack();
                     break;
             }
@@ -139,9 +154,9 @@ public class HotCallsEditableDialog extends BaseFourStatesFragment {
     }
 
     private void saveEmergencyNumbers() {
-        SPManager.getInstance(mActivity).setFirstEmergencyNumber(getFirstEmergencyNumber());
-        SPManager.getInstance(mActivity).setSecondEmergencyNum(getSecondEmergencyNumber());
-        SPManager.getInstance(mActivity).setThirdEmergencyNumber(getThirdEmergencyNumber());
+        SPManager.getInstance(mActivity.get()).setFirstEmergencyNumber(getFirstEmergencyNumber());
+        SPManager.getInstance(mActivity.get()).setSecondEmergencyNum(getSecondEmergencyNumber());
+        SPManager.getInstance(mActivity.get()).setThirdEmergencyNumber(getThirdEmergencyNumber());
     }
 
     @Override

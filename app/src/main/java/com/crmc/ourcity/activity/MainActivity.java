@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.callback.OnItemActionListener;
 import com.crmc.ourcity.callback.OnListItemActionListener;
@@ -72,6 +73,7 @@ import com.crmc.ourcity.utils.updateApp.VersionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -84,33 +86,19 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     private ImageView mActionBack;
     private ImageView mActionSettings;
     private TextView mTitle;
-    private WebViewFragment webViewFragment;
     private final int FRAGMENT_CONTAINER = R.id.flContainer_MA;
     private ArrayList<TickerModel> tickers;
     private boolean isLoggedIn;
-    private int cityNumber, residentId;
-    private String lng;
     private Handler mHandler;
     private VersionManager versionManager;
-    private Configuration config;
+
+    private final WeakReference<MainActivity> mActivity = new WeakReference<>(this);
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
-//        String lang = "iw";
-//        String country = "IL";
-//        Locale locale = new Locale(lang, country);
-//        Locale.setDefault(locale);
-//
-//        config = new Configuration(getBaseContext(). getResources().getConfiguration());
-//        config.locale = locale;
-//        getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-
+        changeLanguage();
         super.onCreate(_savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        config = new Configuration(getBaseContext().getResources().getConfiguration());
-        Log.d("LOC", config.locale.getDisplayLanguage());
 
         mHandler = new Handler(this.getMainLooper());
         isLoggedIn = SPManager.getInstance(this).getIsLoggedStatus();
@@ -136,22 +124,11 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         tickers = getIntent().getParcelableArrayListExtra(Constants.BUNDLE_TICKERS_LIST);
         if (tickers != null) {
             mTicker.setData((List) tickers);
-            mTicker.setOnTickerActionListener(this);
+            mTicker.setOnTickerActionListener(mActivity.get());
             mTicker.startAnimation();
         }
 
-        cityNumber = getResources().getInteger(R.integer.city_id);
-        if (Locale.getDefault().toString().equals("en_US")) {
-            lng = "en";
-        } else {
-            lng = "he";
-        }
-        residentId = SPManager.getInstance(this).getResidentId();
-
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, cityNumber);
-        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, lng);
-        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, residentId);
+        Bundle bundle = buildMenuBundle(mActivity.get());
         getSupportLoaderManager().initLoader(Constants.LOADER_MENU_ID, bundle, this);
 
         if (getFragmentById(FRAGMENT_CONTAINER) == null) {
@@ -159,6 +136,16 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+    }
+
+    private void changeLanguage() {
+        String lang = SPManager.getInstance(mActivity.get()).getApplicationLanguage();
+        String country = SPManager.getInstance(mActivity.get()).getApplicationCountry();
+        Locale locale = new Locale(lang, country);
+        //Locale.setDefault(locale);
+        Configuration config = new Configuration(getBaseContext(). getResources().getConfiguration());
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
     @NonNull
@@ -170,14 +157,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                     setTopFragment(MainMenuFragment.newInstance());
                     break;
                 case R.id.action_settings:
-//                    Fragment fragment = getSupportFragmentManager().findFragmentById(FRAGMENT_CONTAINER);
-//                    boolean isFromMainActivity = fragment instanceof MainMenuFragment || fragment instanceof
-//                            SubMenuFragment;
                     Intent intent = new Intent(this, DialogActivity.class);
-                    //intent.putExtra(Constants.IS_FROM_MAIN_ACTIVITY, isFromMainActivity);
                     EnumUtil.serialize(DialogType.class, DialogType.SETTING).to(intent);
-
-                    //startActivity(intent);
                     startActivityForResult(intent, 1);
                     break;
                 case R.id.action_back:
@@ -214,8 +195,7 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
                 }
                 break;
             case Constants.ACTION_TYPE_LINK:
-                webViewFragment = WebViewFragment.newInstance(_menuModel.link, _menuModel.colorItem, _menuModel.title);
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
+                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.link, _menuModel.colorItem, _menuModel.title));
                 break;
             case Constants.ACTION_TYPE_DOCUMENT:
                 replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_menuModel.colorItem,
@@ -328,9 +308,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onTickerAction(View _view, String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
-            webViewFragment = WebViewFragment.newInstance(_link, Image.getStringColor
-                    (), _title);
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
+                    (), _title));
         }
     }
 
@@ -370,9 +349,10 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     public void onEventsClickLinkAction(String _link, String _title) {
         if (!TextUtils.isEmpty(_link)) {
-            webViewFragment = WebViewFragment.newInstance(_link, Image.getStringColor
-                    (), _title);
-            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, webViewFragment);
+//            webViewFragment = WebViewFragment.newInstance(_link, Image.getStringColor
+//                    (), _title);
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, WebViewFragment.newInstance(_link, Image.getStringColor
+                    (), _title));
         }
     }
 
@@ -449,17 +429,17 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 //
 //        } else {
         super.onBackPressed();
-        hideKeyboard(this);
+        hideKeyboard(mActivity.get());
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             setTopFragment(MainMenuFragment.newInstance());
         }
     }
 
 
-    private void hideKeyboard(Context _context) {
+    private void hideKeyboard(MainActivity _context) {
         InputMethodManager inputManager = (InputMethodManager) _context.getSystemService(Context.INPUT_METHOD_SERVICE);
         // check if no view has focus:
-        View v = ((Activity) _context).getCurrentFocus();
+        View v = _context.getCurrentFocus();
         if (v == null) return;
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
@@ -511,7 +491,34 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {
+    public void onLoaderReset(Loader loader) {}
 
+    private Bundle buildMenuBundle(Context _ctx) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.BUNDLE_CONSTANT_CITY_NUMBER, BuildConfig.CITY_ID);
+        bundle.putString(Constants.BUNDLE_CONSTANT_LANG, setLang(_ctx));
+        bundle.putInt(Constants.BUNDLE_CONSTANT_RESIDENT_ID, getResidentID(_ctx));
+        return bundle;
+    }
+
+    private int getResidentID(Context _ctx) {
+        return SPManager.getInstance(_ctx).getResidentId();
+    }
+
+    private String setLang(Context _ctx) {
+        String lng;
+        if (SPManager.getInstance(_ctx).getApplicationLanguage().equals("iw")) {
+            lng = "he";
+        } else {
+            lng = "en";
+        }
+        return lng;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        mActivity.clear();
     }
 }
