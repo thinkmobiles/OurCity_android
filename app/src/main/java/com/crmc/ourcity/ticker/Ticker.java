@@ -40,11 +40,11 @@ public class Ticker extends TextView implements Animator.AnimatorListener, View.
 
         int firstEndVal = -1 * width;
         int secEndVal = width;
-
-        if(SPManager.getInstance(getContext()).getApplicationLanguage().equals("en")) {
-            firstEndVal = firstEndVal * -1;
-            secEndVal = secEndVal * -1;
-        }
+//TODO:uncomment if they need ltr ticker direction
+//        if(SPManager.getInstance(getContext()).getApplicationLanguage().equals("en")) {
+//            firstEndVal = firstEndVal * -1;
+//            secEndVal = secEndVal * -1;
+//        }
 
 
 

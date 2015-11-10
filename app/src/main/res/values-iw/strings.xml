@@ -6,7 +6,7 @@
     <string name="call_hint">חיוג...</string>
     <string name="app_no_mail_client">אין תיבת דואר אלקטרוני מותקנת</string>
     <string name="app_no_call_client">אין תוכנת טלפון מותקנת</string>
-    <string name="play_service_do_not_supported">מכשיר זה אינו תומך שירותי google play</string>
+    <string name="play_service_do_not_supported">שירותי Google Play אינם מותקנים במכשיר</string>
     <string name="not_found_camera">למכשיר הזה אין מצלמה</string>
     <string name="cant_create_photo">אין אפשרות ליצור תמונה</string>
     <string name="file_is_not_found">הקובץ לא נמצא</string>
