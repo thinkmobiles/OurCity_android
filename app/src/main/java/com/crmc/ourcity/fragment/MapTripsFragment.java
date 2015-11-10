@@ -2,6 +2,7 @@ package com.crmc.ourcity.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -110,8 +111,13 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
         _googleMap.getUiSettings().setZoomControlsEnabled(true);
         bounds = new LatLngBounds.Builder();
         for (int i = 0; i < mMapTrips.mapTripsDetails.size(); i++) {
-            _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new LatLng
-                    (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
+            if (!TextUtils.isEmpty(mMapTrips.getInfo(i))) {
+                _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new LatLng
+                        (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
+            } else {
+                _googleMap.addMarker(new MarkerOptions().position(new LatLng
+                        (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)))).hideInfoWindow();
+            }
             bounds.include(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)));
 
             if (i > 0) {
