@@ -48,11 +48,12 @@
                     android:src="@drawable/icon_details"/>
 
                 <TextView
+                    android:id="@+id/tvTitle_FDSU"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"
                     android:layout_marginLeft="10dp"
-                    android:text="פרטים אישיים"
+                    android:text="@string/fragment_dialog_signup"
                     android:textColor="@color/turquoise"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
@@ -67,6 +68,21 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etFirstName_SUDF"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/first_name"
+                    android:inputType="text"
+                    android:padding="@dimen/person5"
+                    android:textColor="#000"
+                    android:textColorHint="#616161"
+                    android:textSize="@dimen/sign_up_dialog_textSize"/>
+
+                <EditText
                     android:id="@+id/etLastName_SUDF"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -76,7 +92,7 @@
                     android:hint="@string/last_name"
                     android:inputType="text"
                     android:padding="@dimen/person5"
-                    android:paddingRight="@dimen/person5"
+                    android:paddingLeft="@dimen/person5"
                     android:textColor="#000"
                     android:textColorHint="#616161"
                     android:textSize="@dimen/sign_up_dialog_textSize"
@@ -84,21 +100,7 @@
                     />
 
 
-                <EditText
-                    android:id="@+id/etFirstName_SUDF"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:background="#fff"
-                    android:gravity="left|center_vertical"
-                    android:hint="@string/first_name"
-                    android:inputType="text"
-                    android:padding="@dimen/person5"
-                    android:paddingEnd="@dimen/person5"
-                    android:textColor="#000"
-                    android:textColorHint="#616161"
-                    android:textSize="@dimen/sign_up_dialog_textSize"/>
+
 
 
 
@@ -211,7 +213,7 @@
                     android:layout_weight="2"
                     android:background="#fff"
                     android:gravity="left|center_vertical"
-                    android:hint="@string/street"
+                    android:hint="@string/focus_street"
                     android:inputType="textAutoComplete"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
@@ -227,7 +229,7 @@
                     android:layout_weight="1"
                     android:background="#fff"
                     android:gravity="left|center_vertical"
-                    android:hint="@string/house"
+                    android:hint="@string/focus_number"
                     android:inputType="number"
                     android:padding="@dimen/person5"
                     android:textColor="#000"
@@ -240,7 +242,6 @@
                 android:id="@+id/etCityName_SUDF"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_alignEnd="@+id/linearLayout2"
                 android:layout_below="@+id/linearLayout2"
                 android:layout_marginTop="10dp"
                 android:background="#fff"

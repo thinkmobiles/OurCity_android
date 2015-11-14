@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">חדרה</string>
-    <integer name="city_id">1</integer>
+    <string name="global.app.name">TEST</string>
+    <string name="app_name">TEST</string>
+    <integer name="city_id">1055</integer>
     <string name="update_url"></string>
 </resources>

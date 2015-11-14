@@ -54,15 +54,6 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        title = getArguments().getString(Constants.NODE_TITLE);
-    }
-
-    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
@@ -74,39 +65,17 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        mActivity.clear();
-        super.onDetach();
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
-    public void onResume() {
-        configureActionBar(true, true, title);
-        super.onResume();
-        loadLinkList();
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
-        swipeRefreshLayout.setRefreshing(false);
-        if (_data != null) {
-            mAdapter = new LinksListAdapter(mActivity.get(), _data);
-            lvLinks.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
-        } else {
-            showError(getResources().getString(R.string.connection_error));
-        }
-    }
-
-    @Override
-    public Loader<List<Events>> onCreateLoader(int _id, Bundle _args) {
-        return new EventsLoader(mActivity.get(), _args);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Events>> _loader) {
+    protected int getContentView() {
+        return R.layout.fragment_links;
     }
 
     @Override
@@ -134,6 +103,47 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
         swipeInStart();
     }
 
+    @Override
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        configureActionBar(true, true, title);
+        super.onResume();
+        loadLinkList();
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        mActivity.clear();
+        super.onDetach();
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
+        swipeRefreshLayout.setRefreshing(false);
+        if (_data != null) {
+            mAdapter = new LinksListAdapter(mActivity.get(), _data);
+            lvLinks.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            showContent();
+        } else {
+            showError(getResources().getString(R.string.connection_error));
+        }
+    }
+
+    @Override
+    public Loader<List<Events>> onCreateLoader(int _id, Bundle _args) {
+        return new EventsLoader(mActivity.get(), _args);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Events>> _loader) {
+    }
+
     @NonNull
     private AdapterView.OnItemClickListener handleLinkItemClick() {
         return (parent, view, _position, id) ->
@@ -147,16 +157,6 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
-        super.onViewCreated(_view, _savedInstanceState);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_links;
     }
 
     @Override

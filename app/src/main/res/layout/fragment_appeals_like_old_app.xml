@@ -123,13 +123,13 @@
                         android:layout_marginRight="@dimen/survey2"
                         android:layout_marginLeft="@dimen/survey5"
                         android:background="@drawable/boarder_round_af"
-                        android:padding="5dp">
+                        android:padding="3dp">
 
                         <TextView
                             android:id="@+id/tvHeader_AF"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/survey10"
+                            android:layout_marginTop="5dp"
                             android:gravity="center_horizontal"
                             android:singleLine="true"
                             android:text="@string/header_trun_off_text"
@@ -142,7 +142,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvHeader_AF"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:ellipsize="end"
                             android:gravity="center_horizontal"
                             android:paddingLeft="@dimen/survey5"

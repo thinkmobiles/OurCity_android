@@ -54,15 +54,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        title = getArguments().getString(Constants.NODE_TITLE);
-    }
-
-    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
@@ -74,10 +65,46 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     }
 
     @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        mActivity.clear();
-        super.onDetach();
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_events;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        swipeRefreshLayout = findView(R.id.swipe_refresh_events);
+        lvEvents = findView(R.id.lvEvents_EF);
+        View vUnderLine_EF = findView(R.id.vUnderLine_EF);
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e){
+            Image.init(Color.BLACK);
+        }
+        vUnderLine_EF.setBackgroundColor(Image.darkenColor(0.2));
+        lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvEvents.setDividerHeight(4);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        lvEvents.setOnItemClickListener(handleEventItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this::loadEvents);
+        swipeInStart();
+    }
+
+    @Override
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
     }
 
     @Override
@@ -85,6 +112,13 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
         configureActionBar(true, true, title);
         super.onResume();
         loadEvents();
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        mActivity.clear();
+        super.onDetach();
     }
 
     private void loadEvents() {
@@ -116,30 +150,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     public void onLoaderReset(Loader<List<Events>> _loader) {
     }
 
-    @Override
-    protected void initViews() {
-        super.initViews();
-        swipeRefreshLayout = findView(R.id.swipe_refresh_events);
-        lvEvents = findView(R.id.lvEvents_EF);
-        View vUnderLine_EF = findView(R.id.vUnderLine_EF);
-        try {
-            Image.init(Color.parseColor(color));
-        } catch (Exception e){
-            Image.init(Color.BLACK);
-        }
-        vUnderLine_EF.setBackgroundColor(Image.darkenColor(0.2));
-        lvEvents.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
-        lvEvents.setDividerHeight(4);
-    }
-
-    @Override
-    protected void setListeners() {
-        super.setListeners();
-        lvEvents.setOnItemClickListener(handleEventItemClick());
-        swipeRefreshLayout.setOnRefreshListener(this::loadEvents);
-        swipeInStart();
-    }
-
     @NonNull
     private OnItemClickListener handleEventItemClick() {
         return (_parent, _view, _position, id) -> mOnListItemActionListener.onEventsItemAction(mAdapter.getItem(_position));
@@ -152,16 +162,6 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
-        super.onViewCreated(_view, _savedInstanceState);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_events;
     }
 
     @Override

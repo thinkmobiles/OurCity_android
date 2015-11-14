@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">בנימינה גבעת עדה</string>
-    <integer name="city_id">10</integer>
+    <string name="global.app.name">בנימינה גבעת עדה</string>
+    <string name="app_name">Biniamina</string>
     <string name="update_url"></string>
 
 </resources>

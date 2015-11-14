@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ירוחם</string>
-    <integer name="city_id">28</integer>
-    <string name="update_url"></string>
+    <string name="global.app.name">ירוחם</string>
+    <string name="app_name">Yeruham</string>
 </resources>

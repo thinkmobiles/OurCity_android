@@ -44,23 +44,17 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity.clear();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         resultObject = getArguments().getParcelable(Constants.CONFIGURATION_KEY_APPEAL_ITEM);
     }
 
     @Override
-    public void onResume() {
-        configureActionBar(true, true, resultObject.ReferenceID);
-        super.onResume();
+    protected int getContentView() {
+        return R.layout.fragment_appeal_item;
     }
 
+    //called in onCreateView()
     @Override
     protected void initViews() {
         super.initViews();
@@ -97,6 +91,18 @@ public class AppealItemFragment extends BaseFourStatesFragment {
         showContent();
     }
 
+    @Override
+    public void onResume() {
+        configureActionBar(true, true, resultObject.ReferenceID);
+        super.onResume();
+    }
+
+    @Override
+    public void onDetach() {
+        mActivity.clear();
+        super.onDetach();
+    }
+
     private void setImage() {
         vUnderLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_AIF.setBackgroundColor(Image.darkenColor(0.2));
@@ -105,12 +111,6 @@ public class AppealItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_appeal_item;
-    }
-
-    @Override
     public void onRetryClick() {
-
     }
 }

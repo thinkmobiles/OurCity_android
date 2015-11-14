@@ -63,21 +63,14 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity.clear();
-    }
-
-    @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         mCityEntities = getArguments().getParcelable(Constants.CONFIGURATION_KEY_CITY_ENINIES);
     }
 
     @Override
-    public void onResume() {
-        configureActionBar(true, true, mCityEntities.entityName);
-        super.onResume();
+    protected int getContentView() {
+        return R.layout.fragment_city_entities_item;
     }
 
     @Override
@@ -108,6 +101,14 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    protected void setListeners() {
+        super.setListeners();
+        ivCall_CEIF.setOnClickListener(handleClick());
+        ivSendMail_CEIF.setOnClickListener(handleClick());
+        ivCall_Mobile_CEIF.setOnClickListener(handleClick());
+    }
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         checkData(mCityEntities.entityName, tvEntityName_CEIF, tvEntityName_CEIF);
@@ -121,28 +122,38 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         showContent();
     }
 
-//    private void checkData(String _text, TextView _tvView, View _view){
-//        if (!TextUtils.isEmpty(_text)){
-//            _tvView.setText(_text);
-//        } else {
-//            _view.setVisibility(View.GONE);
-//        }
-//    }
+    @Override
+    public void onResume() {
+        configureActionBar(true, true, mCityEntities.entityName);
+        super.onResume();
+    }
 
-    private void setImage(){
-        if (!TextUtils.isEmpty(mCityEntities.phoneNumber)){
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+
+    @Override
+    public void onDetach() {
+        mActivity.clear();
+        super.onDetach();
+    }
+
+    private void setImage() {
+        if (!TextUtils.isEmpty(mCityEntities.phoneNumber)) {
             ivCall_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.phone2, Image
                     .darkenColor(0.2)));
         } else {
             ivCall_CEIF.setVisibility(View.GONE);
         }
-        if (!TextUtils.isEmpty(mCityEntities.emailAddress)){
+        if (!TextUtils.isEmpty(mCityEntities.emailAddress)) {
             ivSendMail_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.mail, Image
                     .darkenColor(0.2)));
         } else {
             ivSendMail_CEIF.setVisibility(View.GONE);
         }
-        if (!TextUtils.isEmpty(mCityEntities.mobileNumber)){
+        if (!TextUtils.isEmpty(mCityEntities.mobileNumber)) {
             ivCall_Mobile_CEIF.setImageDrawable(Image.setDrawableImageColor(mActivity.get(), R.drawable.phone, Image
                     .darkenColor(0.2)));
         } else {
@@ -150,14 +161,6 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
         }
         vUnderLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
         vBottomLine_CEIF.setBackgroundColor(Image.darkenColor(0.2));
-    }
-
-    @Override
-    protected void setListeners() {
-        super.setListeners();
-        ivCall_CEIF.setOnClickListener(handleClick());
-        ivSendMail_CEIF.setOnClickListener(handleClick());
-        ivCall_Mobile_CEIF.setOnClickListener(handleClick());
     }
 
     @NonNull
@@ -200,17 +203,6 @@ public class CityEntitiesItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_city_entities_item;
-    }
-
-    @Override
     public void onRetryClick() {
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
 }

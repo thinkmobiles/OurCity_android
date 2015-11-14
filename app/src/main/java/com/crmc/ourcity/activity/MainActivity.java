@@ -1,6 +1,5 @@
 package com.crmc.ourcity.activity;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -138,12 +136,25 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTitle();
+        checkForUpdates();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        mActivity.clear();
+    }
+
     private void changeLanguage() {
         String lang = SPManager.getInstance(mActivity.get()).getApplicationLanguage();
         String country = SPManager.getInstance(mActivity.get()).getApplicationCountry();
         Locale locale = new Locale(lang, country);
         //Locale.setDefault(locale);
-        Configuration config = new Configuration(getBaseContext(). getResources().getConfiguration());
+        Configuration config = new Configuration(getBaseContext().getResources().getConfiguration());
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
@@ -280,9 +291,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1) {
-            if((data != null ? data.getIntExtra(Constants.BUNDLE_LOGOUT, 0) : 0) == Constants.LOGOUT_KEY)
-            setTopFragment(MainMenuFragment.newInstance());
+        if (requestCode == 1) {
+            if ((data != null ? data.getIntExtra(Constants.BUNDLE_LOGOUT, 0) : 0) == Constants.LOGOUT_KEY)
+                setTopFragment(MainMenuFragment.newInstance());
         }
     }
 
@@ -300,9 +311,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     public void onRSSItemAction(RssItem _entry) {
         replaceFragmentWithBackStack(FRAGMENT_CONTAINER,
                 RSSEntryFragment.newInstance(_entry.getTitle(),
-                                             _entry.getDescription(),
-                                             _entry.getLink(),
-                                             _entry.getPubDate()));
+                        _entry.getDescription(),
+                        _entry.getLink(),
+                        _entry.getPubDate()));
     }
 
     @Override
@@ -399,16 +410,9 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setTitle();
-        checkForUpdates();
-    }
-
     private void checkForUpdates() {
         versionManager = new VersionManager(this);
-        versionManager.setVersionContentUrl(getString(R.string.update_url));
+        versionManager.setVersionContentUrl(BuildConfig.UPDATE_URL);
         versionManager.setTitle(getString(R.string.alertdialog_update_available));
         versionManager.setUpdateNowLabel(getString(R.string.alertdialog_update_now));
         versionManager.setRemindMeLaterLabel(getString(R.string.alertdialog_remind_me_later));
@@ -491,7 +495,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {}
+    public void onLoaderReset(Loader loader) {
+    }
 
     private Bundle buildMenuBundle(Context _ctx) {
         Bundle bundle = new Bundle();
@@ -513,12 +518,5 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
             lng = "en";
         }
         return lng;
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        mActivity.clear();
     }
 }

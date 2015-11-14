@@ -66,7 +66,37 @@
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:orientation="vertical"
+            android:padding="8dp"
             android:paddingRight="@dimen/person20">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/person5"
+                android:layout_marginLeft="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personal_area_id"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvReferenceID_AF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="12345" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvDate_AF"
@@ -75,6 +105,7 @@
                 android:layout_marginBottom="@dimen/person5"
                 android:gravity="left"
                 android:singleLine="true"
+                android:layout_marginLeft="2dp"
                 android:text="2/2/2014   4:50"
                 android:textSize="@dimen/person16"
                 android:textStyle="bold" />
@@ -130,12 +161,9 @@
                 android:id="@+id/tvPhotoText_AF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center|center_horizontal"
+                android:layout_centerInParent="true"
                 android:layout_marginBottom="@dimen/person10"
                 android:gravity="center"
-                android:text="לא צורפה תמונה לדווח"
                 android:textStyle="bold" />
 
             <ImageView
@@ -155,7 +183,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="3"
         android:layout_marginBottom="@dimen/person3">
 
         <LinearLayout
@@ -192,40 +219,6 @@
 
 
         </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:layout_marginLeft="@dimen/person10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/personal_area_id"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="left"
-                android:singleLine="true"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvReferenceID_AF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="left"
-                android:singleLine="true"
-                android:text="12345" />
-
-
-        </LinearLayout>
-
 
     </LinearLayout>
 

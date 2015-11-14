@@ -4,38 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_weight="8"
+    android:rotationY="180">
 
-    <ImageView
-        android:id="@+id/btnCallSkype_FP"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/phone2"/>
+        android:layout_weight="6"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/btnSendMail_FP"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvAddress_FP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/cf_item_text_size"
+            android:textStyle="bold"
+            android:text="dfgsdfgsdfg"
+            android:rotationY="180"
+            tools:background="@android:color/holo_orange_dark"/>
+        <TextView
+            android:id="@+id/tvNameInstitution_FP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/cf_item_text_size"
+            android:text="dfgsdfgsdfg"
+            android:rotationY="180"
+            tools:background="@android:color/holo_orange_dark"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/mail2"/>
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvNameInstitution_FP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
-        android:paddingLeft="20dp"
-        android:gravity="right"
+        <ImageView
+            android:id="@+id/btnSendMail_FP"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/mail2"
+            android:rotationY="180"/>
 
-        android:paddingRight="20dp"
 
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/cf_item_text_size"
-        android:textStyle="bold"
-        tools:background="@android:color/holo_orange_dark"/>
+        <ImageView
+            android:id="@+id/btnCallSkype_FP"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/phone2"
+            android:rotationY="180"/>
+
+    </LinearLayout>
 </LinearLayout>
+
+
+<!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_weight="8">-->
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="2"-->
+        <!--android:orientation="horizontal">-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+
+        <!--android:layout_weight="6"-->
+        <!--android:orientation="vertical">-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvAddress_FP"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="right"-->
+            <!--android:paddingLeft="20dp"-->
+            <!--android:paddingRight="20dp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="@dimen/cf_item_text_size"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="dfgsdfgsdfg"-->
+            <!--tools:background="@android:color/holo_orange_dark"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvNameInstitution_FP"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="right"-->
+            <!--android:paddingLeft="20dp"-->
+            <!--android:paddingRight="20dp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="@dimen/cf_item_text_size"-->
+            <!--android:text="dfgsdfgsdfg"-->
+            <!--tools:background="@android:color/holo_orange_dark"/>-->
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/btnCallSkype_FP"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_margin="5dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:scaleType="centerInside"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:src="@drawable/phone2"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/btnSendMail_FP"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_margin="5dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:scaleType="centerInside"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:src="@drawable/mail2"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/tvNameInstitution_FP"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_gravity="center_vertical|right"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:paddingLeft="20dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="right"&ndash;&gt;-->
+
+        <!--&lt;!&ndash;android:paddingRight="20dp"&ndash;&gt;-->
+
+        <!--&lt;!&ndash;android:textColor="@android:color/black"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textSize="@dimen/cf_item_text_size"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+        <!--&lt;!&ndash;tools:background="@android:color/holo_orange_dark"/>&ndash;&gt;-->
+<!--</LinearLayout>-->

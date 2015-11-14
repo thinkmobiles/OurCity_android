@@ -1,6 +1,7 @@
 package com.crmc.ourcity.fourstatelayout;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity.get().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         amountOfVisibleTickets = getAmountOfVisibleClosedTickets(SPManager.getInstance(mActivity.get()).getAmountOfVisibleTickets());
     }
 
@@ -96,7 +98,6 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     }
 
     protected abstract int getContentView();
-
 
     @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
@@ -211,7 +212,7 @@ public abstract class BaseFourStatesFragment extends BaseFragment implements Fou
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRetryButton.setOnClickListener(null);
+        if (mRetryButton != null) mRetryButton.setOnClickListener(null);
 //        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
 //        refWatcher.watch(this);
     }

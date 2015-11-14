@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 public class SplashScreenActivity extends BaseActivity implements LoaderManager.LoaderCallbacks {
 
-
     private RelativeLayout rlBackground;
     private Handler mHandler = new Handler();
     private Drawable drawable;
@@ -57,6 +56,12 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
             loadTicker(loaderBundle);
             loadBackgroundImage(loaderBundle);
         }, 3000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mActivity.clear();
+        super.onDestroy();
     }
 
     private void loadMobileUISettings(Bundle args) {
@@ -178,10 +183,4 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(Loader _loader) {}
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mActivity.clear();
-    }
 }

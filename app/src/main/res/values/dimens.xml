@@ -74,7 +74,7 @@
     <dimen name="survey15">13.74dp</dimen>
     <dimen name="survey50">45.81dp</dimen>
     <dimen name="survey40">36.65dp</dimen>
-    <dimen name="survey10">9.16dp</dimen>
+    <dimen name="survey10">8dp</dimen>
     <dimen name="survey100">91.63dp</dimen>
 
     <dimen name="survey90">82.47dp</dimen>

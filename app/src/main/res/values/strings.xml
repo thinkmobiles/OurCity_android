@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">חדרה</string>
+
     <string name="action_settings">הגדרות</string>
     <string name="send_mail_hint">Send e-mail...</string>
     <string name="call_hint">Dial...</string>
@@ -35,7 +35,7 @@
     <string name="description">Description:</string>
     <string name="vote_title">שם ההצבעה</string>
     <string name="choose_another_vote">Choose another voting</string>
-    <string name="in_order_to_vote_you_must_select_the_gender_and_age">To vote you must select "sex" and "age"</string>
+    <string name="in_order_to_vote_you_must_select_the_gender_and_age">To vote you must select "gender" and "age"</string>
 
     <!--dialogs-->
     <string name="dialog_camera_add_photo">Add photo</string>
@@ -76,9 +76,9 @@
     <string name="focus_number">Num.</string>
     <string name="focus_f_name">First name</string>
     <string name="focus_l_name">Last name</string>
-    <string name="focus_descripstion">Add description</string>
+    <string name="focus_descripstion">Description</string>
     <string name="focus_phon">Phone number</string>
-    <string name="focus_mobile">Mobile phone</string>
+    <string name="focus_mobile">Mobile number</string>
     <string name="focus_email">E-mail</string>
     <string name="focus_titel">Reporting center</string>
     <string name="focus_titel2">Update details</string>
@@ -87,7 +87,7 @@
     <string name="sign_in_dialog_login">Sign in</string>
     <string name="sign_up_dialog_lName">Last name</string>
     <string name="sign_up_dialog_fName">First name</string>
-    <string name="focus_street">St.</string>
+    <string name="focus_street">Street name</string>
     <string name="focus_house">House</string>
     <string name="sign_up_dialog_error_text">Fill in this field</string>
     <string name="sign_up_dialog_incorrect_phone_number">Incorrect phone number format</string>
@@ -100,7 +100,7 @@
     <string name="personal_area_id">Ticket number:</string>
     <string name="personal_status">Status:</string>
 
-    <string name="not_a_member">Not a member? Register here</string>
+    <string name="not_a_member">Not a member? <b>Tap here</b> to register</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="first_name">First name</string>
@@ -108,29 +108,28 @@
 
 
     <string name="phone_number">Phone number</string>
-    <string name="mobile_phone">Mobile phone</string>
+    <string name="mobile_phone">Mobile number</string>
     <string name="email">E-mail</string>
     <string name="house">House</string>
-    <string name="street">St.</string>
     <string name="do_you_want_to_receive_global_notifications">Would you like to receive global notifications?</string>
     <string name="do_you_want_to_receive_personal_notifications">Would you like to receive personal notifications?</string>
     <string name="dialog_setting_update_info">Personal details</string>
-    <string name="dialog_setting_sign_in">Sign in</string>
+    <string name="dialog_setting_sign_in">Sign In</string>
     <string name="connection_error">The server is not responding</string>
     <string name="loading_string">Loading</string>
-    <string name="incorrect_credentials">Incorrect username or passwordי</string>
+    <string name="incorrect_credentials">Incorrect username or password</string>
     <string name="loading_string_sign_up_dialog">Loading</string>
     <string name="no_messages_for_resident">No messages for resident</string>
     <string name="dialog_title_interest_area">Interest areas</string>
     <string name="dialog_setting_update_resident_info">Personal details</string>
 
-    <string name="header_trun_on_text">הפעלת GPS</string>
-    <string name="middle_trun_on_text">להזנת הפרטים אוטומטית</string>
-    <string name="footer_trun_on_text">לחצו כאן</string>
+    <string name="header_trun_on_text">Use GPS</string>
+    <string name="middle_trun_on_text">To find your address automatically</string>
+    <string name="footer_trun_on_text">Tap here</string>
 
-    <string name="header_trun_off_text">לא הכתובת הנכונה?</string>
-    <string name="middle_trun_off_text">להזנה ידנית של הפרטים</string>
-    <string name="footer_trun_off_text">לחצו כאן</string>
+    <string name="header_trun_off_text">Address is not correct?</string>
+    <string name="middle_trun_off_text">To enter your address manually</string>
+    <string name="footer_trun_off_text">Tap here</string>
     <string name="btn_send_appeal_fragment">Send</string>
     <string name="item_description">Description:</string>
     <string name="item_address">Address:</string>
@@ -168,7 +167,7 @@
     <string name="fragment_send_mail_send">Send</string>
     <string name="dialog_title_languages">Language</string>
     <string name="dialog_language_english">English</string>
-    <string name="dialog_language_hebrew">Hebrew (עִברִית)</string>
+    <string name="dialog_language_hebrew">Hebrew (עברית)</string>
     <string name="restart_app_string">Please restart the application for language changes to take place.</string>
     <string name="attention_string">Attention</string>
     <string name="cannot_find_street">Can not find the street address, pick it from dropdown list</string>
@@ -179,6 +178,9 @@
     <string name="city_entity_phone">Phone:</string>
     <string name="city_entity_mobile_number">Mobile number:</string>
     <string name="sign_up_update_profile_text">Save changes</string>
+    <string name="fragment_dialog_signup">Registration</string>
+    <string name="appels.item.no.photo.available">No photo available</string>
+    <string name="fragment_dialog_sign_up_alter_title">Personal details</string>
 
 
 </resources>

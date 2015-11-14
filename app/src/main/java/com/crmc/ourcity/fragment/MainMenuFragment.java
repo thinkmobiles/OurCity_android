@@ -90,15 +90,8 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
     }
 
     @Override
-    public void onDetach() {
-        mCallBackMenuModel = null;
-        llBtnFirst_MMF.setOnClickListener(null);
-        llBtnSecond_MMF.setOnClickListener(null);
-        llBtnThird_MMF.setOnClickListener(null);
-        mRecyclerView.removeOnItemTouchListener(recyclerItemClickListener);
-        recyclerItemClickListener = null;
-        mActivity.clear();
-        super.onDetach();
+    protected int getContentView() {
+        return R.layout.fragment_main_menu;
     }
 
     @Override
@@ -160,6 +153,29 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         getLoaderManager().initLoader(Constants.LOADER_IMAGE_CITY_ID, cityImgBundle, this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //mRecyclerView.addOnItemTouchListener(null);
+//
+//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+//        refWatcher.watch(this);
+    }
+
+    @Override
+    public void onDetach() {
+
+        super.onDetach();
+
+        mCallBackMenuModel = null;
+        if (llBtnFirst_MMF != null) llBtnFirst_MMF.setOnClickListener(null);
+        if (llBtnSecond_MMF != null) llBtnSecond_MMF.setOnClickListener(null);
+        if (llBtnThird_MMF != null) llBtnThird_MMF.setOnClickListener(null);
+        if (mRecyclerView != null) mRecyclerView.removeOnItemTouchListener(recyclerItemClickListener);
+        recyclerItemClickListener = null;
+        if (mActivity != null) mActivity.clear();
+    }
+
     private void showView() {
         if (loaderMenuFinish && loaderMenuBottomFinish && loaderCityImageFinish && loaderLogoImageFinish) {
             if (Constants.mMenuFull != null) {
@@ -172,11 +188,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
                 showError(getResources().getString(R.string.connection_error));
             }
         }
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_main_menu;
     }
 
     @Override
@@ -362,15 +373,6 @@ public class MainMenuFragment extends BaseFourStatesFragment implements LoaderMa
         } else {
             mCallBackMenuModel.onItemAction(mMenuBottom.get(position));
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //mRecyclerView.addOnItemTouchListener(null);
-//
-//        RefWatcher refWatcher = Application.getRefWatcher(getActivity());
-//        refWatcher.watch(this);
     }
 
     private Bundle buildMenuBundle(Context _ctx) {

@@ -35,12 +35,6 @@
             android:paddingRight="12dp">
 
             <TextView
-                android:id="@+id/tvDate_Text_RssFrgmt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"/>
-
-            <TextView
                 android:id="@+id/tvDate_RssFrgmt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,6 +43,15 @@
                 android:singleLine="true"
                 android:ellipsize="none"
                 android:text="@string/item_date_time" />
+
+            <TextView
+                android:id="@+id/tvDate_Text_RssFrgmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:gravity="right"/>
+
+
         </LinearLayout>
     </LinearLayout>
 

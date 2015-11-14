@@ -4,40 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_weight="8">
 
 
-
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="6"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvNameInstitution_FP"
+        android:id="@+id/tvAddress_FP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
+        android:gravity="left"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_weight="7"
         android:textColor="@android:color/black"
         android:textSize="@dimen/cf_item_text_size"
         android:textStyle="bold"
+        android:text="dfgsdfgsdfg"
+        tools:background="@android:color/holo_orange_dark"/>
+    <TextView
+        android:id="@+id/tvNameInstitution_FP"
+        android:layout_width="match_parent"
+        android:layout_height="wrapфо_content"
+        android:gravity="left"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/cf_item_text_size"
+        android:text="dfgsdfgsdfg"
         tools:background="@android:color/holo_orange_dark"/>
 
-    <ImageView
-        android:id="@+id/btnSendMail_FP"
-        android:layout_width="wrap_content"
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/mail2"/>
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnSendMail_FP"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/mail2"/>
 
 
-    <ImageView
-        android:id="@+id/btnCallSkype_FP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/phone2"/>
+        <ImageView
+            android:id="@+id/btnCallSkype_FP"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/phone2"/>
+
+    </LinearLayout>
 </LinearLayout>

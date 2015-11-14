@@ -1,5 +1,6 @@
 package com.crmc.ourcity.rest;
 
+import com.crmc.ourcity.BuildConfig;
 import com.crmc.ourcity.rest.api.CityApi;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -7,9 +8,7 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
 public class RestClientApi {
-    private static final String BASE_URL = "http://194.42.200.114:8081/OurCityWS/Service.svc";
-//    private static final String BASE_URL = "http://192.168.88.156:8081/OurCityWS/Service.svc";
-    //private static final String BASE_URL = "http://192.168.88.236:8081/OurCityWS/Service.svc";
+    private static final String BASE_URL = BuildConfig.BASE_URL;
 
     private CityApi cityApi;
     private static RestClientApi mInstance;

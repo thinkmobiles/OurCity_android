@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="#424242"
-        android:gravity="center|left"
+        android:gravity="center|right"
         android:padding="10dp"
         android:text="@string/dialog_map_filter_header_text"
         android:textColor="#098686"

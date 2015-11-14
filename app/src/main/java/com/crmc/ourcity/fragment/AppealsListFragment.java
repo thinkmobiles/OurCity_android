@@ -63,19 +63,42 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     }
 
     @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        mActivity.clear();
-        super.onDetach();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
         json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
         route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
         title = getArguments().getString(Constants.NODE_TITLE, "");
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_appealslist;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
+        lvAppeals = findView(R.id.lvCityEntities_CEF);
+        View vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e) {
+            Image.init(Color.BLACK);
+        }
+        vUnderLine_ALF.setBackgroundColor(Image.darkenColor(0.2));
+        lvAppeals.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvAppeals.setDividerHeight(4);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        //TODO: uncomment this line to get detail Appeal
+        lvAppeals.setOnItemClickListener(handleItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeInStart();
     }
 
     @Override
@@ -90,8 +113,10 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
     }
 
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_appealslist;
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        mActivity.clear();
+        super.onDetach();
     }
 
     @Override
@@ -123,31 +148,6 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
         } else {
             showError(getResources().getString(R.string.connection_error));
         }
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
-        swipeRefreshLayout = findView(R.id.swipe_refresh_list_appeals);
-        lvAppeals = findView(R.id.lvCityEntities_CEF);
-        View vUnderLine_ALF = findView(R.id.vUnderLine_ALF);
-        try {
-            Image.init(Color.parseColor(color));
-        } catch (Exception e) {
-            Image.init(Color.BLACK);
-        }
-        vUnderLine_ALF.setBackgroundColor(Image.darkenColor(0.2));
-        lvAppeals.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
-        lvAppeals.setDividerHeight(4);
-    }
-
-    @Override
-    protected void setListeners() {
-        super.setListeners();
-        //TODO: uncomment this line to get detail Appeal
-        lvAppeals.setOnItemClickListener(handleItemClick());
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeInStart();
     }
 
     @NonNull

@@ -44,83 +44,97 @@ android {
         afula {
             applicationId = "com.crmc.afula"
             buildConfigField "int", "CITY_ID", "15"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 11
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         biniamina {
             applicationId = "com.crmc.biniamina"
             buildConfigField "int", "CITY_ID", "10"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 12
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         chadera {
             //понижена версия для тестирования обновления
             applicationId = "com.crmc.chadera"
             buildConfigField "int", "CITY_ID", "1"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 22
-            versionName '2.0.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         machonvizman {
             applicationId = "com.crmc.machonvizman"
             signingConfig signingConfigs.config
-            versionCode 20
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         migdal {
             applicationId = "com.crmc.migdal"
             signingConfig signingConfigs.config
-            versionCode 20
-            versionName '3.0.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         shderot {
             applicationId = "com.crmc.shderot"
             buildConfigField "int", "CITY_ID", "21"
             signingConfig signingConfigs.config
-            versionCode 11
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         shoham {
             applicationId = "com.ctconnect.shoam"
             signingConfig signingConfigs.configShoham
-            versionCode 20
-            versionName '2.0.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         yesod {
             applicationId = "com.crmc.yesod"
             signingConfig signingConfigs.config
-            versionCode 20
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         evenyehuda {
             applicationId = "com.crmc.evenyehuda"
             buildConfigField "int", "CITY_ID", "43"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 2
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         ungvar {
             applicationId = "com.crmc.ungvar"
             buildConfigField "int", "CITY_ID", "42"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 1
-            versionName '1.0.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         yeruham {
             applicationId = "com.crmc.yeruham"
             buildConfigField "int", "CITY_ID", "28"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 3
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
         puma {
             applicationId = "com.crmc.puma"
             buildConfigField "int", "CITY_ID", "1055"
+            buildConfigField "String", "BASE_URL", '"http://192.168.88.156:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.puma&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 3
-            versionName '2.3.0'
+            versionCode 242
+            versionName '2.4.2'
         }
     }
 

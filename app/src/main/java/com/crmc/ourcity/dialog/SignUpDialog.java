@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
@@ -52,7 +53,7 @@ import static com.crmc.ourcity.global.Constants.LOADER_REGISTER_NEW_RESIDENT_ID;
 import static com.crmc.ourcity.global.Constants.LOADER_UPDATE_RESIDENT_INFO;
 
 public class SignUpDialog extends BaseFragment implements View.OnFocusChangeListener, LoaderManager.LoaderCallbacks {
-
+    TextView tvTitle;
     private View root;
     private EditText etLastName, etFirstName, etUsername, etPassword, etPhoneNumber, etMobileNumber,
             etEmail, etHouseNumber, etCityName;
@@ -109,6 +110,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     }
 
     private void findUI(View _root) {
+        tvTitle = (TextView) _root.findViewById(R.id.tvTitle_FDSU);
         etLastName = (EditText) _root.findViewById(R.id.etLastName_SUDF);
         etFirstName = (EditText) _root.findViewById(R.id.etFirstName_SUDF);
         etUsername = (EditText) _root.findViewById(R.id.etUsername_SUDF);
@@ -123,7 +125,11 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
         chbGlobalNotifications = (CheckBox) _root.findViewById(R.id.chbGlobalNotifications_SUDF);
         chbPersonalNotifications = (CheckBox) _root.findViewById(R.id.chbPersonalNotifications_SUDF);
         btnSignUpOrEdit = (Button) _root.findViewById(R.id.btnSignUpOrEdit_SUDF);
-        if (isEditable) btnSignUpOrEdit.setText(R.string.sign_up_update_profile_text);
+        if (isEditable) {
+            tvTitle.setText(R.string.fragment_dialog_sign_up_alter_title);
+            btnSignUpOrEdit.setText(R.string.sign_up_update_profile_text);
+        }
+
         ScrollView view = (ScrollView) _root.findViewById(R.id.scrollView);
         view.setVerticalScrollBarEnabled(false);
         view.setHorizontalScrollBarEnabled(false);
@@ -317,7 +323,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
                 if (streetData != null) {
                     if (streetData.streetsList != null) {
-                         numbersStreets = streetData.streetsList.size();
+                        numbersStreets = streetData.streetsList.size();
                     }
                     if (numbersStreets == 0) {
                         etStreet.setEnabled(false);
@@ -434,7 +440,7 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
     private void setStreetName(ResidentDetails _residentInfo) {
         Optional<String> streetName = Stream.of(streets).filter(item -> _residentInfo.streetId.equals(item.streetId))
                 .map(item -> item.streetName).findFirst();
-        if(streetName.isPresent()) {
+        if (streetName.isPresent()) {
             etStreet.setText(streetName.get());
         } else {
             etStreet.setText("");

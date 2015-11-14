@@ -119,7 +119,7 @@ public class AppealsAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(_item.AttachedFiles)) {
                 tvPhotoText_AF.setText("");
             } else {
-                tvPhotoText_AF.setText("אין תמונה");
+                tvPhotoText_AF.setText(R.string.appels_item_no_photo_available);
             }
 
             if (!TextUtils.isEmpty(_item.DateCreatedClient)) {

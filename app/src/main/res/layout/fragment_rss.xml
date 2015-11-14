@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:divider="@android:color/holo_blue_light"
             android:dividerHeight="4dp"
-            tools:listitem="@layout/listview_row_fe">
+            tools:listitem="@layout/listview_row_fr">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

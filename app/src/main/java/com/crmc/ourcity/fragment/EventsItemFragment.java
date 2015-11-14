@@ -61,18 +61,6 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        mEvents = getArguments().getParcelable(Constants.CONFIGURATION_KEY_EVENTS);
-    }
-
-    @Override
-    public void onResume() {
-        configureActionBar(true, true, mEvents.title);
-        super.onResume();
-    }
-
-    @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
         try {
@@ -83,9 +71,14 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        super.onDetach();
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        mEvents = getArguments().getParcelable(Constants.CONFIGURATION_KEY_EVENTS);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_events_item;
     }
 
     @Override
@@ -122,6 +115,16 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
+    protected void setListeners() {
+        super.setListeners();
+        ivMobilePhone.setOnClickListener(handleClick());
+        ivPhone.setOnClickListener(handleClick());
+        ivSendMail.setOnClickListener(handleClick());
+        ivLink.setOnClickListener(handleClick());
+    }
+
+
+    @Override
     public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
         super.onViewCreated(_view, _savedInstanceState);
         checkData(mEvents.title, tvTitle, tvTitle);
@@ -136,13 +139,24 @@ public class EventsItemFragment extends BaseFourStatesFragment {
         setImage();
     }
 
-//    private void checkData(String _text, TextView _tvView, View _view) {
-//        if (!TextUtils.isEmpty(_text)) {
-//            _tvView.setText(_text);
-//        } else {
-//            _view.setVisibility(View.GONE);
-//        }
-//    }
+
+    @Override
+    public void onResume() {
+        configureActionBar(true, true, mEvents.title);
+        super.onResume();
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        super.onDetach();
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebView(String _html) {
@@ -188,15 +202,6 @@ public class EventsItemFragment extends BaseFourStatesFragment {
         vBottomLine_EIF.setBackgroundColor(Image.darkenColor(0.2));
     }
 
-    @Override
-    protected void setListeners() {
-        super.setListeners();
-        ivMobilePhone.setOnClickListener(handleClick());
-        ivPhone.setOnClickListener(handleClick());
-        ivSendMail.setOnClickListener(handleClick());
-        ivLink.setOnClickListener(handleClick());
-    }
-
     @NonNull
     private View.OnClickListener handleClick() {
         return v -> {
@@ -233,17 +238,7 @@ public class EventsItemFragment extends BaseFourStatesFragment {
     }
 
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_events_item;
-    }
-
-    @Override
     public void onRetryClick() {
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     private class MyWebViewClient extends WebViewClient {

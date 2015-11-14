@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">חדרה</string>
+
     <string name="action_settings">הגדרות</string>
     <string name="send_mail_hint">שלח דואר...</string>
     <string name="call_hint">חיוג...</string>
@@ -101,7 +101,7 @@
     <string name="personal_area_id">מספר פניה:</string>
     <string name="personal_status">סטטוס:</string>
 
-    <string name="not_a_member">אינך רשום? הרשם כאן</string>
+    <string name="not_a_member">לא חבר? <b>הקש כאן</b> כדי להירשם</string>
     <string name="username">שם משתמש</string>
     <string name="password">סיסמא</string>
     <string name="first_name">שם פרטי</string>
@@ -169,7 +169,7 @@
     <string name="fragment_send_mail_send">אישור</string>
     <string name="dialog_title_languages">שפה</string>
     <string name="dialog_language_english">אנגלית (English)</string>
-    <string name="dialog_language_hebrew">עִברִית</string>
+    <string name="dialog_language_hebrew">עברית</string>
     <string name="restart_app_string">אנא הפעל מחדש את הבקשה לשינויי שפה להתקיים.</string>
     <string name="attention_string">תשומת הלב</string>
     <string name="cannot_find_street">לא יכול למצוא את כתובת הרחוב , להרים אותומרשימה נפתחת</string>
@@ -180,6 +180,9 @@
     <string name="city_entity_phone">מספר טלפון:</string>
     <string name="city_entity_mobile_number">טלפון נייד:</string>
     <string name="sign_up_update_profile_text">שמור שינויים</string>
+    <string name="fragment_dialog_signup">הרשמה</string>
+    <string name="appels.item.no.photo.available">אין תמונה</string>
+    <string name="fragment_dialog_sign_up_alter_title">פרטים אישיים</string>
 
 
 </resources>

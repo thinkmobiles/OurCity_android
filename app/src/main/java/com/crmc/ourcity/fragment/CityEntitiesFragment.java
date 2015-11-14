@@ -1,7 +1,6 @@
 package com.crmc.ourcity.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,7 +29,7 @@ import com.crmc.ourcity.utils.Image;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class CityEntitiesFragment  extends BaseFourStatesFragment implements TextWatcher, LoaderManager.LoaderCallbacks<List<CityEntities>> {
+public class CityEntitiesFragment extends BaseFourStatesFragment implements TextWatcher, LoaderManager.LoaderCallbacks<List<CityEntities>> {
 
     private ListView lvCityEntities;
     private EditText etSearch_CEF;
@@ -45,7 +43,7 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
     private CityEntitiesListAdapter mAdapter;
     private OnListItemActionListener mOnListItemActionListener;
 
-    public static CityEntitiesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute,String _title) {
+    public static CityEntitiesFragment newInstance(String _colorItem, String _requestJson, String _requestRoute, String _title) {
         CityEntitiesFragment mCityEntitiesFragment = new CityEntitiesFragment();
         Bundle args = new Bundle();
         args.putString(Constants.CONFIGURATION_KEY_COLOR, _colorItem);
@@ -54,15 +52,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
         args.putString(Constants.NODE_TITLE, _title);
         mCityEntitiesFragment.setArguments(args);
         return mCityEntitiesFragment;
-    }
-
-    @Override
-    public void onCreate(Bundle _savedInstanceState) {
-        super.onCreate(_savedInstanceState);
-        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
-        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
-        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
-        title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
@@ -77,15 +66,48 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
     }
 
     @Override
-    public void onDetach() {
-        mOnListItemActionListener = null;
-        etSearch_CEF.removeTextChangedListener(this);
-        swipeRefreshLayout.setOnRefreshListener(null);
-        lvCityEntities.setOnItemClickListener(null);
+    public void onCreate(Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+        color = getArguments().getString(Constants.CONFIGURATION_KEY_COLOR);
+        json = getArguments().getString(Constants.CONFIGURATION_KEY_JSON);
+        route = getArguments().getString(Constants.CONFIGURATION_KEY_ROUTE);
+        title = getArguments().getString(Constants.NODE_TITLE);
+    }
 
-        hideKeyboard(mActivity.get(), etSearch_CEF);
-        mActivity.clear();
-        super.onDetach();
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_city_entities;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
+        etSearch_CEF = findView(R.id.etSearch_CEF);
+        lvCityEntities = findView(R.id.lvCityEntities_CEF);
+        View vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
+        try {
+            Image.init(Color.parseColor(color));
+        } catch (Exception e) {
+            Image.init(Color.BLACK);
+        }
+        vUnderLine_CEF.setBackgroundColor(Image.darkenColor(0.2));
+        lvCityEntities.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
+        lvCityEntities.setDividerHeight(4);
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        lvCityEntities.setOnItemClickListener(handleItemClick());
+        swipeRefreshLayout.setOnRefreshListener(this::loadCityEntities);
+        swipeInStart();
+        etSearch_CEF.addTextChangedListener(this);
+    }
+
+    @Override
+    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
+        super.onViewCreated(_view, _savedInstanceState);
     }
 
     @Override
@@ -93,6 +115,17 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
         configureActionBar(true, true, title);
         super.onResume();
         loadCityEntities();
+    }
+
+    @Override
+    public void onDetach() {
+        mOnListItemActionListener = null;
+        etSearch_CEF.removeTextChangedListener(this);
+        swipeRefreshLayout.setOnRefreshListener(null);
+        lvCityEntities.setOnItemClickListener(null);
+        hideKeyboard(mActivity.get(), etSearch_CEF);
+        mActivity.clear();
+        super.onDetach();
     }
 
     @Override
@@ -118,32 +151,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
 
     }
 
-    @Override
-    protected void initViews() {
-        super.initViews();
-        swipeRefreshLayout = findView(R.id.swipe_refresh_city_entities);
-        etSearch_CEF = findView(R.id.etSearch_CEF);
-        lvCityEntities = findView(R.id.lvCityEntities_CEF);
-        View vUnderLine_CEF = findView(R.id.vUnderLine_CEF);
-        try {
-            Image.init(Color.parseColor(color));
-        } catch (Exception e){
-            Image.init(Color.BLACK);
-        }
-        vUnderLine_CEF.setBackgroundColor(Image.darkenColor(0.2));
-        lvCityEntities.setDivider(new ColorDrawable(Image.darkenColor(0.2)));
-        lvCityEntities.setDividerHeight(4);
-    }
-
-    @Override
-    protected void setListeners() {
-        super.setListeners();
-        lvCityEntities.setOnItemClickListener(handleItemClick());
-        swipeRefreshLayout.setOnRefreshListener(this::loadCityEntities);
-        swipeInStart();
-        etSearch_CEF.addTextChangedListener(this);
-    }
-
     @NonNull
     private AdapterView.OnItemClickListener handleItemClick() {
         return (_parent, _view, _position, _id) -> {
@@ -160,16 +167,6 @@ public class CityEntitiesFragment  extends BaseFourStatesFragment implements Tex
                 .resourceId));
         if (!swipeRefreshLayout.isEnabled()) swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onViewCreated(final View _view, final Bundle _savedInstanceState) {
-        super.onViewCreated(_view, _savedInstanceState);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_city_entities;
     }
 
     @Override

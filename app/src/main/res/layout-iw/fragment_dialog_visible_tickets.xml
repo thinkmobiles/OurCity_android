@@ -49,14 +49,14 @@
 
 
             <RadioButton                
-                style="@style/RadioButtonWithWhiteTextColorRtl"
+                style="@style/RadioButtonWithBlackTextColorRtl"
                 android:id="@+id/rbVisibleTickets20_FDVT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/visible_tickets_20"/>
 
             <RadioButton
-                style="@style/RadioButtonWithWhiteTextColorRtl"
+                style="@style/RadioButtonWithBlackTextColorRtl"
 
                 android:id="@+id/rbVisibleTickets50_FDVT"
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:text="@string/visible_tickets_50"
                 android:layout_marginTop="12dp"/>
             <RadioButton
-                style="@style/RadioButtonWithWhiteTextColorRtl"
+                style="@style/RadioButtonWithBlackTextColorRtl"
 
                 android:id="@+id/rbVisibleTickets100_FDVT"
                 android:layout_width="match_parent"

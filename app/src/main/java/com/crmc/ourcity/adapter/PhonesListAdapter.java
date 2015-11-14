@@ -63,7 +63,7 @@ public class PhonesListAdapter extends BaseAdapter {
     }
 
     private class ViewHolder implements View.OnClickListener {
-        final TextView tvNameInstitution;
+        final TextView tvNameInstitution, tvAddress;
         final ImageView ivCallSkype;
         final ImageView ivSendMail;
         View view;
@@ -71,6 +71,7 @@ public class PhonesListAdapter extends BaseAdapter {
 
         public ViewHolder(@NonNull final View _view) {
             tvNameInstitution = (TextView) _view.findViewById(R.id.tvNameInstitution_FP);
+            tvAddress = (TextView) _view.findViewById(R.id.tvAddress_FP);
             ivCallSkype = (ImageView) _view.findViewById(R.id.btnCallSkype_FP);
             ivSendMail = (ImageView) _view.findViewById(R.id.btnSendMail_FP);
             ivCallSkype.setOnClickListener(this);
@@ -82,6 +83,11 @@ public class PhonesListAdapter extends BaseAdapter {
         public void setData(Phones _item, int _position) {
             this.position = _position;
             tvNameInstitution.setText(_item.entityName.trim());
+            if (!TextUtils.isEmpty(_item.address.trim())) {
+                tvAddress.setText(getItem(_position).address);
+            } else {
+                tvAddress.setVisibility(View.GONE);
+            }
             if (!TextUtils.isEmpty(getItem(position).phoneNumber)) {
                 ivCallSkype.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.phone2,
                         Image.darkenColor(0.2)));
