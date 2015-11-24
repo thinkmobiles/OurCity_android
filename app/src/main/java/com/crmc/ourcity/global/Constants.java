@@ -32,6 +32,10 @@ public class Constants {
     public static MenuFull mMenuFull = null;
     public static MenuFull mMenuFullBottom = null;
 
+    //for validation
+    public static final int WRONG_STREET_NAME = -1;
+    public static final int EMPTY_TEXT_FIELD = -2;
+
     //for request
     final public static String REQUEST_INTENT_TYPE_PHOTO = "type";
     final public static int REQUEST_TYPE_PHOTO = 0;

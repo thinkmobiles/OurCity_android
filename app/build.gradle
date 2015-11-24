@@ -21,7 +21,7 @@ android {
     }
 
     compileSdkVersion 22
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '23.0.2'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -66,8 +66,8 @@ android {
             buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
             buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
-            versionCode 242
-            versionName '2.4.2'
+            versionCode 121
+            versionName '1.2.1'
         }
         machonvizman {
             applicationId = "com.crmc.machonvizman"
@@ -107,8 +107,29 @@ android {
             buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
             signingConfig signingConfigs.config
             versionCode 242
-            versionName '2.4.2'
+            versionName '2.5.0'
         }
+
+        beitar {
+            applicationId = "com.crmc.beitar"
+            buildConfigField "int", "CITY_ID", "3052"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
+            signingConfig signingConfigs.config
+            versionCode 242
+            versionName '2.5.0'
+        }
+
+        tamar {
+            applicationId = "com.crmc.tamar"
+            buildConfigField "int", "CITY_ID", "3050"
+            buildConfigField "String", "BASE_URL", '"http://194.42.200.114:8081/OurCityWS/Service.svc"'
+            buildConfigField "String", "UPDATE_URL", '"https://play.google.com/store/apps/details?id=com.crmc.chadera&hl=en"'
+            signingConfig signingConfigs.config
+            versionCode 242
+            versionName '2.5.0'
+        }
+
         ungvar {
             applicationId = "com.crmc.ungvar"
             buildConfigField "int", "CITY_ID", "42"

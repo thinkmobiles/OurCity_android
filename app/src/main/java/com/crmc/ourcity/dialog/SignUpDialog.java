@@ -237,9 +237,24 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
         getSelectedStreetId();
 
-        if (etStreet.isEnabled() & selectedStreetID == -1) {
-            etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
-            isValid = false;
+//        if (etStreet.isEnabled() & selectedStreetID == -1) {
+//            etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+//            isValid = false;
+//        }
+
+        if (etStreet.isEnabled()) {
+            switch (selectedStreetID) {
+                case Constants.WRONG_STREET_NAME:
+                    etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text_wrong_street_name));
+                    isValid = false;
+                    break;
+                case Constants.EMPTY_TEXT_FIELD:
+                    etStreet.setError(getResources().getString(R.string.sign_up_dialog_error_text));
+                    isValid = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
         return isValid && isOptionalFieldValid;
@@ -426,14 +441,19 @@ public class SignUpDialog extends BaseFragment implements View.OnFocusChangeList
 
     private void getSelectedStreetId() {
         String street = etStreet.getText().toString();
-        Optional<Integer> optionalSelectedStreamId = Stream.of(streets)
-                .filter(item -> street.equals(item.streetName))
-                .map(item -> selectedStreetID = item.streetId).findFirst();
+        if (!TextUtils.isEmpty(street)) {
+            Optional<Integer> optionalSelectedStreamId = Stream.of(streets)
+                    .filter(item -> street.equals(item.streetName))
+                    .map(item -> selectedStreetID = item.streetId).findFirst();
 
-        if (optionalSelectedStreamId.isPresent()) {
-            selectedStreetID = optionalSelectedStreamId.get();
+            if (optionalSelectedStreamId.isPresent()) {
+                selectedStreetID = optionalSelectedStreamId.get();
+            } else {
+                selectedStreetID = Constants.WRONG_STREET_NAME;
+            }
         } else {
-            selectedStreetID = -1;
+            //
+            selectedStreetID = Constants.EMPTY_TEXT_FIELD;
         }
     }
 

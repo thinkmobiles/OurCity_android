@@ -143,7 +143,7 @@ public class AppealsListFragment extends BaseFourStatesFragment implements Loade
                 mAdapter.notifyDataSetChanged();
                 showContent();
             } else {
-                showEmpty(getResources().getString(R.string.no_messages_for_resident));
+                showEmpty(getResources().getString(R.string.no_appeals_found));
             }
         } else {
             showError(getResources().getString(R.string.connection_error));

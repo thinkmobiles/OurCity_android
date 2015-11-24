@@ -1,8 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusableInTouchMode="true">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +44,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/survey50"
                         android:layout_marginTop="@dimen/survey5"
-                        android:weightSum="3">
+                        android:weightSum="3"
+                        >
 
                         <com.crmc.ourcity.view.EditTextStreetAutoComplete
                             android:id="@+id/etStreetName_SUDF"

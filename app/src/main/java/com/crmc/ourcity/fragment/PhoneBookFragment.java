@@ -144,7 +144,7 @@ public class PhoneBookFragment extends BaseFourStatesFragment implements LoaderM
 
     @Override
     public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id) {
-        mOnListItemActionListener.onPhoneBookItemAction(mAdapter.getItem(_position).phonebookEntries);
+        mOnListItemActionListener.onPhoneBookItemAction(mAdapter.getItem(_position).phonebookEntries, mAdapter.getItem(_position).categoryName);
     }
 
     @Override

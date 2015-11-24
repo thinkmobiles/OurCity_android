@@ -55,10 +55,19 @@ public class GenderDialog extends BaseFourStatesFragment implements View.OnClick
         btnCancelFilter = findView(R.id.btnCancel_DFG);
         btnSelectFilter = findView(R.id.btnOk_DFG);
         rgGender = findView(R.id.rgGender_FDG);
-        if (gender != -1) {
+//        if (gender != -1) {
+//            ((RadioButton) rgGender.getChildAt(gender)).setChecked(true);
+//        }
+        if (gender == -1) {
+            showContent();
+        } else if (gender == 2) {
+            showContent();
+        } else {
             ((RadioButton) rgGender.getChildAt(gender)).setChecked(true);
+            showContent();
         }
-        showContent();
+        //if (gender != -1 || gender != 2) ((RadioButton) rgGender.getChildAt(gender)).setChecked(true);
+        //showContent();
     }
 
     @Override
@@ -76,7 +85,7 @@ public class GenderDialog extends BaseFourStatesFragment implements View.OnClick
     public void onClick(View _v) {
         switch (_v.getId()) {
             case R.id.btnCancel_DFG:
-                mCallback.onActionDialogCancel(false);
+                mCallback.onActionDialogDataInteger(2);
                 break;
             case R.id.btnOk_DFG:
                 gender = rgGender.indexOfChild(rgGender.findViewById(rgGender.getCheckedRadioButtonId()));

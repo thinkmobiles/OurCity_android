@@ -95,7 +95,7 @@ public class PhonesListAdapter extends BaseAdapter {
                 ivCallSkype.setVisibility(View.GONE);
             }
             if (!TextUtils.isEmpty(getItem(position).emailAddress)) {
-                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail2,
+                ivSendMail.setImageDrawable(Image.setDrawableImageColor(mContext, R.drawable.mail,
                         Image.darkenColor(0.2)));
             } else {
                 ivSendMail.setVisibility(View.GONE);

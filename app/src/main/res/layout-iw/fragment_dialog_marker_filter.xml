@@ -33,6 +33,18 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/btnSelect_Filter_DMF"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/turquoise"
+            android:text="@string/dialog_map_filter_btn_select"
+            android:layout_margin="4dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"/>
+
+        <TextView
             android:id="@+id/btnCancel_Filter_DMF"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -44,19 +56,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"/>
 
-
-
-        <TextView
-            android:id="@+id/btnSelect_Filter_DMF"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@color/turquoise"
-            android:text="@string/dialog_map_filter_btn_select"
-            android:layout_margin="4dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white"/>
     </LinearLayout>
 
 

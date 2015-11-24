@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -73,6 +74,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -94,8 +96,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
-        changeLanguage();
         super.onCreate(_savedInstanceState);
+        changeLanguage();
         setContentView(R.layout.activity_main);
 
         mHandler = new Handler(this.getMainLooper());
@@ -368,8 +370,8 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     @Override
-    public void onPhoneBookItemAction(List<Phones> _phones) {
-        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones));
+    public void onPhoneBookItemAction(List<Phones> _phones, String categoryName) {
+        replaceFragmentWithBackStack(FRAGMENT_CONTAINER, PhonesFragment.newInstance(_phones, categoryName));
     }
 
     @Override
@@ -479,19 +481,48 @@ public class MainActivity extends BaseFragmentActivity implements OnItemActionLi
     }
 
     private void goToDetailResidentMessage(Intent intent) {
-        for (int i = 0; i < Constants.mMenuFull.getNodes().size(); i++) {
-            if (Constants.mMenuFull.getNodes().get(i).actionType == Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT) {
-                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(
-                        Constants.mMenuFull.getNodes().get(i).colorItem,
-                        Constants.mMenuFull.getNodes().get(i).requestJson,
-                        Constants.mMenuFull.getNodes().get(i).requestRoute,
-                        Constants.mMenuFull.getNodes().get(i).title, true,
-                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE),
-                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_LINK)));
 
-                break;
-            }
+        MenuModel messagesToResidentModel = null;
+        for (int i = 0; i < Constants.mMenuFull.getNodes().size(); i++) {
+            messagesToResidentModel = recursiveSearch(Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT, Constants.mMenuFull.getNodes().get(i));
+            if (messagesToResidentModel != null) break;
         }
+
+        if (messagesToResidentModel != null) {
+            replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(
+                    messagesToResidentModel.colorItem,
+                    messagesToResidentModel.requestJson,
+                    messagesToResidentModel.requestRoute,
+                    messagesToResidentModel.title, true,
+                    intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE),
+                    intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_LINK)));
+        }
+//        for (int i = 0; i < Constants.mMenuFull.getNodes().size(); i++) {
+//            if (Constants.mMenuFull.getNodes().get(i).actionType == Constants.ACTION_TYPE_MESSAGE_TO_RESIDENT) {
+//                replaceFragmentWithBackStack(FRAGMENT_CONTAINER, MessageToResidentFragment.newInstance(
+//                        Constants.mMenuFull.getNodes().get(i).colorItem,
+//                        Constants.mMenuFull.getNodes().get(i).requestJson,
+//                        Constants.mMenuFull.getNodes().get(i).requestRoute,
+//                        Constants.mMenuFull.getNodes().get(i).title, true,
+//                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_MESSAGE),
+//                        intent.getStringExtra(Constants.BUNDLE_CONSTANT_PUSH_LINK)));
+//
+//                break;
+//            }
+//        }
+    }
+
+    private MenuModel recursiveSearch(int actionType, MenuModel node) {
+        if (node.menu == null & node.actionType == actionType) return node;
+
+        List<MenuModel> temp = node.getMenu();
+        MenuModel res = null;
+
+        for (int i = 0; i < temp.size(); i++) {
+            res = recursiveSearch(actionType, temp.get(i));
+        }
+
+        return res;
     }
 
     @Override

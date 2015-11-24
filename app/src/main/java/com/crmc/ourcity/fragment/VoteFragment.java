@@ -126,8 +126,11 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
         @Override
         public void onLoadFinished(Loader<String> _loader, String _data) {
             //TODO:add checked vote
+            tvAge.setText(getString(R.string.age));
+            tvGender.setText(getString(R.string.gender));
             mAdapter.setVisibleVotePercent(true);
             isVote = true;
+
         }
 
         @Override
@@ -223,14 +226,28 @@ public class VoteFragment extends BaseFourStatesFragment implements OnClickListe
             case Constants.REQUEST_AGE:
                 if (_data != null) {
                     age = _data.getIntExtra(Constants.BUNDLE_INTEGER, 0);
+                    if (age != -1)
                     tvAge.setText(age + "");
+                    else tvAge.setText(getString(R.string.age));
                 }
                 break;
 
             case Constants.REQUEST_GENDER:
                 if (_data != null) {
                     gender = _data.getIntExtra(Constants.BUNDLE_INTEGER, 0);
-                    tvGender.setText((gender == 0) ? getString(R.string.male) : getString(R.string.female));
+                    switch (gender) {
+                        case 0:
+                            tvGender.setText(getString(R.string.male));
+                            break;
+                        case 1:
+                            tvGender.setText(getString(R.string.female));
+                            break;
+                        case 2:
+                            tvGender.setText(getString(R.string.gender));
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
         }

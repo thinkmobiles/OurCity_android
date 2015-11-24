@@ -28,12 +28,14 @@ public class PhonesFragment extends BaseFourStatesFragment {
     private View vUnderLine_FP;
     private OnListItemActionListener mOnListItemActionListener;
     private WeakReference<MainActivity> mActivity;
+    private String title;
 
-    public static PhonesFragment newInstance(List<Phones> _phonesList) {
+    public static PhonesFragment newInstance(List<Phones> _phonesList, String categoryName) {
         PhonesFragment mPhonesFragment = new PhonesFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(Constants.CONFIGURATION_KEY_PHONE_LIST, (ArrayList<? extends Parcelable>)
                 _phonesList);
+        args.putString(Constants.NODE_TITLE, categoryName);
         mPhonesFragment.setArguments(args);
         return mPhonesFragment;
     }
@@ -60,11 +62,12 @@ public class PhonesFragment extends BaseFourStatesFragment {
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         mPhonesList = getArguments().getParcelableArrayList(Constants.CONFIGURATION_KEY_PHONE_LIST);
+        this.title = getArguments().getString(Constants.NODE_TITLE);
     }
 
     @Override
     public void onResume() {
-        configureActionBar(true, true);
+        configureActionBar(true, true, title);
         super.onResume();
     }
 

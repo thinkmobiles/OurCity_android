@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
 
     <TextView
@@ -15,9 +14,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-
-        />
+        android:layout_centerHorizontal="true"/>
 
     <View
         android:id="@+id/vFirstDivider_CFD"

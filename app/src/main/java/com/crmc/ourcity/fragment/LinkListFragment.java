@@ -8,12 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.MainActivity;
@@ -126,10 +124,12 @@ public class LinkListFragment extends BaseFourStatesFragment implements LoaderMa
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new LinksListAdapter(mActivity.get(), _data);
-            lvLinks.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (_data.size() > 0) {
+                mAdapter = new LinksListAdapter(mActivity.get(), _data);
+                lvLinks.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
         } else {
             showError(getResources().getString(R.string.connection_error));
         }

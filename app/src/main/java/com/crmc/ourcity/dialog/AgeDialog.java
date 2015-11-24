@@ -78,7 +78,7 @@ public class AgeDialog extends BaseFourStatesFragment implements View.OnClickLis
     public void onClick(View _v) {
         switch (_v.getId()) {
             case R.id.btnCancel_DFA:
-                mCallback.onActionDialogCancel(false);
+                mCallback.onActionDialogDataInteger(-1);
                 break;
             case R.id.btnOk_DFA:
                 mCallback.onActionDialogDataInteger(npAge.getValue());

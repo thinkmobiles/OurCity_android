@@ -273,6 +273,8 @@ public class OldDAppealsFragment extends BaseFourStatesFragment implements TextW
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity.get(), android.R.layout.simple_list_item_1,
                         streets);
                 etNameStreet.setAdapter(adapter);
+            } else {
+                etNameStreet.setFocusable(false);
             }
             showContent();
         }

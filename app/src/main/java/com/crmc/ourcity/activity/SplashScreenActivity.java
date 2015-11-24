@@ -9,9 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.crmc.ourcity.BuildConfig;
@@ -106,16 +104,16 @@ public class SplashScreenActivity extends BaseActivity implements LoaderManager.
         Loader loader = null;
         switch (_id) {
             case Constants.LOADER_MOBILE_UI_SETTINGS_ID:
-                loader = new MobileUISettingsLoader(mActivity.get(), _args);
+                loader = new MobileUISettingsLoader(getApplicationContext(), _args);
                 break;
             case Constants.LOADER_CRMC_CREDENTIAL_ID:
-                loader = new CrmcCredentialsLoader(mActivity.get(), _args);
+                loader = new CrmcCredentialsLoader(getApplicationContext(), _args);
                 break;
             case Constants.LOADER_BACKGROUND_IMAGE_ID:
-                loader = new ImageLoader(mActivity.get(), _args);
+                loader = new ImageLoader(getApplicationContext(), _args);
                 break;
             case Constants.LOADER_TICKERS_ID:
-                loader = new TickerLoader(mActivity.get(), _args);
+                loader = new TickerLoader(getApplicationContext(), _args);
                 break;
         }
         return loader;

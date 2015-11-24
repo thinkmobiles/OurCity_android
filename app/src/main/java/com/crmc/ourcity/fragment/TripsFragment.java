@@ -138,10 +138,12 @@ public class TripsFragment extends BaseFourStatesFragment implements LoaderManag
     public void onLoadFinished(Loader<List<MapTrips>> _loader, List<MapTrips> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new TripsListAdapter(mActivity.get(), _data);
-            lvTrips.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (_data.size() > 0) {
+                mAdapter = new TripsListAdapter(mActivity.get(), _data);
+                lvTrips.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
         } else {
             showError(getResources().getString(R.string.connection_error));
         }

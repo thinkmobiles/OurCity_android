@@ -132,10 +132,12 @@ public class CityEntitiesFragment extends BaseFourStatesFragment implements Text
     public void onLoadFinished(Loader<List<CityEntities>> _loader, List<CityEntities> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new CityEntitiesListAdapter(mActivity.get(), _data, mOnListItemActionListener);
-            lvCityEntities.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (_data.size() > 0) {
+                mAdapter = new CityEntitiesListAdapter(mActivity.get(), _data, mOnListItemActionListener);
+                lvCityEntities.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
         } else {
             showError(getResources().getString(R.string.connection_error));
         }

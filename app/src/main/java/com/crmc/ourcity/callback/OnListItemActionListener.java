@@ -24,7 +24,7 @@ public interface OnListItemActionListener {
 
     void onEventsClickLinkAction(String _link, String _title);
 
-    void onPhoneBookItemAction(List<Phones> _phones);
+    void onPhoneBookItemAction(List<Phones> _phones, String categoryName);
 
     void onRSSItemAction(RssItem _entry);
 

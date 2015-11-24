@@ -90,7 +90,8 @@
     <string name="sign_up_dialog_fName">שם פרטי</string>
     <string name="focus_street">רחוב</string>
     <string name="focus_house">בית</string>
-    <string name="sign_up_dialog_error_text">למלא שדה זה</string>
+    <string name="sign.up.dialog.error.text">למלא שדה זה</string>
+    <string name="sign.up.dialog.error.text.wrong.street.name">שם רחוב שגוי</string>
     <string name="sign_up_dialog_incorrect_phone_number">מספר טלפון שגוי</string>
     <string name="sign_up_dialog_incorrect_email">דואר אלקטרוני שגוי</string>
     <string name="gcm_SenderID">226589076343</string>
@@ -122,6 +123,7 @@
     <string name="incorrect_credentials">שם  משתמש או סיסמה שגוי</string>
     <string name="loading_string_sign_up_dialog">שולח...</string>
     <string name="no_messages_for_resident">אין הודעות חדשות</string>
+    <string name="no.appeals.found">אין ערעורים</string>
     <string name="dialog_title_interest_area">תחומי עניין</string>
     <string name="dialog_setting_update_resident_info">פרטים אישיים</string>
 
@@ -155,6 +157,7 @@
     <string name="dialog_settings_header">הגדרות</string>
     <string name="dialog_sign_up_btn_sign_up">הירשם</string>
     <string name="dialog_visible_tickets_confirm">אישור</string>
+    <string name="dialog.lang.confirm">Ok</string>
     <string name="item_email">דואר אלקטרוני:</string>
     <string name="item_mobile_phone">נייד:</string>
     <string name="item_phone_number">מספר טלפון:</string>
@@ -170,8 +173,8 @@
     <string name="dialog_title_languages">שפה</string>
     <string name="dialog_language_english">אנגלית (English)</string>
     <string name="dialog_language_hebrew">עברית</string>
-    <string name="restart_app_string">אנא הפעל מחדש את הבקשה לשינויי שפה להתקיים.</string>
-    <string name="attention_string">תשומת הלב</string>
+    <string name="restart_app_string">Please restart the application for language changes to take place.</string>
+    <string name="attention_string">Attention</string>
     <string name="cannot_find_street">לא יכול למצוא את כתובת הרחוב , להרים אותומרשימה נפתחת</string>
     <string name="city_entity_detail">פרטים:</string>
     <string name="city_entity_post">הודעה:</string>
@@ -183,6 +186,8 @@
     <string name="fragment_dialog_signup">הרשמה</string>
     <string name="appels.item.no.photo.available">אין תמונה</string>
     <string name="fragment_dialog_sign_up_alter_title">פרטים אישיים</string>
+
+    <string name="text.when.no.results.in.list">אין תוצאה</string>
 
 
 </resources>

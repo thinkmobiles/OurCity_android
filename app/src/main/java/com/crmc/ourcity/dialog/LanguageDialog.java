@@ -121,7 +121,7 @@ public class LanguageDialog extends BaseFourStatesFragment {
             return new AlertDialog.Builder(getActivity())
                     .setTitle(getResources().getString(R.string.attention_string))
                     .setMessage(getResources().getString(R.string.restart_app_string))
-                    .setPositiveButton(getString(R.string.dialog_visible_tickets_confirm), (dialog, which) -> {
+                    .setPositiveButton(getString(R.string.dialog_lang_confirm), (dialog, which) -> {
 
                         String lang = "";
                         String country = "";

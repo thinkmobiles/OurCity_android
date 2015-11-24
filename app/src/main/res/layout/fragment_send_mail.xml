@@ -143,13 +143,16 @@
                     android:id="@+id/btnCancel_SMF"
                     android:layout_width="0dp"
                     android:layout_height="27dp"
-                    android:layout_marginRight="55dp"
                     android:layout_weight="1"
                     android:background="@drawable/selector_button_green_ff"
                     android:text="@string/fragment_send_mail_cancel"
                     android:textColor="#fff"
                     android:textSize="19dp"
                     android:textStyle="bold"/>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:id="@+id/btnOk_SMF"

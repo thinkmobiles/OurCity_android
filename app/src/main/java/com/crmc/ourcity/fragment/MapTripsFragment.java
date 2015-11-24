@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.annimon.stream.Stream;
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.fourstatelayout.BaseFourStatesFragment;
 import com.crmc.ourcity.global.Constants;
@@ -110,22 +111,26 @@ public final class MapTripsFragment extends BaseFourStatesFragment implements On
         _googleMap.setMyLocationEnabled(true);
         _googleMap.getUiSettings().setZoomControlsEnabled(true);
         bounds = new LatLngBounds.Builder();
-        for (int i = 0; i < mMapTrips.mapTripsDetails.size(); i++) {
-            if (!TextUtils.isEmpty(mMapTrips.getInfo(i))) {
-                _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new LatLng
-                        (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
-            } else {
-                _googleMap.addMarker(new MarkerOptions().position(new LatLng
-                        (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)))).hideInfoWindow();
-            }
-            bounds.include(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)));
+        if (mMapTrips.mapTripsDetails.size() > 0) {
+            for (int i = 0; i < mMapTrips.mapTripsDetails.size(); i++) {
+                if (!TextUtils.isEmpty(mMapTrips.getInfo(i))) {
+                    _googleMap.addMarker(new MarkerOptions().title("\u200e" + mMapTrips.getInfo(i)).position(new LatLng
+                            (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i))));
+                } else {
+                    _googleMap.addMarker(new MarkerOptions().position(new LatLng
+                            (mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)))).hideInfoWindow();
+                }
+                bounds.include(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon(i)));
 
-            if (i > 0) {
-                PolylineOptions polylineOptions = new PolylineOptions().add(new LatLng(mMapTrips.getTripsLat(i - 1),
-                        mMapTrips.getTripsLon(i - 1))).add(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon
-                        (i))).color(Color.RED).width(3);
-                _googleMap.addPolyline(polylineOptions);
+                if (i > 0) {
+                    PolylineOptions polylineOptions = new PolylineOptions().add(new LatLng(mMapTrips.getTripsLat(i - 1),
+                            mMapTrips.getTripsLon(i - 1))).add(new LatLng(mMapTrips.getTripsLat(i), mMapTrips.getTripsLon
+                            (i))).color(Color.RED).width(3);
+                    _googleMap.addPolyline(polylineOptions);
+                }
             }
+        } else {
+            bounds.include(new LatLng(0, 0));
         }
         setCamera(_googleMap);
     }

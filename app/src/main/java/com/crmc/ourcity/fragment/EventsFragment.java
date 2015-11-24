@@ -8,12 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.crmc.ourcity.R;
 import com.crmc.ourcity.activity.MainActivity;
@@ -132,10 +130,12 @@ public class EventsFragment extends BaseFourStatesFragment implements LoaderMana
     public void onLoadFinished(Loader<List<Events>> _loader, List<Events> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new EventsListAdapter(mActivity.get(), _data, mOnListItemActionListener);
-            lvEvents.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (_data.size() > 0) {
+                mAdapter = new EventsListAdapter(mActivity.get(), _data, mOnListItemActionListener);
+                lvEvents.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
         } else {
             showError(getResources().getString(R.string.connection_error));
         }

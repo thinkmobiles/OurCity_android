@@ -87,10 +87,12 @@ public class RSSListFragment extends BaseFourStatesFragment implements LoaderMan
     public void onLoadFinished(Loader<List<RssItem>> _loader, List<RssItem> _data) {
         swipeRefreshLayout.setRefreshing(false);
         if (_data != null) {
-            mAdapter = new RSSAdapter(mAcivity.get(), _data, mOnListItemActionListener);
-            lvRssEntries.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            showContent();
+            if (_data.size() > 0) {
+                mAdapter = new RSSAdapter(mAcivity.get(), _data, mOnListItemActionListener);
+                lvRssEntries.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                showContent();
+            } else showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
         } else {
             showError(getResources().getString(R.string.connection_error));
         }

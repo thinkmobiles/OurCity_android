@@ -97,7 +97,7 @@ public class VoteListFragment extends BaseFourStatesFragment implements LoaderMa
                 mAdapter.notifyDataSetChanged();
                 showContent();
             } else {
-                showEmpty("לא בחרת");
+                showEmpty(getResources().getString(R.string.text_when_no_results_in_list));
             }
         } else {
             showError(getResources().getString(R.string.connection_error));

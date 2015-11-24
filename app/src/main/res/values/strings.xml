@@ -40,7 +40,7 @@
     <!--dialogs-->
     <string name="dialog_camera_add_photo">Add photo</string>
     <string name="dialog_camera_btn_camera">Take a photo</string>
-    <string name="dialog_camera_btn_gallery">Pick from gallery</string>
+    <string name="dialog_camera_btn_gallery">Choose photo from gallery</string>
     <string name="dialog_map_filter_header_text">Interest points filter</string>
     <string name="age">Choose age</string>
     <string name="gender">Choose gender</string>
@@ -89,7 +89,8 @@
     <string name="sign_up_dialog_fName">First name</string>
     <string name="focus_street">Street name</string>
     <string name="focus_house">House</string>
-    <string name="sign_up_dialog_error_text">Fill in this field</string>
+    <string name="sign.up.dialog.error.text">Fill in this field</string>
+    <string name="sign.up.dialog.error.text.wrong.street.name">Wrong street name</string>
     <string name="sign_up_dialog_incorrect_phone_number">Incorrect phone number format</string>
     <string name="sign_up_dialog_incorrect_email">Wrong e-mail format</string>
     <string name="gcm_SenderID">226589076343</string>
@@ -120,6 +121,7 @@
     <string name="incorrect_credentials">Incorrect username or password</string>
     <string name="loading_string_sign_up_dialog">Loading</string>
     <string name="no_messages_for_resident">No messages for resident</string>
+    <string name="no.appeals.found">No appeals</string>
     <string name="dialog_title_interest_area">Interest areas</string>
     <string name="dialog_setting_update_resident_info">Personal details</string>
 
@@ -153,6 +155,7 @@
     <string name="dialog_settings_header">Settings</string>
     <string name="dialog_sign_up_btn_sign_up">Sign up</string>
     <string name="dialog_visible_tickets_confirm">Ok</string>
+    <string name="dialog.lang.confirm">אישור</string>
     <string name="item_email">E-mail:</string>
     <string name="item_mobile_phone">Mobile number:</string>
     <string name="item_phone_number">Phone number:</string>
@@ -168,19 +171,21 @@
     <string name="dialog_title_languages">Language</string>
     <string name="dialog_language_english">English</string>
     <string name="dialog_language_hebrew">Hebrew (עברית)</string>
-    <string name="restart_app_string">Please restart the application for language changes to take place.</string>
-    <string name="attention_string">Attention</string>
+    <string name="restart_app_string">אנא הפעל אפליקציה מחדש, כדי ששינויי שפה יכנסו לתוקף.</string>
+    <string name="attention_string">תשומת הלב</string>
     <string name="cannot_find_street">Can not find the street address, pick it from dropdown list</string>
     <string name="city_entity_detail">Details:</string>
     <string name="city_entity_post">Post:</string>
     <string name="city_entity_email">Email:</string>
     <string name="city_entity_info">Information:</string>
-    <string name="city_entity_phone">Phone:</string>
+    <string name="city_entity_phone">Phone number:</string>
     <string name="city_entity_mobile_number">Mobile number:</string>
     <string name="sign_up_update_profile_text">Save changes</string>
     <string name="fragment_dialog_signup">Registration</string>
     <string name="appels.item.no.photo.available">No photo available</string>
     <string name="fragment_dialog_sign_up_alter_title">Personal details</string>
+    
+    <string name="text.when.no.results.in.list">No results</string>
 
 
 </resources>

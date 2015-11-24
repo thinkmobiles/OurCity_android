@@ -24,5 +24,4 @@ public class AppInfoParserHelper {
     public void setStatusCode(int statusCode) {
         projectTmp.statusCode = statusCode;
     }
-
 }
